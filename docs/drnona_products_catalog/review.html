@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catalog image review</title>
+<style>
+:root{--bg:#101318;--panel:#191e26;--line:#303846;--text:#eef2f7;--muted:#9aa6b6}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);
+font:15px/1.5 system-ui,Segoe UI,sans-serif} main{width:min(1500px,96vw);margin:32px auto}
+h1{font-size:clamp(28px,4vw,52px);margin:0 0 8px} .lead{color:var(--muted);margin-bottom:28px}
+.card{background:var(--panel);border:1px solid var(--line);border-left:6px solid #48bb78;
+border-radius:14px;padding:18px;margin:18px 0} .card.review{border-left-color:#ecc94b}
+.card.fail{border-left-color:#f56565} header{display:flex;gap:12px;align-items:center;margin-bottom:16px}
+.status{font-weight:800;letter-spacing:.08em;font-size:12px;padding:5px 9px;border-radius:999px;background:#26303d}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+figure{margin:0;background:#fff;border-radius:9px;overflow:hidden} figure img{display:block;width:100%;aspect-ratio:1;
+object-fit:contain} figcaption{padding:8px;color:#252a32;background:#e9edf2;font-size:12px}
+.missing{aspect-ratio:1;display:grid;place-items:center;color:#667;background:#ddd}
+dl{display:grid;grid-template-columns:110px 1fr;gap:5px 10px;margin:15px 0 0} dt{color:var(--muted)} dd{margin:0}
+.empty{padding:40px;border:1px dashed var(--line);border-radius:14px;color:var(--muted)}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body><main><h1>Catalog image review</h1>
+<p class="lead">Локальная галерея контроля масок и каталоговых экспортов.</p>
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>anti-aging-serum-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/anti-aging-serum-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/anti-aging-serum-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/anti-aging-serum-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/anti-aging-serum-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.9302</dd>
+                <dt>Warnings</dt><dd>POSSIBLE_EDGE_HALO</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>ard-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/ard-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/ard-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/ard-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/ard-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>dnd-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/dnd-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/dnd-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/dnd-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/dnd-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>eau-de-parfum-faya-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/eau-de-parfum-faya-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/eau-de-parfum-faya-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/eau-de-parfum-faya-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/eau-de-parfum-faya-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.9015</dd>
+                <dt>Warnings</dt><dd>POSSIBLE_EDGE_HALO;UPSCALE_LIMIT_APPLIED</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>eau-de-parfum-kiwi-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/eau-de-parfum-kiwi-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/eau-de-parfum-kiwi-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/eau-de-parfum-kiwi-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/eau-de-parfum-kiwi-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>eau-de-parfum-lady-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/eau-de-parfum-lady-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/eau-de-parfum-lady-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/eau-de-parfum-lady-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/eau-de-parfum-lady-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>eau-de-parfum-lord-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/eau-de-parfum-lord-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/eau-de-parfum-lord-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/eau-de-parfum-lord-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/eau-de-parfum-lord-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.9328</dd>
+                <dt>Warnings</dt><dd>POSSIBLE_EDGE_HALO</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>eau-de-parfum-nona-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/eau-de-parfum-nona-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/eau-de-parfum-nona-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/eau-de-parfum-nona-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/eau-de-parfum-nona-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-bath-salts-quartet-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-bath-salts-quartet-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-bath-salts-quartet-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-bath-salts-quartet-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-bath-salts-quartet-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>LOW_RESOLUTION_SOURCE;UPSCALE_LIMIT_APPLIED</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-chocoseen-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-chocoseen-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-chocoseen-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-chocoseen-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-chocoseen-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.9044</dd>
+                <dt>Warnings</dt><dd>POSSIBLE_EDGE_HALO</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-cleanseen-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-cleanseen-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-cleanseen-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-cleanseen-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-cleanseen-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-complextm-anti-bac-anti-fungal-itchy-dog-spray-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-complextm-anti-bac-anti-fungal-itchy-dog-spray-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-complextm-anti-bac-anti-fungal-itchy-dog-spray-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-complextm-anti-bac-anti-fungal-itchy-dog-spray-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-complextm-anti-bac-anti-fungal-itchy-dog-spray-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.9035</dd>
+                <dt>Warnings</dt><dd>POSSIBLE_EDGE_HALO;UPSCALE_LIMIT_APPLIED</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-complextm-calming-bath-salts-with-camomile-extract-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-complextm-calming-bath-salts-with-camomile-extract-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-complextm-calming-bath-salts-with-camomile-extract-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-complextm-calming-bath-salts-with-camomile-extract-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-complextm-calming-bath-salts-with-camomile-extract-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.8914</dd>
+                <dt>Warnings</dt><dd>POSSIBLE_EDGE_HALO</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-complextm-itchy-dog-flea-shampoo-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-complextm-itchy-dog-flea-shampoo-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-complextm-itchy-dog-flea-shampoo-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-complextm-itchy-dog-flea-shampoo-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-complextm-itchy-dog-flea-shampoo-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.8933</dd>
+                <dt>Warnings</dt><dd>POSSIBLE_EDGE_HALO;UPSCALE_LIMIT_APPLIED</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-complextm-purifying-facial-foam-soap-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-complextm-purifying-facial-foam-soap-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-complextm-purifying-facial-foam-soap-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-complextm-purifying-facial-foam-soap-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-complextm-purifying-facial-foam-soap-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.918</dd>
+                <dt>Warnings</dt><dd>POSSIBLE_EDGE_HALO;UPSCALE_LIMIT_APPLIED</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-complextm-refreshing-bath-salts-with-ylang-ylang-patchouli-and-anis-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-complextm-refreshing-bath-salts-with-ylang-ylang-patchouli-and-anis-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-complextm-refreshing-bath-salts-with-ylang-ylang-patchouli-and-anis-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-complextm-refreshing-bath-salts-with-ylang-ylang-patchouli-and-anis-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-complextm-refreshing-bath-salts-with-ylang-ylang-patchouli-and-anis-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.8933</dd>
+                <dt>Warnings</dt><dd>POSSIBLE_EDGE_HALO</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-complextm-relaxing-bath-salts-with-lavander-extract-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-complextm-relaxing-bath-salts-with-lavander-extract-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-complextm-relaxing-bath-salts-with-lavander-extract-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-complextm-relaxing-bath-salts-with-lavander-extract-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-complextm-relaxing-bath-salts-with-lavander-extract-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.8913</dd>
+                <dt>Warnings</dt><dd>POSSIBLE_EDGE_HALO</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-complextm-reviving-bath-salts-with-rosemary-eucalyptus-and-thyme-ex-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-complextm-reviving-bath-salts-with-rosemary-eucalyptus-and-thyme-ex-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-complextm-reviving-bath-salts-with-rosemary-eucalyptus-and-thyme-ex-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-complextm-reviving-bath-salts-with-rosemary-eucalyptus-and-thyme-ex-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-complextm-reviving-bath-salts-with-rosemary-eucalyptus-and-thyme-ex-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.8952</dd>
+                <dt>Warnings</dt><dd>POSSIBLE_EDGE_HALO</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-dead-sea-water-compressed-wipes-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-dead-sea-water-compressed-wipes-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-dead-sea-water-compressed-wipes-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-dead-sea-water-compressed-wipes-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-dead-sea-water-compressed-wipes-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.944</dd>
+                <dt>Warnings</dt><dd>POSSIBLE_EDGE_HALO;UPSCALE_LIMIT_APPLIED</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-dynamic-cream-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-dynamic-cream-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-dynamic-cream-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-dynamic-cream-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-dynamic-cream-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-eye-care-balm-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-eye-care-balm-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-eye-care-balm-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-eye-care-balm-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-eye-care-balm-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.8203</dd>
+                <dt>Warnings</dt><dd>SOURCE_OBJECT_TOUCHES_BORDER;POSSIBLE_EDGE_HALO</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-face-milk-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-face-milk-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-face-milk-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-face-milk-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-face-milk-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>LOW_RESOLUTION_SOURCE;UPSCALE_LIMIT_APPLIED</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-femseen-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-femseen-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-femseen-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-femseen-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-femseen-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>LOW_RESOLUTION_SOURCE;UPSCALE_LIMIT_APPLIED</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-goldseen-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-goldseen-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-goldseen-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-goldseen-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-goldseen-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-gonseen-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-gonseen-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-gonseen-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-gonseen-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-gonseen-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-gonseen-focustea-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-gonseen-focustea-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-gonseen-focustea-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-gonseen-focustea-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-gonseen-focustea-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-gonseen-relaxtea-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-gonseen-relaxtea-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-gonseen-relaxtea-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-gonseen-relaxtea-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-gonseen-relaxtea-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-gonseen-vitalitea-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-gonseen-vitalitea-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-gonseen-vitalitea-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-gonseen-vitalitea-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-gonseen-vitalitea-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-hand-and-nail-cream-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-hand-and-nail-cream-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-hand-and-nail-cream-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-hand-and-nail-cream-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-hand-and-nail-cream-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-imunseen-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-imunseen-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-imunseen-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-imunseen-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-imunseen-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.8859</dd>
+                <dt>Warnings</dt><dd>POSSIBLE_EDGE_HALO</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-mineral-hair-conditioner-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-mineral-hair-conditioner-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-mineral-hair-conditioner-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-mineral-hair-conditioner-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-mineral-hair-conditioner-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.8909</dd>
+                <dt>Warnings</dt><dd>POSSIBLE_EDGE_HALO</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-mineral-lipstick-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-mineral-lipstick-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-mineral-lipstick-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-mineral-lipstick-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-mineral-lipstick-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-mineral-shampoo-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-mineral-shampoo-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-mineral-shampoo-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-mineral-shampoo-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-mineral-shampoo-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>LOW_RESOLUTION_SOURCE;UPSCALE_LIMIT_APPLIED</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card review">
+              <header><span class="status">REVIEW</span>
+              <strong>halo-multi-mouthwash-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-multi-mouthwash-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-multi-mouthwash-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-multi-mouthwash-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-multi-mouthwash-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.8122</dd>
+                <dt>Warnings</dt><dd>SOURCE_OBJECT_TOUCHES_BORDER;POSSIBLE_EDGE_HALO</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-newseen-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-newseen-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-newseen-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-newseen-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-newseen-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-night-cream-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-night-cream-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-night-cream-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-night-cream-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-night-cream-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-okseen-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-okseen-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-okseen-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-okseen-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-okseen-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-phase-9-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-phase-9-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-phase-9-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-phase-9-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-phase-9-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-pulmoseen-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-pulmoseen-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-pulmoseen-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-pulmoseen-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-pulmoseen-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-pure-unisex-deodorant-stick-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-pure-unisex-deodorant-stick-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-pure-unisex-deodorant-stick-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-pure-unisex-deodorant-stick-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-pure-unisex-deodorant-stick-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.8853</dd>
+                <dt>Warnings</dt><dd>LOW_RESOLUTION_SOURCE;POSSIBLE_EDGE_HALO;UPSCALE_LIMIT_APPLIED</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-ravseen-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-ravseen-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-ravseen-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-ravseen-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-ravseen-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-recovering-mud-mask-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-recovering-mud-mask-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-recovering-mud-mask-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-recovering-mud-mask-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-recovering-mud-mask-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-reumoseen-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-reumoseen-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-reumoseen-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-reumoseen-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-reumoseen-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card review">
+              <header><span class="status">REVIEW</span>
+              <strong>halo-shenseen-mousse-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-shenseen-mousse-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-shenseen-mousse-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-shenseen-mousse-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-shenseen-mousse-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.6379</dd>
+                <dt>Warnings</dt><dd>API_SKIPPED_DRY_RUN;SOURCE_OBJECT_TOUCHES_BORDER;POSSIBLE_EDGE_HALO;LARGE_INTERNAL_HOLES;UPSCALE_LIMIT_APPLIED</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-shower-gel-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-shower-gel-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-shower-gel-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-shower-gel-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-shower-gel-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>LOW_RESOLUTION_SOURCE;UPSCALE_LIMIT_APPLIED</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-slimseen-coffee-mix-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-slimseen-coffee-mix-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-slimseen-coffee-mix-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-slimseen-coffee-mix-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-slimseen-coffee-mix-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.8728</dd>
+                <dt>Warnings</dt><dd>POSSIBLE_EDGE_HALO</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card review">
+              <header><span class="status">REVIEW</span>
+              <strong>halo-solaris-body-lotion-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-solaris-body-lotion-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-solaris-body-lotion-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-solaris-body-lotion-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-solaris-body-lotion-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.8189</dd>
+                <dt>Warnings</dt><dd>SOURCE_OBJECT_TOUCHES_BORDER;POSSIBLE_EDGE_HALO</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-solaris-facial-cream-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-solaris-facial-cream-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-solaris-facial-cream-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-solaris-facial-cream-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-solaris-facial-cream-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.9354</dd>
+                <dt>Warnings</dt><dd>POSSIBLE_EDGE_HALO</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-soupseen-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-soupseen-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-soupseen-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-soupseen-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-soupseen-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.9089</dd>
+                <dt>Warnings</dt><dd>POSSIBLE_EDGE_HALO</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>halo-yamseen-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/halo-yamseen-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/halo-yamseen-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/halo-yamseen-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/halo-yamseen-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>kiwi-halo-deodorant-antiperspirant-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/kiwi-halo-deodorant-antiperspirant-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/kiwi-halo-deodorant-antiperspirant-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/kiwi-halo-deodorant-antiperspirant-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/kiwi-halo-deodorant-antiperspirant-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.925</dd>
+                <dt>Warnings</dt><dd>SOURCE_OBJECT_TOUCHES_BORDER</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>lady-halo-deodorant-antiperspirant-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/lady-halo-deodorant-antiperspirant-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/lady-halo-deodorant-antiperspirant-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/lady-halo-deodorant-antiperspirant-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/lady-halo-deodorant-antiperspirant-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.925</dd>
+                <dt>Warnings</dt><dd>SOURCE_OBJECT_TOUCHES_BORDER</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>lord-halo-deodorant-antiperspirant-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/lord-halo-deodorant-antiperspirant-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/lord-halo-deodorant-antiperspirant-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/lord-halo-deodorant-antiperspirant-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/lord-halo-deodorant-antiperspirant-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>0.925</dd>
+                <dt>Warnings</dt><dd>SOURCE_OBJECT_TOUCHES_BORDER</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>shp-day-time-face-cream-lc-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/shp-day-time-face-cream-lc-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/shp-day-time-face-cream-lc-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/shp-day-time-face-cream-lc-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/shp-day-time-face-cream-lc-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>UPSCALE_LIMIT_APPLIED</dd>
+              </dl>
+            </article>
+            
+
+            <article class="card pass">
+              <header><span class="status">PASS</span>
+              <strong>travel-kit-01.png</strong></header>
+              <div class="grid">
+                <figure><img src="../originals/travel-kit-01.png" alt="Оригинал" loading="lazy"><figcaption>Оригинал</figcaption></figure>
+                <figure><img src="previews/travel-kit-01-checkerboard.jpg" alt="Прозрачный PNG" loading="lazy"><figcaption>Прозрачный PNG</figcaption></figure>
+                <figure><img src="previews/travel-kit-01-white.jpg" alt="Белый фон" loading="lazy"><figcaption>Белый фон</figcaption></figure>
+                <figure><img src="masks/travel-kit-01-mask.png" alt="Alpha mask" loading="lazy"><figcaption>Alpha mask</figcaption></figure>
+              </div>
+              <dl>
+                <dt>Provider</dt><dd>rembg</dd>
+                <dt>Quality</dt><dd>1.0</dd>
+                <dt>Warnings</dt><dd>—</dd>
+              </dl>
+            </article>
+            </main></body>
+</html>
