@@ -14,7 +14,6 @@ import { MagnifyingGlass } from "@phosphor-icons/react/MagnifyingGlass";
 import { MapPin } from "@phosphor-icons/react/MapPin";
 import { Phone } from "@phosphor-icons/react/Phone";
 import { SealCheck } from "@phosphor-icons/react/SealCheck";
-import { Sparkle } from "@phosphor-icons/react/Sparkle";
 import { TelegramLogo } from "@phosphor-icons/react/TelegramLogo";
 import { TestTube } from "@phosphor-icons/react/TestTube";
 import { X } from "@phosphor-icons/react/X";
@@ -43,7 +42,6 @@ import {
   categories,
   getEditorial,
   getRelatedProducts,
-  lordProducts,
   pageByPath,
   productBySlug,
   products,
@@ -166,23 +164,18 @@ function ScrollRestoration() {
     window.scrollTo({ top: 0, behavior: "instant" });
     const main = document.querySelector<HTMLElement>("#main-content");
     main?.focus({ preventScroll: true });
+    document
+      .querySelector<HTMLMetaElement>('meta[name="theme-color"]')
+      ?.setAttribute("content", "#f7fbfc");
     const productSlug = location.pathname.startsWith("/product/")
       ? location.pathname.split("/").pop()
       : "";
-    const isLordTheme =
-      location.pathname === "/lord" ||
-      Boolean(productSlug && productBySlug.get(productSlug)?.collection === "Lord");
-    document.body.classList.toggle("theme-lord", isLordTheme);
-    document
-      .querySelector<HTMLMetaElement>('meta[name="theme-color"]')
-      ?.setAttribute("content", isLordTheme ? "#071827" : "#f7fbfc");
     const title =
       (productSlug && productBySlug.get(productSlug)?.officialName) ||
       pageByPath.get(location.pathname)?.title ||
       (location.pathname === "/products" ? "Каталог" : "") ||
       (location.pathname === "/selection" ? "Подборка" : "") ||
       (location.pathname === "/editorial" ? "Блог и новости" : "") ||
-      (location.pathname === "/lord" ? "Lord collection" : "") ||
       "Dr. Nona Moldova";
     document.title = title === "Dr. Nona Moldova" ? title : `${title} — Dr. Nona Moldova`;
   }, [location.pathname]);
@@ -451,20 +444,18 @@ function ProductCard({
   product,
   index = 0,
   compact = false,
+  catalogImage = false,
 }: {
   product: Product;
   index?: number;
   compact?: boolean;
+  catalogImage?: boolean;
 }) {
   const { contains, toggle } = useSelection();
   const { t } = useLocale();
   const saved = contains(product.slug);
   return (
-    <article
-      className={`product-card ${compact ? "product-card--compact" : ""} ${
-        product.collection === "Lord" ? "product-card--lord" : ""
-      }`}
-    >
+    <article className={`product-card ${compact ? "product-card--compact" : ""}`}>
       <div className="product-card__stage">
         <span className="product-card__number">{String(index + 1).padStart(2, "0")}</span>
         <button
@@ -477,13 +468,20 @@ function ProductCard({
           <Heart aria-hidden="true" weight={saved ? "fill" : "regular"} />
         </button>
         <Link to={`/product/${product.slug}`} tabIndex={-1} aria-hidden="true">
-          <img src={product.image} alt="" width="900" height="900" loading="lazy" decoding="async" />
+          <img
+            className="product-card__image product-card__image--editorial"
+            src={catalogImage ? product.image : product.cardImage}
+            alt=""
+            width="1254"
+            height="1254"
+            loading="lazy"
+            decoding="async"
+          />
         </Link>
       </div>
       <div className="product-card__body">
         <div className="product-card__meta">
           <span>{product.category}</span>
-          {product.collection === "Lord" && <b>Lord</b>}
         </div>
         <h3>
           <Link to={`/product/${product.slug}`}>{product.officialName}</Link>
@@ -500,78 +498,74 @@ function ProductCard({
 function HomePage() {
   const about = pageByPath.get("/about");
   const formula = pageByPath.get("/ourformula");
-  const featured = products.slice(0, 7);
-  const scienceProducts = products.filter((product) =>
-    /phase|serum|dynamic|night|eye/i.test(product.slug)
-  );
-  const heroProduct = scienceProducts[0] ?? products[0];
+  const featured = products;
   const articles = [...getEditorial("news").slice(0, 2), ...getEditorial("blog").slice(0, 1)];
+  const [scienceFocus, setScienceFocus] = useState<"archaea" | "minerals" | "extracts">("minerals");
+  const scienceNodes = [
+    {
+      id: "archaea" as const,
+      label: "Архебактерия",
+      description: "Уникальный природный компонент из экстремальной среды Мёртвого моря.",
+      icon: TestTube,
+    },
+    {
+      id: "minerals" as const,
+      label: "Минералы моря",
+      description: "Минеральная база, связанная с природной экосистемой Мёртвого моря.",
+      icon: Drop,
+    },
+    {
+      id: "extracts" as const,
+      label: "Природные экстракты",
+      description: "Растительные компоненты дополняют формулы ежедневного ухода.",
+      icon: Leaf,
+    },
+  ];
+  const activeScienceNode = scienceNodes.find((node) => node.id === scienceFocus) ?? scienceNodes[1];
+  const heroBenefits = [
+    { icon: Drop, title: "Минералы Мёртвого моря", text: "Уникальный природный источник" },
+    { icon: Flask, title: "Научные разработки", text: "Современные формулы" },
+    { icon: Leaf, title: "Природные компоненты", text: "Экстракты и минералы" },
+    { icon: Heart, title: "Забота о вас", text: "Красота и долголетие" },
+  ];
 
   return (
     <>
       <section className="home-hero">
-        <div className="hero-copy">
-          <p className="eyebrow">Мёртвое море · Наука · Dr. Nona</p>
-          <h1>
-            Halo Complex™
-            <span>Сделано природой</span>
-          </h1>
-          <p className="hero-lead">
-            {about?.paragraphs[0]
-              ? splitText(about.paragraphs[0], 170)[0]
-              : "Откройте для себя новое поколение продуктов на основе Halo Complex™."}
-          </p>
-          <div className="hero-actions">
-            <Link className="button button--primary" to="/products">
-              Открыть каталог <ArrowRight aria-hidden="true" />
-            </Link>
-            <Link className="button button--quiet" to="/ourformula">
-              Исследовать формулу
-            </Link>
-          </div>
-          <div className="hero-proof" aria-label="Ключевые факты">
-            <div>
-              <strong>50+</strong>
-              <span>продуктов</span>
-            </div>
-            <div>
-              <strong>40</strong>
-              <span>стран мира</span>
-            </div>
-            <div>
-              <strong>1994</strong>
-              <span>год основания</span>
+        <div className="home-hero__inner container">
+          <div className="hero-copy">
+            <p className="eyebrow">Мёртвое море · Наука · Dr. Nona</p>
+            <h1>
+              <span className="hero-title-line hero-title-line--ink">Halo</span>
+              <span className="hero-title-line hero-title-line--sea">Complex™</span>
+              <small>Сделано природой</small>
+            </h1>
+            <p className="hero-lead">
+              Мы объединяем силу минералов Мёртвого моря и передовые научные разработки,
+              чтобы создавать продукты для здоровья, красоты и долголетия.
+            </p>
+            <div className="hero-actions">
+              <Link className="button button--primary" to="/products">
+                Открыть каталог <ArrowRight aria-hidden="true" />
+              </Link>
+              <Link className="button button--quiet" to="/ourformula">
+                Исследовать формулу
+              </Link>
             </div>
           </div>
-        </div>
-        <div className="hero-visual" aria-label={`Продукт ${heroProduct.officialName}`}>
-          <div className="hero-visual__orbit hero-visual__orbit--one" />
-          <div className="hero-visual__orbit hero-visual__orbit--two" />
-          <div className="hero-mineral hero-mineral--one" />
-          <div className="hero-mineral hero-mineral--two" />
-          <img
-            src={heroProduct.image}
-            alt={heroProduct.imageAlt || heroProduct.officialName}
-            width="1200"
-            height="1200"
-            fetchPriority="high"
+          <div
+            className="hero-visual"
+            role="img"
+            aria-label="Halo Night Cream в пейзаже Мёртвого моря"
           />
-          <div className="hero-product-note">
-            <Sparkle aria-hidden="true" />
-            <span>
-              <small>Выбор редакции</small>
-              {heroProduct.officialName}
-            </span>
-          </div>
         </div>
-      </section>
-
-      <section className="marquee-line" aria-label="Основные направления">
-        <div>
-          <span>Halo Complex™</span><i />
-          <span>Минералы Мёртвого моря</span><i />
-          <span>Красота и долголетие</span><i />
-          <span>Наука и природа</span><i />
+        <div className="hero-benefits container" aria-label="Принципы Dr. Nona">
+          {heroBenefits.map(({ icon: Icon, title, text }) => (
+            <div className="hero-benefit" key={title}>
+              <Icon aria-hidden="true" />
+              <span><strong>{title}</strong><small>{text}</small></span>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -579,8 +573,8 @@ function HomePage() {
         <Reveal>
           <SectionHeading
             eyebrow="Каталог · 01"
-            title="Более 50 продуктов на основе Halo Complex™"
-            text="Косметика, парфюмерия и пищевые добавки компании Dr. Nona позволяют интегрировать силу Мёртвого моря в нашу повседневную жизнь и дарить нам ощущение силы и спокойствия."
+            title="Обновлённый каталог Dr. Nona"
+            text="Три выбранных продукта в единой эстетике Halo Complex™ и с обновлённой визуальной подачей."
             action={
               <Link className="text-link text-link--large" to="/products">
                 Все продукты <ArrowRight aria-hidden="true" />
@@ -614,49 +608,31 @@ function HomePage() {
               <span />
               <span />
               <span />
-              <b>H</b>
+              <div className="science-core">
+                <b>H</b>
+                <strong>Halo Complex™</strong>
+                <small>{activeScienceNode.label}</small>
+              </div>
             </div>
             <div className="science-points">
-              <div><TestTube aria-hidden="true" /><span>Архебактерия</span></div>
-              <div><Drop aria-hidden="true" /><span>Минералы моря</span></div>
-              <div><Leaf aria-hidden="true" /><span>Природные экстракты</span></div>
+              {scienceNodes.map(({ id, label, icon: Icon }) => (
+                <button
+                  className={scienceFocus === id ? "is-active" : ""}
+                  type="button"
+                  key={id}
+                  aria-pressed={scienceFocus === id}
+                  onClick={() => setScienceFocus(id)}
+                >
+                  <Icon aria-hidden="true" /><span>{label}</span>
+                </button>
+              ))}
+            </div>
+            <div className="science-focus-panel" aria-live="polite">
+              <span>{activeScienceNode.label}</span>
+              <p>{activeScienceNode.description}</p>
             </div>
           </Reveal>
         </div>
-      </section>
-
-      <section className="section container">
-        <Reveal>
-          <SectionHeading
-            eyebrow="Линия Lord · 03"
-            title="Lord"
-            text={lordProducts.map((product) => product.shortDescription).filter(Boolean).join(" ")}
-            align="split"
-          />
-        </Reveal>
-        <Reveal className="lord-banner" delay={60}>
-          <div className="lord-banner__copy">
-            <span className="lord-monogram">L</span>
-            <p className="eyebrow eyebrow--gold">Lord collection</p>
-            <h2>Lord</h2>
-            <Link className="button button--gold" to="/lord">
-              Открыть линию <ArrowRight aria-hidden="true" />
-            </Link>
-          </div>
-          <div className="lord-products">
-            {lordProducts.map((product) => (
-              <img
-                key={product.slug}
-                src={product.image}
-                alt={product.officialName}
-                width="900"
-                height="900"
-                loading="lazy"
-                decoding="async"
-              />
-            ))}
-          </div>
-        </Reveal>
       </section>
 
       <section className="section container history-preview">
@@ -666,7 +642,7 @@ function HomePage() {
           <div className="history-seal"><span>30</span><small>лет истории</small></div>
         </Reveal>
         <Reveal className="history-preview__copy" delay={90}>
-          <p className="eyebrow">История · 04</p>
+          <p className="eyebrow">История · 03</p>
           <h2>История компании</h2>
           <p>
             {pageByPath.get("/about/our-history")?.paragraphs[0]
@@ -683,7 +659,7 @@ function HomePage() {
         <div className="container">
           <Reveal>
             <SectionHeading
-              eyebrow="Знания · 05"
+              eyebrow="Знания · 04"
               title="Блог и новости"
               action={
                 <Link className="text-link text-link--large" to="/editorial">
@@ -747,8 +723,8 @@ function CatalogPage() {
           <h1>Каталог<br /><em>Dr. Nona</em></h1>
         </div>
         <p>
-          Сегодня каталог компании Dr. Nona предлагает более 50-ти продуктов,
-          основанных на формуле Halo Complex™ с минералами Мёртвого моря.
+          В обновлённом каталоге собраны три выбранных продукта Dr. Nona,
+          представленные в единой визуальной системе.
         </p>
       </div>
 
@@ -810,7 +786,7 @@ function CatalogPage() {
       {result.length ? (
         <div className="catalog-grid">
           {result.map((product, index) => (
-            <ProductCard key={product.slug} product={product} index={index} />
+            <ProductCard key={product.slug} product={product} index={index} catalogImage />
           ))}
         </div>
       ) : (
@@ -831,14 +807,14 @@ function ProductPage() {
   const product = productBySlug.get(slug);
   const { contains, toggle } = useSelection();
   const { t } = useLocale();
-  const [openPanel, setOpenPanel] = useState<"ingredients" | "use" | null>("ingredients");
+  const [openPanel, setOpenPanel] = useState<"description" | "ingredients" | "use" | null>("ingredients");
   if (!product) return <NotFoundPage />;
   const related = getRelatedProducts(product);
-  const isLord = product.collection === "Lord";
   const saved = contains(product.slug);
+  const productSummary = splitText(product.longDescription, 330)[0];
 
   return (
-    <div className={isLord ? "product-page product-page--lord" : "product-page"}>
+    <div className="product-page">
       <section className="product-detail container">
         <nav className="breadcrumbs" aria-label="Хлебные крошки">
           <Link to="/">Главная</Link><span>/</span>
@@ -850,7 +826,7 @@ function ProductPage() {
             <div className="product-stage__rings" aria-hidden="true" />
             <span className="product-stage__index">DN · {product.sku || "—"}</span>
             <img
-              src={product.image}
+              src={product.cardImage}
               alt={product.imageAlt || product.officialName}
               width="1200"
               height="1200"
@@ -859,7 +835,7 @@ function ProductPage() {
             <span className="product-stage__caption">{product.category}</span>
           </div>
           <div className="product-info">
-            <p className="eyebrow">{isLord ? "Lord collection" : product.category}</p>
+            <p className="eyebrow">{product.category}</p>
             <h1
               className={
                 product.officialName.length > 60
@@ -872,13 +848,13 @@ function ProductPage() {
               {product.officialName}
             </h1>
             {product.shortDescription && <p className="product-purpose">{product.shortDescription}</p>}
-            <p className="product-description">{product.longDescription}</p>
+            <p className="product-description">{productSummary}</p>
             <dl className="product-facts">
               <div><dt>{t.category}</dt><dd>{product.category}</dd></div>
               <div><dt>{t.sku}</dt><dd>{product.sku || "—"}</dd></div>
             </dl>
             <button
-              className={`button ${isLord ? "button--gold" : "button--primary"} product-select-button`}
+              className="button button--primary product-select-button"
               type="button"
               onClick={() => toggle(product.slug)}
             >
@@ -897,6 +873,7 @@ function ProductPage() {
         </div>
         <div className="accordion">
           {[
+            ["description", "Полное описание", product.longDescription],
             ["ingredients", t.ingredients, product.ingredients],
             ["use", t.use, product.howToUse],
           ].map(([key, label, content]) => (
@@ -904,7 +881,7 @@ function ProductPage() {
               <button
                 type="button"
                 aria-expanded={openPanel === key}
-                onClick={() => setOpenPanel(openPanel === key ? null : key as "ingredients" | "use")}
+                onClick={() => setOpenPanel(openPanel === key ? null : key as "description" | "ingredients" | "use")}
               >
                 <span>{label}</span><span>{openPanel === key ? "−" : "+"}</span>
               </button>
@@ -924,48 +901,6 @@ function ProductPage() {
         <div className="related-grid">
           {related.map((item, index) => (
             <ProductCard key={item.slug} product={item} index={index} compact />
-          ))}
-        </div>
-      </section>
-    </div>
-  );
-}
-
-function LordPage() {
-  return (
-    <div className="lord-page">
-      <section className="lord-hero container">
-        <div className="lord-hero__copy">
-          <p className="eyebrow eyebrow--gold">Самостоятельная линия Dr. Nona</p>
-          <h1>LORD</h1>
-          <p>{lordProducts.map((product) => product.shortDescription).filter(Boolean).join(" ")}</p>
-          <span className="lord-signature">Dr. Nona</span>
-        </div>
-        <div className="lord-hero__visual">
-          <span className="lord-hero__halo" aria-hidden="true" />
-          {lordProducts.map((product, index) => (
-            <img
-              key={product.slug}
-              className={`lord-object lord-object--${index + 1}`}
-              src={product.image}
-              alt={product.officialName}
-              width="900"
-              height="900"
-              fetchPriority={index === 0 ? "high" : "auto"}
-            />
-          ))}
-        </div>
-      </section>
-      <section className="lord-catalog container">
-        <SectionHeading
-          eyebrow="Коллекция"
-          title="Lord"
-          text={lordProducts.map((product) => product.officialName).join(" · ")}
-          align="split"
-        />
-        <div className="lord-catalog__grid">
-          {lordProducts.map((product, index) => (
-            <ProductCard key={product.slug} product={product} index={index} />
           ))}
         </div>
       </section>
@@ -1474,7 +1409,6 @@ function AppRoutes() {
           <Route path="/main" element={<HomePage />} />
           <Route path="/products" element={<DeferredCatalog />} />
           <Route path="/product/:slug" element={<ProductPage />} />
-          <Route path="/lord" element={<LordPage />} />
           <Route path="/about" element={<AboutLandingPage />} />
           <Route path="/about/our-history" element={<HistoryPage />} />
           <Route path="/about/company" element={<AboutContentPage path="/about/company" />} />
@@ -1502,7 +1436,9 @@ export default function App() {
   const [selected, setSelected] = useState<string[]>(() => {
     try {
       const value = JSON.parse(localStorage.getItem("drnona-selection") ?? "[]");
-      return Array.isArray(value) ? value : [];
+      return Array.isArray(value)
+        ? value.filter((slug): slug is string => typeof slug === "string" && productBySlug.has(slug))
+        : [];
     } catch {
       return [];
     }

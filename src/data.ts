@@ -10,8 +10,8 @@ export type Product = {
   howToUse: string;
   sku: string;
   category: string;
-  collection: string;
   image: string;
+  cardImage: string;
   imageAlt: string;
   sourceUrl: string;
   sourceLastmod: string;
@@ -42,21 +42,24 @@ export const categories = Array.from(
   new Set(products.map((product) => product.category).filter(Boolean))
 );
 
-export const lordProducts = products.filter((product) => product.collection === "Lord");
-
 export function getRelatedProducts(product: Product, limit = 4) {
   const explicit = product.relatedSlugs
     .map((slug) => productBySlug.get(slug))
     .filter((item): item is Product => Boolean(item));
-  const related = products
+  const sameCategory = products
     .filter(
       (candidate) =>
         candidate.slug !== product.slug &&
         candidate.category === product.category &&
         !explicit.some((item) => item.slug === candidate.slug)
-    )
-    .slice(0, Math.max(0, limit - explicit.length));
-  return [...explicit, ...related].slice(0, limit);
+    );
+  const remaining = products.filter(
+    (candidate) =>
+      candidate.slug !== product.slug &&
+      !explicit.some((item) => item.slug === candidate.slug) &&
+      !sameCategory.some((item) => item.slug === candidate.slug)
+  );
+  return [...explicit, ...sameCategory, ...remaining].slice(0, limit);
 }
 
 export function getEditorial(kind: "blog" | "news") {

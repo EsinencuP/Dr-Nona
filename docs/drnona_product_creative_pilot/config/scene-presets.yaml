@@ -1,0 +1,145 @@
+presets:
+  neutral_premium:
+    name: Neutral Premium
+    allowed_categories: [unknown, skincare, bodycare, oral care, gift set]
+    palette: [light cream, warm white, sand]
+    surface: light travertine
+    background: soft ivory architectural arch
+    lighting: soft diffused studio daylight
+    camera: eye-level premium product photography, 85mm lens
+    props_required: [travertine podium]
+    props_optional: [neutral fabric, one pale stone]
+    props_forbidden: [neon, dark props, hands, faces, text]
+    prompt_template: restrained premium editorial product background
+    negative_prompt: busy scene, fantasy, oversized decor
+    layout_rules: empty center; props in lower third and outer edges
+    shadow_rules: soft contact shadow, low opacity
+    reflection_rules: disabled
+  mineral_recovery:
+    name: Mineral Recovery
+    allowed_categories: [mud and mineral, repairing skincare, bodycare]
+    palette: [pale aqua, white, light sand]
+    surface: pale mineral stone
+    background: airy aqua-white studio gradient
+    lighting: soft cool diffused daylight
+    camera: eye-level premium skincare photography, 85mm lens
+    props_required: [mineral stone]
+    props_optional: [water, clay, translucent crystals]
+    props_forbidden: [dark mud splashes, oversized crystals, text]
+    prompt_template: luminous mineral wellness background with restrained water cues
+    negative_prompt: dirty mud, dramatic splashes, fantasy crystals
+    layout_rules: clear center; water and minerals below product label zone
+    shadow_rules: soft cool contact shadow
+    reflection_rules: optional only on polished stone or water
+  botanical_repair:
+    name: Botanical Repair
+    allowed_categories: [skincare, repairing skincare, botanical supplement]
+    palette: [warm ivory, olive, soft gold]
+    surface: light travertine
+    background: warm ivory arch
+    lighting: warm diffused daylight
+    camera: eye-level editorial product photography, 85mm lens
+    props_required: [light travertine]
+    props_optional: [olive leaves, small white flowers, mineral crystals]
+    props_forbidden: [giant flowers, dense foliage, text]
+    prompt_template: restorative botanical editorial background with restrained natural materials
+    negative_prompt: jungle, oversized flowers, clutter, fake ingredients
+    layout_rules: maximum five prop groups; label area unobstructed
+    shadow_rules: warm soft contact shadow
+    reflection_rules: disabled
+  hydration_water:
+    name: Hydration Water
+    allowed_categories: [hydration, skincare, functional drink]
+    palette: [white, pale blue, clear glass]
+    surface: glossy white glass
+    background: luminous white and pale blue gradient
+    lighting: clean diffused daylight
+    camera: eye-level high-key product photography, 85mm lens
+    props_required: [clear water cue]
+    props_optional: [glass, droplets, transparent surfaces]
+    props_forbidden: [heavy splashes, dark water, text]
+    prompt_template: high-key hydration background with realistic clear water and glass
+    negative_prompt: stormy water, oversized droplets, floating product
+    layout_rules: open center; transparent elements kept behind placement zone
+    shadow_rules: soft cool contact shadow
+    reflection_rules: optional on glass or water
+  anti_age_gold:
+    name: Anti-age Gold
+    allowed_categories: [anti-age, skincare]
+    palette: [ivory, champagne gold, soft beige]
+    surface: smooth ivory marble
+    background: minimal ivory geometry
+    lighting: delicate directional studio light
+    camera: symmetrical premium product photography, 85mm lens
+    props_required: [smooth marble podium]
+    props_optional: [minimal botanical accent, champagne metal]
+    props_forbidden: [glitter, black background, text]
+    prompt_template: restrained anti-age luxury background with champagne-gold accents
+    negative_prompt: gaudy gold, glitter, excessive shine
+    layout_rules: strict balanced composition; empty center
+    shadow_rules: precise soft directional shadow
+    reflection_rules: optional on polished marble
+  perfume_luxury:
+    name: Perfume Luxury
+    allowed_categories: [perfume]
+    palette: [white marble, navy accent, gold]
+    surface: polished white marble
+    background: elegant architectural arch with restrained deep-color accent
+    lighting: controlled luxury studio lighting
+    camera: eye-level fragrance campaign photography, 85mm lens
+    props_required: [white marble podium]
+    props_optional: [fabric, stone, subtle mist, minimal botanical accent]
+    props_forbidden: [second bottle, faces, hands, text]
+    prompt_template: refined fragrance background with marble, architecture and subtle atmosphere
+    negative_prompt: duplicate bottle, dense mist, nightclub lighting
+    layout_rules: clear central silhouette; decor along edges
+    shadow_rules: soft directional contact shadow
+    reflection_rules: optional on polished marble
+  herbal_tea:
+    name: Herbal Tea
+    allowed_categories: [tea, functional drink, botanical supplement]
+    palette: [warm cream, linen, natural wood]
+    surface: pale natural wood
+    background: warm morning editorial setting
+    lighting: soft warm morning light
+    camera: eye-level still-life photography, 70mm lens
+    props_required: [neutral linen]
+    props_optional: [ceramic cup, light steam, verified herbs]
+    props_forbidden: [unverified herbs, hands, faces, text]
+    prompt_template: calm herbal wellness still life with morning light
+    negative_prompt: rustic clutter, dark wood, excessive steam
+    layout_rules: product placement zone remains empty and dominant
+    shadow_rules: soft natural contact shadow
+    reflection_rules: disabled
+  chocolate_wellness:
+    name: Chocolate Wellness
+    allowed_categories: [functional drink, food supplement]
+    palette: [beige, cream, cocoa brown]
+    surface: warm stone
+    background: soft warm morning studio
+    lighting: warm diffused morning light
+    camera: eye-level commercial still life, 70mm lens
+    props_required: [natural linen]
+    props_optional: [cacao powder, cacao beans, chocolate pieces, ceramic cup]
+    props_forbidden: [cacao unless confirmed, melting product, text]
+    prompt_template: warm restrained chocolate-wellness background
+    negative_prompt: confectionery overload, dark scene, messy powder
+    layout_rules: maximum four prop groups; empty center
+    shadow_rules: soft warm contact shadow
+    reflection_rules: disabled
+  clean_scientific:
+    name: Clean Scientific
+    allowed_categories: [food supplement, oral care, cleansing, unknown]
+    palette: [white, clear glass, pale grey]
+    surface: clean matte white
+    background: high-key minimal laboratory-inspired forms
+    lighting: clean softbox lighting
+    camera: straight-on clinical editorial product photography, 85mm lens
+    props_required: [simple glass form]
+    props_optional: [minimal laboratory geometry]
+    props_forbidden: [medical symbols, claims, formulas, text]
+    prompt_template: clean scientific-inspired background without medical claims
+    negative_prompt: hospital scene, medical promise, molecule text, busy laboratory
+    layout_rules: sparse props; large empty center
+    shadow_rules: restrained neutral contact shadow
+    reflection_rules: optional only on glass

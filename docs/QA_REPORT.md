@@ -3,6 +3,20 @@
 Date: 2026-07-26  
 Status: PASS for local frontend prototype
 
+## 2026-07-27 QA package follow-up
+
+- Applied all QA-001 through QA-014 items from `DR_NONA_QA_PACKAGE.zip`.
+- Rebuilt the hero and product-detail compositions from the approved visual
+  references.
+- Added dedicated generated Dead Sea backgrounds while preserving the official
+  product PNGs.
+- Rechecked eight priority routes at desktop and mobile widths with no
+  document-level horizontal overflow or clipped headings.
+- Completed normalized side-by-side design comparisons.
+- Detailed implementation evidence:
+  `docs/qa-package/2026-07-27/IMPLEMENTATION_REPORT.md`.
+- Final Product Design QA: `design-qa.md` — passed.
+
 ## Automated gates
 
 - TypeScript project build: PASS.

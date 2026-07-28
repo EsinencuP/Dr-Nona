@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "catalog-creative-agent"
+version = "1.0.0"
+description = "Fidelity-safe product catalog creative automation"
+requires-python = ">=3.11"
+dependencies = [
+  "Pillow>=10.0.0",
+  "opencv-python-headless>=4.10.0",
+  "numpy>=1.26.0",
+  "PyYAML>=6.0.1",
+  "python-dotenv>=1.0.1",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
