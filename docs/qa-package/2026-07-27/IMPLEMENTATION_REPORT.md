@@ -73,3 +73,19 @@ PNG files.
 - Product stage containment: passed at 390×844.
 - Halo interaction states: 3/3 passed.
 - Browser console: no warning or error entries; only Vite connection messages and the React development-tools notice.
+
+## Catalog follow-up — 2026-07-28
+
+- Replaced the previous catalog set with the 10 updated product pairs from
+  `docs/drnona_products_catalog/new/`.
+- White `catalog` assets are used only in the main catalog grid; unique `card`
+  assets are used on individual product pages and promotional cards.
+- Catalog density increased from three to four columns on wide desktop.
+- Card radius, border, surface tint, image stage, typography and internal
+  spacing were compacted as one unified light visual system.
+- Removed the separate Lord landing route, body theme, banner, card variant and
+  responsive CSS. Product names printed on supplied packaging remain unchanged.
+- Verified desktop and 390 px mobile layouts: 10 cards rendered, no horizontal
+  overflow, no title/description/link overlap, and no browser console warnings
+  or errors.
+- Final production build: passed.

@@ -3977,15 +3977,15 @@
     ],
     "images": [
       {
-        "src": "https://res.cloudinary.com/drnona-com/image/upload/f_jpeg,w_510,h_430,c_fill/pages/about/founders/founders-kuchina",
+        "src": "https://res.cloudinary.com/drnona-com/image/upload/f_auto,q_auto,w_510,h_430,c_fill/pages/about/founders/founders-kuchina",
         "alt": ""
       },
       {
-        "src": "https://res.cloudinary.com/drnona-com/image/upload/f_jpeg,w_350,h_295,c_fill/pages/about/founders/founders-shneerson",
+        "src": "https://res.cloudinary.com/drnona-com/image/upload/f_auto,q_auto,w_350,h_295,c_fill/pages/about/founders/founders-shneerson",
         "alt": ""
       },
       {
-        "src": "https://res.cloudinary.com/drnona-com/image/upload/f_jpeg,w_510,h_430,c_fill/pages/about/founders/founders-shneerson",
+        "src": "https://res.cloudinary.com/drnona-com/image/upload/f_auto,q_auto,w_510,h_430,c_fill/pages/about/founders/founders-shneerson",
         "alt": ""
       }
     ],

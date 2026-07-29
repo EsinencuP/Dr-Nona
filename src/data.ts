@@ -12,6 +12,7 @@ export type Product = {
   category: string;
   image: string;
   cardImage: string;
+  catalogScale: number;
   imageAlt: string;
   sourceUrl: string;
   sourceLastmod: string;

@@ -140,3 +140,282 @@ media and review data exist.
 - [x] Keep generated imagery replaceable in a dedicated folder.
 
 final result: passed
+
+## Catalog refresh — 2026-07-28
+
+- Runtime catalog reduced to the 10 updated products supplied in
+  `docs/drnona_products_catalog/new/`.
+- Every product uses a paired image contract:
+  `_1` / `*-catalog.png` for the white catalog grid and
+  `_2` / `*-card.png` for the individual product page.
+- Wide desktop catalog: 4 compact cards per row. Intermediate desktop/tablet:
+  3 then 2 columns. Mobile: 1 readable column.
+- Catalog cards share one light sea-and-white visual system. No product receives
+  a separate dark theme, special card chrome or collection badge.
+- The former `/lord` landing route and its theme are removed; the URL resolves
+  to the standard 404 page.
+- Browser QA: 10/10 catalog images loaded, no horizontal overflow, minimum
+  title-to-description gap 11 px, minimum description-to-link gap 18 px.
+- Individual product QA confirmed `*-card.png` is used and no theme class is
+  applied.
+- Production build: passed.
+
+final catalog result: passed
+
+## Density and Halo Complex follow-up — 2026-07-28
+
+- Rebuilt the homepage science block from the supplied visual reference:
+  deep marine gradient, editorial copy column, large orbital diagram, three
+  interactive formula controls and a horizontal active-detail panel.
+- Reduced general section padding, section-heading gaps, catalog intro spacing
+  and catalog bottom padding so more real content enters each viewport.
+- Kept minimum control heights and readable body sizing for the older primary
+  audience.
+- Desktop science section now fits within one 900 px viewport.
+- Mobile science copy is intentionally shortened to a seven-line preview; full
+  information remains available through the formula page.
+- Browser QA: no horizontal overflow and no overlap between diagram controls
+  and the active-detail panel at 1440 px or 390 px.
+
+final density result: passed
+
+## Homepage catalog cards follow-up — 2026-07-28
+
+- Expanded the homepage selection from 6 to 8 updated products.
+- Wide desktop homepage: 4 compact cards per row instead of 3.
+- Homepage cards now explicitly use only `*-catalog.png` assets on a white
+  catalog stage; lifestyle `*-card.png` assets remain exclusive to individual
+  product pages.
+- Browser QA at 1440 px and 390 px: 8/8 images loaded, correct catalog assets,
+  no horizontal overflow, 4 desktop columns and 1 mobile column.
+- Production build: passed.
+
+final homepage cards result: passed
+
+## Site-wide density and heading system — 2026-07-28
+
+- Removed forced desktop line breaks from the catalog, About and Halo Complex
+  page titles.
+- Reworked internal page intros as compact editorial bands: single-line desktop
+  title, adjacent supporting copy and a quiet vertical divider.
+- Reduced the global display scale and tightened section, hero, article,
+  product-detail, timeline, formula-story and footer-adjacent page spacing.
+- Preserved intentional space where it carries real information: the integrated
+  homepage product scene, Halo orbital diagram and product photography.
+- Desktop measurements at 1440 px:
+  - catalog intro: 329 px → 178 px;
+  - About hero: 600 px → 390 px;
+  - standard About/editorial/selection intros: 235–249 px → 170–174 px;
+  - contact/certificate headers: 343 px → 222 px;
+  - article header: 447 px → 325 px;
+  - formula hero: 720 px → 560 px.
+- Browser QA covered 13 representative routes at 1440 px and 10 template routes
+  at 390 px. No horizontal overflow, heading overflow or text collisions were
+  detected.
+- Desktop page titles are one line on every checked route. Mobile headings wrap
+  only when the available width requires it.
+- Production build: passed.
+
+final density-system result: passed
+
+## Halo Complex product-image correction — 2026-07-28
+
+- Formula-page product cards now use the same `*-catalog.png` white-background
+  assets as the main catalog and homepage catalog section.
+- Lifestyle `*-card.png` images remain exclusive to individual product pages.
+- Desktop and mobile browser QA: 2/2 catalog images loaded, correct source
+  suffixes and no horizontal overflow.
+- Production build: passed.
+
+final formula-product-images result: passed
+
+## Product-card selection control — 2026-07-28
+
+- Moved the selection control from the image stage into a dedicated bottom
+  action row beside the product-details link.
+- Reworked the former icon-only control as a compact labelled pill:
+  `В подборку` / `Добавлено`, with matching RU/RO interface labels.
+- The card body and action row now establish their own foreground layers;
+  product imagery remains clipped inside the separate stage and cannot cover
+  the selection control.
+- Desktop QA covered the catalog, homepage and Halo Complex product section.
+  All 20 rendered controls were below their image stages and inside their
+  action rows.
+- Mobile QA confirmed a 40 px minimum control height, no horizontal overflow
+  and no overlap with product imagery.
+- Selection interaction was verified in both directions:
+  `false → true → false`.
+- Production build: passed.
+
+final selection-control result: passed
+
+## Object-aware catalog image scale — 2026-07-29
+
+- Analysed the foreground bounds inside all 10 white-background catalog PNGs
+  instead of treating each 1254 × 1254 canvas as an equally sized product.
+- Source object occupancy before normalization ranged from:
+  - 24% to 90% of canvas width;
+  - 50% to 86% of canvas height.
+- Added an individual `catalogScale` value to every product. Values range from
+  `0.82` for the widest tea box to `0.96` for products with generous source
+  margins.
+- Normalized the visible foreground maximum to approximately 74% of the card.
+  The smallest measured final object-to-card edge margin is 9.9%.
+- Catalog images now use `object-fit: contain` in every ProductCard context.
+  The complete source canvas remains visible even when a compact card stage is
+  not square.
+- Hover enlargement is capped at an additional `0.015`, so the final image
+  scale never reaches or exceeds 1.
+- Desktop QA: 10 catalog cards, 8 homepage cards and 2 Halo Complex cards all
+  loaded with the expected individual scale and `contain` fit.
+- Mobile QA: all 10 catalog objects retained their individual scale, with no
+  horizontal overflow or clipping.
+- Original PNG files were preserved unchanged.
+- Production build: passed.
+
+final object-aware-image-scale result: passed
+
+## Halo Complex compact informative hero — 2026-07-29
+
+- Replaced the oversized decorative orbit hero with a compact informational
+  band that immediately explains the three foundations of Halo Complex:
+  `Архебактерия`, `Мёртвое море` and `Новое поколение`.
+- The detailed story below now follows the same three-part structure, without
+  an accidental fourth chapter or duplicated decorative content.
+- Desktop QA at 1440 × 900:
+  - hero height: 349 px;
+  - detailed content begins at 431 px;
+  - all three information rows fit inside the hero;
+  - no text collisions or horizontal overflow.
+- Mobile QA at 390 × 844:
+  - all three information rows remain inside the hero;
+  - no text collisions, horizontal overflow or console warnings.
+- Production build: passed.
+
+final compact-formula-hero result: passed
+
+## About page integrated editorial journey — 2026-07-29
+
+- Removed the 520 px decorative constellation diagram and the separated
+  corner-to-corner hero composition.
+- Rebuilt the `/about` landing page as a compact information-first overview:
+  official vision copy, three factual company indicators and no empty
+  full-screen presentation area.
+- Replaced the detached subsection list with four asymmetrical, fully clickable
+  editorial chapters:
+  `Компания`, `История`, `Основатели`, `Наука и технология`.
+- Each chapter uses its official Dr. Nona image and source excerpt. Cloudinary
+  delivery was corrected from broken 300 px transforms to working 900 × 900
+  responsive assets.
+- Internal subsection navigation now uses a connected editorial rail with a
+  clear active state, directional feedback and keyboard-visible focus instead
+  of detached pill controls.
+- Motion is limited to short reveal, image-scale and directional hover
+  feedback; `prefers-reduced-motion` continues to disable transitions.
+- Desktop QA at 1440 × 900:
+  - compact overview height: 377 px;
+  - four chapters and four images loaded;
+  - no text collisions or horizontal overflow.
+- Mobile QA at 390 × 844:
+  - compact overview height: 361 px;
+  - all facts and chapter content fit without clipping;
+  - no text collisions, horizontal overflow or console warnings.
+- All four subsection routes expose the correct active navigation state.
+- Production build: passed.
+
+final about-editorial-journey result: passed
+
+## Homepage editorial product showcase — 2026-07-29
+
+- Removed the eight-card homepage catalog grid. The full catalog remains
+  available through its dedicated route and homepage links.
+- Added one large editorial product spotlight using `Halo Dynamic Cream` as the
+  current editorial selection, with a direct product link and selection control.
+- Added two compact supporting products with white-background catalog assets:
+  `Halo Solaris Facial Cream` and `Halo Gonseen VitaliTea`.
+- Added two distinct campaign formats:
+  - a visual promo banner for `Halo Solaris Body Lotion`;
+  - a dark editorial banner for the two-product `Lord` collection.
+- Lifestyle images are used only in editorial spotlight and campaign contexts;
+  compact product entries continue to use catalog images.
+- Motion is limited to short image-scale and card-elevation feedback, with the
+  existing reduced-motion fallback.
+- Desktop QA at 1440 × 1000:
+  - zero standard catalog cards in the homepage showcase;
+  - one spotlight, two supporting products and two campaign banners;
+  - all six images loaded;
+  - no text collisions or horizontal overflow.
+- Mobile QA at 390 × 844:
+  - every unit stacks to the full content width;
+  - the promo image is offset behind a dedicated dark reading zone so its
+    product label does not compete with interface copy;
+  - all six images load after lazy content enters the viewport;
+  - no horizontal overflow or console warnings.
+- Production build: passed.
+
+final homepage-editorial-products result: passed
+
+## Information-density and first-viewport pass — 2026-07-29
+
+- Reduced global section spacing, header height, heading gaps and repeated card
+  padding while retaining readable line height and 40–46 px primary controls.
+- Rebalanced the catalogue for information density:
+  - five product cards per row at 1440 px;
+  - compact single-column cards at 390 px;
+  - all ten catalogue products remain available;
+  - catalogue images use `object-fit: contain`;
+  - selection controls sit below the product media and never overlap it.
+- Moved the product-detail selection CTA directly after the product purpose so
+  it appears in the initial mobile viewport before long copy and facts.
+- Reduced the mobile home hero media height and moved the editorial product
+  heading into the initial viewport. The first screen now contains the main
+  proposition, both hero actions, product visual, benefits and the beginning
+  of the next commercial section.
+- Converted non-featured mobile editorial cards to compact horizontal entries
+  and clamped long article summaries in page headers.
+- Increased certificate density to five columns on desktop and two on mobile.
+- Representative template QA at 1440 × 900 and 390 × 844:
+  - one visible `h1` on every tested page;
+  - zero text collisions;
+  - zero horizontal overflow;
+  - zero broken visible images;
+  - zero unnamed primary controls;
+  - zero undersized primary controls.
+- Full route sweep:
+  - 151 routes checked at 1440 × 900;
+  - 151 routes checked at 390 × 844;
+  - the lazy catalogue route was rechecked after module load and passed;
+  - below-the-fold lazy images were excluded from false-positive failures.
+- RU/RO control check passed; the document language now changes between `ru`
+  and `ro` together with the interface locale.
+- Production build: passed.
+
+final information-density result: passed
+
+## Release-language cleanup — 2026-07-29
+
+- Removed presentation-only numbering from:
+  - homepage section labels;
+  - mobile navigation;
+  - catalogue and related-product cards;
+  - company navigation and chapter cards;
+  - Halo Complex pillars and story chapters;
+  - saved-product rows.
+- Replaced the catalogue's “updated catalogue” wording with direct customer
+  copy describing the product range.
+- Preserved meaningful data such as founding years, product totals, history
+  milestones and the user's saved-product count.
+- Updated the project status to a completed frontend implementation with a
+  verified production build.
+- Visual QA covered the homepage, catalogue, Halo Complex, company page,
+  mobile navigation and a populated saved-products state.
+- Automated release sweep:
+  - 151 public routes checked;
+  - zero presentation labels or section-number markers;
+  - zero horizontal overflow;
+  - zero broken loaded images;
+  - one `h1` per route after the lazy catalogue module completed loading.
+- Mobile regression audit covered 12 representative templates with zero text
+  collisions, unnamed controls or undersized primary controls.
+
+final release-language-cleanup result: passed

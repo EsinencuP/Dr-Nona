@@ -1,9 +1,9 @@
 # Dr. Nona Website
 
-Статус проекта: **Frontend prototype implemented / production content review
-pending**.
+Статус проекта: **Frontend implementation complete / production build
+verified**.
 
-Реализован локальный multi-page React/TypeScript frontend электронного каталога:
+Реализован multi-page React/TypeScript сайт электронного каталога:
 главная, каталог, продукт, Lord, About, история, Halo Complex™, Blog/News,
 подборка и официальные информационные маршруты. Проект не является
 интернет-магазином и не содержит корзину, checkout, оплату или авторизацию.

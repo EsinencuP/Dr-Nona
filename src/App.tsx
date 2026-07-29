@@ -34,7 +34,6 @@ import {
   Route,
   Routes,
   useLocation,
-  useNavigate,
   useParams,
   useSearchParams,
 } from "./router";
@@ -149,13 +148,25 @@ function splitText(text: string, minLength = 140) {
   return chunks;
 }
 
-function formatDate(value: string) {
+function formatDate(value: string, locale: Locale = "ru") {
   if (!value) return "";
-  return new Intl.DateTimeFormat("ru-RU", {
+  return new Intl.DateTimeFormat(locale === "ro" ? "ro-RO" : "ru-RU", {
     day: "numeric",
     month: "long",
     year: "numeric",
   }).format(new Date(value));
+}
+
+const importedPageFallbackTitles: Record<string, string> = {
+  "/blog/Mastopathy": "Мастопатия: что нужно знать",
+  "/news/happypassover": "С праздником Песах",
+  "/news/july-promo": "Июльская акция",
+  "/news/ukraine-results-2022": "Итоги 2022 года в Украине",
+};
+
+function getPageTitle(page?: OfficialPage) {
+  if (!page) return "";
+  return page.title.trim() || page.headings.find((heading) => heading.trim()) || importedPageFallbackTitles[page.path] || "";
 }
 
 function ScrollRestoration() {
@@ -172,7 +183,7 @@ function ScrollRestoration() {
       : "";
     const title =
       (productSlug && productBySlug.get(productSlug)?.officialName) ||
-      pageByPath.get(location.pathname)?.title ||
+      getPageTitle(pageByPath.get(location.pathname)) ||
       (location.pathname === "/products" ? "Каталог" : "") ||
       (location.pathname === "/selection" ? "Подборка" : "") ||
       (location.pathname === "/editorial" ? "Блог и новости" : "") ||
@@ -315,15 +326,13 @@ function Header() {
         hidden={!open}
       >
         <nav aria-label="Мобильная навигация">
-          {nav.map(([to, label], index) => (
+          {nav.map(([to, label]) => (
             <NavLink key={to} to={to}>
-              <small>0{index + 1}</small>
               <span>{label}</span>
               <ArrowUpRight aria-hidden="true" />
             </NavLink>
           ))}
           <NavLink to="/selection">
-            <small>05</small>
             <span>{t.selection}</span>
             <b>{selected.length}</b>
           </NavLink>
@@ -442,12 +451,10 @@ function SectionHeading({
 
 function ProductCard({
   product,
-  index = 0,
   compact = false,
   catalogImage = false,
 }: {
   product: Product;
-  index?: number;
   compact?: boolean;
   catalogImage?: boolean;
 }) {
@@ -457,25 +464,22 @@ function ProductCard({
   return (
     <article className={`product-card ${compact ? "product-card--compact" : ""}`}>
       <div className="product-card__stage">
-        <span className="product-card__number">{String(index + 1).padStart(2, "0")}</span>
-        <button
-          className="save-button"
-          type="button"
-          aria-label={saved ? "Удалить из подборки" : "Добавить в подборку"}
-          aria-pressed={saved}
-          onClick={() => toggle(product.slug)}
-        >
-          <Heart aria-hidden="true" weight={saved ? "fill" : "regular"} />
-        </button>
         <Link to={`/product/${product.slug}`} tabIndex={-1} aria-hidden="true">
           <img
-            className="product-card__image product-card__image--editorial"
+            className={`product-card__image ${
+              catalogImage ? "product-card__image--catalog" : "product-card__image--editorial"
+            }`}
             src={catalogImage ? product.image : product.cardImage}
             alt=""
             width="1254"
             height="1254"
             loading="lazy"
             decoding="async"
+            style={
+              catalogImage
+                ? ({ "--product-object-scale": product.catalogScale } as CSSProperties)
+                : undefined
+            }
           />
         </Link>
       </div>
@@ -486,10 +490,27 @@ function ProductCard({
         <h3>
           <Link to={`/product/${product.slug}`}>{product.officialName}</Link>
         </h3>
-        {product.shortDescription && <p>{product.shortDescription}</p>}
-        <Link className="text-link" to={`/product/${product.slug}`}>
-          {t.details} <ArrowUpRight aria-hidden="true" />
-        </Link>
+        <p
+          className="product-card__description"
+          aria-hidden={product.shortDescription ? undefined : true}
+        >
+          {product.shortDescription || "\u00A0"}
+        </p>
+        <div className="product-card__actions">
+          <Link className="text-link" to={`/product/${product.slug}`}>
+            {t.details} <ArrowUpRight aria-hidden="true" />
+          </Link>
+          <button
+            className="save-button"
+            type="button"
+            aria-label={saved ? t.added : t.add}
+            aria-pressed={saved}
+            onClick={() => toggle(product.slug)}
+          >
+            <Heart aria-hidden="true" weight={saved ? "fill" : "regular"} />
+            <span>{saved ? t.added : t.add}</span>
+          </button>
+        </div>
       </div>
     </article>
   );
@@ -498,7 +519,20 @@ function ProductCard({
 function HomePage() {
   const about = pageByPath.get("/about");
   const formula = pageByPath.get("/ourformula");
-  const featured = products;
+  const { contains, toggle } = useSelection();
+  const spotlight =
+    productBySlug.get("dynamic-hydrating-cream") ?? products[0];
+  const supportingProducts = [
+    productBySlug.get("facial-solaris"),
+    productBySlug.get("halo-gonseen-vitalitea"),
+  ].filter((product): product is Product => Boolean(product));
+  const promoProduct =
+    productBySlug.get("solaris-body-lotion") ?? products[1];
+  const lordProducts = [
+    productBySlug.get("after-shave-lord"),
+    productBySlug.get("lord-deodorant"),
+  ].filter((product): product is Product => Boolean(product));
+  const spotlightSaved = contains(spotlight.slug);
   const articles = [...getEditorial("news").slice(0, 2), ...getEditorial("blog").slice(0, 1)];
   const [scienceFocus, setScienceFocus] = useState<"archaea" | "minerals" | "extracts">("minerals");
   const scienceNodes = [
@@ -522,6 +556,7 @@ function HomePage() {
     },
   ];
   const activeScienceNode = scienceNodes.find((node) => node.id === scienceFocus) ?? scienceNodes[1];
+  const ActiveScienceIcon = activeScienceNode.icon;
   const heroBenefits = [
     { icon: Drop, title: "Минералы Мёртвого моря", text: "Уникальный природный источник" },
     { icon: Flask, title: "Научные разработки", text: "Современные формулы" },
@@ -569,12 +604,11 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="section container product-feature-section">
+      <section className="section container home-product-showcase">
         <Reveal>
           <SectionHeading
-            eyebrow="Каталог · 01"
-            title="Обновлённый каталог Dr. Nona"
-            text="Три выбранных продукта в единой эстетике Halo Complex™ и с обновлённой визуальной подачей."
+            eyebrow="Продукты"
+            title="Выбор редакции"
             action={
               <Link className="text-link text-link--large" to="/products">
                 Все продукты <ArrowRight aria-hidden="true" />
@@ -583,19 +617,147 @@ function HomePage() {
             align="split"
           />
         </Reveal>
-        <div className="featured-product-grid">
-          {featured.map((product, index) => (
-            <Reveal key={product.slug} delay={(index % 4) * 45}>
-              <ProductCard product={product} index={index} />
-            </Reveal>
-          ))}
+
+        <div className="home-product-editorial">
+          <Reveal className="home-product-spotlight">
+            <article>
+              <Link
+                className="home-product-spotlight__media"
+                to={`/product/${spotlight.slug}`}
+                aria-label={`Открыть ${spotlight.officialName}`}
+              >
+                <img
+                  src={spotlight.cardImage}
+                  alt={spotlight.officialName}
+                  width="1254"
+                  height="1254"
+                  decoding="async"
+                />
+              </Link>
+              <div className="home-product-spotlight__body">
+                <div className="home-product-spotlight__meta">
+                  <span>Выбор редакции</span>
+                  <small>{spotlight.category}</small>
+                </div>
+                <h3>{spotlight.officialName}</h3>
+                <p>{spotlight.shortDescription}</p>
+                <div className="home-product-spotlight__actions">
+                  <Link className="button button--primary" to={`/product/${spotlight.slug}`}>
+                    Смотреть продукт <ArrowRight aria-hidden="true" />
+                  </Link>
+                  <button
+                    className="save-button"
+                    type="button"
+                    aria-label={spotlightSaved ? "Добавлено" : "В подборку"}
+                    aria-pressed={spotlightSaved}
+                    onClick={() => toggle(spotlight.slug)}
+                  >
+                    <Heart
+                      aria-hidden="true"
+                      weight={spotlightSaved ? "fill" : "regular"}
+                    />
+                    <span>{spotlightSaved ? "Добавлено" : "В подборку"}</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+          </Reveal>
+
+          <div className="home-product-supporting" aria-label="Ещё два продукта">
+            {supportingProducts.map((product, index) => (
+              <Reveal key={product.slug} delay={70 + index * 55}>
+                <article className="home-product-mini">
+                  <Link
+                    className="home-product-mini__media"
+                    to={`/product/${product.slug}`}
+                    tabIndex={-1}
+                    aria-hidden="true"
+                  >
+                    <img
+                      src={product.image}
+                      alt=""
+                      width="1254"
+                      height="1254"
+                      loading="lazy"
+                      decoding="async"
+                      style={
+                        {
+                          "--product-object-scale": product.catalogScale,
+                        } as CSSProperties
+                      }
+                    />
+                  </Link>
+                  <div className="home-product-mini__body">
+                    <span>{product.category}</span>
+                    <h3>
+                      <Link to={`/product/${product.slug}`}>
+                        {product.officialName}
+                      </Link>
+                    </h3>
+                    <Link className="text-link" to={`/product/${product.slug}`}>
+                      Подробнее <ArrowUpRight aria-hidden="true" />
+                    </Link>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
+        <div className="home-campaign-grid">
+          <Reveal className="home-promo-banner">
+            <article>
+              <img
+                src={promoProduct.cardImage}
+                alt={promoProduct.officialName}
+                width="1254"
+                height="1254"
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="home-promo-banner__content">
+                <span>Промо-фокус</span>
+                <h3>{promoProduct.officialName}</h3>
+                <p>{promoProduct.shortDescription}</p>
+                <Link className="button button--light" to={`/product/${promoProduct.slug}`}>
+                  Открыть продукт <ArrowRight aria-hidden="true" />
+                </Link>
+              </div>
+            </article>
+          </Reveal>
+
+          <Reveal className="home-lord-banner" delay={70}>
+            <article>
+              <div className="home-lord-banner__visual" aria-hidden="true">
+                {lordProducts.map((product) => (
+                  <img
+                    key={product.slug}
+                    src={product.cardImage}
+                    alt=""
+                    width="1254"
+                    height="1254"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ))}
+              </div>
+              <div className="home-lord-banner__content">
+                <span>Коллекция</span>
+                <h3>Lord</h3>
+                <p>{lordProducts[1]?.shortDescription}</p>
+                <Link className="button button--light" to="/products?q=Lord">
+                  Смотреть коллекцию <ArrowRight aria-hidden="true" />
+                </Link>
+              </div>
+            </article>
+          </Reveal>
         </div>
       </section>
 
-      <section className="science-section">
+      <section className="science-section" id="halo-science">
         <div className="container science-grid">
           <Reveal className="science-copy">
-            <p className="eyebrow eyebrow--light">Наука · 02</p>
+            <p className="eyebrow eyebrow--light">Наука</p>
             <h2>Halo Complex™</h2>
             <p className="science-intro">Сделано природой. Раскрыто наукой.</p>
             <p>{formula?.paragraphs[0] ? splitText(formula.paragraphs[0], 260)[0] : ""}</p>
@@ -628,8 +790,14 @@ function HomePage() {
               ))}
             </div>
             <div className="science-focus-panel" aria-live="polite">
-              <span>{activeScienceNode.label}</span>
-              <p>{activeScienceNode.description}</p>
+              <div className="science-focus-panel__icon" aria-hidden="true">
+                <ActiveScienceIcon />
+              </div>
+              <div>
+                <span>{activeScienceNode.label}</span>
+                <i aria-hidden="true" />
+                <p>{activeScienceNode.description}</p>
+              </div>
             </div>
           </Reveal>
         </div>
@@ -642,7 +810,7 @@ function HomePage() {
           <div className="history-seal"><span>30</span><small>лет истории</small></div>
         </Reveal>
         <Reveal className="history-preview__copy" delay={90}>
-          <p className="eyebrow">История · 03</p>
+          <p className="eyebrow">История</p>
           <h2>История компании</h2>
           <p>
             {pageByPath.get("/about/our-history")?.paragraphs[0]
@@ -659,7 +827,7 @@ function HomePage() {
         <div className="container">
           <Reveal>
             <SectionHeading
-              eyebrow="Знания · 04"
+              eyebrow="Знания"
               title="Блог и новости"
               action={
                 <Link className="text-link text-link--large" to="/editorial">
@@ -720,11 +888,10 @@ function CatalogPage() {
       <div className="page-intro page-intro--catalog">
         <div>
           <p className="eyebrow">Каталог · {products.length} продуктов</p>
-          <h1>Каталог<br /><em>Dr. Nona</em></h1>
+          <h1>Каталог <em>Dr. Nona</em></h1>
         </div>
         <p>
-          В обновлённом каталоге собраны три выбранных продукта Dr. Nona,
-          представленные в единой визуальной системе.
+          Продукты Dr. Nona для ежедневного ухода, здоровья и благополучия.
         </p>
       </div>
 
@@ -785,8 +952,8 @@ function CatalogPage() {
 
       {result.length ? (
         <div className="catalog-grid">
-          {result.map((product, index) => (
-            <ProductCard key={product.slug} product={product} index={index} catalogImage />
+          {result.map((product) => (
+            <ProductCard key={product.slug} product={product} catalogImage />
           ))}
         </div>
       ) : (
@@ -848,19 +1015,20 @@ function ProductPage() {
               {product.officialName}
             </h1>
             {product.shortDescription && <p className="product-purpose">{product.shortDescription}</p>}
-            <p className="product-description">{productSummary}</p>
-            <dl className="product-facts">
-              <div><dt>{t.category}</dt><dd>{product.category}</dd></div>
-              <div><dt>{t.sku}</dt><dd>{product.sku || "—"}</dd></div>
-            </dl>
             <button
               className="button button--primary product-select-button"
               type="button"
+              aria-pressed={saved}
               onClick={() => toggle(product.slug)}
             >
               {saved ? <Check aria-hidden="true" /> : <BookmarkSimple aria-hidden="true" />}
               {saved ? t.added : t.add}
             </button>
+            <p className="product-description">{productSummary}</p>
+            <dl className="product-facts">
+              <div><dt>{t.category}</dt><dd>{product.category}</dd></div>
+              <div><dt>{t.sku}</dt><dd>{product.sku || "—"}</dd></div>
+            </dl>
           </div>
         </div>
       </section>
@@ -899,8 +1067,8 @@ function ProductPage() {
       <section className="section container related-section">
         <SectionHeading eyebrow="Следующий шаг" title={t.related} />
         <div className="related-grid">
-          {related.map((item, index) => (
-            <ProductCard key={item.slug} product={item} index={index} compact />
+          {related.map((item) => (
+            <ProductCard key={item.slug} product={item} compact />
           ))}
         </div>
       </section>
@@ -915,12 +1083,20 @@ const aboutLinks = [
   ["/about/science", "Наука и технология"],
 ];
 
+function AboutChapterIcon({ path }: { path: string }) {
+  if (path.includes("our-history")) return <CalendarBlank aria-hidden="true" />;
+  if (path.includes("founders")) return <Heart aria-hidden="true" />;
+  if (path.includes("science")) return <Flask aria-hidden="true" />;
+  return <SealCheck aria-hidden="true" />;
+}
+
 function AboutNavigation() {
   return (
     <nav className="about-nav" aria-label="Разделы о компании">
-      {aboutLinks.map(([path, label], index) => (
+      {aboutLinks.map(([path, label]) => (
         <NavLink key={path} to={path}>
-          <small>0{index + 1}</small>{label}
+          <span>{label}</span>
+          <ArrowRight aria-hidden="true" />
         </NavLink>
       ))}
     </nav>
@@ -930,50 +1106,127 @@ function AboutNavigation() {
 function AboutLandingPage() {
   const page = pageByPath.get("/about");
   const text = page?.paragraphs[0] ?? "";
+  const companyExcerpt = splitText(
+    pageByPath.get("/about/company")?.paragraphs[0] ?? "",
+    210
+  )[0];
+  const chapters = aboutLinks.map(([path, label], index) => {
+    const chapter = pageByPath.get(path);
+    return {
+      path,
+      label,
+      image: page?.images[index]
+        ? {
+            ...page.images[index],
+            src: page.images[index].src.replace(
+              "f_jpeg,w_300,h_300",
+              "f_auto,q_auto,w_900"
+            ),
+          }
+        : undefined,
+      excerpt: splitText(chapter?.paragraphs[0] ?? "", 185)[0],
+    };
+  });
   return (
-    <>
-      <section className="about-hero container">
-        <div>
-          <p className="eyebrow">Dr. Nona International</p>
-          <h1>Наше<br /><em>видение</em></h1>
+    <div className="about-page">
+      <section className="about-overview">
+        <div className="about-overview__inner container">
+          <div className="about-overview__heading">
+            <p className="eyebrow">Dr. Nona International · с 1994 года</p>
+            <h1>Наше <em>видение</em></h1>
+          </div>
+          <div className="about-overview__statement">
+            <span aria-hidden="true">DN</span>
+            <p>{splitText(text, 430)[0]}</p>
+          </div>
+          <dl className="about-facts" aria-label="Dr. Nona в цифрах">
+            <div>
+              <dt>1994</dt>
+              <dd>год основания</dd>
+            </div>
+            <div>
+              <dt>40+</dt>
+              <dd>стран мира</dd>
+            </div>
+            <div>
+              <dt>300 000+</dt>
+              <dd>дистрибьюторов</dd>
+            </div>
+          </dl>
         </div>
-        <p>{splitText(text, 260)[0]}</p>
       </section>
-      <section className="about-constellation container">
-        <AboutNavigation />
-        <div className="about-constellation__visual" aria-hidden="true">
-          <span className="constellation-orbit constellation-orbit--one" />
-          <span className="constellation-orbit constellation-orbit--two" />
-          <span className="constellation-core">DN</span>
-          <span className="constellation-label constellation-label--science">Наука</span>
-          <span className="constellation-label constellation-label--sea">Мёртвое море</span>
-          <span className="constellation-label constellation-label--life">Долголетие</span>
+
+      <section className="about-chapters container" aria-labelledby="about-chapters-title">
+        <header className="about-chapters__heading">
+          <div>
+            <p className="eyebrow">О компании · четыре главы</p>
+            <h2 id="about-chapters-title">Компания Dr. Nona</h2>
+          </div>
+          <p>{companyExcerpt}</p>
+        </header>
+        <div className="about-chapter-grid">
+          {chapters.map((chapter, index) => (
+            <Reveal
+              key={chapter.path}
+              className={`about-chapter about-chapter--${index + 1}`}
+              delay={index * 55}
+            >
+              <Link to={chapter.path}>
+                <div className="about-chapter__media">
+                  {chapter.image?.src && (
+                    <img
+                      src={chapter.image.src}
+                      alt={chapter.image.alt || chapter.label}
+                      width="720"
+                      height="560"
+                      loading={index > 1 ? "lazy" : "eager"}
+                      decoding="async"
+                    />
+                  )}
+                </div>
+                <div className="about-chapter__body">
+                  <div className="about-chapter__meta">
+                    <AboutChapterIcon path={chapter.path} />
+                  </div>
+                  <h3>{chapter.label}</h3>
+                  <p>{chapter.excerpt}</p>
+                  <span className="about-chapter__link">
+                    Открыть раздел <ArrowRight aria-hidden="true" />
+                  </span>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
         </div>
       </section>
-      <section className="about-manifesto">
+
+      <section className="about-principles">
         <div className="container">
-          <span>М</span>
-          <blockquote>
-            Вера в поразительную мудрость природы, непрерывный творческий поиск,
-            приверженность бескомпромиссному качеству.
-          </blockquote>
-          <Link className="button button--light" to="/about/company">
-            Узнать о компании <ArrowRight aria-hidden="true" />
-          </Link>
+          <p className="eyebrow">Принципы Dr. Nona</p>
+          <div className="about-principles__content">
+            <blockquote>
+              Вера в поразительную мудрость природы, непрерывный творческий
+              поиск, приверженность бескомпромиссному качеству.
+            </blockquote>
+            <Link className="button button--light" to="/about/company">
+              О компании <ArrowRight aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 
 function HistoryPage() {
   const page = pageByPath.get("/about/our-history");
+  const title = getPageTitle(page);
   const chapters = splitText(page?.paragraphs[0] ?? "", 520);
   const years = ["1994", "1998", "1999", "2008", "Сегодня"];
   return (
     <section className="history-page container">
       <div className="page-intro">
-        <div><p className="eyebrow">О компании · История</p><h1>{page?.title}</h1></div>
+        <div><p className="eyebrow">О компании · История</p><h1>{title}</h1></div>
         <AboutNavigation />
       </div>
       <div className="timeline">
@@ -982,7 +1235,7 @@ function HistoryPage() {
         </svg>
         {chapters.map((chapter, index) => (
           <Reveal key={chapter.slice(0, 40)} className={`timeline-entry timeline-entry--${index % 2 ? "right" : "left"}`}>
-            <span className="timeline-year">{years[index] ?? `Глава ${index + 1}`}</span>
+            <span className="timeline-year">{years[index] ?? "Этап истории"}</span>
             <p>{chapter}</p>
           </Reveal>
         ))}
@@ -994,11 +1247,12 @@ function HistoryPage() {
 function AboutContentPage({ path }: { path: string }) {
   const page = pageByPath.get(path);
   if (!page) return <NotFoundPage />;
+  const title = getPageTitle(page);
   const paragraphs = page.paragraphs.flatMap((paragraph) => splitText(paragraph, 280));
   return (
     <section className="about-content container">
       <div className="page-intro">
-        <div><p className="eyebrow">О компании</p><h1>{page.title}</h1></div>
+        <div><p className="eyebrow">О компании</p><h1>{title}</h1></div>
         <AboutNavigation />
       </div>
       <div className="about-content__layout">
@@ -1018,12 +1272,12 @@ function AboutContentPage({ path }: { path: string }) {
             </Reveal>
           ))}
           {page.images.length > 0 && (
-            <div className="official-media-grid" aria-label={`Изображения: ${page.title}`}>
+            <div className="official-media-grid" aria-label={`Изображения: ${title}`}>
               {page.images.map((image, index) => (
                 <img
                   key={`${image.src}-${index}`}
                   src={image.src}
-                  alt={image.alt || `${page.title}, изображение ${index + 1}`}
+                  alt={image.alt || title}
                   width="800"
                   height="640"
                   loading="lazy"
@@ -1040,39 +1294,64 @@ function AboutContentPage({ path }: { path: string }) {
 
 function FormulaPage() {
   const page = pageByPath.get("/ourformula");
-  const text = page?.paragraphs.flatMap((item) => splitText(item, 260)) ?? [];
+  const formulaChapters = [
+    {
+      title: "Архебактерия",
+      icon: TestTube,
+      summary: "Древнейшая форма жизни из экстремальной среды Мёртвого моря.",
+      text: "В основу формулы Halo Complex™ входят производные архебактерии — древнейшей формы жизни, способной существовать в экстремальных условиях Мёртвого моря. Её уникальная структура является источником белков, аминокислот и антиоксидантов.",
+    },
+    {
+      title: "Мёртвое море",
+      icon: Drop,
+      summary: "Целебные свойства моря усиливают эксклюзивную формулу.",
+      text: "Сочетание эксклюзивной формулы Halo Complex™ и целебных свойств Мёртвого моря повышает эффективность продукции Dr. Nona, помогает защищать организм от воздействия окружающей среды и способствует регенерации кожи.",
+    },
+    {
+      title: "Новое поколение",
+      icon: Leaf,
+      summary: "Природная сила, превращённая в продукты ежедневного ухода.",
+      text: "Продукты нового поколения сочетают живительную силу архебактерии с целебными свойствами Мёртвого моря. Сегодня формула используется в косметике, парфюмерии и пищевых добавках Dr. Nona.",
+    },
+  ];
   return (
     <>
       <section className="formula-hero">
         <div className="container formula-hero__grid">
-          <div>
+          <div className="formula-hero__copy">
             <p className="eyebrow eyebrow--light">Эксклюзивная формула</p>
-            <h1>Halo<br /><em>Complex™</em></h1>
-            <p>Сделано природой. Раскрыто наукой.</p>
+            <h1>Halo <em>Complex™</em></h1>
+            <p className="formula-hero__lead">
+              {page?.description || "Сделано природой"}. Раскрыто наукой.
+            </p>
+            <p className="formula-hero__summary">
+              Инновационная формула основана на свойствах архебактерии и
+              минералах Мёртвого моря.
+            </p>
           </div>
-          <div className="formula-cell" aria-hidden="true">
-            <span className="formula-cell__core">H</span>
-            <span className="formula-cell__orbit formula-cell__orbit--one" />
-            <span className="formula-cell__orbit formula-cell__orbit--two" />
-            <span className="formula-cell__particle formula-cell__particle--one" />
-            <span className="formula-cell__particle formula-cell__particle--two" />
-            <span className="formula-cell__particle formula-cell__particle--three" />
+          <div className="formula-pillars" aria-label="Основа Halo Complex">
+            {formulaChapters.map(({ title, icon: Icon, summary }) => (
+              <article className="formula-pillar" key={title}>
+                <span className="formula-pillar__icon" aria-hidden="true"><Icon /></span>
+                <div>
+                  <h2>{title}</h2>
+                  <p>{summary}</p>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
       <section className="formula-story container">
-        <div className="formula-story__rail">
-          <span>01</span><i /><span>03</span>
-        </div>
         <div className="formula-story__content">
-          {text.map((paragraph, index) => (
-            <Reveal key={paragraph.slice(0, 40)} className="formula-chapter">
+          {formulaChapters.map(({ title, icon: Icon, text }) => (
+            <Reveal key={title} className="formula-chapter">
               <div className="formula-chapter__icon">
-                {index % 3 === 0 ? <TestTube /> : index % 3 === 1 ? <Drop /> : <Leaf />}
+                <Icon aria-hidden="true" />
               </div>
               <div>
-                <p className="eyebrow">0{index + 1} · {index === 0 ? "Архебактерия" : index === 1 ? "Мёртвое море" : "Новое поколение"}</p>
-                <p>{paragraph}</p>
+                <p className="eyebrow">{title}</p>
+                <p>{text}</p>
               </div>
             </Reveal>
           ))}
@@ -1081,8 +1360,8 @@ function FormulaPage() {
       <section className="formula-products section container">
         <SectionHeading eyebrow="Формула в действии" title="Продукты на основе Halo Complex™" />
         <div className="related-grid">
-          {products.slice(8, 12).map((product, index) => (
-            <ProductCard key={product.slug} product={product} index={index} compact />
+          {products.slice(8, 12).map((product) => (
+            <ProductCard key={product.slug} product={product} compact catalogImage />
           ))}
         </div>
       </section>
@@ -1095,7 +1374,9 @@ function articlePath(page: OfficialPage) {
 }
 
 function ArticleCard({ page, feature = false }: { page: OfficialPage; feature?: boolean }) {
+  const { locale } = useLocale();
   const kind = page.path.startsWith("/news") ? "Новости" : "Блог";
+  const title = getPageTitle(page);
   return (
     <article className={`article-card ${feature ? "article-card--feature" : ""}`}>
       <div className="article-card__visual">
@@ -1114,8 +1395,8 @@ function ArticleCard({ page, feature = false }: { page: OfficialPage; feature?: 
         <span className="article-card__kind">{kind}</span>
       </div>
       <div className="article-card__body">
-        <p><CalendarBlank aria-hidden="true" /> {formatDate(page.sourceLastmod)}</p>
-        <h3><Link to={articlePath(page)}>{page.title}</Link></h3>
+        <p><CalendarBlank aria-hidden="true" /> {formatDate(page.sourceLastmod, locale)}</p>
+        <h3><Link to={articlePath(page)}>{title}</Link></h3>
         {page.description && <span>{page.description}</span>}
         <Link className="text-link" to={articlePath(page)}>
           Читать <ArrowUpRight aria-hidden="true" />
@@ -1126,7 +1407,6 @@ function ArticleCard({ page, feature = false }: { page: OfficialPage; feature?: 
 }
 
 function EditorialHubPage({ kind }: { kind?: "blog" | "news" }) {
-  const navigate = useNavigate();
   const blog = getEditorial("blog");
   const news = getEditorial("news");
   const items = kind === "blog" ? blog : kind === "news" ? news : [...news.slice(0, 8), ...blog.slice(0, 8)];
@@ -1134,11 +1414,11 @@ function EditorialHubPage({ kind }: { kind?: "blog" | "news" }) {
     <section className="editorial-page container">
       <div className="page-intro page-intro--editorial">
         <div><p className="eyebrow">Знания и события</p><h1>{kind === "blog" ? "Блог" : kind === "news" ? "Новости" : "Блог / Новости"}</h1></div>
-        <div className="editorial-switch" aria-label="Тип публикаций">
-          <button className={!kind ? "is-active" : ""} onClick={() => navigate("/editorial")} type="button">Все</button>
-          <button className={kind === "blog" ? "is-active" : ""} onClick={() => navigate("/blog")} type="button">Блог</button>
-          <button className={kind === "news" ? "is-active" : ""} onClick={() => navigate("/news")} type="button">Новости</button>
-        </div>
+        <nav className="editorial-switch" aria-label="Тип публикаций">
+          <NavLink to="/editorial">Все</NavLink>
+          <NavLink to="/blog">Блог</NavLink>
+          <NavLink to="/news">Новости</NavLink>
+        </nav>
       </div>
       <div className="editorial-list">
         {items.map((page, index) => <ArticleCard key={page.path} page={page} feature={index === 0} />)}
@@ -1149,14 +1429,16 @@ function EditorialHubPage({ kind }: { kind?: "blog" | "news" }) {
 
 function ArticlePage() {
   const location = useLocation();
+  const { locale } = useLocale();
   const page = pageByPath.get(location.pathname);
   if (!page) return <NotFoundPage />;
+  const title = getPageTitle(page);
   const body = page.paragraphs.flatMap((item) => splitText(item, 240));
   return (
     <article className="article-page container">
       <div className="article-page__header">
-        <p className="eyebrow">{page.path.startsWith("/news") ? "Новости" : "Блог"} · {formatDate(page.sourceLastmod)}</p>
-        <h1>{page.title}</h1>
+        <p className="eyebrow">{page.path.startsWith("/news") ? "Новости" : "Блог"} · {formatDate(page.sourceLastmod, locale)}</p>
+        <h1>{title}</h1>
         {page.description && <p>{page.description}</p>}
       </div>
       {page.images[0]?.src && (
@@ -1170,7 +1452,7 @@ function ArticlePage() {
         />
       )}
       <div className="article-page__layout">
-        <aside><span>Dr. Nona</span><a href={page.sourceUrl} target="_blank" rel="noreferrer">Оригинал <ArrowUpRight /></a></aside>
+        <aside><span>Dr. Nona</span><a href={page.sourceUrl} target="_blank" rel="noreferrer">Оригинал <ArrowUpRight aria-hidden="true" /></a></aside>
         <div className="prose">
           {body.length ? body.map((paragraph, index) => <p className={index === 0 ? "prose-lead" : ""} key={`${index}-${paragraph.slice(0, 10)}`}>{paragraph}</p>) : (
             <p>Полный материал доступен на официальном сайте Dr. Nona.</p>
@@ -1185,30 +1467,31 @@ function GenericOfficialPage() {
   const location = useLocation();
   const page = pageByPath.get(location.pathname);
   if (!page) return <NotFoundPage />;
+  const title = getPageTitle(page);
   const body = page.paragraphs.flatMap((item) => splitText(item, 260));
   return (
     <section className="official-page container">
       <div className="official-page__header">
         <p className="eyebrow">Dr. Nona · Информация</p>
-        <h1>{page.title || page.headings[0]}</h1>
+        <h1>{title}</h1>
         {page.description && <p>{page.description}</p>}
       </div>
       <div className="official-page__content">
         <aside>
           <MapPin aria-hidden="true" />
           <p>Официальная информация Dr. Nona International</p>
-          <a href={page.sourceUrl} target="_blank" rel="noreferrer">Открыть источник <ArrowUpRight /></a>
+          <a href={page.sourceUrl} target="_blank" rel="noreferrer">Открыть источник <ArrowUpRight aria-hidden="true" /></a>
         </aside>
         <div className="prose">
           {page.headings.slice(1).map((heading) => <h2 key={heading}>{heading}</h2>)}
           {body.map((paragraph, index) => <p key={`${index}-${paragraph.slice(0, 12)}`}>{paragraph}</p>)}
           {page.images.length > 0 && (
-            <div className="official-media-grid" aria-label={`Изображения: ${page.title}`}>
+            <div className="official-media-grid" aria-label={`Изображения: ${title}`}>
               {page.images.map((image, index) => (
                 <img
                   key={`${image.src}-${index}`}
                   src={image.src}
-                  alt={image.alt || `${page.title}, изображение ${index + 1}`}
+                  alt={image.alt || title}
                   width="800"
                   height="640"
                   loading="lazy"
@@ -1319,8 +1602,8 @@ function ContactPage() {
           <label><span>Имя <b>Обязательное поле*</b></span><input name="given-name" autoComplete="given-name" required /></label>
           <label><span>Фамилия <b>Обязательное поле*</b></span><input name="family-name" autoComplete="family-name" required /></label>
           <label><span>ID Дистрибьютора</span><input name="distributor-id" inputMode="numeric" autoComplete="off" /></label>
-          <label><span>Эл. Адрес <b>Обязательное поле*</b></span><input name="email" type="email" autoComplete="email" placeholder="E-mail" required /></label>
-          <label className="contact-form__message"><span>Сообщение <b>Обязательное поле*</b></span><textarea name="message" required /></label>
+          <label><span>Эл. Адрес <b>Обязательное поле*</b></span><input name="email" type="email" autoComplete="email" spellCheck={false} required /></label>
+          <label className="contact-form__message"><span>Сообщение <b>Обязательное поле*</b></span><textarea name="message" autoComplete="off" required /></label>
           <button className="button button--primary" type="submit">Отправить <ArrowRight aria-hidden="true" /></button>
           <p className="contact-form__status" role="status" aria-live="polite">{status}</p>
         </form>
@@ -1349,20 +1632,19 @@ function SelectionPage() {
       {chosen.length ? (
         <>
           <div className="selection-list">
-            {chosen.map((product, index) => (
+            {chosen.map((product) => (
               <article key={product.slug}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
                 <img src={product.image} alt="" width="900" height="900" loading="lazy" decoding="async" />
                 <div><small>{product.category}</small><h2><Link to={`/product/${product.slug}`}>{product.officialName}</Link></h2></div>
-                <button type="button" onClick={() => toggle(product.slug)} aria-label={`Удалить ${product.officialName}`}><X /></button>
+                <button type="button" onClick={() => toggle(product.slug)} aria-label={`Удалить ${product.officialName}`}><X aria-hidden="true" /></button>
               </article>
             ))}
           </div>
           <div className="selection-contact">
             <div><p className="eyebrow eyebrow--light">Следующий шаг</p><h2>Обсудить подборку с консультантом</h2></div>
             <div>
-              <button className="button button--light" type="button" disabled title="Контакт Telegram будет добавлен"><TelegramLogo /> Telegram</button>
-              <a className="button button--outline-light" href="mailto:drnona@drnona.com"><EnvelopeSimple /> Написать на почту</a>
+              <button className="button button--light" type="button" disabled title="Контакт Telegram будет добавлен"><TelegramLogo aria-hidden="true" /> Telegram</button>
+              <a className="button button--outline-light" href="mailto:drnona@drnona.com"><EnvelopeSimple aria-hidden="true" /> Написать на почту</a>
             </div>
           </div>
         </>
@@ -1448,7 +1730,7 @@ export default function App() {
 
   useEffect(() => {
     localStorage.setItem("drnona-locale", locale);
-    document.documentElement.lang = "ru";
+    document.documentElement.lang = locale;
     document.documentElement.dataset.uiLocale = locale;
   }, [locale]);
 
