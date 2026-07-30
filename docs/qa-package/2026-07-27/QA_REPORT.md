@@ -1,5 +1,11 @@
 # DR. NONA QA REPORT
 
+Status: archived source checklist; not a release report  
+Date: 2026-07-27  
+Commit SHA: not recorded  
+Environment: source package only  
+Superseded by: `docs/QA_REPORT.md`
+
 See conversation for full details.
 
 Approved references:

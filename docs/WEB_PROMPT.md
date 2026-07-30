@@ -40,7 +40,8 @@ Target market: Moldova.
 
 Languages: Russian and Romanian.
 
-Primary language and localized URL strategy: TODO.
+Current language: Russian. URL strategy: unprefixed RU; future complete
+Romanian version under `/ro/...` with reciprocal hreflang (D-058).
 
 ### Stack
 

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-07-30",
+  "status": "release-blocked",
+  "label": "Frontend QA candidate; production release blocked",
+  "environment": "local preview at http://127.0.0.1:4173",
+  "blockers": [
+    {
+      "id": "P0-LOCALE",
+      "priority": "P0",
+      "summary": "The /ro/... URL strategy is approved, but complete Romanian UI, content, metadata and alt text are not approved or implemented."
+    },
+    {
+      "id": "P0-CONTACT",
+      "priority": "P0",
+      "summary": "Official Moldova branch phones are published, but the local legal entity, written consultation recipient, server transport, consent text and retention rules are not approved."
+    },
+    {
+      "id": "P0-LEGAL",
+      "priority": "P0",
+      "summary": "The claims registry has no Moldova legal approvals; product classification, evidence and supplement warnings remain unconfirmed."
+    },
+    {
+      "id": "P0-ASSORTMENT",
+      "priority": "P0",
+      "summary": "The source dataset contains 10 products, but only 7 are complete and publishable; the final assortment and disposition of 3 drafts are not approved."
+    },
+    {
+      "id": "P1-MEDIA-RIGHTS",
+      "priority": "P1",
+      "summary": "Production usage rights for product, brand and editorial media require business confirmation."
+    },
+    {
+      "id": "P1-CONTENT",
+      "priority": "P1",
+      "summary": "Moldova-applicable certificates with issuer, product and validity metadata plus Moldova-specific FAQ, branches, Blog and News scope require approval."
+    },
+    {
+      "id": "P1-RANKING",
+      "priority": "P1",
+      "summary": "The popularity sort uses official catalogue order because no approved popularity rank exists."
+    },
+    {
+      "id": "P1-CI-PROTECTION",
+      "priority": "P1",
+      "summary": "Push the workflow and require the quality-gates check in the GitHub main-branch ruleset."
+    },
+    {
+      "id": "P1-SEO-ORIGIN",
+      "priority": "P1",
+      "summary": "Approve the production site origin, build with SITE_URL, deploy the prerendered routes and complete live Google Rich Results and URL Inspection validation."
+    }
+  ]
+}

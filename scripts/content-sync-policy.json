@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "allowedSourceOrigins": [
+    "https://drnona.com"
+  ],
+  "maxProductCountDrop": 0,
+  "maxContentCountDrop": 0,
+  "maxContentErrors": 0,
+  "requireCompleteNewProducts": true
+}

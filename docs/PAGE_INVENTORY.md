@@ -1,6 +1,6 @@
 # Dr. Nona Moldova - Page Parity Inventory
 
-Status: Discovery baseline  
+Status: Active page-parity inventory; not a release status  
 Reference sitemap checked: 2026-07-26  
 Source: https://drnona.com/sitemap.xml
 
@@ -104,6 +104,8 @@ not implementation targets under the current product model.
 | Product category | Category or collection after taxonomy approval |
 | Business opportunity | Preserve informational intent after content review |
 | Branches | Moldova-specific verified contacts |
+| Foreign certificates | Excluded from Moldova evidence; linked only as a separately labelled international archive |
+| Moldova certificates | Publish only with issuer, country, product scope and validity metadata |
 
 ## 6. Content review flags
 

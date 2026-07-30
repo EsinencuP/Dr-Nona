@@ -1,7 +1,7 @@
 # Dr. Nona Moldova — Design Contract
 
 Version: 0.3  
-Status: Discovery contract  
+Status: Active design contract; not a release status  
 Target artifact: bilingual Moldova brand platform and electronic product catalog
 
 ## Goal and audience
@@ -46,7 +46,8 @@ navy/gold темой после входа в контекст коллекци�
 ## Risks and explicit unknowns
 
 - точный возрастной диапазон аудитории;
-- основной язык и localized URL strategy;
+- полный румынский UI/content/metadata/alt для утверждённой стратегии
+  `/ro/...`;
 - лицензированные шрифты;
 - MVP-ассортимент и таксономия;
 - Lord route/entry model и состав кластера;

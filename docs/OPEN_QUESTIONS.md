@@ -1,84 +1,94 @@
-# Dr. Nona Website — Open Questions
+# Which decisions still block release?
 
-Last updated: 2026-07-26
+This file lists only unresolved decisions. `docs/RELEASE_STATUS.md` is the canonical release summary, and `docs/release-status.json` supplies its machine-readable blocker list.
 
-## P0 — блокирует информационную архитектуру и контент
+Last updated: 2026-07-30
 
-1. Нужен ли точный возрастной диапазон внутри утверждённой зрелой и старшей
-   аудитории?
-2. Какой язык является основным: русский или румынский?
-3. Как строятся локализованные URL и переключение языка?
-4. Какие категории и товары входят в MVP?
-5. Сохраняются ли официальные категории `NHⁿ`, `RHⁿ`, `AHⁿ`, `CHⁿ`, `PHⁿ`,
-   `SHⁿ`, `CLⁿ`, `PCⁿ` и их коды?
-6. Входят ли Pet Care и Клиника Леном?
-7. Где проходит граница между категорией, основной линейкой, Lord и женской
-   линейкой?
-8. Что именно означает «женская линейка» и какие товары в неё входят?
-9. Какой официальный источник отзывов разрешён?
-10. Кто проверяет медицинские, anti-aging и терапевтические утверждения?
-11. Какие официальные News и Business материалы актуальны для Молдовы?
-12. Как называется общий пункт/хаб для Blog и News на русском и румынском?
-13. ~~Написание научного комплекса~~ — закрыто решением D-041:
-    используется официальное `Halo Complex™`.
+## P0 release decisions
 
-## P0 — блокирует подборку и консультацию
+### P0-LOCALE: approve Romanian localization
 
-1. Подборка хранится локально или на сервере?
-2. Должна ли подборка сохраняться после закрытия браузера?
-3. Нужна ли ссылка, которой можно поделиться?
-4. Можно ли добавить заметку к подборке или товару?
-5. Какой из предварительно выбранных каналов является основным: Telegram,
-   телефон или корпоративная почта?
-6. Нужна ли форма на сайте дополнительно к этим каналам?
-7. Как выбирается консультант: один глобальный, по стране, по языку, вручную?
-8. Какие данные пользователь передаёт?
-9. Нужен ли checkbox согласия и какой юридический текст используется?
-10. Что именно получает консультант: список ссылок, PDF, текст, ID подборки?
+Approve the Romanian UI, product and editorial copy, metadata and alt text.
+The URL strategy is fixed by D-058 (`/ro/...` with reciprocal `hreflang`), but
+those routes cannot be published until the complete translation exists. The
+current build remains Russian-only under D-048.
 
-## P1 — блокирует дизайн-систему
+### P0-CONTACT: approve the Moldova consultation channel
 
-1. Разрешён ли официальный шрифт `Baker` и есть ли лицензированные файлы?
-2. Используется serif/sans-пара или только современный premium sans?
-3. Какие гарнитуры поддерживают русский и румынский и имеют нужные лицензии?
-4. Есть ли официальный brand book с эталонными цветами?
-5. Как выглядит женская тема?
-6. Какие точные параметры сетки и spacing утверждаются?
-7. Получит ли Lord отдельную collection route, collection surface или иной
-   переход из banner-card?
-8. Какие продукты входят в Lord banner-card/cluster?
-9. Разрешён ли carousel в hero или нужен один фиксированный арт-дирекшн?
-10. Какие иконки и откуда можно использовать?
-11. Какие точные motion tokens утверждаются после статичных макетов?
+The official branch listing now supplies a Chișinău address and two +373
+phones, which are the primary public contacts. Approve the Moldova legal entity
+or distributor name, a local written consultation recipient if one exists,
+server transport, consent text and retention requirements. The current site
+prepares email only for international support and does not claim server
+delivery.
 
-## P1 — контент и медиа
+### P0-LEGAL: approve regulated product claims
 
-1. Есть ли официальный архив фотографий в исходном качестве?
-2. Какие изображения имеют разрешение на использование?
-3. Есть ли реальные фотографии ингредиентов?
-4. Есть ли разрешённые пейзажи Мёртвого моря и фотографии минералов?
-5. Допустимы ли реальные люди в фотосъёмке и в каком контексте?
-6. Кто утверждает alt-тексты?
-7. Нужно ли показывать объём и сертификаты непосредственно в карточке товара?
-8. Нужно ли показывать противопоказания и дисклеймеры?
-9. Какие события истории входят в timeline?
-10. Какие материалы Halo Complex™ разрешено публиковать?
-11. Какие рубрики и статьи входят в Blog / News hub?
-12. Нужны ли FAQ и Newsletter фактически или они пока только в инвентаре?
+Assign a qualified Moldova reviewer. The current sentence-level registry has
+201 candidates and zero approvals. The reviewer must confirm product
+classification, evidence, exact wording, supplement registration and required
+warnings, then record their name, date and document reference for every
+decision. Pending/rejected fields are hidden; details are in
+`docs/CLAIMS_REVIEW.md`.
 
-## P2 — UX и аналитика
+### P0-ASSORTMENT: approve the production assortment
 
-1. Как определяется «популярность», если официальный featured/bestseller rank
-   недоступен в SSR-источнике?
-2. Как выглядит пустой результат поиска?
-3. Можно ли сравнивать товары или только сохранять?
-4. Нужна ли история недавно просмотренных товаров?
-5. Какие KPI фиксируют успех каталога?
-6. Какая аналитика разрешена и как оформляется consent?
-7. Как pages Branches и Certificates адаптируются для Молдовы?
+Confirm that the 10 source records in `src/data/products.json` form the final
+production assortment. Seven complete records are currently published; three
+remain drafts until required content is approved and filled. Provide the final
+list and either complete or remove every draft.
 
-## Как отвечать
+## P1 release decisions
 
-Ответы следует оформлять как явные решения с привязкой к номеру вопроса. После
-утверждения вопрос переносится в `DECISIONS.md`, а зависимые документы
-обновляются.
+### P1-MEDIA-RIGHTS: confirm publication rights
+
+Confirm production rights for every product image, generated campaign image, brand asset and editorial photograph.
+
+### P1-CONTENT: approve Moldova-specific content
+
+Provide Moldova-applicable certificates with issuer, country, product scope and
+validity metadata. Approve the remaining Moldova scope for FAQ, branches, Blog
+and News. Foreign certificate sets are excluded from the Moldova page.
+
+### P1-RANKING: approve popularity semantics
+
+Provide a popularity rank or approve official catalogue order as the permanent fallback for “По популярности”.
+
+### P1-CI-PROTECTION: require the GitHub check
+
+Push `.github/workflows/ci.yml`, then require the `quality-gates` check in the `main` branch ruleset. GitHub stores this enforcement outside the repository.
+
+### P1-SEO-ORIGIN: approve production SEO origin and live validation
+
+Approve the public production origin, build with `SITE_URL` and
+`RELEASE_MODE=production`, deploy the generated route HTML and run Google Rich
+Results plus URL Inspection against the public URLs. The local QA origin
+`http://127.0.0.1:4173` is intentionally not presented as a production
+canonical.
+
+## Resolved questions
+
+- **Primary interface language**: Russian until the complete Romanian release is approved, D-048
+- **Current product count**: 10 source records, 7 published and 3 drafts; final
+  production approval remains P0-ASSORTMENT
+- **Selection storage**: browser `localStorage`
+- **Selection persistence**: survives refresh and navigation
+- **Consultation payload**: product name, SKU and URL, D-049
+- **Contact form**: removed until a server transport and Moldova recipient exist, D-047
+- **Primary direct contact**: official Chișinău address and two +373 phones,
+  D-054
+- **Certificate market separation**: foreign documents are hidden from the
+  Moldova page, D-055
+- **Scientific complex name**: `Halo Complex™`, D-041
+
+## P2 backlog
+
+- Provide approved product launch/catalogue-add dates if the public
+  «Сначала новые» sort is required; until then the UI uses the separate
+  «Недавно обновлённые» source-freshness sort
+- Define measurable catalogue key performance indicators
+- Approve analytics and cookie-consent requirements
+- Decide whether comparison and recently viewed products enter a later release
+- Define the permanent empty-search and no-results analytics events
+
+Record each approved answer in `docs/DECISIONS.md`, remove the matching blocker from `docs/release-status.json`, then run `npm.cmd run build`.

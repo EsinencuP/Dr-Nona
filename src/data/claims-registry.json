@@ -1,0 +1,4043 @@
+[
+  {
+    "id": "CLM-25F332BFDB",
+    "fingerprint": "25f332bfdb09f6dfecc4b4516e61eeaadd758cd0516b0d4816b3ee018ebf1bf5",
+    "scope": "formula",
+    "contentId": "archaea",
+    "field": "text",
+    "claimText": "Её уникальная структура является источником белков, аминокислот и антиоксидантов.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/ourformula",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-2DE8FA02CA",
+    "fingerprint": "2de8fa02ca87f0e0f7b27e044b02880231c91d7751159eaf9bb1d229a578d271",
+    "scope": "formula",
+    "contentId": "dead-sea",
+    "field": "summary",
+    "claimText": "Целебные свойства моря усиливают эксклюзивную формулу.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/ourformula",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-048C797C1A",
+    "fingerprint": "048c797c1a49502070757892d787a01af6f58f46422f370bb8397df8ddafcd6c",
+    "scope": "formula",
+    "contentId": "dead-sea",
+    "field": "text",
+    "claimText": "Сочетание эксклюзивной формулы Halo Complex™ и целебных свойств Мёртвого моря повышает эффективность продукции Dr.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief",
+      "cosmetic-efficacy"
+    ],
+    "sourceUrl": "https://drnona.com/ourformula",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-CB2EC3B945",
+    "fingerprint": "cb2ec3b9457bf772e76a41fa02a8702ec5d8c590c078101d9de491037a09774d",
+    "scope": "formula",
+    "contentId": "dead-sea",
+    "field": "text",
+    "claimText": "Nona, помогает защищать организм от воздействия окружающей среды и способствует регенерации кожи.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/ourformula",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-DFEEFFE638",
+    "fingerprint": "dfeeffe638c46427103eb38be34f709dbe43d3226a58dd7d98dd3e8834ca7ece",
+    "scope": "formula",
+    "contentId": "new-generation",
+    "field": "text",
+    "claimText": "Продукты нового поколения сочетают живительную силу архебактерии с целебными свойствами Мёртвого моря.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/ourformula",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-5C80CFCDF3",
+    "fingerprint": "5c80cfcdf375c9d273a34717ffa6a61f3ef9d87301d9a64b0d51d5977cd5856f",
+    "scope": "official-page",
+    "contentId": "/about/company",
+    "field": "paragraphs.0",
+    "claimText": "Косметические и оздоровительные препараты компании Dr.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/about/company",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-F8F355339C",
+    "fingerprint": "f8f355339c62cdbfedf8aa6122fccedbdc1f5b93f0b868d131415f0dc0df7d21",
+    "scope": "official-page",
+    "contentId": "/about/company",
+    "field": "paragraphs.0",
+    "claimText": "Nona — это продукция кардинально нового, передового поколения, сочетающая живительную силу архебактерии с целебными свойствами Мёртвого моря.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/about/company",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-96BC42EECD",
+    "fingerprint": "96bc42eecd102b2a695b84137fdedcbd87fc55bc55f1bbc38f63364d8fe27bc9",
+    "scope": "official-page",
+    "contentId": "/about/company",
+    "field": "paragraphs.0",
+    "claimText": "Nona International – это беспрецедентная возможность ухода за красотой и здоровьем, а также эффективная борьба с преждевременным старением.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/about/company",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-B5E29B7A51",
+    "fingerprint": "b5e29b7a51b60ad94734f7df14f5089766a28829e65263b49f09fa0ef5d0c9b3",
+    "scope": "official-page",
+    "contentId": "/about/founders/dr_nona_kuchina",
+    "field": "paragraphs.0",
+    "claimText": "Тогда было принято решение провести повторную операцию, которая на этот раз операция прошла успешно, и Нонна сумела побороть ужасную болезнь.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/about/founders/dr_nona_kuchina",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-F59F9BEAC5",
+    "fingerprint": "f59f9beac583683c8ffa509ed1e85d99fc08f868a66a5ef6ef92b51eff4f7324",
+    "scope": "official-page",
+    "contentId": "/about/founders/dr_nona_kuchina",
+    "field": "paragraphs.1",
+    "claimText": "Вскоре после реабилитации Нонна продолжила обучение в Медицинском институте.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/about/founders/dr_nona_kuchina",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-01E95E4EBB",
+    "fingerprint": "01e95e4ebb8bbb226821ae2ca25d0c0b1fac689fe039410cd89145f51bdf20a1",
+    "scope": "official-page",
+    "contentId": "/about/founders/dr_nona_kuchina",
+    "field": "paragraphs.1",
+    "claimText": "Та стойкость, которую Нонна проявила во время болезни сопровождает ее на протяжении всей жизни.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/about/founders/dr_nona_kuchina",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-8B4450B2ED",
+    "fingerprint": "8b4450b2ed6edb55f37c720f08a9294bc4f977fa8bffcb372f7ac2c18f779d49",
+    "scope": "official-page",
+    "contentId": "/about/founders/michael_shneerson",
+    "field": "paragraphs.0",
+    "claimText": "Вскоре, несмотря на занимаемую им высокую должность главного технолога и вполне благополучную, устроенную жизнь, желание репатриироваться в Израиль взяло вверх.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/about/founders/michael_shneerson",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-45E24119CD",
+    "fingerprint": "45e24119cdcc437fd985b79f75df40f8a7ba7e43a016d547ac8bb5b80c3add3c",
+    "scope": "official-page",
+    "contentId": "/about/founders/michael_shneerson",
+    "field": "paragraphs.2",
+    "claimText": "Однажды Нонна вернулась домой из Тель-Авивского университета, где она работала в качестве лектора, с поразительной новостью о том, что в Мертвом море существует жизнь.Тогда и родилась идея производить продукты, основанные на жизненной силе архебактерий, которые могут выжить в суровых условиях жизни Мертвого моря.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/about/founders/michael_shneerson",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-35E6731FC8",
+    "fingerprint": "35e6731fc82c0f2fa9751991dc8da0d6adc4be739bf465b45927c0d3094728d8",
+    "scope": "official-page",
+    "contentId": "/about/founders/michael_shneerson",
+    "field": "paragraphs.2",
+    "claimText": "Тогда же и был разработан метод маркетинга через сеть независимых дистрибьюторов, что позволило компании двигаться вперед без необходимости привлечения капитала для строительства магазинов и рекламных кампаний.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/about/founders/michael_shneerson",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-D8541F7E8D",
+    "fingerprint": "d8541f7e8d253175407bcc4cfb0baab8dc08ec77e951634229aa438b6973068e",
+    "scope": "official-page",
+    "contentId": "/about/founders/michael_shneerson",
+    "field": "paragraphs.3",
+    "claimText": "На протяжении многих лет Михаил Шнеерсон не раз сталкивался с серьезными испытаниями, он благополучно сумел провести компанию через финансовый кризис в России 1998-го года и глобальный кризис 2008-го года.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/about/founders/michael_shneerson",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-63C9973FA4",
+    "fingerprint": "63c9973fa47379fbb0fb6c0473d0977f934d75b999c25714ebdab5f36bee0b5b",
+    "scope": "official-page",
+    "contentId": "/about/our-history",
+    "field": "paragraphs.0",
+    "claimText": "Для того, чтобы дать возможность людям ощутить на себе целебную силу Мёртвого моря, было решено реализовывать продукцию по системе MLM – распространение через сеть независимых дистрибьюторов.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/about/our-history",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-CC808C1A6A",
+    "fingerprint": "cc808c1a6a36379c62848a96907fa20286db27a8cb61e624b50d691a7e7fe590",
+    "scope": "official-page",
+    "contentId": "/about/our-history",
+    "field": "paragraphs.0",
+    "claimText": "Они несут эстафету здоровья и красоты от компании Dr.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/about/our-history",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-804FF53E06",
+    "fingerprint": "804ff53e061f8a8e7129ba348ff94baed529c14189f65d66a302995a91cf7edf",
+    "scope": "official-page",
+    "contentId": "/about/our-history",
+    "field": "paragraphs.0",
+    "claimText": "Nona благополучно преодолеть барьер нового тысячелетия.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/about/our-history",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-7EBB988018",
+    "fingerprint": "7ebb9880183ce6ba6eef3e16919448ac7492507af5181d36dacd25e09468c1f7",
+    "scope": "official-page",
+    "contentId": "/about",
+    "field": "paragraphs.0",
+    "claimText": "Благодаря своей уникальной структуре, состоящей из редких белков, аминокислот и антиоксидантов, архебактерия сумела приспособиться к суровым условиям жизни в Мёртвом море.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/about",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-735AE3A3E2",
+    "fingerprint": "735ae3a3e2b7735f873e48c16b12fbc78e0b4e574ba632e77ffafbc0cc10d1ae",
+    "scope": "official-page",
+    "contentId": "/about",
+    "field": "paragraphs.0",
+    "claimText": "Поиск «рецептов молодости и красоты» привёл к развитию передовых технологий, но только в тандеме с целебным потенциалом природы эти самые технологии помогут нам добиться долгой и полноценной жизни.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/about",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-CD72D5BA4A",
+    "fingerprint": "cd72d5ba4aaa522f5df475de3992ff37d7ca321ec7bd40d23a1ce6b73b23b896",
+    "scope": "official-page",
+    "contentId": "/about",
+    "field": "paragraphs.0",
+    "claimText": "Поиски решения для эффективной регенерации кожи привели нас к открытию удивительной жизненной силы, обитающей в глубинах Мертвого моря – архебактерии.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief",
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/about",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-EBEFD307E3",
+    "fingerprint": "ebefd307e3a71ee8aedc5e9d4ea8626b7acf1607705e3282eac32101415cb115",
+    "scope": "official-page",
+    "contentId": "/about",
+    "field": "paragraphs.0",
+    "claimText": "Сочетание природных способностей архебактерии с целебными свойствами Мёртвого моря придает продукции компании Dr.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/about",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-632A84814A",
+    "fingerprint": "632a84814abf2f5906f156f5e107fb778846f3a96b46888e07bc85473d33a015",
+    "scope": "official-page",
+    "contentId": "/about",
+    "field": "paragraphs.0",
+    "claimText": "Спустя два десятилетия с начала производства Halo Complex™ изменил жизнь миллионов людей по всему миру, которые теперь наслаждаются результатом: прекрасной здоровой кожей, бодростью и долголетием.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/about",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-2D4EC87ADF",
+    "fingerprint": "2d4ec87adfcc29a43dd6d7f018fe748fe418248d9f2ccff3af0e030722c6d696",
+    "scope": "official-page",
+    "contentId": "/about",
+    "field": "paragraphs.0",
+    "claimText": "Nona предлагают комплексное решение для улучшения качества вашей жизни: защитить организм от вредного воздействия окружающей среды, повысить жизненный тонус, поддерживать красоту и молодость на долгие годы.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/about",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-BD5E793A06",
+    "fingerprint": "bd5e793a062961846eb92a1f14154f4af45de33c4f9e990d86767f47d6821fed",
+    "scope": "official-page",
+    "contentId": "/about",
+    "field": "paragraphs.0",
+    "claimText": "Nona уникальную возможность препятствовать старению.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/about",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-C3C370A876",
+    "fingerprint": "c3c370a876329fc5425043f7288fae621a71c997c1921ce966b900c21cae37b7",
+    "scope": "official-page",
+    "contentId": "/blog/5-subtle-habits-that-accelerate-skin-aging",
+    "field": "paragraphs.1",
+    "claimText": "Американские ученые из медицинского центра Hospitals Case выяснили, что люди, которые плохо спят, быстрее стареют.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/5-subtle-habits-that-accelerate-skin-aging",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-A025E516F5",
+    "fingerprint": "a025e516f5062801fb2dc707e965fc776b39698937c42df720a75883dfc5f00e",
+    "scope": "official-page",
+    "contentId": "/blog/5-subtle-habits-that-accelerate-skin-aging",
+    "field": "paragraphs.4",
+    "claimText": "А косметика и накопленная за день грязь забивают поры, способствуют разрушению коллагена в коже и замедляют ее регенерацию.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/5-subtle-habits-that-accelerate-skin-aging",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-B454F58598",
+    "fingerprint": "b454f58598eab4c2d02247ed52ad2e0578733dfc7363d854e99dc2ea82445f48",
+    "scope": "official-page",
+    "contentId": "/blog/5-subtle-habits-that-accelerate-skin-aging",
+    "field": "paragraphs.5",
+    "claimText": "Согласно исследованию канадских ученых из Университета МакМастера, тренировки могут не только сохранить молодость кожи, но и обратить вспять процессы старения у людей, которые начали заниматься спортом в более позднем возрасте.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/5-subtle-habits-that-accelerate-skin-aging",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-DEA5A16FD6",
+    "fingerprint": "dea5a16fd6ed38e4d87c6314fd58c6cf94ae77672710e38d4f54db527e650b46",
+    "scope": "official-page",
+    "contentId": "/blog/asthmaandheat",
+    "field": "paragraphs.0",
+    "claimText": "Жара не только повод для сиесты и отдыха, но и время, когда обостряются заболевания.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/asthmaandheat",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-07D6C8CA93",
+    "fingerprint": "07d6c8ca939547a5133f0da1ce43a70e8afd6a8640b4e5e1f0b372baf579ac13",
+    "scope": "official-page",
+    "contentId": "/blog/asthmaandheat",
+    "field": "paragraphs.12",
+    "claimText": "Лекарственная аэрозоль равномерно распределяется в верхних и нижних дыхательных путях, оказывая быстро желаемый бронхорасширяющий и",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/asthmaandheat",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-05E1B7BCF3",
+    "fingerprint": "05e1b7bcf358eb8f5f3b559e88421d82f2175b24ea1babe325bf0dcf55b5a57d",
+    "scope": "official-page",
+    "contentId": "/blog/asthmaandheat",
+    "field": "paragraphs.15",
+    "claimText": "наличие в кармане ингалятора для облегчения симптомов, небулайзер и пикфлоуметр дома, составленный заранее план действий при приступе",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/asthmaandheat",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-ADD7BF5FE2",
+    "fingerprint": "add7bf5fe2a5dca3cf66d2b98cf43e89bde2d793c4c3a9326dabab7598955326",
+    "scope": "official-page",
+    "contentId": "/blog/asthmaandheat",
+    "field": "paragraphs.17",
+    "claimText": "Но не следует быть слишком самоуверенным – даже «бывалый» астматик не всегда может самостоятельно справиться со своей болезнью.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/asthmaandheat",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-427B394272",
+    "fingerprint": "427b394272f58dd3bfa5b2aa7628e0f2adbf684766985ca8cf9eca6d54de6ab2",
+    "scope": "official-page",
+    "contentId": "/blog/asthmaandheat",
+    "field": "paragraphs.2",
+    "claimText": "Ряд хронических заболеваний, однако, требует к себе особенно внимательного отношения в жаркую погоду.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/asthmaandheat",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-D465FD6C65",
+    "fingerprint": "d465fd6c653579ec3ed68caefe382dd8977d9a41bc0b77cb84497c01fe010074",
+    "scope": "official-page",
+    "contentId": "/blog/autumn-exacerbation-of-gastritis",
+    "field": "paragraphs.2",
+    "claimText": "Начинают активизироваться простуды, истощающие иммунную систему, в результате обостряются уже имеющиеся хронические заболевания.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease",
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/autumn-exacerbation-of-gastritis",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-49F270BAAB",
+    "fingerprint": "49f270baab9eb53cc9b3878ca1b57fe48b28322990e8379c7107272f36c0355f",
+    "scope": "official-page",
+    "contentId": "/blog/autumn-exacerbation-of-gastritis",
+    "field": "paragraphs.2",
+    "claimText": "Сказывается на состоянии здоровья и эмоциональная подавленность, характерная для осени.Сейчас, во время пандемии, из за постоянного стресса, многие заметили у себя выше перечисленные симптомы гастрита.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/autumn-exacerbation-of-gastritis",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-6081A76DE9",
+    "fingerprint": "6081a76de947021087a07e446a9139893d8e7c6def46eab74c159183b1d2d850",
+    "scope": "official-page",
+    "contentId": "/blog/autumn-exacerbation-of-gastritis",
+    "field": "paragraphs.4",
+    "claimText": "Никотин и другие составляющие табачного дыма повреждают слизистую и замедляют процессы ее регенерации.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/autumn-exacerbation-of-gastritis",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-253DD70330",
+    "fingerprint": "253dd70330a532555d338406118def3397f2014ed528e6a13206676230f9906e",
+    "scope": "official-page",
+    "contentId": "/blog/autumn-exacerbation-of-gastritis",
+    "field": "paragraphs.5",
+    "claimText": "А самое главное, не заниматься самолечением!",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/autumn-exacerbation-of-gastritis",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-60F29C8EF9",
+    "fingerprint": "60f29c8ef9b2ec8d9ddd4c348e49db6ccbc4887fce05c6eafc57dbd4d374d3a2",
+    "scope": "official-page",
+    "contentId": "/blog/bellyfat",
+    "field": "paragraphs.0",
+    "claimText": "Люди с заболеваниями сердечно-сосудистой системы в этот период уязвимы особенно.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/bellyfat",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-6C5003788A",
+    "fingerprint": "6c5003788a78905019e934688fa5aed6f3a9d9468f5fa4a7e00d7ce93df95afc",
+    "scope": "official-page",
+    "contentId": "/blog/bellyfat",
+    "field": "paragraphs.1",
+    "claimText": "В жару хуже чувствуют себя гипертоники, у пациентов с ишемической болезнью сердца (ИБС) чаще возникают приступы стенокардии.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/bellyfat",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-25F76B9620",
+    "fingerprint": "25f76b9620d37d9d85af664cb7e2029dc75ec695f4882a3b221df22b70276fae",
+    "scope": "official-page",
+    "contentId": "/blog/bellyfat",
+    "field": "paragraphs.2",
+    "claimText": "Ишемическая болезнь сердца и гипертония больше распространены среди мужчин в возрасте до сорока лет.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/bellyfat",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-E836E22093",
+    "fingerprint": "e836e2209324af459edc4ff3624b458b8d6efde6da4b228f6ac475fbdcc7a595",
+    "scope": "official-page",
+    "contentId": "/blog/breast-cancer-prevention",
+    "field": "paragraphs.0",
+    "claimText": "Ежегодно в мире регистрируется более 1 млн. случаев заболевания раком молочной железы, причем количество заболевших растет год от года.Сейчас, всвязи с пандемией, когда мы находимся под прессом стресса, это особенно актуально.На сегодня единственный надежный способ борьбы против рака молочной железы — превентивная диагностика (на доклинической стадии).",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/breast-cancer-prevention",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-C4D9C88E16",
+    "fingerprint": "c4d9c88e16fe75ea39d31860905e26ac6cddf6487039a8a8ee5a87401f10f1b6",
+    "scope": "official-page",
+    "contentId": "/blog/breast-cancer-prevention",
+    "field": "paragraphs.0",
+    "claimText": "Я рекомендую профилактики женщинам принимать Гало Равсин по 3 капсулы утром.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/breast-cancer-prevention",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-89D16CCD61",
+    "fingerprint": "89d16ccd6172b928a91924beaeb14c26e68b19a0500a1d3ec28b19163be9635d",
+    "scope": "official-page",
+    "contentId": "/blog/choosefacecream",
+    "field": "paragraphs.0",
+    "claimText": "Правильно подобранный крем для лица способен продлить молодость вашей кожи и вернуть ей здоровый, сияющий вид.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/choosefacecream",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-F2982F2EFF",
+    "fingerprint": "f2982f2eff6c5037980c0aebaaa67b94bc48510182ee646fe0e0ee943626350f",
+    "scope": "official-page",
+    "contentId": "/blog/choosefacecream",
+    "field": "paragraphs.10",
+    "claimText": "Чаще всего омолаживающие кремы обогащают витаминными комплексами, делая упор на антиоксиданты и «витамины красоты» (А, С, Е и F),",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/choosefacecream",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-ACB2C94CA6",
+    "fingerprint": "acb2c94ca671beb8aeb8597e5d98b576318db4ea7b6313e9d57de9cbdb91d558",
+    "scope": "official-page",
+    "contentId": "/blog/constipation",
+    "field": "paragraphs.0",
+    "claimText": "Запор – проблема довольно деликатная, поэтому по всей видимости мы никогда не узнаем точную распространенность этого заболевания",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/constipation",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-91663343CC",
+    "fingerprint": "91663343ccaba3960ff40f835b3fcb5c7e64acf528448975d7afbffcee15f9dc",
+    "scope": "official-page",
+    "contentId": "/blog/constipation",
+    "field": "paragraphs.11",
+    "claimText": "Домашнее лечение обязательно должно включать правильную диету.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/constipation",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-CFB57D1832",
+    "fingerprint": "cfb57d18329efb5a39f73559d72531abf6aa48e49ab911df8aa2739a6b2b7879",
+    "scope": "official-page",
+    "contentId": "/blog/constipation",
+    "field": "paragraphs.1",
+    "claimText": "среди населения, поскольку не все пациенты обращаются за медицинской помощью.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/constipation",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-86F16599B3",
+    "fingerprint": "86f16599b3b852c19e677bcfb5123db3cc39ed8489544742dfcdd5572a066e53",
+    "scope": "official-page",
+    "contentId": "/blog/constipation",
+    "field": "paragraphs.31",
+    "claimText": "Но все рецепты нельзя применять беременным женщинам и при хронических заболеваниях желудочно кишечного тракта.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/constipation",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-DA88781E9D",
+    "fingerprint": "da88781e9d284c44e42cad9139b92e832e45b25d42ed901dac31d864a3119c2c",
+    "scope": "official-page",
+    "contentId": "/blog/constipation",
+    "field": "paragraphs.8",
+    "claimText": "При хроническом запоре, будь он функциональным или симптомом другого заболевания, необходимо получить консультацию врача-",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/constipation",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-8F9582B0B5",
+    "fingerprint": "8f9582b0b52e134b1e4a6b27fbb72edd2e98431794ac7d737361b98c78e1f3c1",
+    "scope": "official-page",
+    "contentId": "/blog/covid-and-complication-on-the-brain",
+    "field": "paragraphs.9",
+    "claimText": "В первую очередь, надо исключить ,пока здоровы, вредные привычки - такие как курение и перейти на сбалансированное питание.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/covid-and-complication-on-the-brain",
+    "sourceLastmod": "2022-02-18T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-B7130E0F4D",
+    "fingerprint": "b7130e0f4dc1c3f5b53a2859b2ee16a7394f8689b413d3674b379351bc47601a",
+    "scope": "official-page",
+    "contentId": "/blog/Diet-for-people-over-50",
+    "field": "paragraphs.0",
+    "claimText": "Кроме того, в процессе старения правильное питание может стать ключом к сохранению позитивного настроя.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Diet-for-people-over-50",
+    "sourceLastmod": "2022-08-21T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-BF53BD2527",
+    "fingerprint": "bf53bd25271201ea50696e62ac1675eae9435b8a01def4e085b669263f5926f3",
+    "scope": "official-page",
+    "contentId": "/blog/Diet-for-people-over-50",
+    "field": "paragraphs.0",
+    "claimText": "Рекомендации по питанию после 50 лет.Для людей старше 50-ти лет придерживаться здорового питания особенно важно.Это помогает сохранить остроту мысли, делает организм более устойчивым к болезням и инфекциям, поддерживает высокий уровень энергии и улучшает контроль над хроническими заболеваниями.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease",
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Diet-for-people-over-50",
+    "sourceLastmod": "2022-08-21T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-4993CF92A1",
+    "fingerprint": "4993cf92a16a820f33c9ef808557d0c639f5536c320e62e47955b92f496ac188",
+    "scope": "official-page",
+    "contentId": "/blog/Diet-for-people-over-50",
+    "field": "paragraphs.2",
+    "claimText": "Независимо от возраста, здоровое питание – это свежая красочная пища, творчество на кухне, и обеды с друзьями.Правильное питание, не означает изнурение себя диетами.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Diet-for-people-over-50",
+    "sourceLastmod": "2022-08-21T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-D5F0A0827B",
+    "fingerprint": "d5f0a0827b126dd0acdbd271ee4207d763ba23b9dbc8f253baee205f3fd02d3f",
+    "scope": "official-page",
+    "contentId": "/blog/Diet-for-people-over-50",
+    "field": "paragraphs.2",
+    "claimText": "Но здоровое питание не подразумевает строгие диеты и жертвы.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Diet-for-people-over-50",
+    "sourceLastmod": "2022-08-21T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-F7E16270E6",
+    "fingerprint": "f7e16270e6a539529b1320da2282f4b07874c6e4cff25b69cf74d5fb1f67d95b",
+    "scope": "official-page",
+    "contentId": "/blog/Diet-for-people-over-50",
+    "field": "paragraphs.3",
+    "claimText": "Потребление продуктов, богатых витаминами, повышает иммунитет и борется с токсинами, которые вызывают болезни.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease",
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Diet-for-people-over-50",
+    "sourceLastmod": "2022-08-21T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-EBB5B31032",
+    "fingerprint": "ebb5b31032db7ea86716a8c2f8c1e2822b18f3f46181e64be1d37061df5f4e3a",
+    "scope": "official-page",
+    "contentId": "/blog/Diet-for-people-over-50",
+    "field": "paragraphs.4",
+    "claimText": "Правильное питание снижает риск сердечно-сосудистых заболеваний, инсульта, высокого кровяного давления, диабета 2-го типа, потери костной массы, рака, и анемии.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Diet-for-people-over-50",
+    "sourceLastmod": "2022-08-21T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-5C8B4F773B",
+    "fingerprint": "5c8b4f773b2d13a5453fc2bbbbe2cdf605986e88d92351af051a5f33ed8ad859",
+    "scope": "official-page",
+    "contentId": "/blog/Diet-for-people-over-50",
+    "field": "paragraphs.5",
+    "claimText": "Люди, которые едят разнообразные яркие фрукты, листовую зелень и овощи, а также рыбу и орехи, богатые омега-3 жирными кислотами, улучшают свое внимание и снижают риск развития болезни Альцгеймера.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Diet-for-people-over-50",
+    "sourceLastmod": "2022-08-21T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-E307F6B17F",
+    "fingerprint": "e307f6b17f41fa754ea485372c3fc4eccda3cfa196d8fdfa280ab5e61c923011",
+    "scope": "official-page",
+    "contentId": "/blog/Diet-for-people-over-50",
+    "field": "paragraphs.6",
+    "claimText": "Мы же помогаем своему мозгу, ежедневно принимая Гало Равсин, который восстанавливает память и когнитивные способности.Регулярное потребление богатого антиоксидантами чая Гало Гонсин, также помогает улучшить память и умственную активность.Специалисты предлагают руководствоваться следующими рекомендациями по калорийности пищи.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Diet-for-people-over-50",
+    "sourceLastmod": "2022-08-21T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-7C72A3B9FB",
+    "fingerprint": "7c72a3b9fb36227e45d91ffba4710f6753c20a6106aaa0fe12780fbc0266dc39",
+    "scope": "official-page",
+    "contentId": "/blog/does-our-skin-need-detox",
+    "field": "paragraphs.0",
+    "claimText": "«Процесс детоксикации через лимфу, эпидермис и кровь приводит к целому ряду преимуществ, связанных с омоложением и качеством кожи.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/does-our-skin-need-detox",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-6BAEE15F7A",
+    "fingerprint": "6baee15f7adaca63ef2e81e19d8ab4ac829c420cc8e827a2419da9e95e49229f",
+    "scope": "official-page",
+    "contentId": "/blog/does-our-skin-need-detox",
+    "field": "paragraphs.0",
+    "claimText": "Он помогает не только вывести токсины из межклеточных пространств и клеток кожи, но также избежать застоя жидкости в клетках, что приводит к появлению мелких морщин, высыпаний и тусклого цвета лица, — рассказывает Мария Чамурлиева, кандидат медицинских наук, врач-дерматовенеролог .",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/does-our-skin-need-detox",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-8128C31083",
+    "fingerprint": "8128c31083968e9b3569b4a3f205c457a22c7263bf95333f644d5f289bcc4635",
+    "scope": "official-page",
+    "contentId": "/blog/dreams",
+    "field": "paragraphs.5",
+    "claimText": "Западные мыслители все больше говорят об эссенциальной депрессии, - это состояние, сопровождающееся общим снижением жизненного тонуса.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/dreams",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-A7ADB65FBB",
+    "fingerprint": "a7adb65fbb2f0f8c39bfb424530f50475f85781ee57c43667bbc186fa1faa63d",
+    "scope": "official-page",
+    "contentId": "/blog/drinkingwater",
+    "field": "paragraphs.20",
+    "claimText": "Постоянно организм привыкнет и вы ощутите целебную силу воды",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/drinkingwater",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-2FEB5F4B0C",
+    "fingerprint": "2feb5f4b0c8827a5b5b5fbe3c73b365f5721fd4d25b34c3b966cc4ce44a5b0ac",
+    "scope": "official-page",
+    "contentId": "/blog/Elderberry-benefits",
+    "field": "paragraphs.1",
+    "claimText": "Врачи выписывали бузину при сердечных болезнях, во время простуды, для повышения иммунитета и лечения других заболеваний.Бузина часто используется в кулинарии и даже при приготовлении вина, пива, шампанского и портвейна.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease",
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Elderberry-benefits",
+    "sourceLastmod": "2022-08-21T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-90E5C160D9",
+    "fingerprint": "90e5c160d9b6e1f3622a2c720a1287789eb29d5232f680301061e93acd9bce47",
+    "scope": "official-page",
+    "contentId": "/blog/Elderberry-benefits",
+    "field": "paragraphs.2",
+    "claimText": "· это общее укрепление иммунитета;",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Elderberry-benefits",
+    "sourceLastmod": "2022-08-21T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-8339B8E052",
+    "fingerprint": "8339b8e0528514df6b3bd921b32b931f0b4258b59b4c1d2041000f7da07f087e",
+    "scope": "official-page",
+    "contentId": "/blog/Elderberry-benefits",
+    "field": "paragraphs.3",
+    "claimText": "· снятие симптомов простудных заболеваний: насморка, кашля, жара, озноба;",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Elderberry-benefits",
+    "sourceLastmod": "2022-08-21T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-7DCE5E6F43",
+    "fingerprint": "7dce5e6f43e8188f1d629ae0273f92a4d302d1e134d659db0dc33768a3331e50",
+    "scope": "official-page",
+    "contentId": "/blog/Elderberry-benefits",
+    "field": "paragraphs.7",
+    "claimText": "Может использоваться в течение длительного времени для поддержки иммунной системы.Входящий в состав Гало Имунсина цинк, нужен для производства белков и ДНК, для роста и восстановления мышц, важен для правильного ощущения вкуса и запаха, способствует заживлению ран, помогает иммунной системе бороться с бактериями и вирусами, улучшает пищеварение, регулирует выработку гормонов.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief",
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Elderberry-benefits",
+    "sourceLastmod": "2022-08-21T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-B840A2EEFD",
+    "fingerprint": "b840a2eefd09cfe68af0524ba44af01b4aaed065dc4d295b559d5c5683edba77",
+    "scope": "official-page",
+    "contentId": "/blog/Elderberry-benefits",
+    "field": "paragraphs.7",
+    "claimText": "Мы получили отличные результаты по применению этого препарата взрослых и детей.Черная бузина содержит одни из самых мощных природных антиоксидантов.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Elderberry-benefits",
+    "sourceLastmod": "2022-08-21T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-10B79A949D",
+    "fingerprint": "10b79a949d3b406d23bafd7b9d003508b412bbcc88600ac2511142abc0e00b81",
+    "scope": "official-page",
+    "contentId": "/blog/Elderberry-benefits",
+    "field": "paragraphs.8",
+    "claimText": "Витамин C- укрепляет иммунную систему человека, а также предохраняет её от вирусов и бактерий, ускоряет процесс заживления ран, оказывает влияние на синтез ряда гормонов, регулирует процессы кроветворения и нормализует проницаемость капилляров, участвует в синтезе белка коллагена, что необходимо для роста клеток тканей.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief",
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Elderberry-benefits",
+    "sourceLastmod": "2022-08-21T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-F0F8D91D0B",
+    "fingerprint": "f0f8d91d0bc1e2ac22044aae25187b9389816f53f3a46878817fbf38398dc040",
+    "scope": "official-page",
+    "contentId": "/blog/Fruits-for-women",
+    "field": "paragraphs.11",
+    "claimText": "Жирная рыба стоит на первом месте по содержанию кислот омега-3, которые помогут вам снизить шансы возникновения сердечно-сосудистых заболеваний и даже инфаркта.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Fruits-for-women",
+    "sourceLastmod": "2022-04-27T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-872DD3974D",
+    "fingerprint": "872dd3974d427a95471fc6d5a6471990f6238672ee143f6aeb3c228918c6be22",
+    "scope": "official-page",
+    "contentId": "/blog/Fruits-for-women",
+    "field": "paragraphs.12",
+    "claimText": "Запомните - любой продукт из этого списка 6 недель поможет восстановить ваше здоровье.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Fruits-for-women",
+    "sourceLastmod": "2022-04-27T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-F908461867",
+    "fingerprint": "f90846186724d6c7e2301a91f5b874b7c17bd6b77c1e9a3e318d41443ef9e2b0",
+    "scope": "official-page",
+    "contentId": "/blog/Fruits-for-women",
+    "field": "paragraphs.6",
+    "claimText": "Не любить голубику невозможно — эти ягоды насыщены антиоксидантами больше, чем любые другие.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Fruits-for-women",
+    "sourceLastmod": "2022-04-27T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-3E2E387B39",
+    "fingerprint": "3e2e387b390a8bdbb662124787d61b7fbaf7f3333cf8cd8da36d5b17a4829e65",
+    "scope": "official-page",
+    "contentId": "/blog/Fruits-for-women",
+    "field": "paragraphs.6",
+    "claimText": "Они помогают противостоять раку, повышают активность мозга и поддерживают здоровье сердца.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Fruits-for-women",
+    "sourceLastmod": "2022-04-27T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-953DD79E6A",
+    "fingerprint": "953dd79e6ada3644993e4be5fb4c427cf3046e78b4382a84958176734be1a36e",
+    "scope": "official-page",
+    "contentId": "/blog/funtherapy",
+    "field": "paragraphs.0",
+    "claimText": "Известны случаи излечения смехотерапией даже онкологических заболеваний.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/funtherapy",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-2D084A60D2",
+    "fingerprint": "2d084a60d244cf0f7a73b5e855fe814c999eb984ffc7da83e5de3625472905c6",
+    "scope": "official-page",
+    "contentId": "/blog/funtherapy",
+    "field": "paragraphs.0",
+    "claimText": "Исследования показали, что смех может спасти едва ли не от всех болезней, а не только психологических проблем или неврозов.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/funtherapy",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-95D5182DB5",
+    "fingerprint": "95d5182db56aed486da8085b94b5b284da1ba7659c6461d141250a4dca56be9c",
+    "scope": "official-page",
+    "contentId": "/blog/funtherapy",
+    "field": "paragraphs.0",
+    "claimText": "Он снижает выработку стрессовых гормонов, нормализует давление, повышает иммунитет.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/funtherapy",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-8AF6661044",
+    "fingerprint": "8af6661044caf98ab6578615d1a543c4c6d317853949291527aadc6887436dc9",
+    "scope": "official-page",
+    "contentId": "/blog/funtherapy",
+    "field": "paragraphs.0",
+    "claimText": "При этом мышцы шеи, спины и лица расслабляются — и одного этого уже бывает достаточно, чтобы снять, например, головную боль.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/funtherapy",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-70278F2CF5",
+    "fingerprint": "70278f2cf5922dba60c1a5dae8fcc7553ad398ee2637260e187c3ca843890791",
+    "scope": "official-page",
+    "contentId": "/blog/funtherapy",
+    "field": "paragraphs.0",
+    "claimText": "Счастливая способность улыбаться и смеяться, не дожидаясь каких - то особых условий, издавна считается одним из показателей душевного и физического здоровья.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/funtherapy",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-830BC18B0F",
+    "fingerprint": "830bc18b0fbb9e0f5c42effe100799ac2803f3ffde36a0fec50020e67653e639",
+    "scope": "official-page",
+    "contentId": "/blog/heartandheat",
+    "field": "paragraphs.0",
+    "claimText": "Люди с заболеваниями сердечно-сосудистой системы в этот период уязвимы особенно.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/heartandheat",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-F701301D7D",
+    "fingerprint": "f701301d7d461bf9ec774bee3bf15269da5a7669a0c453a09201ba44e21ac6d0",
+    "scope": "official-page",
+    "contentId": "/blog/heartandheat",
+    "field": "paragraphs.1",
+    "claimText": "В жару хуже чувствуют себя гипертоники, у пациентов с ишемической болезнью сердца (ИБС) чаще возникают приступы стенокардии.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/heartandheat",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-D2248E2291",
+    "fingerprint": "d2248e22918f1738ea5e94b4154102182e3a6308ff62a031066ae2b85aac7c07",
+    "scope": "official-page",
+    "contentId": "/blog/heartandheat",
+    "field": "paragraphs.2",
+    "claimText": "Ишемическая болезнь сердца и гипертония больше распространены среди мужчин в возрасте до сорока лет.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/heartandheat",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-81338400A2",
+    "fingerprint": "81338400a2fb3891f42a92e7709a203038ee9f0dc3b03b6035c9d733f209f02f",
+    "scope": "official-page",
+    "contentId": "/blog/heartandheat",
+    "field": "paragraphs.4",
+    "claimText": "Но после наступления менопаузы, содержание эстрогенов в крови снижается, и по частоте сердечных заболеваний женщины быстро догоняют",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/heartandheat",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-244B4E96CF",
+    "fingerprint": "244b4e96cf1de8aaf4ec85429397d197fcccb5f7131af862fb24d11c9bbffdc6",
+    "scope": "official-page",
+    "contentId": "/blog/hypertension-after-coronavirus",
+    "field": "paragraphs.0",
+    "claimText": "Главным симптомом гипертонии является головная боль.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/hypertension-after-coronavirus",
+    "sourceLastmod": "2022-02-18T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-ACC3CB8EA6",
+    "fingerprint": "acc3cb8ea60477b466d48af614d2f2d7407628bfce3aa38b5d30ac0cdffd8d18",
+    "scope": "official-page",
+    "contentId": "/blog/hypertension-after-coronavirus",
+    "field": "paragraphs.0",
+    "claimText": "Она отмечает, что чаще всего такие пациенты имели артериальную гипертонию, но не знали об этом, а после болезни начали испытывать колебания давления.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/hypertension-after-coronavirus",
+    "sourceLastmod": "2022-02-18T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-8A40679115",
+    "fingerprint": "8a406791154548be12e0d53d6f25c5f8d33bdf1afc763829495aef83e2971abc",
+    "scope": "official-page",
+    "contentId": "/blog/hypertension-after-coronavirus",
+    "field": "paragraphs.0",
+    "claimText": "Также частые симптомы гипертонии: Шум в ушах Летание «мушек» и пелена перед глазами Общая слабость Нарушение сна Головокружение Ощущение тяжести в голове Сильное сердцебиение Такие симптомы бывают на ранней стадии гипертонической болезни и носят невротический характер.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/hypertension-after-coronavirus",
+    "sourceLastmod": "2022-02-18T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-5E12A2E239",
+    "fingerprint": "5e12a2e2396f899d1feb16112ea18ff6d3d26f6af3a8813a73475c07430fa36a",
+    "scope": "official-page",
+    "contentId": "/blog/hypertension-after-coronavirus",
+    "field": "paragraphs.1",
+    "claimText": "к назначенному лечению, я рекомендую: Гало Голдсин по 1 капсуле утром и вечером, Гало Равсин по 3 капсулы утром,",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/hypertension-after-coronavirus",
+    "sourceLastmod": "2022-02-18T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-969F7B3714",
+    "fingerprint": "969f7b37142abd4676d3e0a2e01e0aeab9d8dc46f5469e5254dd7286be5fb8b7",
+    "scope": "official-page",
+    "contentId": "/blog/hypertension-after-coronavirus",
+    "field": "paragraphs.1",
+    "claimText": "Лечение гипертонии Программа по контролю артериального давления состоит из изменения образа жизни и лекарственной терапии.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/hypertension-after-coronavirus",
+    "sourceLastmod": "2022-02-18T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-5F32F8B232",
+    "fingerprint": "5f32f8b23214f1b59a5d90a5ddd3d8459144dc3cdc0620a815db2f07ef24025a",
+    "scope": "official-page",
+    "contentId": "/blog/Immunity-booster-for-kids",
+    "field": "paragraphs.0",
+    "claimText": "Как укрепить иммунитет детям перед школой.Сентябрь , начинается учёба и дети часто болеют.Мамы и бабушки негодуют: - Ну вот , столько фруктов, столько солнца, столько заботы получили и ничего не помогает!",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Immunity-booster-for-kids",
+    "sourceLastmod": "2022-08-21T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-D9D47BC4BD",
+    "fingerprint": "d9d47bc4bdfe1ed4c6c18bf41e21f59e2974254375b3e829791afa0d74cf301d",
+    "scope": "official-page",
+    "contentId": "/blog/Immunity-booster-for-kids",
+    "field": "paragraphs.0",
+    "claimText": "Организм ребёнка подсознательно ищет способ разгрузиться - болезнь, простуда, недомогание - это своеобразный способ побыть дома, отдохнуть и прийти в себя.Но помимо самых очевидных заболеваний ,тревожными симптомами будут следующие: подавленность и вялость;отказ от любимых игр, занятий;изменившееся в худшую сторону поведение ребенка;отказ рассказывать о школе, делиться новостями;сниженный аппетит, плохой сон;отказ ходить в школу.Ребёнку ужно не ругать, а мягко поправить, помочь и подтолкнуть к правильному решению.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Immunity-booster-for-kids",
+    "sourceLastmod": "2022-08-21T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-2AF6FDDA8B",
+    "fingerprint": "2af6fdda8be8e2a0dab4ecdca29015f7a575cb00e9444e038dca77c7bac082bc",
+    "scope": "official-page",
+    "contentId": "/blog/Immunity-booster-for-kids",
+    "field": "paragraphs.1",
+    "claimText": "Гало Имунсин - по 1 чайной ложке взрослому и по 1/2 чайной ложке ребёнку два раза в день.Гало Оксин - 2 капсулы утром взрослому и 1/2 капсулы ребёнкуВанны с Квартетом солей- каждый вечер.Гало Динамический крем - массаж ребёнку перед сном.Помните, если вы хотите здорового ребёнка, в первую очередь берегите себя!",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Immunity-booster-for-kids",
+    "sourceLastmod": "2022-08-21T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-3F5B65B6AF",
+    "fingerprint": "3f5b65b6af3ce307d960403775cb4783f6ce2c100bd8af2001bffd99430a8c68",
+    "scope": "official-page",
+    "contentId": "/blog/insomnia",
+    "field": "paragraphs.0",
+    "claimText": "В долгосрочной перспективе бессонница на 27% повышает риск развития сердечно-сосудистых заболеваний и в 2,5 раза - риск развития сахарного диабета.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/insomnia",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-264D61FF62",
+    "fingerprint": "264d61ff62f0ac1df3a2b9dca8f22bc6bf830128976915f999f792c504e104c7",
+    "scope": "official-page",
+    "contentId": "/blog/insomnia",
+    "field": "paragraphs.0",
+    "claimText": "И.М.Сеченова Михаил Полуэктов считает, что главная причина бессонницы - стресс, вызванный резким изменением образа жизни, конфликтом или не достижением желаемого.Нервная система пере возбуждается, что препятствует засыпанию или приводит к пробуждениям.Еще на сон влияют эндокринные, неврологические или кожные заболевания, гормональные проблемы, астма, черепно-мозговые травмы и проблемы с желудочно-кишечным трактом.В таком случае нужно лечить основное заболевание.Что будет, если игнорировать проблему?",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/insomnia",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-8BD91E35F0",
+    "fingerprint": "8bd91e35f07c1999571d54d2d1f98755ceb1db614d8bac444de941ff4fc23a2f",
+    "scope": "official-page",
+    "contentId": "/blog/intuitiveeating",
+    "field": "paragraphs.18",
+    "claimText": "Нормально так подрывали здоровье тоже.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/intuitiveeating",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-477280E519",
+    "fingerprint": "477280e51959f8c279f3ea234fbbf7e2973bec94c48d1f904f60fc0537107913",
+    "scope": "official-page",
+    "contentId": "/blog/intuitiveeating",
+    "field": "paragraphs.3",
+    "claimText": "Проблема лишь в том, что мы не умеем слушать своё тело и зачастую не отличаем здоровый физический голод от эмоционального.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/intuitiveeating",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-06E124D087",
+    "fingerprint": "06e124d087a9bd6862d25e2a88979f0316c7be95b3a5deff3cee1156f8a37051",
+    "scope": "official-page",
+    "contentId": "/blog/laziness",
+    "field": "paragraphs.29",
+    "claimText": "☝️Кофемикс содержит антиоксиданты — они выводят из организма свободные радикалы, способствующие старению организма.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/laziness",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-FBEB0F7904",
+    "fingerprint": "fbeb0f7904d0ee66717be42e93c60c0c362a319d2ab4acb90ca0ec83d1714578",
+    "scope": "official-page",
+    "contentId": "/blog/laziness",
+    "field": "paragraphs.30",
+    "claimText": "☝️Кофейные антиоксиданты помогают бороться с онкологическими заболеваниями, некоторыми болезнями сердца, обоими видами сахарного диабета",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease",
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/laziness",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-5458FE4E2B",
+    "fingerprint": "5458fe4e2bb25ffd54de5f94732d1e66102f9482d4f92bfd3e1f0086b1d6663b",
+    "scope": "official-page",
+    "contentId": "/blog/laziness",
+    "field": "paragraphs.33",
+    "claimText": "☝️Кофеин уменьшает или совсем снимает головные боли, поскольку расширяет сосуды мозга.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/laziness",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-8D3FF6FC12",
+    "fingerprint": "8d3ff6fc123c7cf1ac663e142b115410eaa1dcae630fda68ab568c9055b38eac",
+    "scope": "official-page",
+    "contentId": "/blog/Life-without-a-gallbladder",
+    "field": "paragraphs.0",
+    "claimText": "Жизнь без желчного пузыря.Желчнокаменная болезнь (ЖКБ) нередко приводит пациентов на операционный стол к хирургу.После проведения операции по удалению желчного пузыря с камнями (холецистэктомия), поскольку проблема ЖКБ изначально находится в изменении состава желчи, операция по удалению пузыря не решает проблему камнеобразования.Около 30% прооперированных пациентов испытывают такие симптомы, как:тянущая опоясывающая больтяжесть в правом и левом бокутошнотагоречь во ртуизменение цвета мочи и кала.После операции по удалению желчного пузыря врач-хирург зачастую не дает никаких долгосрочных рекомендаций.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Life-without-a-gallbladder",
+    "sourceLastmod": "2022-03-03T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-FCC0B8E5BB",
+    "fingerprint": "fcc0b8e5bb88e50470ab50d529399df8923295f4c7723a01939c25969e4102cd",
+    "scope": "official-page",
+    "contentId": "/blog/Life-without-a-gallbladder",
+    "field": "paragraphs.0",
+    "claimText": "Однако чтобы избежать повторных операций, осложнений и возобновления симптомов желчнокаменной болезни, необходимо:1-2 раза в год - посещение гастроэнтеролога для оценки состояния гепатобилиарной зоны1-2 раза в год - УЗИ органов брюшной полости.Рекомендованпостоянный или курсовой прием препаратов для разжижения желчи (урсодезоксихолевая кислота - УДХК) и спазмолитиков согласно рекомендациям лечащего врача-гастроэнтеролога.Самое главное правило, которое следует соблюдать - это регулярное питание небольшими порциями каждые 2-4 часа (дробное питание).",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Life-without-a-gallbladder",
+    "sourceLastmod": "2022-03-03T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-557595E0F8",
+    "fingerprint": "557595e0f80cacd0b06f032899d580e01956c107b0b04676a8f2590f3846289e",
+    "scope": "official-page",
+    "contentId": "/blog/Life-without-drugs",
+    "field": "paragraphs.0",
+    "claimText": "Боль - сторожевой пёс здоровья.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief",
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Life-without-drugs",
+    "sourceLastmod": "2022-03-03T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-81D8681BE2",
+    "fingerprint": "81d8681be23240748c9f4e32180b355f1dae98766b61b6cb5c20d229242e191a",
+    "scope": "official-page",
+    "contentId": "/blog/Life-without-drugs",
+    "field": "paragraphs.0",
+    "claimText": "От стиля общения, манер, взаимоотношений зависят благополучие семьи и гармоничность ее развития.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Life-without-drugs",
+    "sourceLastmod": "2022-03-03T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-A6B22974B9",
+    "fingerprint": "a6b22974b9870247546b83b62d96484ca405a28df710d514c95a974d448c4f9e",
+    "scope": "official-page",
+    "contentId": "/blog/memoryfood",
+    "field": "paragraphs.5",
+    "claimText": "Антиоксиданты защищают клетки мозга, подавляя окисление, уменьшая его негативные последствия и удаляя окислители из организма.5.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/memoryfood",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-76963A5623",
+    "fingerprint": "76963a56237fce9b85d8b15c295d50bb6bab668cca1d02a190e8b19d73bf5436",
+    "scope": "official-page",
+    "contentId": "/blog/memoryfood",
+    "field": "paragraphs.7",
+    "claimText": "Красное вино В то время как высокие уровни алкоголя разрушительны для общего самочувствия и для здоровья мозга в частности, небольшое",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/memoryfood",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-64E1FC42EE",
+    "fingerprint": "64e1fc42ee1f1a2bcf4b5ade86222533a77e4a34f16c836cfe3b254c49ecaeec",
+    "scope": "official-page",
+    "contentId": "/blog/menshealth",
+    "field": "paragraphs.17",
+    "claimText": "Вывод: здоровье наших мужчин в наших руках 🥰 Я ещё всем мужчинам рекомендую Гало Равсин - от 3-5 капсул в день .",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/menshealth",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-7E62370A15",
+    "fingerprint": "7e62370a15b6243d4b81b402233106497d9806142662abf9ad55fa4a6bca4ed0",
+    "scope": "official-page",
+    "contentId": "/blog/menshealth",
+    "field": "paragraphs.1",
+    "claimText": "А когда болезнь уже бьет «ниже пояса», оказывается, что время упущено и придется еще усиленно «побороться» за сохранение мужского здоровья.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease",
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/menshealth",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-F1A8A280A2",
+    "fingerprint": "f1a8a280a2b8cb91552041deaa667cc00dcf73c0be85541e35504d77bd12c28d",
+    "scope": "official-page",
+    "contentId": "/blog/menshealth",
+    "field": "paragraphs.2",
+    "claimText": "Есть один анализ, который ответит на вопрос, здоров ли ваш мужчина.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/menshealth",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-2B57C73AFE",
+    "fingerprint": "2b57c73afef81699a269f3557969817ac2ad5e245a951947ff3d7e7a91ffe99a",
+    "scope": "official-page",
+    "contentId": "/blog/menshealth",
+    "field": "paragraphs.3",
+    "claimText": "Один анализ крови может выдать обширную картину состояния простаты и рисков возникновения урологических заболеваний - это анализ на уровень простат-специфического антигена.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/menshealth",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-DF29CDAF73",
+    "fingerprint": "df29cdaf735f5677cf7222ac19235223701260c5e9e0eede37b96816767b0b38",
+    "scope": "official-page",
+    "contentId": "/blog/menshealth",
+    "field": "paragraphs.5",
+    "claimText": "Этот анализ желательно сдавать даже в самом молодом возрасте, так как от этих заболеваний в настоящее время страдают не только мужчины в возрасте, но и юноши.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/menshealth",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-C6FE6799D9",
+    "fingerprint": "c6fe6799d98ed681d375a3fe9353c521cf987afb470e121d9d27b403659250b1",
+    "scope": "official-page",
+    "contentId": "/blog/notloosingweight",
+    "field": "paragraphs.14",
+    "claimText": "Это и диета, и здоровый сон и хорошее настроение.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/notloosingweight",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-B398FDC075",
+    "fingerprint": "b398fdc075ea1d47e7e9c690993bfd545d3a8237b06820202aed33dfd80ba78d",
+    "scope": "official-page",
+    "contentId": "/blog/notloosingweight",
+    "field": "paragraphs.4",
+    "claimText": "А еще творят настоящие чудеса с настроением – стимулируют выброс гормонов, которые дают ощущение крепкого здоровья и",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/notloosingweight",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-1597DBAD0B",
+    "fingerprint": "1597dbad0b2de344d86f993e4aa710274a0e2b62cc2449b9057252bf3130b98b",
+    "scope": "official-page",
+    "contentId": "/blog/Nutrition-program",
+    "field": "paragraphs.17",
+    "claimText": "Здесь все зависит от вашего здоровья (не каждый организм выдержит моно диету или голодание) диетической программы, ведь по-настоящему держать себя в форме по ее завершении удается немногим.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Nutrition-program",
+    "sourceLastmod": "2022-04-27T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-625735377E",
+    "fingerprint": "625735377ee8ea08ead9ed6064ba08d9e7a04394692273f240bf149f55f3e284",
+    "scope": "official-page",
+    "contentId": "/blog/Nutrition-program",
+    "field": "paragraphs.21",
+    "claimText": "Хронические заболевания отправятся в ремиссию.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Nutrition-program",
+    "sourceLastmod": "2022-04-27T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-B9DE3E98BE",
+    "fingerprint": "b9de3e98beda975d215539a18a778e272dc332368442c09230fe5cc23a26287b",
+    "scope": "official-page",
+    "contentId": "/blog/Nutrition-program",
+    "field": "paragraphs.27",
+    "claimText": "Здесь все зависит от вашего здоровья (не каждый организм выдержит моно диету или голодание), желания похудеть и необходимости срочно влезть в любимое платье.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Nutrition-program",
+    "sourceLastmod": "2022-04-27T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-2A4DD6A491",
+    "fingerprint": "2a4dd6a491e162ba7eb1088353451d7ea02c2c0b2238fba637ca661d69060c57",
+    "scope": "official-page",
+    "contentId": "/blog/Nutrition-program",
+    "field": "paragraphs.29",
+    "claimText": "Чем больше веса, тем скорее они изнашиваются и повергаются заболеваниям (артрит и т.д.).",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Nutrition-program",
+    "sourceLastmod": "2022-04-27T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-8B85B487B6",
+    "fingerprint": "8b85b487b60ab52a104de6301aaf7a5d21e7f802213de8dadbd482bfd4630db8",
+    "scope": "official-page",
+    "contentId": "/blog/Nutrition-program",
+    "field": "paragraphs.31",
+    "claimText": "Например, вы хотите похудеть, чтобы стать привлекательной, уметь без труда порезвиться в парке с ребенком или улучшить состояние здоровья.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Nutrition-program",
+    "sourceLastmod": "2022-04-27T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-9595FC0D03",
+    "fingerprint": "9595fc0d03be24d40aa0cf4ccd964d402fa47f1b2cc6ffb4504c83ff8779f4b1",
+    "scope": "official-page",
+    "contentId": "/blog/Nutrition-program",
+    "field": "paragraphs.35",
+    "claimText": "В основу его системы питания легло большое исследование коллег под названием «Новая концепция в лечении ожирения».",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Nutrition-program",
+    "sourceLastmod": "2022-04-27T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-4681FAA110",
+    "fingerprint": "4681faa11006fb834b09fe79a68e86f4eab096952b88a5f5811fe74b9163a3e4",
+    "scope": "official-page",
+    "contentId": "/blog/painfulperiods",
+    "field": "paragraphs.13",
+    "claimText": "При вторичной дисменорее боли связаны с наличием гинекологических заболеваний, наиболее частыми из которых, являются:",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease",
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/painfulperiods",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-431FD23E43",
+    "fingerprint": "431fd23e435735f45a8e971300e70eb8d78f1d5bd47f8dd6610a9eb7fd6c783c",
+    "scope": "official-page",
+    "contentId": "/blog/painfulperiods",
+    "field": "paragraphs.14",
+    "claimText": "воспалительные заболевания органов малого таза;",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/painfulperiods",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-96CE819BC1",
+    "fingerprint": "96ce819bc149fdc43c525b5a40750a11297bda7d2ceae8b032793eed829d7839",
+    "scope": "official-page",
+    "contentId": "/blog/painfulperiods",
+    "field": "paragraphs.17",
+    "claimText": "☝️Я рекомендую обратиться к гинекологу и с ним решать проблемы боли при месячных .",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/painfulperiods",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-6DD6715CF0",
+    "fingerprint": "6dd6715cf0cdc8ab841de6fb6fccf6ce692982fabe96cae90150ab6328be9e98",
+    "scope": "official-page",
+    "contentId": "/blog/painfulperiods",
+    "field": "paragraphs.1",
+    "claimText": "Он сопровождается изменением гормонального фона и рядом специфических симптомов, от тошноты и чувствительности груди до болезненных",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/painfulperiods",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-1093D96A15",
+    "fingerprint": "1093d96a15448e8ad8bda03ce9fbf40e8c13c3810465919aa9a0ef05117608d5",
+    "scope": "official-page",
+    "contentId": "/blog/painfulperiods",
+    "field": "paragraphs.2",
+    "claimText": "В зависимости от интенсивности и частоты, боли при месячных могут быть разновидностью нормы.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/painfulperiods",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-7623BF0FD5",
+    "fingerprint": "7623bf0fd5ddd3f04777c3b4644c67494697ba87457c81e073dc455a93af2a6d",
+    "scope": "official-page",
+    "contentId": "/blog/painfulperiods",
+    "field": "paragraphs.5",
+    "claimText": "В этом случае нередко можно говорить о наследственном характере заболевания.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/painfulperiods",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-DAFB50DB55",
+    "fingerprint": "dafb50db55e93655d1d11afb15e2bab338aa87c2a25fe770a1bccd80505400e6",
+    "scope": "official-page",
+    "contentId": "/blog/painfulperiods",
+    "field": "paragraphs.7",
+    "claimText": "Этот вид дисменореи чаще всего встречается у женщин старше 30 лет и связан с гинекологическим заболеванием или/и перенесенным",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/painfulperiods",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-284E8C0D51",
+    "fingerprint": "284e8c0d5117a528c761e55a8d6a55e720723c3e3b862f0bba6858e7631ec4fa",
+    "scope": "official-page",
+    "contentId": "/blog/painfulperiods",
+    "field": "paragraphs.8",
+    "claimText": "Для того, чтобы понять, как облегчить боль при месячных, нужно выявить истинную причину появления этих ощущений.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/painfulperiods",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-11D2232584",
+    "fingerprint": "11d2232584d25bbe4c6db1cff8668dc74327c8ea5434331bfc8f80391797b24c",
+    "scope": "official-page",
+    "contentId": "/blog/pedicure",
+    "field": "paragraphs.0",
+    "claimText": "Это также и забота о здоровье ног.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/pedicure",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-177FF1B6F0",
+    "fingerprint": "177ff1b6f01ee521683b3d0df252a96b0f7b13342cbd82b3a9fd33bd91452dee",
+    "scope": "official-page",
+    "contentId": "/blog/pedicure",
+    "field": "paragraphs.2",
+    "claimText": "В него входит профилактика грибковых заболеваний, деформации ногтей.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/pedicure",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-E90DC73DC5",
+    "fingerprint": "e90dc73dc58820f3c44ed58168d2901826f856191e58773ee2c14017a94f3b4c",
+    "scope": "official-page",
+    "contentId": "/blog/Personal-hygiene",
+    "field": "paragraphs.0",
+    "claimText": "Гигиена — это наука об улучшении и сохранении здоровья человека.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Personal-hygiene",
+    "sourceLastmod": "2022-04-27T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-CC1DC234E7",
+    "fingerprint": "cc1dc234e7d4f74f1b7f3d2a2e08f75764554019aecc535eef4b6afd9ee47b53",
+    "scope": "official-page",
+    "contentId": "/blog/Personal-hygiene",
+    "field": "paragraphs.10",
+    "claimText": "Одежда защищает тело человека от загрязнений, механических и химических повреждений, охлаждения, попадания насекомых и так далее.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Personal-hygiene",
+    "sourceLastmod": "2022-04-27T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-2ABEE66330",
+    "fingerprint": "2abee66330d9fd470faaaa0c1045904ff4c4263d39227a37cb611d5251758a3e",
+    "scope": "official-page",
+    "contentId": "/blog/Personal-hygiene",
+    "field": "paragraphs.2",
+    "claimText": "Соблюдение чистоты кожи чрезвычайно важно, ведь кроме защитной функции, она выполняет следующие функции: терморегулирующую, обменную, иммунную, секреторную, рецепторную, дыхательную и другие функции.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Personal-hygiene",
+    "sourceLastmod": "2022-04-27T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-53A1745FE3",
+    "fingerprint": "53a1745fe380318665f1d0283a6a696d32e652924a2d08a64f8df7a25b49068c",
+    "scope": "official-page",
+    "contentId": "/blog/Personal-hygiene",
+    "field": "paragraphs.5",
+    "claimText": "Грязь, содержащая болезнетворные микробы может попасть с рук в рот через пищу.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Personal-hygiene",
+    "sourceLastmod": "2022-04-27T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-9AAF500BEE",
+    "fingerprint": "9aaf500bee4c2a370edabb23c572407e8ad18b156fd4ff208b50354fbbea6501",
+    "scope": "official-page",
+    "contentId": "/blog/Personal-hygiene",
+    "field": "paragraphs.5",
+    "claimText": "Дизентерию, например, называют болезнью грязных рук.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/Personal-hygiene",
+    "sourceLastmod": "2022-04-27T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-1B4D4A5D4E",
+    "fingerprint": "1b4d4a5d4edda0f52797ea61c9d02dbee4ef6a9b4d2b7ba7191236ca804d1042",
+    "scope": "official-page",
+    "contentId": "/blog/proper-facial-care-at-home",
+    "field": "paragraphs.2",
+    "claimText": "Гало Молочко для лица» является одним из представителей линии косметической продукции компании «Доктор Нонна», в состав которой включена уникальная Ауто-трофическая Система (АТС — «ноу-хау» компании «Доктор Нонна»), способствующая восстановлению и обновлению клеток кожи за счёт использования собственных белковых фрагментов отмирающих клеток эпидермиса и компонентов гало- комплекс .«",
+    "claimType": "cosmetic",
+    "detectionReasons": [
+      "cosmetic-efficacy"
+    ],
+    "sourceUrl": "https://drnona.com/blog/proper-facial-care-at-home",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-520E3B8F40",
+    "fingerprint": "520e3b8f40a72891d3b4a12af4643a278ea7df107bb7e39cdb869b5649fb2092",
+    "scope": "official-page",
+    "contentId": "/blog/recovery-of-the-digestive-system-after-covid",
+    "field": "paragraphs.0",
+    "claimText": "Антибиотики нарушают микрофлору, а нестероидные противовоспалительные препараты приводят к повреждению слизистой желудка, тем самым провоцируя повышение выработки соляной кислоты.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/recovery-of-the-digestive-system-after-covid",
+    "sourceLastmod": "2022-02-18T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-0B031F1FD4",
+    "fingerprint": "0b031f1fd452377fd4f5728606f9b763de6a6e7eba960178328160dde48fb391",
+    "scope": "official-page",
+    "contentId": "/blog/recovery-of-the-digestive-system-after-covid",
+    "field": "paragraphs.0",
+    "claimText": "В рекомендации входят: нормализация режима сна и бодрствования контроль рациона, назначение диетического питания лекарственные препараты, которые назначает врач гастроэнтеролог, нормализующие работу печени и пищеварительного тракта.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/recovery-of-the-digestive-system-after-covid",
+    "sourceLastmod": "2022-02-18T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-936D041F4A",
+    "fingerprint": "936d041f4a0f0a992477cefed5cfa95e3a09ea773e736e833828189619e11fad",
+    "scope": "official-page",
+    "contentId": "/blog/recovery-of-the-digestive-system-after-covid",
+    "field": "paragraphs.0",
+    "claimText": "Если даже тошноты, жидкого стула и болей в животе во время острого периода болезни не было, ковид действует на все ткани человека и снижает иммунитет.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease",
+      "pain-healing-or-relief",
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/recovery-of-the-digestive-system-after-covid",
+    "sourceLastmod": "2022-02-18T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-FDB5BE760F",
+    "fingerprint": "fdb5be760fee4b7f23c05e6c6824a62c61cbe36cf82aaada7d3dd36f7316f25f",
+    "scope": "official-page",
+    "contentId": "/blog/recovery-of-the-digestive-system-after-covid",
+    "field": "paragraphs.0",
+    "claimText": "Кроме того, лечение инфекции серьезными препаратами нарушает естественное соотношение микрофлоры в кишечнике, негативно действует на печень.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/recovery-of-the-digestive-system-after-covid",
+    "sourceLastmod": "2022-02-18T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-ED7A4E52F7",
+    "fingerprint": "ed7a4e52f7b481de2972276f4f61d31a10ec3b54dffdbcdf83698167dc64cbea",
+    "scope": "official-page",
+    "contentId": "/blog/recovery-of-the-digestive-system-after-covid",
+    "field": "paragraphs.0",
+    "claimText": "Опасная болезнь позади, но полного выздоровления нет.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease",
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/recovery-of-the-digestive-system-after-covid",
+    "sourceLastmod": "2022-02-18T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-7EBE5042BA",
+    "fingerprint": "7ebe5042bacb3d4573391b118b6ed0a2d38ed07ad709640c185a8d9bba460789",
+    "scope": "official-page",
+    "contentId": "/blog/recovery-of-the-digestive-system-after-covid",
+    "field": "paragraphs.0",
+    "claimText": "При этом, сразу после прекращения симптомов, многие перенесшие коронавирус допускают ошибку и резко возвращаются к старым пищевым привычкам, нанося вред ослабленному после болезни организму.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/recovery-of-the-digestive-system-after-covid",
+    "sourceLastmod": "2022-02-18T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-C994C1CA95",
+    "fingerprint": "c994c1ca9513b9b950b17d4942542f399aa49434b2b93964390d203a363ceb18",
+    "scope": "official-page",
+    "contentId": "/blog/recovery-of-the-digestive-system-after-covid",
+    "field": "paragraphs.0",
+    "claimText": "Также рекомендуется уменьшить порции, чтобы не растягивать стенки желудка, так как это вызывает боль.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/recovery-of-the-digestive-system-after-covid",
+    "sourceLastmod": "2022-02-18T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-0480CD5CBB",
+    "fingerprint": "0480cd5cbb6eab4d9ebb5ad5ec4c9afa9459cf7fa187593266b7f4633923102a",
+    "scope": "official-page",
+    "contentId": "/blog/recovery-of-the-digestive-system-after-covid",
+    "field": "paragraphs.0",
+    "claimText": "Часто обостряются все хронические заболевания.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/recovery-of-the-digestive-system-after-covid",
+    "sourceLastmod": "2022-02-18T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-402415832D",
+    "fingerprint": "402415832d8af36ec9c5812e766f5784c5b25abb343a280d6fe68cc0f4cd88b1",
+    "scope": "official-page",
+    "contentId": "/blog/recovery-of-the-digestive-system-after-covid",
+    "field": "paragraphs.0",
+    "claimText": "Это может спровоцировать застой желчи и привести к болями в правом подреберье, тошноте, появлению горечи во рту.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/recovery-of-the-digestive-system-after-covid",
+    "sourceLastmod": "2022-02-18T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-C451916E36",
+    "fingerprint": "c451916e36a1e800e20b3f454e91ef99a30fcea9849a8918e72060eaa4142b50",
+    "scope": "official-page",
+    "contentId": "/blog/richpeoplefood",
+    "field": "paragraphs.0",
+    "claimText": "В привычки миллиардеров обязательно входит правильное здоровое питание.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/richpeoplefood",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-5A9AA1BD13",
+    "fingerprint": "5a9aa1bd13c6b1a5d2dac35f3f48e3f6f4a149fc75277db6b04abcd653a267b6",
+    "scope": "official-page",
+    "contentId": "/blog/richpeoplefood",
+    "field": "paragraphs.11",
+    "claimText": "Так что, изучая привычки богатых людей, можно сначала стать здоровым и активным, только поменяв одну свою привычку!",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/richpeoplefood",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-10EDA319EB",
+    "fingerprint": "10eda319eb991a3460ad945262ddbf11a1477871999bbdf7c9f6f4229c36e283",
+    "scope": "official-page",
+    "contentId": "/blog/richpeoplefood",
+    "field": "paragraphs.2",
+    "claimText": "Он знает, что пища оказывает влияние на физическое, психическое и даже духовное здоровье человека.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/richpeoplefood",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-AFE3B74004",
+    "fingerprint": "afe3b7400436a2b03883288d2ab0cc681bcb5d4bb47140e3beae955a1b7d2826",
+    "scope": "official-page",
+    "contentId": "/blog/richpeoplefood",
+    "field": "paragraphs.3",
+    "claimText": "Швейцарские эксперты пришли к выводу, что от рациона питания во многом зависит психическое здоровье и благополучие человека.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/richpeoplefood",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-77C7A2DD98",
+    "fingerprint": "77c7a2dd985c77f99a0a5a1edde5142cc4f12f7b3aa3cb471dd85d0ece35af04",
+    "scope": "official-page",
+    "contentId": "/blog/richpeoplefood",
+    "field": "paragraphs.4",
+    "claimText": "Также есть веские доказательства того, что средиземноморская диета, богатая овощами и оливковым маслом, приносит пользу психическому здоровью, защищает от депрессии и тревоги.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/richpeoplefood",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-B94504F049",
+    "fingerprint": "b94504f049403446917c4ff4e3ce99f25413eea8ac3c3fcd48b0ce6a61c3db6a",
+    "scope": "official-page",
+    "contentId": "/blog/richpeoplefood",
+    "field": "paragraphs.5",
+    "claimText": "Взаимодействие между кишечником и мозгом с одной стороны и диетой и психическим здоровьем с другой стороны является одним из самых обсуждаемых вопросов в современной биологической психиатрии.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/richpeoplefood",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-EFF6B64461",
+    "fingerprint": "eff6b64461547602040fbbf4dde69bde0e3ede993ce2fe479086f183bd10b688",
+    "scope": "official-page",
+    "contentId": "/blog/richpeoplefood",
+    "field": "paragraphs.6",
+    "claimText": "Исследователи делают вывод, что диета и питание не только имеют решающее значение для физиологии и состава тела человека, но и оказывают влияние на его настроение и психическое здоровье.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/richpeoplefood",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-3BF208E860",
+    "fingerprint": "3bf208e860e3c2b57b44ec7831ba0fb317e890b856e0d4e17155e2bc1e035246",
+    "scope": "official-page",
+    "contentId": "/blog/sugar-life-shord-life",
+    "field": "paragraphs.0",
+    "claimText": "Во‑первых, уже буквально через неделю вы заметите улучшения в состоянии кожи: ровный цвет и здоровое сияние (если вы страдаете от акне и высыпаний, поверьте, их станет в разы меньше).",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/sugar-life-shord-life",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-D8AB8C8377",
+    "fingerprint": "d8ab8c837769b3a15ec5e93d8c67efdcb80491eb1cd89e9c527b30ec302a8048",
+    "scope": "official-page",
+    "contentId": "/blog/sugar-life-shord-life",
+    "field": "paragraphs.0",
+    "claimText": "Многочисленные исследования подтвердили, что сахар действительно способен ускорять процессы старения как внешние, так и внутренние.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/sugar-life-shord-life",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-4A54ABEF7C",
+    "fingerprint": "4a54abef7c63198244205fc1c3001e97faa36eae59e6f9e2a3055c1519a7e409",
+    "scope": "official-page",
+    "contentId": "/blog/sugar-life-shord-life",
+    "field": "paragraphs.0",
+    "claimText": "Результат - морщины, потеря упругости кожи, появление пигментных пятен и замедление процессов регенерации.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/sugar-life-shord-life",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-168F599F67",
+    "fingerprint": "168f599f675a82670f93d95ad12423ba82587d4cf9797a8d192acbaf5977b633",
+    "scope": "official-page",
+    "contentId": "/blog/sugar-life-shord-life",
+    "field": "paragraphs.0",
+    "claimText": "Сахар несет не одну скрытую угрозу организму - преждевременное старение.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/sugar-life-shord-life",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-73F229CDBC",
+    "fingerprint": "73f229cdbc68be7f9036a01a2da1a46710fca92d56d1d73d2409349d887cc5f6",
+    "scope": "official-page",
+    "contentId": "/blog/sugar-life-shord-life",
+    "field": "paragraphs.0",
+    "claimText": "Теперь вы знаете, почему сахар ускоряет старение организма.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/sugar-life-shord-life",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-FFEBE2E38A",
+    "fingerprint": "ffebe2e38a04187e74d64626730216028bf8f579d666d1b1abdc46e486286a9e",
+    "scope": "official-page",
+    "contentId": "/blog/teen-stress-during-a-pandemic",
+    "field": "paragraphs.0",
+    "claimText": "Поддерживайте его увлечения.Играйте в игры с подростком.Ему это важно, когда родители с ним на одной волне.Важно знать, с 12 лет рекомендации по применению БАДов уже как взрослому!",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/teen-stress-during-a-pandemic",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-A889FB69F8",
+    "fingerprint": "a889fb69f82cb9792d7f2fb303cbe0f941e23e08c2ebe447414f5886641de57b",
+    "scope": "official-page",
+    "contentId": "/blog/varicoseveins",
+    "field": "paragraphs.11",
+    "claimText": "Это происходит потому, что мышечно-венозная помпа в статичном положении не работает)симптомы",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/varicoseveins",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-A155961388",
+    "fingerprint": "a1559613880abc816a128e93bcb02d4f382b6c8301f1d463014d5bbf4966b73b",
+    "scope": "official-page",
+    "contentId": "/blog/varicoseveins",
+    "field": "paragraphs.14",
+    "claimText": "В подавляющем большинстве случаев, для диагностики варикоза и выработки стратегии правильного лечения, врачу-флебологу достаточно",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/varicoseveins",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-F67E19446F",
+    "fingerprint": "f67e19446f3ad27f31dc1a1a67d1a5da10407c6076cdde0aac51aa590158b52f",
+    "scope": "official-page",
+    "contentId": "/blog/varicoseveins",
+    "field": "paragraphs.16",
+    "claimText": "Поэтому, при признаках варикозной болезни надо обращаться к флебологу.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/varicoseveins",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-3957D6C6C3",
+    "fingerprint": "3957d6c6c34f36ce5d9dd62d3d0df818771cbfb879530f80d93147d88491a8c5",
+    "scope": "official-page",
+    "contentId": "/blog/varicoseveins",
+    "field": "paragraphs.20",
+    "claimText": "Помните: здоровые вены- здоровые ноги!",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/varicoseveins",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-D8E64BBD08",
+    "fingerprint": "d8e64bbd0832165284efc35cebf80aed1b5975374c8c827ea833ab0488016cd9",
+    "scope": "official-page",
+    "contentId": "/blog/varicoseveins",
+    "field": "paragraphs.2",
+    "claimText": "Это, в свою очередь, приводит к клиническим проявлениям хронической венозной недостаточности – таким, как отеки ног, боли по ходу варикозно",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/varicoseveins",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-ACDB4AC44F",
+    "fingerprint": "acdb4ac44f59e74bdcb84211fbeb3529b2dac88b90863a9d668640589c71c17f",
+    "scope": "official-page",
+    "contentId": "/blog/varicoseveins",
+    "field": "paragraphs.3",
+    "claimText": "расширенных вен, кожный зуд, судороги в икроножных мышцах.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/varicoseveins",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-92450E3782",
+    "fingerprint": "92450e3782ec3011d491a6aeffaab5857b519a8c8f569ec519f0009e91a89eec",
+    "scope": "official-page",
+    "contentId": "/blog/varicoseveins",
+    "field": "paragraphs.6",
+    "claimText": "💥Боль в икроножных мышцах.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/varicoseveins",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-6A4D5F019D",
+    "fingerprint": "6a4d5f019d8723c934254df8b12249672f79f833081863a75e48f4a550a5d0c2",
+    "scope": "official-page",
+    "contentId": "/blog/varicoseveins",
+    "field": "paragraphs.6",
+    "claimText": "Чаще всего, это – ноющая, неинтенсивная боль, иногда – дискомфорт.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/varicoseveins",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-F236B2AA6E",
+    "fingerprint": "f236b2aa6e1c9462a1f9328dc408b2ae84791b4e88b7740dd19795d9421a3438",
+    "scope": "official-page",
+    "contentId": "/blog/varicoseveins",
+    "field": "paragraphs.7",
+    "claimText": "💥Боль по ходу варикозных вен.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/varicoseveins",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-00F9C5F43A",
+    "fingerprint": "00f9c5f43ab936f771600807cfb2daefaabfee24d19ff59c704224a1b679996b",
+    "scope": "official-page",
+    "contentId": "/blog/varicoseveins",
+    "field": "paragraphs.9",
+    "claimText": "Венозной хромотой называют усиление болей в икроножных мышцах при ходьбе.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/varicoseveins",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-DB40D04CB0",
+    "fingerprint": "db40d04cb07b4e1597e9a0027e23e2e6fbd82037397ddd3135df545f6d938e4b",
+    "scope": "official-page",
+    "contentId": "/blog/War-is-stress",
+    "field": "paragraphs.0",
+    "claimText": "Вообще, в зависимости от длительности воздействия выделяют кратковременный и хронический стресс.Воздействию кратковременного (острого) стресса человек подвергается в течение ограниченного периода времени.Из этого состояния вполне реально извлечь пользу, ведь при остром стрессе временно увеличивается количество энергии, возрастает физическая сила и концентрация, человек становится азартным и активным.Такая мобилизация позволяет лучше справляться с экстремальной ситуацией.Надо знать, что когда угроза минует, организм после кратковременного стресса быстро восстанавливает свои физиологические показатели до нормальных значений.Длительное состояние стресса может привести к срыву адаптационных механизмов и развитию хронических патологий - гипертонии, ишемической болезни сердца, состоянию иммунодефицита, а также к депрессии и другим проблемам со здоровьем.Ганс Селье - великий канадский ученый, впервые описавший в медицинских терминах стресс, называл стресс синдромом адаптации.Как может человек адаптироваться к такой совершенно неестественной обстановке, как война?",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease",
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/War-is-stress",
+    "sourceLastmod": "2022-03-03T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-1FDCDFAE65",
+    "fingerprint": "1fdcdfae650eb65a1ca66832523a1a2195a9bdf4ce1ac293b3ddea398da6f3f5",
+    "scope": "official-page",
+    "contentId": "/blog/what-to-eat-after-coronavirus",
+    "field": "paragraphs.0",
+    "claimText": "Пациенту, переболевшему коронавирусной инфекцией, важно не только соблюдать режим, проявлять умеренную физическую активность и хорошо высыпаться, но и правильно питаться, заявила иммунолог Мария Польнер.Необходимо сделать акцент на умеренных физических нагрузках, полноценном сне, соблюдении режима труда и отдыха и, конечно, на правильном питании.Питание, прежде всего, должно быть полноценным и сбалансированным.Стоит ограничить употребление жиров, сладостей, алкоголя, поваренной соли.После выздоровления процесс реабилитации не заканчивается, вам необходимо помочь организму снова привыкнуть к своему стандартному рациону питания.После болезни нужно быть максимально аккуратным и вводить привычные вам жирные продукты очень медленно.Рекомендации диетической ассоциации Великобритании для людей, восстанавливающихся после коронавируса в больницах, базируются на пяти тезисах.Во-первых, надо есть продукты с высоким содержанием протеина, чтобы как можно быстрее восстановить энергетические возможности организма.Во-вторых, в случае отсутствия аппетита могут быть полезными высококалорийные напитки.В-третьих, нужно пить больше жидкости.В-четвертых, следует есть часто и понемногу.Наконец, при потере вкуса имеет смысл есть более острую еду, а при тошноте - более простую и пресную.Британские диетологи рекомендуют есть бобы, мясо (но как можно меньше красного и обработанного) и орехи для получения протеина, обезжиренное или соевое молоко, йогурты, а также не менее пяти горстей фруктов и овощей в день.Я рекомендую добавить в рацион Гало Супсин, Гало Гонсин, Гало Шокосин и Гало Даксин!",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease",
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/what-to-eat-after-coronavirus",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-7D20B964CE",
+    "fingerprint": "7d20b964ce85d8151931adffb93c797e39569f1ec8712876523868efb5aec6ea",
+    "scope": "official-page",
+    "contentId": "/blog/worsening-arthritis-in-the-fall",
+    "field": "paragraphs.0",
+    "claimText": "Беригите себя и будте здоровы!",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/worsening-arthritis-in-the-fall",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-41B8D6C9B0",
+    "fingerprint": "41b8d6c9b05230c1530d5384ac9ac9fe072c721830d2a01069cf80a82b4d3ed9",
+    "scope": "official-page",
+    "contentId": "/blog/worsening-arthritis-in-the-fall",
+    "field": "paragraphs.0",
+    "claimText": "В этот период боли усиливаются и суставы теряют подвижность.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/worsening-arthritis-in-the-fall",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-BFF0F3F0F6",
+    "fingerprint": "bff0f3f0f6c1281e259c5153721aa0048e37ea1701f19d90ec704d39cb5e8564",
+    "scope": "official-page",
+    "contentId": "/blog/worsening-arthritis-in-the-fall",
+    "field": "paragraphs.0",
+    "claimText": "Как результат, слабая иммунная система — отличное подспорье для развития воспалительного процесса при артрите.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/worsening-arthritis-in-the-fall",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-9EDD048C83",
+    "fingerprint": "9edd048c838eb4fa9f6c6369eb57b974e1974acff20da7952d48481588e95767",
+    "scope": "official-page",
+    "contentId": "/blog/worsening-arthritis-in-the-fall",
+    "field": "paragraphs.0",
+    "claimText": "Люди, страдающие от ревматических болей в коленях, очень боятся холода, им необходимо уделить больше внимания сохранению тепла.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/worsening-arthritis-in-the-fall",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-DA0FCA1917",
+    "fingerprint": "da0fca19179e112591f3b413aee36b43e508ece01294cfd7a41b5daaf0fe267a",
+    "scope": "official-page",
+    "contentId": "/blog/worsening-arthritis-in-the-fall",
+    "field": "paragraphs.0",
+    "claimText": "Нарушается кровообращение в мышечных тканях, суставы недополучают питательных веществ, что не дает развиваться новым клеткам и приводит к деформации соединений и возникновению болей.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/worsening-arthritis-in-the-fall",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-C2C2BC2DB9",
+    "fingerprint": "c2c2bc2db905f9ef972dc8e2eab4c0b2c73900a7b3b0fee3493d33f14d8485ad",
+    "scope": "official-page",
+    "contentId": "/blog/worsening-arthritis-in-the-fall",
+    "field": "paragraphs.0",
+    "claimText": "Обострение артрита и прочих суставных недугов в осеннюю пору совсем не редкость.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/worsening-arthritis-in-the-fall",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-C9F677528D",
+    "fingerprint": "c9f677528d434ca89b9bca90c75c94c0e918d81e34dbc48efb329d091a3f6960",
+    "scope": "official-page",
+    "contentId": "/blog/worsening-arthritis-in-the-fall",
+    "field": "paragraphs.0",
+    "claimText": "Очень полезно для поддержания здоровья и предотвращения обострения боли в суставах принимать горячую ванну, парить ноги в горячей воде с добавлением Гало Квартета Dr Nona или делать согревающий массаж коленных суставов с Гало Солярисом .",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief",
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/worsening-arthritis-in-the-fall",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-7AC533A901",
+    "fingerprint": "7ac533a9011eecbd69ec94de734c3e0854bd8da63f426b34ce55e1d5feb800f2",
+    "scope": "official-page",
+    "contentId": "/blog/worsening-arthritis-in-the-fall",
+    "field": "paragraphs.0",
+    "claimText": "При наличии заболеваний суставов следует при первых осенних холодах одеваться теплее, не допускать переохлаждения организма. .",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/worsening-arthritis-in-the-fall",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-4174F2493D",
+    "fingerprint": "4174f2493db7d452a5ca16db2f0e5ce4240688c5851284a66a6aba155342cde6",
+    "scope": "official-page",
+    "contentId": "/blog/worsening-arthritis-in-the-fall",
+    "field": "paragraphs.0",
+    "claimText": "Со слов пациентов,многие люди, страдающие от ревматоидного артрита, чувствуют ухудшение состояния здоровья от переутомления.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/blog/worsening-arthritis-in-the-fall",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-BFD7DDE458",
+    "fingerprint": "bfd7dde45873397f0ed090239996ea9cf194fe933398480dbf4f879427bb20c0",
+    "scope": "official-page",
+    "contentId": "/blog/worsening-arthritis-in-the-fall",
+    "field": "paragraphs.0",
+    "claimText": "Сохранение тепла считается ключевым моментом в профилактике и лечении болезней суставов.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/blog/worsening-arthritis-in-the-fall",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-F6CECF9C8F",
+    "fingerprint": "f6cecf9c8fb4fe1257c84832867939a5f076ed29117e592e0cf33ed7c0c3eb29",
+    "scope": "official-page",
+    "contentId": "/news/2024-price-update",
+    "field": "paragraphs.6",
+    "claimText": "Также мы уверены, что повышение очковой стоимости позволит нам продолжать поставлять лучшие продукты для здоровья и красоты, соответствующие самым высоким стандартам.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/news/2024-price-update",
+    "sourceLastmod": "2024-07-03T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-C7F0A6EBD4",
+    "fingerprint": "c7f0a6ebd49ba11173efc9887b815c8bfac01cec4a037408aec26a987561c62d",
+    "scope": "official-page",
+    "contentId": "/news/drnona-bd-2024",
+    "field": "paragraphs.4",
+    "claimText": "Мы искренне желаем Вам крепкого здоровья, бесконечного счастья и вдохновения на новые начинания!",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/news/drnona-bd-2024",
+    "sourceLastmod": "2024-04-11T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-2A62B13D7A",
+    "fingerprint": "2a62b13d7a62fc8fd7868a3e6c41666b7f02c93107e3d87c86a99efafb0fe3ed",
+    "scope": "official-page",
+    "contentId": "/news/info-for-all",
+    "field": "paragraphs.2",
+    "claimText": "Михаил Наси вложил душу и посвятил 25 лет служению нашей идее: нести людям здоровье и благосостояние с компанией \"Dr.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/news/info-for-all",
+    "sourceLastmod": "2022-09-07T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-EA160AD3B1",
+    "fingerprint": "ea160ad3b12162e5f7bf869e11aacfcad81b17ac113ed1f1cbfab63317c205c9",
+    "scope": "official-page",
+    "contentId": "/news/info-for-all",
+    "field": "paragraphs.4",
+    "claimText": "Мы хотим выразить благодарность и пожелать здоровья, успехов и всего самого наилучшего, нашему другу Михаилу Наси .",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/news/info-for-all",
+    "sourceLastmod": "2022-09-07T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-A4E11CBEF6",
+    "fingerprint": "a4e11cbef6289197b26d5f9f5757f22dad8864a4db10291072ef8549774c4999",
+    "scope": "official-page",
+    "contentId": "/news/moscow-14sep",
+    "field": "paragraphs.0",
+    "claimText": "Удивительные истории оздоровления с помощью продуктов компании.4.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/news/moscow-14sep",
+    "sourceLastmod": "2024-08-11T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-168F1D7C90",
+    "fingerprint": "168f1d7c907e251e9c915604923243fd9771523801d4b042e0e4a23fd0ca3679",
+    "scope": "official-page",
+    "contentId": "/news/presentation-slovakia-march2024",
+    "field": "paragraphs.2",
+    "claimText": "250 коллег и единомышленников собрались вместе, чтобы обменяться опытом, поделиться идеями по оздоровлению и расширению сетей, внести новое в принципы работы со своей структурой.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/news/presentation-slovakia-march2024",
+    "sourceLastmod": "2024-03-25T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-0439E2B8E5",
+    "fingerprint": "0439e2b8e5de2a377a1c1ebad2f067e58d348a2c38dbb7e864aea6bdcff5b0d6",
+    "scope": "official-page",
+    "contentId": "/news/ruth-course",
+    "field": "paragraphs.6",
+    "claimText": "· Оживить свое моральное и духовное здоровье",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/news/ruth-course",
+    "sourceLastmod": "2022-09-01T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-41C942212A",
+    "fingerprint": "41c942212a38bf0afbf725f8173a9f507462ac7ab3913eb52010df7ba33ce27b",
+    "scope": "official-page",
+    "contentId": "/news/shneerson-bd",
+    "field": "paragraphs.1",
+    "claimText": "Вы создали не просто компанию, а сообщество единомышленников, объединенных идеей здоровья, развития и заботы о людях.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/news/shneerson-bd",
+    "sourceLastmod": "2026-06-30T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-6848E0D64C",
+    "fingerprint": "6848e0d64cfe3492cf03ee89c27e6199474b9190c03d6d27b5d30dff02a68977",
+    "scope": "official-page",
+    "contentId": "/news/shneerson-bd",
+    "field": "paragraphs.2",
+    "claimText": "Желаем Вам крепкого здоровья, долгих счастливых лет, неиссякаемой энергии, радости от семьи, друзей и новых достижений.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/news/shneerson-bd",
+    "sourceLastmod": "2026-06-30T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-8490477277",
+    "fingerprint": "8490477277f5d641bd21373e3c8c324c1126346b58ed30d73ff149581c1a2c96",
+    "scope": "official-page",
+    "contentId": "/ourformula",
+    "field": "paragraphs.0",
+    "claimText": "Косметические и оздоровительные препараты компании Dr.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/ourformula",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-E4B4B53045",
+    "fingerprint": "e4b4b53045aa06e7031b1c3bfe8992cbe9f8a703b3a44f1436c189b77832ee9f",
+    "scope": "official-page",
+    "contentId": "/ourformula",
+    "field": "paragraphs.0",
+    "claimText": "Сочетание нашей эксклюзивной формулы Halo Complex™ и целебных свойств Мёртвого моря даёт беспрецедентную эффективность продукции компании Dr.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief",
+      "cosmetic-efficacy"
+    ],
+    "sourceUrl": "https://drnona.com/ourformula",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-D7CCC39ABC",
+    "fingerprint": "d7ccc39abc01326b8c0a40514af34cc4fe44ca4b3fbcec751b6eb50f4313e059",
+    "scope": "official-page",
+    "contentId": "/ourformula",
+    "field": "paragraphs.0",
+    "claimText": "Уникальная структура архебактерии обладает необыкновенной жизненной силой и является мощным неиссякаемым источником белков, аминокислот и антиоксидантов.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/ourformula",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-F3A82964CA",
+    "fingerprint": "f3a82964ca20ce1f7cc428f0a4ae86f13c9e22e6ebff9bd2ce0d48cf6bcfb026",
+    "scope": "official-page",
+    "contentId": "/ourformula",
+    "field": "paragraphs.0",
+    "claimText": "Nona – это продукция кардинально нового, передового поколения, сочетающая живительную силу архебактерии с целебными свойствами Мёртвого моря.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/ourformula",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-85D97AF9BA",
+    "fingerprint": "85d97af9ba0b5874b5aa465884ef6e6236dae67bc3edb2317fbe1a5af1d5b573",
+    "scope": "official-page",
+    "contentId": "/ourformula",
+    "field": "paragraphs.0",
+    "claimText": "Nona, использование которой оздоравливает организм, замедляет процессы старения, защищает от вредного воздействия окружающей среды, способствует регенерации кожи и дает возможность выглядеть моложе, свежее, бодрее.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief",
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/ourformula",
+    "sourceLastmod": "",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-B3E714A195",
+    "fingerprint": "b3e714a19545e8ce0f8b2e1ac599735c63f60a49c84f38f3bb59446a43626347",
+    "scope": "product",
+    "contentId": "after-shave-lord",
+    "field": "longDescription",
+    "claimText": "Ежедневное использование духов помогает сбалансировать тело и ум, и способствует поддержанию жизненной силы в течение дня.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/product/after-shave-lord",
+    "sourceLastmod": "2025-01-12T09:56:30.825Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-7BAFCBB131",
+    "fingerprint": "7bafcbb13145be4483ca1fea5fa9e0a16bc921a4532adba519774d5eaa44a61e",
+    "scope": "product",
+    "contentId": "dead-sea-water-compresses",
+    "field": "shortDescription",
+    "claimText": "Дезинфицирующий набор под рукой.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/product/dead-sea-water-compresses",
+    "sourceLastmod": "2024-09-01T08:01:48.909Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-267850BD10",
+    "fingerprint": "267850bd100bcc5f88e2fa5d53b3276d114a094564dcb451d4caa26f0e27d1f1",
+    "scope": "product",
+    "contentId": "dynamic-hydrating-cream",
+    "field": "longDescription",
+    "claimText": "Кроме того, при ежедневном использовании Ваша кожа будет увлажненной, тонизированной, упругой и здоровой.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/product/dynamic-hydrating-cream",
+    "sourceLastmod": "2026-05-11T15:13:15.102Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-0CF1193DD6",
+    "fingerprint": "0cf1193dd6af4ac9b984477dc57e846c0b8576d036a7146959212bf43be6849c",
+    "scope": "product",
+    "contentId": "dynamic-hydrating-cream",
+    "field": "longDescription",
+    "claimText": "Nona способствует появлению ощущения мгновенного облегчения в различных ситуациях, таких как: укусы насекомых, зуд, шелушение, сухость кожи.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/product/dynamic-hydrating-cream",
+    "sourceLastmod": "2026-05-11T15:13:15.102Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-9B95048895",
+    "fingerprint": "9b950488950b5d414e24831aa4bca64cec85d9cde77a6af3f05e3cae99a1fc88",
+    "scope": "product",
+    "contentId": "gonseen-relax",
+    "field": "longDescription",
+    "claimText": "Не предназначено для диагностики, лечения, излечения или профилактики заболеваний.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/product/gonseen-relax",
+    "sourceLastmod": "2026-05-10T08:01:01.199Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-3CC2697D0B",
+    "fingerprint": "3cc2697d0ba9312600355670c1ad78e5fb55a74d4f26e89cef1200fd5f72bc0c",
+    "scope": "product",
+    "contentId": "gonseen-relax",
+    "field": "longDescription",
+    "claimText": "Продукт позволяет наслаждаться тёплым напитком как частью вечерней рутины и способствует общему благополучию.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/product/gonseen-relax",
+    "sourceLastmod": "2026-05-10T08:01:01.199Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-9A8E988E28",
+    "fingerprint": "9a8e988e286d6a049c0a0de7b4b031ffcb8b037877547bdd1a92f0c6861fef0f",
+    "scope": "product",
+    "contentId": "halo-gonseen-vitalitea",
+    "field": "longDescription",
+    "claimText": "Не предназначено для диагностики, лечения, излечения или профилактики заболеваний.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://drnona.com/product/halo-gonseen-vitalitea",
+    "sourceLastmod": "2026-05-10T08:00:34.865Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-131C242423",
+    "fingerprint": "131c2424236a01681c6b6e576416d7c9646bf921017308eac05bfc6cc664f8b4",
+    "scope": "product",
+    "contentId": "halo-gonseen-vitalitea",
+    "field": "longDescription",
+    "claimText": "Продукт позволяет наслаждаться тёплым напитком как частью повседневной рутины и способствует общему благополучию.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/product/halo-gonseen-vitalitea",
+    "sourceLastmod": "2026-05-10T08:00:34.865Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-AF3CABF906",
+    "fingerprint": "af3cabf9066dd90c85da728691bfd2fb7b07a861d8498dabc4f0ccabe9ee1081",
+    "scope": "product",
+    "contentId": "halo-gonseen-vitalitea",
+    "field": "shortDescription",
+    "claimText": "Травяной чай в пакетиках для ежедневного баланса и жизненного тонуса",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://drnona.com/product/halo-gonseen-vitalitea",
+    "sourceLastmod": "2026-05-10T08:00:34.865Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-1E4F45C131",
+    "fingerprint": "1e4f45c1311853eb06fed6d86798687c9db998168e6cf8125b7a03d1d814d821",
+    "scope": "product",
+    "contentId": "hand-and-nail-treatment",
+    "field": "longDescription",
+    "claimText": "Применение крема обогащает кожу рук и ногти концентрированной порцией влаги и способствует их защите от сухости, предотвращению трещин и различных повреждений.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/product/hand-and-nail-treatment",
+    "sourceLastmod": "2026-07-07T07:19:38.493Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-51C14FC6D8",
+    "fingerprint": "51c14fc6d8521f756b68838cff1d55f774785378cee827342dbf79fa0f9ca872",
+    "scope": "product",
+    "contentId": "solaris-body-lotion",
+    "field": "longDescription",
+    "claimText": "Инновационный крем отлично смягчает и питает кожу, увлажняет, даёт ощущение свежести и является великолепным средством для общего массажа при мышечных и суставных болях.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/product/solaris-body-lotion",
+    "sourceLastmod": "2024-09-01T07:58:48.826Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-3E54B3C152",
+    "fingerprint": "3e54b3c15297784227f8b9cd592bbb8acb83bbe5cdbce168b1b0d581a76a7580",
+    "scope": "product",
+    "contentId": "solaris-body-lotion",
+    "field": "shortDescription",
+    "claimText": "Способствует обновлению клеток и заживлению кожи.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief",
+      "cosmetic-efficacy"
+    ],
+    "sourceUrl": "https://drnona.com/product/solaris-body-lotion",
+    "sourceLastmod": "2024-09-01T07:58:48.826Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  }
+]

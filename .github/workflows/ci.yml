@@ -1,0 +1,117 @@
+name: Quality gates
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  quality-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Use repository npm version
+        run: npm install --global npm@10.9.8
+
+      - name: Verify runtime contract
+        shell: bash
+        run: |
+          test "$(node --version)" = "v$(cat .nvmrc)"
+          test "$(npm --version)" = "10.9.8"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate runtime and dependency contract
+        run: npm run toolchain:validate
+
+      - name: Validate repository hygiene
+        run: npm run repository:validate
+
+      - name: Validate frontend architecture
+        run: npm run architecture:validate
+
+      - name: Validate typography and contrast
+        run: npm run typography:validate
+
+      - name: Validate Moldova market data
+        run: npm run market:validate
+
+      - name: Validate published product content
+        run: npm run content:validate
+
+      - name: Validate claims registry
+        run: npm run claims:validate
+
+      - name: Validate security headers and CSP
+        run: npm run security:validate
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Run Vitest
+        run: npm run test
+
+      - name: Build production bundle
+        run: npm run build
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Enforce CSP in Chromium
+        run: npm run security:runtime
+
+      - name: Measure production runtime performance
+        run: npm run performance:runtime
+
+      - name: Run Playwright desktop and mobile
+        run: npm run test:e2e
+
+      - name: Revalidate repository hygiene
+        run: npm run repository:validate
+
+      - name: Confirm build and tests leave Git clean
+        shell: bash
+        run: |
+          test -z "$(git status --porcelain --untracked-files=all)"
+
+      - name: Upload production bundle and generated reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-build-${{ github.sha }}
+          path: |
+            dist
+            artifacts/reports
+            docs/SEO_REPORT.md
+            docs/PERFORMANCE_REPORT.md
+            docs/RUNTIME_PERFORMANCE_REPORT.md
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report
+            test-results
+          if-no-files-found: ignore
+          retention-days: 7

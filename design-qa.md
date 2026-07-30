@@ -1,6 +1,12 @@
 # Design QA — Dr. Nona QA package
 
-Date: 2026-07-27
+Report updated: 2026-07-30  
+Base commit: `e762ef3b5098c05c8c7ca4286d538a4fd1aa76eb`  
+Repository state: dirty working tree with uncommitted QA changes  
+Environment: local Vite preview at `http://127.0.0.1:4173`  
+Release authority: `docs/RELEASE_STATUS.md`
+
+This cumulative visual log is supporting evidence. It does not grant production release approval.
 
 ## Comparison target
 
@@ -63,7 +69,8 @@ content only.
   accents; Lord retains a distinct dark-navy state.
 - Image quality and asset fidelity: official transparent product PNGs remain
   unchanged. Two generated backgrounds are isolated under
-  `public/generated/qa-2026-07-27/` with PNG masters and optimized JPEG runtime
+  `docs/qa-package/2026-07-27/source-masters/` for source variants and
+  `public/brand/hero/` for optimized JPEG runtime
   copies. No visible product image was recreated with CSS or SVG.
 - Copy and content: official product copy is retained. No invented testimonials,
   ratings or medical claims were added.
@@ -234,7 +241,7 @@ final formula-product-images result: passed
 - Moved the selection control from the image stage into a dedicated bottom
   action row beside the product-details link.
 - Reworked the former icon-only control as a compact labelled pill:
-  `В подборку` / `Добавлено`, with matching RU/RO interface labels.
+  `В подборку` / `Добавлено`.
 - The card body and action row now establish their own foreground layers;
   product imagery remains clipped inside the separate stage and cannot cover
   the selection control.
@@ -386,8 +393,7 @@ final homepage-editorial-products result: passed
   - 151 routes checked at 390 × 844;
   - the lazy catalogue route was rechecked after module load and passed;
   - below-the-fold lazy images were excluded from false-positive failures.
-- RU/RO control check passed; the document language now changes between `ru`
-  and `ro` together with the interface locale.
+- Russian document-language and interface-copy alignment check passed.
 - Production build: passed.
 
 final information-density result: passed
@@ -419,3 +425,73 @@ final information-density result: passed
   collisions, unnamed controls or undersized primary controls.
 
 final release-language-cleanup result: passed
+
+## QA-001 contact submission integrity — 2026-07-29
+
+- Confirmed that no approved API route, serverless function, email provider,
+  CRM webhook or Moldova recipient exists in the project configuration.
+- Removed the active contact form and its local fake-success handler.
+- Replaced it with explicit direct actions to the current official corporate
+  email and telephone number.
+- Added visible disclosure that the website does not collect or simulate
+  sending personal data.
+- Full server-side submission remains intentionally unavailable until the
+  Moldova recipient, consent copy, retention policy, validation contract, spam
+  protection and transport credentials are approved.
+
+QA-001 false-submission risk: resolved
+QA-001 server-transport acceptance: pending approved external configuration
+
+## QA-002 locale integrity — 2026-07-29
+
+- Removed the incomplete Romanian dictionary and both desktop/mobile language
+  controls.
+- Removed LocaleContext state and Romanian date-format branches.
+- The site now sets and retains `html[lang="ru"]`, matching its visible copy,
+  navigation labels, accessibility labels and live regions.
+- Stale `drnona-locale` browser data is removed on application startup so an
+  earlier RO selection cannot restore mixed-language output.
+- Browser QA confirmed desktop and mobile navigation contain no locale switch,
+  `html[lang]` and `data-ui-locale` remain `ru`, and product-selection
+  accessibility announcements are Russian.
+- All 151 public routes were checked for language state and switch remnants;
+  the lazy catalogue route passed after its module completed loading.
+- Full Romanian support remains a separate content and architecture task:
+  centralized UI resources, localized product/content data, metadata,
+  alt-texts and an approved localized route strategy are required before the
+  switch can return.
+
+QA-002 mixed-language mode: resolved
+QA-002 full Romanian release: pending approved translations and locale model
+
+## QA-003 selection consultation handoff — 2026-07-29
+
+- Implemented one canonical consultation payload containing each selected
+  product's official name, SKU and absolute public product URL.
+- `/selection` passes only compact product slugs to `/contactus`; the contact
+  page resolves and displays every position before the user opens an email.
+- The same resolved payload powers the visible preview, email subject/body and
+  the independent “Скопировать список” fallback.
+- Browser acceptance checks:
+  - maximum local selection: 10 visible rows, 10 SKU and 10 URLs;
+  - route navigation: 10/10 positions received;
+  - refresh on the populated contact URL: 10/10 positions retained;
+  - deletion: 10 → 9 rows, and the deleted name disappeared from both route
+    and email payload;
+  - refresh on `/selection`: the remaining 9 positions persisted;
+  - empty selection: zero handoff blocks and zero selection email links;
+  - mobile 390 × 844: zero horizontal overflow and all three handoff controls
+    are 50 px high.
+- The 10-item `mailto` measures about 2962 characters, so copying the complete
+  plain-text payload is exposed as a first-class fallback for mail clients with
+  URL-length limits.
+- The contact screen states that the site does not store or simulate personal
+  data submission; email transfer occurs only after confirmation in the user's
+  mail application and links to the privacy policy.
+- The current target remains the verified corporate address
+  `shopinfo@drnona.com`. A Moldova-specific recipient and server-confirmed
+  delivery cannot be marked complete until those external details and the
+  transport contract are approved.
+
+QA-003 frontend context handoff: resolved
+QA-003 Moldova recipient and confirmed transport: pending approved external configuration

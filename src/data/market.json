@@ -1,0 +1,43 @@
+{
+  "market": "Moldova",
+  "contact": {
+    "kind": "official-branch-listing",
+    "country": "Молдова",
+    "city": "Кишинёв",
+    "address": "ул. Мирон Костин 7, каб. 511",
+    "phones": [
+      {
+        "label": "+373 69 281 916",
+        "href": "tel:+37369281916"
+      },
+      {
+        "label": "+373 69 049 793",
+        "href": "tel:+37369049793"
+      }
+    ],
+    "sourceUrl": "https://drnona.com/en/warehouses",
+    "sourceCheckedAt": "2026-07-30",
+    "legalEntity": null,
+    "email": null,
+    "telegram": null
+  },
+  "internationalSupport": {
+    "email": "shopinfo@drnona.com",
+    "sourceUrl": "https://drnona.com/en/contactus"
+  },
+  "moldovaCertificates": [],
+  "certificatePolicy": {
+    "requiredFields": [
+      "title",
+      "issuer",
+      "country",
+      "products",
+      "validFrom",
+      "validUntil",
+      "documentUrl",
+      "sourceUrl"
+    ],
+    "internationalArchiveUrl": "https://drnona.com/certificates",
+    "foreignDocumentsVisible": false
+  }
+}

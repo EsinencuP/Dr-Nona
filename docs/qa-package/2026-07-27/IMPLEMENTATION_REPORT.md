@@ -2,7 +2,10 @@
 
 Date: 2026-07-27  
 Source package: `C:\Users\User.DESKTOP\Downloads\DR_NONA_QA_PACKAGE.zip`  
-Status: implemented and verified
+Commit SHA: not recorded  
+Environment: historical local preview  
+Status: archived implementation evidence; not a release report  
+Superseded by: `docs/QA_REPORT.md`
 
 ## QA item resolution
 
@@ -23,28 +26,38 @@ Status: implemented and verified
 | QA-013 | Resolved | The Halo diagram buttons expose `aria-pressed` and update the live explanatory panel. All three states were exercised in the browser. |
 | QA-014 | Resolved | Reduced global and product-specific H1 scales. The long Rosemary product name was checked at 390 px without clipping or horizontal overflow. |
 
-## Generated image assets
+## Image asset archive
 
-All generated assets are isolated in:
+Source and comparison variants are isolated in the dated evidence package:
 
-`public/generated/qa-2026-07-27/`
+`docs/qa-package/2026-07-27/source-masters/`
 
 - `hero-integrated-desktop-v3.png` — final unified desktop master; product scale reduced to match the approved hero reference.
-- `hero-integrated-desktop-v3.jpg` — final optimized desktop runtime version.
 - `hero-integrated-desktop-v2.png` — earlier large-product desktop variant retained for comparison.
 - `hero-integrated-desktop-v2.jpg` — optimized earlier variant.
 - `hero-integrated-mobile-v2.png` — 983×1600 unified mobile master with a dedicated portrait composition.
-- `hero-integrated-mobile-v2.jpg` — optimized mobile runtime version.
 - `hero-dead-sea-stage.png` — 1716×916 master.
 - `hero-dead-sea-stage.jpg` — optimized runtime version.
 - `product-mineral-stage.png` — 1254×1254 master.
 - `product-mineral-stage.jpg` — optimized runtime version.
+
+The two approved optimized runtime files were promoted out of the QA namespace:
+
+- `public/brand/hero/halo-complex-desktop.jpg`
+- `public/brand/hero/halo-complex-mobile.jpg`
 
 The homepage now uses the integrated desktop/mobile hero assets directly. The
 separate product `<img>` layer was removed so the jar, contact shadow, reflected
 light and stone surface remain locked into one composition at every viewport.
 Catalog and product-detail packshots continue to use the official transparent
 PNG files.
+
+Previously unclassified root captures now live under
+`legacy-root-captures/`; the two unreferenced logo source variants live under
+`PROJECT_REFERENCES/RAW/`. `ARTIFACT_MANIFEST.json` records every image path,
+role, byte size, SHA-256 and this report association. The original commit was
+not recorded, so this package remains historical evidence rather than release
+evidence.
 
 ## Visual evidence
 

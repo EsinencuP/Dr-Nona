@@ -11,6 +11,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import { reportClientError } from "./app/monitoring";
 
 type LocationState = {
   pathname: string;
@@ -44,6 +45,21 @@ function notifyNavigation() {
   window.dispatchEvent(new Event("drnona:navigate"));
 }
 
+export function safeDecodeRouteSegment(value: string) {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return null;
+  }
+}
+
+export function isPathnameEncodingValid(pathname: string) {
+  return pathname
+    .split("/")
+    .filter(Boolean)
+    .every((segment) => safeDecodeRouteSegment(segment) !== null);
+}
+
 export function Router({ children }: { children: ReactNode }) {
   const [location, setLocation] = useState(readLocation);
   useEffect(() => {
@@ -55,6 +71,13 @@ export function Router({ children }: { children: ReactNode }) {
       window.removeEventListener("drnona:navigate", update);
     };
   }, []);
+  useEffect(() => {
+    if (isPathnameEncodingValid(location.pathname)) return;
+    reportClientError(
+      new URIError("Malformed percent-encoding in route pathname."),
+      { kind: "malformed-route", source: "router" }
+    );
+  }, [location.pathname]);
   return <LocationContext.Provider value={location}>{children}</LocationContext.Provider>;
 }
 
@@ -137,6 +160,16 @@ export function NavLink({
   );
 }
 
+export function Redirect({ to }: { to: string }) {
+  useEffect(() => {
+    const current = `${window.location.pathname}${window.location.search}`;
+    if (current === to) return;
+    window.history.replaceState({}, "", to);
+    notifyNavigation();
+  }, [to]);
+  return null;
+}
+
 function matchRoute(pattern: string, pathname: string) {
   if (pattern === "*") return { matched: true, params: {} };
   const patternSegments = pattern.split("/").filter(Boolean);
@@ -146,16 +179,28 @@ function matchRoute(pattern: string, pathname: string) {
   for (let index = 0; index < patternSegments.length; index += 1) {
     const expected = patternSegments[index];
     const actual = pathSegments[index];
-    if (expected.startsWith(":")) params[expected.slice(1)] = decodeURIComponent(actual);
-    else if (expected !== actual) return { matched: false, params: {} };
+    if (expected.startsWith(":")) {
+      const decoded = safeDecodeRouteSegment(actual);
+      if (decoded === null) return { matched: false, params: {} };
+      params[expected.slice(1)] = decoded;
+    } else if (expected !== actual) return { matched: false, params: {} };
   }
   return { matched: true, params };
 }
 
 export function Routes({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
+  const routeChildren = Children.toArray(children);
+  const fallbackElement = routeChildren.find(
+    (child) => isValidElement<RouteProps>(child) && child.props.path === "*"
+  );
+  if (!isPathnameEncodingValid(pathname)) {
+    return isValidElement<RouteProps>(fallbackElement)
+      ? fallbackElement.props.element
+      : null;
+  }
   let fallback: RouteProps | null = null;
-  for (const child of Children.toArray(children)) {
+  for (const child of routeChildren) {
     if (!isValidElement<RouteProps>(child)) continue;
     if (child.props.path === "*") {
       fallback = child.props;
@@ -170,5 +215,6 @@ export function Routes({ children }: { children: ReactNode }) {
 }
 
 export function Route(_props: RouteProps) {
+  void _props;
   return null;
 }

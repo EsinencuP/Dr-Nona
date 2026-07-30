@@ -1,1 +1,26 @@
-node_modules
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+artifacts/
+
+.env
+.env.*
+!.env.example
+
+*.log
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Reproducible build-time data and reports. CI publishes them as artifacts.
+src/data/runtime-content.json
+src/data/seo-manifest.json
+docs/BUILD_REPORT.md
+docs/PRODUCT_CONTENT_REPORT.md
+docs/SEO_REPORT.md
+docs/PERFORMANCE_REPORT.md
+docs/RUNTIME_PERFORMANCE_REPORT.md
