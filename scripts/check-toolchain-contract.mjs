@@ -10,11 +10,11 @@ const failures = [];
 if (packageJson.packageManager !== "npm@10.9.8") {
   failures.push("packageManager must be npm@10.9.8.");
 }
-if (packageJson.engines?.node !== ">=22.23.1 <23") {
-  failures.push("Node engine must match the supported Node 22 range.");
+if (packageJson.engines?.node !== "22.x") {
+  failures.push("Node engine must use the Vercel-compatible Node 22.x range.");
 }
-if (packageJson.engines?.npm !== ">=10.9.8 <11") {
-  failures.push("npm engine must match the supported npm 10 range.");
+if (packageJson.engines?.npm !== "10.x") {
+  failures.push("npm engine must use the Vercel-compatible npm 10.x range.");
 }
 if (nodeVersion !== "22.23.1") {
   failures.push(".nvmrc must pin Node 22.23.1.");
@@ -55,6 +55,5 @@ if (failures.length) {
 }
 
 console.log(
-  `Toolchain contract: Node ${nodeVersion}, npm 10.9.8, Cheerio development-only, portable README commands.`
+  `Toolchain contract: deployment Node 22.x/npm 10.x; local pin Node ${nodeVersion}/npm 10.9.8; Cheerio development-only; portable README commands.`
 );
-

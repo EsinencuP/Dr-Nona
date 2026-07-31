@@ -125,6 +125,7 @@ async function responsiveHealth(
             ".accordion-item > button",
             ".contact-direct__actions a",
             ".catalog-status",
+            ".about-nav a",
           ].join(",")
         ),
       ].filter(visible);
@@ -156,6 +157,7 @@ async function responsiveHealth(
                 ".accordion-item > button",
                 ".contact-direct__actions a",
                 ".selection-list button",
+                ".about-nav a",
               ].join(",")
             ),
           ].filter(visible)
@@ -394,6 +396,33 @@ async function runViewportContract(
   await expect(page.locator("form.application-form")).toHaveCount(1);
   await expect(page.locator(".contact-direct__actions a")).toHaveCount(3);
   await expectHealthyLayout(page, `${viewport.name} contact`, touch);
+
+  await preparePage(page, "/about/company");
+  await expect(
+    page.getByRole("navigation", { name: "Разделы о компании" })
+  ).toBeVisible();
+  const aboutNavigationFindings = await page
+    .locator(".page-intro .about-nav a")
+    .evaluateAll((links) =>
+      links.flatMap((link) => {
+        const label = link.querySelector("span");
+        const icon = link.querySelector("svg");
+        if (!label || !icon) return ["missing label or icon"];
+        const labelBounds = label.getBoundingClientRect();
+        const iconBounds = icon.getBoundingClientRect();
+        const findings: string[] = [];
+        if (labelBounds.width < 60) findings.push("label column is too narrow");
+        if (labelBounds.right > iconBounds.left - 4) {
+          findings.push("label overlaps the arrow");
+        }
+        return findings;
+      })
+    );
+  expect(
+    aboutNavigationFindings,
+    `${viewport.name}: about navigation geometry`
+  ).toEqual([]);
+  await expectHealthyLayout(page, `${viewport.name} about-company`, touch);
 
   await preparePage(page, "/bad-request");
   await expect(

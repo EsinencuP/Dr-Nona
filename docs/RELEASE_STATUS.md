@@ -2,7 +2,7 @@
 
 No. Technical quality gates pass locally, but production approval remains blocked by the items below.
 
-Last verified: 2026-07-31 against base commit `fede3938ce5173206ee4a6983ece7fb2c29f2318` and the current cleanup worktree.
+Last verified: 2026-07-31 against base commit `a7303a12459ebd0dc5d4d5c69a1325250c044007` and the current cleanup worktree.
 
 This file is generated from `docs/release-status.json`. Run `npm run release:status:generate` after changing the machine-readable status.
 
@@ -13,7 +13,7 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 | Verdict | `release-blocked` |
 | Label | Technical QA passes; production approval is blocked |
 | Branch | `main` |
-| Base commit | `fede3938ce5173206ee4a6983ece7fb2c29f2318` |
+| Base commit | `a7303a12459ebd0dc5d4d5c69a1325250c044007` |
 | Environment | Windows local QA with Node 22.23.1, npm 10.9.8 and Chromium desktop/mobile |
 
 ## Current dataset

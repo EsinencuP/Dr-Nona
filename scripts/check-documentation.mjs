@@ -20,6 +20,19 @@ const currentCommit = execFileSync("git", ["rev-parse", "HEAD"], {
   encoding: "utf8",
 }).trim();
 
+function commitIsAncestor(ancestor, descendant) {
+  try {
+    execFileSync(
+      "git",
+      ["merge-base", "--is-ancestor", ancestor, descendant],
+      { stdio: "ignore" }
+    );
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 const productCounts = products.reduce(
   (counts, product) => {
     counts[product.publicationStatus] += 1;
@@ -82,8 +95,10 @@ for (const blocker of release.blockers ?? []) {
 if (release.status === "release-ready" && release.blockers.length) {
   errors.push("release-ready cannot contain open blockers");
 }
-if (release.commit !== currentCommit) {
-  errors.push(`release status commit ${release.commit} does not match HEAD ${currentCommit}`);
+if (!commitIsAncestor(release.commit, currentCommit)) {
+  errors.push(
+    `release status base commit ${release.commit} is not an ancestor of HEAD ${currentCommit}`
+  );
 }
 if (JSON.stringify(release.counts) !== JSON.stringify(actualCounts)) {
   errors.push("release-status.json counts do not match source data");

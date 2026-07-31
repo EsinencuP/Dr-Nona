@@ -8,6 +8,16 @@ Last verified: 2026-07-31 against `.github/workflows/ci.yml` and `package.json`.
 
 - Node.js 22.23.1 from `.nvmrc`
 - npm 10.9.8 from `packageManager`
+
+The exact versions above make CI reproducible. `package.json` deliberately uses
+the compatible deployment ranges `node: 22.x` and `npm: 10.x`, because managed
+Vercel builders can run a different patch release within the same supported
+major line.
+
+`docs/release-status.json` records the verified base commit. Documentation
+validation requires that base to be an ancestor of the build commit; requiring
+equality would make a committed status file invalidate the commit that contains
+it.
 - Ubuntu GitHub runner
 - Chromium installed by Playwright
 
