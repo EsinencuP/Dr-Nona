@@ -33,6 +33,22 @@ function commitIsAncestor(ancestor, descendant) {
   }
 }
 
+function commitIsAvailable(commit) {
+  try {
+    execFileSync("git", ["cat-file", "-e", `${commit}^{commit}`], {
+      stdio: "ignore",
+    });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+const repositoryIsShallow =
+  execFileSync("git", ["rev-parse", "--is-shallow-repository"], {
+    encoding: "utf8",
+  }).trim() === "true";
+
 const productCounts = products.reduce(
   (counts, product) => {
     counts[product.publicationStatus] += 1;
@@ -95,9 +111,18 @@ for (const blocker of release.blockers ?? []) {
 if (release.status === "release-ready" && release.blockers.length) {
   errors.push("release-ready cannot contain open blockers");
 }
-if (!commitIsAncestor(release.commit, currentCommit)) {
+if (
+  commitIsAvailable(release.commit) &&
+  !commitIsAncestor(release.commit, currentCommit)
+) {
   errors.push(
     `release status base commit ${release.commit} is not an ancestor of HEAD ${currentCommit}`
+  );
+} else if (!commitIsAvailable(release.commit) && !repositoryIsShallow) {
+  errors.push(`release status base commit ${release.commit} is unavailable`);
+} else if (!commitIsAvailable(release.commit)) {
+  console.warn(
+    `Documentation: base commit ${release.commit} is outside the shallow checkout; ancestry verification deferred.`
   );
 }
 if (JSON.stringify(release.counts) !== JSON.stringify(actualCounts)) {

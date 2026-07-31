@@ -17,7 +17,9 @@ major line.
 `docs/release-status.json` records the verified base commit. Documentation
 validation requires that base to be an ancestor of the build commit; requiring
 equality would make a committed status file invalidate the commit that contains
-it.
+it. GitHub Actions checks out the complete history so this relationship is
+verified. A managed shallow deployment clone may defer ancestry validation when
+the recorded commit object is not available locally.
 - Ubuntu GitHub runner
 - Chromium installed by Playwright
 
