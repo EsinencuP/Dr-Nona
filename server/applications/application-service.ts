@@ -1,13 +1,13 @@
 import { randomUUID } from "node:crypto";
-import type { ApplicationInput } from "../../shared/applications/application-schema";
-import { normalizePhone } from "../../shared/applications/application-schema";
-import { formatTelegramApplication } from "./format-application";
+import type { ApplicationInput } from "../../shared/applications/application-schema.js";
+import { normalizePhone } from "../../shared/applications/application-schema.js";
+import { formatTelegramApplication } from "./format-application.js";
 import type {
   ApplicationProduct,
   ApplicationRecord,
   ApplicationServiceResult,
   ProviderResult,
-} from "./application-types";
+} from "./application-types.js";
 
 export type ApplicationServiceDependencies = {
   productsBySlug: ReadonlyMap<string, ApplicationProduct>;

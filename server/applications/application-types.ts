@@ -1,4 +1,4 @@
-import type { ApplicationInput } from "../../shared/applications/application-schema";
+import type { ApplicationInput } from "../../shared/applications/application-schema.js";
 
 export type ApplicationProduct = {
   slug: string;

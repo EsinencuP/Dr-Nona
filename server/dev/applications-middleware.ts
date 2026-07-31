@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
-import applicationsHandler from "../../api/applications";
+import applicationsHandler from "../../api/applications.js";
 
 function requestBody(request: IncomingMessage) {
   return new Promise<Buffer>((resolve, reject) => {

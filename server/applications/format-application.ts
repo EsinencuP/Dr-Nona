@@ -1,4 +1,4 @@
-import type { ApplicationRecord } from "./application-types";
+import type { ApplicationRecord } from "./application-types.js";
 
 function formatDateTimeInChisinau(iso: string) {
   const parts = new Intl.DateTimeFormat("ru-RU", {

@@ -1,4 +1,4 @@
-import type { ProviderResult } from "../application-types";
+import type { ProviderResult } from "../application-types.js";
 
 type TelegramResponse = {
   ok?: boolean;
