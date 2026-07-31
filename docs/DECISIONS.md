@@ -1,78 +1,41 @@
-# Dr. Nona Website — Decision Log
+# Which product decisions are active?
 
-Last updated: 2026-07-30
+This register keeps active decisions that constrain the current code. Superseded prototypes remain only as compact references.
 
-| ID | Status | Решение | Следствие |
-|---|---|---|---|
-| D-001 | Approved | Проект является электронным каталогом, не магазином. | Cart, checkout, payment и purchase flow запрещены. |
-| D-002 | Approved | Главная цель — бренд, философия, продукция, выбор, подборка, консультант. | Конверсия строится вокруг осмысленного контакта. |
-| D-003 | Approved | Официальный сайт — главный фактический референс. | Контент сверяется с `drnona.com`, но проходит редакционную проверку. |
-| D-004 | Approved | При отсутствии данных используется `TODO`. | AI не генерирует тексты, структуру или решения. |
-| D-005 | Superseded | Изначально были утверждены только Главная, Каталог, Карточка товара, О компании, Blog. | Заменено решением D-018 о page parity. |
-| D-006 | Approved | Главная имеет художественный hero без продающего CTA. | Первый экран эмоциональный, с минимумом текста. |
-| D-007 | Approved | Каталог имеет карточки, поиск, фильтры, сортировку и адаптивность. | Длинный список официального магазина не копируется. |
-| D-008 | Approved | Основное действие с товаром — добавить в подборку. | Терминология и UI не должны напоминать корзину. |
-| D-009 | Approved | Карточка товара содержит описание, применение, отзывы и похожие товары. | Источник отзывов остаётся блокирующим TODO. |
-| D-010 | Approved | «О компании» использует journey, timeline и SVG scroll line. | Должны поддерживаться scroll progress и reduced motion. |
-| D-011 | Approved | Blog использует Editorial Grid Magazine. | Состав и источники контента остаются TODO. |
-| D-012 | Approved | Основная тема: белый, голубой, светло-синий, золото. | Направление конкретизировано решениями D-020, D-021, D-023 и D-027. |
-| D-013 | Approved | Lord получает отдельную тёмную, строгую, мужскую тему с золотом. | Темизация не должна разрушать общую систему. |
-| D-014 | Approved | Используются официальные реальные изображения продуктов и ингредиентов. | AI-модели, дешёвые и медицинские стоки запрещены. |
-| D-015 | Approved | Motion разрешён только со смыслом. | GSAP/SVG/reveal/hover/parallax/smooth scroll подчиняются accessibility и performance. |
-| D-016 | Approved | Accessibility и performance — обязательные качества. | Keyboard, reduced motion, contrast, semantics и низкий CLS входят в acceptance criteria. |
-| D-017 | Approved | Целевой рынок сайта — Молдова. | Контент, контакты, юридические материалы и локализация адаптируются для Молдовы. |
-| D-018 | Approved | Необходимо учесть все содержательные публичные страницы официальной платформы и сохранить их смысл. | Ведётся `PAGE_INVENTORY.md`; визуальный дизайн полностью перерабатывается. |
-| D-019 | Approved | Page parity не возвращает commerce/account flow. | Login, register, profile, cart, checkout и payment success остаются исключёнными согласно D-001. |
-| D-020 | Approved | Основное цветовое направление — светлая холодная Mineral Light система с морским голубым. | Голубой является единственным интерактивным акцентом основной темы. |
-| D-021 | Approved | Золото и зелёный являются поддерживающими фирменными цветами. | Золото работает как брендовая подпись, зелёный — как botanical context; они не конкурируют с CTA. |
-| D-022 | Approved | Lord использует полную page-level тему, основанную на официальной navy/gold упаковке. | Внутри общей каталожной сетки тема не переключается; после входа в Lord меняется весь интерфейс страницы. |
-| D-023 | Approved | Рабочие hex-токены версии 0.3 из `COLOR_SYSTEM.md` приняты как текущая база. | Значения применяются последовательно и могут уточняться только после визуальных проб, а не локально по компонентам. |
-| D-024 | Approved | Основная аудитория — люди зрелого и старшего возраста. | Читаемость, предсказуемость, контраст и удобные зоны нажатия важнее декоративной сложности; точный возраст остаётся TODO. |
-| D-025 | Approved | Целевые ощущения — премиальность, доверие и единство с морской тематикой. | Арт-дирекшн оценивается по этим трём критериям, а не по шаблонным luxury-паттернам. |
-| D-026 | Superseded | Смысловой приоритет: GalaComplex™ → продукция → история → консультанты/сообщество → Мёртвое море/природа. | Порядок сохранён, написание комплекса заменено D-041 по официальному источнику. |
-| D-027 | Approved | В основной теме визуально доминируют белый и голубой; золото и зелёный занимают очень малую долю. | Золото выделяет детали; зелёный редок, допустим в header/footer и почти не используется в каталоге. |
-| D-028 | Approved | Lord должен заметно обособляться полной сменой page-level темы. | Banner-card/collection-card рассматривается как вход; отдельная route и состав кластера остаются открытыми. |
-| D-029 | Approved | Типографика должна быть премиальной, современной, спокойной и читаемой. | Конкретные шрифты выбираются только после проверки русского, румынского и лицензий. |
-| D-030 | Approved | Фото-направление включает Мёртвое море, реальные ингредиенты и минералы. | AI-модели и дешёвые стоки запрещены; права на материалы проверяются. |
-| D-031 | Approved | Большие пустые зоны не используются как универсальный premium-приём; каталог имеет функциональную плотность. | Главная и Blog могут иметь больше воздуха, но не пустые бессодержательные экраны. |
-| D-032 | Approved | Формы компонентов мягкие и округлые, без доминирующих резких углов. | Радиусы и вложенные поверхности проектируются как единая система. |
-| D-033 | Approved | Motion должен быть отзывчивым, сдержанным и производительным. | Приоритет у hover/focus/active, outlines, мягких теней и затемнений; тяжёлые эффекты и декоративные циклы запрещены. |
-| D-034 | Approved | Языки первой версии — русский и румынский. | Основной язык, URL-стратегия и workflow перевода остаются TODO. |
-| D-035 | Approved | Главная навигация: Каталог, О компании, Halo Complex™, единый пункт Blog / News. | Blog и News объединяются на уровне входа, но остаются отдельными типами контента. |
-| D-036 | Approved | Предварительные каналы консультанта — Telegram, телефон и корпоративная почта. | Основной канал, consent и формат передачи подборки будут решены позже. |
-| D-037 | Approved | `drnona.com` является полным источником всех публичных страниц, информационных окон и копирайтинга. | Новый сайт меняет дизайн и UX, но не создаёт альтернативные тексты и не пропускает официальные шаблоны. |
-| D-038 | Approved | Поля карточки товара берутся с официальной product page. | Используются название, назначение, категория, SKU, описание, ингредиенты, применение и related products; commerce-поля по-прежнему исключены. |
-| D-039 | Superseded in part | Каталог фильтруется по типу товара и сортируется по алфавиту, популярности и новизне. | Часть о трактовке sitemap lastmod как новизны заменена D-056; фильтр, алфавит и popularity contract сохраняются. |
-| D-040 | Approved | `docs/ref` используется как набор идей, а не как источник контента или палитры. | Разрешено заимствовать композиционные качества, мягкие маски, продуктовую постановку и типографический ритм; буквальное копирование запрещено. |
-| D-041 | Approved | В интерфейсе используется официальное текущее написание `Halo Complex™`. | Это написание подтверждено актуальными страницами `drnona.com` и заменяет рабочее `GalaComplex™`. |
-| D-042 | Approved | Frontend prototype реализуется на React 19 + TypeScript + Vite как route-separated каталог без внешнего router dependency. | Сохраняются отдельные URL, локальная подборка, официальный content sync и нулевая production vulnerability audit. |
-| D-043 | Superseded | До утверждения полного румынского копирайта primary document language остаётся `ru`, а переключатель RO меняет только подтверждённые элементы интерфейса. | Заменено решением D-048: частичный RO-режим полностью удалён. |
-| D-044 | Superseded | Контактная форма реализована как локальный frontend-интерфейс без внешней отправки. | Заменено решением D-047: неотправляющая форма удалена из публичного интерфейса. |
-| D-045 | Approved | Lord является полной route-level темой, включая body, header, mobile navigation и browser theme-color. | Светлый header внутри Lord больше не допускается. |
-| D-046 | Approved | Российский раздел сертификатов переносит 28 официально наблюдаемых записей; отсутствующие в источнике изображения заменяются нейтральным документным placeholder. | Israel/Ukraine остаются source-link-only до получения проверяемого набора данных. |
-| D-047 | Approved | До подключения утверждённого server-side transport публичная контактная форма не отображается. | Маршрут `/contactus` показывает честные прямые CTA на официальный email и телефон; форма вернётся только вместе с подтверждённым Moldova-получателем, consent, validation, spam protection и обработкой ошибок. Заменяет D-044. |
-| D-048 | Approved | До утверждения полного румынского UI и контента сайт работает только на русском языке, без RO-переключателя. | `html[lang]` и accessibility labels остаются русскими; старое сохранённое значение RO удаляется. Полноценный RO вернётся только как централизованная локализация всех UI, content data, metadata и alt-текстов. Заменяет D-043. |
-| D-049 | Approved | Подборка передаётся в консультационный маршрут единым контекстом: product name, SKU, public URL; тот же payload используется в подготовленном email и доступен для полного копирования. | `/selection` не создаёт обращение при пустом списке; query сохраняет контекст после navigation/refresh; удаление позиции немедленно обновляет route и email payload. До утверждения Moldova-получателя письмо адресуется только официальному `shopinfo@drnona.com`, а server-side отправка остаётся отключённой согласно D-047. |
-| D-050 | Approved | `docs/RELEASE_STATUS.md` является единственным актуальным human-readable release status, а `docs/release-status.json` является его machine-readable blocker source. | Build PASS означает только успешную компиляцию и bundling. `artifacts/reports/BUILD_REPORT.md` автоматически фиксирует commit, source snapshot, environment и dataset counts; CI хранит его как artifact конкретного commit. Production release запрещён, пока `npm.cmd run release:check` возвращает открытые P0/P1. |
-| D-051 | Approved | Обязательный локальный quality gate состоит из `typecheck`, ESLint, Vitest/React Testing Library, production build и Playwright в desktop/mobile Chromium с axe и keyboard checks. | GitHub Actions запускает тот же набор для pull request и `main`. Фактический запрет merge требует внешнего ruleset, который делает check `quality-gates` обязательным. |
-| D-052 | Approved | Medical, therapeutic, health, cosmetic-efficacy и anti-aging формулировки не публикуются без отдельного документированного approval для Молдовы. | Каждое предложение получает статус в `claims-registry.json`; `pending`/`rejected` скрываются, `approved` требует reviewer, дату и document reference. Supplement notice остаётся interim, а P0-LEGAL — открытым до юридического подтверждения. |
-| D-053 | Approved | В публичный интерфейс попадают только записи `publicationStatus: published`, прошедшие категорийный content-completeness gate и имеющие `editorialStatus: ready`. | Пустое обязательное поле оставляет товар черновиком. `null` разрешён только как явно допустимое «неприменимо» и скрывает секцию. Импорт создаёт черновик, build блокирует неполную публикацию и формирует ignored `artifacts/reports/PRODUCT_CONTENT_REPORT.md`. |
-| D-054 | Approved | Основной публичный контакт для Молдовы — адрес официального филиала в Кишинёве и телефоны +373 из списка филиалов Dr. Nona. | Израильский адрес и телефон удалены из Contact/Footer. Международный email подписан отдельно; локальные legal entity, email и Telegram не выдумываются и остаются business approval. |
-| D-055 | Approved | Сертификаты России, Израиля и Украины не отображаются как доказательство для рынка Молдовы. | Moldova certificate публикуется только с issuer, country, products, validity, document URL и source URL. При отсутствии такого набора страница показывает честный market-specific статус, а международный архив отделён предупреждением. |
-| D-056 | Approved | `releasedAt` является единственной утверждённой датой запуска/добавления товара для сортировки «Сначала новые», а `sourceLastmod` отражает только свежесть контента источника. | Пока утверждённых `releasedAt` нет, каталог показывает «Недавно обновлённые» и сортирует по `sourceLastmod`; неизвестные даты идут после известных со стабильным fallback по `officialOrder`, а старый query `sort=newest` безопасно нормализуется в `updated`. Частично заменяет D-039. |
-| D-057 | Approved | Каждый опубликованный индексируемый route получает единый metadata contract и отдельный prerendered HTML: title, description, canonical, robots, Open Graph, Twitter Cards, видимый pre-JS контент и JSON-LD. | Product schema публикует только name/image/SKU/brand без выдуманных offers/reviews/rating; Article использует подтверждённый source URL и sitemap lastmod только как dateModified; BreadcrumbList отражает пользовательскую иерархию. `/selection`, unknown и draft product routes имеют noindex. Production build требует утверждённый `SITE_URL`; live-validator остаётся P1-SEO-ORIGIN. |
-| D-058 | Approved | Основной русский URL остаётся без locale-префикса; будущая полная румынская версия получает отдельные `/ro/...` URL. До готовности полного RO-контента индексируемые страницы публикуют только self-referential `ru-MD` и `x-default`, без ложного `ro-MD`. | Legacy `/main` удалён из route inventory и постоянно перенаправляется HTTP 308 на `/`. Sitemap включает только уникальные canonical indexable URLs. После готовности RO каждая пара RU/RO обязана взаимно ссылаться через `hreflang`; частичный перевод не публикуется. |
-| D-059 | Approved | Большие source datasets не входят в initial application graph: products и official pages загружаются динамически только потребляющими маршрутами; каталог реализован отдельным `pages/CatalogPage.tsx`. | Главная использует сгенерированную проекцию трёх editorial cards и не загружает 137 official records. Прямой `/contactus` не загружает product/official data. Полный claims registry остаётся build/legal источником, а браузер получает компактный publishability index. CI ограничивает initial payload 140 KiB gzip / 115 KiB Brotli и проверяет route requests в desktop/mobile Chromium. |
-| D-060 | Approved | Frontend разделён по реальным границам `app`, `components`, `features`, `pages`, `locales` и `styles`; `App.tsx` остаётся только composition root. | Все route components подключаются настоящими `lazy(() => import(...))`; catalog filtering и consultation handoff являются независимо тестируемыми feature-модулями; русский ресурс отделён от locale provider; CSS хранится в тематических файлах и подключается в гарантированном cascade-порядке с responsive-слоем последним. CI блокирует возврат монолита через `architecture:validate`. |
-| D-061 | Approved | Любое декодирование route segment выполняется безопасно; malformed pathname становится controlled mismatch, а прямой malformed HTTP URL перенаправляется server guard на noindex `/bad-request`. | `%`, неполные UTF-8 escape sequences и другие повреждённые URL не могут обрушить render. `ApplicationErrorBoundary` расположен выше Router. Router/render ошибки попадают в ограниченный session diagnostic log, событие `drnona:error` и опциональный `window.__DR_NONA_MONITORING__.captureException`; отказ monitoring transport не влияет на UI. |
+Last verified: 2026-07-31 against base commit `2411f54ce49d63fed776b09fcba1b61381c71d10` and the current worktree.
 
-## Формат новых решений
+## Active decisions
 
-Каждое новое решение добавляется отдельной строкой:
+| ID | Date | Status | Decision | Reason | Consequence | Source |
+|---|---|---|---|---|---|---|
+| `D-001` | 2026-07-26 | Approved | The product is an informational catalogue, not a store. | The consultation journey is the conversion goal. | Cart, checkout, payment, prices and authentication stay out of scope. | Direct user decision |
+| `D-003` | 2026-07-26 | Approved | `drnona.com` is the factual source for public content. | The Moldova site adapts information, not facts. | Imported content requires editorial and legal gates before publication. | Direct user decision |
+| `D-031` | 2026-07-26 | Approved | Pages use functional density instead of large decorative empty zones. | The mature audience needs more useful information per viewport. | Layout changes must preserve readability while reducing unnecessary scrolling. | Direct user decision |
+| `D-041` | 2026-07-26 | Approved | The interface uses the official name `Halo Complex™`. | The official source superseded the earlier working name. | Navigation, metadata and copy use one spelling. | Official source review |
+| `D-048` | 2026-07-29 | Approved | The current interface is Russian only until complete Romanian content is approved. | Partial localization produced mixed-language and accessibility defects. | No RO switch appears; future Romanian pages use `/ro/...`. | QA-002 and user approval |
+| `D-049` | 2026-07-29 | Approved | A selection carries product name, SKU and public URL into consultation. | The consultant must receive the user's product context. | Empty selections cannot create an order request; refresh preserves selection. | QA-003 |
+| `D-050` | 2026-07-29 | Approved | `release-status.json` is the machine-readable release source and `RELEASE_STATUS.md` is generated from it. | Historical reports produced conflicting verdicts. | A passing build cannot override open P0/P1 blockers. | QA-004 |
+| `D-052` | 2026-07-29 | Approved | Regulated claims require explicit Moldova approval. | Imported health language may create legal risk. | Pending and rejected claim fields stay out of public output. | QA-006 |
+| `D-053` | 2026-07-29 | Approved | Only complete records with `published` and `ready` statuses enter public product surfaces. | Empty product sections are not acceptable publication states. | Three incomplete records remain drafts. | QA-008 |
+| `D-054` | 2026-07-29 | Approved | Moldova branch address and +373 phones are the primary direct contacts. | Israeli contact data did not match the target market. | Unapproved Moldova email, entity and Telegram identity are not invented. | QA-009 |
+| `D-055` | 2026-07-29 | Approved | Foreign certificates are not presented as Moldova evidence. | Country-specific documents can mislead the target audience. | Moldova documents need issuer, product scope, validity and source metadata. | QA-009 |
+| `D-056` | 2026-07-29 | Approved | `sourceLastmod` powers “Недавно обновлённые”; only approved `releasedAt` may power “Сначала новые”. | Sitemap changes do not prove product launch dates. | Unknown release dates never create false novelties. | QA-010 |
+| `D-057` | 2026-07-29 | Approved | Indexable routes receive canonical metadata, supported JSON-LD and prerendered HTML. | A client-only shell does not provide sufficient route context. | No fabricated offers, reviews or ratings enter structured data. | QA-011 |
+| `D-058` | 2026-07-29 | Approved | Russian routes have no locale prefix; future Romanian routes use `/ro/...`. | The strategy avoids duplicate and mixed-language URLs. | `/main` redirects permanently to `/`; current hreflang is Russian/self only. | QA-012 |
+| `D-059` | 2026-07-29 | Approved | Route modules and large datasets load only where needed. | Static imports increased initial route cost. | Catalogue and official content remain outside unrelated initial graphs. | QA-013 |
+| `D-060` | 2026-07-29 | Approved | Frontend modules follow app, component, feature, page, locale and style boundaries. | The former monolith blocked isolation and route splitting. | Architecture validation prevents monolith regression. | QA-014 |
+| `D-061` | 2026-07-29 | Approved | Malformed routes fail safely behind an application error boundary. | Invalid percent encoding could crash rendering. | Damaged URLs show controlled bad-request or not-found output. | QA-015 |
+| `D-062` | 2026-07-31 | Approved | Orders and consultations use one server-validated Telegram-only endpoint. | The owner selected Telegram and removed Resend and Turnstile. | Success follows Telegram delivery; production WAF, consent and retention remain blocked. | Direct user decision |
+| `D-063` | 2026-07-28 | Approved | The catalogue and product pages use one visual system for all lines. | A separate Lord identity was removed from product surfaces. | Lord may appear as a named collection or dark home banner, not as a route-level theme. | Direct user decision |
+| `D-064` | 2026-07-31 | Approved | Runtime product media lives only under `public/products/` and must have an exact source reference. | Raw exports and duplicate asset aliases created repository bloat. | Source-unreferenced assets and export packages are not retained. | Repository cleanup brief |
 
-- уникальный ID;
-- дата;
-- статус `Proposed`, `Approved`, `Rejected` или `Superseded`;
-- точная формулировка;
-- влияние на дизайн, контент или реализацию;
-- ссылка на решение, которое оно заменяет, если применимо.
+## Superseded decisions
+
+| ID | Replaced by | Date |
+|---|---|---|
+| `D-009` product reviews in detail pages | Claims/data policy and current no-review implementation | 2026-07-29 |
+| `D-013`, `D-022`, `D-028`, `D-045` route-level Lord theme | `D-063` | 2026-07-28 |
+| `D-034` partial RU/RO first version | `D-048`, `D-058` | 2026-07-29 |
+| `D-043` partial Romanian switch | `D-048` | 2026-07-29 |
+| `D-044`, `D-047` disabled contact form | `D-062` | 2026-07-31 |
+| `D-046` foreign certificate catalogue | `D-055` | 2026-07-29 |

@@ -51,7 +51,7 @@ test("keyboard navigation reaches the skip link and main content", async ({
   await expect(page.locator("#main-content")).toBeFocused();
 });
 
-test("contact flow preserves context and never exposes a fake submit", async ({
+test("contact flow preserves context and exposes the real application form", async ({
   page,
 }) => {
   await page.addInitScript(() => {
@@ -62,9 +62,15 @@ test("contact flow preserves context and never exposes a fake submit", async ({
   await expect(
     page.getByRole("heading", { level: 3, name: "В письмо войдут" })
   ).toBeVisible();
-  await expect(page.getByText("SKU 324001")).toBeVisible();
-  await expect(page.locator("form")).toHaveCount(0);
-  await expect(page.getByRole("button", { name: "Отправить" })).toHaveCount(0);
+  await expect(page.getByText("SKU 324001")).toHaveCount(2);
+  await expect(page.locator("form.application-form")).toHaveCount(1);
+  await expect(page.getByRole("button", { name: "Заказ" })).toHaveAttribute(
+    "aria-pressed",
+    "true"
+  );
+  await expect(
+    page.getByRole("button", { name: "Отправить заявку" })
+  ).toBeVisible();
   await expect(
     page.getByRole("heading", { level: 2, name: "Филиал в Молдове" })
   ).toBeVisible();

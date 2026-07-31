@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import { brotliCompressSync, gzipSync } from "node:zlib";
 import { load } from "cheerio";
@@ -109,7 +109,8 @@ Budgets: initial gzip ≤ 140 KiB; initial Brotli ≤ 115 KiB.
 - separate official-content chunk: \`${officialContentChunk ?? "MISSING"}\`;
 - route-network assertions for Home, Contact and Catalog run in Playwright.
 `;
-writeFileSync("docs/PERFORMANCE_REPORT.md", report, "utf8");
+mkdirSync("artifacts/reports", { recursive: true });
+writeFileSync("artifacts/reports/PERFORMANCE_REPORT.md", report, "utf8");
 
 if (errors.length) {
   throw new Error(`Performance budget failed:\n- ${errors.join("\n- ")}`);

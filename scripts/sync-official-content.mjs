@@ -18,12 +18,6 @@ import { assessProductContent } from "./product-content-lib.mjs";
 const here = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(here, "..");
 const sourceOrigin = "https://drnona.com";
-const manifestPath = path.join(
-  projectRoot,
-  "docs",
-  "drnona_products_catalog",
-  "manifest.csv"
-);
 const outputDir = path.join(projectRoot, "src", "data");
 const stagingRoot = path.join(projectRoot, "artifacts", "content-sync");
 const policyPath = path.join(here, "content-sync-policy.json");
@@ -78,39 +72,13 @@ function parseArguments(argv) {
   return { command, options };
 }
 
-function parseCsvLine(line) {
-  const cells = [];
-  let cell = "";
-  let quoted = false;
-  for (let index = 0; index < line.length; index += 1) {
-    const char = line[index];
-    if (char === '"') {
-      if (quoted && line[index + 1] === '"') {
-        cell += '"';
-        index += 1;
-      } else {
-        quoted = !quoted;
-      }
-    } else if (char === "," && !quoted) {
-      cells.push(cell);
-      cell = "";
-    } else {
-      cell += char;
-    }
-  }
-  cells.push(cell);
-  return cells;
-}
-
-function parseCsv(text) {
-  const lines = text.replace(/^\uFEFF/, "").split(/\r?\n/).filter(Boolean);
-  const headers = parseCsvLine(lines[0]);
-  return lines.slice(1).map((line) => {
-    const values = parseCsvLine(line);
-    return Object.fromEntries(
-      headers.map((header, index) => [header, values[index] ?? ""])
-    );
-  });
+function sourceInventoryFromProducts(products) {
+  return products.map((product) => ({
+    product_name: product.officialName,
+    product_slug: product.slug,
+    product_page_url: product.sourceUrl,
+    local_filename: path.basename(product.image),
+  }));
 }
 
 function parseSitemap(xml) {
@@ -478,17 +446,15 @@ npm run sync:content:promote -- --candidate "${candidateRelativePath}" --approve
 async function createStage() {
   const policy = await loadPolicy();
   const [
-    manifestText,
     sitemapText,
     previousProducts,
     previousContent,
   ] = await Promise.all([
-    readFile(manifestPath, "utf8"),
     fetchText(`${sourceOrigin}/sitemap.xml`),
     readJson(path.join(outputDir, "products.json")),
     readJson(path.join(outputDir, "official-pages.json")),
   ]);
-  const manifest = parseCsv(manifestText);
+  const manifest = sourceInventoryFromProducts(previousProducts);
   const sitemap = parseSitemap(sitemapText);
   const manifestValidation = validateManifest(manifest, policy);
   const externalErrors = [...manifestValidation.errors];

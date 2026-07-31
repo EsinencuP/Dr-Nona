@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { load } from "cheerio";
 import manifest from "../src/data/seo-manifest.json" with { type: "json" };
@@ -233,7 +233,8 @@ availability or review dataset exists. Article records use sitemap
 For a production build set \`RELEASE_MODE=production\` and provide the approved
 \`SITE_URL\`. The build rejects a production release without that origin.
 `;
-writeFileSync("docs/SEO_REPORT.md", report, "utf8");
+mkdirSync("artifacts/reports", { recursive: true });
+writeFileSync("artifacts/reports/SEO_REPORT.md", report, "utf8");
 
 console.log(
   `SEO output gate: PASS (${stats.total} routes; ${stats.product} Product; ${stats.article} Article; 0 structural errors).`

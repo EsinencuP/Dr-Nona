@@ -1,7 +1,7 @@
 import { spawn } from "node:child_process";
 import { createServer } from "node:net";
 import { chromium } from "@playwright/test";
-import { writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 
 const host = "127.0.0.1";
 const port = await new Promise((resolve, reject) => {
@@ -177,7 +177,8 @@ ${measurements
   )
   .join("\n")}
 `;
-  writeFileSync("docs/RUNTIME_PERFORMANCE_REPORT.md", report, "utf8");
+  mkdirSync("artifacts/reports", { recursive: true });
+  writeFileSync("artifacts/reports/RUNTIME_PERFORMANCE_REPORT.md", report, "utf8");
 
   if (errors.length) {
     throw new Error(`Runtime performance failed:\n- ${errors.join("\n- ")}`);

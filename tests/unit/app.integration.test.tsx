@@ -92,14 +92,18 @@ describe("Dr. Nona application", () => {
     });
   });
 
-  test("shows the selected product context without a fake form submit", async () => {
+  test("shows the selected product context in the real application form", async () => {
     renderApp("/contactus?products=lord-deodorant");
 
     expect(
       await screen.findByRole("heading", { level: 3, name: "В письмо войдут" })
     ).toBeInTheDocument();
-    expect(screen.getByText("SKU 324001")).toBeInTheDocument();
-    expect(screen.queryByRole("form")).not.toBeInTheDocument();
+    expect(screen.getAllByText("SKU 324001")).toHaveLength(2);
+    expect(screen.getByRole("form")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Заказ" })).toHaveAttribute(
+      "aria-pressed",
+      "true"
+    );
     expect(
       screen.getByRole("link", { name: "Подготовить письмо" })
     ).toHaveAttribute("href", expect.stringContaining("lord-deodorant"));

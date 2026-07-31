@@ -12,6 +12,7 @@ import {
   copyConsultationText,
   resolveSelectionProducts,
 } from "../features/contact/consultation";
+import { ApplicationForm } from "../features/contact/ApplicationForm";
 import { useSelection } from "../features/selection/SelectionContext";
 import { marketData } from "../market";
 import { Link, useSearchParams } from "../router";
@@ -59,6 +60,7 @@ function ContactPageContent({
         <p className="eyebrow">Dr. Nona · Молдова</p>
         <h1>Контакты в Молдове</h1>
       </div>
+      <ApplicationForm products={handoffProducts} />
       <div className="contact-layout">
         <div className="contact-direct">
           <p className="eyebrow">Кишинёв · Прямая связь</p>
@@ -123,8 +125,8 @@ function ContactPageContent({
             <SealCheck aria-hidden="true" />
             <span>
               Телефон и адрес взяты из официального списка филиалов Dr. Nona.
-              Email относится к международной службе поддержки. Сайт не
-              сохраняет и не имитирует отправку персональных данных.{" "}
+              Email относится к международной службе поддержки. Для срочного
+              обращения используйте прямые контакты.{" "}
               <Link to="/privacypolicy">Политика конфиденциальности</Link>
             </span>
           </div>

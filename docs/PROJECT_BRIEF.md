@@ -1,242 +1,75 @@
-# Dr. Nona Website — Product Brief
+# What product does this repository deliver?
 
-Status: Frontend QA candidate; production release blocked  
-Last updated: 2026-07-30
+Dr. Nona Moldova is an informational electronic catalogue for a mature Moldova audience. It explains Halo Complex™, presents approved products and helps a visitor send a contextual consultation or order request.
 
-Этот бриф описывает текущую продуктовую модель. Актуальный release status,
-счётчики данных и блокеры находятся в `RELEASE_STATUS.md`.
+Last verified: 2026-07-31. This document describes the stable product contract; current counts and blockers live in `PROJECT_STATUS.md` and `RELEASE_STATUS.md`.
 
-## 1. Краткое определение
+## Product goal
 
-Dr. Nona Website — современный мультимедийный каталог и бренд-опыт. Он помогает
-человеку понять бренд, изучить ассортимент, сформировать личную подборку и
-перейти к разговору с консультантом.
+Help a visitor understand the brand and scientific positioning, inspect approved product information, create a non-commerce selection and contact a Moldova manager without losing product context.
 
-Сайт не продаёт товары напрямую и не имитирует интернет-магазин. Текущая
-источник содержит 10 товарных записей, из которых 7 опубликованы, а 3 скрыты
-как неполные редакционные черновики. Также подключено 137 записей официального
-контента.
+## Audience and experience
 
-## 2. Результат для пользователя
+The primary audience is mature and older adults. The interface prioritizes readable type, predictable navigation, visible states, compact information density and generous touch targets.
 
-После посещения сайта пользователь должен:
+The desired character is premium, calm, marine and trustworthy. It must not depend on tiny typography, excessive whitespace, artificial luxury effects or generic AI-generated composition.
 
-1. Понять научную основу Halo Complex™.
-2. Увидеть, какие продуктовые направления существуют.
-3. Найти подходящие товары через каталог, поиск и фильтры.
-4. Изучить официальный состав, назначение и способ применения.
-5. Понять историю и происхождение бренда.
-6. Сохранить интересующие товары в подборку.
-7. При необходимости перейти к общению с консультантом.
+## Information priority
 
-## 3. Основная продуктовая модель
+Use this order when deciding page hierarchy:
 
-Основной объект сайта — **товар в каталоге**, а не товарная позиция магазина.
+1. Halo Complex™ and the scientific context
+2. Approved products
+3. Company history and founders
+4. Consultation and community context
+5. The Dead Sea, minerals and nature
 
-Основное действие — **«Добавить в подборку»**, а не «Купить» или «Добавить в
-корзину».
+The home hero introduces the brand without an aggressive catalogue CTA. The first substantive home section explains Halo Complex™ before product promotion.
 
-Основная конверсия — **осмысленный контакт с консультантом**, а не оплата.
+## Public surfaces
 
-## 4. Страницы и page parity
+- Home, catalogue, product detail and selection
+- Company overview, history, founders and science
+- Halo Complex™ formula page
+- Editorial hub, Blog, News and approved article routes
+- Contact, branches, certificates, FAQ, privacy, terms and accessibility pages
+- Controlled not-found and malformed-request states
 
-Сайт создаётся для Молдовы и должен учитывать все содержательные публичные
-страницы официальной платформы. Полная классификация ведётся в
-`PAGE_INVENTORY.md`.
-
-Следующие страницы остаются ключевыми композиционными шаблонами:
+The official site supplies the factual page and content baseline. Moldova pages may redesign structure and interaction, but they must not invent facts or publish unapproved imported claims.
 
-### Главная
-
-Роль: эмоциональное знакомство с брендом.
+## Catalogue contract
 
-- художественный Hero;
-- крупный постер;
-- минимальный текст;
-- без продающего CTA;
-- далее первым содержательным блоком раскрывается Halo Complex™;
-- следующие приоритеты: продукция, история, консультанты/сообщество,
-  Мёртвое море/природа;
-- допускается редакционное дыхание без больших пустых экранов.
+The catalogue supports search, product-type filtering and sorting by popularity fallback, source freshness, A to Z and Z to A. Product cards use white-background catalogue media. Product detail pages use their separate editorial card media.
 
-### Каталог
+Only `published` and `ready` records appear publicly. A product detail hides fields that are explicitly not applicable and excludes records with missing required content.
 
-Роль: исследование ассортимента.
+## Selection and contact contract
 
-- карточки товаров;
-- поиск;
-- фильтры;
-- сортировка;
-- адаптивная сетка;
-- hover-состояния;
-- доступ к подборке.
-- максимально полезная площадь и рабочая плотность.
-- фильтр по типу товара;
-- сортировки: по алфавиту, популярности и дате обновления источника;
-- сортировка «Сначала новые» включается только после утверждения дат запуска
-  или добавления товаров, отдельно от sitemap lastmod.
+Selection is not a cart. It stores product slugs locally and presents name, SKU and public URL to the visitor before submission.
 
-### Карточка товара
+The form supports an order request and an online/offline consultation preference. The server validates the payload and sends it to the approved Telegram chat. A successful UI state appears only after successful provider delivery. Payment and consultation-time confirmation remain outside the form.
 
-Роль: полное изучение одного товара.
+## Language and market
 
-- официальное изображение;
-- официальное название;
-- краткое назначение;
-- категория/тип;
-- SKU, если указан;
-- описание;
-- основные ингредиенты;
-- способ применения;
-- похожие товары;
-- действие «Добавить в подборку».
+The current interface is Russian only. A Romanian version may ship only as complete `/ro/...` routes with localized UI, content, metadata, alt text, errors and accessibility labels.
 
-Отзывы не создаются без официального источника.
+Moldova branch contacts are primary. Foreign certificates do not represent Moldova approval. Legal entity, consent wording, retention and claim approvals remain external release decisions.
 
-### О компании
+## Out of scope
 
-Роль: раскрыть историю, философию и доверие.
+- Cart, checkout, payment and prices
+- Authentication, accounts and personal dashboards
+- Customer database, administration interface and CRM
+- Automatic email delivery
+- Reviews, ratings or testimonials without approved sources
+- Partial localization
+- Unapproved medical, scientific or anti-aging claims
 
-- история бренда;
-- journey;
-- timeline;
-- SVG-линия, связанная с прогрессом прокрутки.
+## Success criteria
 
-### Blog
-
-Роль: редакционный контент.
-
-- визуальная модель Editorial Grid Magazine;
-- источники, рубрики и состав страницы: TODO.
-- Blog и News получают единый пункт в главной навигации;
-- типы контента и отдельные article templates не объединяются автоматически.
-
-Дополнительно учитываются:
-
-- Halo Complex™;
-- Company, History, Founders и Science;
-- News и отдельная новость;
-- Contact;
-- Branches;
-- Certificates;
-- FAQ;
-- Business opportunity;
-- Search;
-- Terms of Use;
-- Privacy Policy;
-- Accessibility Statement.
-
-Login, register, profile, cart, checkout и payment success не входят в текущую
-модель каталога.
-
-## 5. Не входит в проект
-
-- корзина;
-- checkout;
-- оплата;
-- цены как инструмент продажи;
-- промокоды;
-- доставка;
-- статусы наличия;
-- личный кабинет;
-- авторизация;
-- маркетплейсная логика;
-- медицинская диагностика;
-- назначения и обещания медицинского результата;
-- агрессивные продающие CTA.
-
-Любое возвращение этих функций требует отдельного решения и обновления
-мастер-документа.
-
-## 6. Ключевые пользовательские сценарии
-
-### Сценарий A — исследование бренда
-
-Главная → О компании → история / Halo Complex™ → Каталог.
-
-### Сценарий B — поиск конкретного товара
-
-Каталог → поиск / фильтр / сортировка → Карточка товара → Добавить в подборку.
-
-### Сценарий C — тематический выбор
-
-Каталог → категория или коллекция → сравнение карточек → несколько товаров в
-подборке → контакт с консультантом.
-
-### Сценарий D — чтение редакционного материала
-
-Blog → статья → связанный продукт или тема, если эта связь будет утверждена.
-
-## 7. Целевая аудитория
-
-Основная аудитория первой версии — люди зрелого и старшего возраста.
-
-Интерфейс должен быть ясным, спокойным, хорошо читаемым и предсказуемым.
-Премиальность не может зависеть от мелкой типографики, низкого контраста,
-скрытых действий или чрезмерной анимации.
-
-Точный возрастной диапазон, дополнительные сегменты и рекламные персоны — TODO.
-
-## 8. Локализация
-
-Целевой рынок: **Молдова**.
-
-Текущая проверяемая версия работает на русском языке согласно D-048.
-URL strategy утверждена D-058: русский остаётся на unprefixed URL, румынский
-получит `/ro/...`. Румынский интерфейс и `ro-MD` hreflang появятся только после
-утверждения полного перевода UI, metadata, alt-текстов и product/content data.
-
-Незакрытые решения перечислены как P0-LOCALE и P0-ASSORTMENT в
-`RELEASE_STATUS.md`.
-
-## 9. Главная навигация
-
-Утверждённые пункты:
-
-1. Каталог;
-2. О компании;
-3. Halo Complex™;
-4. Blog / News — единый вход в редакционный хаб.
-
-Точное пользовательское название объединённого Blog / News, utility-навигация,
-поиск, подборка и переключатель языка требуют отдельной детализации.
-
-## 10. Предварительные каналы консультации
-
-Платформа готовится с учётом:
-
-- Telegram;
-- телефона;
-- корпоративной почты.
-
-Основной прямой контакт соответствует рынку Молдовы: официальный список
-филиалов подтверждает адрес в Кишинёве и два телефона +373. Текущий frontend
-также может передать названия, SKU и URL подборки в подготовленное письмо
-международной поддержке. Moldova legal entity, локальный письменный получатель,
-server transport, consultant routing, consent и retention остаются
-P0-CONTACT.
-
-## 11. Критерии успеха
-
-Количественные KPI: TODO.
-
-Качественные критерии:
-
-- сайт однозначно считывается как каталог, а не магазин;
-- Halo Complex™ считывается как первый содержательный приоритет;
-- философия бренда понятна без агрессивной продажи;
-- товар можно найти и понять;
-- подборка отличается от корзины и визуально, и терминологически;
-- контакт с консультантом сохраняет контекст выбранных товаров;
-- интерфейс остаётся спокойным, премиальным и доступным зрелой аудитории;
-- каталог использует пространство функционально и не имитирует пустой
-  luxury-лендинг;
-- каждый индексируемый route имеет уникальные metadata, canonical и
-  содержательный HTML до выполнения JavaScript;
-- русский контент публикуется на canonical URL без locale-префикса с
-  `ru-MD`/`x-default`; полная румынская версия будет использовать `/ro/...`
-  и взаимные `hreflang`, но не рекламируется до завершения перевода;
-- legacy `/main` постоянно перенаправляется на `/`, а sitemap содержит только
-  canonical indexable URL;
-- product/article pages публикуют только подтверждённые JSON-LD свойства, а
-  breadcrumbs соответствуют пользовательской навигации.
+- A visitor reaches core information and CTA without unnecessary scrolling
+- Search, filters, routes, selection and form states work with keyboard and touch
+- No published product contains required-field gaps
+- No Telegram success appears before provider confirmation
+- Russian pages remain linguistically and semantically consistent
+- Technical gates pass without weakening the release blockers

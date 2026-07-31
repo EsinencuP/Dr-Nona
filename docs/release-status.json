@@ -1,54 +1,129 @@
 {
   "schemaVersion": 1,
-  "asOf": "2026-07-30",
+  "asOf": "2026-07-31",
+  "commit": "2411f54ce49d63fed776b09fcba1b61381c71d10",
+  "branch": "main",
   "status": "release-blocked",
-  "label": "Frontend QA candidate; production release blocked",
-  "environment": "local preview at http://127.0.0.1:4173",
+  "label": "Technical QA passes; production approval is blocked",
+  "environment": "Windows local QA with Node 22.23.1, npm 10.9.8 and Chromium desktop/mobile",
+  "counts": {
+    "sourceProducts": 10,
+    "publishedProducts": 7,
+    "draftProducts": 3,
+    "officialContentRecords": 137,
+    "claims": {
+      "total": 201,
+      "approved": 0,
+      "pending": 201,
+      "rejected": 0
+    }
+  },
   "blockers": [
     {
       "id": "P0-LOCALE",
       "priority": "P0",
-      "summary": "The /ro/... URL strategy is approved, but complete Romanian UI, content, metadata and alt text are not approved or implemented."
+      "owner": "content",
+      "status": "open",
+      "summary": "The complete Romanian interface and content set is not approved or implemented.",
+      "acceptanceCriteria": [
+        "Approve Romanian UI, product content, editorial content, metadata and alt text.",
+        "Publish shareable /ro/... routes with reciprocal hreflang.",
+        "Pass Russian and Romanian smoke, accessibility and SEO checks."
+      ]
     },
     {
       "id": "P0-CONTACT",
       "priority": "P0",
-      "summary": "Official Moldova branch phones are published, but the local legal entity, written consultation recipient, server transport, consent text and retention rules are not approved."
+      "owner": "product",
+      "status": "open",
+      "summary": "Telegram delivery works locally, but privacy, production origin and abuse protection are not approved.",
+      "acceptanceCriteria": [
+        "Approve the Moldova legal recipient, consent copy and retention policy.",
+        "Configure the production origin and server-side WAF or rate limiting.",
+        "Verify successful and failed submissions on the deployed form without duplicate delivery."
+      ]
     },
     {
       "id": "P0-LEGAL",
       "priority": "P0",
-      "summary": "The claims registry has no Moldova legal approvals; product classification, evidence and supplement warnings remain unconfirmed."
+      "owner": "legal",
+      "status": "open",
+      "summary": "Moldova legal review has not approved any regulated product claim.",
+      "acceptanceCriteria": [
+        "Assign a qualified Moldova reviewer.",
+        "Record classification, evidence, reviewer, date and document reference for each claim.",
+        "Keep pending and rejected claims out of production output."
+      ]
     },
     {
       "id": "P0-ASSORTMENT",
       "priority": "P0",
-      "summary": "The source dataset contains 10 products, but only 7 are complete and publishable; the final assortment and disposition of 3 drafts are not approved."
+      "owner": "product",
+      "status": "open",
+      "summary": "The final production assortment and the disposition of three draft products are not approved.",
+      "acceptanceCriteria": [
+        "Approve the final list of products for Moldova.",
+        "Complete and approve each retained draft or remove it from the source dataset.",
+        "Pass the content completeness gate with the approved assortment."
+      ]
     },
     {
       "id": "P1-MEDIA-RIGHTS",
       "priority": "P1",
-      "summary": "Production usage rights for product, brand and editorial media require business confirmation."
+      "owner": "legal",
+      "status": "open",
+      "summary": "Production publication rights for product, brand and editorial media are not confirmed.",
+      "acceptanceCriteria": [
+        "Record the source and permitted production use for each published asset.",
+        "Remove or replace any asset without confirmed rights."
+      ]
     },
     {
       "id": "P1-CONTENT",
       "priority": "P1",
-      "summary": "Moldova-applicable certificates with issuer, product and validity metadata plus Moldova-specific FAQ, branches, Blog and News scope require approval."
+      "owner": "content",
+      "status": "open",
+      "summary": "Moldova certificates and the final local scope for service and editorial pages are not approved.",
+      "acceptanceCriteria": [
+        "Provide Moldova-applicable certificate metadata and document sources.",
+        "Approve the Moldova scope for FAQ, branches, Blog and News.",
+        "Keep foreign certificates clearly separated from Moldova evidence."
+      ]
     },
     {
       "id": "P1-RANKING",
       "priority": "P1",
-      "summary": "The popularity sort uses official catalogue order because no approved popularity rank exists."
+      "owner": "product",
+      "status": "open",
+      "summary": "The popularity ranking has no approved business data source.",
+      "acceptanceCriteria": [
+        "Provide an approved popularity rank or approve official catalogue order as the permanent fallback.",
+        "Document and test the selected comparator."
+      ]
     },
     {
       "id": "P1-CI-PROTECTION",
       "priority": "P1",
-      "summary": "Push the workflow and require the quality-gates check in the GitHub main-branch ruleset."
+      "owner": "engineering",
+      "status": "open",
+      "summary": "The repository workflow exists, but the required GitHub branch rule is not verified.",
+      "acceptanceCriteria": [
+        "Push the workflow to GitHub.",
+        "Require the quality-gates check on the main branch.",
+        "Verify that a failing check blocks merge."
+      ]
     },
     {
       "id": "P1-SEO-ORIGIN",
       "priority": "P1",
-      "summary": "Approve the production site origin, build with SITE_URL, deploy the prerendered routes and complete live Google Rich Results and URL Inspection validation."
+      "owner": "engineering",
+      "status": "open",
+      "summary": "The production origin and live search-engine validation are not approved.",
+      "acceptanceCriteria": [
+        "Approve the public production origin and build with SITE_URL.",
+        "Deploy prerendered canonical routes, sitemap and robots policy.",
+        "Pass live Rich Results and URL inspection without critical errors."
+      ]
     }
   ]
 }

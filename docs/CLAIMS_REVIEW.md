@@ -1,120 +1,46 @@
-# Moldova claims review and publication gate
+# How are product claims approved for Moldova?
 
-This document defines the current safety workflow for medical, therapeutic,
-health, cosmetic-efficacy and anti-aging statements. It is an engineering
-control, not legal advice and not evidence that any Dr. Nona claim is lawful in
-Moldova.
+Every health, medical, therapeutic, anti-aging, cosmetic-efficacy and scientific statement requires a sentence-level decision before publication.
 
-## Current registry
+Last verified: 2026-07-31 against `src/data/claims-registry.json`. The registry contains 201 pending claims, 0 approved claims and 0 rejected claims.
 
-The canonical machine-readable registry is
-`src/data/claims-registry.json`. It currently contains 201 sentence-level
-candidates from:
+## Publication rule
 
-- the 10 current product records;
-- the 137 imported official content records;
-- the Halo Complex™ formula content used by the frontend.
-
-Current approval status:
-
-| Status | Count | Publication behaviour |
-|---|---:|---|
-| `approved` | 0 | Original source field may be shown |
-| `pending` | 201 | Entire source field is hidden |
-| `rejected` | 0 | Entire source field remains hidden |
-
-The registry is conservative and includes automatically detected candidates.
-A candidate is not a legal finding. A reviewer must also look for claims that
-word-based detection could miss.
+Only `approved` claims may reach public runtime content. Pending and rejected fields are replaced by the review state or omitted. Importing a sentence from the official site does not approve it for Moldova.
 
 ## Required record fields
 
-Every record stores:
+Each record contains:
 
-- exact claim sentence and source field;
-- product, page or formula content identifier;
-- source URL and source last-modified value when available;
-- claim category;
-- Moldova market code;
-- `approved`, `rejected` or `pending`;
-- reviewer, review date and approval/rejection reference.
+- Stable ID, scope, source field and exact text
+- Source URL and source hash
+- Status: `pending`, `approved` or `rejected`
+- Reviewer, review date and evidence document reference
+- Notes when the decision needs conditions or replacement wording
 
-`approved` and `rejected` are invalid without a named reviewer, ISO date and
-document reference. Changing source copy changes its fingerprint and creates a
-new `pending` candidate; the previous approval is not silently inherited.
+An approved record requires a named qualified reviewer, a date and a document reference. Editing source text changes its hash and returns the claim to review.
 
-## Cosmetic versus regulated language
+## Review questions
 
-- `cosmetic` candidates describe appearance or ordinary topical-care effects.
-- `health` candidates refer to wellbeing, vitality, body functions,
-  anti-aging or health.
-- `therapeutic` candidates refer to pain, healing, disinfection, relief,
-  regeneration or similar effects.
-- `medical` candidates refer to diagnosis, treatment, prevention, disease or
-  medicinal status.
+The reviewer must decide:
 
-These categories route the review; they do not determine the legal
-classification of the product.
-
-## Moldova review basis
-
-The current engineering hold is based on primary Moldova sources:
-
-- The sanitary regulation for nutrition and health claims states that health
-  claims on food require applicable approved wording and accompanying
-  information; it also describes ANSP scientific review and prohibits
-  unapproved claims.
-  <https://www.legis.md/cautare/downloadpdf/151895>
-- ANSP publishes services and registers for supplement notification,
-  registration and health-claim review.
-  <https://ansp.md/pentru-agenti-economici/>
-- Moldova's medicines law defines medicinal purposes and allows health
-  authorities to apply medicines rules to non-medicinal products with
-  medicine-like action when required.
-  <https://www.legis.md/cautare/downloadpdf/131977>
-
-The business must appoint a qualified Moldova reviewer to confirm the current
-law, product classification, registration status, evidence, final wording and
-required warnings.
+- Product classification in Moldova
+- Whether evidence supports the exact wording
+- Whether the statement is cosmetic or therapeutic
+- Whether supplement registration or warnings apply
+- Whether wording needs an adjacent disclaimer
+- Whether product and formula pages may repeat the statement
 
 ## Supplement notice
 
-Products currently classified in content as `Фитокомплексы` show an interim
-notice next to the product information. Its source is
-`src/data/product-disclaimers.json`.
+The current interim supplement notice is not legal approval. Replace it only with reviewer-approved Moldova wording tied to product classification and evidence.
 
-The notice is intentionally explicit that the final Moldova wording and
-registration status are not confirmed. It is not a substitute for the
-mandatory product-specific label, approved health claim, registration or legal
-review.
+## Workflow
 
-## Commands and release rule
+1. Run `npm run claims:sync` after approved source content changes.
+2. Review every new or changed candidate outside automation.
+3. Record the decision and evidence in the registry.
+4. Run `npm run claims:validate` and `npm run build`.
+5. Keep `P0-LEGAL` open until all production claims have approved dispositions.
 
-```powershell
-npm.cmd run claims:sync
-npm.cmd run claims:validate
-npm.cmd run release:check
-```
-
-- `claims:sync` inventories detector-matched source sentences and preserves
-  review metadata only when the exact claim fingerprint is unchanged.
-- `claims:validate` fails on missing, stale, duplicate or malformed records and
-  on reviewed records without reviewer evidence.
-- The frontend hides every field containing a `pending` or `rejected` record.
-- `release:check` remains blocked while any record is not `approved`, even if
-  the general release-status file were changed incorrectly.
-
-## Reviewer handoff
-
-For each claim, the reviewer must:
-
-1. Confirm product classification for Moldova.
-2. Confirm the exact source and evidence.
-3. Mark the exact sentence `approved` or `rejected`.
-4. Record their name, review date and approval/rejection document reference.
-5. Provide product-specific warnings and health-claim conditions where
-   applicable.
-6. Run `claims:validate`, the complete CI suite and `release:check`.
-
-P0-LEGAL stays open until every production claim and every required notice has
-documented approval.
+Automation validates structure, hashes and publication gating. It cannot decide legal admissibility.

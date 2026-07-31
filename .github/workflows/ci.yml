@@ -42,6 +42,9 @@ jobs:
       - name: Validate repository hygiene
         run: npm run repository:validate
 
+      - name: Validate canonical documentation
+        run: npm run documentation:validate
+
       - name: Validate frontend architecture
         run: npm run architecture:validate
 
@@ -99,9 +102,6 @@ jobs:
           path: |
             dist
             artifacts/reports
-            docs/SEO_REPORT.md
-            docs/PERFORMANCE_REPORT.md
-            docs/RUNTIME_PERFORMANCE_REPORT.md
           if-no-files-found: error
           retention-days: 7
 

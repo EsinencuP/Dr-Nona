@@ -1,6 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { platform } from "node:os";
 import {
   CATEGORY_CONTENT_RULES,
@@ -60,22 +60,27 @@ const repositoryState = statusLines.length
   ? `dirty (${statusLines.length} changed paths)`
   : "clean";
 const generatedAt = new Date().toISOString();
-const diff = execFileSync(
-  "git",
-  ["diff", "--binary", "HEAD", "--", "."],
-  {
-    encoding: "buffer",
-    maxBuffer: 64 * 1024 * 1024,
-    stdio: ["ignore", "pipe", "ignore"],
-  }
-);
+const changedFiles = git("diff", "--name-only", "-z", "HEAD", "--", ".")
+  .split("\0")
+  .filter(Boolean)
+  .sort();
 const untrackedFiles = git("ls-files", "--others", "--exclude-standard")
   .split(/\r?\n/)
   .filter(Boolean)
   .sort();
 const sourceSnapshot = createHash("sha256")
-  .update(commit)
-  .update(diff);
+  .update(commit);
+
+for (const path of changedFiles) {
+  sourceSnapshot.update("changed\0");
+  sourceSnapshot.update(path);
+  sourceSnapshot.update("\0");
+  if (existsSync(path)) {
+    sourceSnapshot.update(readFileSync(path));
+  } else {
+    sourceSnapshot.update("deleted");
+  }
+}
 
 for (const path of untrackedFiles) {
   sourceSnapshot.update(path);
@@ -249,8 +254,7 @@ writeFileSync(
 
 const activeStatusDocs = [
   "README.md",
-  "docs/PROJECT_BRIEF.md",
-  "docs/OPEN_QUESTIONS.md",
+  "docs/PROJECT_STATUS.md",
   "docs/QA_REPORT.md",
   "docs/RELEASE_STATUS.md",
 ];
@@ -271,8 +275,7 @@ for (const path of activeStatusDocs) {
 }
 
 const countDocs = [
-  "README.md",
-  "docs/PROJECT_BRIEF.md",
+  "docs/PROJECT_STATUS.md",
   "docs/QA_REPORT.md",
   "docs/RELEASE_STATUS.md",
 ];
@@ -288,9 +291,8 @@ for (const path of countDocs) {
 }
 
 const blockerDocs = [
-  "docs/OPEN_QUESTIONS.md",
-  "docs/QA_REPORT.md",
   "docs/RELEASE_STATUS.md",
+  "docs/ROADMAP.md",
 ];
 
 for (const blocker of openBlockers) {

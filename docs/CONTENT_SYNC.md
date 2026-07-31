@@ -1,92 +1,54 @@
-# Dr. Nona content sync
+# How do you synchronize official content safely?
 
-Status: Active staged import contract  
-Last updated: 2026-07-30
+The sync pipeline stages a candidate, validates it against the current source datasets and promotes only an explicitly reviewed fingerprint.
 
-`sync:content` never overwrites `src/data`. Every import is a reviewable
-candidate. Production data changes only through an explicit, fingerprint-bound
-promotion.
+Last verified: 2026-07-31 against `scripts/sync-official-content.mjs` and `scripts/content-sync-lib.mjs`.
 
-## Pipeline
+## Source inventory
 
-1. **Fetch** — load the official sitemap and only allowlisted product/content
-   URLs.
-2. **Parse** — extract normalized product and page records into memory.
-3. **Validate** — apply strict Zod schemas, origin rules, uniqueness checks and
-   product completeness rules.
-4. **Compare** — compare candidate counts and fields with current production
-   data.
-5. **Diff** — write added, removed and changed records to `diff.json`.
-6. **Review** — inspect the candidate and resolve every blocking error.
-7. **Promote** — approve the exact SHA-256 fingerprint and identify the
-   reviewer.
+The current `src/data/products.json` is the product inventory. The sync script reads each product slug, official name, source URL and runtime image basename from that file. Raw catalogue exports and external CSV manifests are not repository dependencies.
 
-## Create a candidate
+Official page discovery uses the allowlisted `https://drnona.com` sitemap. The pipeline rejects product, content, summary and sitemap URLs outside the approved origin.
+
+## Stage a candidate
+
+Run:
 
 ```powershell
-npm.cmd run sync:content
+npm run sync:content
 ```
 
-The command writes an ignored package under
-`artifacts/content-sync/<timestamp>-<fingerprint>/`:
-
-- `products.json`;
-- `official-pages.json`;
-- `source-summary.json`;
-- `diff.json`;
-- `fetch-errors.json`;
-- `validation-report.json`;
-- `REVIEW.md`.
-
-The console result always contains `"productionWritten": false`. A blocked
-candidate is still preserved as diagnostic evidence and the command exits with
-a non-zero code.
+The command fetches source pages, parses content, compares the candidate with production data and writes an ignored directory under `artifacts/content-sync/`. It does not modify production JSON.
 
 ## Blocking policy
 
-The versioned policy is `scripts/content-sync-policy.json`. The current gate
-rejects:
+Staging fails when:
 
-- any unexpected product or content count drop;
-- an empty product field that was populated in production;
-- incomplete newly discovered products;
-- duplicate product slug, SKU or content path;
-- duplicate/invalid manifest identifiers and filenames;
-- any product, content, summary, manifest or sitemap URL outside
-  `https://drnona.com`;
-- any content error record;
-- invalid or unknown schema fields;
-- summary counters that do not equal actual candidate counts.
+- Product count falls below the policy threshold
+- A required published field becomes empty
+- A slug, source URL or source filename is invalid or duplicated
+- A source URL leaves the allowlist
+- Fetch/content errors exceed the allowed threshold
+- A published product becomes incomplete
 
-Invalid manifest or sitemap URLs are excluded before page fetches, not merely
-reported after a network request.
+Source layout changes remain visible as candidate errors or diffs. The script does not silently replace reviewed content.
 
-## Revalidate a candidate
+## Validate a candidate
+
+Run:
 
 ```powershell
-npm.cmd run sync:content:validate -- --candidate "artifacts/content-sync/CANDIDATE"
+npm run sync:content:validate -- --candidate "artifacts/content-sync/candidate_directory"
 ```
 
-Validation is repeated against the current production dataset. A candidate can
-therefore become blocked if production changed after the original review.
+Review `diff.json`, `fetch-errors.json`, `validation-report.json`, candidate data and the fingerprint. Legal and editorial review remain outside automation.
 
-## Explicit promotion
+## Promote reviewed data
 
-Use the exact command generated inside the candidate `REVIEW.md`:
+Run promotion only with the exact validated fingerprint and a named reviewer:
 
 ```powershell
-npm.cmd run sync:content:promote -- `
-  --candidate "artifacts/content-sync/CANDIDATE" `
-  --approve "EXACT_SHA256_FINGERPRINT" `
-  --reviewed-by "APPROVED_REVIEWER"
+npm run sync:content:promote -- --candidate "artifacts/content-sync/candidate_directory" --approve "candidate_fingerprint" --reviewed-by "approved_reviewer"
 ```
 
-Promotion is refused when validation fails, the fingerprint differs or the
-reviewer is absent. Before writing, current production files are copied to an
-ignored backup under `artifacts/content-sync/backups/`. A write failure restores
-all three files. A successful promotion creates a versioned audit record under
-`docs/content-sync-promotions/`.
-
-Promotion confirms technical and editorial review only. Health claims still
-require the separate approval workflow in `docs/CLAIMS_REVIEW.md`.
-
+Promotion copies the approved product, official page and summary files into `src/data/`. Run all content, claims, market, build and browser gates afterward.

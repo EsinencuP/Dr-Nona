@@ -1,6 +1,6 @@
 import { execFileSync } from "node:child_process";
-import { existsSync, readFileSync, readdirSync } from "node:fs";
-import { resolve } from "node:path";
+import { readFileSync } from "node:fs";
+import { findForbiddenTrackedPaths } from "./repository-hygiene-lib.mjs";
 
 const requiredIgnoreRules = [
   "node_modules/",
@@ -13,6 +13,15 @@ const requiredIgnoreRules = [
   ".env.*",
   "!.env.example",
   "*.log",
+  "*.tmp",
+  "*.bak",
+  "*.orig",
+  "*.swp",
+  "*.zip",
+  "*.tar",
+  "*.tgz",
+  "*.gz",
+  "*.7z",
   ".DS_Store",
   ".vscode/",
   ".idea/",
@@ -38,21 +47,17 @@ if (missingIgnoreRules.length) {
   );
 }
 
-const tracked = execFileSync("git", ["ls-files", "-z"], {
+const repositoryPaths = execFileSync(
+  "git",
+  ["ls-files", "-z", "--cached", "--others", "--exclude-standard"],
+  {
   encoding: "utf8",
-})
+  }
+)
   .split("\0")
   .filter(Boolean)
   .map((path) => path.replaceAll("\\", "/"));
-const forbiddenTracked = tracked.filter(
-  (path) =>
-    existsSync(path) &&
-    (/^(dist|coverage|playwright-report|test-results|artifacts)\//.test(path) ||
-      (/((^|\/)\.env(?:\.|$))/.test(path) && !path.endsWith("/.env.example")) ||
-      /(^|\/)[^/]+\.log$/i.test(path) ||
-      /^[^/]+\.(?:avif|gif|jpe?g|png|webp)$/i.test(path) ||
-      /^public\/generated\/qa-/i.test(path))
-);
+const forbiddenTracked = findForbiddenTrackedPaths(repositoryPaths);
 
 if (forbiddenTracked.length) {
   throw new Error(
@@ -62,25 +67,10 @@ if (forbiddenTracked.length) {
   );
 }
 
-const qaRoot = resolve("docs/qa-package");
-const packages = existsSync(qaRoot)
-  ? readdirSync(qaRoot, { withFileTypes: true }).filter(
-      (entry) => entry.isDirectory() && /^\d{4}-\d{2}-\d{2}$/.test(entry.name)
-    )
-  : [];
-
-for (const qaPackage of packages) {
-  execFileSync(
-    process.execPath,
-    [
-      "scripts/generate-qa-artifact-manifest.mjs",
-      "--check",
-      `--package=docs/qa-package/${qaPackage.name}`,
-    ],
-    { stdio: "inherit" }
-  );
-}
+execFileSync(process.execPath, ["scripts/check-documentation.mjs"], {
+  stdio: "inherit",
+});
 
 console.log(
-  `Repository hygiene: ${tracked.length} tracked paths checked; ${packages.length} QA package manifest(s) verified.`
+  `Repository hygiene: ${repositoryPaths.length} tracked/untracked source paths checked; documentation links and release state verified.`
 );

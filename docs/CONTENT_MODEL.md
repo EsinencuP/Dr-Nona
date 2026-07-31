@@ -1,308 +1,58 @@
-# Dr. Nona Website — Content Model
-
-Status: Active content contract / production assortment approval pending  
-Last updated: 2026-07-30
-
-## 1. Иерархия источников
-
-1. Последний утверждённый пользователем материал.
-2. Официальный сайт `drnona.com`.
-3. Официальные документы, сертификаты и бренд-материалы.
-4. Локальные представительские данные после подтверждения.
-
-Контент не переносится автоматически: он проходит проверку языка, актуальности,
-юридических формулировок и отсутствия placeholder-фрагментов.
-
-Для браузера генерируется компактная проекция
-`src/data/runtime-content.json`: publishability-флаги claims и три editorial
-cards главной. Полные `official-pages.json` и `claims-registry.json` остаются
-source/QA datasets и не входят в initial route payload.
-
-Текущая опубликованная версия: `ru-MD` на URL без locale-префикса.
-Утверждённая стратегия для полной румынской версии: `/ro/...`. До перевода
-всего UI, контента, metadata, alt и accessibility-текстов `ro-MD` URL и
-`hreflang` не публикуются.
-
-## 2. Сущность Product
-
-### Обязательные поля
-
-- `official_name` — официальное название;
-- `slug` — TODO: правило формирования;
-- `primary_image` — официальное изображение товара;
-- `short_description` — официальный краткий текст, обязательность задаётся
-  правилом категории;
-- `long_description` — официальный полный текст, обязательность задаётся
-  правилом категории;
-- `ingredients` — официальные основные ингредиенты, обязательность задаётся
-  правилом категории;
-- `how_to_use` — официальный способ применения, обязательность задаётся
-  правилом категории;
-- `category` — утверждённая функциональная категория;
-- `collection` — визуальная/брендовая линейка;
-- `sku` — официальный SKU, если опубликован;
-- `related_products` — утверждённые похожие товары;
-- `official_order` — порядок в официальном каталоге для стабильной выдачи;
-- `released_at` — утверждённая дата запуска или добавления товара в каталог;
-  до получения подтверждения хранится как `null`;
-- `source_lastmod` — дата изменения страницы из официального sitemap,
-  используемая только как признак свежести исходного контента;
-- `locale` — язык записи;
-- `source_url` — адрес официального источника;
-- `source_checked_at` — дата последней сверки;
-- `publication_status` — `draft` или `published`;
-- `editorial_status` — `ready`, `missing-required-content` или
-  `review-required`.
-
-### Publication gate
-
-- Поля `short_description`, `long_description`, `ingredients` и `how_to_use`
-  обязательны согласно явному правилу категории в
-  `scripts/product-content-lib.mjs`.
-- Пустая строка всегда означает незавершённый контент. Такая запись остаётся
-  `draft` и не попадает в каталог, поиск, product route, related products или
-  подборку.
-- `null` означает «неприменимо», а не «не заполнено». Он разрешён только если
-  поле внесено в `nullableFields` правила категории; соответствующая секция
-  карточки товара не выводится.
-- `published` допустим только вместе с `editorial_status: ready` и полным
-  набором обязательных полей.
-- Импорт из официального источника создаёт `draft` и фиксирует редакционный
-  статус; публикация не происходит автоматически.
-- `npm run content:validate` и production build завершаются с ошибкой при
-  нарушении этого контракта.
-
-### Возможные поля, требующие решения
-
-- тип/назначение;
-- объём или форма выпуска;
-- сертификаты;
-- предупреждения;
-- противопоказания;
-- возрастные ограничения;
-- alt-текст;
-- галерея;
-- видео;
-- отзывы;
-- рейтинг;
-- FAQ по товару.
-
-### Каталожные вычисляемые поля
-
-- `type_filter` — нормализованный тип/категория товара на основе официальной
-  таксономии;
-- `alphabetical_key` — нормализованное официальное название;
-- `release_key` — `released_at`; записи с подтверждённой датой идут раньше
-  записей без даты, равные и неизвестные даты получают стабильный порядок по
-  `official_order`;
-- `source_update_key` — `source_lastmod` из sitemap для честной сортировки
-  «Недавно обновлённые»;
-- `popularity_key` — официальный featured/bestseller rank, если доступен;
-  иначе используется явно задокументированный стабильный официальный порядок,
-  а не выдуманная аналитика.
+# What data may the catalogue publish?
 
-Дата запуска не выводится из sitemap и не меняется при редакционной правке
-описания. Сортировка «Сначала новые» может появиться в публичном UI только
-после заполнения и утверждения `released_at`.
+The content model separates imported facts, editorial approval and runtime publication. Source presence alone never grants publication.
 
-### Коммерческие поля
+Last verified: 2026-07-31 against `src/data/` and the current validation scripts.
 
-Следующие данные могут существовать в источнике, но не выводятся в новом
-каталоге без отдельного решения:
+## Product
 
-- цена;
-- валюта;
-- VP;
-- наличие;
-- кнопка Add;
-- корзина;
-- доставка;
-- checkout.
+Each product contains identity, content, media, source, ordering and editorial fields:
 
-## 3. Category и Collection — разные сущности
+- `slug`, `officialName`, `sku` and `category`
+- `shortDescription`, `longDescription`, `ingredients` and `howToUse`
+- `image` for the white catalogue composition
+- `cardImage` for the product-detail composition
+- `catalogScale` for object-aware catalogue sizing
+- `sourceUrl`, `sourceLastmod`, `releasedAt` and `officialOrder`
+- `popularityRank` and `relatedSlugs`
+- `publicationStatus` and `editorialStatus`
 
-`Category` отвечает на вопрос «что это / для какой задачи».
+All current categories require the four content fields. An empty string means missing content. `null` is valid only when the category rule explicitly marks a field as not applicable; no current category permits it.
 
-`Collection` отвечает на вопрос «к какой продуктовой или визуальной линейке
-относится товар».
+A product is public only when `publicationStatus` is `published`, `editorialStatus` is `ready` and the category completeness assessment has no issue.
 
-Их нельзя объединять без утверждённой таксономии.
+## Product dates and ranking
 
-### Наблюдаемые категории официального каталога
+`releasedAt` is an approved launch or catalogue-add date. `sourceLastmod` records only source-page freshness. The current UI offers “Недавно обновлённые” because no release dates are approved.
 
-На 2026-07-26 официальный русскоязычный каталог группирует товары так:
+`popularityRank` is a provisional ordering field. `P1-RANKING` remains open until the business approves its source or the permanent fallback.
 
-- `NHⁿ` — Питание кожи;
-- `RHⁿ` — Восстановление;
-- `AHⁿ` — Омоложение;
-- `CHⁿ` — Гигиена;
-- `PHⁿ` — Парфюм;
-- `SHⁿ` — Здоровое питание;
-- `CLⁿ` — Клиника Леном;
-- `PCⁿ` — Pet Care.
+## Selection
 
-Это наблюдение, а не утверждённая структура нового сайта. Нужно решить:
+Selection stores product slugs in safe browser storage. The consultation handoff resolves each slug to official name, SKU and public URL. It is not a cart and contains no quantity, price or payment data.
 
-- сохраняются ли буквенные коды;
-- какие категории входят в MVP;
-- пересекаются ли категории;
-- как локализуются названия;
-- выводится ли Pet Care и Клиника Леном.
+## Application
 
-### Утверждённые коллекции/темы
+An application is either `order` or `consultation`. Both include first name, last name, normalized phone, city, consent flag, source, locale and server request ID.
 
-- Основная линейка;
-- Lord;
-- Женская линейка — TODO.
+Orders include validated product slugs resolved to name and SKU. Consultations include online/offline mode, preferred date, preferred time and `Europe/Chisinau` timezone. Provider delivery metadata never enters product data.
 
-## 4. Сущность Selection
+## Official content record
 
-Подборка — временный или сохранённый список товаров для консультации.
+Each official page record contains path, title, description, headings, paragraphs, images, source URL, source last-modified date and optional fetch error. Runtime publication excludes records that cannot produce a valid page contract.
 
-### Минимальные данные
+## Claim record
 
-- список идентификаторов товаров;
-- дата обновления;
-- язык;
-- порядок товаров.
+Each sentence-level claim stores stable ID, scope, field, text, status, source URL, source hash, reviewer, review date, document reference and optional notes. Only `approved` claims may appear publicly. The current registry contains no approvals.
 
-### TODO
+## Market data
 
-- хранится ли подборка только в браузере;
-- нужна ли синхронизация между устройствами;
-- есть ли share-link;
-- можно ли добавлять заметку к товару;
-- можно ли изменять количество — предварительно нет, поскольку это не корзина;
-- что получает консультант;
-- какой канал связи используется;
-- требуется ли согласие на обработку персональных данных.
+`market.json` stores public Moldova branch data, international support and certificate policy. A Moldova certificate needs title, issuer, country, product scope, validity dates, document URL and source URL.
 
-## 5. Сущность Review
+## SEO record
 
-Отзывы обязательны для карточки товара по мастер-документу, но источник и модель
-не определены.
+The generated SEO manifest contains one record per prerendered route. It stores canonical path, language, indexability, title, description, image, route kind and supported structured data. Offers, ratings and reviews are omitted unless approved source data exists.
 
-Нужно подтвердить:
+## Validation
 
-- официальный источник;
-- модерацию;
-- имя/анонимизацию;
-- дату;
-- язык;
-- рейтинг;
-- юридическое согласие;
-- правила для медицинских утверждений.
-
-До этого отзывы обозначаются `TODO`, а тестовые отзывы не публикуются.
-
-## 6. Сущность Article
-
-Для Blog:
-
-- официальный заголовок;
-- slug;
-- лид;
-- обложка;
-- автор;
-- дата публикации;
-- рубрика;
-- основной текст;
-- связанные темы;
-- связанные товары — только после утверждения;
-- источник;
-- статус редакционной проверки.
-
-## 7. Сущность ConsultantContact
-
-Подтверждённый источник `drnona.com/en/warehouses` содержит:
-
-- рынок: Молдова;
-- город: Кишинёв;
-- адрес: ул. Мирон Костин 7, каб. 511;
-- телефоны: +373 69 281 916 и +373 69 049 793;
-- тип записи: официальный филиал в международном списке Dr. Nona.
-
-Источник не называет молдавское юридическое лицо, локальный email или Telegram.
-Эти поля имеют `null` в `src/data/market.json` и не выводятся как pending
-placeholder. Международный `shopinfo@drnona.com` хранится отдельной сущностью
-international support.
-
-TODO: legal entity/distributor, рабочие часы, локальный письменный получатель,
-server transport, consent и retention.
-
-## 8. Сущность MoldovaCertificate
-
-Публикуемый документ обязан содержать:
-
-- `title`;
-- `issuer`;
-- `country: Молдова`;
-- `products`;
-- `valid_from`;
-- `valid_until`;
-- `document_url`;
-- `source_url`;
-- `publication_status: approved`.
-
-Текущий реестр пуст. Иностранные документы не используются как Moldova
-evidence. Международный архив показывается только отдельной ссылкой с явным
-предупреждением о неприменимости.
-
-## 9. Контентные статусы
-
-- `TODO` — данных нет;
-- `SOURCED` — найден официальный источник;
-- `REVIEW` — требуется редакционная/юридическая проверка;
-- `APPROVED` — разрешено к публикации;
-- `REJECTED` — не использовать;
-- `STALE` — источник устарел или требует повторной проверки.
-
-## 10. Route SEO metadata
-
-`src/data/seo-manifest.json` генерируется из опубликованных товаров,
-официальных страниц и claims registry. Для каждого route фиксируются:
-
-- уникальные `title` и `description`;
-- `canonical_path`;
-- доступные `hreflang`-варианты (`ru-MD`, `x-default`; в будущем — `ro-MD`);
-- `robots` и `indexable`;
-- Open Graph / Twitter type и изображение;
-- пользовательская цепочка breadcrumbs;
-- тип schema: `Product`, `BlogPosting`, `NewsArticle` или общий `WebPage`.
-
-Product schema не получает `offers`, `review`, `aggregateRating`, цену или
-availability без подтверждённого набора данных. Article schema использует
-`source_lastmod` только как `dateModified`; `datePublished` не выводится из
-sitemap. Pending/rejected claim не может попасть в metadata description.
-
-Production origin не хранится в контенте. Он передаётся через `SITE_URL` во
-время production build, чтобы canonical, OG URL, sitemap и JSON-LD использовали
-один утверждённый домен.
-
-Runtime access:
-
-- `loadProductData()` динамически загружает каталог только для home, catalog,
-  product, formula, selection или consultation handoff;
-- `loadOfficialPageData()` динамически загружает полный реестр только для
-  About, Formula, Editorial и official routes;
-- прямой Contact не создаёт ни один из этих запросов;
-- `runtime:generate` пересобирает компактную home/claims-проекцию перед dev и
-  build.
-
-Legacy URL `/main` не является контентным route: сервер отвечает постоянным
-redirect `308` на `/`. Sitemap содержит только уникальные indexable
-`canonical_path`. Build выполняет HTTP-проверку каждого sitemap URL и требует
-`200`, правильный canonical и содержательный prerendered HTML.
-
-## 11. Staged content sync
-
-`npm run sync:content` не изменяет production dataset. Команда создаёт
-candidate package в `artifacts/content-sync/`, проверяет его строгими Zod
-schemas, сравнивает с текущими данными и формирует diff.
-
-Публикация выполняется отдельной командой `sync:content:promote` только после
-повторной валидации, с точным SHA-256 fingerprint кандидата и именем reviewer.
-Политика запрещает неожиданное уменьшение количества записей, обнуление ранее
-заполненных обязательных полей, дубликаты slug/SKU/path, URL вне allowlist и
-content error records. Полный операционный контракт находится в
-`docs/CONTENT_SYNC.md`.
+Run `npm run content:validate`, `npm run claims:validate`, `npm run market:validate` and `npm run build` after changing source data.

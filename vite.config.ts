@@ -1,8 +1,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { existsSync, readFileSync } from "node:fs";
+import type { IncomingMessage, ServerResponse } from "node:http";
 import { resolve, sep } from "node:path";
 import { getGlobalHeaders } from "./scripts/security-headers-lib.mjs";
+import { handleDevApplicationRequest } from "./server/dev/applications-middleware";
 
 const deploymentConfiguration = JSON.parse(
   readFileSync(resolve(process.cwd(), "vercel.json"), "utf8")
@@ -15,15 +17,8 @@ type MiddlewareServer = {
   middlewares: {
     use: (
       handler: (
-        request: {
-          method?: string;
-          url?: string;
-        },
-        response: {
-          statusCode: number;
-          setHeader(name: string, value: string): void;
-          end(body?: string): void;
-        },
+        request: IncomingMessage,
+        response: ServerResponse,
         next: () => void
       ) => void
     ) => void;
@@ -93,7 +88,15 @@ function prerenderedRoutePreview() {
   return {
     name: "dr-nona-prerendered-route-preview",
     configureServer(server: MiddlewareServer) {
+      if (existsSync(resolve(process.cwd(), ".env.local"))) {
+        process.loadEnvFile(resolve(process.cwd(), ".env.local"));
+      }
       installSecurityHeaders(server);
+      server.middlewares.use((request, response, next) => {
+        void handleDevApplicationRequest(request, response).then((handled) => {
+          if (!handled) next();
+        });
+      });
       installMalformedPathGuard(server);
       installLegacyHomeRedirect(server);
     },

@@ -68,6 +68,12 @@ for (const modulePath of [
   "src/features/selection/SelectionContext.tsx",
   "src/locales/LocaleProvider.tsx",
   "src/locales/ru.ts",
+  "shared/applications/application-schema.ts",
+  "server/applications/application-service.ts",
+  "server/applications/format-application.ts",
+  "server/applications/providers/telegram-provider.ts",
+  "server/config/contact-env.ts",
+  "api/applications.ts",
 ]) {
   check(existsSync(resolve(root, modulePath)), `Missing boundary module: ${modulePath}.`);
 }

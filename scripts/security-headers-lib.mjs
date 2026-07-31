@@ -78,6 +78,7 @@ export function validateSecurityConfiguration(configuration) {
     "frame-src": ["'none'"],
     "form-action": ["'self'"],
     "script-src": ["'self'"],
+    "connect-src": ["'self'"],
   };
   for (const [directive, expected] of Object.entries(requiredDirectives)) {
     const actual = directives.get(directive);

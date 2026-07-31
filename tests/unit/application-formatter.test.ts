@@ -1,0 +1,63 @@
+import { describe, expect, test } from "vitest";
+import { formatTelegramApplication } from "../../server/applications/format-application";
+import type { ApplicationRecord } from "../../server/applications/application-types";
+
+const common = {
+  schemaVersion: 1 as const,
+  requestId: "request-123",
+  firstName: "Ana",
+  lastName: "Popescu",
+  phone: "+373 69 123 456",
+  phoneNormalized: "+37369123456",
+  city: "Chișinău",
+  source: "website" as const,
+  locale: "ru-MD" as const,
+  submittedAt: "2030-06-19T08:30:00.000Z",
+};
+
+describe("application formatter", () => {
+  test("formats exact plain-text order notification", () => {
+    const record: ApplicationRecord = {
+      ...common,
+      type: "order",
+      products: [
+        { slug: "first", officialName: "First", sku: "001" },
+        { slug: "second", officialName: "Second", sku: "" },
+      ],
+    };
+    expect(formatTelegramApplication(record)).toBe(
+      [
+        "🛒 НОВЫЙ ЗАКАЗ",
+        "",
+        "Имя Фамилия: Ana Popescu",
+        "Телефон: +373 69 123 456",
+        "Город: Chișinău",
+        "",
+        "Товары:",
+        "1. First — SKU 001",
+        "2. Second — SKU не указан",
+        "",
+        "ID заявки: request-123",
+        "Получено: 19.06.2030, 11:30:00",
+        "Источник: сайт Dr. Nona Moldova",
+      ].join("\n")
+    );
+  });
+
+  test("formats exact plain-text consultation notification", () => {
+    const record: ApplicationRecord = {
+      ...common,
+      type: "consultation",
+      consultationMode: "offline",
+      consultationDate: "2030-06-20",
+      consultationTime: "14:30",
+      timezone: "Europe/Chisinau",
+    };
+    const message = formatTelegramApplication(record);
+    expect(message).toContain("💬 НОВАЯ КОНСУЛЬТАЦИЯ");
+    expect(message).toContain("Формат: Офлайн");
+    expect(message).toContain("Дата и время: 20.06.2030, 14:30");
+    expect(message).toContain("Часовой пояс: Europe/Chisinau");
+    expect(message).not.toMatch(/\[object Object\]|undefined|[*_`]/u);
+  });
+});

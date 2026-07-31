@@ -1,81 +1,53 @@
-# Frontend architecture
+# How is the frontend organized?
 
-Last updated: 2026-07-30
+The application uses route modules and feature boundaries so each page can load and test independently. `src/App.tsx` remains a small composition root.
 
-## Purpose
+Last verified: 2026-07-31 against base commit `2411f54ce49d63fed776b09fcba1b61381c71d10` and the current worktree.
 
-The frontend follows the product's actual boundaries without introducing a
-generic enterprise layer. `src/App.tsx` is a composition root; it does not own
-pages, business logic, locale resources or styling rules.
+## Runtime boundaries
 
-## Boundaries
+| Path | Responsibility |
+|---|---|
+| `src/app/` | App shell, lazy route table, monitoring and error boundary |
+| `src/components/` | Shared UI components without page ownership |
+| `src/features/catalog/` | Pure filter and sort behavior |
+| `src/features/selection/` | Selection persistence and context |
+| `src/features/contact/` | Form UI, client validation and API client |
+| `src/features/about/` | Company content surfaces |
+| `src/features/editorial/` | Editorial page composition |
+| `src/pages/` | One lazy module per route surface |
+| `src/locales/` | Russian resource and locale provider |
+| `src/styles/` | Thematic styles with responsive rules last |
+| `src/data/` | Source datasets and generated runtime projections |
 
-```text
-src/
-  app/
-    ApplicationErrorBoundary.tsx
-    AppShell.tsx
-    monitoring.ts
-    routes.tsx
-    storage.ts
-  components/
-    ArticleCard.tsx
-    ui.tsx
-  features/
-    about/
-    catalog/filterProducts.ts
-    contact/consultation.ts
-    editorial/
-    selection/SelectionContext.tsx
-  locales/
-    LocaleProvider.tsx
-    ru.ts
-  pages/
-    *Page.tsx
-  styles/
-    base.css
-    components.css
-    home.css
-    catalog.css
-    product.css
-    about.css
-    formula.css
-    content.css
-    selection.css
-    shell.css
-    responsive.css
-```
+## Routing
 
-## Contracts
+`src/app/routes.tsx` declares stable page patterns and loads each page with a real dynamic import. `src/router.tsx` provides the small History API router and safe parameter decoding. `ApplicationErrorBoundary` wraps routing so malformed input cannot produce an unrecoverable blank screen.
 
-- Every public route resolves to a separate page module.
-- The application error boundary wraps the custom Router in `main.tsx`.
-- Malformed route encoding is rejected without throwing; direct malformed
-  requests are redirected to the controlled, noindex `/bad-request` route.
-- Client errors are retained as a bounded 20-record session diagnostic log,
-  emitted as `drnona:error` and forwarded to the optional production monitoring
-  adapter without storing query strings or form data.
-- `app/storage.ts` is the only production access point for `localStorage`.
-  Locale and selection values use explicit schemas; security, quota and parsing
-  failures fall back to in-memory state and emit metadata-only telemetry.
-- `src/app/routes.tsx` uses real `lazy(() => import(...))` boundaries.
-- Catalogue filtering and sorting are pure logic in
-  `features/catalog/filterProducts.ts`.
-- Contact payload generation, email handoff and copying are isolated from
-  `ContactPage` presentation in `features/contact/consultation.ts`.
-- Locale copy is stored in `locales/ru.ts`; DOM language synchronization lives
-  in `LocaleProvider.tsx`.
-- `styles.css` is an import manifest only. The thematic files remain
-  independently maintainable, while `responsive.css` is loaded last to preserve
-  cascade correctness at every route.
+Known official content routes use `DynamicOfficialPage`. The SEO manifest and prerender script still produce route-specific HTML for those records.
+
+## Data loading
+
+Product and official content datasets stay outside unrelated initial route graphs. The home page uses generated editorial projections. The catalogue loads product data only when its route needs it. Contact loads neither the catalogue nor the official content dataset unless selection context requests products.
+
+Generated `runtime-content.json` and `seo-manifest.json` are ignored build artifacts. Source product, claims, market and official content datasets remain tracked.
+
+## Contact transport
+
+The browser posts to `POST /api/applications`. Shared Zod validation runs on the client for feedback and on the server for trust. `api/applications.ts` validates the origin and product slugs, then the server-only Telegram provider sends the formatted payload.
+
+The Vite development middleware exposes the same handler locally. Production uses the Vercel Function. Secrets stay in server environment variables and never enter the client bundle.
+
+## Style cascade
+
+`src/styles.css` imports thematic files in a fixed order. `base.css` owns tokens and shared primitives. Page and feature files own their selectors. `responsive.css` loads last and contains cross-page viewport and reduced-motion rules.
 
 ## Enforcement
 
-`npm run architecture:validate` checks the composition-root size, required page
-modules, dynamic imports, feature boundaries, stylesheet manifest and forbidden
-imports through `App.tsx`. The command runs in both `build` and CI.
+- `npm run architecture:validate` checks the composition root, page modules, dynamic imports and style boundaries
+- `npm run performance:validate` checks the initial compressed payload and preload graph
+- `npm run typecheck` checks browser, test, Node and API TypeScript projects
+- `npm run test` checks pure feature and integration behavior
+- `npm run test:e2e` checks routes and requests in Chromium desktop/mobile
 
-Vitest independently covers catalogue filter/sort behavior, consultation
-payload serialization and rejected or unavailable browser storage. The
-application integration suite covers lazy routes, persistent and in-memory
-selection, locale state and content hierarchy.
+Do not add a generic enterprise layer. Create a boundary only when a page, feature, server concern or build concern has independent behavior.

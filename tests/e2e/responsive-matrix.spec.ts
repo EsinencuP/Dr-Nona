@@ -381,7 +381,7 @@ async function runViewportContract(
   await expect(
     page.getByRole("heading", { level: 1, name: "Контакты в Молдове" })
   ).toBeVisible();
-  await expect(page.locator("form")).toHaveCount(0);
+  await expect(page.locator("form.application-form")).toHaveCount(1);
   await expect(page.locator(".contact-direct__actions a")).toHaveCount(3);
   await expectHealthyLayout(page, `${viewport.name} contact`, touch);
 

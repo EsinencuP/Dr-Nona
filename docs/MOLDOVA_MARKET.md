@@ -1,45 +1,36 @@
-# Moldova market contact and certificate policy
+# Which market data may the site show?
 
-Status: Active public-market contract  
-Last checked: 2026-07-30
+The public contact and certificate surfaces must describe Moldova accurately. Foreign data may provide context but cannot imply local approval.
 
-## Primary Moldova contact
+Last verified: 2026-07-31 against `src/data/market.json`.
 
-The official Dr. Nona branch listing names:
+## Primary contact
+
+The current public source is the official branch listing:
 
 - Country: Moldova
-- City: Chișinău / Кишинёв
-- Address: ул. Мирон Костин 7, каб. 511
-- Phone: +373 69 281 916
-- Phone: +373 69 049 793
-- Source: https://drnona.com/en/warehouses
+- City: Chișinău
+- Address: str. Miron Costin 7, office 511
+- Phones: `+373 69 281 916` and `+373 69 049 793`
+- Source: [official warehouse listing](https://drnona.com/en/warehouses)
 
-The source does not name a Moldova legal entity, local email or Telegram
-account. The UI must not invent them. `shopinfo@drnona.com` remains explicitly
-labelled as international support and is not presented as a local Moldova
-address.
+The Moldova legal entity, local email and public Telegram identity are `PENDING APPROVAL`. The international `shopinfo@drnona.com` address remains labeled as international support, not a Moldova entity.
 
-## Certificate publication rule
+## Contact form
 
-The current official certificate archive does not provide a verifiable Moldova
-set with complete issuer, market, product scope and validity metadata.
-Therefore:
+The form sends validated applications to an approved administrative Telegram chat. The chat identifier is a server secret and does not become public contact data. Production still requires approved consent, retention, legal recipient, origin and abuse protection under `P0-CONTACT`.
 
-- Russian, Israeli and Ukrainian documents are not shown on the Moldova page;
-- the public Moldova certificate registry currently contains zero documents;
-- the international archive is linked separately with an explicit warning that
-  it is not proof of Moldova registration or certification;
-- a Moldova certificate can be published only when all of these fields exist:
-  title, issuer, country, products, valid-from, valid-until, document URL and
-  source URL;
-- every published national certificate must name Moldova as its country.
+## Certificate policy
 
-The executable source is `src/data/market.json`. Run
-`npm.cmd run market:validate` before publication.
+A Moldova certificate needs:
 
-## Remaining approvals
+- Title and issuer
+- Country and applicable products
+- Validity start and end
+- Document URL and source URL
 
-- confirm the Moldova legal entity or distributor name;
-- approve a local consultation email or Telegram channel if one exists;
-- approve a server-side consultation recipient, consent and retention flow;
-- provide Moldova-applicable certificates with complete metadata.
+The current dataset contains no approved Moldova certificate. Foreign certificate collections stay hidden from the Moldova evidence surface and link only to the clearly labeled international archive.
+
+## Validation
+
+`npm run market:validate` checks local phone presence, foreign-document separation and certificate field completeness. It does not grant legal approval.
