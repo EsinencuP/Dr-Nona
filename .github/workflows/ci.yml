@@ -38,6 +38,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate deterministic runtime data
+        run: npm run runtime:generate && npm run seo:generate
+
       - name: Validate runtime and dependency contract
         run: npm run toolchain:validate
 

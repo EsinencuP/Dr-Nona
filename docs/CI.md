@@ -20,6 +20,11 @@ equality would make a committed status file invalidate the commit that contains
 it. GitHub Actions checks out the complete history so this relationship is
 verified. A managed shallow deployment clone may defer ancestry validation when
 the recorded commit object is not available locally.
+
+CI generates the ignored runtime and SEO manifests immediately after
+`npm ci`. Repository and documentation validation therefore run against the
+same deterministic inputs as the production build, including on a fresh clone.
+
 - Ubuntu GitHub runner
 - Chromium installed by Playwright
 
