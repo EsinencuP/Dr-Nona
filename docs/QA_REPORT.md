@@ -2,7 +2,7 @@
 
 This report indexes the current automated evidence only. It does not preserve historical screenshots or cumulative implementation logs.
 
-Last verified: 2026-07-31 against base commit `2411f54ce49d63fed776b09fcba1b61381c71d10` and the current cleanup worktree.
+Last verified: 2026-07-31 against base commit `fede3938ce5173206ee4a6983ece7fb2c29f2318` and the current worktree.
 
 ## Scope
 
@@ -12,12 +12,12 @@ The run covers repository hygiene, documentation consistency, architecture, cont
 
 <!-- build-identity:start -->
 - **Status date**: 2026-07-31
-- **Base commit**: `2411f54ce49d63fed776b09fcba1b61381c71d10`
+- **Base commit**: `fede3938ce5173206ee4a6983ece7fb2c29f2318`
 - **Repository state**: dirty cleanup worktree
 - **Environment**: Windows, Node 22.23.1, npm 10.9.8, Chromium desktop/mobile
-- **Products**: 10 source, 7 published, 3 drafts
+- **Products**: 10 source, 10 published, 0 drafts
 - **Official content records**: 137
-- **Claims**: 201 total, 0 approved, 201 pending, 0 rejected
+- **Claims**: 199 total, 0 approved, 199 pending, 0 rejected
 <!-- build-identity:end -->
 
 ## Automated checks
@@ -30,16 +30,16 @@ The run covers repository hygiene, documentation consistency, architecture, cont
 | `npm run architecture:validate` | PASS | 17-line composition root and 17 lazy page modules |
 | `npm run typography:validate` | PASS | 14 px minimum and verified contrast pairs |
 | `npm run market:validate` | PASS | Two Moldova phones; foreign certificates hidden |
-| `npm run content:validate` | PASS | 10 records; all 7 published records complete |
-| `npm run claims:validate` | PASS | 201 structurally valid pending records |
+| `npm run content:validate` | PASS | 10 records; all 10 published records complete |
+| `npm run claims:validate` | PASS | 199 structurally valid pending records |
 | `npm run security:validate` | PASS | Required headers and minimal CSP origins |
 | `npm run typecheck` | PASS | TypeScript project references |
 | `npm run lint` | PASS | ESLint with zero warnings |
-| `npm run test` | PASS | 19 files, 106 tests |
+| `npm run test` | PASS | 20 files, 112 tests |
 | `npm run build` | PASS | 144 prerendered routes and 142 canonical sitemap URLs |
 | `npm run security:runtime` | PASS | 5 rendered routes, enforced CSP, 0 violations |
 | `npm run performance:runtime` | PASS | Home, contact and catalogue within runtime budget |
-| `npm run test:e2e` | PASS | 108 passed, 16 skipped across desktop/mobile, including the cleanup route matrix |
+| `npm run test:e2e` | PASS | 116 passed, 16 skipped across desktop/mobile, including selection, aligned card actions, content completeness and image-mode regressions |
 | `npm run release:check` | EXPECTED BLOCKED | 9 open P0/P1 blockers |
 
 ## Current known issues

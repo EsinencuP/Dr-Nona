@@ -6,6 +6,7 @@ const pages = JSON.parse(
 const claims = JSON.parse(
   readFileSync("src/data/claims-registry.json", "utf8")
 );
+const products = JSON.parse(readFileSync("src/data/products.json", "utf8"));
 
 const fieldPublishability = {};
 const blockedContent = new Set();
@@ -70,6 +71,18 @@ writeFileSync(
   "utf8"
 );
 
+writeFileSync(
+  "src/data/published-product-slugs.json",
+  `${JSON.stringify(
+    products
+      .filter((product) => product.publicationStatus === "published")
+      .map((product) => product.slug),
+    null,
+    2
+  )}\n`,
+  "utf8"
+);
+
 console.log(
-  `Runtime content: ${Object.keys(fieldPublishability).length} claim fields; ${runtimeContent.home.editorial.length} home editorial cards.`
+  `Runtime content: ${Object.keys(fieldPublishability).length} claim fields; ${runtimeContent.home.editorial.length} home editorial cards; ${products.filter((product) => product.publicationStatus === "published").length} selectable products.`
 );

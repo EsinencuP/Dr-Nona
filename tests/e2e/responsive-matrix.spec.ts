@@ -57,9 +57,19 @@ async function preparePage(page: Page, path: string) {
   await page.evaluate(async () => {
     await document.fonts.ready;
     await Promise.all(
-      [...document.images].map((image) =>
-        image.complete ? image.decode().catch(() => undefined) : Promise.resolve()
-      )
+      [...document.images].map(async (image) => {
+        image.loading = "eager";
+        if (!image.complete) {
+          await Promise.race([
+            new Promise<void>((resolve) => {
+              image.addEventListener("load", () => resolve(), { once: true });
+              image.addEventListener("error", () => resolve(), { once: true });
+            }),
+            new Promise<void>((resolve) => setTimeout(resolve, 5_000)),
+          ]);
+        }
+        await image.decode().catch(() => undefined);
+      })
     );
   });
 }
@@ -310,7 +320,7 @@ async function runViewportContract(
     page.getByRole("searchbox", { name: "Поиск по названию" })
   ).toBeVisible();
   await expect(page.getByRole("combobox", { name: "Все категории" })).toBeVisible();
-  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(7);
+  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(10);
   await page.evaluate(() => {
     document.documentElement.lang = "ro";
     const title = document.querySelector(".catalog-page h1");

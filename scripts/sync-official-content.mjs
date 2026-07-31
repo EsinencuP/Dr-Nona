@@ -45,6 +45,23 @@ const decodeXml = (value = "") =>
     .replaceAll("&quot;", '"')
     .replaceAll("&apos;", "'");
 
+function extractRichText($, selection) {
+  const content = selection.clone();
+  content.find("br").replaceWith(" ");
+  content.find("p,li,div,h1,h2,h3,h4,h5,h6").each((_, element) => {
+    $(element).append(" ");
+  });
+  return clean(content.text());
+}
+
+function preferSourceText(sourceValue, existingValue, officialName) {
+  const source = clean(sourceValue);
+  const normalizedName = clean(officialName).toLocaleLowerCase();
+  const isTitlePlaceholder = source.toLocaleLowerCase() === normalizedName;
+  if (source && !isTitlePlaceholder) return source;
+  return existingValue ?? null;
+}
+
 function parseArguments(argv) {
   const args = [...argv];
   const command = args[0] && !args[0].startsWith("--") ? args.shift() : "stage";
@@ -111,26 +128,48 @@ function extractProduct(html, manifest, sitemapRecord, order, existing) {
   const title = $("main h1").first();
   const panel = title.parent();
   const infoTabs = panel.find(".w-auto.bg-white.h-auto").first().children("div");
-  const category =
+  const sourceCategory =
     clean(breadcrumbLd?.itemListElement?.at(-2)?.name) ||
     clean(panel.find(".inline-flex").first().text()) ||
     "Без категории";
+  const officialName = clean(
+    productLd.name || title.text() || manifest.product_name
+  );
+  const sourceShortDescription = clean(
+    productLd.description || panel.find("h2").first().text()
+  );
+  const sourceLongDescription = extractRichText(
+    $,
+    panel.find(".product-description-prose").first()
+  );
+  const sourceIngredients = extractRichText($, infoTabs.eq(0));
+  const sourceHowToUse = extractRichText($, infoTabs.eq(1));
   const localImage = `/products/${manifest.local_filename}`;
   const extracted = {
     slug: manifest.product_slug,
-    officialName: clean(
-      productLd.name || title.text() || manifest.product_name
+    officialName,
+    shortDescription: preferSourceText(
+      sourceShortDescription,
+      existing?.shortDescription,
+      officialName
     ),
-    shortDescription: clean(
-      productLd.description || panel.find("h2").first().text()
+    longDescription: preferSourceText(
+      sourceLongDescription,
+      existing?.longDescription,
+      officialName
     ),
-    longDescription: clean(
-      panel.find(".product-description-prose").first().text()
+    ingredients: preferSourceText(
+      sourceIngredients,
+      existing?.ingredients,
+      officialName
     ),
-    ingredients: clean(infoTabs.eq(0).text()),
-    howToUse: clean(infoTabs.eq(1).text()),
+    howToUse: preferSourceText(
+      sourceHowToUse,
+      existing?.howToUse,
+      officialName
+    ),
     sku: clean(productLd.sku || ""),
-    category,
+    category: existing?.category ?? sourceCategory,
     image: existing?.image ?? localImage,
     imageAlt:
       existing?.imageAlt ??

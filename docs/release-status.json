@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
   "asOf": "2026-07-31",
-  "commit": "2411f54ce49d63fed776b09fcba1b61381c71d10",
+  "commit": "fede3938ce5173206ee4a6983ece7fb2c29f2318",
   "branch": "main",
   "status": "release-blocked",
   "label": "Technical QA passes; production approval is blocked",
   "environment": "Windows local QA with Node 22.23.1, npm 10.9.8 and Chromium desktop/mobile",
   "counts": {
     "sourceProducts": 10,
-    "publishedProducts": 7,
-    "draftProducts": 3,
+    "publishedProducts": 10,
+    "draftProducts": 0,
     "officialContentRecords": 137,
     "claims": {
-      "total": 201,
+      "total": 199,
       "approved": 0,
-      "pending": 201,
+      "pending": 199,
       "rejected": 0
     }
   },

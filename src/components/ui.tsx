@@ -1,10 +1,8 @@
 import { ArrowUpRight } from "@phosphor-icons/react/ArrowUpRight";
 import { Heart } from "@phosphor-icons/react/Heart";
-import { SealCheck } from "@phosphor-icons/react/SealCheck";
 import { useEffect, useRef } from "react";
 import type { CSSProperties, ReactNode } from "react";
-import { getProductCopy, hasBlockedClaims } from "../claims";
-import type { ClaimScope } from "../claims";
+import { getProductCopy } from "../claims";
 import type { OfficialPage, Product } from "../data";
 import { useSelection } from "../features/selection/SelectionContext";
 import { useLocale } from "../locales/LocaleProvider";
@@ -24,35 +22,6 @@ export function splitText(text: string, minLength = 140) {
   }
   if (current.trim()) chunks.push(current.trim());
   return chunks;
-}
-
-export function ClaimsReviewNotice({
-  scope,
-  contentId,
-  compact = false,
-}: {
-  scope: ClaimScope;
-  contentId?: string;
-  compact?: boolean;
-}) {
-  if (!hasBlockedClaims(scope, contentId)) return null;
-
-  return (
-    <aside
-      className={`claims-review-notice${compact ? " claims-review-notice--compact" : ""}`}
-      role="note"
-      data-testid="claims-review-notice"
-    >
-      <SealCheck aria-hidden="true" />
-      <div>
-        <strong>Контент проходит проверку для Молдовы</strong>
-        <span>
-          Медицинские, терапевтические и health-формулировки временно скрыты до
-          документированного approval.
-        </span>
-      </div>
-    </aside>
-  );
 }
 
 export function formatDate(value: string) {
@@ -145,6 +114,16 @@ export function SectionHeading({
   );
 }
 
+const neutralProductDescriptions: Record<string, string> = {
+  "Уход за лицом": "Ежедневный уход за кожей лица.",
+  "Уход за телом": "Ежедневный уход за кожей тела.",
+  "Уход за руками": "Ежедневный уход за руками и ногтями.",
+  "Фитокомплексы": "Травяной напиток в индивидуальных пакетиках.",
+  "Гигиена": "Компактный формат для очищения кожи.",
+  "Дезодоранты": "Дезодорант-антиперспирант для ежедневного использования.",
+  "Парфюмерия": "Аромат из парфюмерной коллекции Dr. Nona.",
+};
+
 export function ProductCard({
   product,
   compact = false,
@@ -157,7 +136,10 @@ export function ProductCard({
   const { contains, toggle } = useSelection();
   const { t } = useLocale();
   const saved = contains(product.slug);
-  const shortDescription = getProductCopy(product, "shortDescription");
+  const shortDescription =
+    getProductCopy(product, "shortDescription") ||
+    neutralProductDescriptions[product.category] ||
+    "Продукт для ежедневного ухода.";
   return (
     <article className={`product-card ${compact ? "product-card--compact" : ""}`}>
       <div className="product-card__stage">
@@ -189,9 +171,8 @@ export function ProductCard({
         </h3>
         <p
           className="product-card__description"
-          aria-hidden={shortDescription ? undefined : true}
         >
-          {shortDescription || "\u00A0"}
+          {shortDescription}
         </p>
         <div className="product-card__actions">
           <Link className="text-link" to={`/product/${product.slug}`}>

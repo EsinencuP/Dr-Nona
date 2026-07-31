@@ -4,7 +4,6 @@ import { Check } from "@phosphor-icons/react/Check";
 import { SealCheck } from "@phosphor-icons/react/SealCheck";
 import { useState } from "react";
 import {
-  ClaimsReviewNotice,
   ProductCard,
   SectionHeading,
   splitText,
@@ -102,7 +101,6 @@ export default function ProductPage() {
             {productShortDescription && (
               <p className="product-purpose">{productShortDescription}</p>
             )}
-            <ClaimsReviewNotice scope="product" contentId={product.slug} compact />
             {productDisclaimer && (
               <aside
                 className="product-disclaimer"
@@ -167,8 +165,7 @@ export default function ProductPage() {
                   hidden={!isOpen}
                 >
                   <p>
-                    {content ||
-                      "Описание свойств временно скрыто до завершения проверки для рынка Молдовы."}
+                    {content || "Информация для этого раздела отсутствует."}
                   </p>
                 </div>
               </div>
@@ -184,7 +181,7 @@ export default function ProductPage() {
         <SectionHeading eyebrow="Следующий шаг" title={t.related} />
         <div className="related-grid">
           {related.map((item) => (
-            <ProductCard key={item.slug} product={item} compact />
+            <ProductCard key={item.slug} product={item} compact catalogImage />
           ))}
         </div>
       </section>

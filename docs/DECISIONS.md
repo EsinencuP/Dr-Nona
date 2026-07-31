@@ -2,7 +2,7 @@
 
 This register keeps active decisions that constrain the current code. Superseded prototypes remain only as compact references.
 
-Last verified: 2026-07-31 against base commit `2411f54ce49d63fed776b09fcba1b61381c71d10` and the current worktree.
+Last verified: 2026-07-31 against base commit `fede3938ce5173206ee4a6983ece7fb2c29f2318` and the current worktree.
 
 ## Active decisions
 

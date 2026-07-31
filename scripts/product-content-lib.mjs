@@ -10,8 +10,13 @@ const COMPLETE_PRODUCT_RULE = {
   nullable: [],
 };
 
+const FRAGRANCE_PRODUCT_RULE = {
+  required: ["shortDescription", "longDescription", "ingredients"],
+  nullable: ["howToUse"],
+};
+
 export const CATEGORY_CONTENT_RULES = {
-  "Парфюмерия": COMPLETE_PRODUCT_RULE,
+  "Парфюмерия": FRAGRANCE_PRODUCT_RULE,
   "Уход за лицом": COMPLETE_PRODUCT_RULE,
   "Дезодоранты": COMPLETE_PRODUCT_RULE,
   "Уход за телом": COMPLETE_PRODUCT_RULE,

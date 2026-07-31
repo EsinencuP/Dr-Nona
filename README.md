@@ -26,6 +26,16 @@ npm run dev
 
 Open `http://127.0.0.1:4173`. Add Telegram secrets only to `.env.local`; Git ignores that file.
 
+## Vercel deployment
+
+The contact endpoint is deployed from `api/applications.ts` as a Vercel
+Function. Add `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` as server-only Vercel
+Environment Variables for every environment that should deliver applications,
+then redeploy. Preview, production and custom same-origin domains are accepted
+automatically; `CONTACT_ALLOWED_ORIGINS` is only for an additional trusted
+origin. See [contact delivery](docs/CONTACT_DELIVERY.md) for the complete setup
+and verification contract.
+
 ## Available commands
 
 | Command | Purpose |

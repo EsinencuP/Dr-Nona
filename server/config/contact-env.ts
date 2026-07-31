@@ -16,31 +16,37 @@ const normalizeOrigin = (value: string) => {
   }
 };
 
+const vercelOriginKeys = [
+  "VERCEL_URL",
+  "VERCEL_BRANCH_URL",
+  "VERCEL_PROJECT_PRODUCTION_URL",
+] as const;
+
+const normalizeVercelOrigin = (value: string | undefined) => {
+  const hostname = value?.trim();
+  if (!hostname) return "";
+  return normalizeOrigin(
+    hostname.includes("://") ? hostname : `https://${hostname}`
+  );
+};
+
 export function readContactEnvironment(
   environment: NodeJS.ProcessEnv = process.env
 ): ContactEnvironmentResult {
-  const required = [
-    "CONTACT_ALLOWED_ORIGINS",
-    "TELEGRAM_BOT_TOKEN",
-    "TELEGRAM_CHAT_ID",
-  ] as const;
+  const required = ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"] as const;
   const missing = required.filter((key) => !environment[key]?.trim());
   if (missing.length) return { success: false, missing: [...missing] };
 
   const allowedOrigins = new Set(
-    environment
-      .CONTACT_ALLOWED_ORIGINS!.split(",")
+    [
+      ...(environment.CONTACT_ALLOWED_ORIGINS ?? "").split(","),
+      ...vercelOriginKeys.map((key) =>
+        normalizeVercelOrigin(environment[key])
+      ),
+    ]
       .map((origin) => normalizeOrigin(origin.trim()))
       .filter(Boolean)
   );
-  if (!allowedOrigins.size) {
-    return {
-      success: false,
-      missing: [
-        "CONTACT_ALLOWED_ORIGINS",
-      ],
-    };
-  }
 
   return {
     success: true,

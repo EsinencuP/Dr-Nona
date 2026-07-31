@@ -36,7 +36,7 @@ test("navigation works for desktop and mobile Chromium", async ({
   }
 
   await expect(page).toHaveURL(/\/products$/);
-  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(7);
+  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(10);
 });
 
 test("keyboard navigation reaches the skip link and main content", async ({
@@ -83,26 +83,26 @@ test("contact flow preserves context and exposes the real application form", asy
   await expect(email).toHaveAttribute("href", /324001/);
 });
 
-test("certificates are scoped to Moldova without a foreign country selector", async ({
+test("certificates page links to the international archive without review copy", async ({
   page,
 }) => {
   await page.goto("/certificates");
 
   await expect(
-    page.getByRole("heading", { level: 1, name: "Сертификаты для Молдовы" })
+    page.getByRole("heading", { level: 1, name: "Сертификаты и документы" })
   ).toBeVisible();
   await expect(
     page.getByRole("heading", {
       level: 2,
-      name: "На сайте нет опубликованных сертификатов для Молдовы",
+      name: "Международный архив сертификатов",
     })
   ).toBeVisible();
   await expect(page.getByRole("combobox")).toHaveCount(0);
   await expect(page.getByText("Russia")).toHaveCount(0);
   await expect(page.getByText("Israel")).toHaveCount(0);
   await expect(page.getByText("Ukraine")).toHaveCount(0);
-  await expect(page.getByText("Кем выдан")).toBeVisible();
-  await expect(page.getByText("Страна действия")).toBeVisible();
-  await expect(page.getByText("Продукты")).toBeVisible();
-  await expect(page.getByText("Срок действия")).toBeVisible();
+  await expect(page.getByText(/провер/i)).toHaveCount(0);
+  await expect(
+    page.getByRole("link", { name: /Открыть международный архив/i })
+  ).toBeVisible();
 });

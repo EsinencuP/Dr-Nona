@@ -12,21 +12,63 @@ test("valid and invalid product deep links resolve correctly", async ({ page }) 
   await expect(page.getByRole("button", { name: /Полное описание/ })).toBeVisible();
   await expect(page.getByRole("button", { name: /Состав/ })).toBeVisible();
   await expect(page.getByRole("button", { name: /Способ применения/ })).toBeVisible();
+  const relatedImages = page.locator(".related-grid .product-card__image--catalog");
+  await expect(relatedImages).toHaveCount(4);
+  for (const image of await relatedImages.all()) {
+    await expect(image).toHaveAttribute("src", /-catalog\.png$/);
+  }
 
   await page.goto("/product/parfum-faya");
   await expect(
     page.getByRole("heading", {
       level: 1,
-      name: "Эта страница ушла за горизонт",
+      name: "Eau De Parfum Faya",
     })
   ).toBeVisible();
+  await expect(page.getByText("309001", { exact: true })).toBeVisible();
+});
+
+test("every catalog product exposes its sourced description", async ({ page }) => {
+  await page.goto("/products");
+  const catalogLinks = page.locator(".catalog-grid .product-card h3 a");
+  await expect(catalogLinks).toHaveCount(10);
+  const productLinks = await catalogLinks
+    .evaluateAll((links) =>
+      links.map((link) => (link as HTMLAnchorElement).getAttribute("href"))
+    );
+
+  expect(productLinks).toHaveLength(10);
+  for (const href of productLinks) {
+    expect(href).toBeTruthy();
+    await page.goto(href!);
+    await expect(page.locator(".product-purpose")).toBeVisible();
+    await expect(page.locator(".product-description")).toBeVisible();
+    await expect(page.locator(".accordion-item")).not.toHaveCount(0);
+  }
+});
+
+test("stale selection entries do not inflate the header count", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    localStorage.setItem(
+      "drnona-selection",
+      JSON.stringify(["removed-catalog-product"])
+    );
+  });
+  await page.goto("/");
+
+  await expect(page.getByRole("link", { name: "Подборка: 0" })).toBeVisible();
+  await expect
+    .poll(() => page.evaluate(() => localStorage.getItem("drnona-selection")))
+    .toBe("[]");
 });
 
 test("selection persists after refresh and removal updates storage", async ({
   page,
 }) => {
   await page.goto("/products");
-  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(7);
+  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(10);
   const firstCard = page.locator(".product-card").first();
   const productName = await firstCard.locator("h3").innerText();
   await firstCard.getByRole("button", { name: "В подборку" }).click();

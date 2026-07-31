@@ -3900,26 +3900,6 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-3CC2697D0B",
-    "fingerprint": "3cc2697d0ba9312600355670c1ad78e5fb55a74d4f26e89cef1200fd5f72bc0c",
-    "scope": "product",
-    "contentId": "gonseen-relax",
-    "field": "longDescription",
-    "claimText": "Продукт позволяет наслаждаться тёплым напитком как частью вечерней рутины и способствует общему благополучию.",
-    "claimType": "health",
-    "detectionReasons": [
-      "health-or-body-function"
-    ],
-    "sourceUrl": "https://drnona.com/product/gonseen-relax",
-    "sourceLastmod": "2026-05-10T08:01:01.199Z",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
     "id": "CLM-9A8E988E28",
     "fingerprint": "9a8e988e286d6a049c0a0de7b4b031ffcb8b037877547bdd1a92f0c6861fef0f",
     "scope": "product",
@@ -3929,26 +3909,6 @@
     "claimType": "medical",
     "detectionReasons": [
       "diagnosis-treatment-or-disease"
-    ],
-    "sourceUrl": "https://drnona.com/product/halo-gonseen-vitalitea",
-    "sourceLastmod": "2026-05-10T08:00:34.865Z",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-131C242423",
-    "fingerprint": "131c2424236a01681c6b6e576416d7c9646bf921017308eac05bfc6cc664f8b4",
-    "scope": "product",
-    "contentId": "halo-gonseen-vitalitea",
-    "field": "longDescription",
-    "claimText": "Продукт позволяет наслаждаться тёплым напитком как частью повседневной рутины и способствует общему благополучию.",
-    "claimType": "health",
-    "detectionReasons": [
-      "health-or-body-function"
     ],
     "sourceUrl": "https://drnona.com/product/halo-gonseen-vitalitea",
     "sourceLastmod": "2026-05-10T08:00:34.865Z",

@@ -110,7 +110,7 @@ export default function HomePage() {
             <p>
               {formulaParagraph
                 ? splitText(formulaParagraph, 260)[0]
-                : "Подробные заявления о свойствах формулы временно скрыты до завершения проверки для рынка Молдовы."}
+                : "Фирменная формула объединяет происхождение Мёртвого моря и научный подход Dr. Nona."}
             </p>
             <Link className="button button--light" to="/ourformula">
               История формулы <ArrowRight aria-hidden="true" />

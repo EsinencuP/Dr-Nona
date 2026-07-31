@@ -26,12 +26,35 @@ The selected date and time are preferences, not a confirmed appointment. The for
 Copy `.env.example` to `.env.local` and provide:
 
 ```dotenv
-CONTACT_ALLOWED_ORIGINS=http://127.0.0.1:4173
 TELEGRAM_BOT_TOKEN=your_bot_token_here
 TELEGRAM_CHAT_ID=your_chat_id_here
 ```
 
-Never expose or commit the token or chat ID. Configure the same keys as server-only deployment variables with the approved production origin.
+`CONTACT_ALLOWED_ORIGINS` is optional and is only needed for an additional
+trusted browser origin. Requests from the site's own origin are accepted
+automatically. On Vercel this covers generated Preview URLs, the Production URL
+and custom domains without weakening the exact-origin check. Vercel system URLs
+are also normalized into the allowlist when available.
+
+Never expose or commit the token or chat ID.
+
+### Vercel configuration
+
+In **Project → Settings → Environment Variables**, add these server-only values:
+
+```text
+TELEGRAM_BOT_TOKEN
+TELEGRAM_CHAT_ID
+```
+
+Apply them to both **Preview** and **Production** if the form must work in both
+environments. Mark the bot token as sensitive. Environment changes only affect
+new deployments, so redeploy after adding or rotating a value. Do not prefix
+either key with `VITE_`: they must remain unavailable to browser code.
+
+The Vite frontend posts to the same deployment at `/api/applications`, and the
+root `api/applications.ts` file is deployed as a Node.js Vercel Function. No
+external API base URL or SPA proxy is required.
 
 ## Response contract
 

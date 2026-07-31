@@ -1,7 +1,6 @@
 import { ArrowUpRight } from "@phosphor-icons/react/ArrowUpRight";
 import { MapPin } from "@phosphor-icons/react/MapPin";
 import {
-  ClaimsReviewNotice,
   formatDate,
   getPageTitle,
   splitText,
@@ -53,11 +52,6 @@ export function ArticlePage() {
         <p className="eyebrow">{page.path.startsWith("/news") ? "Новости" : "Блог"} · {formatDate(page.sourceLastmod)}</p>
         <h1>{title}</h1>
         {description && <p>{description}</p>}
-        <ClaimsReviewNotice
-          scope="official-page"
-          contentId={page.path}
-          compact
-        />
       </div>
       {page.images[0]?.src && (
         <img
@@ -97,11 +91,6 @@ export function GenericOfficialPage() {
         <p className="eyebrow">Dr. Nona · Информация</p>
         <h1>{title}</h1>
         {description && <p>{description}</p>}
-        <ClaimsReviewNotice
-          scope="official-page"
-          contentId={page.path}
-          compact
-        />
       </div>
       <div className="official-page__content">
         <aside>

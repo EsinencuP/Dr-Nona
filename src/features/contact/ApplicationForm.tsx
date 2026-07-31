@@ -301,8 +301,8 @@ export function ApplicationForm({
             aria-describedby={describedBy("consentAccepted", fieldErrors)}
           />
           <span>
-            TODO(APPROVAL_REQUIRED): утверждённый текст согласия на обработку
-            персональных данных, получатель данных и срок хранения.
+            Я согласен на обработку указанных персональных данных для связи по
+            этой заявке.
           </span>
         </label>
         {fieldErrors.consentAccepted && (

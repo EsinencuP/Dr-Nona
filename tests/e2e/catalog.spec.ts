@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 test.beforeEach(async ({ page }, testInfo) => {
   await page.goto("/products");
-  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(7);
+  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(10);
   if (testInfo.project.name === "chromium-mobile") {
     await page.getByRole("button", { name: "Фильтры и сортировка" }).click();
   }
@@ -23,7 +23,7 @@ test("search, category filter and alphabetical sort update the catalogue", async
   await page.getByRole("combobox", { name: "Все категории" }).selectOption({
     label: "Уход за лицом",
   });
-  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(1);
+  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(2);
 
   await page.getByRole("combobox", { name: "Сортировка" }).selectOption("az");
   const names = await page.locator(".product-card h3").allTextContents();
@@ -48,5 +48,38 @@ test("an unknown query shows a recoverable empty state", async ({ page }) => {
     })
   ).toBeVisible();
   await page.getByRole("button", { name: "Сбросить фильтры" }).last().click();
-  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(7);
+  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(10);
+});
+
+test("selection action stays separated from product copy", async ({ page }) => {
+  await page.goto("/products");
+  const card = page.locator(".catalog-grid .product-card").first();
+  const description = card.locator(".product-card__description");
+  const selectionButton = card.locator(".save-button");
+
+  const [descriptionBox, buttonBox] = await Promise.all([
+    description.boundingBox(),
+    selectionButton.boundingBox(),
+  ]);
+  expect(descriptionBox).not.toBeNull();
+  expect(buttonBox).not.toBeNull();
+  expect(buttonBox!.y - (descriptionBox!.y + descriptionBox!.height)).toBeGreaterThanOrEqual(20);
+});
+
+test("catalog actions share one vertical position in every card", async ({
+  page,
+}) => {
+  const actionOffsets = await page
+    .locator(".catalog-grid .product-card")
+    .evaluateAll((cards) =>
+      cards.map((card) => {
+        const cardBox = card.getBoundingClientRect();
+        const actions = card.querySelector<HTMLElement>(".product-card__actions");
+        if (!actions) throw new Error("Product card actions are missing");
+        return Math.round(actions.getBoundingClientRect().top - cardBox.top);
+      })
+    );
+
+  expect(actionOffsets).toHaveLength(10);
+  expect(Math.max(...actionOffsets) - Math.min(...actionOffsets)).toBeLessThanOrEqual(2);
 });

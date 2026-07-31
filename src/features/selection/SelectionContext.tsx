@@ -9,6 +9,7 @@ import {
 } from "react";
 import type { ReactNode } from "react";
 import { safeLocalStorage, selectionSchema } from "../../app/storage";
+import publishedProductSlugsJson from "../../data/published-product-slugs.json";
 
 type SelectionContextValue = {
   selected: string[];
@@ -17,6 +18,11 @@ type SelectionContextValue = {
 };
 
 const SelectionContext = createContext<SelectionContextValue | null>(null);
+const publishedProductSlugs = new Set(publishedProductSlugsJson as string[]);
+
+export function sanitizeSelection(slugs: string[]) {
+  return slugs.filter((slug) => publishedProductSlugs.has(slug));
+}
 
 export function useSelection() {
   const value = useContext(SelectionContext);
@@ -26,7 +32,9 @@ export function useSelection() {
 
 export function SelectionProvider({ children }: { children: ReactNode }) {
   const [selected, setSelected] = useState<string[]>(() =>
-    safeLocalStorage.get("drnona-selection", selectionSchema, [])
+    sanitizeSelection(
+      safeLocalStorage.get("drnona-selection", selectionSchema, [])
+    )
   );
   const [announcement, setAnnouncement] = useState("");
   const announcementTimer = useRef<number | null>(null);

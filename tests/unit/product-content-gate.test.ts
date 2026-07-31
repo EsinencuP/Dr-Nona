@@ -6,21 +6,39 @@ import { evaluateProductDataset } from "../../scripts/product-content-lib.mjs";
 const { allProducts } = await loadProductData();
 
 describe("product content publication gate", () => {
-  test("accepts the current dataset because only complete records are published", () => {
+  test("accepts all ten current products, including explicitly unavailable fragrance fields", () => {
     const report = evaluateProductDataset(allProducts);
 
     expect(report.errors).toEqual([]);
-    expect(report.published).toBe(7);
-    expect(report.drafts).toBe(3);
+    expect(report.published).toBe(10);
+    expect(report.drafts).toBe(0);
+    expect(
+      report.assessments.find(
+        (product: { slug: string }) => product.slug === "parfum-faya"
+      )
+    ).toMatchObject({ complete: true, nullFields: ["howToUse"] });
+  });
+
+  test("requires fragrance description and ingredients", () => {
+    const brokenDataset = allProducts.map((product) =>
+      product.slug === "parfum-faya"
+        ? { ...product, longDescription: null }
+        : product
+    );
+
+    const report = evaluateProductDataset(brokenDataset);
+
+    expect(report.errors).toContain(
+      "parfum-faya: published product has 1 content issue(s)."
+    );
   });
 
   test("rejects an incomplete product marked as published", () => {
     const brokenDataset = allProducts.map((product) =>
-      product.slug === "parfum-faya"
+      product.slug === "lord-deodorant"
         ? {
             ...product,
-            publicationStatus: "published",
-            editorialStatus: "ready",
+            ingredients: "",
           }
         : product
     );
@@ -28,7 +46,7 @@ describe("product content publication gate", () => {
     const report = evaluateProductDataset(brokenDataset);
 
     expect(report.errors).toContain(
-      "parfum-faya: published product has 4 content issue(s)."
+      "lord-deodorant: published product has 1 content issue(s)."
     );
   });
 

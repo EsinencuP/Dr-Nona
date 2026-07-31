@@ -2,7 +2,7 @@
 
 Every health, medical, therapeutic, anti-aging, cosmetic-efficacy and scientific statement requires a sentence-level decision before publication.
 
-Last verified: 2026-07-31 against `src/data/claims-registry.json`. The registry contains 201 pending claims, 0 approved claims and 0 rejected claims.
+Last verified: 2026-07-31 against `src/data/claims-registry.json`. The registry contains 199 pending claims, 0 approved claims and 0 rejected claims.
 
 ## Publication rule
 

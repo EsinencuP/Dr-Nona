@@ -107,7 +107,6 @@
   color: var(--muted);
 }
 
-.claims-review-notice,
 .product-disclaimer {
   max-width: 720px;
   display: flex;
@@ -120,16 +119,6 @@
   color: var(--ink);
 }
 
-.claims-review-notice {
-  margin-block: 14px;
-}
-
-.claims-review-notice--compact {
-  padding: 11px 13px;
-  font-size: var(--type-body-sm);
-}
-
-.claims-review-notice > svg,
 .product-disclaimer > svg {
   width: 20px;
   height: 20px;
@@ -137,19 +126,16 @@
   color: var(--sea-700);
 }
 
-.claims-review-notice div,
 .product-disclaimer div {
   display: grid;
   gap: 3px;
 }
 
-.claims-review-notice strong,
 .product-disclaimer strong {
   font-size: var(--type-ui);
   line-height: 1.35;
 }
 
-.claims-review-notice span,
 .product-disclaimer p {
   margin: 0;
   color: var(--muted);
@@ -165,17 +151,6 @@
 
 .product-disclaimer > svg {
   color: var(--gold-800);
-}
-
-.formula-hero .claims-review-notice {
-  border-color: rgba(194, 238, 242, 0.2);
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--white);
-}
-
-.formula-hero .claims-review-notice > svg,
-.formula-hero .claims-review-notice span {
-  color: rgba(235, 250, 251, 0.82);
 }
 
 .product-facts {
@@ -211,7 +186,7 @@
 
 .product-select-button {
   min-width: 220px;
-  margin-bottom: 0;
+  margin: 6px 0 4px;
 }
 
 .product-knowledge {

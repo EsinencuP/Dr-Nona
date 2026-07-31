@@ -10,10 +10,10 @@ export default function CertificatesPage() {
       <div className="official-page__header official-page__header--split">
         <div>
           <p className="eyebrow">Dr. Nona · Документы</p>
-          <h1>Сертификаты для Молдовы</h1>
+          <h1>Сертификаты и документы</h1>
         </div>
         <span className="market-badge">
-          <MapPin aria-hidden="true" /> Молдова
+          <MapPin aria-hidden="true" /> Официальный архив
         </span>
       </div>
       {certificates.length > 0 ? (
@@ -42,28 +42,19 @@ export default function CertificatesPage() {
           <div className="certificate-market-status__message" role="note">
             <SealCheck aria-hidden="true" />
             <div>
-              <p className="eyebrow">Проверка применимости</p>
-              <h2>На сайте нет опубликованных сертификатов для Молдовы</h2>
+              <p className="eyebrow">Документы Dr. Nona</p>
+              <h2>Международный архив сертификатов</h2>
               <p>
-                В официальном архиве не найден проверяемый набор документов,
-                подтверждающий применение именно на рынке Молдовы. Документы
-                России, Израиля и Украины здесь не показываются, чтобы их нельзя
-                было принять за молдавское подтверждение.
+                Документы о продукции и производстве собраны в официальном
+                международном архиве Dr. Nona.
               </p>
             </div>
           </div>
-          <dl className="certificate-requirements">
-            <div><dt>Кем выдан</dt><dd>Обязательное поле</dd></div>
-            <div><dt>Страна действия</dt><dd>Только Молдова</dd></div>
-            <div><dt>Продукты</dt><dd>Точный перечень</dd></div>
-            <div><dt>Срок действия</dt><dd>Начало и окончание</dd></div>
-          </dl>
           <div className="certificate-international-note">
             <div>
-              <p className="eyebrow">Международные материалы</p>
+              <p className="eyebrow">Официальный источник</p>
               <p>
-                Международный архив Dr. Nona доступен отдельно и не является
-                доказательством регистрации или сертификации продукта в Молдове.
+                Список документов открывается на официальном сайте бренда.
               </p>
             </div>
             <a

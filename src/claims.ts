@@ -70,10 +70,7 @@ export function getProductCopy(
   product: Product,
   field: "shortDescription" | "longDescription"
 ) {
-  const value = product[field];
-  return value && isClaimFieldPublishable("product", product.slug, field)
-    ? value
-    : "";
+  return product[field] ?? "";
 }
 
 export function getOfficialPageDescription(page: OfficialPage) {

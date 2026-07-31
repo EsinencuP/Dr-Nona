@@ -30,7 +30,12 @@ export function requestOriginIsAllowed(
   const origin = request.headers.get("origin");
   if (!origin) return false;
   try {
-    return allowedOrigins.has(new URL(origin).origin);
+    const normalizedOrigin = new URL(origin).origin;
+    const requestOrigin = new URL(request.url).origin;
+    return (
+      normalizedOrigin === requestOrigin ||
+      allowedOrigins.has(normalizedOrigin)
+    );
   } catch {
     return false;
   }

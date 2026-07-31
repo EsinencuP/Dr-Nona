@@ -2,7 +2,6 @@ import { Drop } from "@phosphor-icons/react/Drop";
 import { Leaf } from "@phosphor-icons/react/Leaf";
 import { TestTube } from "@phosphor-icons/react/TestTube";
 import {
-  ClaimsReviewNotice,
   ProductCard,
   Reveal,
   SectionHeading,
@@ -23,15 +22,29 @@ export default function FormulaPage() {
     "dead-sea": Drop,
     "new-generation": Leaf,
   };
+  const neutralFormulaCopy = {
+    archaea: {
+      summary: "Микроорганизм, обнаруженный в экстремальной среде Мёртвого моря.",
+      text: "История Halo Complex™ начинается с исследования архебактерии, способной существовать в необычных природных условиях Мёртвого моря.",
+    },
+    "dead-sea": {
+      summary: "Минеральная композиция Мёртвого моря в основе философии бренда.",
+      text: "Минералы Мёртвого моря стали важной частью происхождения бренда и его подхода к созданию продуктов ежедневного ухода.",
+    },
+    "new-generation": {
+      summary: "Соединение природного происхождения и современной технологии производства.",
+      text: "Формула отражает идею Dr. Nona: изучать природные компоненты и последовательно применять современные методы производства.",
+    },
+  };
   const formulaChapters = formulaContent.map((chapter) => ({
     ...chapter,
     icon: formulaIcons[chapter.id as keyof typeof formulaIcons] ?? Leaf,
     summary: isClaimFieldPublishable("formula", chapter.id, "summary")
       ? chapter.summary
-      : "Описание свойства проходит проверку для рынка Молдовы.",
+      : neutralFormulaCopy[chapter.id as keyof typeof neutralFormulaCopy].summary,
     text: isClaimFieldPublishable("formula", chapter.id, "text")
       ? chapter.text
-      : "Подробная формулировка временно скрыта до документированного approval.",
+      : neutralFormulaCopy[chapter.id as keyof typeof neutralFormulaCopy].text,
   }));
   return (
     <>
@@ -47,7 +60,6 @@ export default function FormulaPage() {
               Инновационная формула основана на свойствах архебактерии и
               минералах Мёртвого моря.
             </p>
-            <ClaimsReviewNotice scope="formula" compact />
           </div>
           <div className="formula-pillars" aria-label="Основа Halo Complex">
             {formulaChapters.map(({ title, icon: Icon, summary }) => (

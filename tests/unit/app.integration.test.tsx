@@ -92,6 +92,22 @@ describe("Dr. Nona application", () => {
     });
   });
 
+  test("discards unavailable products before showing the selection count", async () => {
+    localStorage.setItem(
+      "drnona-selection",
+      JSON.stringify(["removed-catalog-product"])
+    );
+    renderApp("/");
+
+    const selectionLink = await screen.findByRole("link", {
+      name: "Подборка: 0",
+    });
+    expect(within(selectionLink).getByText("0")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(localStorage.getItem("drnona-selection")).toBe("[]");
+    });
+  });
+
   test("shows the selected product context in the real application form", async () => {
     renderApp("/contactus?products=lord-deodorant");
 
@@ -128,50 +144,58 @@ describe("Dr. Nona application", () => {
     expect(marketData.contact.telegram).toBeNull();
   });
 
-  test("does not expose foreign certificates as Moldova evidence", async () => {
+  test("links to the international document archive without review copy", async () => {
     renderApp("/certificates");
 
     expect(
       await screen.findByRole("heading", {
         level: 1,
-        name: "Сертификаты для Молдовы",
+        name: "Сертификаты и документы",
       })
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", {
         level: 2,
-        name: "На сайте нет опубликованных сертификатов для Молдовы",
+        name: "Международный архив сертификатов",
       })
     ).toBeInTheDocument();
     expect(screen.queryByRole("combobox")).not.toBeInTheDocument();
     expect(screen.queryByText("Russia")).not.toBeInTheDocument();
-    expect(screen.getByText("Кем выдан")).toBeInTheDocument();
-    expect(screen.getByText("Страна действия")).toBeInTheDocument();
-    expect(screen.getByText("Продукты")).toBeInTheDocument();
-    expect(screen.getByText("Срок действия")).toBeInTheDocument();
+    expect(screen.queryByText(/провер/i)).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: /Открыть международный архив/i })
+    ).toBeInTheDocument();
   });
 
-  test("publishes only complete, editorially ready products", () => {
+  test("publishes all current products with explicit nulls for unavailable fields", () => {
     expect(allProducts).toHaveLength(10);
-    expect(products).toHaveLength(7);
+    expect(products).toHaveLength(10);
     expect(
       allProducts.filter((product) => product.publicationStatus === "draft")
-    ).toHaveLength(3);
-    expect(productBySlug.has("parfum-faya")).toBe(false);
+    ).toHaveLength(0);
+    expect(productBySlug.has("parfum-faya")).toBe(true);
 
     for (const product of products) {
       expect(product.publicationStatus).toBe("published");
       expect(product.editorialStatus).toBe("ready");
-      expect(product.shortDescription?.trim()).toBeTruthy();
-      expect(product.longDescription?.trim()).toBeTruthy();
-      expect(product.ingredients?.trim()).toBeTruthy();
-      expect(product.howToUse?.trim()).toBeTruthy();
+      for (const field of [
+        "shortDescription",
+        "longDescription",
+        "ingredients",
+        "howToUse",
+      ] as const) {
+        expect(product[field] === null || product[field].trim().length > 0).toBe(true);
+      }
     }
   });
 
   test("marks an explicitly null product field as not applicable", () => {
+    const productWithIngredients = products.find(
+      (product) => product.slug === "lord-deodorant"
+    );
+    expect(productWithIngredients).toBeDefined();
     const product = {
-      ...products[0],
+      ...productWithIngredients!,
       howToUse: null,
     } satisfies Product;
 

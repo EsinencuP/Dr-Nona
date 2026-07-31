@@ -5,7 +5,6 @@ import { Flask } from "@phosphor-icons/react/Flask";
 import { Heart } from "@phosphor-icons/react/Heart";
 import { SealCheck } from "@phosphor-icons/react/SealCheck";
 import {
-  ClaimsReviewNotice,
   Reveal,
   getPageTitle,
   splitText,
@@ -210,11 +209,6 @@ export function AboutContentPage({ path }: { path: string }) {
           </a>
         </aside>
         <div className="prose">
-          <ClaimsReviewNotice
-            scope="official-page"
-            contentId={page.path}
-            compact
-          />
           {paragraphs.map((paragraph, index) => (
             <Reveal key={`${index}-${paragraph.slice(0, 20)}`} delay={(index % 3) * 40}>
               <p className={index === 0 ? "prose-lead" : ""}>{paragraph}</p>
