@@ -88,6 +88,8 @@ function renderReleaseStatus(status) {
   return `# Is the Dr. Nona Moldova site ready for production?\n\nNo. Technical quality gates pass locally, but production approval remains blocked by the items below.\n\nLast verified: ${status.asOf} against base commit \`${status.commit}\` and the current cleanup worktree.\n\nThis file is generated from \`docs/release-status.json\`. Run \`npm run release:status:generate\` after changing the machine-readable status.\n\n## Status identity\n\n| Field | Value |\n|---|---|\n| Verdict | \`${status.status}\` |\n| Label | ${status.label} |\n| Branch | \`${status.branch}\` |\n| Base commit | \`${status.commit}\` |\n| Environment | ${status.environment} |\n\n## Current dataset\n\n| Dataset | Count |\n|---|---:|\n| Source products | ${status.counts.sourceProducts} |\n| Published products | ${status.counts.publishedProducts} |\n| Draft products | ${status.counts.draftProducts} |\n| Official content records | ${status.counts.officialContentRecords} |\n| Claims | ${status.counts.claims.total} |\n| Approved claims | ${status.counts.claims.approved} |\n| Pending claims | ${status.counts.claims.pending} |\n| Rejected claims | ${status.counts.claims.rejected} |\n\n## Open release blockers\n\n| ID | Priority | Owner | Summary |\n|---|---|---|---|\n${blockerRows}\n\n## Acceptance criteria\n\n${criteria}\n\n## Release rule\n\nA successful build confirms compilation, generated output and automated checks. It does not approve legal content, business data, production operations or deployment.\n\nChange the verdict to \`release-ready\` only when every P0 and P1 blocker is closed and \`npm run release:check\` exits successfully.\n`;
 }
 
+const normalizeLineEndings = (value) => value.replace(/\r\n?/g, "\n");
+
 const allowedOwners = new Set([
   "external",
   "content",
@@ -133,7 +135,10 @@ const expectedReleaseMarkdown = renderReleaseStatus(release);
 if (process.argv.includes("--write-release")) {
   writeFileSync("docs/RELEASE_STATUS.md", expectedReleaseMarkdown, "utf8");
 }
-if (readFileSync("docs/RELEASE_STATUS.md", "utf8") !== expectedReleaseMarkdown) {
+if (
+  normalizeLineEndings(readFileSync("docs/RELEASE_STATUS.md", "utf8")) !==
+  normalizeLineEndings(expectedReleaseMarkdown)
+) {
   errors.push("RELEASE_STATUS.md is not synchronized with release-status.json");
 }
 
