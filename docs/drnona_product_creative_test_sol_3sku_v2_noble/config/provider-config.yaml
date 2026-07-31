@@ -1,9 +1,0 @@
-default_provider: folder
-providers:
-  folder:
-    enabled: true
-    input_dir: input/backgrounds
-    note: "Background plates created by GPT-5.6-sol through built-in imagegen."
-  mock:
-    enabled: true
-    note: "Offline deterministic background plates for mechanics tests only."

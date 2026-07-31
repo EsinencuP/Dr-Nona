@@ -1,7 +1,0 @@
-interface:
-  display_name: "Product Creative Studio"
-  short_description: "Protected-layer ecommerce image studio"
-  default_prompt: "Use $product-creative-studio to plan and create fidelity-safe catalog, hero, ingredient, and lifestyle product images."
-
-policy:
-  allow_implicit_invocation: true
