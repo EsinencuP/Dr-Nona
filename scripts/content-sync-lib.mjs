@@ -28,7 +28,7 @@ export const ProductSyncSchema = z
     longDescription: z.string(),
     ingredients: z.union([z.string(), z.null()]),
     howToUse: z.union([z.string(), z.null()]),
-    sku: nonEmptyText,
+    sku: z.string(),
     category: nonEmptyText,
     publicationStatus: z.enum(["published", "draft"]),
     editorialStatus: z.enum([
@@ -42,6 +42,7 @@ export const ProductSyncSchema = z
     catalogScale: z.number().positive().max(2).optional(),
     imageAlt: nonEmptyText,
     sourceUrl: z.string().url(),
+    officialSourceUrl: z.union([z.string().url(), z.null()]).optional(),
     releasedAt: optionalDate,
     sourceLastmod: z.string(),
     officialOrder: z.number().int().positive(),
@@ -358,6 +359,12 @@ export function validateContentSyncCandidate({
       scope: `content:${record.path ?? "unknown"}`,
       value: record.sourceUrl,
     })),
+    ...products
+      .filter((record) => record.officialSourceUrl)
+      .map((record) => ({
+        scope: `product-reference:${record.slug ?? "unknown"}`,
+        value: record.officialSourceUrl,
+      })),
     { scope: "summary", value: summary?.source },
   ];
   for (const { scope, value } of sourceRecords) {

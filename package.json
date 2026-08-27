@@ -43,7 +43,9 @@
     "preview": "vite preview",
     "sync:content": "node scripts/sync-official-content.mjs stage",
     "sync:content:validate": "node scripts/sync-official-content.mjs validate",
-    "sync:content:promote": "node scripts/sync-official-content.mjs promote"
+    "sync:content:promote": "node scripts/sync-official-content.mjs promote",
+    "sync:catalog:md": "node scripts/sync-moldova-catalog.mjs",
+    "sync:catalog:md:write": "node scripts/sync-moldova-catalog.mjs --write"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",

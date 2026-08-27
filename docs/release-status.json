@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
-  "asOf": "2026-07-31",
-  "commit": "a7303a12459ebd0dc5d4d5c69a1325250c044007",
+  "asOf": "2026-08-25",
+  "commit": "46810af5850b11446018dde6c5ee4c9cc71e5196",
   "branch": "main",
   "status": "release-blocked",
   "label": "Technical QA passes; production approval is blocked",
   "environment": "Windows local QA with Node 22.23.1, npm 10.9.8 and Chromium desktop/mobile",
   "counts": {
-    "sourceProducts": 10,
-    "publishedProducts": 10,
+    "sourceProducts": 50,
+    "publishedProducts": 50,
     "draftProducts": 0,
     "officialContentRecords": 137,
     "claims": {
-      "total": 199,
+      "total": 286,
       "approved": 0,
-      "pending": 199,
+      "pending": 286,
       "rejected": 0
     }
   },
@@ -53,18 +53,6 @@
         "Assign a qualified Moldova reviewer.",
         "Record classification, evidence, reviewer, date and document reference for each claim.",
         "Keep pending and rejected claims out of production output."
-      ]
-    },
-    {
-      "id": "P0-ASSORTMENT",
-      "priority": "P0",
-      "owner": "product",
-      "status": "open",
-      "summary": "The final production assortment and the disposition of three draft products are not approved.",
-      "acceptanceCriteria": [
-        "Approve the final list of products for Moldova.",
-        "Complete and approve each retained draft or remove it from the source dataset.",
-        "Pass the content completeness gate with the approved assortment."
       ]
     },
     {

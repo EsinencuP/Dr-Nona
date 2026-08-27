@@ -1,7 +1,8 @@
 {
   "schemaVersion": 1,
   "allowedSourceOrigins": [
-    "https://drnona.com"
+    "https://drnona.com",
+    "https://www.drnona.md"
   ],
   "maxProductCountDrop": 0,
   "maxContentCountDrop": 0,

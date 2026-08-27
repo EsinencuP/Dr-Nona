@@ -20,6 +20,7 @@ export type Product = {
   catalogScale: number;
   imageAlt: string;
   sourceUrl: string;
+  officialSourceUrl?: string | null;
   releasedAt: string | null;
   sourceLastmod: string;
   officialOrder: number;

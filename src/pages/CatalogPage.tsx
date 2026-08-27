@@ -10,6 +10,20 @@ import { useLocale } from "../locales/LocaleProvider";
 import { normalizeCatalogSort } from "../product-sort";
 import { useSearchParams } from "../router";
 
+function productCountLabel(count: number) {
+  const lastTwo = count % 100;
+  const last = count % 10;
+  const word =
+    lastTwo >= 11 && lastTwo <= 14
+      ? "товаров"
+      : last === 1
+        ? "товар"
+        : last >= 2 && last <= 4
+          ? "товара"
+          : "товаров";
+  return `${count} ${word}`;
+}
+
 export default function CatalogPage() {
   const [params, setParams] = useSearchParams();
   const { products, categories } = useProductData();
@@ -23,6 +37,16 @@ export default function CatalogPage() {
     () => filterCatalogProducts({ products, query, category, sort }),
     [category, products, query, sort]
   );
+  const categoryCounts = useMemo(
+    () =>
+      new Map(
+        categories.map((item) => [
+          item,
+          products.filter((product) => product.category === item).length,
+        ])
+      ),
+    [categories, products]
+  );
 
   const update = (key: string, value: string) => {
     const next = new URLSearchParams(params);
@@ -35,10 +59,10 @@ export default function CatalogPage() {
     <section className="catalog-page container">
       <div className="page-intro page-intro--catalog">
         <div>
-          <p className="eyebrow">Каталог · {products.length} продуктов</p>
+          <p className="eyebrow">Каталог · {products.length} товаров</p>
           <h1>Каталог <em>Dr. Nona</em></h1>
         </div>
-        <p>Продукты Dr. Nona для ежедневного ухода.</p>
+        <p>Полный ассортимент Dr. Nona Moldova с описаниями, составом и способом применения.</p>
       </div>
 
       <button
@@ -101,8 +125,30 @@ export default function CatalogPage() {
         </label>
       </div>
 
+      <div className="catalog-categories" aria-label="Фильтр по категории">
+        <button
+          className={category === "all" ? "is-active" : ""}
+          type="button"
+          aria-pressed={category === "all"}
+          onClick={() => update("category", "all")}
+        >
+          <span>Все товары</span><small>{products.length}</small>
+        </button>
+        {categories.map((item) => (
+          <button
+            className={category === item ? "is-active" : ""}
+            type="button"
+            aria-pressed={category === item}
+            key={item}
+            onClick={() => update("category", item)}
+          >
+            <span>{item}</span><small>{categoryCounts.get(item)}</small>
+          </button>
+        ))}
+      </div>
+
       <div className="catalog-status" aria-live="polite">
-        <span>{result.length} {t.productsFound}</span>
+        <span>{productCountLabel(result.length)}</span>
         {(query || category !== "all" || sort !== "popular") && (
           <button type="button" onClick={() => setParams({})}>{t.reset}</button>
         )}

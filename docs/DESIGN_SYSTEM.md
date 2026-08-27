@@ -58,12 +58,7 @@ Product save controls stay at the bottom action area above product media stackin
 
 ## Product imagery
 
-Use official or owner-approved product media only:
-
-- Catalogue cards use `image`, a white-background product composition
-- Product detail uses `cardImage`, an editorial or environment composition
-- Object scale uses `catalogScale`, not the outer canvas dimensions
-- The full product object must remain visible with breathing room from card edges
+Use only owner-approved product media. The current 50-product catalogue deliberately uses the same neutral local placeholder in catalogue, selection, home merchandising and product detail. `image`, `cardImage` and `catalogScale` remain in the model so approved product photography can be introduced later without changing route or card contracts.
 
 Do not retain raw exports, duplicate aliases or unused variants in `public/`. Do not reconstruct official packaging with generative AI.
 

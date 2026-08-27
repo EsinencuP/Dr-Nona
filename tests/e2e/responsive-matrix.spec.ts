@@ -322,7 +322,7 @@ async function runViewportContract(
     page.getByRole("searchbox", { name: "Поиск по названию" })
   ).toBeVisible();
   await expect(page.getByRole("combobox", { name: "Все категории" })).toBeVisible();
-  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(10);
+  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50);
   await page.evaluate(() => {
     document.documentElement.lang = "ro";
     const title = document.querySelector(".catalog-page h1");
@@ -355,7 +355,7 @@ async function runViewportContract(
   await expect(
     page.getByRole("heading", {
       level: 1,
-      name: "Lord - Halo Deodorant Antiperspirant",
+      name: "Deodorant Lord",
     })
   ).toBeVisible();
   const accordionButtons = page.locator(".accordion-item > button");
@@ -457,6 +457,9 @@ for (const viewport of requiredViewports) {
         .getByRole("button", { name: "Фильтры и сортировка" })
         .click();
     }
+    await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50, {
+      timeout: 15_000,
+    });
     await page.locator(".site-footer").scrollIntoViewIfNeeded();
     await page.evaluate(() => window.scrollTo(0, 0));
 
@@ -464,6 +467,7 @@ for (const viewport of requiredViewports) {
       animations: "disabled",
       caret: "hide",
       fullPage: true,
+      timeout: 15_000,
       maxDiffPixelRatio: 0.03,
       threshold: 0.35,
     });

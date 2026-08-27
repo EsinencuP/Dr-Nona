@@ -2,7 +2,7 @@
 
 The application combines explicit React routes with prerendered official-content routes. The generated SEO manifest is the complete machine-readable inventory.
 
-Last verified: 2026-07-31. The current manifest contains 144 prerendered routes, of which 142 are indexable.
+Last verified: 2026-08-25. The current manifest contains 187 routes, of which 185 are indexable.
 
 ## Primary routes
 

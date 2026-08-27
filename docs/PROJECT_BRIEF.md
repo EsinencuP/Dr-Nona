@@ -39,7 +39,7 @@ The official site supplies the factual page and content baseline. Moldova pages 
 
 ## Catalogue contract
 
-The catalogue supports search, product-type filtering and sorting by popularity fallback, source freshness, A to Z and Z to A. Product cards use white-background catalogue media. Product detail pages use their separate editorial card media.
+The catalogue supports search, five-category filtering and sorting by popularity fallback, source freshness, A to Z and Z to A. Until approved product photography is supplied, every product surface uses the neutral Dr. Nona placeholder.
 
 Only `published` and `ready` records appear publicly. A product detail hides fields that are explicitly not applicable and excludes records with missing required content.
 

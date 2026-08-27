@@ -36,7 +36,7 @@ test("navigation works for desktop and mobile Chromium", async ({
   }
 
   await expect(page).toHaveURL(/\/products$/);
-  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(10);
+  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50);
 });
 
 test("keyboard navigation reaches the skip link and main content", async ({

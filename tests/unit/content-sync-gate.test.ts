@@ -157,7 +157,7 @@ describe("content sync publication gate", () => {
 
   test("blocks records that do not conform to the schema", () => {
     const result = validate({
-      products: [product({ sku: "" })],
+      products: [product({ officialName: "" })],
     });
 
     expect(errorCodes(result)).toContain("schema-invalid");

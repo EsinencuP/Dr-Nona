@@ -2,7 +2,7 @@
 
 The content model separates imported facts, editorial approval and runtime publication. Source presence alone never grants publication.
 
-Last verified: 2026-07-31 against `src/data/` and the current validation scripts.
+Last verified: 2026-08-25 against `src/data/` and the current validation scripts.
 
 ## Product
 
@@ -10,14 +10,14 @@ Each product contains identity, content, media, source, ordering and editorial f
 
 - `slug`, `officialName`, `sku` and `category`
 - `shortDescription`, `longDescription`, `ingredients` and `howToUse`
-- `image` for the white catalogue composition
-- `cardImage` for the product-detail composition
-- `catalogScale` for object-aware catalogue sizing
-- `sourceUrl`, `sourceLastmod`, `releasedAt` and `officialOrder`
+- `image` and `cardImage`, currently set to the neutral placeholder until product media is supplied
+- `catalogScale` for future object-aware catalogue sizing
+- `sourceUrl` for the primary Moldova catalogue and optional `officialSourceUrl` for international enrichment
+- `sourceLastmod`, `releasedAt` and `officialOrder`
 - `popularityRank` and `relatedSlugs`
 - `publicationStatus` and `editorialStatus`
 
-All current categories require the four content fields. An empty string means missing content. `null` is valid only when the category rule explicitly marks a field as not applicable; no current category permits it.
+All current categories require `shortDescription` and `longDescription`. `ingredients` and `howToUse` may be `null` only when neither source publishes a usable value. Empty strings remain invalid for required copy.
 
 A product is public only when `publicationStatus` is `published`, `editorialStatus` is `ready` and the category completeness assessment has no issue.
 

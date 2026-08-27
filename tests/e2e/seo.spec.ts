@@ -39,9 +39,9 @@ test("product route exposes complete route metadata and Product JSON-LD", async 
     };
   });
 
-  expect(metadata.title).toContain("Lord - Halo Deodorant Antiperspirant");
+  expect(metadata.title).toContain("Deodorant Lord");
   expect(metadata.description).toContain(
-    "Lord - Halo Deodorant Antiperspirant"
+    "Deodorant Lord"
   );
   expect(metadata.canonical).toBe(
     "http://127.0.0.1:4173/product/lord-deodorant"

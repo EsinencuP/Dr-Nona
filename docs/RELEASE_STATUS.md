@@ -2,7 +2,7 @@
 
 No. Technical quality gates pass locally, but production approval remains blocked by the items below.
 
-Last verified: 2026-07-31 against base commit `a7303a12459ebd0dc5d4d5c69a1325250c044007` and the current cleanup worktree.
+Last verified: 2026-08-25 against base commit `46810af5850b11446018dde6c5ee4c9cc71e5196` and the current cleanup worktree.
 
 This file is generated from `docs/release-status.json`. Run `npm run release:status:generate` after changing the machine-readable status.
 
@@ -13,20 +13,20 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 | Verdict | `release-blocked` |
 | Label | Technical QA passes; production approval is blocked |
 | Branch | `main` |
-| Base commit | `a7303a12459ebd0dc5d4d5c69a1325250c044007` |
+| Base commit | `46810af5850b11446018dde6c5ee4c9cc71e5196` |
 | Environment | Windows local QA with Node 22.23.1, npm 10.9.8 and Chromium desktop/mobile |
 
 ## Current dataset
 
 | Dataset | Count |
 |---|---:|
-| Source products | 10 |
-| Published products | 10 |
+| Source products | 50 |
+| Published products | 50 |
 | Draft products | 0 |
 | Official content records | 137 |
-| Claims | 199 |
+| Claims | 286 |
 | Approved claims | 0 |
-| Pending claims | 199 |
+| Pending claims | 286 |
 | Rejected claims | 0 |
 
 ## Open release blockers
@@ -36,7 +36,6 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 | `P0-LOCALE` | P0 | content | The complete Romanian interface and content set is not approved or implemented. |
 | `P0-CONTACT` | P0 | product | Telegram delivery works locally, but privacy, production origin and abuse protection are not approved. |
 | `P0-LEGAL` | P0 | legal | Moldova legal review has not approved any regulated product claim. |
-| `P0-ASSORTMENT` | P0 | product | The final production assortment and the disposition of three draft products are not approved. |
 | `P1-MEDIA-RIGHTS` | P1 | legal | Production publication rights for product, brand and editorial media are not confirmed. |
 | `P1-CONTENT` | P1 | content | Moldova certificates and the final local scope for service and editorial pages are not approved. |
 | `P1-RANKING` | P1 | product | The popularity ranking has no approved business data source. |
@@ -62,12 +61,6 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 - Assign a qualified Moldova reviewer.
 - Record classification, evidence, reviewer, date and document reference for each claim.
 - Keep pending and rejected claims out of production output.
-
-### `P0-ASSORTMENT`
-
-- Approve the final list of products for Moldova.
-- Complete and approve each retained draft or remove it from the source dataset.
-- Pass the content completeness gate with the approved assortment.
 
 ### `P1-MEDIA-RIGHTS`
 

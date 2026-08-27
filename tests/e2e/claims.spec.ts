@@ -5,22 +5,20 @@ test("sourced product copy is visible without internal review language", async (
 }) => {
   await page.goto("/product/solaris-body-lotion");
 
-  await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Halo Solaris Body Lotion"
-  );
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Solaris");
   await expect(page.getByTestId("claims-review-notice")).toHaveCount(0);
-  await expect(
-    page.getByText("Способствует обновлению клеток и заживлению кожи.")
-  ).toBeVisible();
+  await expect(page.locator(".product-purpose")).toHaveText(
+    "регенерирующий крем для тела."
+  );
   await expect(page.locator(".product-description")).toContainText(
-    /массажа при мышечных и суставных болях/i
+    /бестселлер компании/i
   );
 });
 
 test("supplement product shows a neutral adjacent disclaimer", async ({
   page,
 }) => {
-  await page.goto("/product/halo-gonseen-vitalitea");
+  await page.goto("/product/gonseen");
 
   const disclaimer = page.getByTestId("product-disclaimer");
   await expect(disclaimer).toBeVisible();
@@ -28,7 +26,7 @@ test("supplement product shows a neutral adjacent disclaimer", async ({
   await expect(disclaimer).not.toContainText("Молдовы");
   await expect(disclaimer).not.toContainText("подтверждения");
   await expect(page.locator(".product-description")).toContainText(
-    /формула включает мате/i
+    /чай gonseen/i
   );
 });
 

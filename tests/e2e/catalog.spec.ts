@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 test.beforeEach(async ({ page }, testInfo) => {
   await page.goto("/products");
-  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(10);
+  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50);
   if (testInfo.project.name === "chromium-mobile") {
     await page.getByRole("button", { name: "Фильтры и сортировка" }).click();
   }
@@ -12,18 +12,18 @@ test("search, category filter and alphabetical sort update the catalogue", async
   page,
 }) => {
   const search = page.getByRole("searchbox", { name: "Поиск по названию" });
-  await search.fill("Dynamic");
-  await expect(page).toHaveURL(/q=Dynamic/);
+  await search.fill("404001");
+  await expect(page).toHaveURL(/q=404001/);
   await expect(page.locator(".catalog-grid .product-card")).toHaveCount(1);
   await expect(
-    page.getByRole("heading", { level: 3, name: "Halo Dynamic Cream" })
+    page.getByRole("heading", { level: 3, name: "Dynamic" })
   ).toBeVisible();
 
   await page.getByRole("button", { name: "Очистить поиск" }).click();
   await page.getByRole("combobox", { name: "Все категории" }).selectOption({
-    label: "Уход за лицом",
+    label: "Кремы",
   });
-  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(2);
+  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(12);
 
   await page.getByRole("combobox", { name: "Сортировка" }).selectOption("az");
   const names = await page.locator(".product-card h3").allTextContents();
@@ -48,7 +48,7 @@ test("an unknown query shows a recoverable empty state", async ({ page }) => {
     })
   ).toBeVisible();
   await page.getByRole("button", { name: "Сбросить фильтры" }).last().click();
-  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(10);
+  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50);
 });
 
 test("selection action stays separated from product copy", async ({ page }) => {
@@ -80,6 +80,6 @@ test("catalog actions share one vertical position in every card", async ({
       })
     );
 
-  expect(actionOffsets).toHaveLength(10);
+  expect(actionOffsets).toHaveLength(50);
   expect(Math.max(...actionOffsets) - Math.min(...actionOffsets)).toBeLessThanOrEqual(2);
 });

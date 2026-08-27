@@ -6,20 +6,20 @@ import { evaluateProductDataset } from "../../scripts/product-content-lib.mjs";
 const { allProducts } = await loadProductData();
 
 describe("product content publication gate", () => {
-  test("accepts all ten current products, including explicitly unavailable fragrance fields", () => {
+  test("accepts all 50 current products, including explicitly unavailable fields", () => {
     const report = evaluateProductDataset(allProducts);
 
     expect(report.errors).toEqual([]);
-    expect(report.published).toBe(10);
+    expect(report.published).toBe(50);
     expect(report.drafts).toBe(0);
     expect(
       report.assessments.find(
         (product: { slug: string }) => product.slug === "parfum-faya"
       )
-    ).toMatchObject({ complete: true, nullFields: ["howToUse"] });
+    ).toMatchObject({ complete: true, nullFields: ["ingredients", "howToUse"] });
   });
 
-  test("requires fragrance description and ingredients", () => {
+  test("requires the primary catalogue description", () => {
     const brokenDataset = allProducts.map((product) =>
       product.slug === "parfum-faya"
         ? { ...product, longDescription: null }
@@ -33,12 +33,12 @@ describe("product content publication gate", () => {
     );
   });
 
-  test("rejects an incomplete product marked as published", () => {
+  test("rejects an empty required description on a published product", () => {
     const brokenDataset = allProducts.map((product) =>
       product.slug === "lord-deodorant"
         ? {
             ...product,
-            ingredients: "",
+            longDescription: "",
           }
         : product
     );
@@ -50,7 +50,7 @@ describe("product content publication gate", () => {
     );
   });
 
-  test("rejects null unless the category rule explicitly allows it", () => {
+  test("accepts null for a field unavailable in the source catalogue", () => {
     const brokenDataset = allProducts.map((product) =>
       product.slug === "lord-deodorant"
         ? {
@@ -62,9 +62,7 @@ describe("product content publication gate", () => {
 
     const report = evaluateProductDataset(brokenDataset);
 
-    expect(report.errors).toContain(
-      "lord-deodorant: published product has 1 content issue(s)."
-    );
+    expect(report.errors).toEqual([]);
   });
 
   test("rejects an invalid approved release date", () => {

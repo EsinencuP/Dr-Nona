@@ -34,14 +34,14 @@ describe("Dr. Nona application", () => {
     const search = await screen.findByRole("searchbox", {
       name: "Поиск по названию",
     });
-    await user.type(search, "Dynamic");
+    await user.type(search, "404001");
 
     await waitFor(() => {
-      expect(window.location.search).toBe("?q=Dynamic");
+      expect(window.location.search).toBe("?q=404001");
     });
-    expect(screen.getByText("1 продуктов")).toBeInTheDocument();
+    expect(screen.getByText("1 товар")).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { level: 3, name: "Halo Dynamic Cream" })
+      screen.getByRole("heading", { level: 3, name: "Dynamic" })
     ).toBeInTheDocument();
   });
 
@@ -72,12 +72,12 @@ describe("Dr. Nona application", () => {
     expect(
       await screen.findByRole("heading", {
         level: 2,
-        name: "Lord - Halo Deodorant Antiperspirant",
+        name: "Deodorant Lord",
       })
     ).toBeInTheDocument();
     await user.click(
       screen.getByRole("button", {
-        name: "Удалить Lord - Halo Deodorant Antiperspirant",
+        name: "Удалить Deodorant Lord",
       })
     );
 
@@ -168,8 +168,8 @@ describe("Dr. Nona application", () => {
   });
 
   test("publishes all current products with explicit nulls for unavailable fields", () => {
-    expect(allProducts).toHaveLength(10);
-    expect(products).toHaveLength(10);
+    expect(allProducts).toHaveLength(50);
+    expect(products).toHaveLength(50);
     expect(
       allProducts.filter((product) => product.publicationStatus === "draft")
     ).toHaveLength(0);
@@ -228,7 +228,7 @@ describe("Dr. Nona application", () => {
       separators.every((separator) => separator.getAttribute("aria-hidden") === "true")
     ).toBe(true);
     expect(
-      within(breadcrumb).getByText("Lord - Halo Deodorant Antiperspirant")
+      within(breadcrumb).getByText("Deodorant Lord")
     ).toHaveAttribute("aria-current", "page");
 
     const trigger = screen.getByRole("button", { name: "Состав" });

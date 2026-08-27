@@ -2,7 +2,7 @@
 
 This roadmap contains unfinished work only. Completed implementation history stays in Git and active product choices stay in `DECISIONS.md`.
 
-Last verified: 2026-07-31 against `docs/release-status.json` and the current worktree.
+Last verified: 2026-08-25 against `docs/release-status.json` and the current worktree.
 
 ## External approval blockers
 
@@ -27,16 +27,6 @@ External owners must resolve these tasks before engineering can mark the release
 - **Goal**: Make the existing Telegram form operationally and legally deployable
 - **Acceptance criteria**: Approve recipient, consent, retention and production origin; confirm the deployed successful and failed flows
 - **Verification commands**: `npm run test`, `npm run test:e2e`, `npm run release:check`
-
-### `P0-ASSORTMENT`: approve the product set
-
-- **Priority**: P0
-- **Status**: Open
-- **Owner**: Product/content
-- **Dependency**: Final Moldova assortment and missing draft content
-- **Goal**: Decide which of the 10 source products may ship
-- **Acceptance criteria**: Approve the final list; complete or remove all three drafts; keep every published record complete
-- **Verification commands**: `npm run content:validate`, `npm run build`
 
 ### `P1-MEDIA-RIGHTS`: confirm publication rights
 

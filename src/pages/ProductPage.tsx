@@ -138,7 +138,7 @@ export default function ProductPage() {
         <div className="product-knowledge__intro">
           <p className="eyebrow">Подробно о продукте</p>
           <h2>Состав и применение</h2>
-          <p>Информация перенесена с официальной страницы продукта Dr. Nona.</p>
+          <p>Описание перенесено из каталога Dr. Nona Moldova и дополнено данными международного сайта.</p>
         </div>
         <div className="accordion">
           {productSections.map(({ key, label, content }) => {
@@ -171,9 +171,16 @@ export default function ProductPage() {
               </div>
             );
           })}
-          <a className="official-source-link" href={product.sourceUrl} target="_blank" rel="noreferrer">
-            {t.source}: drnona.com <ArrowUpRight aria-hidden="true" />
-          </a>
+          <div className="product-source-links">
+            <a className="official-source-link" href={product.sourceUrl} target="_blank" rel="noreferrer">
+              {t.source}: drnona.md <ArrowUpRight aria-hidden="true" />
+            </a>
+            {product.officialSourceUrl && (
+              <a className="official-source-link" href={product.officialSourceUrl} target="_blank" rel="noreferrer">
+                Дополнительные данные: drnona.com <ArrowUpRight aria-hidden="true" />
+              </a>
+            )}
+          </div>
         </div>
       </section>
 

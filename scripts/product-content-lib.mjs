@@ -11,17 +11,25 @@ const COMPLETE_PRODUCT_RULE = {
 };
 
 const FRAGRANCE_PRODUCT_RULE = {
-  required: ["shortDescription", "longDescription", "ingredients"],
-  nullable: ["howToUse"],
+  required: ["shortDescription", "longDescription"],
+  nullable: ["ingredients", "howToUse"],
+};
+
+const MOLDOVA_CATALOG_RULE = {
+  required: ["shortDescription", "longDescription"],
+  nullable: ["ingredients", "howToUse"],
 };
 
 export const CATEGORY_CONTENT_RULES = {
   "Парфюмерия": FRAGRANCE_PRODUCT_RULE,
+  "Кремы": MOLDOVA_CATALOG_RULE,
+  "Напитки": MOLDOVA_CATALOG_RULE,
+  "Пищевые добавки": MOLDOVA_CATALOG_RULE,
   "Уход за лицом": COMPLETE_PRODUCT_RULE,
   "Дезодоранты": COMPLETE_PRODUCT_RULE,
   "Уход за телом": COMPLETE_PRODUCT_RULE,
   "Фитокомплексы": COMPLETE_PRODUCT_RULE,
-  "Гигиена": COMPLETE_PRODUCT_RULE,
+  "Гигиена": MOLDOVA_CATALOG_RULE,
   "Уход за руками": COMPLETE_PRODUCT_RULE,
 };
 

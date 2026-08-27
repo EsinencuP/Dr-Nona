@@ -58,6 +58,19 @@
   filter: none;
 }
 
+.product-stage img[src$="product-placeholder.svg"] {
+  width: min(78%, 620px);
+  height: min(78%, 620px);
+  object-fit: contain;
+  border-radius: 34px;
+  box-shadow: 0 22px 60px rgba(20, 88, 101, 0.12);
+}
+
+.product-source-links {
+  display: grid;
+  gap: 8px;
+}
+
 .product-stage__index,
 .product-stage__caption {
   position: absolute;

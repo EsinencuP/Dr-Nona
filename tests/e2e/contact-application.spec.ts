@@ -62,7 +62,7 @@ test("order defaults from selection and Telegram delivery succeeds", async ({
 
 test("client validation and complete failure preserve data", async ({ page }) => {
   await page.route("**/api/applications", async (route) => {
-    await new Promise((resolve) => setTimeout(resolve, 250));
+    await new Promise((resolve) => setTimeout(resolve, 1_000));
     await route.fulfill({
       status: 502,
       contentType: "application/json",

@@ -24,8 +24,15 @@ export function filterCatalogProducts({
       (product) =>
         (category === "all" || product.category === category) &&
         (!needle ||
-          product.officialName.toLocaleLowerCase("ru").includes(needle) ||
-          getProductCopy(product, "shortDescription")
+          [
+            product.officialName,
+            product.sku,
+            product.category,
+            getProductCopy(product, "shortDescription"),
+            getProductCopy(product, "longDescription"),
+            product.ingredients ?? "",
+          ]
+            .join(" ")
             .toLocaleLowerCase("ru")
             .includes(needle))
     )

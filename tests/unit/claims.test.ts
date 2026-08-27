@@ -40,7 +40,7 @@ describe("regulated claims publication guard", () => {
       isClaimFieldPublishable(
         "product",
         "solaris-body-lotion",
-        "shortDescription"
+        "longDescription"
       )
     ).toBe(false);
   });
@@ -62,7 +62,7 @@ describe("regulated claims publication guard", () => {
   });
 
   it("provides a neutral consumer disclaimer for supplement content", () => {
-    const product = productBySlug.get("halo-gonseen-vitalitea");
+    const product = productBySlug.get("gonseen");
     expect(product).toBeDefined();
     const disclaimer = getProductDisclaimer(product!);
     expect(disclaimer?.status).toBe("interim");

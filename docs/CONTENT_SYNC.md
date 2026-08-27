@@ -2,13 +2,15 @@
 
 The sync pipeline stages a candidate, validates it against the current source datasets and promotes only an explicitly reviewed fingerprint.
 
-Last verified: 2026-07-31 against `scripts/sync-official-content.mjs` and `scripts/content-sync-lib.mjs`.
+Last verified: 2026-08-25 against the Moldova catalogue and international content sync scripts.
 
 ## Source inventory
 
-The current `src/data/products.json` is the product inventory. The sync script reads each product slug, official name, source URL and runtime image basename from that file. Raw catalogue exports and external CSV manifests are not repository dependencies.
+The current `src/data/products.json` contains 50 Russian-language products from `https://www.drnona.md/catalog`. `drnona.md` is authoritative for the assortment, product name and description. Matching pages on `https://drnona.com` supplement SKU, ingredients and usage data without overriding the primary catalogue copy.
 
-Official page discovery uses the allowlisted `https://drnona.com` sitemap. The pipeline rejects product, content, summary and sitemap URLs outside the approved origin.
+Both `https://www.drnona.md` and `https://drnona.com` are allowlisted sources. Product media is intentionally replaced by the local neutral placeholder.
+
+To validate the Moldova source without writing data, run `npm run sync:catalog:md`. To rebuild `products.json` after reviewing the live inventory, run `npm run sync:catalog:md:write`. The command requires exactly 50 products and validates all five category counts, unique slugs and non-empty primary descriptions.
 
 ## Stage a candidate
 

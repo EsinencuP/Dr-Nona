@@ -13,5 +13,35 @@
       "https://www.legis.md/cautare/downloadpdf/151895",
       "https://ansp.md/pentru-agenti-economici/"
     ]
+  },
+  {
+    "id": "MD-SUPPLEMENT-INTERIM-002",
+    "market": "MD",
+    "appliesToCategory": "Пищевые добавки",
+    "status": "interim",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "title": "Информация о пищевой добавке",
+    "text": "Не является лекарственным средством и не предназначена для диагностики, лечения или профилактики заболеваний. Не заменяет разнообразное и сбалансированное питание и здоровый образ жизни.",
+    "sourceUrls": [
+      "https://www.legis.md/cautare/downloadpdf/151895",
+      "https://ansp.md/pentru-agenti-economici/"
+    ]
+  },
+  {
+    "id": "MD-SUPPLEMENT-INTERIM-003",
+    "market": "MD",
+    "appliesToCategory": "Напитки",
+    "status": "interim",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "title": "Информация о продукте",
+    "text": "Не является лекарственным средством и не предназначен для диагностики, лечения или профилактики заболеваний. Не заменяет разнообразное и сбалансированное питание и здоровый образ жизни.",
+    "sourceUrls": [
+      "https://www.legis.md/cautare/downloadpdf/151895",
+      "https://ansp.md/pentru-agenti-economici/"
+    ]
   }
 ]

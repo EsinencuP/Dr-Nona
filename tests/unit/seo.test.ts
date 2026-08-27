@@ -35,7 +35,7 @@ describe("route SEO contract", () => {
 
     expect(product).toMatchObject({
       "@type": "Product",
-      name: "Lord - Halo Deodorant Antiperspirant",
+      name: "Deodorant Lord",
       sku: "324001",
       brand: { "@type": "Brand", name: "Dr. Nona" },
     });
@@ -77,10 +77,10 @@ describe("route SEO contract", () => {
     document.documentElement.dataset.siteOrigin = origin;
     applyRouteMetadata("/product/lord-deodorant");
 
-    expect(document.title).toContain("Lord - Halo Deodorant Antiperspirant");
+    expect(document.title).toContain("Deodorant Lord");
     expect(
       document.querySelector('meta[name="description"]')?.getAttribute("content")
-    ).toContain("Lord - Halo Deodorant Antiperspirant");
+    ).toContain("Deodorant Lord");
     expect(
       document.querySelector('link[rel="canonical"]')?.getAttribute("href")
     ).toBe(`${origin}/product/lord-deodorant`);

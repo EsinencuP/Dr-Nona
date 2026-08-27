@@ -23,7 +23,7 @@ export default function HomePage() {
     productBySlug.get("dynamic-hydrating-cream") ?? products[0];
   const supportingProducts = [
     productBySlug.get("hand-and-nail-treatment"),
-    productBySlug.get("halo-gonseen-vitalitea"),
+    productBySlug.get("gonseen"),
   ].filter((product): product is Product => Boolean(product));
   const promoProduct =
     productBySlug.get("solaris-body-lotion") ?? products[1];

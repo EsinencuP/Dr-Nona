@@ -46,6 +46,8 @@ and verification contract.
 | `npm run lint` | Run ESLint with zero warnings |
 | `npm run test` | Run unit and component tests |
 | `npm run test:e2e` | Run desktop/mobile browser tests |
+| `npm run sync:catalog:md` | Validate the 50-product Moldova source catalogue without writing |
+| `npm run sync:catalog:md:write` | Rebuild product data from the reviewed Moldova catalogue |
 | `npm run repository:validate` | Check repository and documentation hygiene |
 | `npm run documentation:validate` | Check canonical docs and release consistency |
 | `npm run release:check` | Fail while release blockers remain |
