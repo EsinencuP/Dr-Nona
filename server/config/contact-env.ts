@@ -2,6 +2,7 @@ export type ContactEnvironment = {
   allowedOrigins: Set<string>;
   telegramBotToken: string;
   telegramChatId: string;
+  telegramWebhookSecret?: string;
 };
 
 export type ContactEnvironmentResult =
@@ -54,6 +55,7 @@ export function readContactEnvironment(
       allowedOrigins,
       telegramBotToken: environment.TELEGRAM_BOT_TOKEN!,
       telegramChatId: environment.TELEGRAM_CHAT_ID!,
+      telegramWebhookSecret: environment.TELEGRAM_WEBHOOK_SECRET?.trim() || undefined,
     },
   };
 }

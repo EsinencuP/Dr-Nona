@@ -1,5 +1,10 @@
 import { describe, expect, test } from "vitest";
-import { formatTelegramApplication } from "../../server/applications/format-application";
+import {
+  formatTelegramApplication,
+  STATUS_PENDING,
+  STATUS_DONE,
+  replaceStatus,
+} from "../../server/applications/format-application";
 import type { ApplicationRecord } from "../../server/applications/application-types";
 
 const common = {
@@ -40,6 +45,8 @@ describe("application formatter", () => {
         "ID заявки: request-123",
         "Получено: 19.06.2030, 11:30:00",
         "Источник: сайт Dr. Nona Moldova",
+        "",
+        STATUS_PENDING,
       ].join("\n")
     );
   });
@@ -58,6 +65,22 @@ describe("application formatter", () => {
     expect(message).toContain("Формат: Офлайн");
     expect(message).toContain("Дата и время: 20.06.2030, 14:30");
     expect(message).toContain("Часовой пояс: Europe/Chisinau");
+    expect(message).toContain(STATUS_PENDING);
     expect(message).not.toMatch(/\[object Object\]|undefined|[*_`]/u);
   });
 });
+
+describe("replaceStatus", () => {
+  test("replaces pending status with done", () => {
+    const text = `Some message\n\n${STATUS_PENDING}`;
+    const result = replaceStatus(text, STATUS_PENDING, STATUS_DONE);
+    expect(result).toBe(`Some message\n\n${STATUS_DONE}`);
+  });
+
+  test("returns null when target status is not found", () => {
+    const text = `Some message\n\n${STATUS_DONE}`;
+    const result = replaceStatus(text, STATUS_PENDING, STATUS_DONE);
+    expect(result).toBeNull();
+  });
+});
+

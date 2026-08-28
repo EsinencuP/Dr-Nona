@@ -1,5 +1,21 @@
 import type { ApplicationRecord } from "./application-types.js";
 
+export const STATUS_PENDING = "⏳ Статус: Ожидает обработки";
+export const STATUS_DONE = "✅ Статус: Выполнено";
+
+/**
+ * Replace the status line in a Telegram message.
+ * Returns `null` when the target status line is not found.
+ */
+export function replaceStatus(
+  text: string,
+  from: string,
+  to: string
+): string | null {
+  if (!text.includes(from)) return null;
+  return text.replace(from, to);
+}
+
 function formatDateTimeInChisinau(iso: string) {
   const parts = new Intl.DateTimeFormat("ru-RU", {
     timeZone: "Europe/Chisinau",
@@ -48,6 +64,8 @@ export function formatTelegramApplication(record: ApplicationRecord) {
       ...products,
       "",
       ...footer,
+      "",
+      STATUS_PENDING,
     ].join("\n");
   }
 
@@ -63,5 +81,7 @@ export function formatTelegramApplication(record: ApplicationRecord) {
     "Часовой пояс: Europe/Chisinau",
     "",
     ...footer,
+    "",
+    STATUS_PENDING,
   ].join("\n");
 }
