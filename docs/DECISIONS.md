@@ -26,7 +26,8 @@ Last verified: 2026-07-31 against base commit `fede3938ce5173206ee4a6983ece7fb2c
 | `D-061` | 2026-07-29 | Approved | Malformed routes fail safely behind an application error boundary. | Invalid percent encoding could crash rendering. | Damaged URLs show controlled bad-request or not-found output. | QA-015 |
 | `D-062` | 2026-07-31 | Approved | Orders and consultations use one server-validated Telegram-only endpoint. | The owner selected Telegram and removed Resend and Turnstile. | Success follows Telegram delivery; production WAF, consent and retention remain blocked. | Direct user decision |
 | `D-063` | 2026-07-28 | Approved | The catalogue and product pages use one visual system for all lines. | A separate Lord identity was removed from product surfaces. | Lord may appear as a named collection or dark home banner, not as a route-level theme. | Direct user decision |
-| `D-065` | 2026-08-25 | Approved | The 50-product RU inventory, names and descriptions come from `drnona.md`; `drnona.com` supplements matching SKU, ingredients and usage data. Product imagery is replaced by one local neutral placeholder. | The owner explicitly replaced the previous ten-product catalogue and deferred product images. | Existing product routes are preserved where international slugs match; filtering uses the five Moldova catalogue categories. | Direct user decision |
+| `D-065` | 2026-08-25 | Approved | The 50-product RU inventory, names and descriptions come from `drnona.md`; `drnona.com` supplements matching SKU, ingredients and usage data. | The owner explicitly replaced the previous ten-product catalogue. | Existing product routes are preserved where international slugs match; filtering uses the five Moldova catalogue categories. | Direct user decision |
+| `D-066` | 2026-08-28 | Approved | Every product surface uses one shared image asset; the earlier catalogue/detail image split is removed. | The owner supplied a reviewed archive and explicitly retired the two-image concept. | Forty-two matched products use archive PNGs; eight unmatched products keep the neutral placeholder until their exact media is supplied. | Direct user decision |
 
 ## Superseded decisions
 
@@ -39,3 +40,4 @@ Last verified: 2026-07-31 against base commit `fede3938ce5173206ee4a6983ece7fb2c
 | `D-043` partial Romanian switch | `D-048` | 2026-07-29 |
 | `D-044`, `D-047` disabled contact form | `D-062` | 2026-07-31 |
 | `D-046` foreign certificate catalogue | `D-055` | 2026-07-29 |
+| Product-media clause of `D-065` | `D-066` | 2026-08-28 |

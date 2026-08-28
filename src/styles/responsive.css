@@ -8,21 +8,17 @@
   }
 
   .product-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-2px);
     border-color: rgba(78, 153, 167, 0.48);
     box-shadow: var(--shadow-soft);
   }
 
   .product-card:hover .product-card__stage img {
-    transform: rotate(-0.5deg);
+    transform: none;
   }
 
-  .product-card:hover .product-card__image--catalog {
-    scale: calc(var(--product-object-scale, 0.9) + 0.015);
-  }
-
-  .product-card:hover .product-card__image--editorial {
-    scale: 1.015;
+  .product-card:hover .product-card__image {
+    scale: 1.01;
   }
 
   .home-product-spotlight:hover .home-product-spotlight__media img {
@@ -36,7 +32,7 @@
   }
 
   .home-product-mini:hover .home-product-mini__media img {
-    scale: calc(var(--product-object-scale, 0.9) + 0.012);
+    scale: 1.012;
   }
 
   .home-promo-banner:hover > article > img {
@@ -49,7 +45,7 @@
   }
 
   .save-button:hover {
-    transform: scale(1.06);
+    transform: scale(1.025);
     border-color: rgba(78, 153, 167, 0.48);
     background: var(--white);
   }
@@ -176,19 +172,24 @@
     top: var(--header-height);
     display: block;
     padding: 24px 18px 40px;
-    background: rgba(247, 251, 252, 0.98);
+    background: rgba(247, 251, 252, 0.9);
     opacity: 0;
     pointer-events: none;
-    transform: translateY(-12px);
-    transition: opacity 200ms var(--ease-standard), transform 200ms var(--ease-out);
-    backdrop-filter: blur(16px);
+    visibility: hidden;
+    transform: translateY(-8px) scale(0.985);
+    transform-origin: calc(100% - 42px) top;
+    transition: opacity 200ms var(--ease-standard), transform 240ms var(--ease-out), visibility 0s linear 240ms;
+    backdrop-filter: blur(22px) saturate(150%);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
     overscroll-behavior: contain;
   }
 
   .mobile-panel.is-open {
     opacity: 1;
     pointer-events: auto;
-    transform: translateY(0);
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    transition-delay: 0s;
   }
 
   .mobile-panel nav {
@@ -783,13 +784,38 @@
     background: var(--white);
     font-size: var(--type-ui);
     font-weight: 700;
+    cursor: pointer;
+    transition: transform 100ms var(--ease-out), border-color 160ms var(--ease-standard), background-color 160ms var(--ease-standard);
+  }
+
+  .mobile-filters-toggle:active {
+    transform: scale(0.985);
+  }
+
+  .mobile-filters-toggle svg:last-child {
+    margin-left: auto;
+    transition: transform 200ms var(--ease-out);
+  }
+
+  .mobile-filters-toggle[aria-expanded="true"] svg:last-child {
+    transform: rotate(180deg);
   }
 
   .catalog-toolbar {
-    display: none;
+    display: grid;
     position: static;
     grid-template-columns: 1fr;
+    max-height: 0;
+    margin-bottom: 0;
+    padding-block: 0;
+    overflow: hidden;
+    border-width: 0;
     border-radius: 18px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px) scale(0.99);
+    transform-origin: center top;
+    transition: max-height 240ms var(--ease-out), margin-bottom 240ms var(--ease-out), padding 240ms var(--ease-out), border-width 0s linear 240ms, opacity 180ms var(--ease-standard), transform 240ms var(--ease-out), visibility 0s linear 240ms;
   }
 
   .catalog-categories {
@@ -809,7 +835,14 @@
   }
 
   .catalog-toolbar.is-open {
-    display: grid;
+    max-height: 240px;
+    margin-bottom: 8px;
+    padding: 6px;
+    border-width: 1px;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    transition-delay: 0s;
   }
 
   .catalog-toolbar .search-field {
@@ -1366,5 +1399,44 @@
 
   .timeline-line path {
     stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .site-header,
+  .mobile-panel,
+  .catalog-toolbar,
+  .article-card__kind {
+    background: var(--paper);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .toast {
+    background: var(--ink);
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --line: #6f858d;
+    --muted: #354a52;
+  }
+
+  .site-header,
+  .catalog-toolbar,
+  .product-card,
+  .article-card,
+  .button,
+  .save-button,
+  .mobile-menu-button,
+  .mobile-filters-toggle {
+    border-color: currentColor;
+    box-shadow: none;
+  }
+
+  :focus-visible {
+    outline-width: 4px;
+    outline-color: var(--sea-800);
   }
 }

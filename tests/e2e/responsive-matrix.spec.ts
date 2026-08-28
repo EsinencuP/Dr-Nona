@@ -313,7 +313,7 @@ async function runViewportContract(
   await preparePage(page, "/products");
   if (viewport.width <= 640) {
     const filtersToggle = page.getByRole("button", {
-      name: "Фильтры и сортировка",
+      name: "Поиск и сортировка",
     });
     await expect(filtersToggle).toBeVisible();
     await filtersToggle.click();
@@ -439,40 +439,70 @@ test.beforeEach(({ browserName }, testInfo) => {
   );
 });
 
-for (const viewport of [...requiredViewports, landscapeViewport]) {
-  test(`responsive contract: ${viewport.name}`, async ({ page }) => {
-    await runViewportContract(page, viewport);
-  });
-}
+test.describe("responsive viewport contracts", () => {
+  test.describe.configure({ mode: "serial" });
 
-for (const viewport of requiredViewports) {
-  test(`visual catalogue baseline: ${viewport.name}`, async ({ page }) => {
-    await page.setViewportSize({
-      width: viewport.width,
-      height: viewport.height,
+  for (const viewport of [...requiredViewports, landscapeViewport]) {
+    test(`responsive contract: ${viewport.name}`, async ({ page }) => {
+      await runViewportContract(page, viewport);
     });
-    await preparePage(page, "/products");
-    if (viewport.width <= 640) {
+  }
+});
+
+test.describe("catalogue visual baselines", () => {
+  test.describe.configure({ mode: "serial" });
+
+  for (const viewport of requiredViewports) {
+    test(`visual catalogue baseline: ${viewport.name}`, async ({ page }) => {
+      test.setTimeout(90_000);
+      await page.setViewportSize({
+        width: viewport.width,
+        height: viewport.height,
+      });
+      await preparePage(page, "/products");
+      if (viewport.width <= 640) {
+        await page
+          .getByRole("button", { name: "Поиск и сортировка" })
+          .click();
+      }
+      await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50, {
+        timeout: 15_000,
+      });
       await page
-        .getByRole("button", { name: "Фильтры и сортировка" })
-        .click();
-    }
-    await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50, {
-      timeout: 15_000,
-    });
-    await page.locator(".site-footer").scrollIntoViewIfNeeded();
-    await page.evaluate(() => window.scrollTo(0, 0));
+        .locator(".catalog-grid .product-card img")
+        .evaluateAll((images) =>
+          images.forEach((image) => {
+            (image as HTMLImageElement).loading = "eager";
+          })
+        );
+      await page.locator(".site-footer").scrollIntoViewIfNeeded();
+      await page.waitForFunction(
+        () =>
+          Array.from(
+            document.querySelectorAll<HTMLImageElement>(
+              ".catalog-grid .product-card img"
+            )
+          ).every((image) => image.complete && image.naturalWidth > 0),
+        undefined,
+        { timeout: 60_000 }
+      );
+      await page.addStyleTag({
+        content:
+          ".catalog-grid .product-card { content-visibility: visible !important; }",
+      });
+      await page.evaluate(() => window.scrollTo(0, 0));
 
-    await expect(page).toHaveScreenshot(`catalog-${viewport.name}.png`, {
-      animations: "disabled",
-      caret: "hide",
-      fullPage: true,
-      timeout: 15_000,
-      maxDiffPixelRatio: 0.03,
-      threshold: 0.35,
+      await expect(page).toHaveScreenshot(`catalog-${viewport.name}.png`, {
+        animations: "disabled",
+        caret: "hide",
+        fullPage: true,
+        timeout: 15_000,
+        maxDiffPixelRatio: 0.03,
+        threshold: 0.35,
+      });
     });
-  });
-}
+  }
+});
 
 test("200% zoom equivalent preserves priority actions", async ({ page }) => {
   await page.setViewportSize({ width: 640, height: 450 });
@@ -486,7 +516,7 @@ test("200% zoom equivalent preserves priority actions", async ({ page }) => {
     await preparePage(page, route);
     if (route === "/products") {
       await page
-        .getByRole("button", { name: "Фильтры и сортировка" })
+        .getByRole("button", { name: "Поиск и сортировка" })
         .click();
     }
     await expectHealthyLayout(page, `200% zoom ${route}`, true);

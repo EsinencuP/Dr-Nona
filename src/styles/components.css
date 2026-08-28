@@ -50,7 +50,7 @@
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: var(--mist);
+  background: #fff;
 }
 
 .product-card__stage::after {
@@ -76,12 +76,9 @@
   transition: scale 260ms var(--ease-out), transform 260ms var(--ease-out);
 }
 
-.product-card__stage .product-card__image--catalog {
+.product-card__stage .product-card__image {
   object-fit: contain;
-  scale: var(--product-object-scale, 0.9);
-}
-
-.product-card__stage .product-card__image--editorial {
+  /* Each shared product master already includes object-aware safe padding. */
   scale: 1;
 }
 

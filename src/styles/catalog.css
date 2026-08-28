@@ -9,7 +9,7 @@
 .catalog-toolbar {
   position: sticky;
   z-index: 10;
-  top: 12px;
+  top: calc(var(--header-height) + 12px);
   display: grid;
   grid-template-columns: minmax(300px, 1fr) 280px 250px;
   gap: 10px;
@@ -69,6 +69,13 @@
   border: 0;
   background: transparent;
   cursor: pointer;
+  border-radius: 50%;
+  transition: transform 100ms var(--ease-out), background-color 160ms var(--ease-standard);
+}
+
+.search-field button:active {
+  transform: scale(0.9);
+  background: var(--sea-050);
 }
 
 .search-field button svg {
@@ -128,7 +135,11 @@
   font-size: var(--type-caption);
   font-weight: 700;
   cursor: pointer;
-  transition: border-color 160ms var(--ease-standard), background-color 160ms var(--ease-standard), color 160ms var(--ease-standard);
+  transition: transform 100ms var(--ease-out), border-color 160ms var(--ease-standard), background-color 160ms var(--ease-standard), color 160ms var(--ease-standard);
+}
+
+.catalog-categories button:active {
+  transform: scale(0.975);
 }
 
 .catalog-categories button small {
@@ -157,6 +168,13 @@
   font-size: var(--type-ui);
   font-weight: 700;
   cursor: pointer;
+  border-radius: 10px;
+  transition: transform 100ms var(--ease-out), background-color 160ms var(--ease-standard);
+}
+
+.catalog-status button:active {
+  transform: scale(0.97);
+  background: var(--sea-050);
 }
 
 .catalog-grid {

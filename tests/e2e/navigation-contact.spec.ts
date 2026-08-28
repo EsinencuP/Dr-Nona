@@ -21,6 +21,10 @@ test("navigation works for desktop and mobile Chromium", async ({
     await expect(
       page.getByRole("navigation", { name: "Мобильная навигация" })
     ).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(menu).toHaveAttribute("aria-expanded", "false");
+    await expect(menu).toBeFocused();
+    await menu.click();
     await page
       .getByRole("navigation", { name: "Мобильная навигация" })
       .getByRole("link", { name: "Каталог" })

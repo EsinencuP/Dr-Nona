@@ -214,7 +214,6 @@ function extractProduct(html, manifest, sitemapRecord, order, existing) {
           : "missing-required-content",
   };
 
-  if (existing?.cardImage) product.cardImage = existing.cardImage;
   if (typeof existing?.catalogScale === "number") {
     product.catalogScale = existing.catalogScale;
   }

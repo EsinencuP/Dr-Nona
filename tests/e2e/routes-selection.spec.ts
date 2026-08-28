@@ -12,10 +12,10 @@ test("valid and invalid product deep links resolve correctly", async ({ page }) 
   await expect(page.getByRole("button", { name: /Полное описание/ })).toBeVisible();
   await expect(page.getByRole("button", { name: /Состав/ })).toBeVisible();
   await expect(page.getByRole("button", { name: /Способ применения/ })).toBeVisible();
-  const relatedImages = page.locator(".related-grid .product-card__image--catalog");
+  const relatedImages = page.locator(".related-grid .product-card__image");
   await expect(relatedImages).toHaveCount(4);
   for (const image of await relatedImages.all()) {
-    await expect(image).toHaveAttribute("src", "/brand/product-placeholder.svg");
+    await expect(image).toHaveAttribute("src", /\/products\/catalog\/.+\.png$/);
   }
 
   await page.goto("/product/parfum-faya");

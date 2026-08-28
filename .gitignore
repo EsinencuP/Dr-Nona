@@ -5,6 +5,9 @@ playwright-report/
 test-results/
 artifacts/
 
+# Local image-normalization workspace and its review exports.
+tools/catalog-image-agent/
+
 .env
 .env.*
 !.env.example

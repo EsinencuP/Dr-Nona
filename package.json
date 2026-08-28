@@ -40,6 +40,7 @@
     "test:e2e:mobile": "playwright test --project=chromium-mobile",
     "ci": "npm run repository:validate && npm run architecture:validate && npm run typography:validate && npm run market:validate && npm run content:validate && npm run claims:validate && npm run security:validate && npm run typecheck && npm run lint && npm run test && npm run build && npm run security:runtime && npm run performance:runtime && npm run test:e2e && npm run repository:validate",
     "release:check": "npm run documentation:validate && node scripts/check-release-readiness.mjs",
+    "images:import:catalog": "node scripts/import-product-card-images.mjs",
     "preview": "vite preview",
     "sync:content": "node scripts/sync-official-content.mjs stage",
     "sync:content:validate": "node scripts/sync-official-content.mjs validate",

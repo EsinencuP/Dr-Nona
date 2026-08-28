@@ -77,7 +77,7 @@ export default function ProductPage() {
             <div className="product-stage__rings" aria-hidden="true" />
             <span className="product-stage__index">DN · {product.sku || "—"}</span>
             <img
-              src={product.cardImage}
+              src={product.image}
               alt={product.imageAlt || product.officialName}
               width="1200"
               height="1200"
@@ -188,7 +188,7 @@ export default function ProductPage() {
         <SectionHeading eyebrow="Следующий шаг" title={t.related} />
         <div className="related-grid">
           {related.map((item) => (
-            <ProductCard key={item.slug} product={item} compact catalogImage />
+            <ProductCard key={item.slug} product={item} compact />
           ))}
         </div>
       </section>

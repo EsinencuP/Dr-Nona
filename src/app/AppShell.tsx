@@ -54,12 +54,50 @@ function BrandMark({ inverted = false }: { inverted?: boolean }) {
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobilePanelRef = useRef<HTMLDivElement>(null);
   const { selected } = useSelection();
   const { t } = useLocale();
+  const location = useLocation();
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", open);
     return () => document.body.classList.remove("menu-open");
+  }, [open]);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        menuButtonRef.current?.focus();
+        return;
+      }
+      if (event.key === "Tab") {
+        const links = Array.from(
+          mobilePanelRef.current?.querySelectorAll<HTMLAnchorElement>("a") ?? []
+        );
+        if (!links.length) return;
+        const first = links[0];
+        const last = links[links.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    window.requestAnimationFrame(() => {
+      mobilePanelRef.current?.querySelector<HTMLAnchorElement>("a")?.focus();
+    });
+    return () => window.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
   const nav = [
@@ -95,6 +133,7 @@ function Header() {
             <b>{selected.length}</b>
           </Link>
           <button
+            ref={menuButtonRef}
             className="mobile-menu-button"
             type="button"
             aria-expanded={open}
@@ -106,22 +145,29 @@ function Header() {
           </button>
         </div>
       </div>
-      {open && (
-        <div id="mobile-navigation" className="mobile-panel is-open">
-          <nav aria-label={t.mobileNavigation}>
-            {nav.map(([to, label]) => (
-              <NavLink key={to} to={to} onClick={() => setOpen(false)}>
-                <span>{label}</span>
-                <ArrowUpRight aria-hidden="true" />
-              </NavLink>
-            ))}
-            <NavLink to="/selection" onClick={() => setOpen(false)}>
-              <span>{t.selection}</span>
-              <b>{selected.length}</b>
+      <div
+        ref={mobilePanelRef}
+        id="mobile-navigation"
+        className={`mobile-panel ${open ? "is-open" : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label={t.mobileNavigation}
+        aria-hidden={!open}
+        inert={!open}
+      >
+        <nav aria-label={t.mobileNavigation}>
+          {nav.map(([to, label]) => (
+            <NavLink key={to} to={to} onClick={() => setOpen(false)}>
+              <span>{label}</span>
+              <ArrowUpRight aria-hidden="true" />
             </NavLink>
-          </nav>
-        </div>
-      )}
+          ))}
+          <NavLink to="/selection" onClick={() => setOpen(false)}>
+            <span>{t.selection}</span>
+            <b>{selected.length}</b>
+          </NavLink>
+        </nav>
+      </div>
     </header>
   );
 }

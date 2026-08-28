@@ -58,9 +58,9 @@ Product save controls stay at the bottom action area above product media stackin
 
 ## Product imagery
 
-Use only owner-approved product media. The current 50-product catalogue deliberately uses the same neutral local placeholder in catalogue, selection, home merchandising and product detail. `image`, `cardImage` and `catalogScale` remain in the model so approved product photography can be introduced later without changing route or card contracts.
+Use only owner-approved product media. One `image` field supplies catalogue cards, selection, home merchandising, related products, SEO and product detail; there is no separate premium/detail image. Forty-two reviewed archive images are active, and the neutral placeholder remains only for the eight products absent from the archive. `catalogScale` may adjust compact presentation without changing the source asset.
 
-Do not retain raw exports, duplicate aliases or unused variants in `public/`. Do not reconstruct official packaging with generative AI.
+Do not retain raw exports, duplicate aliases or unused variants in `public/`. Never use another product as a fallback for a missing match.
 
 ## Responsive rules
 

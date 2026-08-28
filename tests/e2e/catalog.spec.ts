@@ -4,7 +4,7 @@ test.beforeEach(async ({ page }, testInfo) => {
   await page.goto("/products");
   await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50);
   if (testInfo.project.name === "chromium-mobile") {
-    await page.getByRole("button", { name: "Фильтры и сортировка" }).click();
+    await page.getByRole("button", { name: "Поиск и сортировка" }).click();
   }
 });
 

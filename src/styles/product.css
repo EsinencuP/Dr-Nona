@@ -54,7 +54,7 @@
   max-height: none;
   position: relative;
   z-index: 2;
-  object-fit: cover;
+  object-fit: contain;
   filter: none;
 }
 

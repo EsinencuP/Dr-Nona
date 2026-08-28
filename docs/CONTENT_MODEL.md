@@ -2,7 +2,7 @@
 
 The content model separates imported facts, editorial approval and runtime publication. Source presence alone never grants publication.
 
-Last verified: 2026-08-25 against `src/data/` and the current validation scripts.
+Last verified: 2026-08-28 against `src/data/` and the current validation scripts.
 
 ## Product
 
@@ -10,14 +10,16 @@ Each product contains identity, content, media, source, ordering and editorial f
 
 - `slug`, `officialName`, `sku` and `category`
 - `shortDescription`, `longDescription`, `ingredients` and `howToUse`
-- `image` and `cardImage`, currently set to the neutral placeholder until product media is supplied
-- `catalogScale` for future object-aware catalogue sizing
+- one `image` field shared by catalogue cards, home merchandising, selection, related products, SEO and product detail
+- `catalogScale` for object-aware sizing of the shared image in compact cards
 - `sourceUrl` for the primary Moldova catalogue and optional `officialSourceUrl` for international enrichment
 - `sourceLastmod`, `releasedAt` and `officialOrder`
 - `popularityRank` and `relatedSlugs`
 - `publicationStatus` and `editorialStatus`
 
 All current categories require `shortDescription` and `longDescription`. `ingredients` and `howToUse` may be `null` only when neither source publishes a usable value. Empty strings remain invalid for required copy.
+
+The owner-supplied archive currently provides verified matches for 42 products. Eight products retain the neutral placeholder because the archive contains no matching item; another product's image must never be substituted as a guess.
 
 A product is public only when `publicationStatus` is `published`, `editorialStatus` is `ready` and the category completeness assessment has no issue.
 

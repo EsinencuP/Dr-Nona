@@ -38,7 +38,6 @@ export const ProductSyncSchema = z
     ]),
     collection: nonEmptyText.optional(),
     image: nonEmptyText,
-    cardImage: nonEmptyText.optional(),
     catalogScale: z.number().positive().max(2).optional(),
     imageAlt: nonEmptyText,
     sourceUrl: z.string().url(),

@@ -6,7 +6,6 @@ import { Heart } from "@phosphor-icons/react/Heart";
 import { Leaf } from "@phosphor-icons/react/Leaf";
 import { TestTube } from "@phosphor-icons/react/TestTube";
 import { useState } from "react";
-import type { CSSProperties } from "react";
 import { getProductCopy } from "../claims";
 import { ArticleCard } from "../components/ArticleCard";
 import { Reveal, SectionHeading, splitText } from "../components/ui";
@@ -177,7 +176,7 @@ export default function HomePage() {
                 aria-label={`Открыть ${spotlight.officialName}`}
               >
                 <img
-                  src={spotlight.cardImage}
+                  src={spotlight.image}
                   alt={spotlight.officialName}
                   width="1254"
                   height="1254"
@@ -228,15 +227,10 @@ export default function HomePage() {
                     <img
                       src={product.image}
                       alt=""
-                      width="1254"
-                      height="1254"
+                      width="1600"
+                      height="1600"
                       loading="lazy"
                       decoding="async"
-                      style={
-                        {
-                          "--product-object-scale": product.catalogScale,
-                        } as CSSProperties
-                      }
                     />
                   </Link>
                   <div className="home-product-mini__body">
@@ -260,7 +254,7 @@ export default function HomePage() {
           <Reveal className="home-promo-banner">
             <article>
               <img
-                src={promoProduct.cardImage}
+                src={promoProduct.image}
                 alt={promoProduct.officialName}
                 width="1254"
                 height="1254"
@@ -286,7 +280,7 @@ export default function HomePage() {
                 {lordProducts.map((product) => (
                   <img
                     key={product.slug}
-                    src={product.cardImage}
+                    src={product.image}
                     alt=""
                     width="1254"
                     height="1254"

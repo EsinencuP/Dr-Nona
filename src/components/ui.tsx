@@ -130,11 +130,9 @@ const neutralProductDescriptions: Record<string, string> = {
 export function ProductCard({
   product,
   compact = false,
-  catalogImage = false,
 }: {
   product: Product;
   compact?: boolean;
-  catalogImage?: boolean;
 }) {
   const { contains, toggle } = useSelection();
   const { t } = useLocale();
@@ -148,20 +146,13 @@ export function ProductCard({
       <div className="product-card__stage">
         <Link to={`/product/${product.slug}`} tabIndex={-1} aria-hidden="true">
           <img
-            className={`product-card__image ${
-              catalogImage ? "product-card__image--catalog" : "product-card__image--editorial"
-            }`}
-            src={catalogImage ? product.image : product.cardImage}
+            className="product-card__image"
+            src={product.image}
             alt=""
-            width="1254"
-            height="1254"
+            width="1600"
+            height="1600"
             loading="lazy"
             decoding="async"
-            style={
-              catalogImage
-                ? ({ "--product-object-scale": product.catalogScale } as CSSProperties)
-                : undefined
-            }
           />
         </Link>
       </div>

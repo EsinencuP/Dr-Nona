@@ -93,7 +93,7 @@ export default function FormulaPage() {
         <SectionHeading eyebrow="Формула в действии" title="Продукты на основе Halo Complex™" />
         <div className="related-grid">
           {products.slice(0, 4).map((product) => (
-            <ProductCard key={product.slug} product={product} compact catalogImage />
+            <ProductCard key={product.slug} product={product} compact />
           ))}
         </div>
       </section>

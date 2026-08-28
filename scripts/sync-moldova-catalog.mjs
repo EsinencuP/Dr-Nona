@@ -299,6 +299,10 @@ function validate(products) {
 
 async function main() {
   const shouldWrite = process.argv.includes("--write");
+  const existingProducts = JSON.parse(await readFile(outputPath, "utf8"));
+  const existingBySlug = new Map(
+    existingProducts.map((product) => [product.slug, product])
+  );
   const sitemap = parseSitemap(await fetchText(`${moldovaOrigin}/sitemap.xml`));
   const inventory = Object.entries(categoryInventory).flatMap(([category, sourceSlugs]) =>
     sourceSlugs.map((sourceSlug) => ({ category, sourceSlug }))
@@ -320,6 +324,7 @@ async function main() {
       }
     }
     const slug = localSlug(sourceSlug);
+    const existing = existingBySlug.get(slug);
     const sameCategory = categoryInventory[category].map(localSlug);
     const ownIndex = sameCategory.indexOf(slug);
     const relatedSlugs = Array.from({ length: Math.min(4, sameCategory.length - 1) }, (_, offset) =>
@@ -336,10 +341,11 @@ async function main() {
       category,
       publicationStatus: "published",
       editorialStatus: "ready",
-      image: placeholder,
-      cardImage: placeholder,
-      catalogScale: 1,
-      imageAlt: `Изображение продукта ${moldova.title} будет добавлено позже`,
+      image: existing?.image || placeholder,
+      catalogScale: existing?.catalogScale || 1,
+      imageAlt:
+        existing?.imageAlt ||
+        `Изображение продукта ${moldova.title} будет добавлено позже`,
       sourceUrl,
       officialSourceUrl,
       releasedAt: null,

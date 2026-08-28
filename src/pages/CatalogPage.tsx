@@ -69,12 +69,18 @@ export default function CatalogPage() {
         className="mobile-filters-toggle"
         type="button"
         aria-expanded={filtersOpen}
+        aria-controls="catalog-search-and-sort"
         onClick={() => setFiltersOpen((value) => !value)}
       >
-        <List aria-hidden="true" /> Фильтры и сортировка
+        <List aria-hidden="true" />
+        <span>{filtersOpen ? "Скрыть поиск и сортировку" : "Поиск и сортировка"}</span>
+        <CaretDown aria-hidden="true" />
       </button>
 
-      <div className={`catalog-toolbar ${filtersOpen ? "is-open" : ""}`}>
+      <div
+        id="catalog-search-and-sort"
+        className={`catalog-toolbar ${filtersOpen ? "is-open" : ""}`}
+      >
         <label className="search-field">
           <MagnifyingGlass aria-hidden="true" />
           <span className="sr-only">{t.search}</span>
@@ -157,7 +163,7 @@ export default function CatalogPage() {
       {result.length ? (
         <div className="catalog-grid">
           {result.map((product) => (
-            <ProductCard key={product.slug} product={product} catalogImage />
+            <ProductCard key={product.slug} product={product} />
           ))}
         </div>
       ) : (

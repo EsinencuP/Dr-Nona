@@ -2,7 +2,7 @@
 
 The application is a functional local QA candidate. Its technical gates pass, but production release remains blocked.
 
-Last verified: 2026-08-25 against base commit `46810af5850b11446018dde6c5ee4c9cc71e5196` and the current worktree.
+Last verified: 2026-08-28 against base commit `46810af5850b11446018dde6c5ee4c9cc71e5196` and the current worktree.
 
 ## Status identity
 
@@ -24,6 +24,7 @@ Last verified: 2026-08-25 against base commit `46810af5850b11446018dde6c5ee4c9cc
 
 - Route-separated React catalogue, product, company, formula, editorial, service and legal pages
 - Search, category filtering and stable catalogue sorting
+- One shared product-image contract with 42 matched owner-supplied archive assets and eight explicit placeholders
 - Persistent non-commerce selection with product name, SKU and URL handoff
 - Server-validated order and consultation form with Telegram-only delivery
 - Russian metadata, canonical URLs, sitemap, robots policy and prerendered HTML
@@ -59,12 +60,12 @@ Use blocker IDs in [the release status](RELEASE_STATUS.md). The current blockers
 |---|---|---|---|
 | `npm ci` | PASS | 2026-07-31 | Clean reinstall: 287 packages, 0 vulnerabilities |
 | `npm run toolchain:validate` | PASS | 2026-07-31 | Node/npm and dependency contract output |
-| `npm run repository:validate` | PASS | 2026-08-25 | 213 tracked/untracked source paths verified |
-| `npm run typecheck` | PASS | 2026-08-25 | TypeScript project references |
-| `npm run lint` | PASS | 2026-08-25 | ESLint with zero warnings |
-| `npm run test` | PASS | 2026-08-25 | 20 files, 112 tests |
-| `npm run build` | PASS | 2026-08-25 | 187 prerendered routes, 185 sitemap URLs |
+| `npm run repository:validate` | PASS | 2026-08-28 | Current source paths and documentation links verified |
+| `npm run typecheck` | PASS | 2026-08-28 | TypeScript project references |
+| `npm run lint` | PASS | 2026-08-28 | ESLint with zero warnings |
+| `npm run test` | PASS | 2026-08-28 | 20 files, 113 tests |
+| `npm run build` | PASS | 2026-08-28 | 187 prerendered routes, 185 sitemap URLs |
 | `npm run security:runtime` | PASS | 2026-07-31 | 5 routes under enforced CSP, 0 violations |
 | `npm run performance:runtime` | PASS | 2026-07-31 | Home, contact and catalogue within runtime budget |
-| `npm run test:e2e` | PASS | 2026-08-25 | 116 passed, 16 skipped |
+| `npm run test:e2e` | PASS | 2026-08-28 | 116 passed, 16 skipped; shared-image visual matrix included |
 | `npm run release:check` | EXPECTED BLOCKED | 2026-08-25 | 8 open P0/P1 blockers |

@@ -16,7 +16,6 @@ export type Product = {
     | "missing-required-content"
     | "review-required";
   image: string;
-  cardImage: string;
   catalogScale: number;
   imageAlt: string;
   sourceUrl: string;

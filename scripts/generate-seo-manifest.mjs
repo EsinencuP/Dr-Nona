@@ -258,7 +258,7 @@ for (const product of products.filter(
     robots: "index,follow",
     indexable: true,
     ogType: "product",
-    image: product.cardImage,
+    image: product.image,
     kind: "product",
     breadcrumbs: [
       breadcrumbRoot(),
@@ -269,7 +269,7 @@ for (const product of products.filter(
       type: "Product",
       name: product.officialName,
       sku: product.sku,
-      image: product.cardImage,
+      image: product.image,
     },
   });
 }

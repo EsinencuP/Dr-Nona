@@ -6,6 +6,28 @@ import { evaluateProductDataset } from "../../scripts/product-content-lib.mjs";
 const { allProducts } = await loadProductData();
 
 describe("product content publication gate", () => {
+  test("uses one shared image contract and only explicit missing-media placeholders", () => {
+    const normalizedImages = allProducts.filter((product) =>
+      product.image.startsWith("/products/catalog-normalized/")
+    );
+    const placeholders = allProducts
+      .filter((product) => product.image === "/brand/product-placeholder.svg")
+      .map((product) => product.slug);
+
+    expect(normalizedImages).toHaveLength(42);
+    expect(placeholders).toEqual([
+      "dead-sea-water-compresses",
+      "lord-deodorant",
+      "lipstick-new",
+      "salts-lavander",
+      "after-shave-lord",
+      "perfume-kiwi",
+      "perfume-lady",
+      "parfum-faya",
+    ]);
+    expect(allProducts.every((product) => !("cardImage" in product))).toBe(true);
+  });
+
   test("accepts all 50 current products, including explicitly unavailable fields", () => {
     const report = evaluateProductDataset(allProducts);
 

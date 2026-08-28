@@ -1,0 +1,415 @@
+{
+  "category_url": "https://www.drnona.md/catalog",
+  "resolved_category_url": "https://www.drnona.md/catalog",
+  "started_at": "2026-08-27T19:43:09.244900+00:00",
+  "finished_at": "2026-08-27T19:43:50.214793+00:00",
+  "products_found": 50,
+  "product_pages_opened": 0,
+  "image_candidates_found": 50,
+  "images_downloaded": 50,
+  "images_converted_to_png": 50,
+  "duplicates_removed": 0,
+  "failed_downloads": [],
+  "products": [
+    {
+      "name": "Compressed Wipes",
+      "url": "https://www.drnona.md/compressed_wipes_ru",
+      "images_saved": [
+        "compressed-wipes-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Shower Gel ( LORD )",
+      "url": "https://www.drnona.md/shower_gel_lord",
+      "images_saved": [
+        "shower-gel-lord-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Multi Mouthwash",
+      "url": "https://www.drnona.md/mouthwash",
+      "images_saved": [
+        "multi-mouthwash-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Deodorant ( LORD )",
+      "url": "https://www.drnona.md/deodorant_lord",
+      "images_saved": [
+        "deodorant-lord-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Deodorant ( LADY )",
+      "url": "https://www.drnona.md/deodorant_lady",
+      "images_saved": [
+        "deodorant-lady-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Deodorant ( KIWI )",
+      "url": "https://www.drnona.md/deodorant_kiwi",
+      "images_saved": [
+        "deodorant-kiwi-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Unisex Deodorant Stick",
+      "url": "https://www.drnona.md/unisex_deodorant_stick",
+      "images_saved": [
+        "unisex-deodorant-stick-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Shenseen Mousse Toothpaste",
+      "url": "https://www.drnona.md/shenseen_mousse_toothpaste",
+      "images_saved": [
+        "shenseen-mousse-toothpaste-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Facial Foam Soap",
+      "url": "https://www.drnona.md/facial_foam_soap",
+      "images_saved": [
+        "facial-foam-soap-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Mineral Hair Conditioner",
+      "url": "https://www.drnona.md/mineral_hair_conditioner",
+      "images_saved": [
+        "mineral-hair-conditioner-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Shower Gel",
+      "url": "https://www.drnona.md/shower_gel",
+      "images_saved": [
+        "shower-gel-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Mineral Shampoo",
+      "url": "https://www.drnona.md/mineral_shampoo",
+      "images_saved": [
+        "mineral-shampoo-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Bath Salts with Camomile extract",
+      "url": "https://www.drnona.md/bath_salts_with_chamomile_extract",
+      "images_saved": [
+        "bath-salts-with-camomile-extract-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Mineral Lipstick",
+      "url": "https://www.drnona.md/mineral_lipstick",
+      "images_saved": [
+        "mineral-lipstick-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Recovering Mud Musk",
+      "url": "https://www.drnona.md/recovering_mud_musk",
+      "images_saved": [
+        "recovering-mud-musk-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Bath Salts with Lavander extract",
+      "url": "https://www.drnona.md/bath_salts_with_lavender_extract",
+      "images_saved": [
+        "bath-salts-with-lavander-extract-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Bath Salts with Ylang Ylang, Patchouli & Anis Star Extract",
+      "url": "https://www.drnona.md/bath_salts_with_ylang_ylang_extract",
+      "images_saved": [
+        "bath-salts-with-ylang-ylang-patchouli-and-anis-star-extract-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Bath Salts with Rosemary, Eucalyptus & Thyme extract",
+      "url": "https://www.drnona.md/bath_salts_with_rosemary_extract",
+      "images_saved": [
+        "bath-salts-with-rosemary-eucalyptus-and-thyme-extract-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "PHASE-9",
+      "url": "https://www.drnona.md/phase_9",
+      "images_saved": [
+        "phase-9-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "DND",
+      "url": "https://www.drnona.md/dnd",
+      "images_saved": [
+        "dnd-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "OKSEEN",
+      "url": "https://www.drnona.md/okseen",
+      "images_saved": [
+        "okseen-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "CLEANSEEN",
+      "url": "https://www.drnona.md/cleanseen",
+      "images_saved": [
+        "cleanseen-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "GOLDSEEN",
+      "url": "https://www.drnona.md/goldseen",
+      "images_saved": [
+        "goldseen-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "IMUNSEEN",
+      "url": "https://www.drnona.md/imunseen",
+      "images_saved": [
+        "imunseen-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "PULMOSEEN",
+      "url": "https://www.drnona.md/pulmoseen",
+      "images_saved": [
+        "pulmoseen-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "REUMOSEEN",
+      "url": "https://www.drnona.md/reumoseen",
+      "images_saved": [
+        "reumoseen-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "RAVSEEN",
+      "url": "https://www.drnona.md/ravseen",
+      "images_saved": [
+        "ravseen-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "NEWSEEN",
+      "url": "https://www.drnona.md/newseen",
+      "images_saved": [
+        "newseen-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "FEMSEEN",
+      "url": "https://www.drnona.md/femseen",
+      "images_saved": [
+        "femseen-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "YAMSEEN",
+      "url": "https://www.drnona.md/yamseen",
+      "images_saved": [
+        "yamseen-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Dynamic Cream",
+      "url": "https://www.drnona.md/dynamic",
+      "images_saved": [
+        "dynamic-cream-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Solaris Body Lotion",
+      "url": "https://www.drnona.md/solaris",
+      "images_saved": [
+        "solaris-body-lotion-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Hand and Nail Cream",
+      "url": "https://www.drnona.md/hand_and_nail_cream",
+      "images_saved": [
+        "hand-and-nail-cream-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Shea Body Butter",
+      "url": "https://www.drnona.md/body_butter",
+      "images_saved": [
+        "shea-body-butter-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Solaris Facial Cream",
+      "url": "https://www.drnona.md/facial_solaris",
+      "images_saved": [
+        "solaris-facial-cream-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Eye Care Balm",
+      "url": "https://www.drnona.md/eye_care_balm",
+      "images_saved": [
+        "eye-care-balm-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Anti-Aging Serum",
+      "url": "https://www.drnona.md/anti_aging_serum",
+      "images_saved": [
+        "anti-aging-serum-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Face Milk",
+      "url": "https://www.drnona.md/face_milk",
+      "images_saved": [
+        "face-milk-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Night Cream",
+      "url": "https://www.drnona.md/night_cream",
+      "images_saved": [
+        "night-cream-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Top Samples Kit",
+      "url": "https://www.drnona.md/top_samples_kit",
+      "images_saved": [
+        "top-samples-kit-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Moisturizing Cream For Face",
+      "url": "https://www.drnona.md/ard_cream_for_face",
+      "images_saved": [
+        "moisturizing-cream-for-face-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Day Time Face Cream",
+      "url": "https://www.drnona.md/shp_day_time_face_cream",
+      "images_saved": [
+        "day-time-face-cream-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Eau De Parfume ( KIWI )",
+      "url": "https://www.drnona.md/parfume_kiwi",
+      "images_saved": [
+        "eau-de-parfume-kiwi-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Eau De Parfume ( LADY )",
+      "url": "https://www.drnona.md/parfume_lady",
+      "images_saved": [
+        "eau-de-parfume-lady-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Eau De Parfume ( LORD )",
+      "url": "https://www.drnona.md/parfume_lord",
+      "images_saved": [
+        "eau-de-parfume-lord-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Eau De Parfume ( FAYA )",
+      "url": "https://www.drnona.md/parfume_faya",
+      "images_saved": [
+        "eau-de-parfume-faya-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Chocoseen",
+      "url": "https://www.drnona.md/chocoseen",
+      "images_saved": [
+        "chocoseen-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Slimseen Coffee Mix",
+      "url": "https://www.drnona.md/slimseen_coffee_mix",
+      "images_saved": [
+        "slimseen-coffee-mix-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Gonseen Tea",
+      "url": "https://www.drnona.md/gonseen",
+      "images_saved": [
+        "gonseen-tea-01.png"
+      ],
+      "errors": []
+    },
+    {
+      "name": "Soupseen",
+      "url": "https://www.drnona.md/soupseen",
+      "images_saved": [
+        "soupseen-01.png"
+      ],
+      "errors": []
+    }
+  ]
+}
