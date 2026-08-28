@@ -134,6 +134,8 @@ async function telegramWebhookHandler(request: Request): Promise<Response> {
   return jsonResponse({ ok: true }, 200);
 }
 
-export default {
-  fetch: telegramWebhookHandler,
-};
+export default async function handler(request: Request): Promise<Response> {
+  return telegramWebhookHandler(request);
+}
+
+export { telegramWebhookHandler };
