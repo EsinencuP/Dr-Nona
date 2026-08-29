@@ -176,6 +176,27 @@ async function responsiveHealth(
           )
         ),
       ].filter(visible);
+      const exposedActions = actions.filter((element) => {
+        const bounds = element.getBoundingClientRect();
+        if (
+          bounds.bottom <= 0 ||
+          bounds.top >= window.innerHeight ||
+          bounds.right <= 0 ||
+          bounds.left >= window.innerWidth
+        ) {
+          return false;
+        }
+        const centerX = Math.min(
+          window.innerWidth - 1,
+          Math.max(0, bounds.left + bounds.width / 2)
+        );
+        const centerY = Math.min(
+          window.innerHeight - 1,
+          Math.max(0, bounds.top + bounds.height / 2)
+        );
+        const topmost = document.elementFromPoint(centerX, centerY);
+        return Boolean(topmost && (topmost === element || element.contains(topmost)));
+      });
       const clippedActions = actions
         .filter((element) => {
           const bounds = element.getBoundingClientRect();
@@ -222,14 +243,18 @@ async function responsiveHealth(
               .map(finding)
           : [];
       const overlappingActions = [];
-      for (let firstIndex = 0; firstIndex < actions.length; firstIndex += 1) {
+      for (
+        let firstIndex = 0;
+        firstIndex < exposedActions.length;
+        firstIndex += 1
+      ) {
         for (
           let secondIndex = firstIndex + 1;
-          secondIndex < actions.length;
+          secondIndex < exposedActions.length;
           secondIndex += 1
         ) {
-          const first = actions[firstIndex];
-          const second = actions[secondIndex];
+          const first = exposedActions[firstIndex];
+          const second = exposedActions[secondIndex];
           if (first.contains(second) || second.contains(first)) continue;
           const firstBounds = first.getBoundingClientRect();
           const secondBounds = second.getBoundingClientRect();

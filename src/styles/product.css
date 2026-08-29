@@ -225,6 +225,7 @@
 }
 
 .accordion-item > button {
+  scroll-margin-top: calc(var(--header-height) + 12px);
   width: 100%;
   min-height: 62px;
   display: flex;

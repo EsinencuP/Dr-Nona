@@ -83,3 +83,31 @@ test("catalog actions share one vertical position in every card", async ({
   expect(actionOffsets).toHaveLength(50);
   expect(Math.max(...actionOffsets) - Math.min(...actionOffsets)).toBeLessThanOrEqual(2);
 });
+
+test("every catalogue card uses a loaded normalized product image", async ({
+  page,
+}) => {
+  const images = page.locator(".catalog-grid .product-card__image");
+  await expect(images).toHaveCount(50);
+  const sources = await images.evaluateAll((items) =>
+    items.map((item) => item.getAttribute("src"))
+  );
+  expect(sources).toHaveLength(50);
+  expect(
+    sources.every((source) =>
+      /^\/products\/catalog-normalized\/.+\.png$/.test(source ?? "")
+    )
+  ).toBe(true);
+
+  const firstImage = images.first();
+  await expect(firstImage).toBeVisible();
+  await expect
+    .poll(() =>
+      firstImage.evaluate(
+        (item) =>
+          (item as HTMLImageElement).complete &&
+          (item as HTMLImageElement).naturalWidth > 0
+      )
+    )
+    .toBe(true);
+});

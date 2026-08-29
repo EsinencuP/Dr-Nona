@@ -58,16 +58,11 @@ function Header() {
   const mobilePanelRef = useRef<HTMLDivElement>(null);
   const { selected } = useSelection();
   const { t } = useLocale();
-  const location = useLocation();
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", open);
     return () => document.body.classList.remove("menu-open");
   }, [open]);
-
-  useEffect(() => {
-    setOpen(false);
-  }, [location.pathname]);
 
   useEffect(() => {
     if (!open) return;
