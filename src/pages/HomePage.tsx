@@ -8,15 +8,18 @@ import { TestTube } from "@phosphor-icons/react/TestTube";
 import { useState } from "react";
 import { getProductCopy } from "../claims";
 import { ArticleCard } from "../components/ArticleCard";
+import { ProductImage } from "../components/ProductImage";
 import { Reveal, SectionHeading, splitText } from "../components/ui";
-import { useProductData } from "../data";
 import type { OfficialPage, Product } from "../data";
 import runtimeContent from "../data/runtime-content.json";
 import { useSelection } from "../features/selection/SelectionContext";
 import { Link } from "../router";
 
 export default function HomePage() {
-  const { productBySlug, products } = useProductData();
+  const products = runtimeContent.home.products as Product[];
+  const productBySlug = new Map(
+    products.map((product) => [product.slug, product])
+  );
   const { contains, toggle } = useSelection();
   const spotlight =
     productBySlug.get("dynamic-hydrating-cream") ?? products[0];
@@ -116,28 +119,30 @@ export default function HomePage() {
             </Link>
           </Reveal>
           <Reveal className="science-diagram" delay={80}>
-            <div className="science-rings" aria-hidden="true">
-              <span />
-              <span />
-              <span />
-              <div className="science-core">
-                <b>H</b>
-                <strong>Halo Complex™</strong>
-                <small>{activeScienceNode.label}</small>
+            <div className="science-orbit">
+              <div className="science-rings" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+                <div className="science-core">
+                  <b>H</b>
+                  <strong>Halo Complex™</strong>
+                  <small>{activeScienceNode.label}</small>
+                </div>
               </div>
-            </div>
-            <div className="science-points">
-              {scienceNodes.map(({ id, label, icon: Icon }) => (
-                <button
-                  className={scienceFocus === id ? "is-active" : ""}
-                  type="button"
-                  key={id}
-                  aria-pressed={scienceFocus === id}
-                  onClick={() => setScienceFocus(id)}
-                >
-                  <Icon aria-hidden="true" /><span>{label}</span>
-                </button>
-              ))}
+              <div className="science-points">
+                {scienceNodes.map(({ id, label, icon: Icon }) => (
+                  <button
+                    className={scienceFocus === id ? "is-active" : ""}
+                    type="button"
+                    key={id}
+                    aria-pressed={scienceFocus === id}
+                    onClick={() => setScienceFocus(id)}
+                  >
+                    <Icon aria-hidden="true" /><span>{label}</span>
+                  </button>
+                ))}
+              </div>
             </div>
             <div className="science-focus-panel" aria-live="polite">
               <div className="science-focus-panel__icon" aria-hidden="true">
@@ -175,12 +180,14 @@ export default function HomePage() {
                 to={`/product/${spotlight.slug}`}
                 aria-label={`Открыть ${spotlight.officialName}`}
               >
-                <img
+                <ProductImage
                   src={spotlight.image}
                   alt={spotlight.officialName}
                   width="1254"
                   height="1254"
+                  loading="lazy"
                   decoding="async"
+                  sizes="(max-width: 640px) calc(100vw - 28px), (max-width: 960px) 48vw, 620px"
                 />
               </Link>
               <div className="home-product-spotlight__body">
@@ -224,13 +231,12 @@ export default function HomePage() {
                     tabIndex={-1}
                     aria-hidden="true"
                   >
-                    <img
+                    <ProductImage
                       src={product.image}
                       alt=""
                       width="1600"
                       height="1600"
-                      loading="lazy"
-                      decoding="async"
+                      sizes="(max-width: 640px) 108px, (max-width: 960px) 28vw, 220px"
                     />
                   </Link>
                   <div className="home-product-mini__body">
@@ -253,13 +259,12 @@ export default function HomePage() {
         <div className="home-campaign-grid">
           <Reveal className="home-promo-banner">
             <article>
-              <img
+              <ProductImage
                 src={promoProduct.image}
                 alt={promoProduct.officialName}
                 width="1254"
                 height="1254"
-                loading="lazy"
-                decoding="async"
+                sizes="(max-width: 640px) calc(100vw - 28px), (max-width: 960px) 48vw, 620px"
               />
               <div className="home-promo-banner__content">
                 <span>Промо-фокус</span>
@@ -278,14 +283,13 @@ export default function HomePage() {
             <article>
               <div className="home-lord-banner__visual" aria-hidden="true">
                 {lordProducts.map((product) => (
-                  <img
+                  <ProductImage
                     key={product.slug}
                     src={product.image}
                     alt=""
                     width="1254"
                     height="1254"
-                    loading="lazy"
-                    decoding="async"
+                    sizes="(max-width: 640px) 60vw, (max-width: 960px) 30vw, 360px"
                   />
                 ))}
               </div>

@@ -8,6 +8,7 @@ import {
   SectionHeading,
   splitText,
 } from "../components/ui";
+import { ProductImage } from "../components/ProductImage";
 import {
   getProductCopy,
   getProductDisclaimer,
@@ -76,12 +77,14 @@ export default function ProductPage() {
           <div className="product-stage">
             <div className="product-stage__rings" aria-hidden="true" />
             <span className="product-stage__index">DN · {product.sku || "—"}</span>
-            <img
+            <ProductImage
               src={product.image}
               alt={product.imageAlt || product.officialName}
               width="1200"
               height="1200"
+              loading="eager"
               fetchPriority="high"
+              sizes="(max-width: 960px) calc(100vw - 36px), 46vw"
             />
             <span className="product-stage__caption">{product.category}</span>
           </div>

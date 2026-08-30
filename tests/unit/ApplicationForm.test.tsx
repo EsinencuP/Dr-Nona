@@ -15,6 +15,20 @@ async function fillCommon(user: ReturnType<typeof userEvent.setup>) {
 }
 
 describe("ApplicationForm", () => {
+  test("focuses the first invalid field after client validation", async () => {
+    const user = userEvent.setup();
+    render(<ApplicationForm products={[]} />);
+
+    await user.click(screen.getByRole("button", { name: "Отправить заявку" }));
+
+    const firstName = screen.getByRole("textbox", { name: /^Имя/ });
+    await waitFor(() => expect(firstName).toHaveFocus());
+    expect(firstName).toHaveAttribute(
+      "aria-invalid",
+      "true"
+    );
+  });
+
   test("defaults to consultation without products and focuses success status", async () => {
     const submit = vi.fn(async () => ({
       kind: "success" as const,

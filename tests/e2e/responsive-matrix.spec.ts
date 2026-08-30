@@ -547,3 +547,61 @@ test("200% zoom equivalent preserves priority actions", async ({ page }) => {
     await expectHealthyLayout(page, `200% zoom ${route}`, true);
   }
 });
+
+test("audit layout regressions stay closed", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await preparePage(page, "/products");
+  const firstRowTop = await page.locator(".catalog-grid .product-card").first()
+    .evaluate((card) => Math.round(card.getBoundingClientRect().top));
+  const firstRowCards = await page.locator(".catalog-grid .product-card")
+    .evaluateAll((cards, top) =>
+      cards.filter(
+        (card) => Math.abs(Math.round(card.getBoundingClientRect().top) - top) <= 1
+      ).length,
+    firstRowTop);
+  expect(firstRowCards).toBe(4);
+
+  const firstProductImage = page.locator(".catalog-grid .product-card img").first();
+  await firstProductImage.scrollIntoViewIfNeeded();
+  await expect.poll(() => firstProductImage.evaluate((image) =>
+    (image as HTMLImageElement).currentSrc)).toMatch(/catalog-responsive\/.+\.(avif|webp)$/);
+
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await preparePage(page, "/");
+  const tabletHeroBackground = await page.locator(".home-hero").evaluate(
+    (hero) => getComputedStyle(hero).backgroundImage
+  );
+  expect(tabletHeroBackground).toContain("linear-gradient");
+  expect(tabletHeroBackground).toContain("halo-complex-desktop.jpg");
+
+  await page.setViewportSize({ width: 375, height: 812 });
+  await preparePage(page, "/");
+  await expect(page.locator(".science-focus-panel")).toBeAttached();
+  const scienceGeometry = await page.evaluate(() => {
+    const buttons = [...document.querySelectorAll<HTMLElement>(
+      ".science-points button"
+    )];
+    const panel = document.querySelector<HTMLElement>(".science-focus-panel");
+    return {
+      buttonsBottom: Math.max(
+        ...buttons.map((button) => button.getBoundingClientRect().bottom)
+      ),
+      panelTop: panel?.getBoundingClientRect().top ?? 0,
+      panelPosition: panel ? getComputedStyle(panel).position : "missing",
+    };
+  });
+  expect(scienceGeometry.panelPosition).toBe("static");
+  expect(scienceGeometry.buttonsBottom).toBeLessThanOrEqual(
+    scienceGeometry.panelTop
+  );
+
+  await page.setViewportSize({ width: 844, height: 390 });
+  await preparePage(page, "/");
+  await page.locator(".mobile-menu-button").click();
+  const panel = page.locator(".mobile-panel");
+  await expect(panel).toHaveCSS("overflow-y", "auto");
+  const lastNavigationLink = panel.locator("nav a").last();
+  await lastNavigationLink.scrollIntoViewIfNeeded();
+  await expect(lastNavigationLink).toBeVisible();
+  await expect(lastNavigationLink).toHaveCSS("min-height", "54px");
+});

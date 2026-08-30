@@ -13,8 +13,6 @@ export const REQUIRED_SECURITY_HEADERS = {
 };
 
 export const EXPECTED_EXTERNAL_ORIGINS = new Set([
-  "https://fonts.googleapis.com",
-  "https://fonts.gstatic.com",
   "https://res.cloudinary.com",
 ]);
 

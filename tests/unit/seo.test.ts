@@ -3,6 +3,7 @@ import manifestJson from "../../src/data/seo-manifest.json";
 import {
   buildJsonLd,
   getRouteMetadata,
+  resolveSiteOriginFromEnvironment,
   type SeoManifest,
 } from "../../src/seo-core.mjs";
 import { applyRouteMetadata } from "../../src/seo";
@@ -11,6 +12,15 @@ const manifest = manifestJson as SeoManifest;
 const origin = "https://catalog.example";
 
 describe("route SEO contract", () => {
+  test("prefers the stable Vercel production hostname over a preview URL", () => {
+    expect(
+      resolveSiteOriginFromEnvironment({
+        VERCEL_PROJECT_PRODUCTION_URL: "dr-nona-bice.vercel.app",
+        VERCEL_URL: "dr-nona-preview-123.vercel.app",
+      })
+    ).toBe("https://dr-nona-bice.vercel.app");
+  });
+
   test("keeps every indexable title and description unique", () => {
     const routes = manifest.routes.filter((route) => route.indexable);
 

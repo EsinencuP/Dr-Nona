@@ -16,7 +16,7 @@ function observeModuleRequests(page: Page) {
   return urls;
 }
 
-test("home does not load the complete official content dataset", async ({
+test("home does not load complete product or official content datasets", async ({
   page,
 }) => {
   const requests = observeModuleRequests(page);
@@ -26,6 +26,7 @@ test("home does not load the complete official content dataset", async ({
   expect(requests.some((url) => url.includes("official-pages.json"))).toBe(
     false
   );
+  expect(requests.some((url) => url.includes("products.json"))).toBe(false);
 });
 
 test("direct contact route does not load product or official datasets", async ({

@@ -6,7 +6,11 @@
   padding: clamp(24px, 3vw, 42px) 0 20px;
   background-image:
     linear-gradient(90deg, rgba(247, 251, 252, 0.98) 0%, rgba(247, 251, 252, 0.9) 29%, rgba(247, 251, 252, 0.24) 54%, rgba(247, 251, 252, 0) 76%),
-    url("/brand/hero/halo-complex-desktop.jpg");
+    image-set(
+      url("/brand/hero/halo-complex-desktop.avif") type("image/avif"),
+      url("/brand/hero/halo-complex-desktop.webp") type("image/webp"),
+      url("/brand/hero/halo-complex-desktop.jpg") type("image/jpeg")
+    );
   background-position: center, right center;
   background-size: 100% 100%, auto 100%;
   background-repeat: no-repeat;
@@ -528,6 +532,10 @@
   position: relative;
   display: grid;
   place-items: center;
+}
+
+.science-orbit {
+  display: contents;
 }
 
 .science-rings {

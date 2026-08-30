@@ -5,12 +5,10 @@ import manifest from "../src/data/seo-manifest.json" with { type: "json" };
 import {
   absoluteUrl,
   buildJsonLd,
-  normalizeSiteOrigin,
+  resolveSiteOriginFromEnvironment,
 } from "../src/seo-core.mjs";
 
-const siteOrigin = normalizeSiteOrigin(
-  process.env.SITE_URL ?? "http://127.0.0.1:4173"
-);
+const siteOrigin = resolveSiteOriginFromEnvironment(process.env);
 const errors = [];
 const stats = {
   total: manifest.routes.length,

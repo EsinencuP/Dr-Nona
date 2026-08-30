@@ -7,6 +7,14 @@ const claims = JSON.parse(
   readFileSync("src/data/claims-registry.json", "utf8")
 );
 const products = JSON.parse(readFileSync("src/data/products.json", "utf8"));
+const homeProductSlugs = [
+  "dynamic-hydrating-cream",
+  "hand-and-nail-treatment",
+  "gonseen",
+  "solaris-body-lotion",
+  "after-shave-lord",
+  "lord-deodorant",
+];
 
 const fieldPublishability = {};
 const blockedContent = new Set();
@@ -62,6 +70,13 @@ const runtimeContent = {
   },
   home: {
     editorial: [...editorial("news", 2), ...editorial("blog", 1)],
+    products: homeProductSlugs.map((slug) => {
+      const product = products.find((candidate) => candidate.slug === slug);
+      if (!product || product.publicationStatus !== "published") {
+        throw new Error(`Missing published home product: ${slug}`);
+      }
+      return product;
+    }),
   },
 };
 
@@ -84,5 +99,5 @@ writeFileSync(
 );
 
 console.log(
-  `Runtime content: ${Object.keys(fieldPublishability).length} claim fields; ${runtimeContent.home.editorial.length} home editorial cards; ${products.filter((product) => product.publicationStatus === "published").length} selectable products.`
+  `Runtime content: ${Object.keys(fieldPublishability).length} claim fields; ${runtimeContent.home.editorial.length} home editorial cards; ${runtimeContent.home.products.length} home products; ${products.filter((product) => product.publicationStatus === "published").length} selectable products.`
 );

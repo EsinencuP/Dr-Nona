@@ -9,6 +9,28 @@ export function normalizeSiteOrigin(value = DEFAULT_SITE_ORIGIN) {
   return url.origin;
 }
 
+export function resolveSiteOriginFromEnvironment(environment = {}) {
+  const explicitOrigin = environment.SITE_URL?.trim();
+  const vercelHostname = (
+    environment.VERCEL_PROJECT_PRODUCTION_URL ?? environment.VERCEL_URL
+  )?.trim();
+  const detectedOrigin = explicitOrigin || (
+    vercelHostname
+      ? /^https?:\/\//i.test(vercelHostname)
+        ? vercelHostname
+        : `https://${vercelHostname}`
+      : undefined
+  );
+
+  if (environment.RELEASE_MODE === "production" && !detectedOrigin) {
+    throw new Error(
+      "SITE_URL or a Vercel production URL is required for a production release."
+    );
+  }
+
+  return normalizeSiteOrigin(detectedOrigin ?? DEFAULT_SITE_ORIGIN);
+}
+
 export function absoluteUrl(value, siteOrigin) {
   return new globalThis.URL(
     value || "/",

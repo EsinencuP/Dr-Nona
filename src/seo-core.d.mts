@@ -42,6 +42,9 @@ export type SeoManifest = {
 
 export const SITE_NAME: string;
 export const DEFAULT_SITE_ORIGIN: string;
+export function resolveSiteOriginFromEnvironment(
+  environment?: Record<string, string | undefined>
+): string;
 export function normalizeSiteOrigin(value?: string): string;
 export function absoluteUrl(value: string, siteOrigin: string): string;
 export function getRouteMetadata(

@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Redirect, Route, Routes } from "../router";
+import HomePage from "../pages/HomePage";
 
-const HomePage = lazy(() => import("../pages/HomePage"));
 const CatalogPage = lazy(() => import("../pages/CatalogPage"));
 const ProductPage = lazy(() => import("../pages/ProductPage"));
 const AboutPage = lazy(() => import("../pages/AboutPage"));

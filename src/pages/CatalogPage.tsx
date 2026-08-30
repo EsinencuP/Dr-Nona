@@ -2,7 +2,7 @@ import { CaretDown } from "@phosphor-icons/react/CaretDown";
 import { List } from "@phosphor-icons/react/List";
 import { MagnifyingGlass } from "@phosphor-icons/react/MagnifyingGlass";
 import { X } from "@phosphor-icons/react/X";
-import { useMemo, useState } from "react";
+import { useDeferredValue, useMemo, useState } from "react";
 import { ProductCard } from "../components/ui";
 import { useProductData } from "../data";
 import { filterCatalogProducts } from "../features/catalog/filterProducts";
@@ -32,10 +32,17 @@ export default function CatalogPage() {
   const category = params.get("category") ?? "all";
   const sort = normalizeCatalogSort(params.get("sort"));
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const deferredQuery = useDeferredValue(query);
 
   const result = useMemo(
-    () => filterCatalogProducts({ products, query, category, sort }),
-    [category, products, query, sort]
+    () =>
+      filterCatalogProducts({
+        products,
+        query: deferredQuery,
+        category,
+        sort,
+      }),
+    [category, deferredQuery, products, sort]
   );
   const categoryCounts = useMemo(
     () =>
@@ -153,7 +160,11 @@ export default function CatalogPage() {
         ))}
       </div>
 
-      <div className="catalog-status" aria-live="polite">
+      <div
+        className="catalog-status"
+        aria-busy={query !== deferredQuery}
+        aria-live="polite"
+      >
         <span>{productCountLabel(result.length)}</span>
         {(query || category !== "all" || sort !== "popular") && (
           <button type="button" onClick={() => setParams({})}>{t.reset}</button>

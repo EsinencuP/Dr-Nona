@@ -92,6 +92,43 @@ describe("Dr. Nona application", () => {
     });
   });
 
+  test("synchronizes the selection after another browser tab updates storage", async () => {
+    renderApp("/");
+
+    expect(
+      await screen.findByRole("link", { name: "Подборка: 0" })
+    ).toBeInTheDocument();
+
+    window.dispatchEvent(
+      new StorageEvent("storage", {
+        key: "drnona-selection",
+        newValue: JSON.stringify(["lord-deodorant"]),
+        storageArea: localStorage,
+      })
+    );
+
+    expect(
+      await screen.findByRole("link", { name: "Подборка: 1" })
+    ).toBeInTheDocument();
+  });
+
+  test("serves responsive AVIF and WebP product images with a PNG fallback", async () => {
+    const { container } = renderApp("/products");
+
+    await screen.findByRole("heading", { level: 1, name: /Каталог/ });
+    const picture = container.querySelector(".product-card picture");
+    expect(picture).not.toBeNull();
+    expect(
+      picture?.querySelector('source[type="image/avif"]')?.getAttribute("srcset")
+    ).toContain("-480.avif 480w");
+    expect(
+      picture?.querySelector('source[type="image/webp"]')?.getAttribute("srcset")
+    ).toContain("-1200.webp 1200w");
+    expect(picture?.querySelector("img")?.getAttribute("src")).toMatch(
+      /catalog-normalized\/.+\.png$/
+    );
+  });
+
   test("discards unavailable products before showing the selection count", async () => {
     localStorage.setItem(
       "drnona-selection",

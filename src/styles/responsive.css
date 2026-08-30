@@ -97,8 +97,16 @@
   .about-overview h1,
   .formula-hero h1,
   .section-heading--split h2 {
-    white-space: nowrap;
-    text-wrap: nowrap;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: break-word;
+    text-wrap: balance;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1380px) {
+  .catalog-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
@@ -181,6 +189,8 @@
     transition: opacity 200ms var(--ease-standard), transform 240ms var(--ease-out), visibility 0s linear 240ms;
     backdrop-filter: blur(22px) saturate(150%);
     -webkit-backdrop-filter: blur(22px) saturate(150%);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
   }
 
@@ -450,6 +460,34 @@
   }
 }
 
+@media (min-width: 641px) and (max-width: 960px) {
+  .home-hero {
+    background-image:
+      linear-gradient(90deg, rgba(247, 251, 252, 0.98) 0%, rgba(247, 251, 252, 0.9) 45%, rgba(247, 251, 252, 0.5) 70%, rgba(247, 251, 252, 0.06) 100%),
+      image-set(
+        url("/brand/hero/halo-complex-desktop.avif") type("image/avif"),
+        url("/brand/hero/halo-complex-desktop.webp") type("image/webp"),
+        url("/brand/hero/halo-complex-desktop.jpg") type("image/jpeg")
+      );
+    background-position: left center, right center;
+    background-size: 100% 100%, cover;
+  }
+}
+
+@media (max-width: 960px) and (max-height: 700px) {
+  .mobile-panel {
+    padding-block: 12px 24px;
+  }
+
+  .mobile-panel a {
+    min-height: 54px;
+  }
+
+  .mobile-panel a span {
+    font-size: 1.35rem;
+  }
+}
+
 @media (max-width: 640px) {
   :root {
     --container: calc(100% - 28px);
@@ -491,7 +529,11 @@
     padding: 24px 0 14px;
     background-image:
       linear-gradient(180deg, rgba(247, 251, 252, 0.98) 0%, rgba(247, 251, 252, 0.95) 42%, rgba(247, 251, 252, 0.4) 50%, rgba(247, 251, 252, 0.08) 57%, rgba(247, 251, 252, 0) 64%),
-      url("/brand/hero/halo-complex-mobile.jpg");
+      image-set(
+        url("/brand/hero/halo-complex-mobile.avif") type("image/avif"),
+        url("/brand/hero/halo-complex-mobile.webp") type("image/webp"),
+        url("/brand/hero/halo-complex-mobile.jpg") type("image/jpeg")
+      );
     background-position: center top;
     background-size: cover;
     background-repeat: no-repeat;
@@ -676,7 +718,18 @@
   }
 
   .science-diagram {
-    min-height: 340px;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 16px;
+  }
+
+  .science-orbit {
+    min-height: 280px;
+    position: relative;
+    display: grid;
+    place-items: center;
   }
 
   .science-section {
@@ -720,10 +773,13 @@
   }
 
   .science-focus-panel {
-    width: 92%;
+    width: 100%;
+    position: static;
     grid-template-columns: 58px 1fr;
     gap: 14px;
+    margin-top: 16px;
     padding: 13px 15px;
+    transform: none;
   }
 
   .science-focus-panel__icon {

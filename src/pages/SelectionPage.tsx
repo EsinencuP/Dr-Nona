@@ -4,6 +4,7 @@ import { CopySimple } from "@phosphor-icons/react/CopySimple";
 import { EnvelopeSimple } from "@phosphor-icons/react/EnvelopeSimple";
 import { X } from "@phosphor-icons/react/X";
 import { useState } from "react";
+import { ProductImage } from "../components/ProductImage";
 import { useProductData } from "../data";
 import type { Product } from "../data";
 import {
@@ -40,7 +41,13 @@ export default function SelectionPage() {
           <div className="selection-list">
             {chosen.map((product) => (
               <article key={product.slug}>
-                <img src={product.image} alt="" width="900" height="900" loading="lazy" decoding="async" />
+                <ProductImage
+                  src={product.image}
+                  alt=""
+                  width="900"
+                  height="900"
+                  sizes="(max-width: 640px) 80px, 112px"
+                />
                 <div>
                   <small>{product.category}</small>
                   <h2><Link to={`/product/${product.slug}`}>{product.officialName}</Link></h2>

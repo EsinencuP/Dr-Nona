@@ -3,21 +3,12 @@ import { dirname, join } from "node:path";
 import { load } from "cheerio";
 import manifest from "../src/data/seo-manifest.json" with { type: "json" };
 import {
-  normalizeSiteOrigin,
   renderPrerenderedContent,
   renderSeoHead,
+  resolveSiteOriginFromEnvironment,
 } from "../src/seo-core.mjs";
 
-const configuredSiteUrl = process.env.SITE_URL;
-if (process.env.RELEASE_MODE === "production" && !configuredSiteUrl) {
-  throw new Error(
-    "SITE_URL is required when RELEASE_MODE=production so canonical URLs cannot point to localhost."
-  );
-}
-
-const siteOrigin = normalizeSiteOrigin(
-  configuredSiteUrl ?? "http://127.0.0.1:4173"
-);
+const siteOrigin = resolveSiteOriginFromEnvironment(process.env);
 const template = readFileSync("dist/index.html", "utf8");
 
 function outputPath(routePath) {

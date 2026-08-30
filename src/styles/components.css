@@ -423,3 +423,6 @@
   margin-bottom: 0;
   color: var(--muted);
 }
+.product-picture {
+  display: contents;
+}

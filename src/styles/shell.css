@@ -125,7 +125,7 @@
 }
 
 .page-loader {
-  min-height: 65vh;
+  min-height: calc(100svh - var(--header-height));
   display: grid;
   place-items: center;
   align-content: center;

@@ -2,13 +2,13 @@
 
 The application uses route modules and feature boundaries so each page can load and test independently. `src/App.tsx` remains a small composition root.
 
-Last verified: 2026-07-31 against base commit `fede3938ce5173206ee4a6983ece7fb2c29f2318` and the current worktree.
+Last verified: 2026-08-30 against base commit `f3d8401b2fbd71a206a643b148e54b6f5d2f68a5` and the current worktree.
 
 ## Runtime boundaries
 
 | Path | Responsibility |
 |---|---|
-| `src/app/` | App shell, lazy route table, monitoring and error boundary |
+| `src/app/` | App shell, route table, monitoring and error boundary |
 | `src/components/` | Shared UI components without page ownership |
 | `src/features/catalog/` | Pure filter and sort behavior |
 | `src/features/selection/` | Selection persistence and context |
@@ -22,13 +22,13 @@ Last verified: 2026-07-31 against base commit `fede3938ce5173206ee4a6983ece7fb2c
 
 ## Routing
 
-`src/app/routes.tsx` declares stable page patterns and loads each page with a real dynamic import. `src/router.tsx` provides the small History API router and safe parameter decoding. `ApplicationErrorBoundary` wraps routing so malformed input cannot produce an unrecoverable blank screen.
+`src/app/routes.tsx` declares stable page patterns. The home page is the small eager LCP-critical route; the other sixteen page surfaces use real dynamic imports. `src/router.tsx` provides the small History API router and safe parameter decoding. `ApplicationErrorBoundary` wraps routing so malformed input cannot produce an unrecoverable blank screen.
 
 Known official content routes use `DynamicOfficialPage`. The SEO manifest and prerender script still produce route-specific HTML for those records.
 
 ## Data loading
 
-Product and official content datasets stay outside unrelated initial route graphs. The home page uses generated editorial projections. The catalogue loads product data only when its route needs it. Contact loads neither the catalogue nor the official content dataset unless selection context requests products.
+Product and official content datasets stay outside unrelated initial route graphs. The home page uses generated editorial and six-product projections, so it does not load the complete catalogue. The catalogue loads product data only when its route needs it. Contact loads neither the catalogue nor the official content dataset unless selection context requests products.
 
 Generated `runtime-content.json` and `seo-manifest.json` are ignored build artifacts. Source product, claims, market and official content datasets remain tracked.
 
@@ -44,7 +44,7 @@ The Vite development middleware exposes the same handler locally. Production use
 
 ## Enforcement
 
-- `npm run architecture:validate` checks the composition root, page modules, dynamic imports and style boundaries
+- `npm run architecture:validate` checks the composition root, eager-home exception, lazy page modules and style boundaries
 - `npm run performance:validate` checks the initial compressed payload and preload graph
 - `npm run typecheck` checks browser, test, Node and API TypeScript projects
 - `npm run test` checks pure feature and integration behavior

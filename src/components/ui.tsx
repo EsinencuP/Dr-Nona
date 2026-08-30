@@ -7,6 +7,7 @@ import type { OfficialPage, Product } from "../data";
 import { useSelection } from "../features/selection/SelectionContext";
 import { useLocale } from "../locales/LocaleProvider";
 import { Link } from "../router";
+import { ProductImage } from "./ProductImage";
 
 export function splitText(text: string, minLength = 140) {
   if (!text) return [];
@@ -145,14 +146,13 @@ export function ProductCard({
     <article className={`product-card ${compact ? "product-card--compact" : ""}`}>
       <div className="product-card__stage">
         <Link to={`/product/${product.slug}`} tabIndex={-1} aria-hidden="true">
-          <img
+          <ProductImage
             className="product-card__image"
             src={product.image}
             alt=""
             width="1600"
             height="1600"
-            loading="lazy"
-            decoding="async"
+            sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1023px) calc((100vw - 52px) / 2), (max-width: 1380px) calc((100vw - 116px) / 4), 260px"
           />
         </Link>
       </div>

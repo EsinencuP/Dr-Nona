@@ -43,6 +43,28 @@ export function SelectionProvider({ children }: { children: ReactNode }) {
     safeLocalStorage.set("drnona-selection", selected, selectionSchema);
   }, [selected]);
 
+  useEffect(() => {
+    const synchronizeSelection = (event: StorageEvent) => {
+      if (event.key !== "drnona-selection") return;
+
+      const nextSelection = event.newValue === null
+        ? []
+        : selectionSchema.parse(event.newValue);
+      if (!nextSelection) return;
+
+      const sanitized = sanitizeSelection(nextSelection);
+      setSelected((current) =>
+        current.length === sanitized.length &&
+        current.every((slug, index) => slug === sanitized[index])
+          ? current
+          : sanitized
+      );
+    };
+
+    window.addEventListener("storage", synchronizeSelection);
+    return () => window.removeEventListener("storage", synchronizeSelection);
+  }, []);
+
   useEffect(
     () => () => {
       if (announcementTimer.current !== null) {

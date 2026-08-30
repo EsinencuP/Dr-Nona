@@ -49,10 +49,17 @@ for (const page of requiredPages) {
     existsSync(resolve(root, `src/pages/${page}.tsx`)),
     `Missing page module: src/pages/${page}.tsx.`
   );
-  check(
-    routesSource.includes(`lazy(() => import("../pages/${page}"))`),
-    `${page} must use a real dynamic import in src/app/routes.tsx.`
-  );
+  if (page === "HomePage") {
+    check(
+      routesSource.includes('import HomePage from "../pages/HomePage"'),
+      "HomePage must remain the eager LCP-critical route."
+    );
+  } else {
+    check(
+      routesSource.includes(`lazy(() => import("../pages/${page}"))`),
+      `${page} must use a real dynamic import in src/app/routes.tsx.`
+    );
+  }
 }
 check(
   !routesSource.includes("lazy(async"),
@@ -110,5 +117,5 @@ if (failures.length) {
 }
 
 console.log(
-  `Frontend architecture PASS: App ${appLines} lines, ${requiredPages.length} lazy page modules, feature boundaries verified.`
+  `Frontend architecture PASS: App ${appLines} lines, 1 eager LCP route, ${requiredPages.length - 1} lazy page modules, feature boundaries verified.`
 );

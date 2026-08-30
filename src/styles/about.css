@@ -37,7 +37,9 @@
   margin: 0;
   font-size: clamp(3.6rem, 4.8vw, 5.1rem);
   line-height: 0.98;
-  white-space: nowrap;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  text-wrap: balance;
 }
 
 .about-overview__heading h1 em {

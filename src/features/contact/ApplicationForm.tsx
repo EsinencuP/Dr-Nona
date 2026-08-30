@@ -47,6 +47,7 @@ export function ApplicationForm({
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [result, setResult] = useState<ApplicationApiResult | null>(null);
   const attemptKey = useRef(createAttemptKey());
+  const formRef = useRef<HTMLFormElement>(null);
   const statusHeading = useRef<HTMLHeadingElement>(null);
   const allowedSlugs = useMemo(
     () => new Set(products.map((product) => product.slug)),
@@ -57,6 +58,19 @@ export function ApplicationForm({
   useEffect(() => {
     if (accepted) statusHeading.current?.focus();
   }, [accepted]);
+
+  useEffect(() => {
+    if (status !== "validation-error" || !Object.keys(fieldErrors).length) {
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      formRef.current
+        ?.querySelector<HTMLElement>('[aria-invalid="true"]')
+        ?.focus();
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [fieldErrors, status]);
 
   const setFormMode = (nextMode: FormMode) => {
     if (status === "submitting") return;
@@ -159,6 +173,7 @@ export function ApplicationForm({
       </div>
 
       <form
+        ref={formRef}
         className="application-form"
         aria-labelledby="application-title"
         onSubmit={onSubmit}
