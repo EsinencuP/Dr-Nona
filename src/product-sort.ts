@@ -59,5 +59,12 @@ export function compareCatalogProducts(
     return right.officialName.localeCompare(left.officialName, "ru");
   }
   if (sort === "updated") return compareBySourceUpdatedAt(left, right);
-  return left.popularityRank - right.popularityRank;
+  const popularityDifference = left.popularityRank - right.popularityRank;
+  if (popularityDifference !== 0) return popularityDifference;
+
+  // Popularity is business-owned data. officialOrder and SKU only make equal
+  // approved ranks deterministic; they do not manufacture a popularity score.
+  const officialOrderDifference = left.officialOrder - right.officialOrder;
+  if (officialOrderDifference !== 0) return officialOrderDifference;
+  return left.sku.localeCompare(right.sku, "en");
 }

@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { loadProductData, type Product } from "../../src/data";
 import {
+  compareCatalogProducts,
   compareByReleasedAt,
   compareBySourceUpdatedAt,
   normalizeCatalogSort,
@@ -97,5 +98,32 @@ describe("catalog date comparators", () => {
     expect(normalizeCatalogSort("newest")).toBe("updated");
     expect(normalizeCatalogSort("updated")).toBe("updated");
     expect(normalizeCatalogSort("unknown")).toBe("popular");
+  });
+
+  test("uses official order and SKU as deterministic equal-rank tie-breakers", () => {
+    const laterSku = productFixture({
+      slug: "later-sku",
+      sku: "900002",
+      popularityRank: 3,
+      officialOrder: 8,
+    });
+    const earlierSku = productFixture({
+      slug: "earlier-sku",
+      sku: "900001",
+      popularityRank: 3,
+      officialOrder: 8,
+    });
+    const earlierOrder = productFixture({
+      slug: "earlier-order",
+      sku: "999999",
+      popularityRank: 3,
+      officialOrder: 2,
+    });
+
+    expect(
+      [laterSku, earlierSku, earlierOrder]
+        .sort((left, right) => compareCatalogProducts(left, right, "popular"))
+        .map(({ slug }) => slug)
+    ).toEqual(["earlier-order", "earlier-sku", "later-sku"]);
   });
 });

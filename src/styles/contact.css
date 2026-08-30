@@ -214,6 +214,22 @@
   line-height: 1.5;
 }
 
+.application-consent-row {
+  display: grid;
+  gap: 6px;
+}
+
+.application-consent__privacy {
+  width: fit-content;
+  margin-left: 32px;
+  color: var(--sea-800);
+  font-size: var(--type-body-sm);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
 .application-consent input {
   margin-top: 1px;
 }

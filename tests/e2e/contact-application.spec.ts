@@ -97,3 +97,37 @@ test("offline submission reports failure and preserves entered data", async ({
   await expect(page.getByLabel("Имя")).toHaveValue("Ana");
   await expect(page.getByLabel("Телефон")).toHaveValue("069 123 456");
 });
+
+test("consent is required, linked to privacy policy and receives focus", async ({
+  page,
+}) => {
+  let requestCount = 0;
+  await page.route("**/api/applications", async (route) => {
+    requestCount += 1;
+    await route.abort();
+  });
+  await page.goto("/contactus");
+  await page.getByLabel("Имя").fill("Ana");
+  await page.getByLabel("Фамилия").fill("Popescu");
+  await page.getByLabel("Телефон").fill("069 123 456");
+  await page.getByLabel("Город").fill("Chișinău");
+  await page.getByLabel("Предпочтительная дата").fill("2099-01-01");
+  await page.getByLabel("Предпочтительное время").fill("10:00");
+
+  const consent = page.getByRole("checkbox");
+  await expect(consent).toHaveAttribute("required", "");
+  await expect(
+    page
+      .getByRole("form")
+      .getByRole("link", { name: "Политика конфиденциальности" })
+  ).toHaveAttribute("href", "/privacypolicy");
+
+  await page.getByRole("button", { name: "Отправить заявку" }).click();
+
+  await expect(
+    page.getByText("Необходимо принять условия обработки данных")
+  ).toBeVisible();
+  await expect(consent).toHaveAttribute("aria-invalid", "true");
+  await expect(consent).toBeFocused();
+  expect(requestCount).toBe(0);
+});

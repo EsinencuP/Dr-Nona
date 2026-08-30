@@ -10,6 +10,8 @@ import type { FormEvent } from "react";
 import type { Product } from "../../data";
 import type { ApplicationInput } from "../../../shared/applications/application-schema";
 import { marketData } from "../../market";
+import { useLocale } from "../../locales/LocaleProvider";
+import { Link } from "../../router";
 import { submitApplication } from "./application-client";
 import type { ApplicationApiResult } from "./application-client";
 import { validateClientApplication } from "./client-application-validation";
@@ -40,6 +42,7 @@ export function ApplicationForm({
   products,
   submit = submitApplication,
 }: ApplicationFormProps) {
+  const { t } = useLocale();
   const [mode, setMode] = useState<FormMode>(
     products.length ? "order" : "consultation"
   );
@@ -307,19 +310,22 @@ export function ApplicationForm({
           />
         </label>
 
-        <label className="application-consent">
-          <input
-            name="consentAccepted"
-            type="checkbox"
-            disabled={accepted}
-            aria-invalid={Boolean(fieldErrors.consentAccepted)}
-            aria-describedby={describedBy("consentAccepted", fieldErrors)}
-          />
-          <span>
-            Я согласен на обработку указанных персональных данных для связи по
-            этой заявке.
-          </span>
-        </label>
+        <div className="application-consent-row">
+          <label className="application-consent">
+            <input
+              name="consentAccepted"
+              type="checkbox"
+              required
+              disabled={accepted}
+              aria-invalid={Boolean(fieldErrors.consentAccepted)}
+              aria-describedby={describedBy("consentAccepted", fieldErrors)}
+            />
+            <span>{t.consentText}</span>
+          </label>
+          <Link className="application-consent__privacy" to="/privacypolicy">
+            {t.privacyPolicy}
+          </Link>
+        </div>
         {fieldErrors.consentAccepted && (
           <small id="consentAccepted-error" className="application-error">
             {fieldErrors.consentAccepted}

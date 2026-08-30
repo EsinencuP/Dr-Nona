@@ -31,4 +31,7 @@ export const ru = {
   primaryNavigation: "Основная навигация",
   mobileNavigation: "Мобильная навигация",
   breadcrumbs: "Хлебные крошки",
+  consentText:
+    "Я согласен на обработку указанных персональных данных для связи по этой заявке.",
+  privacyPolicy: "Политика конфиденциальности",
 } as const;
