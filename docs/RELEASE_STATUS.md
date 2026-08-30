@@ -2,7 +2,7 @@
 
 No. Technical quality gates pass locally, but production approval remains blocked by the items below.
 
-Last verified: 2026-08-25 against base commit `46810af5850b11446018dde6c5ee4c9cc71e5196` and the current cleanup worktree.
+Last verified: 2026-08-30 against base commit `678eac7` and the current cleanup worktree.
 
 This file is generated from `docs/release-status.json`. Run `npm run release:status:generate` after changing the machine-readable status.
 
@@ -13,7 +13,7 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 | Verdict | `release-blocked` |
 | Label | Technical QA passes; production approval is blocked |
 | Branch | `main` |
-| Base commit | `46810af5850b11446018dde6c5ee4c9cc71e5196` |
+| Base commit | `678eac7` |
 | Environment | Windows local QA with Node 22.23.1, npm 10.9.8 and Chromium desktop/mobile |
 
 ## Current dataset
@@ -34,7 +34,7 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 | ID | Priority | Owner | Summary |
 |---|---|---|---|
 | `P0-LOCALE` | P0 | content | The complete Romanian interface and content set is not approved or implemented. |
-| `P0-CONTACT` | P0 | product | Telegram delivery works locally, but privacy, production origin and abuse protection are not approved. |
+| `P0-CONTACT` | P0 | product | Telegram delivery and an application-level rate guard are implemented, but privacy, production origin and platform-wide abuse protection are not approved. |
 | `P0-LEGAL` | P0 | legal | Moldova legal review has not approved any regulated product claim. |
 | `P1-MEDIA-RIGHTS` | P1 | legal | Production publication rights for product, brand and editorial media are not confirmed. |
 | `P1-CONTENT` | P1 | content | Moldova certificates and the final local scope for service and editorial pages are not approved. |
@@ -53,7 +53,7 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 ### `P0-CONTACT`
 
 - Approve the Moldova legal recipient, consent copy and retention policy.
-- Configure the production origin and server-side WAF or rate limiting.
+- Configure the production origin and verify the application guard plus a platform-wide Vercel WAF policy.
 - Verify successful and failed submissions on the deployed form without duplicate delivery.
 
 ### `P0-LEGAL`

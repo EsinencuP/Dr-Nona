@@ -23,15 +23,10 @@ export function getGlobalHeaderEntries(configuration) {
   return globalRule?.headers ?? [];
 }
 
-export function getGlobalHeaders(configuration, { enforceCsp = false } = {}) {
-  const headers = Object.fromEntries(
+export function getGlobalHeaders(configuration) {
+  return Object.fromEntries(
     getGlobalHeaderEntries(configuration).map(({ key, value }) => [key, value])
   );
-  if (enforceCsp && headers[REPORT_ONLY_CSP_HEADER]) {
-    headers[ENFORCED_CSP_HEADER] = headers[REPORT_ONLY_CSP_HEADER];
-    delete headers[REPORT_ONLY_CSP_HEADER];
-  }
-  return headers;
 }
 
 export function parseCsp(value) {
@@ -54,11 +49,14 @@ function addError(errors, message) {
 export function validateSecurityConfiguration(configuration) {
   const errors = [];
   const headers = getGlobalHeaders(configuration);
-  const csp = headers[REPORT_ONLY_CSP_HEADER];
+  const csp = headers[ENFORCED_CSP_HEADER];
 
   if (!csp) {
-    addError(errors, `${REPORT_ONLY_CSP_HEADER} is missing from the global rule.`);
+    addError(errors, `${ENFORCED_CSP_HEADER} is missing from the global rule.`);
     return errors;
+  }
+  if (headers[REPORT_ONLY_CSP_HEADER]) {
+    addError(errors, `${REPORT_ONLY_CSP_HEADER} must not remain in production.`);
   }
 
   for (const [key, expected] of Object.entries(REQUIRED_SECURITY_HEADERS)) {

@@ -71,6 +71,8 @@
   --sea-400: #4e99a7;
   --sea-700: #0b6676;
   --sea-800: #084e5c;
+  --focus-inner: #084e5c;
+  --focus-outer: #ffffff;
   --gold-050: #f3ecdd;
   --gold-500: #b99a5a;
   --gold-800: #7a5a21;
@@ -198,8 +200,9 @@ p {
 }
 
 :focus-visible {
-  outline: 3px solid var(--sea-400);
-  outline-offset: 4px;
+  outline: 3px solid var(--focus-inner);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px var(--focus-outer);
 }
 
 .container {

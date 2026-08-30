@@ -9,6 +9,10 @@ import {
 } from "../server/config/contact-env.js";
 import { jsonResponse } from "../server/http/json-response.js";
 import {
+  applicationRateLimitGuard,
+  type RateLimitDecision,
+} from "../server/http/application-rate-limit.js";
+import {
   readJsonBody,
   requestOriginIsAllowed,
 } from "../server/http/request-validation.js";
@@ -41,7 +45,9 @@ export type ApplicationsHandlerDependencies = {
     | { success: true; value: ContactEnvironment }
     | { success: false; missing: string[] };
   process?: typeof processApplication;
-  rateLimitGuard?: (request: Request) => Promise<boolean>;
+  rateLimitGuard?: (
+    request: Request
+  ) => Promise<boolean | RateLimitDecision>;
   logger?: (metadata: Record<string, unknown>) => void;
 };
 
@@ -69,11 +75,23 @@ export function createApplicationsHandler(
     if (!requestOriginIsAllowed(request, environment.allowedOrigins)) {
       return jsonResponse({ ok: false, code: "FORBIDDEN" }, 403);
     }
-    if (
-      dependencies.rateLimitGuard &&
-      !(await dependencies.rateLimitGuard(request))
-    ) {
-      return jsonResponse({ ok: false, code: "RATE_LIMITED" }, 429);
+    const rateLimitResult = await (
+      dependencies.rateLimitGuard ?? applicationRateLimitGuard
+    )(request);
+    const rateLimitAllowed =
+      typeof rateLimitResult === "boolean"
+        ? rateLimitResult
+        : rateLimitResult.allowed;
+    if (!rateLimitAllowed) {
+      const retryAfterSeconds =
+        typeof rateLimitResult === "boolean"
+          ? 60
+          : rateLimitResult.retryAfterSeconds;
+      return jsonResponse(
+        { ok: false, code: "RATE_LIMITED" },
+        429,
+        { "Retry-After": String(retryAfterSeconds) }
+      );
     }
     const body = await readJsonBody(request);
     if (!body.success) {

@@ -22,8 +22,7 @@ export function getGlobalHeaderEntries(
 ): HeaderEntry[];
 
 export function getGlobalHeaders(
-  configuration: SecurityConfiguration,
-  options?: { enforceCsp?: boolean }
+  configuration: SecurityConfiguration
 ): Record<string, string>;
 
 export function parseCsp(value: string): Map<string, string[]>;

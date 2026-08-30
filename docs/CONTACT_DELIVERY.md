@@ -2,16 +2,17 @@
 
 The website sends validated order and consultation applications to one approved Telegram chat. Email is not an automated delivery provider.
 
-Last verified: 2026-07-31 against `api/applications.ts`, `server/applications/` and `src/features/contact/`.
+Last verified: 2026-08-30 against `api/applications.ts`, `server/applications/` and `src/features/contact/`.
 
 ## Request flow
 
 1. `ApplicationForm` validates the user-facing fields.
 2. The client sends JSON to `POST /api/applications` with an idempotency attempt key.
-3. The server validates the environment, origin, body, consent, product slugs and attempt-key format.
-4. The service creates a server request ID and formats a plain-text Telegram message.
-5. The provider sends the message with an 8s timeout.
-6. HTTP 201 produces the success state; provider failure produces HTTP 502 and preserves form data.
+3. The server validates the environment and exact origin, then applies a five-attempt-per-minute guard to the anonymized client address.
+4. The server validates the body, consent, product slugs and attempt-key format.
+5. The service creates a server request ID and formats a plain-text Telegram message.
+6. The provider sends the message with an 8s timeout.
+7. HTTP 201 produces the success state; provider failure produces HTTP 502 and preserves form data.
 
 The Vite development middleware uses the same handler at `http://127.0.0.1:4173`. Vercel hosts the production function.
 
@@ -62,7 +63,7 @@ external API base URL or SPA proxy is required.
 - HTTP 400: schema, product or attempt-key validation failed
 - HTTP 403: request origin is not approved
 - HTTP 405: method is not POST
-- HTTP 429: configured production rate limit rejected the request
+- HTTP 429: the application guard rejected more than five attempts in one minute and returns `Retry-After`
 - HTTP 502: Telegram delivery failed
 - HTTP 503: required server configuration is missing
 
@@ -70,7 +71,9 @@ Success appears only after HTTP 201. Network, validation and provider failures k
 
 ## Current protection
 
-The endpoint has exact-origin validation, schema validation, payload limits, product allowlisting, a honeypot and server-only secrets. Turnstile is absent. Production WAF or rate limiting, durable deduplication, consent copy and retention policy remain open under `P0-CONTACT`.
+The endpoint has exact-origin validation, a bounded application-level fixed-window guard, schema validation, payload limits, product allowlisting, a honeypot and server-only secrets. Client addresses are hashed before they are held in the short-lived in-memory bucket map. Turnstile is absent by design.
+
+Because serverless instances do not share memory, a Vercel WAF rule is still recommended for globally consistent rate limiting. Durable deduplication, approved consent copy and the retention policy remain open under `P0-CONTACT`.
 
 ## Operations
 

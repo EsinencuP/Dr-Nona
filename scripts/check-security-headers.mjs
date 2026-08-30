@@ -41,5 +41,5 @@ if (errors.length) {
 }
 
 console.log(
-  `Security header gate: PASS (${runtimeOrigins.size} external runtime origins; report-only CSP ready for enforced verification).`
+  `Security header gate: PASS (${runtimeOrigins.size} external runtime origins; CSP is enforced).`
 );

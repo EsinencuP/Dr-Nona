@@ -2,11 +2,11 @@
 
 `vercel.json` is the version-controlled deployment source. Shared scripts apply and verify the same policy in build, preview and runtime checks.
 
-Last verified: 2026-07-31 against `vercel.json` and `scripts/security-headers-lib.mjs`.
+Last verified: 2026-08-30 against `vercel.json` and `scripts/security-headers-lib.mjs`.
 
 ## Required headers
 
-- `Content-Security-Policy-Report-Only` during the current rollout
+- Enforced `Content-Security-Policy`
 - `X-Content-Type-Options: nosniff`
 - `X-Frame-Options: DENY`
 - `Referrer-Policy: strict-origin-when-cross-origin`
@@ -14,13 +14,15 @@ Last verified: 2026-07-31 against `vercel.json` and `scripts/security-headers-li
 - One-year `Strict-Transport-Security` with subdomains
 - `Cross-Origin-Opener-Policy: same-origin`
 
-The runtime gate converts the report-only policy to enforced Content Security Policy (CSP) and renders representative routes in Chromium. A production switch requires explicit approval and a clean runtime result.
+The production configuration and local preview use the same enforced Content Security Policy (CSP). The runtime gate renders representative routes in Chromium and fails on any policy violation.
+
+The Vite development server adds `unsafe-inline` to `script-src` only for its injected React Refresh bootstrap. This exception is selected by the `dev` npm lifecycle and is absent from preview, build output and `vercel.json`.
 
 ## CSP allowlist
 
-The policy allows self-hosted scripts, forms, media and connections. Approved external origins are limited to Google Fonts CSS, Google Fonts files and Cloudinary images. `script-src` contains neither `unsafe-inline` nor `unsafe-eval`.
+The policy allows self-hosted scripts, forms, fonts, media and connections. The only approved external runtime origin is Cloudinary for official editorial images. `script-src` contains neither `unsafe-inline` nor `unsafe-eval`.
 
-Cloudflare Turnstile is not configured. The contact endpoint therefore requires production WAF or server-side rate limiting before release.
+Cloudflare Turnstile is intentionally not configured. The contact endpoint has a bounded five-attempt fixed-window guard per anonymized client address. A Vercel WAF rule remains recommended for platform-wide enforcement across all function instances.
 
 ## Caching
 
@@ -32,6 +34,6 @@ Cloudflare Turnstile is not configured. The contact endpoint therefore requires 
 
 - `npm run security:validate` checks the configuration and minimal origin allowlist
 - `npm run security:http-validate` checks headers on representative responses and the `/main` redirect
-- `npm run security:runtime` enforces CSP in Chromium and fails on violations
+- `npm run security:runtime` verifies the production-enforced CSP in Chromium and fails on violations
 
 Production header delivery and WAF behavior remain unverified until deployment.

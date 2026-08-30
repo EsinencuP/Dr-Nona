@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "asOf": "2026-08-25",
-  "commit": "46810af5850b11446018dde6c5ee4c9cc71e5196",
+  "asOf": "2026-08-30",
+  "commit": "678eac7",
   "branch": "main",
   "status": "release-blocked",
   "label": "Technical QA passes; production approval is blocked",
@@ -36,10 +36,10 @@
       "priority": "P0",
       "owner": "product",
       "status": "open",
-      "summary": "Telegram delivery works locally, but privacy, production origin and abuse protection are not approved.",
+      "summary": "Telegram delivery and an application-level rate guard are implemented, but privacy, production origin and platform-wide abuse protection are not approved.",
       "acceptanceCriteria": [
         "Approve the Moldova legal recipient, consent copy and retention policy.",
-        "Configure the production origin and server-side WAF or rate limiting.",
+        "Configure the production origin and verify the application guard plus a platform-wide Vercel WAF policy.",
         "Verify successful and failed submissions on the deployed form without duplicate delivery."
       ]
     },

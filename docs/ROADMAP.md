@@ -2,7 +2,7 @@
 
 This roadmap contains unfinished work only. Completed implementation history stays in Git and active product choices stay in `DECISIONS.md`.
 
-Last verified: 2026-08-25 against `docs/release-status.json` and the current worktree.
+Last verified: 2026-08-30 against `docs/release-status.json` and the current worktree.
 
 ## External approval blockers
 
@@ -72,14 +72,14 @@ External owners must resolve these tasks before engineering can mark the release
 
 Engineering can complete these tasks after the related external inputs are approved.
 
-### `P0-CONTACT-ENGINEERING`: protect production submissions
+### `P0-CONTACT-PLATFORM`: verify platform-wide submission protection
 
 - **Priority**: P0
-- **Status**: Open
+- **Status**: Partially complete; application guard implemented
 - **Owner**: Engineering
 - **Dependency**: Approved production origin and abuse-protection policy
-- **Goal**: Protect `POST /api/applications` without changing the form contract
-- **Acceptance criteria**: Configure server-side WAF or rate limiting; preserve validation, retry and failure states; verify no duplicate delivery
+- **Goal**: Extend the existing per-instance guard for `POST /api/applications` with platform-wide enforcement
+- **Acceptance criteria**: Configure and publish a Vercel WAF rule; verify 429 behavior on the deployed domain; preserve validation, retry and failure states; verify no duplicate delivery
 - **Verification commands**: `npm run test`, `npm run test:e2e`, production smoke test
 
 ### `P1-CI-PROTECTION`: enforce quality gates

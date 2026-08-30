@@ -1493,6 +1493,7 @@
 
   :focus-visible {
     outline-width: 4px;
-    outline-color: var(--sea-800);
+    outline-color: var(--focus-inner);
+    box-shadow: 0 0 0 7px var(--focus-outer);
   }
 }

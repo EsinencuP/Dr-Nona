@@ -107,6 +107,22 @@ test("selection persists after refresh and removal updates storage", async ({
   ).toBeVisible();
 });
 
+test("selection count synchronizes between open tabs", async ({ context }) => {
+  const firstTab = await context.newPage();
+  const secondTab = await context.newPage();
+  await Promise.all([firstTab.goto("/products"), secondTab.goto("/products")]);
+  await expect(firstTab.locator(".catalog-grid .product-card")).toHaveCount(50);
+  await expect(secondTab.getByRole("link", { name: "Подборка: 0" })).toBeVisible();
+
+  await firstTab
+    .locator(".catalog-grid .product-card")
+    .first()
+    .getByRole("button", { name: "В подборку" })
+    .click();
+
+  await expect(secondTab.getByRole("link", { name: "Подборка: 1" })).toBeVisible();
+});
+
 test("unknown deep links render the site 404", async ({ page }) => {
   await page.goto("/definitely-not-a-route");
   await expect(

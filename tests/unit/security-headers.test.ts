@@ -13,7 +13,7 @@ function changedConfiguration(transform: (value: string) => string) {
   const configuration = structuredClone(validConfiguration);
   const csp = configuration.headers[0].headers.find(
     ({ key }: { key: string }) =>
-      key === "Content-Security-Policy-Report-Only"
+      key === "Content-Security-Policy"
   );
   csp.value = transform(csp.value);
   return configuration;
@@ -24,16 +24,13 @@ describe("security header deployment contract", () => {
     expect(validateSecurityConfiguration(validConfiguration)).toEqual([]);
   });
 
-  test("converts report-only CSP to the same enforced policy for runtime QA", () => {
-    const reportOnly = getGlobalHeaders(validConfiguration);
-    const enforced = getGlobalHeaders(validConfiguration, { enforceCsp: true });
+  test("ships the validated CSP in enforcement mode", () => {
+    const headers = getGlobalHeaders(validConfiguration);
 
-    expect(enforced["Content-Security-Policy"]).toBe(
-      reportOnly["Content-Security-Policy-Report-Only"]
+    expect(headers["Content-Security-Policy"]).toContain(
+      "default-src 'self'"
     );
-    expect(enforced).not.toHaveProperty(
-      "Content-Security-Policy-Report-Only"
-    );
+    expect(headers).not.toHaveProperty("Content-Security-Policy-Report-Only");
   });
 
   test("rejects unsafe-eval", () => {

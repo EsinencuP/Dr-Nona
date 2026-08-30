@@ -9,9 +9,12 @@ import { handleDevApplicationRequest } from "./server/dev/applications-middlewar
 const deploymentConfiguration = JSON.parse(
   readFileSync(resolve(process.cwd(), "vercel.json"), "utf8")
 );
-const securityHeaders = getGlobalHeaders(deploymentConfiguration, {
-  enforceCsp: process.env.SECURITY_CSP_ENFORCE === "1",
-});
+const securityHeaders = getGlobalHeaders(deploymentConfiguration);
+if (process.env.npm_lifecycle_event === "dev") {
+  securityHeaders["Content-Security-Policy"] = securityHeaders[
+    "Content-Security-Policy"
+  ].replace("script-src 'self'", "script-src 'self' 'unsafe-inline'");
+}
 
 type MiddlewareServer = {
   middlewares: {

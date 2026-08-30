@@ -5,6 +5,7 @@ import {
 } from "../../api/applications";
 import type { ContactEnvironment } from "../../server/config/contact-env";
 import type { ApplicationServiceResult } from "../../server/applications/application-types";
+import { createApplicationRateLimitGuard } from "../../server/http/application-rate-limit";
 
 const environment: ContactEnvironment = {
   allowedOrigins: new Set(["https://example.test"]),
@@ -43,6 +44,7 @@ function handler(
   return createApplicationsHandler({
     environment: () => ({ success: true, value: environment }),
     process: vi.fn(async () => serviceResult),
+    rateLimitGuard: async () => true,
     ...overrides,
   });
 }
@@ -155,6 +157,40 @@ describe("POST /api/applications", () => {
       { rateLimitGuard: async () => false }
     )(request());
     expect(response.status).toBe(429);
+    expect(response.headers.get("Retry-After")).toBe("60");
+  });
+
+  test("limits one client to five application attempts per minute", async () => {
+    let now = 1_000;
+    const rateLimitGuard = createApplicationRateLimitGuard({
+      now: () => now,
+    });
+    const process = vi.fn(async () => ({
+      requestId: "request-limited",
+      type: "order" as const,
+      delivery: { telegram: "sent" as const },
+      outcome: "success" as const,
+    }));
+    const limitedHandler = createApplicationsHandler({
+      environment: () => ({ success: true, value: environment }),
+      process,
+      rateLimitGuard,
+    });
+    const clientRequest = () =>
+      request(validBody, {
+        headers: { "x-vercel-forwarded-for": "203.0.113.20" },
+      });
+
+    for (let attempt = 0; attempt < 5; attempt += 1) {
+      expect((await limitedHandler(clientRequest())).status).toBe(201);
+    }
+    const limited = await limitedHandler(clientRequest());
+    expect(limited.status).toBe(429);
+    expect(limited.headers.get("Retry-After")).toBe("60");
+    expect(process).toHaveBeenCalledTimes(5);
+
+    now += 60_000;
+    expect((await limitedHandler(clientRequest())).status).toBe(201);
   });
 
   test("metadata-only logs never include PII", async () => {

@@ -76,7 +76,7 @@ const preview = spawn(
   ],
   {
     cwd: process.cwd(),
-    env: { ...process.env, SECURITY_CSP_ENFORCE: "1" },
+    env: process.env,
     stdio: ["ignore", "pipe", "pipe"],
     windowsHide: true,
   }

@@ -81,3 +81,19 @@ test("client validation and complete failure preserve data", async ({ page }) =>
   await expect(page.getByText(/Заявка не отправлена/)).toBeVisible();
   await expect(page.getByLabel("Имя")).toHaveValue("Ana");
 });
+
+test("offline submission reports failure and preserves entered data", async ({
+  page,
+}) => {
+  await page.route("**/api/applications", (route) => route.abort("internetdisconnected"));
+  await page.goto("/contactus");
+  await fillCommon(page);
+  await page.getByLabel("Предпочтительная дата").fill("2099-01-01");
+  await page.getByLabel("Предпочтительное время").fill("10:00");
+
+  await page.getByRole("button", { name: "Отправить заявку" }).click();
+
+  await expect(page.getByText(/Заявка не отправлена/)).toBeVisible();
+  await expect(page.getByLabel("Имя")).toHaveValue("Ana");
+  await expect(page.getByLabel("Телефон")).toHaveValue("069 123 456");
+});

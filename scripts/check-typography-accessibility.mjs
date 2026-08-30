@@ -78,6 +78,27 @@ if (contrastFailures.length) {
   );
 }
 
+const focusInner = token("focus-inner");
+const focusOuter = token("focus-outer");
+const focusChecks = [
+  ...lightSurfaces.map((surface) => ({
+    pair: `focus-inner/${surface}`,
+    ratio: contrast(focusInner, token(surface)),
+  })),
+  ...["ink", "lord-950", "lord-900", "lord-800"].map((surface) => ({
+    pair: `focus-outer/${surface}`,
+    ratio: contrast(focusOuter, token(surface)),
+  })),
+];
+const focusFailures = focusChecks.filter(({ ratio }) => ratio < 3);
+if (focusFailures.length) {
+  throw new Error(
+    `Focus indicator fails 3:1 adjacent contrast:\n${focusFailures
+      .map(({ pair, ratio }) => `${pair}: ${ratio.toFixed(2)}:1`)
+      .join("\n")}`
+  );
+}
+
 const html = readFileSync("index.html", "utf8");
 if (/user-scalable\s*=\s*no|maximum-scale\s*=\s*1/i.test(html)) {
   throw new Error("Viewport metadata must not disable browser zoom.");
@@ -86,5 +107,5 @@ if (/user-scalable\s*=\s*no|maximum-scale\s*=\s*1/i.test(html)) {
 console.log(
   `Typography accessibility: PASS (${styleFiles.length} stylesheets; minimum ${minimumTextPx}px; muted contrast ${contrastResults
     .map(({ surface, ratio }) => `${surface} ${ratio.toFixed(2)}:1`)
-    .join(", ")}).`
+    .join(", ")}; focus indicator ${Math.min(...focusChecks.map(({ ratio }) => ratio)).toFixed(2)}:1 minimum).`
 );

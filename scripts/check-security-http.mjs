@@ -9,7 +9,7 @@ import {
 
 const host = "127.0.0.1";
 const configuration = JSON.parse(await readFile("vercel.json", "utf8"));
-const expectedHeaders = getGlobalHeaders(configuration, { enforceCsp: true });
+const expectedHeaders = getGlobalHeaders(configuration);
 const port = await new Promise((resolve, reject) => {
   const probe = createServer();
   probe.once("error", reject);
@@ -40,7 +40,7 @@ const preview = spawn(
   ],
   {
     cwd: process.cwd(),
-    env: { ...process.env, SECURITY_CSP_ENFORCE: "1" },
+    env: process.env,
     stdio: ["ignore", "pipe", "pipe"],
     windowsHide: true,
   }
