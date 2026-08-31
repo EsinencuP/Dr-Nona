@@ -32,10 +32,10 @@ Last verified: 2026-08-30 against base commit `678eac7` and the precision-audit 
 
 - TypeScript: pass
 - ESLint: pass with zero warnings
-- Vitest: 21 files, 145 tests passed
-- Production build: pass; 187 prerendered routes and 185 sitemap URLs
+- Vitest: 21 files, 147 tests passed
+- Production build: pass; 301 prerendered routes and 299 sitemap URLs
 - Enforced CSP runtime: five representative routes, zero violations
-- Playwright: 123 passed, 17 intentionally skipped across desktop and mobile
+- Playwright: 133 passed, 17 intentionally skipped across desktop and mobile
 - Release gate: expected blocked by the eight external P0/P1 items above
 
 The precision audit's release verdict remains `release-blocked`, but its three actionable UI/security findings and both stated testing gaps now have repository evidence.

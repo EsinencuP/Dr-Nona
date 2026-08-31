@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Redirect, Route, Routes } from "../router";
 import HomePage from "../pages/HomePage";
+import { useLocale } from "../locales/LocaleProvider";
 
 const CatalogPage = lazy(() => import("../pages/CatalogPage"));
 const ProductPage = lazy(() => import("../pages/ProductPage"));
@@ -20,12 +21,13 @@ const BadRequestPage = lazy(() => import("../pages/BadRequestPage"));
 const DynamicOfficialPage = lazy(() => import("../pages/DynamicOfficialPage"));
 
 export function AppRoutes() {
+  const { locale } = useLocale();
   return (
     <Suspense
       fallback={
         <div className="page-loader" aria-live="polite">
           <span />
-          <p>Загрузка страницы</p>
+          <p>{locale === "ro" ? "Se încarcă pagina" : "Загрузка страницы"}</p>
         </div>
       }
     >

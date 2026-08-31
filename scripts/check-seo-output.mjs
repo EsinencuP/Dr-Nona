@@ -64,28 +64,31 @@ for (const route of manifest.routes) {
   const alternateLinks = $('link[rel="alternate"][hreflang]');
   if (route.indexable) {
     stats.hreflang += 1;
+    const expectedAlternates = route.alternates ?? {
+      "ru-MD": route.canonicalPath,
+      "x-default": route.canonicalPath,
+    };
     expect(
-      alternateLinks.length === 2,
-      `${route.path}: expected exactly two available-language alternates.`
+      alternateLinks.length === Object.keys(expectedAlternates).length,
+      `${route.path}: available-language alternate count mismatch.`
     );
-    expect(
-      $('link[rel="alternate"][hreflang="ru-MD"]').attr("href") === canonical,
-      `${route.path}: ru-MD alternate mismatch.`
-    );
-    expect(
-      $('link[rel="alternate"][hreflang="x-default"]').attr("href") === canonical,
-      `${route.path}: x-default alternate mismatch.`
-    );
-    expect(
-      $('link[rel="alternate"][hreflang="ro-MD"]').length === 0,
-      `${route.path}: unpublished Romanian alternate must not be advertised.`
-    );
+    for (const [language, path] of Object.entries(expectedAlternates)) {
+      expect(
+        $(`link[rel="alternate"][hreflang="${language}"]`).attr("href") ===
+          absoluteUrl(path, siteOrigin),
+        `${route.path}: ${language} alternate mismatch.`
+      );
+    }
   } else {
     expect(
       alternateLinks.length === 0,
       `${route.path}: noindex route must not advertise language alternates.`
     );
   }
+  expect(
+    $("html").attr("lang") === (route.locale === "ro" ? "ro" : "ru"),
+    `${route.path}: html lang mismatch.`
+  );
   for (const property of [
     "og:type",
     "og:title",

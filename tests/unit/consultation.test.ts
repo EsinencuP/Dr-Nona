@@ -54,4 +54,14 @@ describe("consultation handoff", () => {
     expect(email).toContain("NC-01");
     expect(email).toContain("2 поз.");
   });
+
+  test("builds Romanian consultation copy and localized product URLs", () => {
+    const text = buildConsultationText([first], "ro");
+    const email = decodeURIComponent(buildConsultationEmail([first], "ro"));
+
+    expect(text).toContain("Bună ziua!");
+    expect(text).toContain("Cod produs: NC-01");
+    expect(text).toContain("/ro/product/night-cream");
+    expect(email).toContain("Consultație pentru selecția Dr. Nona");
+  });
 });

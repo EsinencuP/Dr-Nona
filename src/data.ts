@@ -1,5 +1,10 @@
 import formulaContentJson from "./data/formula-content.json";
+import formulaContentRoJson from "./data/formula-content-ro.json";
+import companyPagesJson from "./data/company-pages.json";
 import { use } from "react";
+import { useLocale } from "./locales/LocaleProvider";
+
+type Locale = "ru" | "ro";
 
 export type Product = {
   slug: string;
@@ -54,6 +59,10 @@ export type FormulaChapter = {
 };
 
 export const formulaContent = formulaContentJson as FormulaChapter[];
+const formulaContentByLocale: Record<Locale, FormulaChapter[]> = {
+  ru: formulaContent,
+  ro: formulaContentRoJson as FormulaChapter[],
+};
 
 export type ProductData = {
   allProducts: Product[];
@@ -63,14 +72,34 @@ export type ProductData = {
   getRelatedProducts: (product: Product, limit?: number) => Product[];
 };
 
+type RomanianProductCopy = Pick<
+  Product,
+  | "shortDescription"
+  | "longDescription"
+  | "ingredients"
+  | "howToUse"
+  | "category"
+  | "imageAlt"
+  | "sourceUrl"
+>;
+
 export type OfficialPageData = {
   officialPages: OfficialPage[];
   pageByPath: Map<string, OfficialPage>;
   getEditorial: (kind: "blog" | "news") => OfficialPage[];
 };
 
-let productDataPromise: Promise<ProductData> | undefined;
-let officialPageDataPromise: Promise<OfficialPageData> | undefined;
+type LocalizedCompanyPageCopy = Pick<
+  OfficialPage,
+  "title" | "description" | "headings" | "paragraphs" | "sourceUrl"
+>;
+
+const companyPages = companyPagesJson as Record<
+  Locale,
+  Record<string, LocalizedCompanyPageCopy>
+>;
+const productDataPromises = new Map<Locale, Promise<ProductData>>();
+const officialPageDataPromises = new Map<Locale, Promise<OfficialPageData>>();
 
 function createProductData(productsJson: Product[]): ProductData {
   const allProducts = productsJson;
@@ -129,26 +158,59 @@ function createOfficialPageData(pagesJson: OfficialPage[]): OfficialPageData {
   return { officialPages, pageByPath, getEditorial };
 }
 
-export function loadProductData() {
-  productDataPromise ??= import("./data/products.json").then((module) =>
-    createProductData(module.default as Product[])
-  );
-  return productDataPromise;
+export function loadProductData(locale: Locale = "ru") {
+  const cached = productDataPromises.get(locale);
+  if (cached) return cached;
+  const promise = Promise.all([
+    import("./data/products.json"),
+    locale === "ro" ? import("./data/products-ro.json") : Promise.resolve(null),
+  ]).then(([productsModule, romanianModule]) => {
+    const products = productsModule.default as Product[];
+    if (!romanianModule) return createProductData(products);
+    const localizedCopy = romanianModule.default as Record<
+      string,
+      RomanianProductCopy
+    >;
+    return createProductData(
+      products.map((product) => ({
+        ...product,
+        ...localizedCopy[product.slug],
+        officialName: product.officialName,
+      }))
+    );
+  });
+  productDataPromises.set(locale, promise);
+  return promise;
 }
 
-export function loadOfficialPageData() {
-  officialPageDataPromise ??= import("./data/official-pages.json").then(
-    (module) => createOfficialPageData(module.default as OfficialPage[])
-  );
-  return officialPageDataPromise;
+export function loadOfficialPageData(locale: Locale = "ru") {
+  const cached = officialPageDataPromises.get(locale);
+  if (cached) return cached;
+  const promise = import("./data/official-pages.json").then((module) => {
+    const localizedPages = companyPages[locale];
+    const pages = (module.default as OfficialPage[]).map((page) => {
+      const localizedCopy = localizedPages[page.path];
+      return localizedCopy ? { ...page, ...localizedCopy } : page;
+    });
+    return createOfficialPageData(pages);
+  });
+  officialPageDataPromises.set(locale, promise);
+  return promise;
 }
 
 export function useProductData() {
-  return use(loadProductData());
+  const { locale } = useLocale();
+  return use(loadProductData(locale));
 }
 
 export function useOfficialPageData() {
-  return use(loadOfficialPageData());
+  const { locale } = useLocale();
+  return use(loadOfficialPageData(locale));
+}
+
+export function useFormulaContent() {
+  const { locale } = useLocale();
+  return formulaContentByLocale[locale];
 }
 
 export function isProductContentFieldApplicable<K extends ProductContentField>(

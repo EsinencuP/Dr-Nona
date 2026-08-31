@@ -1,4 +1,3 @@
-import manifestJson from "./data/seo-manifest.json";
 import {
   absoluteUrl,
   buildJsonLd,
@@ -8,7 +7,14 @@ import {
   type SeoRouteMetadata,
 } from "./seo-core.mjs";
 
-const manifest = manifestJson as SeoManifest;
+let manifestPromise: Promise<SeoManifest> | undefined;
+
+function loadManifest() {
+  manifestPromise ??= import("./data/seo-manifest.json").then(
+    (module) => module.default as SeoManifest
+  );
+  return manifestPromise;
+}
 
 function siteOrigin() {
   const prerendered = document.documentElement.dataset.siteOrigin;
@@ -40,12 +46,13 @@ function appendLink(
   document.head.append(node);
 }
 
-export function getSeoMetadata(pathname: string): SeoRouteMetadata {
-  return getRouteMetadata(manifest, pathname);
+export async function getSeoMetadata(pathname: string): Promise<SeoRouteMetadata> {
+  return getRouteMetadata(await loadManifest(), pathname);
 }
 
-export function applyRouteMetadata(pathname: string) {
-  const metadata = getSeoMetadata(pathname);
+export async function applyRouteMetadata(pathname: string) {
+  const manifest = await loadManifest();
+  const metadata = getRouteMetadata(manifest, pathname);
   const origin = siteOrigin();
   const canonical = absoluteUrl(metadata.canonicalPath, origin);
   const image = absoluteUrl(metadata.image, origin);
@@ -56,7 +63,11 @@ export function applyRouteMetadata(pathname: string) {
 
   appendMeta("name", "description", metadata.description);
   appendMeta("name", "robots", metadata.robots);
-  appendMeta("property", "og:locale", "ru_MD");
+  appendMeta(
+    "property",
+    "og:locale",
+    metadata.locale === "ro" ? "ro_MD" : "ru_MD"
+  );
   appendMeta("property", "og:site_name", manifest.siteName);
   appendMeta("property", "og:type", metadata.ogType);
   appendMeta("property", "og:title", metadata.title);
@@ -84,8 +95,14 @@ export function applyRouteMetadata(pathname: string) {
 
   appendLink("canonical", canonical);
   if (metadata.indexable) {
-    appendLink("alternate", canonical, "ru-MD");
-    appendLink("alternate", canonical, "x-default");
+    const alternates = metadata.alternates ?? {
+      [metadata.locale === "ro" ? "ro-MD" : "ru-MD"]:
+        metadata.canonicalPath,
+      "x-default": metadata.canonicalPath,
+    };
+    for (const [language, path] of Object.entries(alternates)) {
+      appendLink("alternate", absoluteUrl(path, origin), language);
+    }
   }
 
   const jsonLd = document.createElement("script");
@@ -97,5 +114,3 @@ export function applyRouteMetadata(pathname: string) {
   );
   document.head.append(jsonLd);
 }
-
-export { manifest as seoManifest };

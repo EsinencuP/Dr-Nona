@@ -286,7 +286,7 @@
 .contact-direct h2 {
   max-width: 640px;
   margin-bottom: 0;
-  font-size: clamp(2.6rem, 4.6vw, 4.8rem);
+  font-size: clamp(2.4rem, 3.5vw, 3.65rem);
   line-height: 0.98;
 }
 

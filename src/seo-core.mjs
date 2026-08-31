@@ -63,6 +63,7 @@ export function getRouteMetadata(manifest, pathname) {
 export function buildJsonLd(metadata, siteOrigin) {
   const origin = normalizeSiteOrigin(siteOrigin);
   const canonical = absoluteUrl(metadata.canonicalPath, origin);
+  const language = metadata.locale === "ro" ? "ro-MD" : "ru-MD";
   const graph = [
     {
       "@type": "WebPage",
@@ -70,13 +71,13 @@ export function buildJsonLd(metadata, siteOrigin) {
       url: canonical,
       name: metadata.pageTitle,
       description: metadata.description,
-      inLanguage: "ru-MD",
+      inLanguage: language,
       isPartOf: {
         "@type": "WebSite",
         "@id": `${origin}/#website`,
         url: `${origin}/`,
         name: SITE_NAME,
-        inLanguage: "ru-MD",
+        inLanguage: language,
       },
     },
   ];
@@ -87,7 +88,7 @@ export function buildJsonLd(metadata, siteOrigin) {
       "@id": `${origin}/#website`,
       url: `${origin}/`,
       name: SITE_NAME,
-      inLanguage: "ru-MD",
+      inLanguage: language,
     });
   }
 
@@ -127,7 +128,7 @@ export function buildJsonLd(metadata, siteOrigin) {
         url: "https://drnona.com/",
       },
       isBasedOn: metadata.schema.sourceUrl,
-      inLanguage: "ru",
+      inLanguage: metadata.locale === "ro" ? "ro" : "ru",
     };
     if (metadata.schema.image) {
       article.image = [absoluteUrl(metadata.schema.image, origin)];
@@ -181,16 +182,24 @@ export function renderSeoHead(metadata, siteOrigin) {
     metadata.schema?.type === "Article" && metadata.schema.dateModified
       ? `\n<meta data-route-seo property="article:modified_time" content="${escapeHtml(metadata.schema.dateModified)}">`
       : "";
+  const alternateEntries = metadata.alternates
+    ? Object.entries(metadata.alternates)
+    : [[metadata.locale === "ro" ? "ro-MD" : "ru-MD", metadata.canonicalPath], ["x-default", metadata.canonicalPath]];
   const alternates = metadata.indexable
-    ? `\n<link data-route-seo rel="alternate" hreflang="ru-MD" href="${escapeHtml(canonical)}">
-<link data-route-seo rel="alternate" hreflang="x-default" href="${escapeHtml(canonical)}">`
+    ? alternateEntries
+        .map(
+          ([language, path]) =>
+            `\n<link data-route-seo rel="alternate" hreflang="${escapeHtml(language)}" href="${escapeHtml(absoluteUrl(path, origin))}">`
+        )
+        .join("")
     : "";
+  const ogLocale = metadata.locale === "ro" ? "ro_MD" : "ru_MD";
 
   return `<title>${escapeHtml(metadata.title)}</title>
 <meta data-route-seo name="description" content="${escapeHtml(metadata.description)}">
 <meta data-route-seo name="robots" content="${escapeHtml(metadata.robots)}">
 <link data-route-seo rel="canonical" href="${escapeHtml(canonical)}">${alternates}
-<meta data-route-seo property="og:locale" content="ru_MD">
+<meta data-route-seo property="og:locale" content="${ogLocale}">
 <meta data-route-seo property="og:site_name" content="${SITE_NAME}">
 <meta data-route-seo property="og:type" content="${escapeHtml(metadata.ogType)}">
 <meta data-route-seo property="og:title" content="${escapeHtml(metadata.title)}">
@@ -217,8 +226,9 @@ export function renderPrerenderedContent(metadata, siteOrigin) {
       ? `<img src="${escapeHtml(absoluteUrl(metadata.image, origin))}" alt="" width="1200" height="630">`
       : "";
 
+  const breadcrumbsLabel = metadata.locale === "ro" ? "Fir de navigare" : "Хлебные крошки";
   return `<main id="main-content" data-prerendered-route="${escapeHtml(metadata.path)}">
-  <nav aria-label="Хлебные крошки">${breadcrumbs}</nav>
+  <nav aria-label="${breadcrumbsLabel}">${breadcrumbs}</nav>
   <article>
     <h1>${escapeHtml(metadata.pageTitle)}</h1>
     <p>${escapeHtml(metadata.description)}</p>

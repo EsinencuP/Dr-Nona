@@ -35,11 +35,11 @@ The run covers repository hygiene, documentation consistency, architecture, cont
 | `npm run security:validate` | PASS | Production-enforced CSP, required headers and minimal external origins |
 | `npm run typecheck` | PASS | TypeScript project references |
 | `npm run lint` | PASS | ESLint with zero warnings |
-| `npm run test` | PASS | 21 files, 145 tests |
-| `npm run build` | PASS | 187 prerendered routes and 185 canonical sitemap URLs; 50 Product JSON-LD records |
+| `npm run test` | PASS | 21 files, 147 tests |
+| `npm run build` | PASS | 301 prerendered routes and 299 canonical sitemap URLs; 150 Product JSON-LD records across legacy, RU and RO catalogue routes; RU/RO company and Halo Complex routes included |
 | `npm run security:runtime` | PASS | 5 rendered routes, enforced CSP, 0 violations |
 | `npm run performance:runtime` | PASS | Home, contact and catalogue within runtime budget |
-| `npm run test:e2e` | PASS | 123 passed, 17 skipped across desktop/mobile, including 320–1920 px reflow, offline submission and two-tab selection synchronization |
+| `npm run test:e2e` | PASS | 133 passed, 17 skipped across desktop/mobile, including RU/RO company and Halo Complex routes, 320–1920 px reflow, offline submission and two-tab selection synchronization |
 | `npm run release:check` | EXPECTED BLOCKED | 8 open P0/P1 blockers |
 
 ## Current known issues

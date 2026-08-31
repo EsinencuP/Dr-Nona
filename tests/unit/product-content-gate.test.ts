@@ -4,6 +4,7 @@ import { loadProductData } from "../../src/data";
 import { evaluateProductDataset } from "../../scripts/product-content-lib.mjs";
 
 const { allProducts } = await loadProductData();
+const { allProducts: romanianProducts } = await loadProductData("ro");
 
 describe("product content publication gate", () => {
   test("uses one shared normalized image contract without missing-media placeholders", () => {
@@ -30,6 +31,31 @@ describe("product content publication gate", () => {
         (product: { slug: string }) => product.slug === "parfum-faya"
       )
     ).toMatchObject({ complete: true, nullFields: ["ingredients", "howToUse"] });
+  });
+
+  test("keeps complete English product names in both locales", () => {
+    const expectedNames = [
+      "Solaris Body Lotion",
+      "Hand and Nail Cream",
+      "Dynamic Cream",
+      "Shea Body Butter",
+      "Solaris Facial Cream",
+      "Multi Mouthwash",
+      "Compressed Wipes",
+      "Eau De Parfume ( LORD )",
+      "Eau De Parfume ( KIWI )",
+      "Eau De Parfume ( LADY )",
+      "Eau De Parfume ( FAYA )",
+    ];
+    const names = allProducts.map((product) => product.officialName);
+
+    expect(names).toEqual(expect.arrayContaining(expectedNames));
+    expect(romanianProducts.map((product) => product.officialName)).toEqual(names);
+    expect(
+      romanianProducts.every(
+        (product) => !/[А-Яа-яЁё]/u.test(JSON.stringify(product))
+      )
+    ).toBe(true);
   });
 
   test("requires the primary catalogue description", () => {

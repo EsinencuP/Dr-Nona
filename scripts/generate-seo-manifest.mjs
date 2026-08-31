@@ -1,6 +1,12 @@
 import { readFileSync, writeFileSync } from "node:fs";
 
 const products = JSON.parse(readFileSync("src/data/products.json", "utf8"));
+const romanianProducts = JSON.parse(
+  readFileSync("src/data/products-ro.json", "utf8")
+);
+const companyPages = JSON.parse(
+  readFileSync("src/data/company-pages.json", "utf8")
+);
 const pages = JSON.parse(readFileSync("src/data/official-pages.json", "utf8"));
 const claims = JSON.parse(
   readFileSync("src/data/claims-registry.json", "utf8")
@@ -324,6 +330,127 @@ for (const page of pages.filter((item) => !item.error)) {
         }
       : null,
   });
+}
+
+const localizableCompanyPaths = new Set([
+  "/about",
+  "/about/company",
+  "/about/our-history",
+  "/about/founders",
+  "/about/science",
+  "/ourformula",
+]);
+const localizedStaticCopy = {
+  ro: {
+    "/": {
+      title: "Dr. Nona Moldova",
+      description:
+        "Catalogul produselor Dr. Nona pentru Moldova, istoria brandului și baza științifică Halo Complex™.",
+    },
+    "/selection": {
+      title: "Selecția mea",
+      description:
+        "Produsele Dr. Nona selectate pentru a fi transmise unui consultant.",
+    },
+    "/contactus": {
+      title: "Contacte Dr. Nona în Moldova",
+      description:
+        "Adresa, telefoanele și formularul de contact al filialei Dr. Nona din Chișinău.",
+    },
+  },
+};
+const localizableRoutes = [...routes.values()].filter(
+  (route) =>
+    route.path === "/" ||
+    route.path === "/products" ||
+    route.path === "/selection" ||
+    route.path === "/contactus" ||
+    route.kind === "product" ||
+    localizableCompanyPaths.has(route.path)
+);
+
+for (const baseRoute of localizableRoutes) {
+  const isProduct = baseRoute.kind === "product";
+  const slug = isProduct ? baseRoute.path.split("/").at(-1) : null;
+  const product = slug
+    ? products.find((item) => item.slug === slug)
+    : null;
+  const romanian = slug ? romanianProducts[slug] : null;
+  if (slug && (!product || !romanian)) {
+    throw new Error(`Missing localized SEO content for product ${slug}.`);
+  }
+  const unprefixedPath = baseRoute.path;
+  const localizedPaths = {
+    ru: unprefixedPath === "/" ? "/ru" : `/ru${unprefixedPath}`,
+    ro: unprefixedPath === "/" ? "/ro" : `/ro${unprefixedPath}`,
+  };
+  const alternates = {
+    "ru-MD": localizedPaths.ru,
+    "ro-MD": localizedPaths.ro,
+    "x-default": unprefixedPath,
+  };
+
+  baseRoute.alternates = alternates;
+  baseRoute.locale = "ru";
+
+  for (const locale of ["ru", "ro"]) {
+    const path = localizedPaths[locale];
+    const isRomanian = locale === "ro";
+    const localizedCompanyPage = companyPages[locale][baseRoute.path];
+    const localizedStatic = isRomanian
+      ? localizedStaticCopy.ro[baseRoute.path]
+      : null;
+    const pageTitleValue = isProduct
+      ? product.officialName
+      : baseRoute.path === "/products" && isRomanian
+        ? "Catalogul produselor Dr. Nona"
+        : localizedCompanyPage?.title ?? localizedStatic?.title ?? baseRoute.pageTitle;
+    const description = localizedCompanyPage?.description ?? localizedStatic?.description ?? (
+      isRomanian
+        ? isProduct
+        ? truncate(`${product.officialName}. ${romanian.shortDescription}`)
+        : "Catalogul complet Dr. Nona Moldova, cu descrieri, compoziție și mod de utilizare."
+        : baseRoute.description
+    );
+    const parentAboutPath = `/${locale}/about`;
+    const localizedBreadcrumbs = baseRoute.path === "/"
+      ? [{ name: pageTitleValue, path }]
+      : isProduct
+      ? [
+          { name: isRomanian ? "Pagina principală" : "Главная", path: `/${locale}` },
+          {
+            name: isRomanian ? "Catalog" : "Каталог",
+            path: localizedPaths[locale].replace(`/product/${slug}`, "/products"),
+          },
+          { name: product.officialName, path },
+        ]
+      : baseRoute.path.startsWith("/about/")
+        ? [
+            { name: isRomanian ? "Pagina principală" : "Главная", path: `/${locale}` },
+            {
+              name: isRomanian ? "Despre companie" : "О компании",
+              path: parentAboutPath,
+            },
+            { name: pageTitleValue, path },
+          ]
+        : [
+            { name: isRomanian ? "Pagina principală" : "Главная", path: `/${locale}` },
+            { name: pageTitleValue, path },
+          ];
+    add({
+      ...baseRoute,
+      path,
+      canonicalPath: path,
+      pageTitle: pageTitleValue,
+      title: `${pageTitleValue} (${locale.toUpperCase()}) — ${SITE_NAME}`,
+      description: truncate(
+        locale === "ru" ? `Русская версия. ${description}` : description
+      ),
+      locale,
+      alternates,
+      breadcrumbs: localizedBreadcrumbs,
+    });
+  }
 }
 
 const routeList = [...routes.values()];

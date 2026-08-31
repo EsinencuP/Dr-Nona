@@ -45,7 +45,7 @@ describe("route SEO contract", () => {
 
     expect(product).toMatchObject({
       "@type": "Product",
-      name: "Deodorant Lord",
+      name: "Deodorant ( LORD )",
       sku: "324001",
       brand: { "@type": "Brand", name: "Dr. Nona" },
     });
@@ -83,14 +83,14 @@ describe("route SEO contract", () => {
     );
   });
 
-  test("updates the complete metadata set during client-side navigation", () => {
+  test("updates the complete metadata set during client-side navigation", async () => {
     document.documentElement.dataset.siteOrigin = origin;
-    applyRouteMetadata("/product/lord-deodorant");
+    await applyRouteMetadata("/product/lord-deodorant");
 
-    expect(document.title).toContain("Deodorant Lord");
+    expect(document.title).toContain("Deodorant ( LORD )");
     expect(
       document.querySelector('meta[name="description"]')?.getAttribute("content")
-    ).toContain("Deodorant Lord");
+    ).toContain("Deodorant ( LORD )");
     expect(
       document.querySelector('link[rel="canonical"]')?.getAttribute("href")
     ).toBe(`${origin}/product/lord-deodorant`);
@@ -104,15 +104,17 @@ describe("route SEO contract", () => {
       document
         .querySelector('link[rel="alternate"][hreflang="ru-MD"]')
         ?.getAttribute("href")
-    ).toBe(`${origin}/product/lord-deodorant`);
+    ).toBe(`${origin}/ru/product/lord-deodorant`);
     expect(
       document
         .querySelector('link[rel="alternate"][hreflang="x-default"]')
         ?.getAttribute("href")
     ).toBe(`${origin}/product/lord-deodorant`);
     expect(
-      document.querySelector('link[rel="alternate"][hreflang="ro-MD"]')
-    ).toBeNull();
+      document
+        .querySelector('link[rel="alternate"][hreflang="ro-MD"]')
+        ?.getAttribute("href")
+    ).toBe(`${origin}/ro/product/lord-deodorant`);
 
     const jsonLd = JSON.parse(
       document.querySelector('script[type="application/ld+json"]')?.textContent ??

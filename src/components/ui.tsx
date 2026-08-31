@@ -128,6 +128,19 @@ const neutralProductDescriptions: Record<string, string> = {
   "Парфюмерия": "Аромат из парфюмерной коллекции Dr. Nona.",
 };
 
+const neutralProductDescriptionsRo: Record<string, string> = {
+  "Creme": "Cremă pentru îngrijirea zilnică a pielii.",
+  "Băuturi": "Băutură din gama Dr. Nona.",
+  "Suplimente alimentare": "Supliment alimentar din gama Dr. Nona.",
+  "Îngrijirea feței": "Îngrijire zilnică pentru pielea feței.",
+  "Îngrijirea corpului": "Îngrijire zilnică pentru pielea corpului.",
+  "Îngrijirea mâinilor": "Îngrijire zilnică pentru mâini și unghii.",
+  "Fitocomplexe": "Băutură din plante în plicuri individuale.",
+  "Igienă": "Format compact pentru curățarea pielii.",
+  "Deodorante": "Deodorant antiperspirant pentru utilizare zilnică.",
+  "Parfumerie": "Parfum din colecția Dr. Nona.",
+};
+
 export function ProductCard({
   product,
   compact = false,
@@ -136,12 +149,16 @@ export function ProductCard({
   compact?: boolean;
 }) {
   const { contains, toggle } = useSelection();
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
   const saved = contains(product.slug);
   const shortDescription =
     getProductCopy(product, "shortDescription") ||
-    neutralProductDescriptions[product.category] ||
-    "Продукт для ежедневного ухода.";
+    (locale === "ro"
+      ? neutralProductDescriptionsRo[product.category]
+      : neutralProductDescriptions[product.category]) ||
+    (locale === "ro"
+      ? "Produs pentru îngrijire zilnică."
+      : "Продукт для ежедневного ухода.");
   return (
     <article className={`product-card ${compact ? "product-card--compact" : ""}`}>
       <div className="product-card__stage">

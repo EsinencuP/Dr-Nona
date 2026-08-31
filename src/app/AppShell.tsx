@@ -24,8 +24,8 @@ function ScrollRestoration() {
     document
       .querySelector<HTMLMetaElement>('meta[name="theme-color"]')
       ?.setAttribute("content", "#f7fbfc");
-    applyRouteMetadata(location.pathname);
-  }, [location.pathname]);
+    void applyRouteMetadata(location.localizedPathname);
+  }, [location.localizedPathname, location.pathname]);
   return null;
 }
 
@@ -57,7 +57,8 @@ function Header() {
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const mobilePanelRef = useRef<HTMLDivElement>(null);
   const { selected } = useSelection();
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
+  const location = useLocation();
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", open);
@@ -117,6 +118,29 @@ function Header() {
           ))}
         </nav>
         <div className="header-actions">
+          <div
+            className="locale-switch"
+            role="group"
+            aria-label={locale === "ro" ? "Alege limba" : "Выбрать язык"}
+          >
+            {(["ru", "ro"] as const).map((item) => {
+              const nextSearch = new URLSearchParams(location.search);
+              nextSearch.delete("category");
+              const query = nextSearch.toString();
+              const suffix = location.pathname === "/" ? "" : location.pathname;
+              const path = `/${item}${suffix}${query ? `?${query}` : ""}`;
+              return (
+                <Link
+                  key={item}
+                  to={path}
+                  lang={item}
+                  aria-current={locale === item ? "true" : undefined}
+                >
+                  {item.toUpperCase()}
+                </Link>
+              );
+            })}
+          </div>
           <Link
             className="selection-link"
             to="/selection"
@@ -168,48 +192,77 @@ function Header() {
 }
 
 function Footer() {
+  const { locale, t } = useLocale();
+  const copy = locale === "ro"
+    ? {
+        description:
+          "Catalogul produselor Dr. Nona și istoria formulei Halo Complex™ pentru publicul din Moldova.",
+        sections: "Secțiuni",
+        information: "Informații",
+        contacts: "Contacte",
+        branches: "Filiale",
+        certificates: "Certificate",
+        faq: "Întrebări și răspunsuri",
+        contact: "Contact",
+        city: "Chișinău · Moldova",
+        terms: "Termeni de utilizare",
+        privacy: "Politica de confidențialitate",
+        accessibility: "Accesibilitate",
+      }
+    : {
+        description:
+          "Каталог продукции Dr. Nona и история формулы Halo Complex™ для аудитории Молдовы.",
+        sections: "Разделы",
+        information: "Информация",
+        contacts: "Контакты",
+        branches: "Филиалы",
+        certificates: "Сертификаты",
+        faq: "Вопросы и ответы",
+        contact: "Связь",
+        city: "Кишинёв · Молдова",
+        terms: "Условия использования",
+        privacy: "Политика конфиденциальности",
+        accessibility: "Доступность",
+      };
   return (
     <footer className="site-footer">
       <div className="footer-orbit" aria-hidden="true" />
       <div className="footer-grid">
         <div className="footer-brand">
           <BrandMark inverted />
-          <p>
-            Каталог продукции Dr. Nona и история формулы Halo Complex™ для
-            аудитории Молдовы.
-          </p>
+          <p>{copy.description}</p>
         </div>
         <div>
-          <p className="footer-title">Разделы</p>
-          <Link to="/products">Каталог</Link>
-          <Link to="/about">О компании</Link>
+          <p className="footer-title">{copy.sections}</p>
+          <Link to="/products">{t.catalog}</Link>
+          <Link to="/about">{t.about}</Link>
           <Link to="/ourformula">Halo Complex™</Link>
-          <Link to="/editorial">Блог / Новости</Link>
+          <Link to="/editorial">{t.editorial}</Link>
         </div>
         <div>
-          <p className="footer-title">Информация</p>
-          <Link to="/contactus">Контакты</Link>
-          <Link to="/warehouses">Филиалы</Link>
-          <Link to="/certificates">Сертификаты</Link>
-          <Link to="/faq">Вопросы и ответы</Link>
+          <p className="footer-title">{copy.information}</p>
+          <Link to="/contactus">{copy.contacts}</Link>
+          <Link to="/warehouses">{copy.branches}</Link>
+          <Link to="/certificates">{copy.certificates}</Link>
+          <Link to="/faq">{copy.faq}</Link>
         </div>
         <div>
-          <p className="footer-title">Связь</p>
+          <p className="footer-title">{copy.contact}</p>
           <a href={marketData.contact.phones[0].href}>
             <Phone aria-hidden="true" /> {marketData.contact.phones[0].label}
           </a>
           <a href={marketData.contact.phones[1].href}>
             <Phone aria-hidden="true" /> {marketData.contact.phones[1].label}
           </a>
-          <span className="footer-contact-market">Кишинёв · Молдова</span>
+          <span className="footer-contact-market">{copy.city}</span>
         </div>
       </div>
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} Dr. Nona Moldova</span>
         <div>
-          <Link to="/termsofuse">Условия использования</Link>
-          <Link to="/privacypolicy">Политика конфиденциальности</Link>
-          <Link to="/accessibility-statement">Доступность</Link>
+          <Link to="/termsofuse">{copy.terms}</Link>
+          <Link to="/privacypolicy">{copy.privacy}</Link>
+          <Link to="/accessibility-statement">{copy.accessibility}</Link>
         </div>
       </div>
     </footer>

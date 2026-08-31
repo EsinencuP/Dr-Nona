@@ -40,7 +40,7 @@ test("product breadcrumbs and accordion expose their relationships", async ({
   });
   await expect(breadcrumb.locator('span[aria-hidden="true"]')).toHaveCount(2);
   await expect(
-    breadcrumb.getByText("Deodorant Lord")
+    breadcrumb.getByText("Deodorant ( LORD )")
   ).toHaveAttribute("aria-current", "page");
 
   const trigger = page.getByRole("button", { name: "Состав" });

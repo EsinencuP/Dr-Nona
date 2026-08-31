@@ -16,7 +16,7 @@ test("search, category filter and alphabetical sort update the catalogue", async
   await expect(page).toHaveURL(/q=404001/);
   await expect(page.locator(".catalog-grid .product-card")).toHaveCount(1);
   await expect(
-    page.getByRole("heading", { level: 3, name: "Dynamic" })
+    page.getByRole("heading", { level: 3, name: "Dynamic Cream" })
   ).toBeVisible();
 
   await page.getByRole("button", { name: "Очистить поиск" }).click();

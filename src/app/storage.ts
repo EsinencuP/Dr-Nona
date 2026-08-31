@@ -145,10 +145,14 @@ export function createSafeStorageAdapter(
   };
 }
 
-export const ruLocaleSchema: StorageSchema<"ru"> = {
-  parse: (raw) => raw === "ru" ? "ru" : undefined,
+export type SupportedLocale = "ru" | "ro";
+
+export const localeSchema: StorageSchema<SupportedLocale> = {
+  parse: (raw) => raw === "ru" || raw === "ro" ? raw : undefined,
   serialize: (value) => value,
 };
+
+export const ruLocaleSchema = localeSchema;
 
 export const selectionSchema: StorageSchema<string[]> = {
   parse(raw) {

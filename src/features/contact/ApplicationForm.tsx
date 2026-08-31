@@ -38,11 +38,113 @@ function describedBy(name: string, errors: Record<string, string>) {
   return errors[name] ? `${name}-error` : undefined;
 }
 
+function localizeServerErrors(
+  errors: Record<string, string>,
+  locale: "ru" | "ro"
+) {
+  if (locale === "ru") return errors;
+  const translations: Record<string, string> = {
+    "Имя: обязательное поле": "Prenume: câmp obligatoriu",
+    "Фамилия: обязательное поле": "Nume: câmp obligatoriu",
+    "Город: обязательное поле": "Oraș: câmp obligatoriu",
+    "Некорректный номер телефона": "Număr de telefon incorect",
+    "Необходимо принять условия обработки данных":
+      "Este necesar acordul pentru prelucrarea datelor",
+    "Выберите хотя бы один товар": "Selectați cel puțin un produs",
+    "Можно выбрать не более 20 товаров":
+      "Puteți selecta cel mult 20 de produse",
+    "Один или несколько товаров недоступны":
+      "Unul sau mai multe produse nu sunt disponibile",
+    "Выберите формат консультации": "Selectați formatul consultației",
+    "Некорректная дата": "Dată incorectă",
+    "Некорректное время": "Oră incorectă",
+    "Выберите будущую дату и время по часовому поясу Кишинёва":
+      "Selectați o dată și o oră viitoare în fusul orar al Chișinăului",
+  };
+  return Object.fromEntries(
+    Object.entries(errors).map(([field, message]) => [
+      field,
+      translations[message] ?? "Verificați valoarea introdusă",
+    ])
+  );
+}
+
 export function ApplicationForm({
   products,
   submit = submitApplication,
 }: ApplicationFormProps) {
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
+  const copy = locale === "ro"
+    ? {
+        eyebrow: "Contactați un consultant",
+        title: "Trimiteți o solicitare",
+        intro:
+          "Alegeți tipul solicitării. Trimiterea formularului nu reprezintă plata comenzii sau confirmarea orei consultației.",
+        requestType: "Tipul solicitării",
+        order: "Comandă",
+        consultation: "Consultație",
+        firstName: "Prenume",
+        lastName: "Nume",
+        phone: "Telefon",
+        city: "Oraș",
+        selectedProducts: "Produse selectate",
+        positions: "produse",
+        missingSku: "nu este indicat",
+        emptyOrder: "Pentru o comandă, adăugați mai întâi produse în selecție.",
+        consultationFormat: "Formatul consultației",
+        online: "Online",
+        offline: "La sediu",
+        preferredDate: "Data preferată",
+        preferredTime: "Ora preferată",
+        advisory:
+          "Data și ora indicate sunt orientative. Consultantul vă va contacta pentru confirmare.",
+        sending: "Se trimite solicitarea…",
+        accepted: "Solicitare acceptată",
+        submit: "Trimite solicitarea",
+        success: (id: string) =>
+          `Solicitarea nr. ${id} a fost trimisă. Consultantul vă va contacta la numărul indicat.`,
+        failure:
+          "Solicitarea nu a fost trimisă. Datele au rămas în formular — încercați din nou sau sunați la filială.",
+        validation: "Verificați câmpurile marcate.",
+        status: "Statutul solicitării",
+        errorTitle: "Trimiterea nu a putut fi finalizată",
+        call: "Sunați",
+      }
+    : {
+        eyebrow: "Связаться с менеджером",
+        title: "Оставить заявку",
+        intro:
+          "Выберите нужный сценарий. Заявка не является оплатой заказа или подтверждением времени консультации.",
+        requestType: "Тип заявки",
+        order: "Заказ",
+        consultation: "Консультация",
+        firstName: "Имя",
+        lastName: "Фамилия",
+        phone: "Телефон",
+        city: "Город",
+        selectedProducts: "Выбранные товары",
+        positions: "поз.",
+        missingSku: "не указан",
+        emptyOrder: "Для заявки на заказ сначала добавьте товары в подборку.",
+        consultationFormat: "Формат консультации",
+        online: "Онлайн",
+        offline: "Офлайн",
+        preferredDate: "Предпочтительная дата",
+        preferredTime: "Предпочтительное время",
+        advisory:
+          "Выбранные дата и время являются предпочтительными. Менеджер свяжется с вами для подтверждения.",
+        sending: "Отправляем заявку…",
+        accepted: "Заявка принята",
+        submit: "Отправить заявку",
+        success: (id: string) =>
+          `Заявка №${id} отправлена. Менеджер свяжется с вами по указанному номеру.`,
+        failure:
+          "Заявка не отправлена. Данные сохранены в форме — повторите попытку или используйте телефон филиала.",
+        validation: "Проверьте отмеченные поля.",
+        status: "Статус заявки",
+        errorTitle: "Не удалось завершить отправку",
+        call: "Позвоните",
+      };
   const [mode, setMode] = useState<FormMode>(
     products.length ? "order" : "consultation"
   );
@@ -111,7 +213,7 @@ export function ApplicationForm({
             consultationDate: String(form.get("consultationDate") ?? ""),
             consultationTime: String(form.get("consultationTime") ?? ""),
           };
-    const validation = validateClientApplication(raw, allowedSlugs);
+    const validation = validateClientApplication(raw, allowedSlugs, locale);
     if (!validation.success) {
       setFieldErrors(validation.fieldErrors);
       setStatus("validation-error");
@@ -131,39 +233,36 @@ export function ApplicationForm({
       response.kind === "validation-error"
     ) {
       if (response.kind === "validation-error") {
-        setFieldErrors(response.fieldErrors);
+        setFieldErrors(localizeServerErrors(response.fieldErrors, locale));
       }
     }
   };
 
   const statusContent =
     result?.kind === "success"
-      ? `Заявка №${result.requestId} отправлена. Менеджер свяжется с вами по указанному номеру.`
+      ? copy.success(result.requestId)
       : status === "network-error" || status === "server-error"
-          ? "Заявка не отправлена. Данные сохранены в форме — повторите попытку или используйте телефон филиала."
+          ? copy.failure
           : status === "validation-error"
-            ? "Проверьте отмеченные поля."
+            ? copy.validation
             : "";
 
   return (
     <section className="application-panel" aria-labelledby="application-title">
       <div className="application-panel__heading">
-        <p className="eyebrow">Связаться с менеджером</p>
-        <h2 id="application-title">Оставить заявку</h2>
-        <p>
-          Выберите нужный сценарий. Заявка не является оплатой заказа или
-          подтверждением времени консультации.
-        </p>
+        <p className="eyebrow">{copy.eyebrow}</p>
+        <h2 id="application-title">{copy.title}</h2>
+        <p>{copy.intro}</p>
       </div>
 
-      <div className="application-mode" role="group" aria-label="Тип заявки">
+      <div className="application-mode" role="group" aria-label={copy.requestType}>
         <button
           type="button"
           className={mode === "order" ? "is-active" : ""}
           aria-pressed={mode === "order"}
           onClick={() => setFormMode("order")}
         >
-          Заказ
+          {copy.order}
         </button>
         <button
           type="button"
@@ -171,7 +270,7 @@ export function ApplicationForm({
           aria-pressed={mode === "consultation"}
           onClick={() => setFormMode("consultation")}
         >
-          Консультация
+          {copy.consultation}
         </button>
       </div>
 
@@ -184,10 +283,10 @@ export function ApplicationForm({
       >
         <div className="application-form__grid">
           {[
-            ["firstName", "Имя", "text", "given-name"],
-            ["lastName", "Фамилия", "text", "family-name"],
-            ["phone", "Телефон", "tel", "tel"],
-            ["city", "Город", "text", "address-level2"],
+            ["firstName", copy.firstName, "text", "given-name"],
+            ["lastName", copy.lastName, "text", "family-name"],
+            ["phone", copy.phone, "tel", "tel"],
+            ["city", copy.city, "text", "address-level2"],
           ].map(([name, label, type, autoComplete]) => (
             <label className="application-field" key={name}>
               <span>{label}</span>
@@ -212,20 +311,20 @@ export function ApplicationForm({
             aria-labelledby="application-products-title"
           >
             <div>
-              <h3 id="application-products-title">Выбранные товары</h3>
-              <span>{products.length} поз.</span>
+              <h3 id="application-products-title">{copy.selectedProducts}</h3>
+              <span>{products.length} {copy.positions}</span>
             </div>
             {products.length ? (
               <ul>
                 {products.map((product) => (
                   <li key={product.slug}>
                     <span>{product.officialName}</span>
-                    <small>SKU {product.sku || "не указан"}</small>
+                    <small>SKU {product.sku || copy.missingSku}</small>
                   </li>
                 ))}
               </ul>
             ) : (
-              <p>Для заявки на заказ сначала добавьте товары в подборку.</p>
+              <p>{copy.emptyOrder}</p>
             )}
             {fieldErrors.productSlugs && (
               <small id="productSlugs-error">{fieldErrors.productSlugs}</small>
@@ -234,7 +333,7 @@ export function ApplicationForm({
         ) : (
           <>
             <fieldset className="application-choice">
-              <legend>Формат консультации</legend>
+              <legend>{copy.consultationFormat}</legend>
               <label>
                 <input
                   type="radio"
@@ -243,7 +342,7 @@ export function ApplicationForm({
                   defaultChecked
                   disabled={accepted}
                 />
-                Онлайн
+                {copy.online}
               </label>
               <label>
                 <input
@@ -252,12 +351,12 @@ export function ApplicationForm({
                   value="offline"
                   disabled={accepted}
                 />
-                Офлайн
+                {copy.offline}
               </label>
             </fieldset>
             <div className="application-form__grid">
               <label className="application-field">
-                <span>Предпочтительная дата</span>
+                <span>{copy.preferredDate}</span>
                 <input
                   name="consultationDate"
                   type="date"
@@ -275,7 +374,7 @@ export function ApplicationForm({
                 )}
               </label>
               <label className="application-field">
-                <span>Предпочтительное время</span>
+                <span>{copy.preferredTime}</span>
                 <input
                   name="consultationTime"
                   type="time"
@@ -294,8 +393,7 @@ export function ApplicationForm({
               </label>
             </div>
             <p className="application-form__advisory">
-              Выбранные дата и время являются предпочтительными. Менеджер
-              свяжется с вами для подтверждения.
+              {copy.advisory}
             </p>
           </>
         )}
@@ -342,14 +440,14 @@ export function ApplicationForm({
           }
         >
           {status === "submitting" ? (
-            "Отправляем заявку…"
+            copy.sending
           ) : accepted ? (
             <>
-              <CheckCircle aria-hidden="true" /> Заявка принята
+              <CheckCircle aria-hidden="true" /> {copy.accepted}
             </>
           ) : (
             <>
-              <PaperPlaneTilt aria-hidden="true" /> Отправить заявку
+              <PaperPlaneTilt aria-hidden="true" /> {copy.submit}
             </>
           )}
         </button>
@@ -360,12 +458,12 @@ export function ApplicationForm({
             role={accepted ? "status" : "alert"}
           >
             <h3 ref={statusHeading} tabIndex={-1}>
-              {accepted ? "Статус заявки" : "Не удалось завершить отправку"}
+              {accepted ? copy.status : copy.errorTitle}
             </h3>
             <p>{statusContent}</p>
             {!accepted && (
               <p>
-                Позвоните:{" "}
+                {copy.call}:{" "}
                 {marketData.contact.phones.map((phone, index) => (
                   <span key={phone.href}>
                     {index ? " · " : ""}

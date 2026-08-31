@@ -41,7 +41,7 @@ describe("Dr. Nona application", () => {
     });
     expect(screen.getByText("1 товар")).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { level: 3, name: "Dynamic" })
+      screen.getByRole("heading", { level: 3, name: "Dynamic Cream" })
     ).toBeInTheDocument();
   });
 
@@ -72,12 +72,12 @@ describe("Dr. Nona application", () => {
     expect(
       await screen.findByRole("heading", {
         level: 2,
-        name: "Deodorant Lord",
+        name: "Deodorant ( LORD )",
       })
     ).toBeInTheDocument();
     await user.click(
       screen.getByRole("button", {
-        name: "Удалить Deodorant Lord",
+        name: "Удалить Deodorant ( LORD )",
       })
     );
 
@@ -149,7 +149,7 @@ describe("Dr. Nona application", () => {
     renderApp("/contactus?products=lord-deodorant");
 
     expect(
-      await screen.findByRole("heading", { level: 3, name: "В письмо войдут" })
+      await screen.findByRole("heading", { level: 3, name: "В заявку войдут" })
     ).toBeInTheDocument();
     expect(screen.getAllByText("SKU 324001")).toHaveLength(2);
     expect(screen.getByRole("form")).toBeInTheDocument();
@@ -240,16 +240,21 @@ describe("Dr. Nona application", () => {
     expect(isProductContentFieldApplicable(product, "howToUse")).toBe(false);
   });
 
-  test("keeps the release language aligned with Russian content", async () => {
-    renderApp("/");
+  test("exposes explicit RU and RO locale links", async () => {
+    renderApp("/products");
     await waitFor(() => {
       expect(document.documentElement.lang).toBe("ru");
       expect(document.documentElement.dataset.uiLocale).toBe("ru");
     });
-    expect(screen.queryByRole("button", { name: /RU|RO/i })).not.toBeInTheDocument();
-    expect(
-      screen.queryByRole("group", { name: /язык/i })
-    ).not.toBeInTheDocument();
+    const localeGroup = screen.getByRole("group", { name: /язык/i });
+    expect(within(localeGroup).getByRole("link", { name: "RU" })).toHaveAttribute(
+      "aria-current",
+      "true"
+    );
+    expect(within(localeGroup).getByRole("link", { name: "RO" })).toHaveAttribute(
+      "href",
+      "/ro/products"
+    );
   });
 
   test("connects product breadcrumbs and accordion semantics", async () => {
@@ -265,7 +270,7 @@ describe("Dr. Nona application", () => {
       separators.every((separator) => separator.getAttribute("aria-hidden") === "true")
     ).toBe(true);
     expect(
-      within(breadcrumb).getByText("Deodorant Lord")
+      within(breadcrumb).getByText("Deodorant ( LORD )")
     ).toHaveAttribute("aria-current", "page");
 
     const trigger = screen.getByRole("button", { name: "Состав" });

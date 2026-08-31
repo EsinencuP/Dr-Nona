@@ -13,7 +13,7 @@ Last verified: 2026-08-30 against base commit `678eac7` and the current worktree
 | Working tree | Precision-audit remediation worktree; no commit or push performed |
 | Environment | Windows, Node 22.23.1, npm 10.9.8, Chromium desktop/mobile |
 | Release verdict | `release-blocked` |
-| UI language | Russian only; approved Romanian content is not implemented |
+| UI language | Complete RU/RO route pairs for catalogue, products, company chapters and Halo Complex; editorial remains in its original language |
 | Source products | 50 |
 | Published products | 50 |
 | Draft products | 0 |
@@ -28,7 +28,7 @@ Last verified: 2026-08-30 against base commit `678eac7` and the current worktree
 - Persistent non-commerce selection with product name, SKU and URL handoff
 - Server-validated order and consultation form with Telegram-only delivery
 - Five-attempt-per-minute application guard with anonymized client keys and bounded memory
-- Russian metadata, canonical URLs, sitemap, robots policy and prerendered HTML
+- RU/RO metadata, canonical URLs, reciprocal hreflang and prerendered HTML for catalogue, products, company chapters and Halo Complex
 - Product/content publication gates and a sentence-level claims registry
 - Keyboard navigation, reduced motion, responsive matrix and axe checks
 - Security header, Content Security Policy, performance and repository gates
@@ -38,7 +38,7 @@ Last verified: 2026-08-30 against base commit `678eac7` and the current worktree
 - Cart, checkout, payments, prices and discounts
 - Authentication, account area and customer database
 - General-purpose backend, administration interface and customer relationship management
-- Partial Romanian mode
+- Romanian localization outside the approved catalogue, company and Halo Complex route set
 - Unapproved certificates, reviews and draft products; regulated source copy remains explicitly release-blocked until reviewed
 - Email as an automated application transport
 
@@ -64,9 +64,9 @@ Use blocker IDs in [the release status](RELEASE_STATUS.md). The current blockers
 | `npm run repository:validate` | PASS | 2026-08-30 | Current source paths and documentation links verified |
 | `npm run typecheck` | PASS | 2026-08-30 | TypeScript project references |
 | `npm run lint` | PASS | 2026-08-30 | ESLint with zero warnings |
-| `npm run test` | PASS | 2026-08-30 | 21 files, 145 tests |
-| `npm run build` | PASS | 2026-08-30 | 187 prerendered routes, 185 sitemap URLs |
+| `npm run test` | PASS | 2026-08-30 | 21 files, 147 tests |
+| `npm run build` | PASS | 2026-08-30 | 301 prerendered routes, 299 sitemap URLs |
 | `npm run security:runtime` | PASS | 2026-08-30 | 5 routes under enforced CSP, 0 violations |
 | `npm run performance:runtime` | PASS | 2026-07-31 | Home, contact and catalogue within runtime budget |
-| `npm run test:e2e` | PASS | 2026-08-30 | 123 passed, 17 skipped; offline and two-tab regressions included |
+| `npm run test:e2e` | PASS | 2026-08-30 | 133 passed, 17 skipped; RU/RO, offline and two-tab regressions included |
 | `npm run release:check` | EXPECTED BLOCKED | 2026-08-30 | 8 open P0/P1 blockers |

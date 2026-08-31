@@ -9,17 +9,71 @@ import {
   getPageTitle,
   splitText,
 } from "../../components/ui";
-import { getOfficialPageParagraphs } from "../../claims";
 import { useOfficialPageData } from "../../data";
+import { useLocale } from "../../locales/LocaleProvider";
 import { Link, NavLink } from "../../router";
 import NotFoundPage from "../../pages/NotFoundPage";
 
-const aboutLinks = [
-  ["/about/company", "Компания"],
-  ["/about/our-history", "История"],
-  ["/about/founders", "Основатели"],
-  ["/about/science", "Наука и технология"],
-];
+const aboutCopy = {
+  ru: {
+    links: [
+      ["/about/company", "Компания"],
+      ["/about/our-history", "История"],
+      ["/about/founders", "Основатели"],
+      ["/about/science", "Наука и технологии"],
+    ],
+    sectionsLabel: "Разделы о компании",
+    since: "с 1994 года",
+    vision: "Наше",
+    visionAccent: "видение",
+    factsLabel: "Dr. Nona в цифрах",
+    founded: "год основания",
+    countries: "стран мира",
+    distributors: "дистрибьюторов",
+    chaptersEyebrow: "О компании · четыре главы",
+    chaptersTitle: "Компания Dr. Nona",
+    openSection: "Открыть раздел",
+    principles: "Принципы Dr. Nona",
+    principlesQuote:
+      "Вера в мудрость природы, непрерывный творческий поиск и приверженность качеству.",
+    aboutCompany: "О компании",
+    historyEyebrow: "О компании · История",
+    today: "Сегодня",
+    historyStage: "Этап истории",
+    aboutEyebrow: "О компании",
+    officialSource: "Официальный источник",
+    imagesLabel: "Изображения",
+  },
+  ro: {
+    links: [
+      ["/about/company", "Compania"],
+      ["/about/our-history", "Istorie"],
+      ["/about/founders", "Fondatori"],
+      ["/about/science", "Știință și tehnologie"],
+    ],
+    sectionsLabel: "Secțiuni despre companie",
+    since: "din 1994",
+    vision: "Viziunea",
+    visionAccent: "noastră",
+    factsLabel: "Dr. Nona în cifre",
+    founded: "anul fondării",
+    countries: "țări din întreaga lume",
+    distributors: "distribuitori",
+    chaptersEyebrow: "Despre companie · patru capitole",
+    chaptersTitle: "Compania Dr. Nona",
+    openSection: "Deschide secțiunea",
+    principles: "Principiile Dr. Nona",
+    principlesQuote:
+      "Încredere în înțelepciunea naturii, cercetare creativă continuă și angajament față de calitate.",
+    aboutCompany: "Despre companie",
+    historyEyebrow: "Despre companie · Istorie",
+    today: "Astăzi",
+    historyStage: "Etapă din istorie",
+    aboutEyebrow: "Despre companie",
+    officialSource: "Sursa oficială",
+    imagesLabel: "Imagini",
+  },
+} as const;
 
 function AboutChapterIcon({ path }: { path: string }) {
   if (path.includes("our-history")) return <CalendarBlank aria-hidden="true" />;
@@ -29,9 +83,11 @@ function AboutChapterIcon({ path }: { path: string }) {
 }
 
 function AboutNavigation() {
+  const { locale } = useLocale();
+  const copy = aboutCopy[locale];
   return (
-    <nav className="about-nav" aria-label="Разделы о компании">
-      {aboutLinks.map(([path, label]) => (
+    <nav className="about-nav" aria-label={copy.sectionsLabel}>
+      {copy.links.map(([path, label]) => (
         <NavLink key={path} to={path}>
           <span>{label}</span>
           <ArrowRight aria-hidden="true" />
@@ -42,6 +98,8 @@ function AboutNavigation() {
 }
 
 export function AboutLandingPage() {
+  const { locale } = useLocale();
+  const copy = aboutCopy[locale];
   const { pageByPath } = useOfficialPageData();
   const page = pageByPath.get("/about");
   const text = page?.paragraphs[0] ?? "";
@@ -49,7 +107,7 @@ export function AboutLandingPage() {
     pageByPath.get("/about/company")?.paragraphs[0] ?? "",
     210
   )[0];
-  const chapters = aboutLinks.map(([path, label], index) => {
+  const chapters = copy.links.map(([path, label], index) => {
     const chapter = pageByPath.get(path);
     return {
       path,
@@ -71,25 +129,25 @@ export function AboutLandingPage() {
       <section className="about-overview">
         <div className="about-overview__inner container">
           <div className="about-overview__heading">
-            <p className="eyebrow">Dr. Nona International · с 1994 года</p>
-            <h1>Наше <em>видение</em></h1>
+            <p className="eyebrow">Dr. Nona International · {copy.since}</p>
+            <h1>{copy.vision} <em>{copy.visionAccent}</em></h1>
           </div>
           <div className="about-overview__statement">
             <span aria-hidden="true">DN</span>
             <p>{splitText(text, 430)[0]}</p>
           </div>
-          <dl className="about-facts" aria-label="Dr. Nona в цифрах">
+          <dl className="about-facts" aria-label={copy.factsLabel}>
             <div>
               <dt>1994</dt>
-              <dd>год основания</dd>
+              <dd>{copy.founded}</dd>
             </div>
             <div>
               <dt>40+</dt>
-              <dd>стран мира</dd>
+              <dd>{copy.countries}</dd>
             </div>
             <div>
               <dt>300 000+</dt>
-              <dd>дистрибьюторов</dd>
+              <dd>{copy.distributors}</dd>
             </div>
           </dl>
         </div>
@@ -98,8 +156,8 @@ export function AboutLandingPage() {
       <section className="about-chapters container" aria-labelledby="about-chapters-title">
         <header className="about-chapters__heading">
           <div>
-            <p className="eyebrow">О компании · четыре главы</p>
-            <h2 id="about-chapters-title">Компания Dr. Nona</h2>
+            <p className="eyebrow">{copy.chaptersEyebrow}</p>
+            <h2 id="about-chapters-title">{copy.chaptersTitle}</h2>
           </div>
           <p>{companyExcerpt}</p>
         </header>
@@ -130,7 +188,7 @@ export function AboutLandingPage() {
                   <h3>{chapter.label}</h3>
                   <p>{chapter.excerpt}</p>
                   <span className="about-chapter__link">
-                    Открыть раздел <ArrowRight aria-hidden="true" />
+                    {copy.openSection} <ArrowRight aria-hidden="true" />
                   </span>
                 </div>
               </Link>
@@ -141,14 +199,13 @@ export function AboutLandingPage() {
 
       <section className="about-principles">
         <div className="container">
-          <p className="eyebrow">Принципы Dr. Nona</p>
+          <p className="eyebrow">{copy.principles}</p>
           <div className="about-principles__content">
             <blockquote>
-              Вера в поразительную мудрость природы, непрерывный творческий
-              поиск, приверженность бескомпромиссному качеству.
+              {copy.principlesQuote}
             </blockquote>
             <Link className="button button--light" to="/about/company">
-              О компании <ArrowRight aria-hidden="true" />
+              {copy.aboutCompany} <ArrowRight aria-hidden="true" />
             </Link>
           </div>
         </div>
@@ -158,15 +215,17 @@ export function AboutLandingPage() {
 }
 
 export function HistoryPage() {
+  const { locale } = useLocale();
+  const copy = aboutCopy[locale];
   const { pageByPath } = useOfficialPageData();
   const page = pageByPath.get("/about/our-history");
   const title = getPageTitle(page);
-  const chapters = splitText(page?.paragraphs[0] ?? "", 520);
-  const years = ["1994", "1998", "1999", "2008", "Сегодня"];
+  const chapters = page?.paragraphs ?? [];
+  const years = ["1994", "1998", "1999", "2008", copy.today];
   return (
     <section className="history-page container">
       <div className="page-intro">
-        <div><p className="eyebrow">О компании · История</p><h1>{title}</h1></div>
+        <div><p className="eyebrow">{copy.historyEyebrow}</p><h1>{title}</h1></div>
         <AboutNavigation />
       </div>
       <div className="timeline">
@@ -175,7 +234,7 @@ export function HistoryPage() {
         </svg>
         {chapters.map((chapter, index) => (
           <Reveal key={chapter.slice(0, 40)} className={`timeline-entry timeline-entry--${index % 2 ? "right" : "left"}`}>
-            <span className="timeline-year">{years[index] ?? "Этап истории"}</span>
+            <span className="timeline-year">{years[index] ?? copy.historyStage}</span>
             <p>{chapter}</p>
           </Reveal>
         ))}
@@ -185,17 +244,19 @@ export function HistoryPage() {
 }
 
 export function AboutContentPage({ path }: { path: string }) {
+  const { locale } = useLocale();
+  const copy = aboutCopy[locale];
   const { pageByPath } = useOfficialPageData();
   const page = pageByPath.get(path);
   if (!page) return <NotFoundPage />;
   const title = getPageTitle(page);
-  const paragraphs = getOfficialPageParagraphs(page).flatMap((paragraph) =>
+  const paragraphs = page.paragraphs.flatMap((paragraph) =>
     splitText(paragraph, 280)
   );
   return (
     <section className="about-content container">
       <div className="page-intro">
-        <div><p className="eyebrow">О компании</p><h1>{title}</h1></div>
+        <div><p className="eyebrow">{copy.aboutEyebrow}</p><h1>{title}</h1></div>
         <AboutNavigation />
       </div>
       <div className="about-content__layout">
@@ -205,7 +266,7 @@ export function AboutContentPage({ path }: { path: string }) {
           </div>
           <p>Dr. Nona International</p>
           <a href={page.sourceUrl} target="_blank" rel="noreferrer">
-            Официальный источник <ArrowUpRight aria-hidden="true" />
+            {copy.officialSource} <ArrowUpRight aria-hidden="true" />
           </a>
         </aside>
         <div className="prose">
@@ -215,7 +276,7 @@ export function AboutContentPage({ path }: { path: string }) {
             </Reveal>
           ))}
           {page.images.length > 0 && (
-            <div className="official-media-grid" aria-label={`Изображения: ${title}`}>
+            <div className="official-media-grid" aria-label={`${copy.imagesLabel}: ${title}`}>
               {page.images.map((image, index) => (
                 <img
                   key={`${image.src}-${index}`}

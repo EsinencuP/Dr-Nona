@@ -4221,6 +4221,26 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
+    "id": "CLM-9850B309E7",
+    "fingerprint": "9850b309e7bedf4e1f82e3b4956c2f835a47830a146093409b3f3e085188d292",
+    "scope": "product",
+    "contentId": "dynamic-hydrating-cream",
+    "field": "longDescription",
+    "claimText": "Универсальный крем, который заботится о коже каждый день Мощное восстановление и защита — ускоряет регенерацию, снимает покраснения и раздражения.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://www.drnona.md/dynamic",
+    "sourceLastmod": "2026-02-06T14:38:40+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
     "id": "CLM-4E82BD3E07",
     "fingerprint": "4e82bd3e0762c9433f460510c509b77074cf7d116853a5a65dccd375843db2a6",
     "scope": "product",
@@ -4241,32 +4261,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-88FD6F39E3",
-    "fingerprint": "88fd6f39e31d592ad63e3097ef02a777a9d139b40aecebf06934a124dc90f1c7",
-    "scope": "product",
-    "contentId": "dynamic-hydrating-cream",
-    "field": "longDescription",
-    "claimText": "Nona Универсальный крем, который заботится о коже каждый день Мощное восстановление и защита — ускоряет регенерацию, снимает покраснения и раздражения.",
-    "claimType": "therapeutic",
-    "detectionReasons": [
-      "pain-healing-or-relief"
-    ],
-    "sourceUrl": "https://www.drnona.md/dynamic",
-    "sourceLastmod": "2026-02-06T14:38:40+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-40B09CC3E1",
-    "fingerprint": "40b09cc3e1c42acb06843dbf8ef68bb3621ff95d9188fc85240e92b60cf66e6f",
+    "id": "CLM-EC74D102B2",
+    "fingerprint": "ec74d102b2d63fe140b46bb87cbb41769b90878c7e87cf825f26581a1a3cfcc2",
     "scope": "product",
     "contentId": "dynamic-hydrating-cream",
     "field": "shortDescription",
-    "claimText": "Nona Универсальный крем, который заботится о коже каждый день Мощное восстановление и защита — ускоряет регенерацию, снимает покраснения и раздражения.",
+    "claimText": "Универсальный крем, который заботится о коже каждый день Мощное восстановление и защита — ускоряет регенерацию, снимает покраснения и раздражения.",
     "claimType": "therapeutic",
     "detectionReasons": [
       "pain-healing-or-relief"

@@ -380,7 +380,7 @@ async function runViewportContract(
   await expect(
     page.getByRole("heading", {
       level: 1,
-      name: "Deodorant Lord",
+      name: "Deodorant ( LORD )",
     })
   ).toBeVisible();
   const accordionButtons = page.locator(".accordion-item > button");
@@ -402,6 +402,7 @@ async function runViewportContract(
       firstAccordionLabel.textContent =
         "Descriere completă și recomandări detaliate pentru utilizare";
     }
+    window.scrollTo(0, 0);
   });
   await expectHealthyLayout(page, `${viewport.name} product-long-ro`, touch);
 

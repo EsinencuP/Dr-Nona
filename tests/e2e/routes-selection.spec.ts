@@ -5,7 +5,7 @@ test("valid and invalid product deep links resolve correctly", async ({ page }) 
   await expect(
     page.getByRole("heading", {
       level: 1,
-      name: "Deodorant Lord",
+      name: "Deodorant ( LORD )",
     })
   ).toBeVisible();
   await expect(page.getByText("324001", { exact: true })).toBeVisible();
@@ -25,7 +25,7 @@ test("valid and invalid product deep links resolve correctly", async ({ page }) 
   await expect(
     page.getByRole("heading", {
       level: 1,
-      name: "Parfume Faya",
+      name: "Eau De Parfume ( FAYA )",
     })
   ).toBeVisible();
   await expect(page.getByText("309001", { exact: true })).toBeVisible();

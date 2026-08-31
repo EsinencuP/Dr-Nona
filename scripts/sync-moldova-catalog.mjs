@@ -5,6 +5,79 @@ const moldovaOrigin = "https://www.drnona.md";
 const internationalOrigin = "https://drnona.com";
 const placeholder = "/brand/product-placeholder.svg";
 const outputPath = new URL("../src/data/products.json", import.meta.url);
+const romanianOutputPath = new URL("../src/data/products-ro.json", import.meta.url);
+
+// Product detail titles on drnona.md are sometimes abbreviated (for example,
+// "Dynamic"), while the category cards contain the complete commercial name.
+// Keep this source-backed inventory explicit so a content sync cannot silently
+// remove the product type from the public catalogue.
+const officialProductNames = {
+  solaris: "Solaris Body Lotion",
+  hand_and_nail_cream: "Hand and Nail Cream",
+  dynamic: "Dynamic Cream",
+  body_butter: "Shea Body Butter",
+  facial_solaris: "Solaris Facial Cream",
+  eye_care_balm: "Eye Care Balm",
+  face_milk: "Face Milk",
+  night_cream: "Night Cream",
+  anti_aging_serum: "Anti-Aging Serum",
+  ard_cream_for_face: "Moisturizing Cream / For Face",
+  shp_day_time_face_cream: "Day Time Face Cream",
+  top_samples_kit: "Top Samples Kit",
+  gonseen: "Gonseen Tea",
+  slimseen_coffee_mix: "Slimseen Coffee Mix",
+  chocoseen: "Chocoseen",
+  soupseen: "Soupseen",
+  okseen: "OKSEEN",
+  phase_9: "PHASE-9",
+  dnd: "DND",
+  imunseen: "IMUNSEEN",
+  goldseen: "GOLDSEEN",
+  cleanseen: "CLEANSEEN",
+  ravseen: "RAVSEEN",
+  pulmoseen: "PULMOSEEN",
+  reumoseen: "REUMOSEEN",
+  yamseen: "YAMSEEN",
+  newseen: "NEWSEEN",
+  femseen: "FEMSEEN",
+  mouthwash: "Multi Mouthwash",
+  compressed_wipes_ru: "Compressed Wipes",
+  shower_gel_lord: "Shower Gel ( LORD )",
+  deodorant_lady: "Deodorant ( LADY )",
+  deodorant_kiwi: "Deodorant ( KIWI )",
+  deodorant_lord: "Deodorant ( LORD )",
+  facial_foam_soap: "Facial Foam Soap",
+  unisex_deodorant_stick: "Unisex Deodorant Stick",
+  shenseen_mousse_toothpaste: "Shenseen Mousse Toothpaste",
+  shower_gel: "Shower Gel",
+  mineral_shampoo: "Mineral Shampoo",
+  mineral_hair_conditioner: "Mineral Hair Conditioner",
+  mineral_lipstick: "Mineral Lipstick",
+  recovering_mud_musk: "Recovering Mud Musk",
+  bath_salts_with_chamomile_extract: "Bath Salts with Camomile extract",
+  bath_salts_with_ylang_ylang_extract:
+    "Bath Salts with Ylang Ylang, Patchouli & Anis Star Extract",
+  bath_salts_with_rosemary_extract:
+    "Bath Salts with Rosemary, Eucalyptus & Thyme extract",
+  bath_salts_with_lavender_extract: "Bath Salts with Lavander extract",
+  parfume_lord: "Eau De Parfume ( LORD )",
+  parfume_kiwi: "Eau De Parfume ( KIWI )",
+  parfume_lady: "Eau De Parfume ( LADY )",
+  parfume_faya: "Eau De Parfume ( FAYA )",
+};
+
+const romanianCategories = {
+  "Кремы": "Creme",
+  "Напитки": "Băuturi",
+  "Пищевые добавки": "Suplimente alimentare",
+  "Гигиена": "Igienă",
+  "Парфюмерия": "Parfumerie",
+};
+
+const romanianSourceSlugs = {
+  compressed_wipes_ru: "compressed_wipes_ro",
+  bath_salts_with_lavender_extract: "bath_salts_with_lavander_extract_ro",
+};
 
 const categoryInventory = {
   "Кремы": [
@@ -168,24 +241,37 @@ function parseJsonLd($, type) {
 }
 
 function sourceTitle($) {
-  return clean($("title").text().replace(/\s*\(\s*RU\s*\)\s*$/i, ""));
+  return clean($("title").text().replace(/\s*\(\s*(?:RU|RO)\s*\)\s*$/i, ""));
 }
 
-function stripSourceHeading(text, title) {
+function stripSourceHeading(text, title, officialName = title) {
   let value = text;
-  for (const prefix of [`${title} Dr. Nona`, title, "Dr. Nona"]) {
-    if (value.toLocaleLowerCase("ru").startsWith(prefix.toLocaleLowerCase("ru"))) {
-      value = value.slice(prefix.length).trim();
+  const prefixes = [
+    `${officialName} Dr. Nona`,
+    `${title} Dr. Nona`,
+    officialName,
+    title,
+    "Dr. Nona",
+  ];
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const prefix of prefixes) {
+      if (value.toLocaleLowerCase("ru").startsWith(prefix.toLocaleLowerCase("ru"))) {
+        value = value.slice(prefix.length).trim();
+        changed = true;
+        break;
+      }
     }
   }
   return clean(value);
 }
 
-function shortDescription(value) {
+function shortDescription(value, locale = "ru") {
   const protectedValue = value
     .replace(/^[\s–—-]+/, "")
     .replace(/Dr\.\s*Nona/gi, "Dr Nona");
-  const segments = [...new Intl.Segmenter("ru", { granularity: "sentence" }).segment(protectedValue)]
+  const segments = [...new Intl.Segmenter(locale, { granularity: "sentence" }).segment(protectedValue)]
     .map(({ segment }) => clean(segment).replace(/Dr Nona/gi, "Dr. Nona"))
     .filter((segment) => segment.length > 25);
   const first = segments[0] || value;
@@ -201,15 +287,19 @@ function segmentBetween(value, starts, ends) {
   return match ? clean(match[1]) : null;
 }
 
-function extractMoldovaProduct(html) {
+function extractMoldovaProduct(html, locale = "ru", officialName) {
   const $ = cheerio.load(html);
   $("script,style,noscript,svg").remove();
   const title = sourceTitle($);
-  const body = stripSourceHeading(extractRichText($, $("body")), title);
+  const body = stripSourceHeading(
+    extractRichText($, $("body")),
+    title,
+    officialName
+  );
   if (!title || body.length < 40) throw new Error("Moldova product page has no usable title or description.");
   return {
     title,
-    shortDescription: shortDescription(body),
+    shortDescription: shortDescription(body, locale),
     longDescription: body,
     ingredients: segmentBetween(
       body,
@@ -220,6 +310,23 @@ function extractMoldovaProduct(html) {
       body,
       ["Способ применения", "Применение", "Как использовать"],
       ["Состав", "Преимущества", "Важно", "Противопоказания"]
+    ),
+  };
+}
+
+function extractRomanianProduct(html, officialName) {
+  const parsed = extractMoldovaProduct(html, "ro", officialName);
+  return {
+    ...parsed,
+    ingredients: segmentBetween(
+      parsed.longDescription,
+      ["Compoziție", "Ingrediente", "Conține", "Compoziția sa include"],
+      ["Mod de utilizare", "Utilizare", "Beneficii", "Recomandări", "Ideal pentru"]
+    ),
+    howToUse: segmentBetween(
+      parsed.longDescription,
+      ["Mod de utilizare", "Utilizare", "Cum se utilizează", "Utilizați"],
+      ["Compoziție", "Ingrediente", "Important", "Contraindicații"]
     ),
   };
 }
@@ -314,7 +421,19 @@ async function main() {
     const officialSourceUrl = internationalSlug
       ? `${internationalOrigin}/product/${internationalSlug}`
       : null;
-    const moldova = extractMoldovaProduct(await fetchText(sourceUrl));
+    const officialName = officialProductNames[sourceSlug];
+    const moldova = extractMoldovaProduct(
+      await fetchText(sourceUrl),
+      "ru",
+      officialName
+    );
+    const romanianSourceSlug =
+      romanianSourceSlugs[sourceSlug] || `${sourceSlug.replace(/_ru$/, "")}_ro`;
+    const romanianSourceUrl = `${moldovaOrigin}/${romanianSourceSlug}`;
+    const romanian = extractRomanianProduct(
+      await fetchText(romanianSourceUrl),
+      officialName
+    );
     let international = null;
     if (officialSourceUrl) {
       try {
@@ -332,7 +451,7 @@ async function main() {
     );
     return {
       slug,
-      officialName: moldova.title,
+      officialName: officialName || moldova.title,
       shortDescription: moldova.shortDescription,
       longDescription: moldova.longDescription || international?.description || "",
       ingredients: international?.ingredients || moldova.ingredients || null,
@@ -345,7 +464,7 @@ async function main() {
       catalogScale: existing?.catalogScale || 1,
       imageAlt:
         existing?.imageAlt ||
-        `Изображение продукта ${moldova.title} будет добавлено позже`,
+        `Изображение продукта ${officialName || moldova.title}`,
       sourceUrl,
       officialSourceUrl,
       releasedAt: null,
@@ -353,6 +472,15 @@ async function main() {
       officialOrder: index + 1,
       popularityRank: index + 1,
       relatedSlugs,
+      romanian: {
+        shortDescription: romanian.shortDescription,
+        longDescription: romanian.longDescription,
+        ingredients: romanian.ingredients,
+        howToUse: romanian.howToUse,
+        category: romanianCategories[category],
+        imageAlt: `Imaginea produsului ${officialName || moldova.title}`,
+        sourceUrl: romanianSourceUrl,
+      },
     };
   });
 
@@ -363,7 +491,20 @@ async function main() {
   const withHowToUse = products.filter((product) => product.howToUse).length;
 
   if (shouldWrite) {
-    await writeFile(outputPath, `${JSON.stringify(products, null, 2)}\n`, "utf8");
+    const russianProducts = products.map((product) =>
+      Object.fromEntries(
+        Object.entries(product).filter(([key]) => key !== "romanian")
+      )
+    );
+    const romanianProducts = Object.fromEntries(
+      products.map((product) => [product.slug, product.romanian])
+    );
+    await writeFile(outputPath, `${JSON.stringify(russianProducts, null, 2)}\n`, "utf8");
+    await writeFile(
+      romanianOutputPath,
+      `${JSON.stringify(romanianProducts, null, 2)}\n`,
+      "utf8"
+    );
   } else {
     await readFile(outputPath, "utf8");
   }

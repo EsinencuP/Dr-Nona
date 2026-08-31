@@ -442,6 +442,33 @@ p {
   gap: 18px;
 }
 
+.locale-switch {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--white) 88%, transparent);
+}
+
+.locale-switch a {
+  min-width: 34px;
+  min-height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: var(--type-caption);
+  font-weight: 750;
+  letter-spacing: 0.04em;
+}
+
+.locale-switch a[aria-current="true"] {
+  background: var(--sea-800);
+  color: var(--white);
+}
+
 .selection-link {
   min-height: 44px;
   display: flex;

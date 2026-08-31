@@ -30,6 +30,8 @@ export type SeoRouteMetadata = {
   ogType: "website" | "product" | "article";
   image: string;
   kind: string;
+  locale?: "ru" | "ro";
+  alternates?: Record<string, string>;
   breadcrumbs: SeoBreadcrumb[];
   schema: ProductSeoSchema | ArticleSeoSchema | null;
 };

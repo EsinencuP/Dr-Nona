@@ -2,7 +2,7 @@
 
 The application combines explicit React routes with prerendered official-content routes. The generated SEO manifest is the complete machine-readable inventory.
 
-Last verified: 2026-08-25. The current manifest contains 187 routes, of which 185 are indexable.
+Last verified: 2026-08-30. The current manifest contains 301 routes, of which 299 are indexable. This includes localized RU/RO catalogue and product-detail routes for all 50 published products, plus localized company, history, founders, science and Halo Complex pages.
 
 ## Primary routes
 
@@ -39,7 +39,7 @@ The inventory excludes account, registration, login, cart, checkout, payment, se
 
 ## Locale strategy
 
-Russian pages use unprefixed canonical paths and `ru-MD`. Future Romanian pages require complete `/ro/...` equivalents with reciprocal hreflang. No partial Romanian route is published.
+Russian pages keep their unprefixed canonical paths and also expose explicit `/ru/...` alternatives where a complete bilingual pair exists. Romanian equivalents use `/ro/...`. Reciprocal `ru-MD`, `ro-MD` and `x-default` hreflang is active for the catalogue, all product details, `/about` and its four chapters, and `/ourformula`. Blog and news remain on their original unprefixed routes by the owner's decision and are not presented as Romanian pages.
 
 ## Verification
 

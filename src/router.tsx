@@ -15,7 +15,10 @@ import { reportClientError } from "./app/monitoring";
 
 type LocationState = {
   pathname: string;
+  localizedPathname: string;
   search: string;
+  locale: "ru" | "ro";
+  hasLocalePrefix: boolean;
 };
 
 type NavigateOptions = {
@@ -29,15 +32,27 @@ type RouteProps = {
 
 const LocationContext = createContext<LocationState>({
   pathname: window.location.pathname,
+  localizedPathname: window.location.pathname,
   search: window.location.search,
+  locale: "ru",
+  hasLocalePrefix: false,
 });
 
 const ParamsContext = createContext<Record<string, string>>({});
 
 function readLocation(): LocationState {
+  const localizedPathname = window.location.pathname || "/";
+  const localeMatch = localizedPathname.match(/^\/(ru|ro)(?=\/|$)/);
+  const locale = localeMatch?.[1] === "ro" ? "ro" : "ru";
+  const pathname = localeMatch
+    ? localizedPathname.slice(localeMatch[0].length) || "/"
+    : localizedPathname;
   return {
-    pathname: window.location.pathname || "/",
+    pathname,
+    localizedPathname,
     search: window.location.search,
+    locale,
+    hasLocalePrefix: Boolean(localeMatch),
   };
 }
 
@@ -85,11 +100,29 @@ export function useLocation() {
   return useContext(LocationContext);
 }
 
+function localizeInternalPath(to: string, location: LocationState) {
+  if (
+    !to.startsWith("/") ||
+    to.startsWith("//") ||
+    /^\/(?:ru|ro)(?=\/|$)/.test(to) ||
+    !location.hasLocalePrefix
+  ) {
+    return to;
+  }
+  return `/${location.locale}${to === "/" ? "" : to}`;
+}
+
 export function useNavigate() {
+  const location = useLocation();
   return (to: string, options: NavigateOptions = {}) => {
+    const destination = localizeInternalPath(to, location);
     const current = `${window.location.pathname}${window.location.search}`;
-    if (current === to) return;
-    window.history[options.replace ? "replaceState" : "pushState"]({}, "", to);
+    if (current === destination) return;
+    window.history[options.replace ? "replaceState" : "pushState"](
+      {},
+      "",
+      destination
+    );
     notifyNavigation();
   };
 }
@@ -122,7 +155,9 @@ export function Link({
   children,
   ...props
 }: AnchorHTMLAttributes<HTMLAnchorElement> & { to: string }) {
+  const location = useLocation();
   const navigate = useNavigate();
+  const href = localizeInternalPath(to, location);
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     onClick?.(event);
     if (
@@ -137,7 +172,7 @@ export function Link({
     event.preventDefault();
     navigate(to);
   };
-  return <a href={to} onClick={handleClick} {...props}>{children}</a>;
+  return <a href={href} onClick={handleClick} {...props}>{children}</a>;
 }
 
 export function NavLink({

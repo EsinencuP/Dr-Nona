@@ -19,39 +19,80 @@ export function resolveSelectionProducts(
     .filter((product): product is Product => Boolean(product));
 }
 
-export function productPublicUrl(product: Product) {
-  return new URL(`/product/${encodeURIComponent(product.slug)}`, window.location.origin).href;
+type ConsultationLocale = "ru" | "ro";
+
+export function productPublicUrl(
+  product: Product,
+  locale: ConsultationLocale = "ru"
+) {
+  const prefix = locale === "ro" ? "/ro" : "";
+  return new URL(
+    `${prefix}/product/${encodeURIComponent(product.slug)}`,
+    window.location.origin
+  ).href;
 }
 
-export function buildConsultationText(productsToSend: Product[]) {
+export function buildConsultationText(
+  productsToSend: Product[],
+  locale: ConsultationLocale = "ru"
+) {
+  const copy = locale === "ro"
+    ? {
+        greeting: "Bună ziua!",
+        withProducts:
+          "Doresc o consultație despre produsele Dr. Nona selectate:",
+        withoutProducts: "Doresc o consultație despre produsele Dr. Nona.",
+        sku: "Cod produs",
+        missingSku: "nu este indicat",
+        link: "Link",
+        reply: "Vă rog să mă contactați pentru detalii.",
+      }
+    : {
+        greeting: "Здравствуйте!",
+        withProducts:
+          "Хочу получить консультацию по выбранным продуктам Dr. Nona:",
+        withoutProducts: "Хочу получить консультацию по продукции Dr. Nona.",
+        sku: "Артикул",
+        missingSku: "не указан",
+        link: "Ссылка",
+        reply: "Пожалуйста, свяжитесь со мной для уточнения деталей.",
+      };
   const productLines = productsToSend.flatMap((product, index) => [
     `${index + 1}. ${product.officialName}`,
-    `Артикул: ${product.sku || "не указан"}`,
-    `Ссылка: ${productPublicUrl(product)}`,
+    `${copy.sku}: ${product.sku || copy.missingSku}`,
+    `${copy.link}: ${productPublicUrl(product, locale)}`,
     "",
   ]);
   return [
-    "Здравствуйте!",
-    productsToSend.length
-      ? "Хочу получить консультацию по выбранным продуктам Dr. Nona:"
-      : "Хочу получить консультацию по продукции Dr. Nona.",
+    copy.greeting,
+    productsToSend.length ? copy.withProducts : copy.withoutProducts,
     "",
     ...productLines,
-    "Пожалуйста, ответьте на это письмо.",
+    copy.reply,
   ].join("\r\n");
 }
 
-export function buildConsultationEmail(productsToSend: Product[]) {
-  const subject = productsToSend.length
-    ? `Консультация по подборке Dr. Nona — ${productsToSend.length} поз.`
-    : "Консультация Dr. Nona Moldova";
-  const body = buildConsultationText(productsToSend);
+export function buildConsultationEmail(
+  productsToSend: Product[],
+  locale: ConsultationLocale = "ru"
+) {
+  const subject = locale === "ro"
+    ? productsToSend.length
+      ? `Consultație pentru selecția Dr. Nona — ${productsToSend.length} produse`
+      : "Consultație Dr. Nona Moldova"
+    : productsToSend.length
+      ? `Консультация по подборке Dr. Nona — ${productsToSend.length} поз.`
+      : "Консультация Dr. Nona Moldova";
+  const body = buildConsultationText(productsToSend, locale);
 
   return `mailto:${officialContactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
-export async function copyConsultationText(productsToSend: Product[]) {
-  const text = buildConsultationText(productsToSend);
+export async function copyConsultationText(
+  productsToSend: Product[],
+  locale: ConsultationLocale = "ru"
+) {
+  const text = buildConsultationText(productsToSend, locale);
 
   if (navigator.clipboard?.writeText) {
     try {

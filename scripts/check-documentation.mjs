@@ -237,8 +237,8 @@ for (const count of [
     errors.push(`PROJECT_STATUS.md does not include current count ${count}`);
   }
 }
-if (!projectStatus.includes("Russian only")) {
-  errors.push("PROJECT_STATUS.md does not state the current Russian-only UI contract");
+if (!projectStatus.includes("Complete RU/RO route pairs")) {
+  errors.push("PROJECT_STATUS.md does not state the current localized route scope");
 }
 
 const pageInventory = readFileSync("docs/PAGE_INVENTORY.md", "utf8");

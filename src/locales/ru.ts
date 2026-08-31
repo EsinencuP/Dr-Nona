@@ -35,3 +35,7 @@ export const ru = {
     "Я согласен на обработку указанных персональных данных для связи по этой заявке.",
   privacyPolicy: "Политика конфиденциальности",
 } as const;
+
+export type LocaleMessages = {
+  [Key in keyof typeof ru]: string;
+};

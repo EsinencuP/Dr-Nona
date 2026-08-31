@@ -6,8 +6,8 @@ Last verified: 2026-08-30 against the current worktree.
 
 | Task | Status | Current result | Required input |
 |---|---|---|---|
-| `TASK-01` locale-prefixed routes | Blocked with `TASK-02` | The production contract remains Russian-only. Activating `/ro/...` before complete content would violate the no-mixed-language acceptance criterion. | Complete approved Romanian content set. |
-| `TASK-02` UI, catalogue and metadata localization | Blocked | Russian locale resources exist; Romanian UI, 50 products, 137 content records, metadata, alt and accessibility copy are not supplied. | Reviewed Romanian dataset with stable IDs for every field. |
+| `TASK-01` locale-prefixed routes | Complete for approved scope | `/ru/...` and `/ro/...` route pairs are active for the catalogue, 50 products, company chapters and Halo Complex. Blog/news remain original by owner decision. | Extend only after a complete reviewed dataset exists for another route group. |
+| `TASK-02` UI, catalogue and metadata localization | Complete for approved scope | Romanian UI, 50 products, company chapters, Halo Complex, metadata, alt and accessibility copy are connected to stable routes. | External language review remains a release approval item. |
 | `TASK-03` claims cleanup | Blocked | Registry validation passes structurally, but all 286 decisions remain `pending`. | For every claim: approved/rejected decision, reviewer, ISO date and approval reference; neutral replacement copy for rejected claims. |
 | `TASK-04` certificates and media | Partially complete | Moldova certificate list is empty, foreign documents are hidden and current image links load. | Approved Moldova certificate records and a rights manifest for every published asset. |
 | `TASK-05` popularity sorting | Code complete; business approval open | Comparator uses `popularityRank` and now resolves equal ranks deterministically by `officialOrder`, then SKU. Current ranks mirror catalogue order and remain provisional. | Approved 50-product ranking or explicit approval of catalogue order as permanent fallback. |

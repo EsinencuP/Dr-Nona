@@ -27,7 +27,28 @@ export default function ProductPage() {
   const { productBySlug, getRelatedProducts } = useProductData();
   const product = productBySlug.get(slug);
   const { contains, toggle } = useSelection();
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
+  const copy = locale === "ro"
+    ? {
+        fullDescription: "Descriere completă",
+        detailEyebrow: "Detalii despre produs",
+        detailTitle: "Compoziție și utilizare",
+        detailIntro:
+          "Descrierea provine din catalogul oficial Dr. Nona Moldova, iar informațiile suplimentare au fost verificate pe site-ul internațional.",
+        unavailable: "Informația pentru această secțiune nu este disponibilă.",
+        additionalSource: "Informații suplimentare",
+        nextStep: "Pasul următor",
+      }
+    : {
+        fullDescription: "Полное описание",
+        detailEyebrow: "Подробно о продукте",
+        detailTitle: "Состав и применение",
+        detailIntro:
+          "Описание перенесено из каталога Dr. Nona Moldova и дополнено данными международного сайта.",
+        unavailable: "Информация для этого раздела отсутствует.",
+        additionalSource: "Дополнительные данные",
+        nextStep: "Следующий шаг",
+      };
   const [openPanel, setOpenPanel] = useState<"description" | "ingredients" | "use" | null>("ingredients");
   if (!product) return <NotFoundPage />;
   const related = getRelatedProducts(product);
@@ -44,7 +65,7 @@ export default function ProductPage() {
   if (isProductContentFieldApplicable(product, "longDescription")) {
     productSections.push({
       key: "description",
-      label: "Полное описание",
+      label: copy.fullDescription,
       content: productLongDescription,
     });
   }
@@ -139,9 +160,9 @@ export default function ProductPage() {
 
       <section className="product-knowledge container">
         <div className="product-knowledge__intro">
-          <p className="eyebrow">Подробно о продукте</p>
-          <h2>Состав и применение</h2>
-          <p>Описание перенесено из каталога Dr. Nona Moldova и дополнено данными международного сайта.</p>
+          <p className="eyebrow">{copy.detailEyebrow}</p>
+          <h2>{copy.detailTitle}</h2>
+          <p>{copy.detailIntro}</p>
         </div>
         <div className="accordion">
           {productSections.map(({ key, label, content }) => {
@@ -168,7 +189,7 @@ export default function ProductPage() {
                   hidden={!isOpen}
                 >
                   <p>
-                    {content || "Информация для этого раздела отсутствует."}
+                    {content || copy.unavailable}
                   </p>
                 </div>
               </div>
@@ -180,7 +201,7 @@ export default function ProductPage() {
             </a>
             {product.officialSourceUrl && (
               <a className="official-source-link" href={product.officialSourceUrl} target="_blank" rel="noreferrer">
-                Дополнительные данные: drnona.com <ArrowUpRight aria-hidden="true" />
+                {copy.additionalSource}: drnona.com <ArrowUpRight aria-hidden="true" />
               </a>
             )}
           </div>
@@ -188,7 +209,7 @@ export default function ProductPage() {
       </section>
 
       <section className="section container related-section">
-        <SectionHeading eyebrow="Следующий шаг" title={t.related} />
+        <SectionHeading eyebrow={copy.nextStep} title={t.related} />
         <div className="related-grid">
           {related.map((item) => (
             <ProductCard key={item.slug} product={item} compact />

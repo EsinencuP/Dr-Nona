@@ -10,13 +10,84 @@ import { getProductCopy } from "../claims";
 import { ArticleCard } from "../components/ArticleCard";
 import { ProductImage } from "../components/ProductImage";
 import { Reveal, SectionHeading, splitText } from "../components/ui";
+import { useProductData } from "../data";
 import type { OfficialPage, Product } from "../data";
 import runtimeContent from "../data/runtime-content.json";
 import { useSelection } from "../features/selection/SelectionContext";
+import { useLocale } from "../locales/LocaleProvider";
 import { Link } from "../router";
 
 export default function HomePage() {
-  const products = runtimeContent.home.products as Product[];
+  const { productBySlug: localizedProducts } = useProductData();
+  const { locale } = useLocale();
+  const copy = locale === "ro"
+    ? {
+        heroEyebrow: "Marea Moartă · Știință · Dr. Nona",
+        heroTagline: "Creat de natură",
+        heroLead:
+          "Combinăm forța mineralelor Mării Moarte cu cercetarea științifică modernă pentru a crea produse de îngrijire zilnică și frumusețe.",
+        heroPrinciples: "Principiile Dr. Nona",
+        science: "Știință",
+        scienceIntro: "Creat de natură. Dezvăluit de știință.",
+        scienceFallback:
+          "Formula proprie reunește originea Mării Moarte cu abordarea științifică Dr. Nona.",
+        formulaStory: "Istoria formulei",
+        products: "Produse",
+        editorsChoice: "Recomandarea noastră",
+        allProducts: "Toate produsele",
+        openProduct: "Vezi produsul",
+        saved: "Adăugat",
+        add: "Adaugă în selecție",
+        moreProducts: "Alte două produse recomandate",
+        details: "Detalii",
+        promo: "Produs în prim-plan",
+        collection: "Colecție",
+        viewCollection: "Descoperă colecția",
+        history: "Istorie",
+        companyHistory: "Istoria companiei",
+        historyText:
+          "Compania Dr. Nona International a fost fondată la 22 august 1994, pe acoperișul casei doctorului Nona și a lui Mihail Șneerson.",
+        continueHistory: "Descoperă istoria",
+        years: "de ani de istorie",
+        knowledge: "Informații utile",
+        blogNews: "Blog și noutăți",
+        readAll: "Vezi toate materialele",
+      }
+    : {
+        heroEyebrow: "Мёртвое море · Наука · Dr. Nona",
+        heroTagline: "Сделано природой",
+        heroLead:
+          "Мы объединяем силу минералов Мёртвого моря и передовые научные разработки, чтобы создавать продукты для ежедневного ухода и красоты.",
+        heroPrinciples: "Принципы Dr. Nona",
+        science: "Наука",
+        scienceIntro: "Сделано природой. Раскрыто наукой.",
+        scienceFallback:
+          "Фирменная формула объединяет происхождение Мёртвого моря и научный подход Dr. Nona.",
+        formulaStory: "История формулы",
+        products: "Продукты",
+        editorsChoice: "Выбор редакции",
+        allProducts: "Все продукты",
+        openProduct: "Смотреть продукт",
+        saved: "Добавлено",
+        add: "В подборку",
+        moreProducts: "Ещё два продукта",
+        details: "Подробнее",
+        promo: "Промо-фокус",
+        collection: "Коллекция",
+        viewCollection: "Смотреть коллекцию",
+        history: "История",
+        companyHistory: "История компании",
+        historyText:
+          "Компания Dr. Nona International была основана 22 августа 1994 года, на крыше дома Доктора Нонны и Михаила Шнеерсона.",
+        continueHistory: "Продолжить историю",
+        years: "лет истории",
+        knowledge: "Знания",
+        blogNews: "Блог и новости",
+        readAll: "Читать всё",
+      };
+  const products = (runtimeContent.home.products as Product[]).map(
+    (product) => localizedProducts.get(product.slug) ?? product
+  );
   const productBySlug = new Map(
     products.map((product) => [product.slug, product])
   );
@@ -36,7 +107,29 @@ export default function HomePage() {
   const spotlightSaved = contains(spotlight.slug);
   const articles = runtimeContent.home.editorial as OfficialPage[];
   const [scienceFocus, setScienceFocus] = useState<"archaea" | "minerals" | "extracts">("minerals");
-  const scienceNodes = [
+  const scienceNodes = locale === "ro" ? [
+    {
+      id: "archaea" as const,
+      label: "Arhebacterie",
+      description:
+        "O componentă naturală unică, provenită din mediul extrem al Mării Moarte.",
+      icon: TestTube,
+    },
+    {
+      id: "minerals" as const,
+      label: "Mineralele mării",
+      description:
+        "O bază minerală asociată ecosistemului natural al Mării Moarte.",
+      icon: Drop,
+    },
+    {
+      id: "extracts" as const,
+      label: "Extracte naturale",
+      description:
+        "Componentele vegetale completează formulele de îngrijire zilnică.",
+      icon: Leaf,
+    },
+  ] : [
     {
       id: "archaea" as const,
       label: "Архебактерия",
@@ -60,10 +153,10 @@ export default function HomePage() {
   const ActiveScienceIcon = activeScienceNode.icon;
   const formulaParagraph = "";
   const heroBenefits = [
-    { icon: Drop, title: "Минералы Мёртвого моря", text: "Уникальный природный источник" },
-    { icon: Flask, title: "Научные разработки", text: "Современные формулы" },
-    { icon: Leaf, title: "Природные компоненты", text: "Экстракты и минералы" },
-    { icon: Heart, title: "Забота о вас", text: "Ежедневный уход" },
+    { icon: Drop, title: locale === "ro" ? "Mineralele Mării Moarte" : "Минералы Мёртвого моря", text: locale === "ro" ? "O sursă naturală unică" : "Уникальный природный источник" },
+    { icon: Flask, title: locale === "ro" ? "Cercetare științifică" : "Научные разработки", text: locale === "ro" ? "Formule contemporane" : "Современные формулы" },
+    { icon: Leaf, title: locale === "ro" ? "Ingrediente naturale" : "Природные компоненты", text: locale === "ro" ? "Extracte și minerale" : "Экстракты и минералы" },
+    { icon: Heart, title: locale === "ro" ? "Grijă pentru dumneavoastră" : "Забота о вас", text: locale === "ro" ? "Îngrijire zilnică" : "Ежедневный уход" },
   ];
 
   return (
@@ -71,27 +164,26 @@ export default function HomePage() {
       <section className="home-hero">
         <div className="home-hero__inner container">
           <div className="hero-copy">
-            <p className="eyebrow">Мёртвое море · Наука · Dr. Nona</p>
+            <p className="eyebrow">{copy.heroEyebrow}</p>
             <h1>
               <span className="hero-title-line hero-title-line--ink">Halo</span>
               <span className="hero-title-line hero-title-line--sea">Complex™</span>
-              <small>Сделано природой</small>
+              <small>{copy.heroTagline}</small>
             </h1>
             <p className="hero-lead">
-              Мы объединяем силу минералов Мёртвого моря и передовые научные разработки,
-              чтобы создавать продукты для ежедневного ухода и красоты.
+              {copy.heroLead}
             </p>
           </div>
           <div
             className="hero-visual"
             role="img"
-            aria-label="Halo Night Cream в пейзаже Мёртвого моря"
+            aria-label={locale === "ro" ? "Halo Night Cream într-un peisaj al Mării Moarte" : "Halo Night Cream в пейзаже Мёртвого моря"}
           />
         </div>
         <div
           className="hero-benefits container"
           role="region"
-          aria-label="Принципы Dr. Nona"
+          aria-label={copy.heroPrinciples}
           tabIndex={0}
         >
           {heroBenefits.map(({ icon: Icon, title, text }) => (
@@ -106,16 +198,16 @@ export default function HomePage() {
       <section className="science-section" id="halo-science">
         <div className="container science-grid">
           <Reveal className="science-copy">
-            <p className="eyebrow eyebrow--light">Наука</p>
+            <p className="eyebrow eyebrow--light">{copy.science}</p>
             <h2>Halo Complex™</h2>
-            <p className="science-intro">Сделано природой. Раскрыто наукой.</p>
+            <p className="science-intro">{copy.scienceIntro}</p>
             <p>
               {formulaParagraph
                 ? splitText(formulaParagraph, 260)[0]
-                : "Фирменная формула объединяет происхождение Мёртвого моря и научный подход Dr. Nona."}
+                : copy.scienceFallback}
             </p>
             <Link className="button button--light" to="/ourformula">
-              История формулы <ArrowRight aria-hidden="true" />
+              {copy.formulaStory} <ArrowRight aria-hidden="true" />
             </Link>
           </Reveal>
           <Reveal className="science-diagram" delay={80}>
@@ -161,11 +253,11 @@ export default function HomePage() {
       <section className="section container home-product-showcase">
         <Reveal>
           <SectionHeading
-            eyebrow="Продукты"
-            title="Выбор редакции"
+            eyebrow={copy.products}
+            title={copy.editorsChoice}
             action={
               <Link className="text-link text-link--large" to="/products">
-                Все продукты <ArrowRight aria-hidden="true" />
+                {copy.allProducts} <ArrowRight aria-hidden="true" />
               </Link>
             }
             align="split"
@@ -178,7 +270,7 @@ export default function HomePage() {
               <Link
                 className="home-product-spotlight__media"
                 to={`/product/${spotlight.slug}`}
-                aria-label={`Открыть ${spotlight.officialName}`}
+                aria-label={`${copy.openProduct}: ${spotlight.officialName}`}
               >
                 <ProductImage
                   src={spotlight.image}
@@ -192,7 +284,7 @@ export default function HomePage() {
               </Link>
               <div className="home-product-spotlight__body">
                 <div className="home-product-spotlight__meta">
-                  <span>Выбор редакции</span>
+                  <span>{copy.editorsChoice}</span>
                   <small>{spotlight.category}</small>
                 </div>
                 <h3>{spotlight.officialName}</h3>
@@ -201,12 +293,12 @@ export default function HomePage() {
                 )}
                 <div className="home-product-spotlight__actions">
                   <Link className="button button--primary" to={`/product/${spotlight.slug}`}>
-                    Смотреть продукт <ArrowRight aria-hidden="true" />
+                    {copy.openProduct} <ArrowRight aria-hidden="true" />
                   </Link>
                   <button
                     className="save-button"
                     type="button"
-                    aria-label={spotlightSaved ? "Добавлено" : "В подборку"}
+                    aria-label={spotlightSaved ? copy.saved : copy.add}
                     aria-pressed={spotlightSaved}
                     onClick={() => toggle(spotlight.slug)}
                   >
@@ -214,14 +306,14 @@ export default function HomePage() {
                       aria-hidden="true"
                       weight={spotlightSaved ? "fill" : "regular"}
                     />
-                    <span>{spotlightSaved ? "Добавлено" : "В подборку"}</span>
+                    <span>{spotlightSaved ? copy.saved : copy.add}</span>
                   </button>
                 </div>
               </div>
             </article>
           </Reveal>
 
-          <div className="home-product-supporting" aria-label="Ещё два продукта">
+          <div className="home-product-supporting" aria-label={copy.moreProducts}>
             {supportingProducts.map((product, index) => (
               <Reveal key={product.slug} delay={70 + index * 55}>
                 <article className="home-product-mini">
@@ -247,7 +339,7 @@ export default function HomePage() {
                       </Link>
                     </h3>
                     <Link className="text-link" to={`/product/${product.slug}`}>
-                      Подробнее <ArrowUpRight aria-hidden="true" />
+                      {copy.details} <ArrowUpRight aria-hidden="true" />
                     </Link>
                   </div>
                 </article>
@@ -267,13 +359,13 @@ export default function HomePage() {
                 sizes="(max-width: 640px) calc(100vw - 28px), (max-width: 960px) 48vw, 620px"
               />
               <div className="home-promo-banner__content">
-                <span>Промо-фокус</span>
+                <span>{copy.promo}</span>
                 <h3>{promoProduct.officialName}</h3>
                 {getProductCopy(promoProduct, "shortDescription") && (
                   <p>{getProductCopy(promoProduct, "shortDescription")}</p>
                 )}
                 <Link className="button button--light" to={`/product/${promoProduct.slug}`}>
-                  Открыть продукт <ArrowRight aria-hidden="true" />
+                  {copy.openProduct} <ArrowRight aria-hidden="true" />
                 </Link>
               </div>
             </article>
@@ -294,14 +386,14 @@ export default function HomePage() {
                 ))}
               </div>
               <div className="home-lord-banner__content">
-                <span>Коллекция</span>
+                <span>{copy.collection}</span>
                 <h3>Lord</h3>
                 {lordProducts[1] &&
                   getProductCopy(lordProducts[1], "shortDescription") && (
                     <p>{getProductCopy(lordProducts[1], "shortDescription")}</p>
                   )}
                 <Link className="button button--light" to="/products?q=Lord">
-                  Смотреть коллекцию <ArrowRight aria-hidden="true" />
+                  {copy.viewCollection} <ArrowRight aria-hidden="true" />
                 </Link>
               </div>
             </article>
@@ -313,17 +405,14 @@ export default function HomePage() {
         <Reveal className="history-preview__visual">
           <span className="history-year">1994</span>
           <div className="history-sea" aria-hidden="true" />
-          <div className="history-seal"><span>30</span><small>лет истории</small></div>
+          <div className="history-seal"><span>30</span><small>{copy.years}</small></div>
         </Reveal>
         <Reveal className="history-preview__copy" delay={90}>
-          <p className="eyebrow">История</p>
-          <h2>История компании</h2>
-          <p>
-            Компания Dr. Nona International была основана 22 августа 1994
-            года, на крыше дома Доктора Нонны и Михаила Шнеерсона.
-          </p>
+          <p className="eyebrow">{copy.history}</p>
+          <h2>{copy.companyHistory}</h2>
+          <p>{copy.historyText}</p>
           <Link className="text-link text-link--large" to="/about/our-history">
-            Продолжить историю <ArrowRight aria-hidden="true" />
+            {copy.continueHistory} <ArrowRight aria-hidden="true" />
           </Link>
         </Reveal>
       </section>
@@ -332,11 +421,11 @@ export default function HomePage() {
         <div className="container">
           <Reveal>
             <SectionHeading
-              eyebrow="Знания"
-              title="Блог и новости"
+              eyebrow={copy.knowledge}
+              title={copy.blogNews}
               action={
                 <Link className="text-link text-link--large" to="/editorial">
-                  Читать всё <ArrowRight aria-hidden="true" />
+                  {copy.readAll} <ArrowRight aria-hidden="true" />
                 </Link>
               }
               align="split"

@@ -39,10 +39,8 @@ test("product route exposes complete route metadata and Product JSON-LD", async 
     };
   });
 
-  expect(metadata.title).toContain("Deodorant Lord");
-  expect(metadata.description).toContain(
-    "Deodorant Lord"
-  );
+  expect(metadata.title).toContain("Deodorant ( LORD )");
+  expect(metadata.description).toContain("Deodorant ( LORD )");
   expect(metadata.canonical).toBe(
     "http://127.0.0.1:4173/product/lord-deodorant"
   );
@@ -51,7 +49,11 @@ test("product route exposes complete route metadata and Product JSON-LD", async 
   expect(metadata.alternates).toEqual([
     {
       hreflang: "ru-MD",
-      href: "http://127.0.0.1:4173/product/lord-deodorant",
+      href: "http://127.0.0.1:4173/ru/product/lord-deodorant",
+    },
+    {
+      hreflang: "ro-MD",
+      href: "http://127.0.0.1:4173/ro/product/lord-deodorant",
     },
     {
       hreflang: "x-default",
@@ -81,6 +83,7 @@ test("article route exposes Article and Breadcrumb metadata", async ({
   page,
 }) => {
   await page.goto("/blog/what-to-eat-after-coronavirus");
+  await expect(page).toHaveTitle(/Чем питаться после коронавируса/);
 
   const metadata = await page.evaluate(() => {
     const jsonLd = JSON.parse(

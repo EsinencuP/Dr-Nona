@@ -10,7 +10,8 @@ import { useLocale } from "../locales/LocaleProvider";
 import { normalizeCatalogSort } from "../product-sort";
 import { useSearchParams } from "../router";
 
-function productCountLabel(count: number) {
+function productCountLabel(count: number, locale: "ru" | "ro") {
+  if (locale === "ro") return `${count} ${count === 1 ? "produs" : "produse"}`;
   const lastTwo = count % 100;
   const last = count % 10;
   const word =
@@ -27,7 +28,30 @@ function productCountLabel(count: number) {
 export default function CatalogPage() {
   const [params, setParams] = useSearchParams();
   const { products, categories } = useProductData();
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
+  const copy = locale === "ro"
+    ? {
+        eyebrow: `Catalog · ${products.length} produse`,
+        title: "Catalog",
+        intro:
+          "Gama completă Dr. Nona Moldova, cu descrieri, compoziție și mod de utilizare.",
+        showFilters: "Căutare și sortare",
+        hideFilters: "Ascunde căutarea și sortarea",
+        clearSearch: "Șterge căutarea",
+        sorting: "Sortare",
+        categoryFilter: "Filtru după categorie",
+      }
+    : {
+        eyebrow: `Каталог · ${products.length} товаров`,
+        title: "Каталог",
+        intro:
+          "Полный ассортимент Dr. Nona Moldova с описаниями, составом и способом применения.",
+        showFilters: "Поиск и сортировка",
+        hideFilters: "Скрыть поиск и сортировку",
+        clearSearch: "Очистить поиск",
+        sorting: "Сортировка",
+        categoryFilter: "Фильтр по категории",
+      };
   const query = params.get("q") ?? "";
   const category = params.get("category") ?? "all";
   const sort = normalizeCatalogSort(params.get("sort"));
@@ -66,10 +90,10 @@ export default function CatalogPage() {
     <section className="catalog-page container">
       <div className="page-intro page-intro--catalog">
         <div>
-          <p className="eyebrow">Каталог · {products.length} товаров</p>
-          <h1>Каталог <em>Dr. Nona</em></h1>
+          <p className="eyebrow">{copy.eyebrow}</p>
+          <h1>{copy.title} <em>Dr. Nona</em></h1>
         </div>
-        <p>Полный ассортимент Dr. Nona Moldova с описаниями, составом и способом применения.</p>
+        <p>{copy.intro}</p>
       </div>
 
       <button
@@ -80,7 +104,7 @@ export default function CatalogPage() {
         onClick={() => setFiltersOpen((value) => !value)}
       >
         <List aria-hidden="true" />
-        <span>{filtersOpen ? "Скрыть поиск и сортировку" : "Поиск и сортировка"}</span>
+        <span>{filtersOpen ? copy.hideFilters : copy.showFilters}</span>
         <CaretDown aria-hidden="true" />
       </button>
 
@@ -104,7 +128,7 @@ export default function CatalogPage() {
             <button
               type="button"
               onClick={() => update("q", "")}
-              aria-label="Очистить поиск"
+              aria-label={copy.clearSearch}
             >
               <X aria-hidden="true" />
             </button>
@@ -123,7 +147,7 @@ export default function CatalogPage() {
           <CaretDown aria-hidden="true" />
         </label>
         <label className="select-field">
-          <span className="sr-only">Сортировка</span>
+          <span className="sr-only">{copy.sorting}</span>
           <select
             name="sort"
             value={sort}
@@ -138,14 +162,14 @@ export default function CatalogPage() {
         </label>
       </div>
 
-      <div className="catalog-categories" aria-label="Фильтр по категории">
+      <div className="catalog-categories" aria-label={copy.categoryFilter}>
         <button
           className={category === "all" ? "is-active" : ""}
           type="button"
           aria-pressed={category === "all"}
           onClick={() => update("category", "all")}
         >
-          <span>Все товары</span><small>{products.length}</small>
+          <span>{t.allProducts}</span><small>{products.length}</small>
         </button>
         {categories.map((item) => (
           <button
@@ -165,7 +189,7 @@ export default function CatalogPage() {
         aria-busy={query !== deferredQuery}
         aria-live="polite"
       >
-        <span>{productCountLabel(result.length)}</span>
+        <span>{productCountLabel(result.length, locale)}</span>
         {(query || category !== "all" || sort !== "popular") && (
           <button type="button" onClick={() => setParams({})}>{t.reset}</button>
         )}

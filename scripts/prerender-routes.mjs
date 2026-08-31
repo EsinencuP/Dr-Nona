@@ -24,7 +24,7 @@ for (const route of manifest.routes) {
   $("[data-route-seo]").remove();
   $("head").append(renderSeoHead(route, siteOrigin));
   $("#root").html(renderPrerenderedContent(route, siteOrigin));
-  $("html").attr("lang", "ru");
+  $("html").attr("lang", route.locale === "ro" ? "ro" : "ru");
   $("html").attr("data-site-origin", siteOrigin);
 
   const destination = outputPath(route.path);
