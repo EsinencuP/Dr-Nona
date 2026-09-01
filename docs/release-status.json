@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "asOf": "2026-09-01",
-  "commit": "678eac7",
+  "commit": "ada4aa0e9c5e",
   "branch": "main",
   "status": "release-blocked",
   "label": "Technical QA passes; production approval is blocked",

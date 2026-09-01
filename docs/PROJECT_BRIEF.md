@@ -2,7 +2,7 @@
 
 Dr. Nona Moldova is an informational electronic catalogue for a mature Moldova audience. It explains Halo Complex™, presents approved products and helps a visitor send a contextual consultation or order request.
 
-Last verified: 2026-07-31. This document describes the stable product contract; current counts and blockers live in `PROJECT_STATUS.md` and `RELEASE_STATUS.md`.
+Last verified: 2026-09-01. This document describes the stable product contract; current counts and blockers live in `PROJECT_STATUS.md` and `RELEASE_STATUS.md`.
 
 ## Product goal
 
@@ -39,7 +39,7 @@ The official site supplies the factual page and content baseline. Moldova pages 
 
 ## Catalogue contract
 
-The catalogue supports search, five-category filtering and sorting by popularity fallback, source freshness, A to Z and Z to A. Every product surface uses the same shared image. The current owner-supplied archive covers 42 products; unmatched products retain the neutral Dr. Nona placeholder.
+The catalogue supports search, five-category filtering and sorting by popularity fallback, source freshness, A to Z and Z to A. Every product surface uses the same shared image. All 50 published products have a distinct matched owner-supplied asset; no catalogue card uses the neutral placeholder.
 
 Only `published` and `ready` records appear publicly. A product detail hides fields that are explicitly not applicable and excludes records with missing required content.
 
@@ -51,7 +51,7 @@ The form supports an order request and an online/offline consultation preference
 
 ## Language and market
 
-The current interface is Russian only. A Romanian version may ship only as complete `/ro/...` routes with localized UI, content, metadata, alt text, errors and accessibility labels.
+Russian and Romanian route pairs are implemented for the catalogue, all 50 product pages, company chapters and Halo Complex. Product names remain in English. Blog and News retain their original-language canonical routes; imported Romanian descriptive product fields remain quarantined until editorial and legal approval.
 
 Moldova branch contacts are primary. Foreign certificates do not represent Moldova approval. Legal entity, consent wording, retention and claim approvals remain external release decisions.
 
@@ -71,5 +71,5 @@ Moldova branch contacts are primary. Foreign certificates do not represent Moldo
 - Search, filters, routes, selection and form states work with keyboard and touch
 - No published product contains required-field gaps
 - No Telegram success appears before provider confirmation
-- Russian pages remain linguistically and semantically consistent
+- Russian and Romanian routes remain linguistically and semantically consistent within the approved localized scope
 - Technical gates pass without weakening the release blockers

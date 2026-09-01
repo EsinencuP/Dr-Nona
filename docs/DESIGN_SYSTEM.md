@@ -2,7 +2,7 @@
 
 The visual system combines a light mineral palette, editorial typography and catalogue density. It must feel premium and trustworthy without sacrificing information per viewport.
 
-Last verified: 2026-07-31 against the tokens and component styles in `src/styles/`. This document is the only canonical design specification.
+Last verified: 2026-09-01 against the tokens and component styles in `src/styles/`. This document is the only canonical design specification.
 
 ## Visual goals
 
@@ -58,7 +58,7 @@ Product save controls stay at the bottom action area above product media stackin
 
 ## Product imagery
 
-Use only owner-approved product media. One `image` field supplies catalogue cards, selection, home merchandising, related products, SEO and product detail; there is no separate premium/detail image. Forty-two reviewed archive images are active, and the neutral placeholder remains only for the eight products absent from the archive. `catalogScale` may adjust compact presentation without changing the source asset.
+Use only owner-approved product media. One `image` field supplies catalogue cards, selection, home merchandising, related products, SEO and product detail; there is no separate premium/detail image. All 50 published products have distinct matched assets and no product uses the neutral placeholder. `catalogScale` may adjust compact presentation without changing the source asset.
 
 Do not retain raw exports, duplicate aliases or unused variants in `public/`. Never use another product as a fallback for a missing match.
 

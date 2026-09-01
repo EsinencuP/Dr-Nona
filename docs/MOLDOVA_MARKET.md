@@ -2,7 +2,7 @@
 
 The public contact and certificate surfaces must describe Moldova accurately. Foreign data may provide context but cannot imply local approval.
 
-Last verified: 2026-07-31 against `src/data/market.json`.
+Last verified: 2026-09-01 against `src/data/market.json` and `npm run market:validate`.
 
 ## Primary contact
 

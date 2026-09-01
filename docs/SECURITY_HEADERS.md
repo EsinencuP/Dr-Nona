@@ -2,7 +2,7 @@
 
 `vercel.json` is the version-controlled deployment source. Shared scripts apply and verify the same policy in build, preview and runtime checks.
 
-Last verified: 2026-08-30 against `vercel.json` and `scripts/security-headers-lib.mjs`.
+Last verified: 2026-09-01 against `vercel.json`, `scripts/security-headers-lib.mjs` and the enforced runtime CSP check.
 
 ## Required headers
 

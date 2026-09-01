@@ -2,7 +2,7 @@
 
 The application uses route modules and feature boundaries so each page can load and test independently. `src/App.tsx` remains a small composition root.
 
-Last verified: 2026-08-30 against base commit `f3d8401b2fbd71a206a643b148e54b6f5d2f68a5` and the current worktree.
+Last verified: 2026-09-01 against base commit `ada4aa0e9c5e` and the current worktree.
 
 ## Runtime boundaries
 

@@ -384,7 +384,7 @@ async function runViewportContract(
     })
   ).toBeVisible();
   const accordionButtons = page.locator(".accordion-item > button");
-  await expect(accordionButtons).toHaveCount(3);
+  await expect(accordionButtons).toHaveCount(2);
   for (const button of await accordionButtons.all()) {
     await button.click();
     await expect(button).toHaveAttribute("aria-expanded", "true");

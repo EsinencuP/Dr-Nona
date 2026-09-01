@@ -29,7 +29,7 @@ test("restricted storage does not break startup or session selection", async ({
   ).toBeVisible();
 
   const firstCard = page.locator(".product-card").first();
-  const productName = await firstCard.getByRole("heading", { level: 3 })
+  const productName = await firstCard.getByRole("heading", { level: 2 })
     .innerText();
   await firstCard.getByRole("button", { name: "В подборку" }).click();
   await expect(
@@ -51,4 +51,3 @@ test("restricted storage does not break startup or session selection", async ({
     .toBeGreaterThan(0);
   expect(pageErrors).toEqual([]);
 });
-

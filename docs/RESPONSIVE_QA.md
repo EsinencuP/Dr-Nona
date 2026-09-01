@@ -2,7 +2,7 @@
 
 Responsive QA combines geometry assertions, accessibility checks and seven committed catalogue baselines. Historical manual screenshot packages are not part of the repository.
 
-Last verified: 2026-07-31 against `tests/e2e/responsive-matrix.spec.ts` and Playwright configuration.
+Last verified: 2026-09-01 against `tests/e2e/responsive-matrix.spec.ts`, the deep UI/UX audit and Playwright configuration.
 
 ## Viewport matrix
 

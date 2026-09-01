@@ -2,15 +2,15 @@
 
 The application is a functional local QA candidate. Its technical gates pass, but production release remains blocked.
 
-Last verified: 2026-08-30 against base commit `678eac7` and the current worktree.
+Last verified: 2026-09-01 against base commit `ada4aa0e9c5e` and the current cleanup and QA worktree.
 
 ## Status identity
 
 | Field | Current value |
 |---|---|
 | Branch | `main` |
-| Base commit | `678eac7` |
-| Working tree | Precision-audit remediation worktree; no commit or push performed |
+| Base commit | `ada4aa0e9c5e` |
+| Working tree | Cleanup, documentation and QA synchronization worktree; no commit or push performed |
 | Environment | Windows, Node 22.23.1, npm 10.9.8, Chromium desktop/mobile |
 | Release verdict | `release-blocked` |
 | UI language | Complete RU/RO route pairs for catalogue, products, company chapters and Halo Complex; editorial remains in its original language |
@@ -60,13 +60,13 @@ Use blocker IDs in [the release status](RELEASE_STATUS.md). The current blockers
 | Command | Result | Date | Evidence |
 |---|---|---|---|
 | `npm ci` | PASS | 2026-07-31 | Clean reinstall: 287 packages, 0 vulnerabilities |
-| `npm run toolchain:validate` | PASS | 2026-07-31 | Node/npm and dependency contract output |
-| `npm run repository:validate` | PASS | 2026-08-30 | Current source paths and documentation links verified |
-| `npm run typecheck` | PASS | 2026-08-30 | TypeScript project references |
-| `npm run lint` | PASS | 2026-08-30 | ESLint with zero warnings |
+| `npm run toolchain:validate` | PASS | 2026-09-01 | Node/npm and dependency contract output |
+| `npm run repository:validate` | PASS | 2026-09-01 | 656 source paths and documentation links verified before final cleanup |
+| `npm run typecheck` | PASS | 2026-09-01 | TypeScript project references |
+| `npm run lint` | PASS | 2026-09-01 | ESLint with zero warnings |
 | `npm run test` | PASS | 2026-09-01 | 22 files, 165 tests |
-| `npm run build` | PASS | 2026-08-30 | 301 prerendered routes, 299 sitemap URLs |
-| `npm run security:runtime` | PASS | 2026-08-30 | 5 routes under enforced CSP, 0 violations |
-| `npm run performance:runtime` | PASS | 2026-07-31 | Home, contact and catalogue within runtime budget |
-| `npm run test:e2e` | PASS | 2026-08-30 | 133 passed, 17 skipped; RU/RO, offline and two-tab regressions included |
-| `npm run release:check` | EXPECTED BLOCKED | 2026-08-30 | 8 open P0/P1 blockers |
+| `npm run build` | PASS | 2026-09-01 | 315 prerendered routes, 311 sitemap URLs |
+| `npm run security:runtime` | PASS | 2026-09-01 | 5 routes under enforced CSP, 0 violations |
+| `npm run performance:runtime` | PASS | 2026-09-01 | Home, contact and catalogue within runtime budget |
+| `npm run test:e2e` | PASS | 2026-09-01 | 277 passed, 17 intentionally skipped across 294 desktop/mobile scenarios |
+| `npm run release:check` | EXPECTED BLOCKED | 2026-09-01 | 8 open P0/P1 blockers |

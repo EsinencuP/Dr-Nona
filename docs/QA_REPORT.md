@@ -2,7 +2,7 @@
 
 This report indexes the current automated evidence only. It does not preserve historical screenshots or cumulative implementation logs.
 
-Last verified: 2026-08-30 against base commit `678eac7` and the precision-audit remediation worktree.
+Last verified: 2026-09-01 against base commit `ada4aa0e9c5e` and the current cleanup and QA worktree.
 
 ## Scope
 
@@ -11,9 +11,9 @@ The run covers repository hygiene, documentation consistency, architecture, cont
 ## Verified identity
 
 <!-- build-identity:start -->
-- **Status date**: 2026-08-30
-- **Base commit**: `678eac7`
-- **Repository state**: precision-audit remediation with enforced CSP and application rate guard
+- **Status date**: 2026-09-01
+- **Base commit**: `ada4aa0e9c5e`
+- **Repository state**: cleanup and QA synchronization worktree; no commit or push performed
 - **Environment**: Windows, Node 22.23.1, npm 10.9.8, Chromium desktop/mobile
 - **Products**: 50 source, 50 published, 0 drafts
 - **Official content records**: 137
@@ -27,7 +27,7 @@ The run covers repository hygiene, documentation consistency, architecture, cont
 | `npm ci` | PASS | Clean reinstall: 287 packages, 0 vulnerabilities |
 | `npm run toolchain:validate` | PASS | Supported Node/npm and dependency placement |
 | `npm run repository:validate` | PASS | Current source paths, documentation links and repository hygiene |
-| `npm run architecture:validate` | PASS | 17-line composition root and 17 lazy page modules |
+| `npm run architecture:validate` | PASS | 17-line composition root, one eager LCP route and 16 lazy page modules |
 | `npm run typography:validate` | PASS | 14 px minimum and verified contrast pairs |
 | `npm run market:validate` | PASS | Two Moldova phones; foreign certificates hidden |
 | `npm run content:validate` | PASS | 50 records; all 50 published records complete |
@@ -36,10 +36,10 @@ The run covers repository hygiene, documentation consistency, architecture, cont
 | `npm run typecheck` | PASS | TypeScript project references |
 | `npm run lint` | PASS | ESLint with zero warnings |
 | `npm run test` | PASS | 22 files, 165 tests |
-| `npm run build` | PASS | 301 prerendered routes and 299 canonical sitemap URLs; 150 Product JSON-LD records across legacy, RU and RO catalogue routes; RU/RO company and Halo Complex routes included |
+| `npm run build` | PASS | 315 prerendered routes and 311 canonical sitemap URLs; 150 Product and 114 Article JSON-LD records |
 | `npm run security:runtime` | PASS | 5 rendered routes, enforced CSP, 0 violations |
-| `npm run performance:runtime` | PASS | Home, contact and catalogue within runtime budget |
-| `npm run test:e2e` | PASS | 133 passed, 17 skipped across desktop/mobile, including RU/RO company and Halo Complex routes, 320–1920 px reflow, offline submission and two-tab selection synchronization |
+| `npm run performance:runtime` | PASS | Home 41.6/76.2/387.9 ms; contact 45.9/61.2/277.2 ms; catalogue 47.9/92.4/318.0 ms parse/script/task |
+| `npm run test:e2e` | PASS | 277 passed, 17 intentionally skipped across 294 desktop/mobile scenarios; claims-gate, RU/RO, accessibility, 320–1920 px reflow and visual baselines included |
 | `npm run release:check` | EXPECTED BLOCKED | 8 open P0/P1 blockers |
 
 ## Current known issues

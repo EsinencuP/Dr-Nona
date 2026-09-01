@@ -4,6 +4,10 @@ coverage/
 playwright-report/
 test-results/
 artifacts/
+exports/
+
+# Keep reusable QA context files in .agents/, but ignore disposable agent workspaces.
+.agents/*/
 
 # Local image-normalization workspace and its review exports.
 tools/catalog-image-agent/

@@ -2,7 +2,7 @@
 
 The `quality-gates` workflow reproduces the supported toolchain, validates the repository, builds static output and runs browser checks before artifacts are retained for seven days.
 
-Last verified: 2026-07-31 against `.github/workflows/ci.yml` and `package.json`.
+Last verified: 2026-09-01 against `.github/workflows/ci.yml` and `package.json`.
 
 ## Supported runtime
 

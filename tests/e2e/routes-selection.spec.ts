@@ -11,7 +11,7 @@ test("valid and invalid product deep links resolve correctly", async ({ page }) 
   await expect(page.getByText("324001", { exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: /Полное описание/ })).toBeVisible();
   await expect(page.getByRole("button", { name: /Состав/ })).toBeVisible();
-  await expect(page.getByRole("button", { name: /Способ применения/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Способ применения/ })).toHaveCount(0);
   const relatedImages = page.locator(".related-grid .product-card__image");
   await expect(relatedImages).toHaveCount(4);
   for (const image of await relatedImages.all()) {
@@ -31,7 +31,7 @@ test("valid and invalid product deep links resolve correctly", async ({ page }) 
   await expect(page.getByText("309001", { exact: true })).toBeVisible();
 });
 
-test("every catalog category exposes sourced product details", async ({ page }) => {
+test("every catalog category exposes product identity and source", async ({ page }) => {
   await page.goto("/products");
   const catalogLinks = page.locator(".catalog-grid .product-card :is(h2, h3) a");
   await expect(catalogLinks).toHaveCount(50);
@@ -45,9 +45,10 @@ test("every catalog category exposes sourced product details", async ({ page }) 
 
   for (const href of categorySamples) {
     await page.goto(href);
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     await expect(page.locator(".product-purpose")).toBeVisible();
-    await expect(page.locator(".product-description")).toBeVisible();
-    await expect(page.locator(".accordion-item")).not.toHaveCount(0);
+    await expect(page.getByRole("link", { name: "Источник: drnona.md" })).toBeVisible();
+    await expect(page.getByTestId("claims-review-notice")).toHaveCount(0);
   }
 });
 
@@ -76,7 +77,7 @@ test("selection persists after refresh and removal updates storage", async ({
     timeout: 15_000,
   });
   const firstCard = page.locator(".product-card").first();
-  const productName = await firstCard.locator("h3").innerText();
+  const productName = await firstCard.getByRole("heading", { level: 2 }).innerText();
   await firstCard.getByRole("button", { name: "В подборку" }).click();
   await expect(
     page.getByRole("link", { name: "Подборка: 1" })

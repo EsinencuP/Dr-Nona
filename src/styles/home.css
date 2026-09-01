@@ -410,6 +410,11 @@
   font-size: var(--type-body-sm);
 }
 
+.home-promo-banner__content .button {
+  padding-inline: 18px;
+  white-space: nowrap;
+}
+
 .home-lord-banner > article {
   background: var(--lord-950);
   color: var(--lord-paper);

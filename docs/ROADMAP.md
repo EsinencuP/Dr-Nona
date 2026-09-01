@@ -2,7 +2,7 @@
 
 This roadmap contains unfinished work only. Completed implementation history stays in Git and active product choices stay in `DECISIONS.md`.
 
-Last verified: 2026-08-30 against `docs/release-status.json` and the current worktree.
+Last verified: 2026-09-01 against `docs/release-status.json` and the current worktree.
 
 ## External approval blockers
 

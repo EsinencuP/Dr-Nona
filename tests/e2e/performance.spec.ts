@@ -58,7 +58,9 @@ test("catalogue loads its own route module and product data only", async ({
   );
 
   expect(requests.some((url) => url.includes("/pages/CatalogPage"))).toBe(true);
-  expect(requests.some((url) => url.includes("products.json"))).toBe(true);
+  expect(requests.some((url) => url.includes("products-public.json"))).toBe(
+    true
+  );
   expect(requests.some((url) => url.includes("official-pages.json"))).toBe(
     false
   );

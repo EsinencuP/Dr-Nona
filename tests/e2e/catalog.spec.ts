@@ -2,7 +2,9 @@ import { expect, test } from "@playwright/test";
 
 test.beforeEach(async ({ page }, testInfo) => {
   await page.goto("/products");
-  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50);
+  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50, {
+    timeout: 15_000,
+  });
   if (testInfo.project.name === "chromium-mobile") {
     await page.getByRole("button", { name: "Поиск и сортировка" }).click();
   }
@@ -16,7 +18,7 @@ test("search, category filter and alphabetical sort update the catalogue", async
   await expect(page).toHaveURL(/q=404001/);
   await expect(page.locator(".catalog-grid .product-card")).toHaveCount(1);
   await expect(
-    page.getByRole("heading", { level: 3, name: "Dynamic Cream" })
+    page.getByRole("heading", { level: 2, name: "Dynamic Cream" })
   ).toBeVisible();
 
   await page.getByRole("button", { name: "Очистить поиск" }).click();

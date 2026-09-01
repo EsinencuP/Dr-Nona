@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("sourced product copy is visible without internal review language", async ({
+test("pending product copy is replaced without internal review language", async ({
   page,
 }) => {
   await page.goto("/product/solaris-body-lotion");
@@ -8,11 +8,10 @@ test("sourced product copy is visible without internal review language", async (
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Solaris");
   await expect(page.getByTestId("claims-review-notice")).toHaveCount(0);
   await expect(page.locator(".product-purpose")).toHaveText(
-    "регенерирующий крем для тела."
+    "Крем из ассортимента Dr. Nona для ежедневного ухода за кожей."
   );
-  await expect(page.locator(".product-description")).toContainText(
-    /бестселлер компании/i
-  );
+  await expect(page.locator(".product-description")).toHaveCount(0);
+  await expect(page.getByText(/бестселлер компании/i)).toHaveCount(0);
 });
 
 test("supplement product shows a neutral adjacent disclaimer", async ({
@@ -25,9 +24,11 @@ test("supplement product shows a neutral adjacent disclaimer", async ({
   await expect(disclaimer).toContainText("Не является лекарственным средством");
   await expect(disclaimer).not.toContainText("Молдовы");
   await expect(disclaimer).not.toContainText("подтверждения");
-  await expect(page.locator(".product-description")).toContainText(
-    /чай gonseen/i
+  await expect(page.locator(".product-purpose")).toHaveText(
+    "Напиток из ассортимента Dr. Nona для повседневного рациона."
   );
+  await expect(page.locator(".product-description")).toHaveCount(0);
+  await expect(page.getByText(/чай gonseen/i)).toHaveCount(0);
 });
 
 test("Halo formula uses neutral copy without an internal review state", async ({

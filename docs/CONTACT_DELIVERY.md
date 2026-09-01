@@ -2,7 +2,7 @@
 
 The website sends validated order and consultation applications to one approved Telegram chat. Email is not an automated delivery provider.
 
-Last verified: 2026-08-30 against `api/applications.ts`, `server/applications/` and `src/features/contact/`.
+Last verified: 2026-09-01 against `api/applications.ts`, `server/applications/`, `src/features/contact/` and the current browser contract tests.
 
 ## Request flow
 
