@@ -190,6 +190,7 @@ export function ApplicationForm({
     if (status === "submitting" || accepted) return;
     const form = new FormData(event.currentTarget);
     const common = {
+      locale: locale === "ro" ? "ro-MD" : "ru-MD",
       firstName: String(form.get("firstName") ?? ""),
       lastName: String(form.get("lastName") ?? ""),
       phone: String(form.get("phone") ?? ""),

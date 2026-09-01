@@ -13,6 +13,7 @@ const trimmedText = (label: string, max: number) =>
     .max(max, `${label}: слишком длинное значение`);
 
 const baseApplicationSchema = z.object({
+  locale: z.enum(["ru-MD", "ro-MD"]),
   firstName: trimmedText("Имя", NAME_MAX),
   lastName: trimmedText("Фамилия", NAME_MAX),
   phone: z

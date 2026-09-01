@@ -13,10 +13,7 @@ import {
   getProductCopy,
   getProductDisclaimer,
 } from "../claims";
-import {
-  isProductContentFieldApplicable,
-  useProductData,
-} from "../data";
+import { useProductData } from "../data";
 import { useSelection } from "../features/selection/SelectionContext";
 import { useLocale } from "../locales/LocaleProvider";
 import { Link, useParams } from "../router";
@@ -56,31 +53,33 @@ export default function ProductPage() {
   const productShortDescription = getProductCopy(product, "shortDescription");
   const productLongDescription = getProductCopy(product, "longDescription");
   const productSummary = splitText(productLongDescription, 330)[0];
-  const productDisclaimer = getProductDisclaimer(product);
+  const productDisclaimer = getProductDisclaimer(product, locale);
+  const productIngredients = getProductCopy(product, "ingredients");
+  const productHowToUse = getProductCopy(product, "howToUse");
   const productSections: Array<{
     key: "description" | "ingredients" | "use";
     label: string;
     content: string;
   }> = [];
-  if (isProductContentFieldApplicable(product, "longDescription")) {
+  if (productLongDescription) {
     productSections.push({
       key: "description",
       label: copy.fullDescription,
       content: productLongDescription,
     });
   }
-  if (isProductContentFieldApplicable(product, "ingredients")) {
+  if (productIngredients) {
     productSections.push({
       key: "ingredients",
       label: t.ingredients,
-      content: product.ingredients,
+      content: productIngredients,
     });
   }
-  if (isProductContentFieldApplicable(product, "howToUse")) {
+  if (productHowToUse) {
     productSections.push({
       key: "use",
       label: t.use,
-      content: product.howToUse,
+      content: productHowToUse,
     });
   }
 
@@ -97,7 +96,7 @@ export default function ProductPage() {
         <div className="product-detail__grid">
           <div className="product-stage">
             <div className="product-stage__rings" aria-hidden="true" />
-            <span className="product-stage__index">DN · {product.sku || "—"}</span>
+            <span className="product-stage__index">DN · {product.sku || "NV"}</span>
             <ProductImage
               src={product.image}
               alt={product.imageAlt || product.officialName}
@@ -152,7 +151,7 @@ export default function ProductPage() {
             )}
             <dl className="product-facts">
               <div><dt>{t.category}</dt><dd>{product.category}</dd></div>
-              <div><dt>{t.sku}</dt><dd>{product.sku || "—"}</dd></div>
+              <div><dt>{t.sku}</dt><dd>{product.sku || "NV"}</dd></div>
             </dl>
           </div>
         </div>

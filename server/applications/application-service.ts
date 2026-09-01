@@ -36,7 +36,7 @@ export async function processApplication(
     ...phone,
     city: input.city,
     source: "website" as const,
-    locale: "ru-MD" as const,
+    locale: input.locale,
     submittedAt,
   };
   const record: ApplicationRecord =

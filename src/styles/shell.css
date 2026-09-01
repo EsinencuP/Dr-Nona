@@ -104,7 +104,7 @@
   gap: 9px;
   padding: 11px 17px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--ink);
   color: var(--white);
   box-shadow: 0 16px 40px rgba(20, 38, 45, 0.2);

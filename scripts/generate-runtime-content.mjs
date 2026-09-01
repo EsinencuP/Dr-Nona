@@ -7,6 +7,18 @@ const claims = JSON.parse(
   readFileSync("src/data/claims-registry.json", "utf8")
 );
 const products = JSON.parse(readFileSync("src/data/products.json", "utf8"));
+const romanianProducts = JSON.parse(
+  readFileSync("src/data/products-ro.json", "utf8")
+);
+const romanianReview = JSON.parse(
+  readFileSync("src/data/products-ro-review.json", "utf8")
+);
+const productCopyFields = [
+  "shortDescription",
+  "longDescription",
+  "ingredients",
+  "howToUse",
+];
 const homeProductSlugs = [
   "dynamic-hydrating-cream",
   "hand-and-nail-treatment",
@@ -29,6 +41,43 @@ for (const claim of claims) {
     blockedScopes.add(claim.scope);
   }
 }
+
+function fieldIsPublishable(contentId, field) {
+  return fieldPublishability[`product\u001f${contentId}\u001f${field}`] ?? true;
+}
+
+const publicProducts = products.map((product) => ({
+  ...product,
+  ...Object.fromEntries(
+    productCopyFields.map((field) => [
+      field,
+      fieldIsPublishable(product.slug, field) ? product[field] : null,
+    ])
+  ),
+}));
+
+const publicRomanianProducts = Object.fromEntries(
+  products.map((product) => {
+    const localized = romanianProducts[product.slug];
+    if (!localized) throw new Error(`Missing Romanian product record: ${product.slug}`);
+    const review = romanianReview.products[product.slug] ?? {};
+    return [
+      product.slug,
+      {
+        ...localized,
+        ...Object.fromEntries(
+          productCopyFields.map((field) => [
+            field,
+            review[field] === "approved" &&
+            fieldIsPublishable(`ro:${product.slug}`, field)
+              ? localized[field]
+              : null,
+          ])
+        ),
+      },
+    ];
+  })
+);
 
 function editorial(kind, limit) {
   return pages
@@ -70,15 +119,27 @@ const runtimeContent = {
   },
   home: {
     editorial: [...editorial("news", 2), ...editorial("blog", 1)],
-    products: homeProductSlugs.map((slug) => {
+    productSlugs: homeProductSlugs.map((slug) => {
       const product = products.find((candidate) => candidate.slug === slug);
       if (!product || product.publicationStatus !== "published") {
         throw new Error(`Missing published home product: ${slug}`);
       }
-      return product;
+      return slug;
     }),
   },
 };
+
+writeFileSync(
+  "src/data/products-public.json",
+  `${JSON.stringify(publicProducts, null, 2)}\n`,
+  "utf8"
+);
+
+writeFileSync(
+  "src/data/products-ro-public.json",
+  `${JSON.stringify(publicRomanianProducts, null, 2)}\n`,
+  "utf8"
+);
 
 writeFileSync(
   "src/data/runtime-content.json",
@@ -99,5 +160,5 @@ writeFileSync(
 );
 
 console.log(
-  `Runtime content: ${Object.keys(fieldPublishability).length} claim fields; ${runtimeContent.home.editorial.length} home editorial cards; ${runtimeContent.home.products.length} home products; ${products.filter((product) => product.publicationStatus === "published").length} selectable products.`
+  `Runtime content: ${Object.keys(fieldPublishability).length} claim fields; ${runtimeContent.home.editorial.length} home editorial cards; ${runtimeContent.home.productSlugs.length} home products; ${products.filter((product) => product.publicationStatus === "published").length} selectable products.`
 );

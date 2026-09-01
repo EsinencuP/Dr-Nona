@@ -12,6 +12,8 @@ import {
   useState,
 } from "react";
 import { reportClientError } from "./app/monitoring";
+import { localeSchema, safeLocalStorage } from "./app/storage";
+import { isLocaleRouteSupported, localePathFor } from "./locale-routing.mjs";
 
 type LocationState = {
   pathname: string;
@@ -43,7 +45,14 @@ const ParamsContext = createContext<Record<string, string>>({});
 function readLocation(): LocationState {
   const localizedPathname = window.location.pathname || "/";
   const localeMatch = localizedPathname.match(/^\/(ru|ro)(?=\/|$)/);
-  const locale = localeMatch?.[1] === "ro" ? "ro" : "ru";
+  const storedLocale = safeLocalStorage.get(
+    "drnona-locale",
+    localeSchema,
+    "ru"
+  );
+  const locale = localeMatch
+    ? localeMatch[1] === "ro" ? "ro" : "ru"
+    : storedLocale;
   const pathname = localeMatch
     ? localizedPathname.slice(localeMatch[0].length) || "/"
     : localizedPathname;
@@ -87,6 +96,24 @@ export function Router({ children }: { children: ReactNode }) {
     };
   }, []);
   useEffect(() => {
+    if (location.hasLocalePrefix && !isLocaleRouteSupported(location.pathname)) {
+      safeLocalStorage.set("drnona-locale", location.locale, localeSchema);
+      const next = `${location.pathname}${location.search}`;
+      window.history.replaceState({}, "", next);
+      notifyNavigation();
+      return;
+    }
+    if (
+      !location.hasLocalePrefix &&
+      location.locale === "ro" &&
+      isLocaleRouteSupported(location.pathname)
+    ) {
+      const next = `/ro${location.pathname === "/" ? "" : location.pathname}${location.search}`;
+      window.history.replaceState({}, "", next);
+      notifyNavigation();
+    }
+  }, [location.hasLocalePrefix, location.locale, location.pathname, location.search]);
+  useEffect(() => {
     if (isPathnameEncodingValid(location.pathname)) return;
     reportClientError(
       new URIError("Malformed percent-encoding in route pathname."),
@@ -101,15 +128,30 @@ export function useLocation() {
 }
 
 function localizeInternalPath(to: string, location: LocationState) {
+  const targetPathname = to.split(/[?#]/u, 1)[0] || "/";
   if (
     !to.startsWith("/") ||
     to.startsWith("//") ||
     /^\/(?:ru|ro)(?=\/|$)/.test(to) ||
-    !location.hasLocalePrefix
+    !isLocaleRouteSupported(targetPathname) ||
+    location.locale !== "ro" && !location.hasLocalePrefix
   ) {
     return to;
   }
   return `/${location.locale}${to === "/" ? "" : to}`;
+}
+
+export function useSetLocale() {
+  const location = useLocation();
+  return (locale: "ru" | "ro") => {
+    safeLocalStorage.set("drnona-locale", locale, localeSchema);
+    const destination = localePathFor(location.pathname, location.search, locale);
+    const current = `${window.location.pathname}${window.location.search}`;
+    if (current !== destination) {
+      window.history.pushState({}, "", destination);
+    }
+    notifyNavigation();
+  };
 }
 
 export function useNavigate() {

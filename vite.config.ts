@@ -155,7 +155,7 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes("official-pages.json")) return "official-content";
-          if (id.includes("products.json")) return "catalog-data";
+          if (/products(?:-ro)?-public\.json$/u.test(id)) return "catalog-data";
           if (id.includes("node_modules/react")) return "react-core";
           if (id.includes("@phosphor-icons")) return "icons";
         }

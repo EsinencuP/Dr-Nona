@@ -9,7 +9,9 @@ async function fillCommon(page: Page) {
 }
 
 test("consultation success uses mocked API and focuses status", async ({ page }) => {
+  let submittedLocale: string | undefined;
   await page.route("**/api/applications", async (route) => {
+    submittedLocale = route.request().postDataJSON().locale;
     await route.fulfill({
       status: 201,
       contentType: "application/json",
@@ -31,6 +33,41 @@ test("consultation success uses mocked API and focuses status", async ({ page })
   await page.getByRole("button", { name: "Отправить заявку" }).click();
   await expect(page.getByText(/Заявка №request-e2e отправлена/)).toBeVisible();
   await expect(page.getByRole("heading", { name: "Статус заявки" })).toBeFocused();
+  expect(submittedLocale).toBe("ru-MD");
+});
+
+test("Romanian contact form submits ro-MD through the same API contract", async ({ page }) => {
+  let submittedBody: Record<string, unknown> | undefined;
+  await page.route("**/api/applications", async (route) => {
+    submittedBody = route.request().postDataJSON() as Record<string, unknown>;
+    await route.fulfill({
+      status: 201,
+      contentType: "application/json",
+      body: JSON.stringify({
+        ok: true,
+        requestId: "request-ro",
+        delivery: { telegram: "sent" },
+      }),
+    });
+  });
+
+  await page.goto("/ro/contactus");
+  await page.getByLabel("Prenume").fill("Ana");
+  await page.getByLabel("Nume", { exact: true }).fill("Popescu");
+  await page.getByLabel("Telefon").fill("069 123 456");
+  await page.getByLabel("Oraș").fill("Chișinău");
+  await page.getByRole("checkbox").check();
+  await page.getByLabel("Data preferată").fill("2099-01-01");
+  await page.getByLabel("Ora preferată").fill("10:00");
+  await page.getByRole("button", { name: "Trimite solicitarea" }).click();
+
+  await expect(page.getByText(/Solicitarea nr\. request-ro a fost trimisă/u)).toBeVisible();
+  expect(submittedBody).toMatchObject({
+    locale: "ro-MD",
+    type: "consultation",
+    firstName: "Ana",
+    lastName: "Popescu",
+  });
 });
 
 test("order defaults from selection and Telegram delivery succeeds", async ({

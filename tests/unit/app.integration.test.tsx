@@ -41,7 +41,7 @@ describe("Dr. Nona application", () => {
     });
     expect(screen.getByText("1 товар")).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { level: 3, name: "Dynamic Cream" })
+      screen.getByRole("heading", { level: 2, name: "Dynamic Cream" })
     ).toBeInTheDocument();
   });
 

@@ -18,13 +18,13 @@ Last verified: 2026-08-30 against base commit `678eac7` and the current worktree
 | Published products | 50 |
 | Draft products | 0 |
 | Official content records | 137 |
-| Claims | 286 total: 0 approved, 286 pending, 0 rejected |
+| Claims | 399 total: 0 approved, 399 pending, 0 rejected |
 
 ## Implemented
 
 - Route-separated React catalogue, product, company, formula, editorial, service and legal pages
 - Search, category filtering and stable catalogue sorting
-- One shared product-image contract with 42 matched owner-supplied archive assets and eight explicit placeholders
+- One shared product-image contract with 50 matched product assets and no placeholders
 - Persistent non-commerce selection with product name, SKU and URL handoff
 - Server-validated order and consultation form with Telegram-only delivery
 - Five-attempt-per-minute application guard with anonymized client keys and bounded memory
@@ -64,7 +64,7 @@ Use blocker IDs in [the release status](RELEASE_STATUS.md). The current blockers
 | `npm run repository:validate` | PASS | 2026-08-30 | Current source paths and documentation links verified |
 | `npm run typecheck` | PASS | 2026-08-30 | TypeScript project references |
 | `npm run lint` | PASS | 2026-08-30 | ESLint with zero warnings |
-| `npm run test` | PASS | 2026-08-30 | 21 files, 147 tests |
+| `npm run test` | PASS | 2026-09-01 | 22 files, 165 tests |
 | `npm run build` | PASS | 2026-08-30 | 301 prerendered routes, 299 sitemap URLs |
 | `npm run security:runtime` | PASS | 2026-08-30 | 5 routes under enforced CSP, 0 violations |
 | `npm run performance:runtime` | PASS | 2026-07-31 | Home, contact and catalogue within runtime budget |

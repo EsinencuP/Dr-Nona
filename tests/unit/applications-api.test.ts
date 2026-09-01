@@ -13,6 +13,7 @@ const environment: ContactEnvironment = {
   telegramChatId: "test-chat",
 };
 const validBody = {
+  locale: "ru-MD",
   type: "order",
   firstName: "Ana",
   lastName: "Popescu",
@@ -50,6 +51,33 @@ function handler(
 }
 
 describe("POST /api/applications", () => {
+  test.each(["ru-MD", "ro-MD"] as const)(
+    "passes validated locale %s unchanged to the application service",
+    async (locale) => {
+      const process = vi.fn(async () => ({
+        requestId: "request-locale",
+        type: "order" as const,
+        delivery: { telegram: "sent" as const },
+        outcome: "success" as const,
+      }));
+      const response = await handler(
+        {
+          requestId: "request-locale",
+          type: "order",
+          delivery: { telegram: "sent" },
+          outcome: "success",
+        },
+        { process }
+      )(request({ ...validBody, locale }));
+
+      expect(response.status).toBe(201);
+      expect(process).toHaveBeenCalledWith(
+        expect.objectContaining({ locale }),
+        expect.any(Object)
+      );
+    }
+  );
+
   test.each([
     [
       201,

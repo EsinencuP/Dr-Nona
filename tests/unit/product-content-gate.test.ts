@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { loadProductData } from "../../src/data";
+import sourceProducts from "../../src/data/products.json";
 // @ts-expect-error The build validator is an intentionally framework-neutral ESM module.
 import { evaluateProductDataset } from "../../scripts/product-content-lib.mjs";
 
@@ -21,7 +22,7 @@ describe("product content publication gate", () => {
   });
 
   test("accepts all 50 current products, including explicitly unavailable fields", () => {
-    const report = evaluateProductDataset(allProducts);
+    const report = evaluateProductDataset(sourceProducts);
 
     expect(report.errors).toEqual([]);
     expect(report.published).toBe(50);
@@ -59,7 +60,7 @@ describe("product content publication gate", () => {
   });
 
   test("requires the primary catalogue description", () => {
-    const brokenDataset = allProducts.map((product) =>
+    const brokenDataset = sourceProducts.map((product) =>
       product.slug === "parfum-faya"
         ? { ...product, longDescription: null }
         : product
@@ -73,7 +74,7 @@ describe("product content publication gate", () => {
   });
 
   test("rejects an empty required description on a published product", () => {
-    const brokenDataset = allProducts.map((product) =>
+    const brokenDataset = sourceProducts.map((product) =>
       product.slug === "lord-deodorant"
         ? {
             ...product,
@@ -90,7 +91,7 @@ describe("product content publication gate", () => {
   });
 
   test("accepts null for a field unavailable in the source catalogue", () => {
-    const brokenDataset = allProducts.map((product) =>
+    const brokenDataset = sourceProducts.map((product) =>
       product.slug === "lord-deodorant"
         ? {
             ...product,
@@ -105,7 +106,7 @@ describe("product content publication gate", () => {
   });
 
   test("rejects an invalid approved release date", () => {
-    const brokenDataset = allProducts.map((product) =>
+    const brokenDataset = sourceProducts.map((product) =>
       product.slug === "lord-deodorant"
         ? {
             ...product,

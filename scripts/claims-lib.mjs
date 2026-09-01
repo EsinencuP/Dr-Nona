@@ -28,7 +28,33 @@ const DETECTORS = [
   },
 ];
 
+const ROMANIAN_DETECTORS = [
+  {
+    type: "medical",
+    reason: "diagnosis-treatment-or-disease-ro",
+    pattern: /(diagnostic|tratament|vindec|preven|boal|afecți|medicament|medical)/iu,
+  },
+  {
+    type: "therapeutic",
+    reason: "pain-healing-or-relief-ro",
+    pattern: /(durere|dureri|muscular|articular|cicatriz|dezinfect|inflama|mușcătur|mâncărim|fisur|leziun|regener|terapeutic)/iu,
+  },
+  {
+    type: "health",
+    reason: "health-or-body-function-ro",
+    pattern: /(sănătat|longevitat|vitalitat|echilibrul\s+(?:corpului|organismului)|imunit|antioxidant|îmbătrân|întiner)/iu,
+  },
+  {
+    type: "cosmetic",
+    reason: "cosmetic-efficacy-ro",
+    pattern: /(nivel\s+celular|restabilirea\s+pielii|protejează\s+organismul|eficiența\s+produsului)/iu,
+  },
+];
+
 const SENTENCE_SEGMENTER = new Intl.Segmenter("ru", {
+  granularity: "sentence",
+});
+const ROMANIAN_SENTENCE_SEGMENTER = new Intl.Segmenter("ro", {
   granularity: "sentence",
 });
 
@@ -36,15 +62,17 @@ function readJson(path) {
   return JSON.parse(readFileSync(path, "utf8"));
 }
 
-function sentences(value) {
+function sentences(value, locale = "ru") {
   if (!value?.trim()) return [];
-  return [...SENTENCE_SEGMENTER.segment(value)]
+  const segmenter = locale === "ro" ? ROMANIAN_SENTENCE_SEGMENTER : SENTENCE_SEGMENTER;
+  return [...segmenter.segment(value)]
     .map(({ segment }) => segment.trim())
     .filter(Boolean);
 }
 
-function classify(text) {
-  const matches = DETECTORS.filter(({ pattern }) => pattern.test(text));
+function classify(text, locale = "ru") {
+  const detectors = locale === "ro" ? ROMANIAN_DETECTORS : DETECTORS;
+  const matches = detectors.filter(({ pattern }) => pattern.test(text));
   if (!matches.length) return null;
   const priority = ["medical", "therapeutic", "health", "cosmetic"];
   const type =
@@ -70,8 +98,9 @@ function candidate({
   claimText,
   sourceUrl,
   sourceLastmod = "",
+  locale = "ru",
 }) {
-  const classification = classify(claimText);
+  const classification = classify(claimText, locale);
   if (!classification) return null;
   const claimFingerprint = fingerprint(scope, contentId, field, claimText);
   return {
@@ -97,8 +126,9 @@ function collectField({
   value,
   sourceUrl,
   sourceLastmod,
+  locale = "ru",
 }) {
-  for (const claimText of sentences(value)) {
+  for (const claimText of sentences(value, locale)) {
     const item = candidate({
       scope,
       contentId,
@@ -106,6 +136,7 @@ function collectField({
       claimText,
       sourceUrl,
       sourceLastmod,
+      locale,
     });
     if (item) output.push(item);
   }
@@ -113,12 +144,13 @@ function collectField({
 
 export function buildClaimCandidates() {
   const products = readJson("src/data/products.json");
+  const romanianProducts = readJson("src/data/products-ro.json");
   const pages = readJson("src/data/official-pages.json");
   const formula = readJson("src/data/formula-content.json");
   const output = [];
 
   for (const product of products) {
-    for (const field of ["shortDescription", "longDescription"]) {
+    for (const field of ["shortDescription", "longDescription", "ingredients", "howToUse"]) {
       collectField({
         output,
         scope: "product",
@@ -127,6 +159,19 @@ export function buildClaimCandidates() {
         value: product[field],
         sourceUrl: product.sourceUrl,
         sourceLastmod: product.sourceLastmod,
+      });
+    }
+    const romanian = romanianProducts[product.slug];
+    for (const field of ["shortDescription", "longDescription", "ingredients", "howToUse"]) {
+      collectField({
+        output,
+        scope: "product",
+        contentId: `ro:${product.slug}`,
+        field,
+        value: romanian?.[field],
+        sourceUrl: romanian?.sourceUrl ?? product.sourceUrl,
+        sourceLastmod: product.sourceLastmod,
+        locale: "ro",
       });
     }
   }

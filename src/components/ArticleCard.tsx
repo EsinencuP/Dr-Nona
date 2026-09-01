@@ -4,13 +4,15 @@ import { getOfficialPageDescription } from "../claims";
 import type { OfficialPage } from "../data";
 import { Link } from "../router";
 import { formatDate, getPageTitle } from "./ui";
+import { useLocale } from "../locales/LocaleProvider";
 
 function articlePath(page: OfficialPage) {
   return page.path;
 }
 
 export function ArticleCard({ page, feature = false }: { page: OfficialPage; feature?: boolean }) {
-  const kind = page.path.startsWith("/news") ? "Новости" : "Блог";
+  const { locale } = useLocale();
+  const kind = page.path.startsWith("/news") ? (locale === "ro" ? "Noutăți" : "Новости") : "Blog";
   const title = getPageTitle(page);
   const description = getOfficialPageDescription(page);
   return (
@@ -24,6 +26,7 @@ export function ArticleCard({ page, feature = false }: { page: OfficialPage; fea
             height="400"
             loading="lazy"
             decoding="async"
+            lang="ru"
           />
         ) : (
           <div className="article-card__fallback" aria-hidden="true"><span>DN</span></div>
@@ -31,11 +34,11 @@ export function ArticleCard({ page, feature = false }: { page: OfficialPage; fea
         <span className="article-card__kind">{kind}</span>
       </div>
       <div className="article-card__body">
-        <p><CalendarBlank aria-hidden="true" /> {formatDate(page.sourceLastmod)}</p>
-        <h3><Link to={articlePath(page)}>{title}</Link></h3>
-        {description && <span>{description}</span>}
+        <p><CalendarBlank aria-hidden="true" /> {formatDate(page.sourceLastmod, locale)}</p>
+        <h3 lang="ru"><Link to={articlePath(page)}>{title}</Link></h3>
+        {description && <span lang="ru">{description}</span>}
         <Link className="text-link" to={articlePath(page)}>
-          Читать <ArrowUpRight aria-hidden="true" />
+          {locale === "ro" ? "Citește" : "Читать"} <ArrowUpRight aria-hidden="true" />
         </Link>
       </div>
     </article>

@@ -26,7 +26,7 @@ test("search, category filter and alphabetical sort update the catalogue", async
   await expect(page.locator(".catalog-grid .product-card")).toHaveCount(12);
 
   await page.getByRole("combobox", { name: "Сортировка" }).selectOption("az");
-  const names = await page.locator(".product-card h3").allTextContents();
+  const names = await page.locator(".product-card :is(h2, h3)").allTextContents();
   expect(names).toEqual(
     [...names].sort((left, right) => left.localeCompare(right, "ru"))
   );

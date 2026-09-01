@@ -30,6 +30,7 @@ export type Product = {
   officialOrder: number;
   popularityRank: number;
   relatedSlugs: string[];
+  contentLocale?: Locale;
 };
 
 export type ProductContentField =
@@ -47,6 +48,7 @@ export type OfficialPage = {
   images: Array<{ src: string; alt: string }>;
   sourceUrl: string;
   sourceLastmod: string;
+  publicationStatus?: "published" | "tombstone";
   error?: string;
 };
 
@@ -101,8 +103,11 @@ const companyPages = companyPagesJson as Record<
 const productDataPromises = new Map<Locale, Promise<ProductData>>();
 const officialPageDataPromises = new Map<Locale, Promise<OfficialPageData>>();
 
-function createProductData(productsJson: Product[]): ProductData {
-  const allProducts = productsJson;
+function createProductData(productsJson: Product[], locale: Locale): ProductData {
+  const allProducts: Product[] = productsJson.map((product) => ({
+    ...product,
+    contentLocale: locale,
+  }));
   const products = allProducts.filter(
     (product) => product.publicationStatus === "published"
   );
@@ -162,11 +167,11 @@ export function loadProductData(locale: Locale = "ru") {
   const cached = productDataPromises.get(locale);
   if (cached) return cached;
   const promise = Promise.all([
-    import("./data/products.json"),
-    locale === "ro" ? import("./data/products-ro.json") : Promise.resolve(null),
+    import("./data/products-public.json"),
+    locale === "ro" ? import("./data/products-ro-public.json") : Promise.resolve(null),
   ]).then(([productsModule, romanianModule]) => {
     const products = productsModule.default as Product[];
-    if (!romanianModule) return createProductData(products);
+    if (!romanianModule) return createProductData(products, locale);
     const localizedCopy = romanianModule.default as Record<
       string,
       RomanianProductCopy
@@ -176,7 +181,8 @@ export function loadProductData(locale: Locale = "ru") {
         ...product,
         ...localizedCopy[product.slug],
         officialName: product.officialName,
-      }))
+      })),
+      locale
     );
   });
   productDataPromises.set(locale, promise);

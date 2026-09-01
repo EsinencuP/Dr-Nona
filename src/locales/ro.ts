@@ -16,7 +16,6 @@ export const ro: LocaleMessages = {
   sortAZ: "Alfabetic A—Z",
   sortZA: "Alfabetic Z—A",
   sortUpdated: "Actualizate recent",
-  productsFound: "produse",
   empty: "Nu am găsit produse pentru filtrele selectate.",
   reset: "Resetează filtrele",
   source: "Sursă",

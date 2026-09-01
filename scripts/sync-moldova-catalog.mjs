@@ -1,5 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import * as cheerio from "cheerio";
+import { parseRomanianProductHtml } from "./romanian-product-content-lib.mjs";
 
 const moldovaOrigin = "https://www.drnona.md";
 const internationalOrigin = "https://drnona.com";
@@ -315,20 +316,7 @@ function extractMoldovaProduct(html, locale = "ru", officialName) {
 }
 
 function extractRomanianProduct(html, officialName) {
-  const parsed = extractMoldovaProduct(html, "ro", officialName);
-  return {
-    ...parsed,
-    ingredients: segmentBetween(
-      parsed.longDescription,
-      ["Compoziție", "Ingrediente", "Conține", "Compoziția sa include"],
-      ["Mod de utilizare", "Utilizare", "Beneficii", "Recomandări", "Ideal pentru"]
-    ),
-    howToUse: segmentBetween(
-      parsed.longDescription,
-      ["Mod de utilizare", "Utilizare", "Cum se utilizează", "Utilizați"],
-      ["Compoziție", "Ingrediente", "Important", "Contraindicații"]
-    ),
-  };
+  return { title: officialName, ...parseRomanianProductHtml(html) };
 }
 
 function extractInternationalProduct(html) {

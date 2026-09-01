@@ -4,6 +4,7 @@ import type { ProviderResult } from "../../server/applications/application-types
 import type { ApplicationInput } from "../../shared/applications/application-schema";
 
 const input: ApplicationInput = {
+  locale: "ru-MD",
   type: "order",
   firstName: "Ana",
   lastName: "Popescu",
@@ -63,5 +64,19 @@ describe("application service", () => {
       string,
     ][];
     expect(telegramCalls[0][1]).toContain("request-fixed");
+  });
+
+  test.each([
+    ["ru-MD", "Язык: RU"],
+    ["ro-MD", "Язык: RO"],
+  ] as const)("preserves %s from validated input through Telegram", async (locale, label) => {
+    const deps = dependencies(() => Promise.resolve(sent()));
+    await processApplication({ ...input, locale }, deps);
+    const [record, message] = deps.sendTelegram.mock.calls[0] as unknown as [
+      { locale: string },
+      string,
+    ];
+    expect(record.locale).toBe(locale);
+    expect(message).toContain(label);
   });
 });

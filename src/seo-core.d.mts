@@ -51,7 +51,8 @@ export function normalizeSiteOrigin(value?: string): string;
 export function absoluteUrl(value: string, siteOrigin: string): string;
 export function getRouteMetadata(
   manifest: SeoManifest,
-  pathname: string
+  pathname: string,
+  preferredLocale?: "ru" | "ro"
 ): SeoRouteMetadata;
 export function buildJsonLd(
   metadata: SeoRouteMetadata,

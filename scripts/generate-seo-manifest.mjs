@@ -1,8 +1,12 @@
 import { readFileSync, writeFileSync } from "node:fs";
+import { isLocaleRouteSupported } from "../src/locale-routing.mjs";
 
 const products = JSON.parse(readFileSync("src/data/products.json", "utf8"));
 const romanianProducts = JSON.parse(
   readFileSync("src/data/products-ro.json", "utf8")
+);
+const romanianReview = JSON.parse(
+  readFileSync("src/data/products-ro-review.json", "utf8")
 );
 const companyPages = JSON.parse(
   readFileSync("src/data/company-pages.json", "utf8")
@@ -43,6 +47,30 @@ function truncate(value, max = 158) {
   const text = clean(value);
   if (text.length <= max) return text;
   return `${text.slice(0, max - 1).replace(/\s+\S*$/, "")}…`;
+}
+
+function isImportedEnglishBoilerplate(value) {
+  return /^Shop Dr\. Nona International premium skincare/iu.test(clean(value));
+}
+
+function fitMeta(value, min, max, suffix) {
+  let text = clean(value);
+  while (text.length < min) text = `${text}${suffix}`;
+  return truncate(text, max);
+}
+
+function stableRouteMarker(path) {
+  let hash = 2166136261;
+  for (const char of path) {
+    hash ^= char.codePointAt(0);
+    hash = Math.imul(hash, 16777619);
+  }
+  return Math.abs(hash >>> 0).toString(36).slice(0, 6);
+}
+
+function uniqueMeta(value, route, max) {
+  const marker = ` · ${stableRouteMarker(route.path)}`;
+  return `${truncate(value, max - marker.length)}${marker}`;
 }
 
 function pageTitle(page) {
@@ -289,7 +317,7 @@ for (const page of pages.filter((item) => !item.error)) {
     "official-page",
     page.path,
     "description"
-  )
+  ) && !isImportedEnglishBoilerplate(page.description)
     ? clean(page.description)
     : "";
   const description = truncate(
@@ -332,14 +360,6 @@ for (const page of pages.filter((item) => !item.error)) {
   });
 }
 
-const localizableCompanyPaths = new Set([
-  "/about",
-  "/about/company",
-  "/about/our-history",
-  "/about/founders",
-  "/about/science",
-  "/ourformula",
-]);
 const localizedStaticCopy = {
   ro: {
     "/": {
@@ -357,16 +377,26 @@ const localizedStaticCopy = {
       description:
         "Adresa, telefoanele și formularul de contact al filialei Dr. Nona din Chișinău.",
     },
+    "/certificates": {
+      title: "Certificate și documente Dr. Nona",
+      description: "Arhiva oficială a documentelor și certificatelor Dr. Nona relevante pentru publicul din Moldova.",
+    },
+    "/editorial": {
+      title: "Blog și noutăți Dr. Nona",
+      description: "Materiale, cunoștințe, evenimente și noutăți Dr. Nona într-o singură secțiune editorială.",
+    },
+    "/blog": {
+      title: "Blog Dr. Nona",
+      description: "Articole Dr. Nona despre îngrijirea de zi cu zi, stilul de viață și noutățile mărcii.",
+    },
+    "/news": {
+      title: "Noutăți Dr. Nona",
+      description: "Evenimente, anunțuri și noutăți internaționale despre marca Dr. Nona.",
+    },
   },
 };
-const localizableRoutes = [...routes.values()].filter(
-  (route) =>
-    route.path === "/" ||
-    route.path === "/products" ||
-    route.path === "/selection" ||
-    route.path === "/contactus" ||
-    route.kind === "product" ||
-    localizableCompanyPaths.has(route.path)
+const localizableRoutes = [...routes.values()].filter((route) =>
+  isLocaleRouteSupported(route.path)
 );
 
 for (const baseRoute of localizableRoutes) {
@@ -405,10 +435,15 @@ for (const baseRoute of localizableRoutes) {
       : baseRoute.path === "/products" && isRomanian
         ? "Catalogul produselor Dr. Nona"
         : localizedCompanyPage?.title ?? localizedStatic?.title ?? baseRoute.pageTitle;
+    const romanianDescriptionApproved = slug &&
+      romanianReview.products[slug]?.shortDescription === "approved" &&
+      fieldIsPublishable("product", `ro:${slug}`, "shortDescription");
     const description = localizedCompanyPage?.description ?? localizedStatic?.description ?? (
       isRomanian
         ? isProduct
-        ? truncate(`${product.officialName}. ${romanian.shortDescription}`)
+        ? romanianDescriptionApproved
+          ? truncate(`${product.officialName}. ${romanian.shortDescription}`)
+          : `Informații despre produsul ${product.officialName} din catalogul Dr. Nona Moldova.`
         : "Catalogul complet Dr. Nona Moldova, cu descrieri, compoziție și mod de utilizare."
         : baseRoute.description
     );
@@ -476,10 +511,36 @@ disambiguate(
   (route) =>
     `${route.pageTitle} · ${humanizePath(route.path)} — ${SITE_NAME}`
 );
+
+for (const route of routeList) {
+  route.title = fitMeta(
+    route.title,
+    30,
+    65,
+    route.locale === "ro" ? " · site oficial" : " · официальный сайт"
+  );
+  route.description = fitMeta(
+    route.description,
+    70,
+    160,
+    route.locale === "ro"
+      ? " Informații oficiale suplimentare sunt disponibile pe site-ul Dr. Nona Moldova."
+      : " Дополнительная официальная информация доступна на сайте Dr. Nona Moldova."
+  );
+  if (route.indexable && !route.alternates) {
+    route.alternates = {
+      "ru-MD": route.canonicalPath,
+      "x-default": route.canonicalPath,
+    };
+    route.locale = "ru";
+  }
+}
+disambiguate("title", (route) => uniqueMeta(route.title, route, 65));
 disambiguate(
   "description",
   (route) => truncate(`${humanizePath(route.path)}. ${route.description}`)
 );
+disambiguate("description", (route) => uniqueMeta(route.description, route, 160));
 
 const unsafePath = routeList.find(
   (route) =>

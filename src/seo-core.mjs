@@ -38,23 +38,40 @@ export function absoluteUrl(value, siteOrigin) {
   ).href;
 }
 
-export function getRouteMetadata(manifest, pathname) {
+export function getRouteMetadata(manifest, pathname, preferredLocale) {
   const route = manifest.routes.find((item) => item.path === pathname);
-  if (route) return route;
+  const romanian = preferredLocale === "ro" || pathname === "/ro" || pathname.startsWith("/ro/");
+  if (route) {
+    if (!(romanian && route.path === "/bad-request")) return route;
+    return {
+      ...route,
+      pageTitle: "Link deteriorat",
+      title: `Link deteriorat — ${SITE_NAME}`,
+      description: "Adresa conține o secvență incorectă de caractere. Reveniți la pagina principală Dr. Nona Moldova.",
+      locale: "ro",
+      breadcrumbs: [
+        { name: "Pagina principală", path: "/" },
+        { name: "Link deteriorat", path: pathname },
+      ],
+    };
+  }
   return {
     path: pathname,
     canonicalPath: pathname,
-    pageTitle: "Страница не найдена",
-    title: `Страница не найдена — ${SITE_NAME}`,
-    description: "Запрошенная страница не найдена. Перейдите на главную страницу или в каталог Dr. Nona Moldova.",
+    pageTitle: romanian ? "Pagină negăsită" : "Страница не найдена",
+    title: `${romanian ? "Pagină negăsită" : "Страница не найдена"} — ${SITE_NAME}`,
+    description: romanian
+      ? "Pagina solicitată nu a fost găsită. Reveniți la pagina principală sau la catalogul Dr. Nona Moldova."
+      : "Запрошенная страница не найдена. Перейдите на главную страницу или в каталог Dr. Nona Moldova.",
     robots: "noindex,follow",
     indexable: false,
     ogType: "website",
     image: "/brand/dr-nona-logo.png",
     kind: "not-found",
+    locale: romanian ? "ro" : "ru",
     breadcrumbs: [
-      { name: "Главная", path: "/" },
-      { name: "Страница не найдена", path: pathname },
+      { name: romanian ? "Pagina principală" : "Главная", path: "/" },
+      { name: romanian ? "Pagină negăsită" : "Страница не найдена", path: pathname },
     ],
     schema: null,
   };

@@ -21,7 +21,7 @@ Last verified: 2026-08-30 against base commit `678eac7` and the precision-audit 
 |---|---|---|
 | `P0-LOCALE` | Approved Romanian UI, product, editorial, metadata, alt and accessibility copy is not supplied. | Content/product approval and translation review. |
 | `P0-CONTACT` | The in-process guard is not globally shared between serverless instances; consent wording and retention are not approved. | Publish a Vercel WAF rule and approve privacy operations. |
-| `P0-LEGAL` | All 286 regulated statements are still pending. Source product copy remains visible and the release gate remains blocked. | Qualified Moldova reviewer decisions with evidence and dates. |
+| `P0-LEGAL` | All 399 detected regulated statements are still pending. Affected source fields are quarantined from public runtime output and the release gate remains blocked. | Qualified Moldova reviewer decisions with evidence and dates. |
 | `P1-MEDIA-RIGHTS` | The repository cannot prove the owner's production publication rights. | Legal/media provenance record. |
 | `P1-CONTENT` | No approved Moldova certificate package is present. | Certificate metadata and source documents. |
 | `P1-RANKING` | “Popularity” has no approved business dataset. | Product owner ranking or approved fallback. |
@@ -32,7 +32,7 @@ Last verified: 2026-08-30 against base commit `678eac7` and the precision-audit 
 
 - TypeScript: pass
 - ESLint: pass with zero warnings
-- Vitest: 21 files, 147 tests passed
+- Vitest: 22 files, 165 tests passed
 - Production build: pass; 301 prerendered routes and 299 sitemap URLs
 - Enforced CSP runtime: five representative routes, zero violations
 - Playwright: 133 passed, 17 intentionally skipped across desktop and mobile

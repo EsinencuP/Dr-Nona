@@ -198,7 +198,7 @@ export default function CatalogPage() {
       {result.length ? (
         <div className="catalog-grid">
           {result.map((product) => (
-            <ProductCard key={product.slug} product={product} />
+            <ProductCard key={product.slug} product={product} headingLevel={2} />
           ))}
         </div>
       ) : (

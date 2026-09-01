@@ -8,6 +8,7 @@ import {
 } from "./seo-core.mjs";
 
 let manifestPromise: Promise<SeoManifest> | undefined;
+let latestMetadataRequest = 0;
 
 function loadManifest() {
   manifestPromise ??= import("./data/seo-manifest.json").then(
@@ -46,13 +47,18 @@ function appendLink(
   document.head.append(node);
 }
 
-export async function getSeoMetadata(pathname: string): Promise<SeoRouteMetadata> {
-  return getRouteMetadata(await loadManifest(), pathname);
+export async function getSeoMetadata(
+  pathname: string,
+  locale?: "ru" | "ro"
+): Promise<SeoRouteMetadata> {
+  return getRouteMetadata(await loadManifest(), pathname, locale);
 }
 
-export async function applyRouteMetadata(pathname: string) {
+export async function applyRouteMetadata(pathname: string, locale?: "ru" | "ro") {
+  const request = ++latestMetadataRequest;
   const manifest = await loadManifest();
-  const metadata = getRouteMetadata(manifest, pathname);
+  if (request !== latestMetadataRequest) return;
+  const metadata = getRouteMetadata(manifest, pathname, locale);
   const origin = siteOrigin();
   const canonical = absoluteUrl(metadata.canonicalPath, origin);
   const image = absoluteUrl(metadata.image, origin);

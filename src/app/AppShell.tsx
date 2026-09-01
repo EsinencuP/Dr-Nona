@@ -9,7 +9,8 @@ import { useSelection } from "../features/selection/SelectionContext";
 import { useLocale } from "../locales/LocaleProvider";
 import { marketData } from "../market";
 import { applyRouteMetadata } from "../seo";
-import { Link, NavLink, useLocation } from "../router";
+import { localePathFor } from "../locale-routing.mjs";
+import { Link, NavLink, useLocation, useSetLocale } from "../router";
 
 function ScrollRestoration() {
   const location = useLocation();
@@ -24,8 +25,8 @@ function ScrollRestoration() {
     document
       .querySelector<HTMLMetaElement>('meta[name="theme-color"]')
       ?.setAttribute("content", "#f7fbfc");
-    void applyRouteMetadata(location.localizedPathname);
-  }, [location.localizedPathname, location.pathname]);
+    void applyRouteMetadata(location.localizedPathname, location.locale);
+  }, [location.locale, location.localizedPathname, location.pathname]);
   return null;
 }
 
@@ -59,6 +60,7 @@ function Header() {
   const { selected } = useSelection();
   const { locale, t } = useLocale();
   const location = useLocation();
+  const setLocale = useSetLocale();
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", open);
@@ -127,14 +129,21 @@ function Header() {
               const nextSearch = new URLSearchParams(location.search);
               nextSearch.delete("category");
               const query = nextSearch.toString();
-              const suffix = location.pathname === "/" ? "" : location.pathname;
-              const path = `/${item}${suffix}${query ? `?${query}` : ""}`;
+              const path = localePathFor(
+                location.pathname,
+                query ? `?${query}` : "",
+                item
+              );
               return (
                 <Link
                   key={item}
                   to={path}
                   lang={item}
                   aria-current={locale === item ? "true" : undefined}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    setLocale(item);
+                  }}
                 >
                   {item.toUpperCase()}
                 </Link>

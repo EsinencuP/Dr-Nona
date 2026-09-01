@@ -6,6 +6,7 @@ import {
 
 const allowed = new Set(["lord-deodorant"]);
 const base = {
+  locale: "ru-MD",
   firstName: " Ana-Maria ",
   lastName: "O'Connor",
   phone: "+373 (69) 123-456",
@@ -15,6 +16,27 @@ const base = {
 };
 
 describe("application schema", () => {
+  test.each(["ru-MD", "ro-MD"] as const)(
+    "accepts the supported application locale %s",
+    (locale) => {
+      const result = validateApplicationInput(
+        { ...base, locale, type: "order", productSlugs: ["lord-deodorant"] },
+        { allowedProductSlugs: allowed }
+      );
+      expect(result.success).toBe(true);
+      if (result.success) expect(result.data.locale).toBe(locale);
+    }
+  );
+
+  test("rejects a missing or unsupported locale", () => {
+    for (const locale of [undefined, "en-US"]) {
+      const result = validateApplicationInput(
+        { ...base, locale, type: "order", productSlugs: ["lord-deodorant"] },
+        { allowedProductSlugs: allowed }
+      );
+      expect(result.success).toBe(false);
+    }
+  });
   test("accepts and trims a valid order, while deduplicating products", () => {
     const result = validateApplicationInput(
       {

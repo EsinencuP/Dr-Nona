@@ -34,6 +34,7 @@ describe("application formatter", () => {
       [
         "🛒 НОВЫЙ ЗАКАЗ",
         "",
+        "Язык: RU",
         "Имя Фамилия: Ana Popescu",
         "Телефон: +373 69 123 456",
         "Город: Chișinău",
@@ -68,6 +69,19 @@ describe("application formatter", () => {
     expect(message).toContain(STATUS_PENDING);
     expect(message).not.toMatch(/\[object Object\]|undefined|[*_`]/u);
   });
+
+  test("preserves the Romanian application locale for the consultant", () => {
+    const record: ApplicationRecord = {
+      ...common,
+      locale: "ro-MD",
+      type: "consultation",
+      consultationMode: "online",
+      consultationDate: "2030-06-20",
+      consultationTime: "10:00",
+      timezone: "Europe/Chisinau",
+    };
+    expect(formatTelegramApplication(record)).toContain("Язык: RO");
+  });
 });
 
 describe("replaceStatus", () => {
@@ -83,4 +97,3 @@ describe("replaceStatus", () => {
     expect(result).toBeNull();
   });
 });
-

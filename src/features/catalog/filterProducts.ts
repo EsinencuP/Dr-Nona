@@ -30,7 +30,7 @@ export function filterCatalogProducts({
             product.category,
             getProductCopy(product, "shortDescription"),
             getProductCopy(product, "longDescription"),
-            product.ingredients ?? "",
+            getProductCopy(product, "ingredients"),
           ]
             .join(" ")
             .toLocaleLowerCase("ru")

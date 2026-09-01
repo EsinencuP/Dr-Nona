@@ -38,6 +38,7 @@ function formatConsultationDate(date: string, time: string) {
 
 export function formatTelegramApplication(record: ApplicationRecord) {
   const common = [
+    `Язык: ${record.locale === "ro-MD" ? "RO" : "RU"}`,
     `Имя Фамилия: ${record.firstName} ${record.lastName}`,
     `Телефон: ${record.phone}`,
     `Город: ${record.city}`,

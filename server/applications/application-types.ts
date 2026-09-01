@@ -16,7 +16,7 @@ type ApplicationRecordBase = {
   phoneNormalized: string;
   city: string;
   source: "website";
-  locale: "ru-MD";
+  locale: ApplicationInput["locale"];
   submittedAt: string;
 };
 

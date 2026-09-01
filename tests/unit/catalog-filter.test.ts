@@ -13,14 +13,14 @@ describe("catalog filtering", () => {
     productFixture({
       slug: "alpha",
       officialName: "Alpha Cream",
-      shortDescription: "Морские минералы",
+      shortDescription: "Морские минералы в составе ежедневного ухода из ассортимента Dr. Nona.",
       category: "Уход",
       popularityRank: 2,
     }),
     productFixture({
       slug: "beta",
       officialName: "Beta Lotion",
-      shortDescription: "Ежедневный уход",
+      shortDescription: "Средство для ежедневного ухода за кожей тела из ассортимента Dr. Nona.",
       category: "Тело",
       popularityRank: 1,
     }),

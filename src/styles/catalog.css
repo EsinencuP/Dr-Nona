@@ -215,7 +215,7 @@
   font-size: var(--type-caption);
 }
 
-.catalog-grid .product-card h3 {
+.catalog-grid .product-card :is(h2, h3) {
   min-height: 2.55em;
   margin-bottom: 8px;
   font-size: clamp(1rem, 1.12vw, 1.22rem);

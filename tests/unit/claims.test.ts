@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 import claimsRegistry from "../../src/data/claims-registry.json";
+import publicProducts from "../../src/data/products-public.json";
+import publicRomanianProducts from "../../src/data/products-ro-public.json";
 import {
   getOfficialPageParagraphs,
   getProductCopy,
@@ -30,12 +32,16 @@ describe("regulated claims publication guard", () => {
     ).toBe(true);
   });
 
-  it("keeps sourced product copy visible while the claim remains tracked", () => {
+  it("quarantines sourced product copy while its claim remains pending", () => {
     const product = productBySlug.get("solaris-body-lotion");
     expect(product).toBeDefined();
-    expect(getProductCopy(product!, "shortDescription")).toBe(
+    expect(getProductCopy(product!, "shortDescription")).not.toBe(
       product!.shortDescription
     );
+    expect(getProductCopy(product!, "shortDescription")).toContain(
+      "ежедневного ухода"
+    );
+    expect(getProductCopy(product!, "longDescription")).toBe("");
     expect(
       isClaimFieldPublishable(
         "product",
@@ -43,6 +49,32 @@ describe("regulated claims publication guard", () => {
         "longDescription"
       )
     ).toBe(false);
+  });
+
+  it("removes pending claim fields from browser-facing product datasets", () => {
+    const blocked = claimsRegistry.filter(
+      (claim) => claim.scope === "product" && claim.status !== "approved"
+    );
+    const russian = new Map(publicProducts.map((product) => [product.slug, product]));
+    for (const claim of blocked) {
+      const romanian = claim.contentId.startsWith("ro:");
+      const slug = romanian ? claim.contentId.slice(3) : claim.contentId;
+      const record = romanian
+        ? publicRomanianProducts[slug as keyof typeof publicRomanianProducts]
+        : russian.get(slug);
+      expect(record).toBeDefined();
+      expect(record?.[claim.field as keyof typeof record]).toBeNull();
+    }
+  });
+
+  it("does not expose unreviewed Romanian descriptive fields", async () => {
+    const { productBySlug: romanianProducts } = await loadProductData("ro");
+    const product = romanianProducts.get("solaris-body-lotion");
+    expect(product?.contentLocale).toBe("ro");
+    expect(product?.longDescription).toBeNull();
+    expect(getProductCopy(product!, "shortDescription")).toContain(
+      "îngrijirea zilnică"
+    );
   });
 
   it("keeps a product field without a detected regulated claim", () => {

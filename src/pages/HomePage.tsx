@@ -27,6 +27,7 @@ export default function HomePage() {
         heroLead:
           "Combinăm forța mineralelor Mării Moarte cu cercetarea științifică modernă pentru a crea produse de îngrijire zilnică și frumusețe.",
         heroPrinciples: "Principiile Dr. Nona",
+        heroBenefitsHint: "Încă 3 principii — derulați orizontal",
         science: "Știință",
         scienceIntro: "Creat de natură. Dezvăluit de știință.",
         scienceFallback:
@@ -59,6 +60,7 @@ export default function HomePage() {
         heroLead:
           "Мы объединяем силу минералов Мёртвого моря и передовые научные разработки, чтобы создавать продукты для ежедневного ухода и красоты.",
         heroPrinciples: "Принципы Dr. Nona",
+        heroBenefitsHint: "Ещё 3 принципа — листайте горизонтально",
         science: "Наука",
         scienceIntro: "Сделано природой. Раскрыто наукой.",
         scienceFallback:
@@ -85,9 +87,9 @@ export default function HomePage() {
         blogNews: "Блог и новости",
         readAll: "Читать всё",
       };
-  const products = (runtimeContent.home.products as Product[]).map(
-    (product) => localizedProducts.get(product.slug) ?? product
-  );
+  const products = (runtimeContent.home.productSlugs as string[])
+    .map((slug) => localizedProducts.get(slug))
+    .filter((product): product is Product => Boolean(product));
   const productBySlug = new Map(
     products.map((product) => [product.slug, product])
   );
@@ -193,6 +195,9 @@ export default function HomePage() {
             </div>
           ))}
         </div>
+        <p className="hero-benefits__hint container">
+          {copy.heroBenefitsHint} <ArrowRight aria-hidden="true" />
+        </p>
       </section>
 
       <section className="science-section" id="halo-science">

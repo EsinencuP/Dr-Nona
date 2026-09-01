@@ -136,7 +136,7 @@ describe("application in restricted storage mode", () => {
     const card = addButtons[0].closest("article");
     expect(card).not.toBeNull();
     const productName = within(card as HTMLElement)
-      .getByRole("heading", { level: 3 })
+      .getByRole("heading", { level: 2 })
       .textContent;
     expect(productName).toBeTruthy();
     await user.click(addButtons[0]);

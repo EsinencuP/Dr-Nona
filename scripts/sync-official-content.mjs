@@ -565,6 +565,7 @@ async function createStage() {
         images: [],
         sourceUrl: record.url,
         sourceLastmod: record.lastmod,
+        publicationStatus: "tombstone",
         error: String(error),
       };
     }

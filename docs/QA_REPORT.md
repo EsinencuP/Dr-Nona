@@ -17,7 +17,7 @@ The run covers repository hygiene, documentation consistency, architecture, cont
 - **Environment**: Windows, Node 22.23.1, npm 10.9.8, Chromium desktop/mobile
 - **Products**: 50 source, 50 published, 0 drafts
 - **Official content records**: 137
-- **Claims**: 286 total, 0 approved, 286 pending, 0 rejected
+- **Claims**: 399 total, 0 approved, 399 pending, 0 rejected
 <!-- build-identity:end -->
 
 ## Automated checks
@@ -31,11 +31,11 @@ The run covers repository hygiene, documentation consistency, architecture, cont
 | `npm run typography:validate` | PASS | 14 px minimum and verified contrast pairs |
 | `npm run market:validate` | PASS | Two Moldova phones; foreign certificates hidden |
 | `npm run content:validate` | PASS | 50 records; all 50 published records complete |
-| `npm run claims:validate` | PASS | 286 structurally valid pending records |
+| `npm run claims:validate` | PASS | 399 structurally valid pending records; pending fields are publication-blocked |
 | `npm run security:validate` | PASS | Production-enforced CSP, required headers and minimal external origins |
 | `npm run typecheck` | PASS | TypeScript project references |
 | `npm run lint` | PASS | ESLint with zero warnings |
-| `npm run test` | PASS | 21 files, 147 tests |
+| `npm run test` | PASS | 22 files, 165 tests |
 | `npm run build` | PASS | 301 prerendered routes and 299 canonical sitemap URLs; 150 Product JSON-LD records across legacy, RU and RO catalogue routes; RU/RO company and Halo Complex routes included |
 | `npm run security:runtime` | PASS | 5 rendered routes, enforced CSP, 0 violations |
 | `npm run performance:runtime` | PASS | Home, contact and catalogue within runtime budget |

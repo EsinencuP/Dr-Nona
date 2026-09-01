@@ -2,7 +2,7 @@
 
 No. Technical quality gates pass locally, but production approval remains blocked by the items below.
 
-Last verified: 2026-08-30 against base commit `678eac7` and the current cleanup worktree.
+Last verified: 2026-09-01 against base commit `678eac7` and the current cleanup worktree.
 
 This file is generated from `docs/release-status.json`. Run `npm run release:status:generate` after changing the machine-readable status.
 
@@ -24,16 +24,16 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 | Published products | 50 |
 | Draft products | 0 |
 | Official content records | 137 |
-| Claims | 286 |
+| Claims | 399 |
 | Approved claims | 0 |
-| Pending claims | 286 |
+| Pending claims | 399 |
 | Rejected claims | 0 |
 
 ## Open release blockers
 
 | ID | Priority | Owner | Summary |
 |---|---|---|---|
-| `P0-LOCALE` | P0 | content | The complete Romanian interface and content set is not approved or implemented. |
+| `P0-LOCALE` | P0 | content | Romanian routes and interface are implemented; imported Romanian descriptive product copy remains quarantined pending editorial approval. |
 | `P0-CONTACT` | P0 | product | Telegram delivery and an application-level rate guard are implemented, but privacy, production origin and platform-wide abuse protection are not approved. |
 | `P0-LEGAL` | P0 | legal | Moldova legal review has not approved any regulated product claim. |
 | `P1-MEDIA-RIGHTS` | P1 | legal | Production publication rights for product, brand and editorial media are not confirmed. |
@@ -46,8 +46,8 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 
 ### `P0-LOCALE`
 
-- Approve Romanian UI, product content, editorial content, metadata and alt text.
-- Publish shareable /ro/... routes with reciprocal hreflang.
+- Approve or reject each quarantined Romanian product description, ingredient list and usage instruction.
+- Approve Romanian metadata and alt text; keep original-language articles explicitly marked as Russian.
 - Pass Russian and Romanian smoke, accessibility and SEO checks.
 
 ### `P0-CONTACT`

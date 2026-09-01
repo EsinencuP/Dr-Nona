@@ -135,6 +135,12 @@
     min-height: 470px;
   }
 
+  .home-promo-banner > article,
+  .home-lord-banner > article {
+    height: auto;
+    min-height: 360px;
+  }
+
   .catalog-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
@@ -492,7 +498,7 @@
   :root {
     --container: calc(100% - 28px);
     --header-height: 64px;
-    --radius-lg: 25px;
+    --radius-lg: 20px;
     --radius-xl: 32px;
   }
 
@@ -578,13 +584,21 @@
     display: flex;
     margin-top: -12px;
     overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
     scroll-snap-type: x mandatory;
   }
 
+  .hero-benefits::-webkit-scrollbar {
+    display: none;
+  }
+
   .hero-benefit {
-    min-width: 210px;
+    min-width: 100%;
+    flex: 0 0 100%;
     padding: 14px 16px;
     scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
   .hero-benefit:nth-child(3) {
@@ -593,6 +607,25 @@
 
   .hero-benefit:nth-child(n + 3) {
     border-top: 0;
+  }
+
+  .hero-benefits__hint {
+    min-height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 7px;
+    margin-top: 7px;
+    color: var(--sea-700);
+    font-size: var(--type-caption);
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .hero-benefits__hint svg {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
   }
 
   .marquee-line > div {
@@ -724,7 +757,7 @@
     min-height: 220px;
   }
 
-  .product-card h3 {
+  .product-card :is(h2, h3) {
     min-height: 0;
   }
 
@@ -954,7 +987,7 @@
     -webkit-line-clamp: 3;
   }
 
-  .catalog-grid .product-card h3 {
+  .catalog-grid .product-card :is(h2, h3) {
     min-height: 0;
     font-size: 1.16rem;
   }
@@ -1411,13 +1444,13 @@
   }
 
   .selection-list small {
-    font-size: 0.78rem;
+    font-size: 0.875rem;
     letter-spacing: 0.06em;
   }
 
   .selection-list__sku {
     margin-top: 8px;
-    font-size: 0.84rem;
+    font-size: 0.875rem;
   }
 
   .selection-contact {

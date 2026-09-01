@@ -1,0 +1,306 @@
+{
+  "version": 1,
+  "defaultStatus": "pending",
+  "products": {
+    "solaris-body-lotion": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "hand-and-nail-treatment": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "dynamic-hydrating-cream": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "body-butter": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "facial-solaris": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "eye-contour-balm": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "face-milk": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "night-cream": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "anti-aging-serum": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "ard-complex": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "shp-day-time-face-cream-lc": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "samples-kit": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "gonseen": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "coffee-mix": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "chocoseen": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "soupseen": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "okseen": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "fase-9": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "dnd-chewing-gum-tablets": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "imunseen": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "goldseen": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "cleanseen": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "ravseen": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "pulmoseen": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "reumoseen": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "yamseen": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "newseen": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "femseen": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "mouthwash": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "dead-sea-water-compresses": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "shower-gel-lord": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "lady-deodorant": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "kiwi-deodorant": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "lord-deodorant": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "face-soap": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "halo-pure-unisex-deodorant-stick": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "halo-shenseen-toothpaste": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "halo-gel": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "frequent-use-tonic-shampoo": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "conditioner": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "lipstick-new": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "beauty-mask-for-face": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "salts-camomile": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "salts-ylangylang": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "salts-rosemary": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "salts-lavander": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "after-shave-lord": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "perfume-kiwi": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "perfume-lady": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    },
+    "parfum-faya": {
+      "shortDescription": "pending",
+      "longDescription": "pending",
+      "ingredients": "pending",
+      "howToUse": "pending"
+    }
+  }
+}

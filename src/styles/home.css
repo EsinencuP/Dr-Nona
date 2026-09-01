@@ -83,10 +83,14 @@
   margin-top: -18px;
   overflow: hidden;
   border: 1px solid rgba(78, 153, 167, 0.18);
-  border-radius: 18px;
+  border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.91);
   box-shadow: 0 20px 54px rgba(20, 38, 45, 0.1);
   backdrop-filter: blur(14px);
+}
+
+.hero-benefits__hint {
+  display: none;
 }
 
 .hero-benefit {
@@ -251,7 +255,7 @@
   min-height: 48px;
   padding: 10px 16px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--white);
   color: var(--sea-800);
 }
@@ -620,7 +624,7 @@
   min-height: 50px;
   padding: 10px 20px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: rgba(7, 48, 63, 0.62);
   color: var(--sea-050);
   font-size: var(--type-ui);

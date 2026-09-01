@@ -2,7 +2,7 @@
 
 The application combines explicit React routes with prerendered official-content routes. The generated SEO manifest is the complete machine-readable inventory.
 
-Last verified: 2026-08-30. The current manifest contains 301 routes, of which 299 are indexable. This includes localized RU/RO catalogue and product-detail routes for all 50 published products, plus localized company, history, founders, science and Halo Complex pages.
+Last verified: 2026-09-01. The current manifest contains 315 routes, of which 311 are indexable. This includes localized RU/RO catalogue and product-detail routes for all 50 published products, plus localized company, history, founders, science, Halo Complex, editorial hubs and certificates pages.
 
 ## Primary routes
 
@@ -39,7 +39,9 @@ The inventory excludes account, registration, login, cart, checkout, payment, se
 
 ## Locale strategy
 
-Russian pages keep their unprefixed canonical paths and also expose explicit `/ru/...` alternatives where a complete bilingual pair exists. Romanian equivalents use `/ro/...`. Reciprocal `ru-MD`, `ro-MD` and `x-default` hreflang is active for the catalogue, all product details, `/about` and its four chapters, and `/ourformula`. Blog and news remain on their original unprefixed routes by the owner's decision and are not presented as Romanian pages.
+Russian pages keep their unprefixed canonical paths and also expose explicit `/ru/...` alternatives where a complete bilingual pair exists. Romanian equivalents use `/ro/...`. Reciprocal `ru-MD`, `ro-MD` and `x-default` hreflang is active for home, catalogue, all product details, selection, contacts, certificates, `/about` and its four chapters, `/ourformula`, plus the localized editorial/blog/news hubs.
+
+Individual blog/news articles and other imported official pages remain original-language content on one unprefixed canonical URL. When opened from the Romanian shell, navigation and controls stay Romanian while source copy is explicitly marked `lang="ru"`; these routes publish only `ru-MD` and `x-default`. The shared route contract in `src/locale-routing.mjs` prevents runtime links or the SEO generator from inventing `/ro` aliases for content without a complete Romanian version.
 
 ## Verification
 

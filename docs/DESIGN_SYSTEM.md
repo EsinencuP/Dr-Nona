@@ -52,7 +52,7 @@ Dark navy and gold tokens may support the footer or a bounded Lord collection ba
 
 ## Components and states
 
-Buttons, cards, inputs and panels use the shared 12, 20, 32 and 48 px radius scale. Primary actions use sea blue; saved state uses a filled control with explicit `aria-pressed` state. Hover, focus, active, disabled, submitting, success and failure states must remain distinguishable without color alone.
+Cards, inputs and panels use the shared 12, 20, 32 and 48 px radius scale. The named `--radius-pill` token is reserved for capsule-shaped buttons, chips, segmented controls and the skip link; it is not a general-purpose card or panel radius. Primary actions use sea blue; saved state uses a filled control with explicit `aria-pressed` state. Hover, focus, active, disabled, submitting, success and failure states must remain distinguishable without color alone.
 
 Product save controls stay at the bottom action area above product media stacking. Images must never cover an action. Forms retain entered values after validation, network or provider failure.
 
@@ -67,6 +67,8 @@ Do not retain raw exports, duplicate aliases or unused variants in `public/`. Ne
 The supported minimum width is 320 px. Layout changes occur at 1180, 960 and 640 px, with contact-specific adaptation at 980 px. Verify 320, 375, 430, 768, 1024, 1440 and 1920 px plus mobile landscape.
 
 Mobile layouts may reduce secondary copy and collapse controls, but they must preserve the page CTA, product identity, selection action and error recovery. No document-level horizontal scrolling is allowed.
+
+At 640 px and below, the hero principles rail shows one complete card per snap point and a localized continuation hint. Product or explanatory text must not be used as a clipped preview of the next item.
 
 ## Accessibility
 

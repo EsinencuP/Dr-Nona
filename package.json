@@ -46,7 +46,9 @@
     "sync:content:validate": "node scripts/sync-official-content.mjs validate",
     "sync:content:promote": "node scripts/sync-official-content.mjs promote",
     "sync:catalog:md": "node scripts/sync-moldova-catalog.mjs",
-    "sync:catalog:md:write": "node scripts/sync-moldova-catalog.mjs --write"
+    "sync:catalog:md:write": "node scripts/sync-moldova-catalog.mjs --write",
+    "content:repair:ro": "node scripts/repair-romanian-product-content.mjs",
+    "content:repair:ro:write": "node scripts/repair-romanian-product-content.mjs --write"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",

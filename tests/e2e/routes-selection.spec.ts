@@ -33,7 +33,7 @@ test("valid and invalid product deep links resolve correctly", async ({ page }) 
 
 test("every catalog category exposes sourced product details", async ({ page }) => {
   await page.goto("/products");
-  const catalogLinks = page.locator(".catalog-grid .product-card h3 a");
+  const catalogLinks = page.locator(".catalog-grid .product-card :is(h2, h3) a");
   await expect(catalogLinks).toHaveCount(50);
   const categorySamples = [
     "/product/solaris-body-lotion",

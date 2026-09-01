@@ -21,6 +21,16 @@ test("home exposes a complete locale switch and preserves Romanian navigation", 
   await expect(page).toHaveURL(/\/ro\/products$/);
 });
 
+test("restores the saved Romanian locale on an unprefixed entry", async ({ page }) => {
+  await page.goto("/");
+  await page.evaluate(() => localStorage.setItem("drnona-locale", "ro"));
+  await page.goto("/");
+  await expect(page).toHaveURL(/\/ro$/);
+  await expect(page.locator("html")).toHaveAttribute("lang", "ro");
+  await page.getByRole("link", { name: /catalog/i }).first().click();
+  await expect(page).toHaveURL(/\/ro\/products$/);
+});
+
 test("navigation works for desktop and mobile Chromium", async ({
   page,
 }, testInfo) => {

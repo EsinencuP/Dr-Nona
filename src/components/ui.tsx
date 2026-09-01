@@ -25,9 +25,9 @@ export function splitText(text: string, minLength = 140) {
   return chunks;
 }
 
-export function formatDate(value: string) {
+export function formatDate(value: string, locale: "ru" | "ro" = "ru") {
   if (!value) return "";
-  return new Intl.DateTimeFormat("ru-RU", {
+  return new Intl.DateTimeFormat(locale === "ro" ? "ro-MD" : "ru-RU", {
     day: "numeric",
     month: "long",
     year: "numeric",
@@ -115,50 +115,19 @@ export function SectionHeading({
   );
 }
 
-const neutralProductDescriptions: Record<string, string> = {
-  "Кремы": "Крем для ежедневного ухода за кожей.",
-  "Напитки": "Напиток из ассортимента Dr. Nona.",
-  "Пищевые добавки": "Пищевая добавка из ассортимента Dr. Nona.",
-  "Уход за лицом": "Ежедневный уход за кожей лица.",
-  "Уход за телом": "Ежедневный уход за кожей тела.",
-  "Уход за руками": "Ежедневный уход за руками и ногтями.",
-  "Фитокомплексы": "Травяной напиток в индивидуальных пакетиках.",
-  "Гигиена": "Компактный формат для очищения кожи.",
-  "Дезодоранты": "Дезодорант-антиперспирант для ежедневного использования.",
-  "Парфюмерия": "Аромат из парфюмерной коллекции Dr. Nona.",
-};
-
-const neutralProductDescriptionsRo: Record<string, string> = {
-  "Creme": "Cremă pentru îngrijirea zilnică a pielii.",
-  "Băuturi": "Băutură din gama Dr. Nona.",
-  "Suplimente alimentare": "Supliment alimentar din gama Dr. Nona.",
-  "Îngrijirea feței": "Îngrijire zilnică pentru pielea feței.",
-  "Îngrijirea corpului": "Îngrijire zilnică pentru pielea corpului.",
-  "Îngrijirea mâinilor": "Îngrijire zilnică pentru mâini și unghii.",
-  "Fitocomplexe": "Băutură din plante în plicuri individuale.",
-  "Igienă": "Format compact pentru curățarea pielii.",
-  "Deodorante": "Deodorant antiperspirant pentru utilizare zilnică.",
-  "Parfumerie": "Parfum din colecția Dr. Nona.",
-};
-
 export function ProductCard({
   product,
   compact = false,
+  headingLevel = 3,
 }: {
   product: Product;
   compact?: boolean;
+  headingLevel?: 2 | 3;
 }) {
   const { contains, toggle } = useSelection();
-  const { locale, t } = useLocale();
+  const { t } = useLocale();
   const saved = contains(product.slug);
-  const shortDescription =
-    getProductCopy(product, "shortDescription") ||
-    (locale === "ro"
-      ? neutralProductDescriptionsRo[product.category]
-      : neutralProductDescriptions[product.category]) ||
-    (locale === "ro"
-      ? "Produs pentru îngrijire zilnică."
-      : "Продукт для ежедневного ухода.");
+  const shortDescription = getProductCopy(product, "shortDescription");
   return (
     <article className={`product-card ${compact ? "product-card--compact" : ""}`}>
       <div className="product-card__stage">
@@ -177,9 +146,15 @@ export function ProductCard({
         <div className="product-card__meta">
           <span>{product.category}</span>
         </div>
-        <h3>
-          <Link to={`/product/${product.slug}`}>{product.officialName}</Link>
-        </h3>
+        {headingLevel === 2 ? (
+          <h2>
+            <Link to={`/product/${product.slug}`}>{product.officialName}</Link>
+          </h2>
+        ) : (
+          <h3>
+            <Link to={`/product/${product.slug}`}>{product.officialName}</Link>
+          </h3>
+        )}
         <p
           className="product-card__description"
         >

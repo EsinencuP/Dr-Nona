@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "asOf": "2026-08-30",
+  "asOf": "2026-09-01",
   "commit": "678eac7",
   "branch": "main",
   "status": "release-blocked",
@@ -12,9 +12,9 @@
     "draftProducts": 0,
     "officialContentRecords": 137,
     "claims": {
-      "total": 286,
+      "total": 399,
       "approved": 0,
-      "pending": 286,
+      "pending": 399,
       "rejected": 0
     }
   },
@@ -24,10 +24,10 @@
       "priority": "P0",
       "owner": "content",
       "status": "open",
-      "summary": "The complete Romanian interface and content set is not approved or implemented.",
+      "summary": "Romanian routes and interface are implemented; imported Romanian descriptive product copy remains quarantined pending editorial approval.",
       "acceptanceCriteria": [
-        "Approve Romanian UI, product content, editorial content, metadata and alt text.",
-        "Publish shareable /ro/... routes with reciprocal hreflang.",
+        "Approve or reject each quarantined Romanian product description, ingredient list and usage instruction.",
+        "Approve Romanian metadata and alt text; keep original-language articles explicitly marked as Russian.",
         "Pass Russian and Romanian smoke, accessibility and SEO checks."
       ]
     },

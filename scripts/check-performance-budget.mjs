@@ -61,6 +61,7 @@ expect(
 );
 
 const assetNames = readdirSync("dist/assets");
+const claims = JSON.parse(readFileSync("src/data/claims-registry.json", "utf8"));
 const catalogRouteChunk = assetNames.find((name) =>
   /^CatalogPage-.*\.js$/.test(name)
 );
@@ -73,6 +74,20 @@ const officialContentChunk = assetNames.find((name) =>
 expect(Boolean(catalogRouteChunk), "CatalogPage route chunk is missing.");
 expect(Boolean(catalogDataChunk), "Product data chunk is missing.");
 expect(Boolean(officialContentChunk), "Official content chunk is missing.");
+
+if (catalogDataChunk) {
+  const catalogBundle = readFileSync(join("dist/assets", catalogDataChunk), "utf8");
+  const leakedProductClaims = claims.filter(
+    (claim) =>
+      claim.scope === "product" &&
+      claim.status !== "approved" &&
+      catalogBundle.includes(claim.claimText)
+  );
+  expect(
+    leakedProductClaims.length === 0,
+    `Product data chunk contains ${leakedProductClaims.length} pending/rejected claim(s).`
+  );
+}
 
 expect(
   !/official-content|catalog-data|CatalogPage/.test(
@@ -107,6 +122,7 @@ Budgets: initial gzip ≤ 140 KiB; initial Brotli ≤ 115 KiB.
 - separate route chunk: \`${catalogRouteChunk ?? "MISSING"}\`;
 - separate product-data chunk: \`${catalogDataChunk ?? "MISSING"}\`;
 - separate official-content chunk: \`${officialContentChunk ?? "MISSING"}\`;
+- product-data chunk contains no pending/rejected product claim text;
 - route-network assertions for Home, Contact and Catalog run in Playwright.
 `;
 mkdirSync("artifacts/reports", { recursive: true });

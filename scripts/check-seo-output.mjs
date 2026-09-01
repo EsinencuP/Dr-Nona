@@ -49,6 +49,21 @@ for (const route of manifest.routes) {
     $('meta[name="description"]').attr("content") === route.description,
     `${route.path}: description mismatch.`
   );
+  if (route.indexable) {
+    expect(
+      route.title.length >= 30 && route.title.length <= 65,
+      `${route.path}: title must contain 30-65 characters.`
+    );
+    expect(
+      route.description.length >= 70 && route.description.length <= 160,
+      `${route.path}: description must contain 70-160 characters.`
+    );
+    expect(
+      !/^Shop Dr\. Nona International premium skincare/iu.test(route.description),
+      `${route.path}: imported English boilerplate description is forbidden.`
+    );
+    expect(Boolean(route.alternates), `${route.path}: locale alternates are missing.`);
+  }
   expect(
     $('meta[name="robots"]').attr("content") === route.robots,
     `${route.path}: robots mismatch.`

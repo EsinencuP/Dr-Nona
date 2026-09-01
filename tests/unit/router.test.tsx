@@ -1,7 +1,8 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, test } from "vitest";
 import { getClientErrorRecords } from "../../src/app/monitoring";
+import { isLocaleRouteSupported, localePathFor } from "../../src/locale-routing.mjs";
 import {
   Link,
   isPathnameEncodingValid,
@@ -46,7 +47,33 @@ function RouterHarness() {
 
 describe("custom router", () => {
   beforeEach(() => {
+    localStorage.clear();
     window.history.replaceState({}, "", "/");
+  });
+
+  test("adds locale prefixes only to routes with complete localized content", () => {
+    expect(isLocaleRouteSupported("/products")).toBe(true);
+    expect(isLocaleRouteSupported("/product/dynamic-hydrating-cream")).toBe(true);
+    expect(isLocaleRouteSupported("/blog")).toBe(true);
+    expect(isLocaleRouteSupported("/blog/original-article")).toBe(false);
+    expect(isLocaleRouteSupported("/faq")).toBe(false);
+    expect(localePathFor("/products", "?category=face", "ro")).toBe(
+      "/ro/products?category=face"
+    );
+    expect(localePathFor("/blog/original-article", "", "ro")).toBe(
+      "/blog/original-article"
+    );
+  });
+
+  test("removes an unsupported locale prefix without losing the UI preference", async () => {
+    window.history.replaceState({}, "", "/ro/blog/original-article");
+    render(<RouterHarness />);
+
+    await waitFor(() => {
+      expect(window.location.pathname).toBe("/blog/original-article");
+    });
+    expect(localStorage.getItem("drnona-locale")).toBe("ro");
+    expect(screen.getByText("Not found")).toBeInTheDocument();
   });
 
   test("matches dynamic routes and updates search params", async () => {

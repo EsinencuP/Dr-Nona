@@ -87,6 +87,7 @@ export function validateClientApplication(
     return {
       success: true,
       data: {
+        locale: locale === "ro" ? "ro-MD" : "ru-MD",
         type: "order",
         firstName: String(raw.firstName).trim(),
         lastName: String(raw.lastName).trim(),
@@ -119,6 +120,7 @@ export function validateClientApplication(
     return {
       success: true,
       data: {
+        locale: locale === "ro" ? "ro-MD" : "ru-MD",
         type: "consultation",
         firstName: String(raw.firstName).trim(),
         lastName: String(raw.lastName).trim(),
