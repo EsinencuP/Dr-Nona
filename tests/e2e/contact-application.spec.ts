@@ -4,7 +4,7 @@ async function fillCommon(page: Page) {
   await page.getByLabel("Имя").fill("Ana");
   await page.getByLabel("Фамилия").fill("Popescu");
   await page.getByLabel("Телефон").fill("069 123 456");
-  await page.getByLabel("Город").fill("Chișinău");
+  await page.getByLabel("Регион доставки (Молдова)").selectOption("Кишинёв");
   await page.getByRole("checkbox").check();
 }
 
@@ -82,7 +82,9 @@ test("Romanian contact form submits ro-MD through the same API contract", async 
   await page.getByLabel("Prenume").fill("Ana");
   await page.getByLabel("Nume", { exact: true }).fill("Popescu");
   await page.getByLabel("Telefon").fill("069 123 456");
-  await page.getByLabel("Oraș").fill("Chișinău");
+  await page
+    .getByLabel("Regiunea de livrare (Moldova)")
+    .selectOption("Кишинёв");
   await page.getByRole("checkbox").check();
   await page.getByLabel("Data preferată").fill("2099-01-01");
   await page.getByLabel("Ora preferată").fill("10:00");
@@ -100,10 +102,12 @@ test("Romanian contact form submits ro-MD through the same API contract", async 
 test("order defaults from selection and Telegram delivery succeeds", async ({
   page,
 }) => {
+  let submittedBody: Record<string, unknown> | undefined;
   await page.addInitScript(() => {
     localStorage.setItem("drnona-selection", JSON.stringify(["lord-deodorant"]));
   });
   await page.route("**/api/applications", async (route) => {
+    submittedBody = route.request().postDataJSON() as Record<string, unknown>;
     await route.fulfill({
       status: 201,
       contentType: "application/json",
@@ -120,8 +124,15 @@ test("order defaults from selection and Telegram delivery succeeds", async ({
     "true"
   );
   await fillCommon(page);
+  await page
+    .getByRole("button", { name: /Увеличить количество/u })
+    .click();
   await page.getByRole("button", { name: "Отправить заявку" }).click();
   await expect(page.getByText(/Заявка №request-order отправлена/)).toBeVisible();
+  expect(submittedBody).toMatchObject({
+    productSlugs: ["lord-deodorant"],
+    items: [{ slug: "lord-deodorant", quantity: 2 }],
+  });
 });
 
 test("client validation and complete failure preserve data", async ({ page }) => {
@@ -174,7 +185,7 @@ test("consent is required, linked to privacy policy and receives focus", async (
   await page.getByLabel("Имя").fill("Ana");
   await page.getByLabel("Фамилия").fill("Popescu");
   await page.getByLabel("Телефон").fill("069 123 456");
-  await page.getByLabel("Город").fill("Chișinău");
+  await page.getByLabel("Регион доставки (Молдова)").selectOption("Кишинёв");
   await page.getByLabel("Предпочтительная дата").fill("2099-01-01");
   await page.getByLabel("Предпочтительное время").fill("10:00");
 

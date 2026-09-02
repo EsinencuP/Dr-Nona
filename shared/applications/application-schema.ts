@@ -1,7 +1,8 @@
 import { z } from "zod";
+import { MASTERCLASS_TOPICS } from "../constants/masterclass-topics.js";
+import { MOLDOVA_REGIONS } from "../constants/moldova-regions.js";
 
 const NAME_MAX = 60;
-const CITY_MAX = 100;
 const PHONE_MAX = 32;
 const SLUG_MAX = 100;
 
@@ -29,7 +30,14 @@ const baseApplicationSchema = z.object({
       },
       "Некорректный номер телефона"
     ),
-  city: trimmedText("Город", CITY_MAX),
+  city: z
+    .string({ error: "Выберите регион" })
+    .trim()
+    .min(1, "Выберите регион из списка")
+    .refine(
+      (value) => MOLDOVA_REGIONS.some((region) => region === value),
+      "Выберите регион из списка"
+    ),
   consentAccepted: z.literal(true, {
     error: "Необходимо принять условия обработки данных",
   }),
@@ -58,6 +66,23 @@ const baseApplicationSchema = z.object({
   sessionHistory: z.string().trim().max(2000).optional(),
 });
 
+export const orderItemSchema = z.object({
+  slug: z
+    .string()
+    .trim()
+    .min(1, "Некорректный товар")
+    .max(SLUG_MAX, "Некорректный товар")
+    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/u, "Некорректный товар"),
+  quantity: z
+    .number()
+    .int("Количество должно быть целым числом")
+    .min(1, "Минимум 1 шт.")
+    .max(99, "Максимум 99 шт.")
+    .default(1),
+});
+
+export type OrderItemInput = z.infer<typeof orderItemSchema>;
+
 const orderApplicationSchema = baseApplicationSchema.extend({
   type: z.literal("order"),
   productSlugs: z
@@ -72,6 +97,7 @@ const orderApplicationSchema = baseApplicationSchema.extend({
     .min(1, "Выберите хотя бы один товар")
     .max(20, "Можно выбрать не более 20 товаров")
     .transform((slugs) => [...new Set(slugs)]),
+  items: z.array(orderItemSchema).max(20).optional(),
 });
 
 const consultationApplicationSchema = baseApplicationSchema.extend({
@@ -87,9 +113,23 @@ const consultationApplicationSchema = baseApplicationSchema.extend({
     .regex(/^(?:[01]\d|2[0-3]):[0-5]\d$/u, "Некорректное время"),
 });
 
+const masterclassApplicationSchema = baseApplicationSchema.extend({
+  type: z.literal("masterclass"),
+  masterclassTopic: z.enum(MASTERCLASS_TOPICS, {
+    error: "Выберите тему мастер-класса из списка",
+  }),
+  eventDate: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/u, "Некорректная дата"),
+  eventTime: z
+    .string()
+    .regex(/^(?:[01]\d|2[0-3]):[0-5]\d$/u, "Некорректное время"),
+});
+
 export const applicationInputSchema = z.discriminatedUnion("type", [
   orderApplicationSchema,
   consultationApplicationSchema,
+  masterclassApplicationSchema,
 ]);
 
 export type ApplicationInput = z.infer<typeof applicationInputSchema>;
@@ -97,6 +137,10 @@ export type OrderApplicationInput = Extract<ApplicationInput, { type: "order" }>
 export type ConsultationApplicationInput = Extract<
   ApplicationInput,
   { type: "consultation" }
+>;
+export type MasterclassApplicationInput = Extract<
+  ApplicationInput,
+  { type: "masterclass" }
 >;
 
 export type ApplicationValidationOptions = {
@@ -156,7 +200,20 @@ export function validateApplicationInput(
     if (data.productSlugs.some((slug) => !options.allowedProductSlugs.has(slug))) {
       fieldErrors.productSlugs = "Один или несколько товаров недоступны";
     }
-  } else {
+    if (data.items) {
+      const selectedSlugs = new Set(data.productSlugs);
+      const itemSlugs = data.items.map((item) => item.slug);
+      if (
+        new Set(itemSlugs).size !== itemSlugs.length ||
+        itemSlugs.some(
+          (slug) =>
+            !selectedSlugs.has(slug) || !options.allowedProductSlugs.has(slug)
+        )
+      ) {
+        fieldErrors.items = "Некорректные данные о количестве товаров";
+      }
+    }
+  } else if (data.type === "consultation") {
     if (!isCalendarDate(data.consultationDate)) {
       fieldErrors.consultationDate = "Некорректная дата";
     } else if (
@@ -166,6 +223,14 @@ export function validateApplicationInput(
       fieldErrors.consultationDate =
         "Выберите будущую дату и время по часовому поясу Кишинёва";
     }
+  } else if (!isCalendarDate(data.eventDate)) {
+    fieldErrors.eventDate = "Некорректная дата";
+  } else if (
+    `${data.eventDate}T${data.eventTime}` <
+    chisinauLocalMinute(options.now ?? new Date())
+  ) {
+    fieldErrors.eventDate =
+      "Выберите будущую дату и время по часовому поясу Кишинёва";
   }
 
   return Object.keys(fieldErrors).length

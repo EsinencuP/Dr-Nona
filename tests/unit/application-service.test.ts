@@ -9,7 +9,7 @@ const input: ApplicationInput = {
   firstName: "Ana",
   lastName: "Popescu",
   phone: "069 123 456",
-  city: "Chișinău",
+  city: "Кишинёв",
   consentAccepted: true,
   website: "",
   productSlugs: ["lord-deodorant"],
@@ -64,6 +64,26 @@ describe("application service", () => {
       string,
     ][];
     expect(telegramCalls[0][1]).toContain("request-fixed");
+  });
+
+  test("passes selected quantities to the record and Telegram message", async () => {
+    const deps = dependencies(() => Promise.resolve(sent()));
+    await processApplication(
+      {
+        ...input,
+        items: [{ slug: "lord-deodorant", quantity: 4 }],
+      },
+      deps
+    );
+    const [record, message] = deps.sendTelegram.mock.calls[0] as unknown as [
+      { products: Array<{ slug: string; quantity?: number }> },
+      string,
+    ];
+
+    expect(record.products).toEqual([
+      expect.objectContaining({ slug: "lord-deodorant", quantity: 4 }),
+    ]);
+    expect(message).toContain("Lord Deodorant × 4 шт.");
   });
 
   test.each([

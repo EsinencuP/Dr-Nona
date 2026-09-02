@@ -5,7 +5,7 @@ const common = {
   firstName: " Ana ",
   lastName: " Popescu ",
   phone: "069 123 456",
-  city: " Chișinău ",
+  city: " Кишинёв ",
   consentAccepted: true,
   website: "",
   email: " ana@example.com ",
@@ -56,5 +56,45 @@ describe("client application validation", () => {
         sessionHistory: '["lord-deodorant"]',
       });
     }
+  });
+
+  test("normalizes order quantities and ignores unselected item records", () => {
+    const result = validateClientApplication(
+      {
+        ...common,
+        type: "order",
+        productSlugs: ["lord-deodorant"],
+        items: [
+          { slug: "lord-deodorant", quantity: 120 },
+          { slug: "unselected-product", quantity: 4 },
+        ],
+      },
+      new Set(["lord-deodorant"])
+    );
+
+    expect(result.success).toBe(true);
+    if (result.success && result.data.type === "order") {
+      expect(result.data.items).toEqual([
+        { slug: "lord-deodorant", quantity: 99 },
+      ]);
+    }
+  });
+
+  test("rejects an arbitrary region before submission", () => {
+    const result = validateClientApplication(
+      {
+        ...common,
+        city: "Chișinău",
+        type: "order",
+        productSlugs: ["lord-deodorant"],
+      },
+      new Set(["lord-deodorant"]),
+      "ro"
+    );
+
+    expect(result).toEqual({
+      success: false,
+      fieldErrors: { city: "Selectați o regiune din listă" },
+    });
   });
 });

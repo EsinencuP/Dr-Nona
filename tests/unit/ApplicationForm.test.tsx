@@ -13,7 +13,10 @@ async function fillCommon(user: ReturnType<typeof userEvent.setup>) {
   await user.type(screen.getByLabelText("Имя"), "Ana");
   await user.type(screen.getByLabelText("Фамилия"), "Popescu");
   await user.type(screen.getByLabelText("Телефон"), "069 123 456");
-  await user.type(screen.getByLabelText("Город"), "Chișinău");
+  await user.selectOptions(
+    screen.getByLabelText("Регион доставки (Молдова)"),
+    "Кишинёв"
+  );
   await user.click(screen.getByRole("checkbox"));
 }
 
@@ -94,6 +97,46 @@ describe("ApplicationForm", () => {
     await waitFor(() =>
       expect(screen.getByText(/Заявка №request-2 отправлена/)).toBeVisible()
     );
+  });
+
+  test("submits the quantity selected for an order product", async () => {
+    const submit = vi.fn(
+      async (input: ApplicationInput, idempotencyKey: string) => {
+        void input;
+        void idempotencyKey;
+        return {
+          kind: "success" as const,
+          requestId: "request-quantity",
+          delivery: { telegram: "sent" as const },
+        };
+      }
+    );
+    const product = products[0];
+    const user = userEvent.setup();
+    render(<ApplicationForm products={[product]} submit={submit} />);
+
+    await fillCommon(user);
+    const decrease = screen.getByRole("button", {
+      name: `Уменьшить количество ${product.officialName}`,
+    });
+    const increase = screen.getByRole("button", {
+      name: `Увеличить количество ${product.officialName}`,
+    });
+    expect(decrease).toBeDisabled();
+    await user.click(increase);
+    await user.click(increase);
+    expect(
+      screen.getByRole("group", {
+        name: `Количество: ${product.officialName}`,
+      })
+    ).toHaveTextContent("3");
+
+    await user.click(screen.getByRole("button", { name: "Отправить заявку" }));
+    await waitFor(() => expect(submit).toHaveBeenCalledTimes(1));
+    expect(submit.mock.calls[0][0]).toMatchObject({
+      type: "order",
+      items: [{ slug: product.slug, quantity: 3 }],
+    });
   });
 
   test("keeps entered values after a server error", async () => {

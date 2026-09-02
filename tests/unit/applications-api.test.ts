@@ -18,10 +18,11 @@ const validBody = {
   firstName: "Ana",
   lastName: "Popescu",
   phone: "069 123 456",
-  city: "Chișinău",
+  city: "Кишинёв",
   consentAccepted: true,
   website: "",
   productSlugs: ["lord-deodorant"],
+  items: [{ slug: "lord-deodorant", quantity: 2 }],
 };
 const request = (
   body: unknown = validBody,
@@ -234,7 +235,7 @@ describe("POST /api/applications", () => {
     )(request());
     expect(response.status).toBe(201);
     expect(JSON.stringify(logger.mock.calls)).not.toMatch(
-      /Ana|Popescu|069|Chișinău/u
+      /Ana|Popescu|069|Кишинёв/u
     );
   });
 });

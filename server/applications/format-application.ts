@@ -41,7 +41,7 @@ export function formatTelegramApplication(record: ApplicationRecord) {
     `Язык: ${record.locale === "ro-MD" ? "RO" : "RU"}`,
     `Имя Фамилия: ${record.firstName} ${record.lastName}`,
     `Телефон: ${record.phone}`,
-    `Город: ${record.city}`,
+    `Регион: ${record.city}`,
   ];
   const footer = [
     `ID заявки: ${record.requestId}`,
@@ -50,12 +50,14 @@ export function formatTelegramApplication(record: ApplicationRecord) {
   ];
 
   if (record.type === "order") {
-    const products = record.products.map(
-      (product, index) =>
-        `${index + 1}. ${product.officialName} — ${
-          product.sku ? `SKU ${product.sku}` : "SKU не указан"
-        }`
-    );
+    const products = record.products.map((product, index) => {
+      const quantity =
+        product.quantity && product.quantity > 1
+          ? ` × ${product.quantity} шт.`
+          : "";
+      const sku = product.sku ? `SKU ${product.sku}` : "SKU не указан";
+      return `${index + 1}. ${product.officialName}${quantity} — ${sku}`;
+    });
     return [
       "🛒 НОВЫЙ ЗАКАЗ",
       "",
@@ -63,6 +65,24 @@ export function formatTelegramApplication(record: ApplicationRecord) {
       "",
       "Товары:",
       ...products,
+      "",
+      ...footer,
+      "",
+      STATUS_PENDING,
+    ].join("\n");
+  }
+
+  if (record.type === "masterclass") {
+    return [
+      "🎓 НОВАЯ ЗАПИСЬ НА МАСТЕР-КЛАСС",
+      "",
+      ...common,
+      `Тема: ${record.masterclassTopic}`,
+      `Дата и время: ${formatConsultationDate(
+        record.eventDate,
+        record.eventTime
+      )}`,
+      "Часовой пояс: Europe/Chisinau",
       "",
       ...footer,
       "",

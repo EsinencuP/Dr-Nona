@@ -46,6 +46,9 @@ export async function processApplication(
     locale: input.locale,
     submittedAt,
   };
+  const quantitiesBySlug = input.type === "order"
+    ? new Map(input.items?.map((item) => [item.slug, item.quantity]))
+    : undefined;
   const record: ApplicationRecord =
     input.type === "order"
       ? {
@@ -54,17 +57,29 @@ export async function processApplication(
           products: input.productSlugs.map((slug) => {
             const product = dependencies.productsBySlug.get(slug);
             if (!product) throw new Error("Validated product is unavailable");
-            return product;
+            return {
+              ...product,
+              quantity: quantitiesBySlug?.get(slug) ?? 1,
+            };
           }),
         }
-      : {
-          ...base,
-          type: "consultation",
-          consultationMode: input.consultationMode,
-          consultationDate: input.consultationDate,
-          consultationTime: input.consultationTime,
-          timezone: "Europe/Chisinau",
-        };
+      : input.type === "consultation"
+        ? {
+            ...base,
+            type: "consultation",
+            consultationMode: input.consultationMode,
+            consultationDate: input.consultationDate,
+            consultationTime: input.consultationTime,
+            timezone: "Europe/Chisinau",
+          }
+        : {
+            ...base,
+            type: "masterclass",
+            masterclassTopic: input.masterclassTopic,
+            eventDate: input.eventDate,
+            eventTime: input.eventTime,
+            timezone: "Europe/Chisinau",
+          };
   const dbInput: DbWriteInput = {
     requestId,
     firstName: input.firstName,
@@ -86,15 +101,27 @@ export async function processApplication(
     sessionHistory:
       input.sessionHistory ?? dependencies.extraFields?.sessionHistory,
     eventDate:
-      input.type === "consultation" ? input.consultationDate : undefined,
+      input.type === "consultation"
+        ? input.consultationDate
+        : input.type === "masterclass"
+          ? input.eventDate
+          : undefined,
     eventTime:
-      input.type === "consultation" ? input.consultationTime : undefined,
+      input.type === "consultation"
+        ? input.consultationTime
+        : input.type === "masterclass"
+          ? input.eventTime
+          : undefined,
+    masterclassTopic:
+      input.type === "masterclass" ? input.masterclassTopic : undefined,
     consultationMode:
       input.type === "consultation" ? input.consultationMode : undefined,
-    products:
-      input.type === "order"
-        ? input.productSlugs.map((slug) => ({ slug, quantity: 1 }))
-        : undefined,
+    products: record.type === "order"
+      ? record.products.map((product) => ({
+          slug: product.slug,
+          quantity: product.quantity ?? 1,
+        }))
+      : undefined,
   };
   const dbResult = await saveApplicationToDb(dbInput).catch(
     (error: unknown) => ({

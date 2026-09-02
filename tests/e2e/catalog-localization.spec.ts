@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 const cyrillic = /[А-Яа-яЁё]/u;
+const testBaseUrl = `http://127.0.0.1:${process.env.PLAYWRIGHT_PORT ?? "4173"}`;
 
 test("Romanian catalogue keeps complete English product names and Romanian copy", async ({
   page,
@@ -117,7 +118,7 @@ test("Romanian editorial shell keeps original-language pages on their canonical 
   await expect(page.locator(".article-page .prose")).toHaveAttribute("lang", "ru");
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     "href",
-    `http://127.0.0.1:4173${articlePath}`
+    `${testBaseUrl}${articlePath}`
   );
   await expect(page.locator('link[rel="alternate"][hreflang="ro-MD"]')).toHaveCount(0);
 
@@ -139,7 +140,7 @@ test("Romanian UI does not invent localized URLs for original generic pages", as
   await expect(page.locator(".official-page .prose")).toHaveAttribute("lang", "ru");
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     "href",
-    "http://127.0.0.1:4173/faq"
+    `${testBaseUrl}/faq`
   );
   await expect(page.locator('link[rel="alternate"][hreflang="ro-MD"]')).toHaveCount(0);
 });

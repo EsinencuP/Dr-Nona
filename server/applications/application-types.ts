@@ -4,6 +4,7 @@ export type ApplicationProduct = {
   slug: string;
   officialName: string;
   sku: string;
+  quantity?: number;
 };
 
 export type ApplicationExtraFields = {
@@ -21,7 +22,7 @@ export type ApplicationExtraFields = {
 type ApplicationRecordBase = {
   schemaVersion: 1;
   requestId: string;
-  type: "order" | "consultation";
+  type: ApplicationInput["type"];
   firstName: string;
   lastName: string;
   phone: string;
@@ -45,9 +46,18 @@ export type ConsultationApplicationRecord = ApplicationRecordBase & {
   timezone: "Europe/Chisinau";
 };
 
+export type MasterclassApplicationRecord = ApplicationRecordBase & {
+  type: "masterclass";
+  masterclassTopic: string;
+  eventDate: string;
+  eventTime: string;
+  timezone: "Europe/Chisinau";
+};
+
 export type ApplicationRecord =
   | OrderApplicationRecord
-  | ConsultationApplicationRecord;
+  | ConsultationApplicationRecord
+  | MasterclassApplicationRecord;
 
 export type ProviderName = "telegram";
 export type ProviderResult =

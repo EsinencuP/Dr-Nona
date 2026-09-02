@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+const testBaseUrl = `http://127.0.0.1:${process.env.PLAYWRIGHT_PORT ?? "4173"}`;
+
 test("product route exposes complete route metadata and Product JSON-LD", async ({
   page,
 }) => {
@@ -42,22 +44,22 @@ test("product route exposes complete route metadata and Product JSON-LD", async 
   expect(metadata.title).toContain("Deodorant ( LORD )");
   expect(metadata.description).toContain("Deodorant ( LORD )");
   expect(metadata.canonical).toBe(
-    "http://127.0.0.1:4173/product/lord-deodorant"
+    `${testBaseUrl}/product/lord-deodorant`
   );
   expect(metadata.ogType).toBe("product");
   expect(metadata.twitterCard).toBe("summary_large_image");
   expect(metadata.alternates).toEqual([
     {
       hreflang: "ru-MD",
-      href: "http://127.0.0.1:4173/ru/product/lord-deodorant",
+      href: `${testBaseUrl}/ru/product/lord-deodorant`,
     },
     {
       hreflang: "ro-MD",
-      href: "http://127.0.0.1:4173/ro/product/lord-deodorant",
+      href: `${testBaseUrl}/ro/product/lord-deodorant`,
     },
     {
       hreflang: "x-default",
-      href: "http://127.0.0.1:4173/product/lord-deodorant",
+      href: `${testBaseUrl}/product/lord-deodorant`,
     },
   ]);
   expect(metadata.types).toEqual(
@@ -72,10 +74,10 @@ test("legacy /main URL permanently resolves to the canonical home", async ({
   page,
 }) => {
   await page.goto("/main");
-  await expect(page).toHaveURL("http://127.0.0.1:4173/");
+  await expect(page).toHaveURL(`${testBaseUrl}/`);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     "href",
-    "http://127.0.0.1:4173/"
+    `${testBaseUrl}/`
   );
 });
 
@@ -109,7 +111,7 @@ test("article route exposes Article and Breadcrumb metadata", async ({
 
   expect(metadata.title).toContain("Чем питаться после коронавируса");
   expect(metadata.canonical).toBe(
-    "http://127.0.0.1:4173/blog/what-to-eat-after-coronavirus"
+    `${testBaseUrl}/blog/what-to-eat-after-coronavirus`
   );
   expect(metadata.ogType).toBe("article");
   expect(metadata.types).toEqual(

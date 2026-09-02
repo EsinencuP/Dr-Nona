@@ -35,7 +35,7 @@
   grid-column: 2;
   align-self: start;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 4px;
   padding: 4px;
   border: 1px solid var(--line);
@@ -92,7 +92,8 @@
 }
 
 .application-field input,
-.application-field textarea {
+.application-field textarea,
+.application-field select {
   width: 100%;
   min-height: 50px;
   padding: 0 14px;
@@ -112,13 +113,15 @@
 }
 
 .application-field input:focus,
-.application-field textarea:focus {
+.application-field textarea:focus,
+.application-field select:focus {
   border-color: var(--sea-600);
   outline: 3px solid rgba(27, 120, 137, 0.15);
 }
 
 .application-field input[aria-invalid="true"],
-.application-field textarea[aria-invalid="true"] {
+.application-field textarea[aria-invalid="true"],
+.application-field select[aria-invalid="true"] {
   border-color: #a83c3c;
 }
 
@@ -173,6 +176,58 @@
 
 .application-products li span {
   font-weight: 700;
+}
+
+.application-product__identity {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.application-quantity {
+  display: grid;
+  grid-template-columns: 44px 34px 44px;
+  align-items: center;
+  justify-content: end;
+  gap: 4px;
+}
+
+.application-quantity button {
+  width: 44px;
+  height: 44px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--white);
+  color: var(--sea-800);
+  font: inherit;
+  font-size: 1.15rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.application-quantity button:hover:not(:disabled) {
+  border-color: var(--sea-400);
+  background: var(--sea-100);
+}
+
+.application-quantity button:focus-visible {
+  outline: 3px solid var(--focus-inner);
+  outline-offset: 2px;
+}
+
+.application-quantity button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.application-quantity output {
+  text-align: center;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
 }
 
 .application-products li small {
@@ -350,6 +405,10 @@
     gap: 14px;
   }
 
+  .application-mode {
+    grid-template-columns: 1fr;
+  }
+
   .application-form__grid,
   .application-form__optional {
     grid-template-columns: 1fr;
@@ -361,7 +420,11 @@
 
   .application-products li {
     grid-template-columns: 1fr;
-    gap: 3px;
+    gap: 10px;
+  }
+
+  .application-quantity {
+    justify-content: start;
   }
 
   .application-products li small {

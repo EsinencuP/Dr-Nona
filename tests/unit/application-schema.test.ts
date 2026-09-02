@@ -3,6 +3,7 @@ import {
   normalizePhone,
   validateApplicationInput,
 } from "../../shared/applications/application-schema";
+import { MOLDOVA_REGIONS } from "../../shared/constants/moldova-regions";
 
 const allowed = new Set(["lord-deodorant"]);
 const base = {
@@ -10,12 +11,17 @@ const base = {
   firstName: " Ana-Maria ",
   lastName: "O'Connor",
   phone: "+373 (69) 123-456",
-  city: "Chișinău",
+  city: "Кишинёв",
   consentAccepted: true,
   website: "",
 };
 
 describe("application schema", () => {
+  test("contains 36 unique Moldova regions", () => {
+    expect(MOLDOVA_REGIONS).toHaveLength(36);
+    expect(new Set(MOLDOVA_REGIONS).size).toBe(36);
+  });
+
   test.each(["ru-MD", "ro-MD"] as const)(
     "accepts the supported application locale %s",
     (locale) => {
@@ -43,6 +49,7 @@ describe("application schema", () => {
         ...base,
         type: "order",
         productSlugs: ["lord-deodorant", "lord-deodorant"],
+        items: [{ slug: "lord-deodorant", quantity: 3 }],
       },
       { allowedProductSlugs: allowed }
     );
@@ -51,6 +58,9 @@ describe("application schema", () => {
       expect(result.data.firstName).toBe("Ana-Maria");
       expect(result.data.type === "order" && result.data.productSlugs).toEqual([
         "lord-deodorant",
+      ]);
+      expect(result.data.type === "order" && result.data.items).toEqual([
+        { slug: "lord-deodorant", quantity: 3 },
       ]);
     }
   });
@@ -121,6 +131,65 @@ describe("application schema", () => {
       { allowedProductSlugs: allowed, now: new Date("2030-06-19T08:00:00Z") }
     );
     expect(result.success).toBe(true);
+  });
+
+  test("rejects a region outside the curated Moldova list", () => {
+    const result = validateApplicationInput(
+      {
+        ...base,
+        city: "Chișinău",
+        type: "order",
+        productSlugs: ["lord-deodorant"],
+      },
+      { allowedProductSlugs: allowed }
+    );
+
+    expect(result).toEqual({
+      success: false,
+      fieldErrors: { city: "Выберите регион из списка" },
+    });
+  });
+
+  test.each([0, 1.5, 100])("rejects invalid product quantity %s", (quantity) => {
+    const result = validateApplicationInput(
+      {
+        ...base,
+        type: "order",
+        productSlugs: ["lord-deodorant"],
+        items: [{ slug: "lord-deodorant", quantity }],
+      },
+      { allowedProductSlugs: allowed }
+    );
+
+    expect(result.success).toBe(false);
+    if (!result.success) expect(result.fieldErrors).toHaveProperty("items");
+  });
+
+  test("rejects duplicate or unselected quantity items", () => {
+    for (const items of [
+      [
+        { slug: "lord-deodorant", quantity: 1 },
+        { slug: "lord-deodorant", quantity: 2 },
+      ],
+      [{ slug: "another-product", quantity: 2 }],
+    ]) {
+      const result = validateApplicationInput(
+        {
+          ...base,
+          type: "order",
+          productSlugs: ["lord-deodorant"],
+          items,
+        },
+        {
+          allowedProductSlugs: new Set([
+            "lord-deodorant",
+            "another-product",
+          ]),
+        }
+      );
+      expect(result.success).toBe(false);
+      if (!result.success) expect(result.fieldErrors).toHaveProperty("items");
+    }
   });
 
   test.each([

@@ -14,7 +14,7 @@ const common = {
   lastName: "Popescu",
   phone: "+373 69 123 456",
   phoneNormalized: "+37369123456",
-  city: "Chișinău",
+  city: "Кишинёв",
   source: "website" as const,
   locale: "ru-MD" as const,
   submittedAt: "2030-06-19T08:30:00.000Z",
@@ -26,8 +26,8 @@ describe("application formatter", () => {
       ...common,
       type: "order",
       products: [
-        { slug: "first", officialName: "First", sku: "001" },
-        { slug: "second", officialName: "Second", sku: "" },
+        { slug: "first", officialName: "First", sku: "001", quantity: 3 },
+        { slug: "second", officialName: "Second", sku: "", quantity: 1 },
       ],
     };
     expect(formatTelegramApplication(record)).toBe(
@@ -37,10 +37,10 @@ describe("application formatter", () => {
         "Язык: RU",
         "Имя Фамилия: Ana Popescu",
         "Телефон: +373 69 123 456",
-        "Город: Chișinău",
+        "Регион: Кишинёв",
         "",
         "Товары:",
-        "1. First — SKU 001",
+        "1. First × 3 шт. — SKU 001",
         "2. Second — SKU не указан",
         "",
         "ID заявки: request-123",
