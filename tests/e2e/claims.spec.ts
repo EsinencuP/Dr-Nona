@@ -10,7 +10,9 @@ test("pending product copy is replaced without internal review language", async 
   await expect(page.locator(".product-purpose")).toHaveText(
     "Крем из ассортимента Dr. Nona для ежедневного ухода за кожей."
   );
-  await expect(page.locator(".product-description")).toHaveCount(0);
+  await expect(page.locator(".product-description")).toContainText(
+    "Solaris Body Lotion представлен в каталоге Dr. Nona Moldova"
+  );
   await expect(page.getByText(/бестселлер компании/i)).toHaveCount(0);
 });
 
@@ -27,7 +29,9 @@ test("supplement product shows a neutral adjacent disclaimer", async ({
   await expect(page.locator(".product-purpose")).toHaveText(
     "Напиток из ассортимента Dr. Nona для повседневного рациона."
   );
-  await expect(page.locator(".product-description")).toHaveCount(0);
+  await expect(page.locator(".product-description")).toContainText(
+    "Gonseen Tea представлен в каталоге Dr. Nona Moldova"
+  );
   await expect(page.getByText(/чай gonseen/i)).toHaveCount(0);
 });
 

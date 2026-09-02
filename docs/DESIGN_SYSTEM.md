@@ -2,7 +2,7 @@
 
 The visual system combines a light mineral palette, editorial typography and catalogue density. It must feel premium and trustworthy without sacrificing information per viewport.
 
-Last verified: 2026-09-01 against the tokens and component styles in `src/styles/`. This document is the only canonical design specification.
+Last verified: 2026-09-02 against the tokens and component styles in `src/styles/`. This document is the only canonical design specification.
 
 ## Visual goals
 
@@ -55,6 +55,12 @@ Dark navy and gold tokens may support the footer or a bounded Lord collection ba
 Cards, inputs and panels use the shared 12, 20, 32 and 48 px radius scale. The named `--radius-pill` token is reserved for capsule-shaped buttons, chips, segmented controls and the skip link; it is not a general-purpose card or panel radius. Primary actions use sea blue; saved state uses a filled control with explicit `aria-pressed` state. Hover, focus, active, disabled, submitting, success and failure states must remain distinguishable without color alone.
 
 Product save controls stay at the bottom action area above product media stacking. Images must never cover an action. Forms retain entered values after validation, network or provider failure.
+
+### Product detail composition
+
+The first useful viewport follows one direct reading path: product media, category context, product name, editorial description, source-backed composition or usage highlights, then the selection action. Product name and description carry the strongest hierarchy. Category and SKU remain available as compact service metadata and must never visually compete with the description.
+
+On desktop, media and decision content share a balanced two-column grid aligned at the top. The information section below exposes the product overview, composition and usage without requiring accordion interaction; unavailable or non-applicable fields are omitted instead of replaced with generic filler. On mobile, the media becomes square, the action fills the available width and every information card stays in the document flow. Do not add prices, ratings, urgency, purchase controls or commerce language.
 
 ## Product imagery
 

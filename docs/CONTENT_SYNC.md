@@ -2,7 +2,7 @@
 
 The sync pipeline stages a candidate, validates it against the current source datasets and promotes only an explicitly reviewed fingerprint.
 
-Last verified: 2026-09-01 against the Moldova catalogue, international content sync scripts and current product assets.
+Last verified: 2026-09-02 against the Moldova catalogue, international content sync scripts and current product assets.
 
 ## Source inventory
 
@@ -11,6 +11,8 @@ The current `src/data/products.json` contains 50 Russian-language products from 
 Both `https://www.drnona.md` and `https://drnona.com` are allowlisted content sources. Product media comes from the owner-supplied local archive: all 50 published records resolve to distinct matched files under `public/products/catalog-normalized/`, with no active placeholder.
 
 To validate the Moldova source without writing data, run `npm run sync:catalog:md`. To rebuild `products.json` after reviewing the live inventory, run `npm run sync:catalog:md:write`. The command requires exactly 50 products and validates all five category counts, unique slugs and non-empty primary descriptions.
+
+The 2026-09-02 dry run verified 50 catalogue products, 48 international source matches, 48 SKUs, 43 ingredient lists and 36 usage guides. No candidate was promoted because the reviewed source dataset was already current.
 
 The Moldova sync preserves the current local `image`, `imageAlt` and `catalogScale` values. To repeat the reviewed media import from an extracted archive, run `npm run images:import:catalog -- <single_product_cards-folder>`. The import rejects missing or ambiguous numbered source files and removes the obsolete secondary-image field.
 

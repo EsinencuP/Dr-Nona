@@ -2,7 +2,7 @@
 
 Responsive QA combines geometry assertions, accessibility checks and seven committed catalogue baselines. Historical manual screenshot packages are not part of the repository.
 
-Last verified: 2026-09-01 against `tests/e2e/responsive-matrix.spec.ts`, the deep UI/UX audit and Playwright configuration.
+Last verified: 2026-09-02 against `tests/e2e/responsive-matrix.spec.ts`, the deep UI/UX audit and Playwright configuration.
 
 ## Viewport matrix
 
@@ -24,7 +24,7 @@ The Playwright projects start at 1440 × 900 and 390 × 844. The responsive test
 - Header, navigation and mobile menu
 - Home hero, Halo section and product promotion
 - Catalogue introduction, filters, product grid and empty state
-- Product title, media, selection action and accordion
+- Product title, media, source-backed overview, visible information cards and selection action
 - Selection handoff and contact form
 - Company, formula, editorial and dynamic official pages
 - Footer, 404 and malformed-request recovery
@@ -52,3 +52,5 @@ Failure screenshots, traces, videos and reports are local or CI artifacts. Do no
 Verify keyboard-only navigation, hover-capable pointers, touch input and `prefers-reduced-motion`. Reduced motion must preserve state changes and content access while disabling nonessential movement.
 
 Run `npm run test:e2e` after any layout, typography, navigation or interactive-state change.
+
+The 2026-09-02 product-detail pass additionally opened all 50 products at 390 px and 1440 px. All 100 route/viewport checks passed without image-stage overflow, clipped product objects, CTA collisions or document-level horizontal scrolling.

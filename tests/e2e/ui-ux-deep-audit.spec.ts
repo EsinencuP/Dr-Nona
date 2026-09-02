@@ -741,21 +741,14 @@ test.describe("7 · Interaction polish", () => {
     expect(before, "aria-pressed did not change after click").not.toEqual(after);
   });
 
-  test("accordion opens and closes on product page", async ({ page }) => {
+  test("product information is visible without disclosure friction", async ({ page }) => {
     await prepare(page, "/product/solaris-body-lotion");
-    const buttons = page.locator(".accordion-item > button");
-    await expect(buttons.first()).toBeVisible();
-
-    const firstBtn = buttons.first();
-    const initial = await firstBtn.getAttribute("aria-expanded");
-    if (initial === "false") {
-      await firstBtn.click();
-      await page.waitForTimeout(200);
-      await expect(firstBtn).toHaveAttribute("aria-expanded", "true");
-    }
-    await firstBtn.click();
-    await page.waitForTimeout(200);
-    await expect(firstBtn).toHaveAttribute("aria-expanded", "false");
+    const cards = page.locator(".product-copy-card");
+    await expect(cards).toHaveCount(3);
+    await expect(cards.first()).toBeVisible();
+    await expect(cards.first()).toContainText("О продукте");
+    await expect(cards.nth(1)).toContainText("Состав");
+    await expect(cards.nth(2)).toContainText("Способ применения");
   });
 
   test("catalogue search filter reduces visible product count", async ({ page }) => {

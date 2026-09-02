@@ -9,9 +9,9 @@ test("valid and invalid product deep links resolve correctly", async ({ page }) 
     })
   ).toBeVisible();
   await expect(page.getByText("324001", { exact: true })).toBeVisible();
-  await expect(page.getByRole("button", { name: /Полное описание/ })).toBeVisible();
-  await expect(page.getByRole("button", { name: /Состав/ })).toBeVisible();
-  await expect(page.getByRole("button", { name: /Способ применения/ })).toHaveCount(0);
+  await expect(page.getByRole("heading", { level: 3, name: "О продукте" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 3, name: "Состав" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 3, name: "Способ применения" })).toHaveCount(0);
   const relatedImages = page.locator(".related-grid .product-card__image");
   await expect(relatedImages).toHaveCount(4);
   for (const image of await relatedImages.all()) {
@@ -47,6 +47,7 @@ test("every catalog category exposes product identity and source", async ({ page
     await page.goto(href);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     await expect(page.locator(".product-purpose")).toBeVisible();
+    await expect(page.locator(".product-copy-card--overview")).toBeVisible();
     await expect(page.getByRole("link", { name: "Источник: drnona.md" })).toBeVisible();
     await expect(page.getByTestId("claims-review-notice")).toHaveCount(0);
   }

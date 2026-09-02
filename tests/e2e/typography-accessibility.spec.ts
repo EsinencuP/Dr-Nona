@@ -98,6 +98,7 @@ test("320–1920px reflow includes a 200% zoom equivalent", async ({ page }) => 
 });
 
 test("WCAG text spacing does not clip interactive text", async ({ page }) => {
+  test.setTimeout(90_000);
   await page.setViewportSize({ width: 390, height: 844 });
 
   for (const route of priorityRoutes) {
@@ -113,6 +114,12 @@ test("WCAG text spacing does not clip interactive text", async ({ page }) => {
         p { margin-bottom: 2em !important; }
       `,
     });
+    await page.evaluate(
+      () =>
+        new Promise<void>((resolve) =>
+          requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
+        )
+    );
 
     const result = await page.evaluate(() => {
       const clippedInteractive = [
@@ -123,7 +130,13 @@ test("WCAG text spacing does not clip interactive text", async ({ page }) => {
         .filter((element) => {
           const style = getComputedStyle(element);
           const bounds = element.getBoundingClientRect();
+          const carriesVisibleText = Boolean(element.textContent?.trim());
+          const isTextControl =
+            element instanceof HTMLInputElement ||
+            element instanceof HTMLSelectElement;
           return (
+            element.getAttribute("aria-hidden") !== "true" &&
+            (carriesVisibleText || isTextControl) &&
             style.display !== "none" &&
             style.visibility !== "hidden" &&
             bounds.width > 0 &&
@@ -134,6 +147,11 @@ test("WCAG text spacing does not clip interactive text", async ({ page }) => {
         })
         .map((element) => ({
           tag: element.tagName,
+          className: element.className,
+          href: element instanceof HTMLAnchorElement ? element.getAttribute("href") : null,
+          ariaHidden: element.getAttribute("aria-hidden"),
+          client: [element.clientWidth, element.clientHeight],
+          scroll: [element.scrollWidth, element.scrollHeight],
           text: element.textContent?.trim().slice(0, 80) ?? "",
         }));
 

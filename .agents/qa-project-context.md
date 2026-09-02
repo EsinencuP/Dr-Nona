@@ -1,6 +1,6 @@
 # Dr. Nona Moldova QA context
 
-Last verified: 2026-09-01 against base commit `ada4aa0e9c5e` and the current cleanup and QA worktree.
+Last verified: 2026-09-02 against base commit `a57d149` and the current product-detail worktree.
 
 ## Read first
 
@@ -20,7 +20,7 @@ Last verified: 2026-09-01 against base commit `ada4aa0e9c5e` and the current cle
 | Official content records | 137 |
 | Claims | 399 pending, 0 approved, 0 rejected |
 | SEO routes | 315 total, 311 indexable |
-| Unit/integration tests | 22 files, 165 tests |
+| Unit/integration tests | 23 files, 169 tests |
 | Browser suite | 277 passed, 17 intentionally skipped across 294 desktop/mobile scenarios |
 | Open release blockers | 8 P0/P1 blockers |
 

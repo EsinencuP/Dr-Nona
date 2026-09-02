@@ -257,9 +257,8 @@ describe("Dr. Nona application", () => {
     );
   });
 
-  test("connects product breadcrumbs and accordion semantics", async () => {
-    const user = userEvent.setup();
-    const { container } = renderApp("/product/lord-deodorant");
+  test("connects product breadcrumbs and exposes product information", async () => {
+    renderApp("/product/lord-deodorant");
 
     const breadcrumb = await screen.findByRole("navigation", {
       name: "Хлебные крошки",
@@ -273,18 +272,13 @@ describe("Dr. Nona application", () => {
       within(breadcrumb).getByText("Deodorant ( LORD )")
     ).toHaveAttribute("aria-current", "page");
 
-    const trigger = screen.getByRole("button", { name: "Состав" });
-    const panelId = trigger.getAttribute("aria-controls");
-    expect(panelId).toBeTruthy();
-    expect(trigger).toHaveAttribute("aria-expanded", "true");
-    const panel = container.querySelector<HTMLElement>(`#${panelId}`);
-    expect(panel).not.toBeNull();
-    expect(panel).toHaveAttribute("role", "region");
-    expect(panel).toHaveAttribute("aria-labelledby", trigger.id);
-
-    await user.click(trigger);
-    expect(trigger).toHaveAttribute("aria-expanded", "false");
-    expect(panel).toHaveAttribute("hidden");
+    const overview = screen.getByRole("heading", { level: 3, name: "О продукте" });
+    const ingredients = screen.getByRole("heading", { level: 3, name: "Состав" });
+    expect(overview.closest("article")).toHaveClass("product-copy-card");
+    expect(ingredients.closest("article")).toHaveClass("product-copy-card");
+    expect(overview.closest("article")).toBeVisible();
+    expect(ingredients.closest("article")).toBeVisible();
+    expect(screen.queryByRole("button", { name: "Состав" })).not.toBeInTheDocument();
   });
 
   test("keeps the approved home content hierarchy", async () => {

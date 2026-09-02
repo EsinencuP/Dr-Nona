@@ -30,7 +30,7 @@ for (const route of routes) {
   });
 }
 
-test("product breadcrumbs and accordion expose their relationships", async ({
+test("product breadcrumbs and visible information expose their relationships", async ({
   page,
 }) => {
   await page.goto("/product/lord-deodorant");
@@ -43,16 +43,15 @@ test("product breadcrumbs and accordion expose their relationships", async ({
     breadcrumb.getByText("Deodorant ( LORD )")
   ).toHaveAttribute("aria-current", "page");
 
-  const trigger = page.getByRole("button", { name: "Состав" });
-  const panelId = await trigger.getAttribute("aria-controls");
-  expect(panelId).toBeTruthy();
-  await expect(trigger).toHaveAttribute("aria-expanded", "true");
-
-  const panel = page.locator(`#${panelId}`);
-  await expect(panel).toHaveAttribute("role", "region");
-  await expect(panel).toHaveAttribute("aria-labelledby", await trigger.getAttribute("id") ?? "");
-
-  await trigger.click();
-  await expect(trigger).toHaveAttribute("aria-expanded", "false");
-  await expect(panel).toBeHidden();
+  const overview = page.getByRole("heading", { level: 3, name: "О продукте" });
+  const ingredients = page.getByRole("heading", { level: 3, name: "Состав" });
+  await expect(overview).toBeVisible();
+  await expect(ingredients).toBeVisible();
+  await expect(overview.locator("xpath=ancestor::article[1]")).toHaveClass(
+    /product-copy-card/
+  );
+  await expect(ingredients.locator("xpath=ancestor::article[1]")).toHaveClass(
+    /product-copy-card/
+  );
+  await expect(page.getByRole("button", { name: "Состав" })).toHaveCount(0);
 });

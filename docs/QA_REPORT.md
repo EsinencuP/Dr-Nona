@@ -2,7 +2,7 @@
 
 This report indexes the current automated evidence only. It does not preserve historical screenshots or cumulative implementation logs.
 
-Last verified: 2026-09-01 against base commit `ada4aa0e9c5e` and the current cleanup and QA worktree.
+Last verified: 2026-09-02 against base commit `a57d149` and the current product-detail worktree.
 
 ## Scope
 
@@ -11,9 +11,9 @@ The run covers repository hygiene, documentation consistency, architecture, cont
 ## Verified identity
 
 <!-- build-identity:start -->
-- **Status date**: 2026-09-01
-- **Base commit**: `ada4aa0e9c5e`
-- **Repository state**: cleanup and QA synchronization worktree; no commit or push performed
+- **Status date**: 2026-09-02
+- **Base commit**: `a57d149`
+- **Repository state**: product-detail redesign and QA worktree; commit and push follow this report
 - **Environment**: Windows, Node 22.23.1, npm 10.9.8, Chromium desktop/mobile
 - **Products**: 50 source, 50 published, 0 drafts
 - **Official content records**: 137
@@ -35,7 +35,7 @@ The run covers repository hygiene, documentation consistency, architecture, cont
 | `npm run security:validate` | PASS | Production-enforced CSP, required headers and minimal external origins |
 | `npm run typecheck` | PASS | TypeScript project references |
 | `npm run lint` | PASS | ESLint with zero warnings |
-| `npm run test` | PASS | 22 files, 165 tests |
+| `npm run test` | PASS | 23 files, 169 tests |
 | `npm run build` | PASS | 315 prerendered routes and 311 canonical sitemap URLs; 150 Product and 114 Article JSON-LD records |
 | `npm run security:runtime` | PASS | 5 rendered routes, enforced CSP, 0 violations |
 | `npm run performance:runtime` | PASS | Home 41.6/76.2/387.9 ms; contact 45.9/61.2/277.2 ms; catalogue 47.9/92.4/318.0 ms parse/script/task |
@@ -57,3 +57,7 @@ The authoritative list lives in `docs/release-status.json` and [the release stat
 ## Release relation
 
 Technical PASS means the tested worktree builds and satisfies its automated contracts. It does not mean the site is legally, operationally or commercially approved for production.
+
+## Product-detail verification
+
+The product page now prioritizes the product name, editorial description, formula basis, usage summary and selection action before compact service metadata. Description, ingredients and usage are visible without accordion interaction. A dedicated 50-product geometry audit covered desktop and mobile object containment, CTA separation and horizontal overflow; the full Playwright suite independently covers text spacing, 200% zoom equivalence, axe and the 320–1920 px viewport matrix.

@@ -42,6 +42,10 @@ async function preparePage(page: Page, path: string) {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto(path);
   await page.locator("main").waitFor();
+  await page.getByText("Загрузка страницы", { exact: true }).waitFor({
+    state: "detached",
+    timeout: 15_000,
+  });
   await page.addStyleTag({
     content: `
       *, *::before, *::after {
@@ -383,23 +387,20 @@ async function runViewportContract(
       name: "Deodorant ( LORD )",
     })
   ).toBeVisible();
-  const accordionButtons = page.locator(".accordion-item > button");
-  await expect(accordionButtons).toHaveCount(2);
-  for (const button of await accordionButtons.all()) {
-    await button.click();
-    await expect(button).toHaveAttribute("aria-expanded", "true");
-  }
+  const productInformationCards = page.locator(".product-copy-card");
+  await expect(productInformationCards).toHaveCount(2);
+  await expect(productInformationCards.first()).toBeVisible();
   await page.evaluate(() => {
     const title = document.querySelector(".product-info h1");
-    const firstAccordionLabel = document.querySelector(
-      ".accordion-item button span"
+    const firstInformationLabel = document.querySelector(
+      ".product-copy-card h3"
     );
     if (title) {
       title.textContent =
         "Deodorant antiperspirant pentru protecție îndelungată și îngrijire zilnică";
     }
-    if (firstAccordionLabel) {
-      firstAccordionLabel.textContent =
+    if (firstInformationLabel) {
+      firstInformationLabel.textContent =
         "Descriere completă și recomandări detaliate pentru utilizare";
     }
     window.scrollTo(0, 0);
