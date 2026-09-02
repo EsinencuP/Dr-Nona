@@ -35,3 +35,7 @@ Thumbs.db
 # Reproducible build-time data. CI publishes reports from artifacts/reports/.
 src/data/runtime-content.json
 src/data/seo-manifest.json
+
+# Prisma local database
+prisma/dev.db
+prisma/dev.db-journal
