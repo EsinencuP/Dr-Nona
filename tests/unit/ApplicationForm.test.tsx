@@ -1,8 +1,11 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
+import type { ApplicationInput } from "../../shared/applications/application-schema";
 import { ApplicationForm } from "../../src/features/contact/ApplicationForm";
 import { loadProductData } from "../../src/data";
+import { LocaleProvider } from "../../src/locales/LocaleProvider";
+import { Router } from "../../src/router";
 
 const { products } = await loadProductData();
 
@@ -110,5 +113,78 @@ describe("ApplicationForm", () => {
     );
     expect(screen.getByLabelText("Имя")).toHaveValue("Ana");
     expect(screen.getByLabelText("Телефон")).toHaveValue("069 123 456");
+  });
+
+  test("submits optional contact fields and stored attribution context", async () => {
+    window.history.replaceState({}, "", "/contactus?source=selection");
+    sessionStorage.setItem("utm_source", "instagram");
+    sessionStorage.setItem("utm_medium", "story");
+    sessionStorage.setItem("utm_campaign", "autumn-care");
+    sessionStorage.setItem("utm_content", "product-card");
+    sessionStorage.setItem(
+      "session_product_history",
+      JSON.stringify(["lord-deodorant"])
+    );
+    const submit = vi.fn(
+      async (input: ApplicationInput, idempotencyKey: string) => {
+        void input;
+        void idempotencyKey;
+        return {
+          kind: "success" as const,
+          requestId: "request-context",
+          delivery: { telegram: "sent" as const },
+        };
+      }
+    );
+    const user = userEvent.setup();
+    render(<ApplicationForm products={[]} submit={submit} />);
+
+    await fillCommon(user);
+    await user.type(screen.getByLabelText("Email (необязательно)"), "ana@example.com");
+    await user.type(
+      screen.getByLabelText("Комментарий к заявке (необязательно)"),
+      "Позвоните заранее"
+    );
+    await user.type(
+      screen.getByLabelText("Удобное время для звонка (необязательно)"),
+      "После 18:00"
+    );
+    await user.type(screen.getByLabelText("Предпочтительная дата"), "2099-01-01");
+    await user.type(screen.getByLabelText("Предпочтительное время"), "10:00");
+    await user.click(screen.getByRole("button", { name: "Отправить заявку" }));
+
+    await waitFor(() => expect(submit).toHaveBeenCalledTimes(1));
+    expect(submit.mock.calls[0][0]).toMatchObject({
+      email: "ana@example.com",
+      comment: "Позвоните заранее",
+      preferredCallTime: "После 18:00",
+      utmSource: "instagram",
+      utmMedium: "story",
+      utmCampaign: "autumn-care",
+      utmContent: "product-card",
+      entryPoint: "/contactus?source=selection",
+      sessionHistory: '["lord-deodorant"]',
+    });
+    window.history.replaceState({}, "", "/");
+  });
+
+  test("renders optional fields in Romanian", () => {
+    window.history.replaceState({}, "", "/ro/contactus");
+    render(
+      <Router>
+        <LocaleProvider>
+          <ApplicationForm products={[]} />
+        </LocaleProvider>
+      </Router>
+    );
+
+    expect(screen.getByLabelText("Email (opțional)")).toBeVisible();
+    expect(
+      screen.getByLabelText("Comentariu la solicitare (opțional)")
+    ).toBeVisible();
+    expect(
+      screen.getByLabelText("Interval potrivit pentru apel (opțional)")
+    ).toBeVisible();
+    window.history.replaceState({}, "", "/");
   });
 });

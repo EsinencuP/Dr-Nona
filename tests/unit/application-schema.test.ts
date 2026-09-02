@@ -55,6 +55,60 @@ describe("application schema", () => {
     }
   });
 
+  test("accepts and normalizes optional contact and analytics fields", () => {
+    const result = validateApplicationInput(
+      {
+        ...base,
+        type: "order",
+        productSlugs: ["lord-deodorant"],
+        email: " ana@example.com ",
+        comment: "  Please call before delivery  ",
+        preferredCallTime: "  after 18:00  ",
+        utmSource: " instagram ",
+        utmMedium: " story ",
+        utmCampaign: " autumn ",
+        utmContent: " product-card ",
+        entryPoint: " /contactus?utm_source=instagram ",
+        sessionHistory: ' ["lord-deodorant"] ',
+      },
+      { allowedProductSlugs: allowed }
+    );
+
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data).toMatchObject({
+        email: "ana@example.com",
+        comment: "Please call before delivery",
+        preferredCallTime: "after 18:00",
+        utmSource: "instagram",
+        entryPoint: "/contactus?utm_source=instagram",
+        sessionHistory: '["lord-deodorant"]',
+      });
+    }
+  });
+
+  test.each([
+    ["email", { email: "not-an-email" }],
+    ["comment", { comment: "x".repeat(501) }],
+    ["preferredCallTime", { preferredCallTime: "x".repeat(101) }],
+    ["utmSource", { utmSource: "x".repeat(201) }],
+    ["entryPoint", { entryPoint: "x".repeat(501) }],
+    ["sessionHistory", { sessionHistory: "x".repeat(2001) }],
+  ])("rejects invalid optional field %s", (field, override) => {
+    const result = validateApplicationInput(
+      {
+        ...base,
+        type: "order",
+        productSlugs: ["lord-deodorant"],
+        ...override,
+      },
+      { allowedProductSlugs: allowed }
+    );
+
+    expect(result.success).toBe(false);
+    if (!result.success) expect(result.fieldErrors).toHaveProperty(field);
+  });
+
   test("accepts a future consultation in Europe/Chisinau", () => {
     const result = validateApplicationInput(
       {

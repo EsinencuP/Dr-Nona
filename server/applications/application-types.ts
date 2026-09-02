@@ -6,6 +6,18 @@ export type ApplicationProduct = {
   sku: string;
 };
 
+export type ApplicationExtraFields = {
+  email?: string;
+  comment?: string;
+  preferredCallTime?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  utmContent?: string;
+  entryPoint?: string;
+  sessionHistory?: string;
+};
+
 type ApplicationRecordBase = {
   schemaVersion: 1;
   requestId: string;

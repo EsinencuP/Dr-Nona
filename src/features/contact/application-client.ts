@@ -24,6 +24,7 @@ export async function submitApplication(
   idempotencyKey: string,
   fetchImpl: typeof fetch = fetch
 ): Promise<ApplicationApiResult> {
+  const requestBody: ApplicationInput = { ...input };
   let response: Response;
   try {
     response = await fetchImpl("/api/applications", {
@@ -32,7 +33,7 @@ export async function submitApplication(
         "Content-Type": "application/json",
         "Idempotency-Key": idempotencyKey,
       },
-      body: JSON.stringify(input),
+      body: JSON.stringify(requestBody),
     });
   } catch {
     return { kind: "network-error" };

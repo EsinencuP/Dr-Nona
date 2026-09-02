@@ -9,9 +9,15 @@ async function fillCommon(page: Page) {
 }
 
 test("consultation success uses mocked API and focuses status", async ({ page }) => {
-  let submittedLocale: string | undefined;
+  let submittedBody: Record<string, unknown> | undefined;
+  await page.addInitScript(() => {
+    sessionStorage.setItem(
+      "session_product_history",
+      JSON.stringify(["dynamic-hydrating-cream"])
+    );
+  });
   await page.route("**/api/applications", async (route) => {
-    submittedLocale = route.request().postDataJSON().locale;
+    submittedBody = route.request().postDataJSON() as Record<string, unknown>;
     await route.fulfill({
       status: 201,
       contentType: "application/json",
@@ -22,18 +28,39 @@ test("consultation success uses mocked API and focuses status", async ({ page })
       }),
     });
   });
-  await page.goto("/contactus");
+  await page.goto(
+    "/contactus?utm_source=instagram&utm_medium=story&utm_campaign=autumn-care&utm_content=product-card"
+  );
   await expect(page.getByRole("button", { name: "Консультация" })).toHaveAttribute(
     "aria-pressed",
     "true"
   );
   await fillCommon(page);
+  await page.getByLabel("Email (необязательно)").fill("ana@example.com");
+  await page
+    .getByLabel("Комментарий к заявке (необязательно)")
+    .fill("Позвоните заранее");
+  await page
+    .getByLabel("Удобное время для звонка (необязательно)")
+    .fill("После 18:00");
   await page.getByLabel("Предпочтительная дата").fill("2099-01-01");
   await page.getByLabel("Предпочтительное время").fill("10:00");
   await page.getByRole("button", { name: "Отправить заявку" }).click();
   await expect(page.getByText(/Заявка №request-e2e отправлена/)).toBeVisible();
   await expect(page.getByRole("heading", { name: "Статус заявки" })).toBeFocused();
-  expect(submittedLocale).toBe("ru-MD");
+  expect(submittedBody).toMatchObject({
+    locale: "ru-MD",
+    email: "ana@example.com",
+    comment: "Позвоните заранее",
+    preferredCallTime: "После 18:00",
+    utmSource: "instagram",
+    utmMedium: "story",
+    utmCampaign: "autumn-care",
+    utmContent: "product-card",
+    entryPoint:
+      "/contactus?utm_source=instagram&utm_medium=story&utm_campaign=autumn-care&utm_content=product-card",
+    sessionHistory: '["dynamic-hydrating-cream"]',
+  });
 });
 
 test("Romanian contact form submits ro-MD through the same API contract", async ({ page }) => {

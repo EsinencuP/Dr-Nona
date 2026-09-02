@@ -34,6 +34,28 @@ const baseApplicationSchema = z.object({
     error: "Необходимо принять условия обработки данных",
   }),
   website: z.string().max(0, "Некорректные данные формы").optional(),
+  email: z
+    .string()
+    .trim()
+    .email("Некорректный адрес электронной почты")
+    .optional()
+    .or(z.literal("")),
+  comment: z
+    .string()
+    .trim()
+    .max(500, "Комментарий: не более 500 символов")
+    .optional(),
+  preferredCallTime: z
+    .string()
+    .trim()
+    .max(100, "Время звонка: слишком длинное значение")
+    .optional(),
+  utmSource: z.string().trim().max(200).optional(),
+  utmMedium: z.string().trim().max(200).optional(),
+  utmCampaign: z.string().trim().max(200).optional(),
+  utmContent: z.string().trim().max(200).optional(),
+  entryPoint: z.string().trim().max(500).optional(),
+  sessionHistory: z.string().trim().max(2000).optional(),
 });
 
 const orderApplicationSchema = baseApplicationSchema.extend({

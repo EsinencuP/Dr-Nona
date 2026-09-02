@@ -15,6 +15,7 @@ import { Link } from "../../router";
 import { submitApplication } from "./application-client";
 import type { ApplicationApiResult } from "./application-client";
 import { validateClientApplication } from "./client-application-validation";
+import { readSessionValue } from "./utm-capture";
 
 type FormMode = "order" | "consultation";
 type FormStatus =
@@ -48,6 +49,12 @@ function localizeServerErrors(
     "Фамилия: обязательное поле": "Nume: câmp obligatoriu",
     "Город: обязательное поле": "Oraș: câmp obligatoriu",
     "Некорректный номер телефона": "Număr de telefon incorect",
+    "Некорректный адрес электронной почты":
+      "Adresa de email nu este corectă",
+    "Комментарий: не более 500 символов":
+      "Comentariul poate avea cel mult 500 de caractere",
+    "Время звонка: слишком длинное значение":
+      "Intervalul pentru apel este prea lung",
     "Необходимо принять условия обработки данных":
       "Este necesar acordul pentru prelucrarea datelor",
     "Выберите хотя бы один товар": "Selectați cel puțin un produs",
@@ -87,6 +94,10 @@ export function ApplicationForm({
         lastName: "Nume",
         phone: "Telefon",
         city: "Oraș",
+        email: "Email (opțional)",
+        comment: "Comentariu la solicitare (opțional)",
+        preferredCallTime: "Interval potrivit pentru apel (opțional)",
+        preferredCallTimePlaceholder: "De exemplu: după ora 18:00",
         selectedProducts: "Produse selectate",
         positions: "produse",
         missingSku: "nu este indicat",
@@ -122,6 +133,10 @@ export function ApplicationForm({
         lastName: "Фамилия",
         phone: "Телефон",
         city: "Город",
+        email: "Email (необязательно)",
+        comment: "Комментарий к заявке (необязательно)",
+        preferredCallTime: "Удобное время для звонка (необязательно)",
+        preferredCallTimePlaceholder: "Например: после 18:00",
         selectedProducts: "Выбранные товары",
         positions: "поз.",
         missingSku: "не указан",
@@ -198,15 +213,29 @@ export function ApplicationForm({
       consentAccepted: form.get("consentAccepted") === "on",
       website: String(form.get("website") ?? ""),
     };
+    const analyticsFields = {
+      email: String(form.get("email") ?? "").trim() || undefined,
+      comment: String(form.get("comment") ?? "").trim() || undefined,
+      preferredCallTime:
+        String(form.get("preferredCallTime") ?? "").trim() || undefined,
+      utmSource: readSessionValue("utm_source"),
+      utmMedium: readSessionValue("utm_medium"),
+      utmCampaign: readSessionValue("utm_campaign"),
+      utmContent: readSessionValue("utm_content"),
+      entryPoint: window.location.pathname + window.location.search,
+      sessionHistory: readSessionValue("session_product_history"),
+    };
     const raw =
       mode === "order"
         ? {
             ...common,
+            ...analyticsFields,
             type: "order",
             productSlugs: products.map((product) => product.slug),
           }
         : {
             ...common,
+            ...analyticsFields,
             type: "consultation",
             consultationMode: String(
               form.get("consultationMode") ?? "online"
@@ -304,6 +333,57 @@ export function ApplicationForm({
               )}
             </label>
           ))}
+        </div>
+
+        <div className="application-form__optional">
+          <label className="application-field">
+            <span>{copy.email}</span>
+            <input
+              name="email"
+              type="email"
+              autoComplete="email"
+              disabled={accepted}
+              aria-invalid={Boolean(fieldErrors.email)}
+              aria-describedby={describedBy("email", fieldErrors)}
+            />
+            {fieldErrors.email && (
+              <small id="email-error">{fieldErrors.email}</small>
+            )}
+          </label>
+          <label className="application-field">
+            <span>{copy.preferredCallTime}</span>
+            <input
+              name="preferredCallTime"
+              type="text"
+              placeholder={copy.preferredCallTimePlaceholder}
+              maxLength={100}
+              disabled={accepted}
+              aria-invalid={Boolean(fieldErrors.preferredCallTime)}
+              aria-describedby={describedBy(
+                "preferredCallTime",
+                fieldErrors
+              )}
+            />
+            {fieldErrors.preferredCallTime && (
+              <small id="preferredCallTime-error">
+                {fieldErrors.preferredCallTime}
+              </small>
+            )}
+          </label>
+          <label className="application-field application-field--wide">
+            <span>{copy.comment}</span>
+            <textarea
+              name="comment"
+              rows={3}
+              maxLength={500}
+              disabled={accepted}
+              aria-invalid={Boolean(fieldErrors.comment)}
+              aria-describedby={describedBy("comment", fieldErrors)}
+            />
+            {fieldErrors.comment && (
+              <small id="comment-error">{fieldErrors.comment}</small>
+            )}
+          </label>
         </div>
 
         {mode === "order" ? (

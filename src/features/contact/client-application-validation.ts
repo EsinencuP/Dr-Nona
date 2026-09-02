@@ -4,6 +4,16 @@ export type ClientValidationResult =
   | { success: true; data: ApplicationInput }
   | { success: false; fieldErrors: Record<string, string> };
 
+function optionalTrimmedText(value: unknown) {
+  if (typeof value !== "string") return undefined;
+  const trimmed = value.trim();
+  return trimmed || undefined;
+}
+
+function optionalString(value: unknown) {
+  return typeof value === "string" ? value : undefined;
+}
+
 export function validateClientApplication(
   raw: Record<string, unknown>,
   allowedProductSlugs: ReadonlySet<string>,
@@ -72,6 +82,17 @@ export function validateClientApplication(
   if (typeof raw.website === "string" && raw.website.length > 0) {
     fieldErrors.website = copy.form;
   }
+  const optionalFields = {
+    email: optionalTrimmedText(raw.email),
+    comment: optionalTrimmedText(raw.comment),
+    preferredCallTime: optionalTrimmedText(raw.preferredCallTime),
+    utmSource: optionalString(raw.utmSource),
+    utmMedium: optionalString(raw.utmMedium),
+    utmCampaign: optionalString(raw.utmCampaign),
+    utmContent: optionalString(raw.utmContent),
+    entryPoint: optionalString(raw.entryPoint),
+    sessionHistory: optionalString(raw.sessionHistory),
+  };
 
   if (raw.type === "order") {
     const slugs = Array.isArray(raw.productSlugs)
@@ -96,6 +117,7 @@ export function validateClientApplication(
         consentAccepted: true,
         website: String(raw.website ?? ""),
         productSlugs: slugs,
+        ...optionalFields,
       },
     };
   }
@@ -131,6 +153,7 @@ export function validateClientApplication(
         consultationMode: raw.consultationMode as "online" | "offline",
         consultationDate: String(raw.consultationDate),
         consultationTime: String(raw.consultationTime),
+        ...optionalFields,
       },
     };
   }

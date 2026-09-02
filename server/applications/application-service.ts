@@ -1,8 +1,14 @@
 import { randomUUID } from "node:crypto";
 import type { ApplicationInput } from "../../shared/applications/application-schema.js";
 import { normalizePhone } from "../../shared/applications/application-schema.js";
+import {
+  saveApplicationToDb,
+  saveMessageIdToDb,
+  type DbWriteInput,
+} from "./application-db.js";
 import { formatTelegramApplication } from "./format-application.js";
 import type {
+  ApplicationExtraFields,
   ApplicationProduct,
   ApplicationRecord,
   ApplicationServiceResult,
@@ -18,6 +24,7 @@ export type ApplicationServiceDependencies = {
   createRequestId?: () => string;
   now?: () => Date;
   logger?: (metadata: Record<string, unknown>) => void;
+  extraFields?: ApplicationExtraFields;
 };
 
 export async function processApplication(
@@ -58,10 +65,60 @@ export async function processApplication(
           consultationTime: input.consultationTime,
           timezone: "Europe/Chisinau",
         };
+  const dbInput: DbWriteInput = {
+    requestId,
+    firstName: input.firstName,
+    lastName: input.lastName,
+    phone: phone.phone,
+    phoneNormalized: phone.phoneNormalized,
+    email: input.email?.trim() || dependencies.extraFields?.email,
+    region: input.city,
+    type: input.type,
+    comment: input.comment?.trim() || dependencies.extraFields?.comment,
+    preferredCallTime:
+      input.preferredCallTime?.trim() ||
+      dependencies.extraFields?.preferredCallTime,
+    utmSource: input.utmSource ?? dependencies.extraFields?.utmSource,
+    utmMedium: input.utmMedium ?? dependencies.extraFields?.utmMedium,
+    utmCampaign: input.utmCampaign ?? dependencies.extraFields?.utmCampaign,
+    utmContent: input.utmContent ?? dependencies.extraFields?.utmContent,
+    entryPoint: input.entryPoint ?? dependencies.extraFields?.entryPoint,
+    sessionHistory:
+      input.sessionHistory ?? dependencies.extraFields?.sessionHistory,
+    eventDate:
+      input.type === "consultation" ? input.consultationDate : undefined,
+    eventTime:
+      input.type === "consultation" ? input.consultationTime : undefined,
+    consultationMode:
+      input.type === "consultation" ? input.consultationMode : undefined,
+    products:
+      input.type === "order"
+        ? input.productSlugs.map((slug) => ({ slug, quantity: 1 }))
+        : undefined,
+  };
+  const dbResult = await saveApplicationToDb(dbInput).catch(
+    (error: unknown) => ({
+      success: false as const,
+      error: String(error),
+    })
+  );
+  dependencies.logger?.({
+    event: "application.db.write",
+    requestId,
+    dbSuccess: dbResult.success,
+    ...(!dbResult.success && { dbError: dbResult.error }),
+  });
   const message = formatTelegramApplication(record);
   const telegramResult = await dependencies
     .sendTelegram(record, message)
     .catch(() => undefined);
+  if (
+    dbResult.success &&
+    telegramResult?.status === "sent" &&
+    telegramResult.providerMessageId
+  ) {
+    await saveMessageIdToDb(requestId, telegramResult.providerMessageId);
+  }
   const delivery = {
     telegram:
       telegramResult?.provider === "telegram" &&
