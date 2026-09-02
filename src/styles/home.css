@@ -1,6 +1,6 @@
 .home-hero {
   width: 100%;
-  min-height: 0;
+  min-height: calc(100svh - var(--header-height));
   position: relative;
   overflow: hidden;
   padding: clamp(24px, 3vw, 42px) 0 20px;
@@ -18,7 +18,7 @@
 }
 
 .home-hero__inner {
-  min-height: 450px;
+  min-height: 560px;
   display: grid;
   grid-template-columns: minmax(440px, 0.86fr) minmax(520px, 1.14fr);
   align-items: center;
@@ -163,8 +163,8 @@
 
 .home-product-editorial {
   display: grid;
-  grid-template-columns: minmax(0, 1.72fr) minmax(330px, 0.68fr);
-  gap: 18px;
+  grid-template-columns: minmax(0, 1.4fr) minmax(340px, 0.75fr);
+  gap: 20px;
 }
 
 .home-product-editorial > *,
@@ -173,10 +173,10 @@
 }
 
 .home-product-spotlight > article {
-  min-height: 440px;
+  min-height: 480px;
   height: 100%;
   display: grid;
-  grid-template-columns: minmax(0, 1.18fr) minmax(300px, 0.82fr);
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
   overflow: hidden;
   border: 1px solid rgba(78, 153, 167, 0.22);
   border-radius: var(--radius-xl);
@@ -200,6 +200,7 @@
   height: 100%;
   display: block;
   object-fit: contain;
+  scale: 1.42;
   transition: transform 260ms var(--ease-out);
 }
 
@@ -207,8 +208,8 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 30px;
+  justify-content: flex-start;
+  padding: 36px 30px;
 }
 
 .home-product-spotlight__meta {
@@ -249,6 +250,8 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 12px;
+  margin-top: auto;
+  padding-top: 22px;
 }
 
 .home-product-spotlight__actions .save-button {
@@ -278,8 +281,9 @@
 
 .home-product-mini {
   height: 100%;
+  min-height: 200px;
   display: grid;
-  grid-template-columns: minmax(120px, 0.88fr) minmax(0, 1.12fr);
+  grid-template-columns: 160px minmax(0, 1fr);
   overflow: hidden;
   border: 1px solid rgba(78, 153, 167, 0.2);
   border-radius: var(--radius-lg);
@@ -302,8 +306,12 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  scale: var(--product-object-scale, 0.9);
+  scale: 1.07;
   transition: scale 240ms var(--ease-out);
+}
+
+.home-product-mini--landscape .home-product-mini__media img {
+  scale: 1.3;
 }
 
 .home-product-mini__body {
@@ -324,9 +332,13 @@
 }
 
 .home-product-mini h3 {
+  display: -webkit-box;
+  overflow: hidden;
   margin-bottom: 12px;
   font-size: clamp(1.45rem, 1.75vw, 1.9rem);
   line-height: 1.08;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .home-product-mini .text-link {
@@ -352,7 +364,7 @@
 
 .home-promo-banner > article {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(220px, 1.05fr);
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 1fr);
   background:
     radial-gradient(circle at 18% 12%, rgba(201, 235, 239, 0.9), transparent 44%),
     linear-gradient(135deg, #0d6272, #073c49);
@@ -369,8 +381,11 @@
   grid-column: 2;
   grid-row: 1;
   object-fit: contain;
-  padding: 18px;
-  background: var(--white);
+  padding: 0;
+  background:
+    radial-gradient(circle at 50% 52%, rgba(190, 232, 237, 0.68), transparent 54%),
+    linear-gradient(145deg, rgba(43, 132, 146, 0.38), rgba(5, 55, 68, 0.16));
+  scale: 1;
   transition: transform 260ms var(--ease-out);
 }
 
@@ -384,7 +399,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  padding: 28px;
+  padding: 32px 24px 32px 32px;
   color: var(--white);
 }
 
@@ -411,6 +426,7 @@
 }
 
 .home-promo-banner__content .button {
+  margin-top: auto;
   padding-inline: 18px;
   white-space: nowrap;
 }
@@ -423,9 +439,11 @@
 .home-lord-banner__visual {
   position: absolute;
   inset: 18px 18px 18px 46%;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 12px 10px 8px;
   overflow: hidden;
   border-radius: 22px;
   background: rgba(255, 255, 255, 0.96);
@@ -436,13 +454,23 @@
 }
 
 .home-lord-banner__visual img {
-  width: 100%;
+  width: 50%;
   height: 100%;
   min-width: 0;
   object-fit: contain;
-  padding: 8px;
+  padding: 0;
+  object-position: center bottom;
   opacity: 1;
+  scale: 1;
   transition: transform 260ms var(--ease-out), opacity 180ms var(--ease-standard);
+}
+
+.home-lord-banner__visual img:first-child {
+  width: 56%;
+}
+
+.home-lord-banner__visual img:last-child {
+  width: 44%;
 }
 
 .home-lord-banner__content {

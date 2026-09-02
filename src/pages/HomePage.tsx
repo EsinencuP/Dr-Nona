@@ -321,7 +321,13 @@ export default function HomePage() {
           <div className="home-product-supporting" aria-label={copy.moreProducts}>
             {supportingProducts.map((product, index) => (
               <Reveal key={product.slug} delay={70 + index * 55}>
-                <article className="home-product-mini">
+                <article
+                  className={`home-product-mini${
+                    product.slug === "gonseen"
+                      ? " home-product-mini--landscape"
+                      : ""
+                  }`}
+                >
                   <Link
                     className="home-product-mini__media"
                     to={`/product/${product.slug}`}
@@ -333,7 +339,7 @@ export default function HomePage() {
                       alt=""
                       width="1600"
                       height="1600"
-                      sizes="(max-width: 640px) 108px, (max-width: 960px) 28vw, 220px"
+                      sizes="(max-width: 640px) 124px, (max-width: 960px) 28vw, 220px"
                     />
                   </Link>
                   <div className="home-product-mini__body">

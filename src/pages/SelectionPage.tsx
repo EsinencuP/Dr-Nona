@@ -86,13 +86,19 @@ export default function SelectionPage() {
           <div className="selection-list">
             {chosen.map((product) => (
               <article key={product.slug}>
-                <ProductImage
-                  src={product.image}
-                  alt=""
-                  width="900"
-                  height="900"
-                  sizes="(max-width: 640px) 116px, 164px"
-                />
+                <Link
+                  className="selection-list__media"
+                  to={`/product/${product.slug}`}
+                  aria-label={product.officialName}
+                >
+                  <ProductImage
+                    src={product.image}
+                    alt=""
+                    width="900"
+                    height="900"
+                    sizes="(max-width: 640px) 100px, 160px"
+                  />
+                </Link>
                 <div>
                   <small>{product.category}</small>
                   <h2><Link to={`/product/${product.slug}`}>{product.officialName}</Link></h2>

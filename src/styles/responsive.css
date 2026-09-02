@@ -243,12 +243,13 @@
   }
 
   .home-hero {
+    min-height: calc(100svh - var(--header-height));
     padding-top: 46px;
     background-position: 66% center;
   }
 
   .home-hero__inner {
-    min-height: 0;
+    min-height: 460px;
   }
 
   .hero-copy {
@@ -531,7 +532,7 @@
   }
 
   .home-hero {
-    min-height: auto;
+    min-height: calc(100svh - var(--header-height));
     padding: 24px 0 14px;
     background-image:
       linear-gradient(180deg, rgba(247, 251, 252, 0.98) 0%, rgba(247, 251, 252, 0.95) 42%, rgba(247, 251, 252, 0.4) 50%, rgba(247, 251, 252, 0.08) 57%, rgba(247, 251, 252, 0) 64%),
@@ -677,8 +678,8 @@
   }
 
   .home-product-mini {
-    min-height: 158px;
-    grid-template-columns: 108px minmax(0, 1fr);
+    min-height: 172px;
+    grid-template-columns: 124px minmax(0, 1fr);
   }
 
   .home-product-mini__body {
@@ -690,29 +691,31 @@
     font-size: 1.24rem;
   }
 
-  .home-promo-banner > article,
   .home-lord-banner > article {
     min-height: 286px;
   }
 
+  .home-promo-banner > article {
+    min-height: 420px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 210px;
+  }
+
   .home-promo-banner__content {
-    width: auto;
-    inset: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 18px;
+    grid-column: 1;
+    grid-row: 1;
+    padding: 24px 20px 20px;
   }
 
   .home-promo-banner > article::after {
-    background:
-      linear-gradient(90deg, rgba(24, 37, 40, 0.92) 0%, rgba(24, 37, 40, 0.67) 58%, rgba(24, 37, 40, 0.08) 100%),
-      linear-gradient(180deg, transparent 55%, rgba(24, 37, 40, 0.5));
+    display: none;
   }
 
-  .home-promo-banner > article > img {
-    padding: 10px;
-    transform: none;
+  .home-promo-banner > article img {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 0;
+    scale: 1;
   }
 
   .home-promo-banner h3 {
@@ -726,6 +729,7 @@
 
   .home-lord-banner__visual {
     inset: 12px 12px 12px 52%;
+    padding: 8px 4px;
     opacity: 1;
   }
 
@@ -1428,15 +1432,21 @@
   }
 
   .selection-list article {
-    min-height: 136px;
-    grid-template-columns: 116px minmax(0, 1fr) 44px;
-    gap: 14px;
-    padding-block: 10px;
+    min-height: 124px;
+    grid-template-columns: 100px minmax(0, 1fr) auto;
+    gap: 16px;
+    padding-block: 12px;
   }
 
-  .selection-list img {
-    width: 116px;
-    height: 116px;
+  .selection-list__media {
+    width: 100px;
+    height: 100px;
+  }
+
+  .selection-list__media img {
+    width: 100%;
+    height: 100%;
+    scale: 1.08;
   }
 
   .selection-list h2 {
