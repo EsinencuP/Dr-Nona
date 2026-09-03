@@ -39,3 +39,5 @@ src/data/seo-manifest.json
 # Prisma local database
 prisma/dev.db
 prisma/dev.db-journal
+
+.vercel

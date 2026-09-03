@@ -17,6 +17,7 @@
     { "id": "contact.proxy", "path": "api/applications.ts", "kind": "serverless-proxy" },
     { "id": "contact.devAdapter", "path": "server/dev/applications-middleware.ts", "kind": "development-adapter" },
     { "id": "crm.external", "repository": "EsinencuP/Dr-Nona-CRM", "kind": "external-backend" },
+    { "id": "deploy.ignore", "path": ".vercelignore", "kind": "deployment-config" },
     { "id": "tests.unit", "path": "tests/unit", "kind": "tests" },
     { "id": "tests.e2e", "path": "tests/e2e", "kind": "tests" }
   ],
@@ -30,6 +31,7 @@
     { "from": "contact.client", "to": "contact.proxy", "type": "posts-to" },
     { "from": "contact.devAdapter", "to": "contact.proxy", "type": "adapts" },
     { "from": "contact.proxy", "to": "crm.external", "type": "forwards-to" },
+    { "from": "deploy.ignore", "to": "contact.proxy", "type": "protects-deployment-input" },
     { "from": "tests.unit", "to": "contact.client", "type": "covers" },
     { "from": "tests.unit", "to": "contact.proxy", "type": "covers" },
     { "from": "tests.e2e", "to": "pages", "type": "covers" }
