@@ -2,6 +2,10 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 import type { ApplicationInput } from "../../shared/applications/application-schema";
+import {
+  MASTERCLASS_TOPICS,
+  MASTERCLASS_TOPIC_LABELS_RO,
+} from "../../shared/constants/masterclass-topics";
 import { ApplicationForm } from "../../src/features/contact/ApplicationForm";
 import { loadProductData } from "../../src/data";
 import { LocaleProvider } from "../../src/locales/LocaleProvider";
@@ -139,6 +143,40 @@ describe("ApplicationForm", () => {
     });
   });
 
+  test("submits a masterclass topic with the requested date and time", async () => {
+    const submit = vi.fn(
+      async (input: ApplicationInput, idempotencyKey: string) => {
+        void input;
+        void idempotencyKey;
+        return {
+          kind: "success" as const,
+          requestId: "request-masterclass",
+          delivery: { telegram: "sent" as const },
+        };
+      }
+    );
+    const user = userEvent.setup();
+    render(<ApplicationForm products={[]} submit={submit} />);
+
+    await user.click(screen.getByRole("button", { name: "Мастер-класс" }));
+    await fillCommon(user);
+    await user.selectOptions(
+      screen.getByLabelText("Тема мастер-класса"),
+      MASTERCLASS_TOPICS[2]
+    );
+    await user.type(screen.getByLabelText("Желаемая дата"), "2099-01-01");
+    await user.type(screen.getByLabelText("Желаемое время"), "14:30");
+    await user.click(screen.getByRole("button", { name: "Отправить заявку" }));
+
+    await waitFor(() => expect(submit).toHaveBeenCalledTimes(1));
+    expect(submit.mock.calls[0][0]).toMatchObject({
+      type: "masterclass",
+      masterclassTopic: MASTERCLASS_TOPICS[2],
+      eventDate: "2099-01-01",
+      eventTime: "14:30",
+    });
+  });
+
   test("keeps entered values after a server error", async () => {
     const user = userEvent.setup();
     render(
@@ -228,6 +266,26 @@ describe("ApplicationForm", () => {
     expect(
       screen.getByLabelText("Interval potrivit pentru apel (opțional)")
     ).toBeVisible();
+    window.history.replaceState({}, "", "/");
+  });
+
+  test("renders the masterclass flow in Romanian while keeping canonical values", async () => {
+    window.history.replaceState({}, "", "/ro/contactus");
+    const user = userEvent.setup();
+    render(
+      <Router>
+        <LocaleProvider>
+          <ApplicationForm products={[]} />
+        </LocaleProvider>
+      </Router>
+    );
+
+    await user.click(screen.getByRole("button", { name: "Masterclass" }));
+    const topic = screen.getByLabelText("Tema masterclassului");
+    expect(topic).toHaveTextContent(MASTERCLASS_TOPIC_LABELS_RO[MASTERCLASS_TOPICS[0]]);
+    expect(topic).not.toHaveTextContent(MASTERCLASS_TOPICS[0]);
+    expect(screen.getByLabelText("Data dorită")).toBeVisible();
+    expect(screen.getByLabelText("Ora dorită")).toBeVisible();
     window.history.replaceState({}, "", "/");
   });
 });

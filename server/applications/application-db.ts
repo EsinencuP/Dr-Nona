@@ -40,6 +40,13 @@ export type DbWriteResult =
   | { success: true; orderId: string }
   | { success: false; error: string };
 
+export type OrderStatus =
+  | "NEW"
+  | "PROCESSING"
+  | "DELIVERY"
+  | "DONE"
+  | "CANCELLED";
+
 export async function saveApplicationToDb(
   input: DbWriteInput,
   db: PrismaClient = getDbClient()
@@ -119,5 +126,27 @@ export async function saveMessageIdToDb(
       orderId,
       error: error instanceof Error ? error.message : String(error),
     });
+  }
+}
+
+export async function updateOrderStatusByTelegramMessageId(
+  telegramMessageId: string,
+  status: OrderStatus,
+  db: PrismaClient = getDbClient()
+): Promise<boolean> {
+  try {
+    const order = await db.order.findUnique({
+      where: { telegramMessageId },
+    });
+    if (!order) return false;
+
+    await db.order.update({
+      where: { id: order.id },
+      data: { status },
+    });
+    return true;
+  } catch (error) {
+    console.error("Failed to update order status in DB:", error);
+    return false;
   }
 }

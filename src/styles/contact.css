@@ -406,7 +406,11 @@
   }
 
   .application-mode {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .application-mode button:last-child {
+    grid-column: 1 / -1;
   }
 
   .application-form__grid,

@@ -1,18 +1,20 @@
 import {
-  STATUS_PENDING,
+  STATUS_CANCELLED,
+  STATUS_DELIVERY,
   STATUS_DONE,
-  replaceStatus,
+  STATUS_PROCESSING,
+  replaceAnyStatus,
 } from "../server/applications/format-application.js";
+import {
+  updateOrderStatusByTelegramMessageId,
+  type OrderStatus,
+} from "../server/applications/application-db.js";
 import {
   editTelegramMessage,
   deleteTelegramMessage,
 } from "../server/applications/providers/telegram-edit.js";
 import { jsonResponse } from "../server/http/json-response.js";
 
-/**
- * Keywords that mark an application as completed.
- * Matched case-insensitively against the full reply text.
- */
 const DONE_KEYWORDS = new Set([
   "ok",
   "ок",
@@ -21,7 +23,35 @@ const DONE_KEYWORDS = new Set([
   "done",
   "ready",
   "выполнено",
+]);
+
+const CANCEL_KEYWORDS = new Set([
+  "отмена",
+  "отменить",
+  "cancel",
+  "отклон",
+  "отказ",
+  "cancelled",
+]);
+
+const PROCESSING_KEYWORDS = new Set([
+  "в работе",
+  "процесс",
+  "processing",
+  "in progress",
+  "принято",
+  "беру",
+  "work",
+]);
+
+const DELIVERY_KEYWORDS = new Set([
+  "доставка",
+  "в доставке",
   "отправлено",
+  "курьер",
+  "почта",
+  "delivery",
+  "shipped",
 ]);
 
 export type TelegramUpdate = {
@@ -39,9 +69,13 @@ export type TelegramUpdate = {
   };
 };
 
-export function isDoneCommand(text: string): boolean {
+export function parseManagerStatusCommand(text: string): OrderStatus | null {
   const normalized = text.trim().toLowerCase();
-  return DONE_KEYWORDS.has(normalized);
+  if (DONE_KEYWORDS.has(normalized)) return "DONE";
+  if (CANCEL_KEYWORDS.has(normalized)) return "CANCELLED";
+  if (PROCESSING_KEYWORDS.has(normalized)) return "PROCESSING";
+  if (DELIVERY_KEYWORDS.has(normalized)) return "DELIVERY";
+  return null;
 }
 
 function getHeader(request: Request, name: string): string | null {
@@ -82,6 +116,7 @@ export type WebhookHandlerDependencies = {
   getEnvironment?: () => { botToken: string; webhookSecret: string } | null;
   editMessage?: typeof editTelegramMessage;
   deleteMessage?: typeof deleteTelegramMessage;
+  updateOrderStatus?: typeof updateOrderStatusByTelegramMessageId;
   logger?: (metadata: Record<string, unknown>) => void;
 };
 
@@ -133,40 +168,62 @@ export function createTelegramWebhookHandler(
         return jsonResponse({ ok: true }, 200);
       }
 
-      // Check if the reply text is a "done" command
-      if (!isDoneCommand(message.text)) {
+      const matchedStatus = parseManagerStatusCommand(message.text);
+      if (!matchedStatus) {
         return jsonResponse({ ok: true }, 200);
       }
 
-      // Build the updated message text
-      const updatedText = replaceStatus(originalText, STATUS_PENDING, STATUS_DONE);
+      const nextStatusLine =
+        matchedStatus === "PROCESSING"
+          ? STATUS_PROCESSING
+          : matchedStatus === "DELIVERY"
+            ? STATUS_DELIVERY
+            : matchedStatus === "DONE"
+              ? STATUS_DONE
+              : STATUS_CANCELLED;
+      const updatedText = replaceAnyStatus(originalText, nextStatusLine);
       if (!updatedText) {
         return jsonResponse({ ok: true }, 200);
       }
 
+      const updateStatusFn =
+        dependencies.updateOrderStatus ??
+        updateOrderStatusByTelegramMessageId;
       const editFn = dependencies.editMessage ?? editTelegramMessage;
       const deleteFn = dependencies.deleteMessage ?? deleteTelegramMessage;
       const logFn = dependencies.logger ?? console.info;
+      const orderMessageId = message.reply_to_message.message_id;
+      const managerCommandMessageId = message.message_id;
+      const chatId = message.chat.id;
 
-      const editResult = await editFn(
-        message.chat.id,
-        message.reply_to_message.message_id,
-        updatedText,
-        { botToken: env.botToken }
-      );
+      const databaseUpdated = await updateStatusFn(
+        String(orderMessageId),
+        matchedStatus
+      ).catch(() => false);
 
-      if (editResult.ok) {
-        await deleteFn(message.chat.id, message.message_id, {
+      if (matchedStatus === "DONE" || matchedStatus === "CANCELLED") {
+        await deleteFn(chatId, orderMessageId, {
+          botToken: env.botToken,
+        }).catch(() => undefined);
+        await deleteFn(chatId, managerCommandMessageId, {
+          botToken: env.botToken,
+        }).catch(() => undefined);
+      } else {
+        await editFn(chatId, orderMessageId, updatedText, {
+          botToken: env.botToken,
+        }).catch(() => undefined);
+        await deleteFn(chatId, managerCommandMessageId, {
           botToken: env.botToken,
         }).catch(() => undefined);
       }
 
       logFn({
         event: "webhook.status_update",
-        chatId: message.chat.id,
-        originalMessageId: message.reply_to_message.message_id,
+        chatId,
+        originalMessageId: orderMessageId,
         replyFrom: message.from?.first_name,
-        editSuccess: editResult.ok,
+        newStatus: matchedStatus,
+        databaseUpdated,
       });
 
       return jsonResponse({ ok: true }, 200);

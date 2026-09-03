@@ -6,6 +6,7 @@ import {
 import type { ContactEnvironment } from "../../server/config/contact-env";
 import type { ApplicationServiceResult } from "../../server/applications/application-types";
 import { createApplicationRateLimitGuard } from "../../server/http/application-rate-limit";
+import { MASTERCLASS_TOPICS } from "../../shared/constants/masterclass-topics";
 
 const environment: ContactEnvironment = {
   allowedOrigins: new Set(["https://example.test"]),
@@ -121,6 +122,45 @@ describe("POST /api/applications", () => {
       code: "VALIDATION_ERROR",
       fieldErrors: { phone: expect.any(String) },
     });
+  });
+
+  test("accepts and forwards a valid masterclass application", async () => {
+    const process = vi.fn(async () => ({
+      requestId: "request-masterclass",
+      type: "masterclass" as const,
+      delivery: { telegram: "sent" as const },
+      outcome: "success" as const,
+    }));
+    const response = await handler(
+      {
+        requestId: "request-masterclass",
+        type: "masterclass",
+        delivery: { telegram: "sent" },
+        outcome: "success",
+      },
+      { process }
+    )(
+      request({
+        ...validBody,
+        type: "masterclass",
+        productSlugs: undefined,
+        items: undefined,
+        masterclassTopic: MASTERCLASS_TOPICS[1],
+        eventDate: "2099-01-01",
+        eventTime: "14:30",
+      })
+    );
+
+    expect(response.status).toBe(201);
+    expect(process).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: "masterclass",
+        masterclassTopic: MASTERCLASS_TOPICS[1],
+        eventDate: "2099-01-01",
+        eventTime: "14:30",
+      }),
+      expect.any(Object)
+    );
   });
 
   test("returns 403 for an invalid Origin", async () => {

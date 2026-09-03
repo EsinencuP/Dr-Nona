@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { validateClientApplication } from "../../src/features/contact/client-application-validation";
+import { MASTERCLASS_TOPICS } from "../../shared/constants/masterclass-topics";
 
 const common = {
   firstName: " Ana ",
@@ -33,6 +34,16 @@ describe("client application validation", () => {
         consultationMode: "online",
         consultationDate: "2099-01-01",
         consultationTime: "10:00",
+      },
+      new Set<string>(),
+    ],
+    [
+      "masterclass",
+      {
+        type: "masterclass",
+        masterclassTopic: MASTERCLASS_TOPICS[0],
+        eventDate: "2099-01-01",
+        eventTime: "10:00",
       },
       new Set<string>(),
     ],
@@ -95,6 +106,27 @@ describe("client application validation", () => {
     expect(result).toEqual({
       success: false,
       fieldErrors: { city: "Selectați o regiune din listă" },
+    });
+  });
+
+  test("rejects a masterclass topic outside the curated list", () => {
+    const result = validateClientApplication(
+      {
+        ...common,
+        type: "masterclass",
+        masterclassTopic: "Произвольная тема",
+        eventDate: "2099-01-01",
+        eventTime: "10:00",
+      },
+      new Set(),
+      "ro"
+    );
+
+    expect(result).toEqual({
+      success: false,
+      fieldErrors: {
+        masterclassTopic: "Selectați o temă de masterclass din listă",
+      },
     });
   });
 });

@@ -6,6 +6,7 @@ import { Heart } from "@phosphor-icons/react/Heart";
 import { Leaf } from "@phosphor-icons/react/Leaf";
 import { TestTube } from "@phosphor-icons/react/TestTube";
 import { useState } from "react";
+import type { CSSProperties } from "react";
 import { getProductCopy } from "../claims";
 import { ArticleCard } from "../components/ArticleCard";
 import { ProductImage } from "../components/ProductImage";
@@ -276,6 +277,11 @@ export default function HomePage() {
                 className="home-product-spotlight__media"
                 to={`/product/${spotlight.slug}`}
                 aria-label={`${copy.openProduct}: ${spotlight.officialName}`}
+                style={{
+                  "--home-product-scale": Number(
+                    (spotlight.catalogScale * 1.18).toFixed(3)
+                  ),
+                } as CSSProperties}
               >
                 <ProductImage
                   src={spotlight.image}
@@ -333,6 +339,11 @@ export default function HomePage() {
                     to={`/product/${product.slug}`}
                     tabIndex={-1}
                     aria-hidden="true"
+                    style={{
+                      "--home-product-scale": Number(
+                        (product.catalogScale * 1.15).toFixed(3)
+                      ),
+                    } as CSSProperties}
                   >
                     <ProductImage
                       src={product.image}
@@ -361,7 +372,16 @@ export default function HomePage() {
 
         <div className="home-campaign-grid">
           <Reveal className="home-promo-banner">
-            <article>
+            <article
+              style={{
+                "--home-promo-scale": Number(
+                  (promoProduct.catalogScale * 1.45).toFixed(3)
+                ),
+                "--home-promo-mobile-scale": Number(
+                  (promoProduct.catalogScale * 1.15).toFixed(3)
+                ),
+              } as CSSProperties}
+            >
               <ProductImage
                 src={promoProduct.image}
                 alt={promoProduct.officialName}
@@ -393,6 +413,14 @@ export default function HomePage() {
                     width="1254"
                     height="1254"
                     sizes="(max-width: 640px) 60vw, (max-width: 960px) 30vw, 360px"
+                    style={{
+                      "--home-lord-scale": Number(
+                        (
+                          product.catalogScale *
+                          (product.slug === "lord-deodorant" ? 1.45 : 1.15)
+                        ).toFixed(3)
+                      ),
+                    } as CSSProperties}
                   />
                 ))}
               </div>

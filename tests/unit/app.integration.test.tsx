@@ -112,6 +112,14 @@ describe("Dr. Nona application", () => {
     ).toBeInTheDocument();
   });
 
+  test("exposes the temporary CRM entry from the e-catalog header", async () => {
+    renderApp("/");
+
+    expect(
+      await screen.findByRole("link", { name: "Открыть внутреннюю CRM" })
+    ).toHaveAttribute("href", "http://127.0.0.1:3001/dashboard");
+  });
+
   test("serves responsive AVIF and WebP product images with a PNG fallback", async () => {
     const { container } = renderApp("/products");
 

@@ -112,4 +112,33 @@ test("every catalogue card uses a loaded normalized product image", async ({
       )
     )
     .toBe(true);
+
+  const mediaFrames = await page
+    .locator(".catalog-grid .product-card")
+    .evaluateAll((cards) =>
+      cards.map((card) => {
+        const stage = card.querySelector<HTMLElement>(".product-card__stage");
+        const picture = card.querySelector<HTMLElement>(".product-picture");
+        const image = card.querySelector<HTMLImageElement>(".product-card__image");
+        const stageRect = stage?.getBoundingClientRect();
+        const pictureRect = picture?.getBoundingClientRect();
+        return {
+          stageWidth: Math.round(stageRect?.width ?? 0),
+          stageHeight: Math.round(stageRect?.height ?? 0),
+          pictureWidth: Math.round(pictureRect?.width ?? 0),
+          pictureHeight: Math.round(pictureRect?.height ?? 0),
+          objectFit: image ? getComputedStyle(image).objectFit : "",
+        };
+      })
+    );
+
+  expect(mediaFrames).toHaveLength(50);
+  expect(
+    mediaFrames.every(
+      (frame) =>
+        frame.objectFit === "contain" &&
+        Math.abs(frame.pictureWidth - frame.stageWidth) <= 1 &&
+        Math.abs(frame.pictureHeight - frame.stageHeight) <= 1
+    )
+  ).toBe(true);
 });

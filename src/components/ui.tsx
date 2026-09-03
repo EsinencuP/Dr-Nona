@@ -129,7 +129,15 @@ export function ProductCard({
   const saved = contains(product.slug);
   const shortDescription = getProductCopy(product, "shortDescription");
   return (
-    <article className={`product-card ${compact ? "product-card--compact" : ""}`}>
+    <article
+      className={`product-card ${compact ? "product-card--compact" : ""}`}
+      style={{
+        "--product-object-scale": product.catalogScale,
+        "--product-object-hover-scale": Number(
+          (product.catalogScale * 1.012).toFixed(3)
+        ),
+      } as CSSProperties}
+    >
       <div className="product-card__stage">
         <Link to={`/product/${product.slug}`} tabIndex={-1} aria-hidden="true">
           <ProductImage

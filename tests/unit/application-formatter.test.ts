@@ -1,11 +1,17 @@
 import { describe, expect, test } from "vitest";
 import {
   formatTelegramApplication,
+  ALL_STATUS_LINES,
+  STATUS_CANCELLED,
+  STATUS_DELIVERY,
   STATUS_PENDING,
+  STATUS_PROCESSING,
   STATUS_DONE,
+  replaceAnyStatus,
   replaceStatus,
 } from "../../server/applications/format-application";
 import type { ApplicationRecord } from "../../server/applications/application-types";
+import { MASTERCLASS_TOPICS } from "../../shared/constants/masterclass-topics";
 
 const common = {
   schemaVersion: 1 as const,
@@ -82,6 +88,25 @@ describe("application formatter", () => {
     };
     expect(formatTelegramApplication(record)).toContain("Язык: RO");
   });
+
+  test("formats a masterclass notification with topic and Chisinau time", () => {
+    const record: ApplicationRecord = {
+      ...common,
+      type: "masterclass",
+      masterclassTopic: MASTERCLASS_TOPICS[0],
+      eventDate: "2030-06-20",
+      eventTime: "14:30",
+      timezone: "Europe/Chisinau",
+    };
+
+    const message = formatTelegramApplication(record);
+    expect(message).toContain("🎓 НОВАЯ ЗАПИСЬ НА МАСТЕР-КЛАСС");
+    expect(message).toContain(`Тема: ${MASTERCLASS_TOPICS[0]}`);
+    expect(message).toContain("Дата и время: 20.06.2030, 14:30");
+    expect(message).toContain("Часовой пояс: Europe/Chisinau");
+    expect(message).toContain(STATUS_PENDING);
+    expect(message).not.toMatch(/\[object Object\]|undefined|[*_`]/u);
+  });
 });
 
 describe("replaceStatus", () => {
@@ -95,5 +120,26 @@ describe("replaceStatus", () => {
     const text = `Some message\n\n${STATUS_DONE}`;
     const result = replaceStatus(text, STATUS_PENDING, STATUS_DONE);
     expect(result).toBeNull();
+  });
+
+  test.each(ALL_STATUS_LINES)("replaces lifecycle status %s", (statusLine) => {
+    const text = `Some message\n\n${statusLine}`;
+    expect(replaceAnyStatus(text, STATUS_DELIVERY)).toBe(
+      `Some message\n\n${STATUS_DELIVERY}`
+    );
+  });
+
+  test("exposes all five lifecycle status lines", () => {
+    expect(ALL_STATUS_LINES).toEqual([
+      STATUS_PENDING,
+      STATUS_PROCESSING,
+      STATUS_DELIVERY,
+      STATUS_DONE,
+      STATUS_CANCELLED,
+    ]);
+  });
+
+  test("does not alter a message without a lifecycle status", () => {
+    expect(replaceAnyStatus("Some message", STATUS_PROCESSING)).toBeNull();
   });
 });

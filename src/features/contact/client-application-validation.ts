@@ -199,7 +199,8 @@ export function validateClientApplication(
 
   if (raw.type === "masterclass") {
     const masterclassTopic = raw.masterclassTopic;
-    if (!isMasterclassTopic(masterclassTopic)) {
+    const masterclassTopicIsValid = isMasterclassTopic(masterclassTopic);
+    if (!masterclassTopicIsValid) {
       fieldErrors.masterclassTopic = copy.masterclassTopic;
     }
     if (
@@ -214,10 +215,9 @@ export function validateClientApplication(
     ) {
       fieldErrors.eventTime = copy.time;
     }
-    if (!isMasterclassTopic(masterclassTopic)) {
+    if (!masterclassTopicIsValid || Object.keys(fieldErrors).length) {
       return { success: false, fieldErrors };
     }
-    if (Object.keys(fieldErrors).length) return { success: false, fieldErrors };
 
     return {
       success: true,

@@ -2,6 +2,7 @@ import { describe, expect, test, vi } from "vitest";
 import { processApplication } from "../../server/applications/application-service";
 import type { ProviderResult } from "../../server/applications/application-types";
 import type { ApplicationInput } from "../../shared/applications/application-schema";
+import { MASTERCLASS_TOPICS } from "../../shared/constants/masterclass-topics";
 
 const input: ApplicationInput = {
   locale: "ru-MD",
@@ -43,6 +44,11 @@ function dependencies(telegram: () => Promise<ProviderResult>) {
     createRequestId: () => "request-fixed",
     now: () => new Date("2030-01-01T00:00:00.000Z"),
     logger: vi.fn(),
+    saveApplication: vi.fn(async () => ({
+      success: true as const,
+      orderId: "request-fixed",
+    })),
+    saveMessageId: vi.fn(async () => undefined),
   };
 }
 
@@ -98,5 +104,39 @@ describe("application service", () => {
     ];
     expect(record.locale).toBe(locale);
     expect(message).toContain(label);
+  });
+
+  test("maps a masterclass to Telegram and database fields", async () => {
+    const deps = dependencies(() => Promise.resolve(sent()));
+    const masterclassInput: ApplicationInput = {
+      ...input,
+      type: "masterclass",
+      masterclassTopic: MASTERCLASS_TOPICS[0],
+      eventDate: "2030-06-20",
+      eventTime: "14:30",
+    };
+
+    const result = await processApplication(masterclassInput, deps);
+
+    expect(result).toMatchObject({ type: "masterclass", outcome: "success" });
+    expect(deps.sendTelegram).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: "masterclass",
+        masterclassTopic: MASTERCLASS_TOPICS[0],
+        eventDate: "2030-06-20",
+        eventTime: "14:30",
+        timezone: "Europe/Chisinau",
+      }),
+      expect.stringContaining("🎓 НОВАЯ ЗАПИСЬ НА МАСТЕР-КЛАСС")
+    );
+    expect(deps.saveApplication).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: "masterclass",
+        masterclassTopic: MASTERCLASS_TOPICS[0],
+        eventDate: "2030-06-20",
+        eventTime: "14:30",
+        products: undefined,
+      })
+    );
   });
 });

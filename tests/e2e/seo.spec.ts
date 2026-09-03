@@ -6,6 +6,7 @@ test("product route exposes complete route metadata and Product JSON-LD", async 
   page,
 }) => {
   await page.goto("/product/lord-deodorant");
+  await expect(page).toHaveTitle(/Deodorant \( LORD \)/);
 
   const metadata = await page.evaluate(() => {
     const jsonLd = JSON.parse(

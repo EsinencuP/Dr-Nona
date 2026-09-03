@@ -4,6 +4,7 @@ import { CopySimple } from "@phosphor-icons/react/CopySimple";
 import { EnvelopeSimple } from "@phosphor-icons/react/EnvelopeSimple";
 import { X } from "@phosphor-icons/react/X";
 import { useState } from "react";
+import type { CSSProperties } from "react";
 import { ProductImage } from "../components/ProductImage";
 import { useProductData } from "../data";
 import type { Product } from "../data";
@@ -90,6 +91,9 @@ export default function SelectionPage() {
                   className="selection-list__media"
                   to={`/product/${product.slug}`}
                   aria-label={product.officialName}
+                  style={{
+                    "--selection-object-scale": product.catalogScale,
+                  } as CSSProperties}
                 >
                   <ProductImage
                     src={product.image}

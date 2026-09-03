@@ -16,6 +16,20 @@ function observeModuleRequests(page: Page) {
   return urls;
 }
 
+function isCatalogRouteAsset(url: string) {
+  return (
+    url.includes("/pages/CatalogPage") ||
+    /\/assets\/CatalogPage-[^/?]+\.js(?:\?|$)/u.test(url)
+  );
+}
+
+function isCatalogDataAsset(url: string) {
+  return (
+    url.includes("products-public.json") ||
+    /\/assets\/catalog-data-[^/?]+\.js(?:\?|$)/u.test(url)
+  );
+}
+
 test("home does not load complete product or official content datasets", async ({
   page,
 }) => {
@@ -43,9 +57,7 @@ test("direct contact route does not load product or official datasets", async ({
   expect(requests.some((url) => url.includes("official-pages.json"))).toBe(
     false
   );
-  expect(requests.some((url) => url.includes("/pages/CatalogPage"))).toBe(
-    false
-  );
+  expect(requests.some(isCatalogRouteAsset)).toBe(false);
 });
 
 test("catalogue loads its own route module and product data only", async ({
@@ -57,10 +69,8 @@ test("catalogue loads its own route module and product data only", async ({
     "Каталог"
   );
 
-  expect(requests.some((url) => url.includes("/pages/CatalogPage"))).toBe(true);
-  expect(requests.some((url) => url.includes("products-public.json"))).toBe(
-    true
-  );
+  expect(requests.some(isCatalogRouteAsset)).toBe(true);
+  expect(requests.some(isCatalogDataAsset)).toBe(true);
   expect(requests.some((url) => url.includes("official-pages.json"))).toBe(
     false
   );

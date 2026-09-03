@@ -1,7 +1,18 @@
 import type { ApplicationRecord } from "./application-types.js";
 
 export const STATUS_PENDING = "⏳ Статус: Ожидает обработки";
-export const STATUS_DONE = "✅ Статус: Выполнено";
+export const STATUS_PROCESSING = "⚙️ Статус: В обработке";
+export const STATUS_DELIVERY = "🚚 Статус: В доставке";
+export const STATUS_DONE = "✅ Статус: Выполнен";
+export const STATUS_CANCELLED = "❌ Статус: Отменён";
+
+export const ALL_STATUS_LINES = [
+  STATUS_PENDING,
+  STATUS_PROCESSING,
+  STATUS_DELIVERY,
+  STATUS_DONE,
+  STATUS_CANCELLED,
+] as const;
 
 /**
  * Replace the status line in a Telegram message.
@@ -14,6 +25,22 @@ export function replaceStatus(
 ): string | null {
   if (!text.includes(from)) return null;
   return text.replace(from, to);
+}
+
+/**
+ * Replace any lifecycle status line in a Telegram application card.
+ * Returns `null` when the message is not a recognized application card.
+ */
+export function replaceAnyStatus(
+  text: string,
+  newStatusLine: string
+): string | null {
+  for (const statusLine of ALL_STATUS_LINES) {
+    if (text.includes(statusLine)) {
+      return text.replace(statusLine, newStatusLine);
+    }
+  }
+  return null;
 }
 
 function formatDateTimeInChisinau(iso: string) {

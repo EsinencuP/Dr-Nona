@@ -25,6 +25,8 @@ export type ApplicationServiceDependencies = {
   now?: () => Date;
   logger?: (metadata: Record<string, unknown>) => void;
   extraFields?: ApplicationExtraFields;
+  saveApplication?: typeof saveApplicationToDb;
+  saveMessageId?: typeof saveMessageIdToDb;
 };
 
 export async function processApplication(
@@ -123,7 +125,9 @@ export async function processApplication(
         }))
       : undefined,
   };
-  const dbResult = await saveApplicationToDb(dbInput).catch(
+  const dbResult = await (
+    dependencies.saveApplication ?? saveApplicationToDb
+  )(dbInput).catch(
     (error: unknown) => ({
       success: false as const,
       error: String(error),
@@ -144,7 +148,10 @@ export async function processApplication(
     telegramResult?.status === "sent" &&
     telegramResult.providerMessageId
   ) {
-    await saveMessageIdToDb(requestId, telegramResult.providerMessageId);
+    await (dependencies.saveMessageId ?? saveMessageIdToDb)(
+      requestId,
+      telegramResult.providerMessageId
+    );
   }
   const delivery = {
     telegram:

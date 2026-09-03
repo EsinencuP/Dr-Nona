@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { MASTERCLASS_TOPICS } from "../../shared/constants/masterclass-topics";
 
 async function fillCommon(page: Page) {
   await page.getByLabel("Имя").fill("Ana");
@@ -132,6 +133,47 @@ test("order defaults from selection and Telegram delivery succeeds", async ({
   expect(submittedBody).toMatchObject({
     productSlugs: ["lord-deodorant"],
     items: [{ slug: "lord-deodorant", quantity: 2 }],
+  });
+});
+
+test("masterclass submits its canonical topic and preferred schedule", async ({
+  page,
+}) => {
+  let submittedBody: Record<string, unknown> | undefined;
+  await page.route("**/api/applications", async (route) => {
+    submittedBody = route.request().postDataJSON() as Record<string, unknown>;
+    await route.fulfill({
+      status: 201,
+      contentType: "application/json",
+      body: JSON.stringify({
+        ok: true,
+        requestId: "request-masterclass",
+        delivery: { telegram: "sent" },
+      }),
+    });
+  });
+  await page.goto("/contactus");
+  await page.getByRole("button", { name: "Мастер-класс" }).click();
+  await expect(
+    page.getByRole("button", { name: "Мастер-класс" })
+  ).toHaveAttribute("aria-pressed", "true");
+  await fillCommon(page);
+  await page
+    .getByLabel("Тема мастер-класса")
+    .selectOption(MASTERCLASS_TOPICS[3]);
+  await page.getByLabel("Желаемая дата").fill("2099-01-01");
+  await page.getByLabel("Желаемое время").fill("14:30");
+  await page.getByRole("button", { name: "Отправить заявку" }).click();
+
+  await expect(
+    page.getByText(/Заявка №request-masterclass отправлена/u)
+  ).toBeVisible();
+  expect(submittedBody).toMatchObject({
+    locale: "ru-MD",
+    type: "masterclass",
+    masterclassTopic: MASTERCLASS_TOPICS[3],
+    eventDate: "2099-01-01",
+    eventTime: "14:30",
   });
 });
 

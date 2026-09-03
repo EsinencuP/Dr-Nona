@@ -48,6 +48,8 @@
   min-height: 280px;
   position: relative;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
   place-items: center;
   overflow: hidden;
   background: #fff;
@@ -60,13 +62,32 @@
 .product-card__stage a {
   width: 100%;
   height: 100%;
+  min-width: 0;
+  min-height: 0;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
   place-items: center;
+  overflow: hidden;
+}
+
+.product-card__stage .product-picture {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  place-items: center;
+  overflow: hidden;
 }
 
 .product-card__stage img {
   width: 100%;
   height: 100%;
+  min-width: 0;
+  min-height: 0;
   max-height: none;
   position: relative;
   z-index: 2;
@@ -78,8 +99,7 @@
 
 .product-card__stage .product-card__image {
   object-fit: contain;
-  /* Each shared product master already includes object-aware safe padding. */
-  scale: 1;
+  scale: var(--product-object-scale, 1);
 }
 
 .save-button {

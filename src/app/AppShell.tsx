@@ -12,6 +12,9 @@ import { applyRouteMetadata } from "../seo";
 import { localePathFor } from "../locale-routing.mjs";
 import { Link, NavLink, useLocation, useSetLocale } from "../router";
 
+const CRM_ENTRY_URL =
+  import.meta.env.VITE_CRM_URL?.trim() || "http://127.0.0.1:3001/dashboard";
+
 function ScrollRestoration() {
   const location = useLocation();
   const previousPathname = useRef(location.pathname);
@@ -120,6 +123,14 @@ function Header() {
           ))}
         </nav>
         <div className="header-actions">
+          <a
+            className="crm-entry-link"
+            href={CRM_ENTRY_URL}
+            aria-label={locale === "ro" ? "Deschide CRM intern" : "Открыть внутреннюю CRM"}
+          >
+            <span>CRM</span>
+            <ArrowUpRight aria-hidden="true" />
+          </a>
           <div
             className="locale-switch"
             role="group"
@@ -194,6 +205,10 @@ function Header() {
             <span>{t.selection}</span>
             <b>{selected.length}</b>
           </NavLink>
+          <a href={CRM_ENTRY_URL} onClick={() => setOpen(false)}>
+            <span>{locale === "ro" ? "CRM intern" : "Внутренняя CRM"}</span>
+            <ArrowUpRight aria-hidden="true" />
+          </a>
         </nav>
       </div>
     </header>

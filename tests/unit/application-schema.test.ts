@@ -3,6 +3,7 @@ import {
   normalizePhone,
   validateApplicationInput,
 } from "../../shared/applications/application-schema";
+import { MASTERCLASS_TOPICS } from "../../shared/constants/masterclass-topics";
 import { MOLDOVA_REGIONS } from "../../shared/constants/moldova-regions";
 
 const allowed = new Set(["lord-deodorant"]);
@@ -131,6 +132,29 @@ describe("application schema", () => {
       { allowedProductSlugs: allowed, now: new Date("2030-06-19T08:00:00Z") }
     );
     expect(result.success).toBe(true);
+  });
+
+  test("accepts a future masterclass from the curated topics list", () => {
+    const result = validateApplicationInput(
+      {
+        ...base,
+        type: "masterclass",
+        masterclassTopic: MASTERCLASS_TOPICS[0],
+        eventDate: "2030-06-20",
+        eventTime: "14:30",
+      },
+      { allowedProductSlugs: allowed, now: new Date("2030-06-19T08:00:00Z") }
+    );
+
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data).toMatchObject({
+        type: "masterclass",
+        masterclassTopic: MASTERCLASS_TOPICS[0],
+        eventDate: "2030-06-20",
+        eventTime: "14:30",
+      });
+    }
   });
 
   test("rejects a region outside the curated Moldova list", () => {
@@ -276,6 +300,43 @@ describe("application schema", () => {
     if (!result.success) {
       expect(result.fieldErrors).toHaveProperty("consultationDate");
     }
+  });
+
+  test.each([
+    ["masterclassTopic", { masterclassTopic: "Произвольная тема" }],
+    ["eventDate", { eventDate: "2029-02-31" }],
+    ["eventTime", { eventTime: "25:70" }],
+  ])("rejects invalid masterclass %s", (field, override) => {
+    const result = validateApplicationInput(
+      {
+        ...base,
+        type: "masterclass",
+        masterclassTopic: MASTERCLASS_TOPICS[0],
+        eventDate: "2030-06-20",
+        eventTime: "14:30",
+        ...override,
+      },
+      { allowedProductSlugs: allowed, now: new Date("2030-06-19T08:00:00Z") }
+    );
+
+    expect(result.success).toBe(false);
+    if (!result.success) expect(result.fieldErrors).toHaveProperty(field);
+  });
+
+  test("rejects a past masterclass in Chisinau local time", () => {
+    const result = validateApplicationInput(
+      {
+        ...base,
+        type: "masterclass",
+        masterclassTopic: MASTERCLASS_TOPICS[0],
+        eventDate: "2030-06-19",
+        eventTime: "10:00",
+      },
+      { allowedProductSlugs: allowed, now: new Date("2030-06-19T08:30:00Z") }
+    );
+
+    expect(result.success).toBe(false);
+    if (!result.success) expect(result.fieldErrors).toHaveProperty("eventDate");
   });
 
   test("normalizes phone without inventing a country code", () => {

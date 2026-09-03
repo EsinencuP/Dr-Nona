@@ -50,6 +50,12 @@ test("home and selection keep the approved composition at priority widths", asyn
       const spotlight = document.querySelector<HTMLElement>(
         ".home-product-spotlight > article"
       );
+      const spotlightMedia = spotlight?.querySelector<HTMLElement>(
+        ".home-product-spotlight__media"
+      );
+      const spotlightPicture = spotlightMedia?.querySelector<HTMLElement>(
+        ".product-picture"
+      );
       const spotlightActions = document.querySelector<HTMLElement>(
         ".home-product-spotlight__actions"
       );
@@ -57,6 +63,9 @@ test("home and selection keep the approved composition at priority widths", asyn
         ".home-promo-banner > article"
       );
       const promoImage = promo?.querySelector<HTMLImageElement>("img");
+      const promoPicture = promo?.querySelector<HTMLElement>(
+        ".product-picture"
+      );
       const promoContent = promo?.querySelector<HTMLElement>(
         ".home-promo-banner__content"
       );
@@ -68,10 +77,12 @@ test("home and selection keep the approved composition at priority widths", asyn
       const heroRect = hero?.getBoundingClientRect();
       const scienceRect = science?.getBoundingClientRect();
       const spotlightRect = spotlight?.getBoundingClientRect();
+      const spotlightMediaRect = spotlightMedia?.getBoundingClientRect();
+      const spotlightPictureRect = spotlightPicture?.getBoundingClientRect();
       const actionsRect = spotlightActions?.getBoundingClientRect();
       const promoStyle = promo ? getComputedStyle(promo) : null;
       const promoImageStyle = promoImage ? getComputedStyle(promoImage) : null;
-      const promoImageRect = promoImage?.getBoundingClientRect();
+      const promoPictureRect = promoPicture?.getBoundingClientRect();
       const promoContentRect = promoContent?.getBoundingClientRect();
 
       return {
@@ -81,10 +92,14 @@ test("home and selection keep the approved composition at priority widths", asyn
         spotlightActionGap: spotlightRect && actionsRect
           ? Math.round(spotlightRect.bottom - actionsRect.bottom)
           : 999,
+        spotlightPictureWidth: spotlightPictureRect?.width ?? 0,
+        spotlightPictureHeight: spotlightPictureRect?.height ?? 0,
+        spotlightMediaWidth: spotlightMediaRect?.width ?? 0,
+        spotlightMediaHeight: spotlightMediaRect?.height ?? 0,
         promoColumns: promoStyle?.gridTemplateColumns ?? "",
         promoRows: promoStyle?.gridTemplateRows ?? "",
-        promoImageTop: promoImageRect?.top ?? 0,
-        promoImageLeft: promoImageRect?.left ?? 0,
+        promoPictureTop: promoPictureRect?.top ?? 0,
+        promoPictureLeft: promoPictureRect?.left ?? 0,
         promoContentBottom: promoContentRect?.bottom ?? 0,
         promoContentRight: promoContentRect?.right ?? 0,
         promoImageFit: promoImageStyle?.objectFit ?? "",
@@ -103,18 +118,26 @@ test("home and selection keep the approved composition at priority widths", asyn
     expect(homeLayout.spotlightActionGap, `${viewport.name}: spotlight actions`).toBeLessThanOrEqual(
       viewport.width <= 640 ? 24 : 44
     );
+    expect(homeLayout.spotlightPictureWidth).toBeGreaterThan(0);
+    expect(homeLayout.spotlightPictureHeight).toBeGreaterThan(0);
+    expect(homeLayout.spotlightPictureWidth).toBeLessThanOrEqual(
+      homeLayout.spotlightMediaWidth + 1
+    );
+    expect(homeLayout.spotlightPictureHeight).toBeLessThanOrEqual(
+      homeLayout.spotlightMediaHeight + 1
+    );
     expect(homeLayout.promoImageFit).toBe("contain");
     expect(homeLayout.lordImageFits).toEqual(["contain", "contain"]);
     expect(homeLayout.documentWidth).toBeLessThanOrEqual(homeLayout.viewportWidth + 1);
 
     if (viewport.width <= 640) {
       expect(homeLayout.promoColumns.trim().split(/\s+/)).toHaveLength(1);
-      expect(homeLayout.promoImageTop).toBeGreaterThanOrEqual(
+      expect(homeLayout.promoPictureTop).toBeGreaterThanOrEqual(
         homeLayout.promoContentBottom - 1
       );
     } else {
       expect(homeLayout.promoColumns.trim().split(/\s+/)).toHaveLength(2);
-      expect(homeLayout.promoImageLeft).toBeGreaterThanOrEqual(
+      expect(homeLayout.promoPictureLeft).toBeGreaterThanOrEqual(
         homeLayout.promoContentRight - 1
       );
     }
@@ -135,14 +158,18 @@ test("home and selection keep the approved composition at priority widths", asyn
     const selectionLayout = await page.locator(".selection-list article").first().evaluate(
       (card) => {
         const media = card.querySelector<HTMLElement>(".selection-list__media");
+        const picture = media?.querySelector<HTMLElement>(".product-picture");
         const copy = card.children.item(1) as HTMLElement | null;
         const remove = card.querySelector<HTMLButtonElement>("button");
         const cardRect = card.getBoundingClientRect();
         const mediaRect = media?.getBoundingClientRect();
+        const pictureRect = picture?.getBoundingClientRect();
         const copyRect = copy?.getBoundingClientRect();
         const removeRect = remove?.getBoundingClientRect();
         return {
           mediaWidth: Math.round(mediaRect?.width ?? 0),
+          pictureWidth: Math.round(pictureRect?.width ?? 0),
+          pictureHeight: Math.round(pictureRect?.height ?? 0),
           mediaLeft: mediaRect?.left ?? 0,
           copyLeft: copyRect?.left ?? 0,
           copyRight: copyRect?.right ?? 0,
@@ -157,6 +184,12 @@ test("home and selection keep the approved composition at priority widths", asyn
     );
 
     expect(selectionLayout.mediaWidth).toBe(viewport.width <= 640 ? 100 : 160);
+    expect(selectionLayout.pictureWidth).toBeGreaterThanOrEqual(
+      selectionLayout.mediaWidth - 2
+    );
+    expect(selectionLayout.pictureHeight).toBeGreaterThanOrEqual(
+      selectionLayout.mediaWidth - 2
+    );
     expect(selectionLayout.mediaLeft).toBeLessThan(selectionLayout.copyLeft);
     expect(selectionLayout.copyRight).toBeLessThanOrEqual(selectionLayout.removeLeft);
     expect(selectionLayout.removeRight).toBeLessThanOrEqual(selectionLayout.cardRight + 1);

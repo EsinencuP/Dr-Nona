@@ -443,6 +443,37 @@ p {
   gap: 18px;
 }
 
+.crm-entry-link {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 14px;
+  border-radius: var(--radius-pill);
+  background: var(--lord-900);
+  color: var(--white);
+  font-size: var(--type-caption);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+  box-shadow: 0 8px 22px rgba(7, 24, 39, 0.14);
+  transition: background-color 160ms var(--ease-standard), transform 100ms var(--ease-out);
+}
+
+.crm-entry-link:hover {
+  background: var(--sea-800);
+}
+
+.crm-entry-link:active {
+  transform: scale(0.97);
+}
+
+.crm-entry-link svg {
+  width: 15px;
+  height: 15px;
+}
+
 .locale-switch {
   display: flex;
   align-items: center;
