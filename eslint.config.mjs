@@ -10,7 +10,6 @@ export default tseslint.config(
       "coverage",
       "dist",
       "artifacts",
-      "crm",
       "node_modules",
       "playwright-report",
       "test-results",

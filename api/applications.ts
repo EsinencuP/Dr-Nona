@@ -1,161 +1,93 @@
-import { createRequire } from "node:module";
-import { validateApplicationInput } from "../shared/applications/application-schema.js";
-import { processApplication } from "../server/applications/application-service.js";
-import type { ApplicationProduct } from "../server/applications/application-types.js";
-import { sendTelegramApplication } from "../server/applications/providers/telegram-provider.js";
-import {
-  readContactEnvironment,
-  type ContactEnvironment,
-} from "../server/config/contact-env.js";
-import { jsonResponse } from "../server/http/json-response.js";
-import {
-  applicationRateLimitGuard,
-  type RateLimitDecision,
-} from "../server/http/application-rate-limit.js";
-import {
-  readJsonBody,
-  requestOriginIsAllowed,
-} from "../server/http/request-validation.js";
+const MAX_PROXY_BODY_BYTES = 16 * 1024;
+const PROXY_TIMEOUT_MS = 10_000;
 
-const require = createRequire(import.meta.url);
-type ProductRecord = ApplicationProduct & {
-  publicationStatus: string;
-  editorialStatus: string;
+export type ApplicationsProxyDependencies = {
+  endpoint?: () => string | undefined;
+  fetch?: typeof fetch;
 };
-const productsJson = require("../src/data/products.json") as ProductRecord[];
 
-const availableProducts = productsJson.filter(
-  (product) =>
-    product.publicationStatus === "published" &&
-    product.editorialStatus === "ready"
-);
-const productsBySlug = new Map<string, ApplicationProduct>(
-  availableProducts.map((product) => [
-    product.slug,
-    {
-      slug: product.slug,
-      officialName: product.officialName,
-      sku: product.sku,
+function jsonResponse(body: unknown, status: number, headers: Record<string, string> = {}) {
+  return Response.json(body, {
+    status,
+    headers: {
+      "Cache-Control": "no-store",
+      ...headers,
     },
-  ])
-);
+  });
+}
 
-export type ApplicationsHandlerDependencies = {
-  environment?: () =>
-    | { success: true; value: ContactEnvironment }
-    | { success: false; missing: string[] };
-  process?: typeof processApplication;
-  rateLimitGuard?: (
-    request: Request
-  ) => Promise<boolean | RateLimitDecision>;
-  logger?: (metadata: Record<string, unknown>) => void;
-};
+function readEndpoint(dependencies: ApplicationsProxyDependencies) {
+  const value =
+    dependencies.endpoint?.() ?? process.env.CRM_APPLICATIONS_API_URL;
+  if (!value?.trim()) return null;
+  try {
+    const url = new URL(value.trim());
+    if (url.protocol !== "https:" && url.protocol !== "http:") return null;
+    return url;
+  } catch {
+    return null;
+  }
+}
 
-export function createApplicationsHandler(
-  dependencies: ApplicationsHandlerDependencies = {}
+export function createApplicationsProxy(
+  dependencies: ApplicationsProxyDependencies = {}
 ) {
-  return async function applicationsHandler(request: Request) {
+  return async function applicationsProxy(request: Request) {
     if (request.method !== "POST") {
-      return jsonResponse(
-        { ok: false, code: "METHOD_NOT_ALLOWED" },
-        405,
-        { Allow: "POST" }
-      );
+      return jsonResponse({ ok: false, code: "METHOD_NOT_ALLOWED" }, 405, {
+        Allow: "POST",
+      });
     }
-    const environmentResult = (
-      dependencies.environment ?? readContactEnvironment
-    )();
-    if (!environmentResult.success) {
-      return jsonResponse(
-        { ok: false, code: "SERVICE_UNAVAILABLE" },
-        503
-      );
+
+    const endpoint = readEndpoint(dependencies);
+    if (!endpoint) {
+      return jsonResponse({ ok: false, code: "SERVICE_UNAVAILABLE" }, 503);
     }
-    const environment = environmentResult.value;
-    if (!requestOriginIsAllowed(request, environment.allowedOrigins)) {
-      return jsonResponse({ ok: false, code: "FORBIDDEN" }, 403);
+
+    const contentType = request.headers.get("content-type") ?? "";
+    if (!contentType.toLowerCase().startsWith("application/json")) {
+      return jsonResponse({ ok: false, code: "INVALID_CONTENT_TYPE" }, 400);
     }
-    const rateLimitResult = await (
-      dependencies.rateLimitGuard ?? applicationRateLimitGuard
-    )(request);
-    const rateLimitAllowed =
-      typeof rateLimitResult === "boolean"
-        ? rateLimitResult
-        : rateLimitResult.allowed;
-    if (!rateLimitAllowed) {
-      const retryAfterSeconds =
-        typeof rateLimitResult === "boolean"
-          ? 60
-          : rateLimitResult.retryAfterSeconds;
-      return jsonResponse(
-        { ok: false, code: "RATE_LIMITED" },
-        429,
-        { "Retry-After": String(retryAfterSeconds) }
-      );
+
+    const body = await request.arrayBuffer();
+    if (body.byteLength > MAX_PROXY_BODY_BYTES) {
+      return jsonResponse({ ok: false, code: "PAYLOAD_TOO_LARGE" }, 413);
     }
-    const body = await readJsonBody(request);
-    if (!body.success) {
-      return jsonResponse({ ok: false, code: body.code }, body.status);
-    }
-    const validation = validateApplicationInput(body.value, {
-      allowedProductSlugs: new Set(productsBySlug.keys()),
+
+    const headers = new Headers({
+      "Content-Type": "application/json",
     });
-    if (!validation.success) {
-      return jsonResponse(
-        {
-          ok: false,
-          code: "VALIDATION_ERROR",
-          fieldErrors: validation.fieldErrors,
-        },
-        400
-      );
+    for (const name of ["idempotency-key", "origin", "x-forwarded-for", "x-real-ip"]) {
+      const value = request.headers.get(name);
+      if (value) headers.set(name, value);
     }
-    const idempotencyKey = request.headers.get("idempotency-key")?.trim();
-    if (
-      !idempotencyKey ||
-      idempotencyKey.length > 128 ||
-      !/^[a-zA-Z0-9:_-]+$/u.test(idempotencyKey)
-    ) {
-      return jsonResponse(
-        {
-          ok: false,
-          code: "VALIDATION_ERROR",
-          fieldErrors: {
-            idempotencyKey: "Некорректный ключ повторной отправки",
-          },
+
+    try {
+      const upstream = await (dependencies.fetch ?? fetch)(endpoint, {
+        method: "POST",
+        headers,
+        body,
+        signal: AbortSignal.timeout(PROXY_TIMEOUT_MS),
+      });
+      const responseBody = await upstream.arrayBuffer();
+      const retryAfter = upstream.headers.get("retry-after");
+      return new Response(responseBody, {
+        status: upstream.status,
+        headers: {
+          "Cache-Control": "no-store",
+          "Content-Type":
+            upstream.headers.get("content-type") ??
+            "application/json; charset=utf-8",
+          ...(retryAfter ? { "Retry-After": retryAfter } : {}),
         },
-        400
-      );
+      });
+    } catch {
+      return jsonResponse({ ok: false, code: "UPSTREAM_UNAVAILABLE" }, 502);
     }
-    const serviceResult = await (dependencies.process ?? processApplication)(
-      validation.data,
-      {
-        productsBySlug,
-        sendTelegram: (_record, message) =>
-          sendTelegramApplication(message, {
-            botToken: environment.telegramBotToken,
-            chatId: environment.telegramChatId,
-          }),
-        logger: dependencies.logger ?? ((metadata) => console.info(metadata)),
-      }
-    );
-    const responseBody = {
-      ok: serviceResult.outcome !== "failure",
-      requestId: serviceResult.requestId,
-      ...(serviceResult.outcome === "failure"
-          ? { code: "DELIVERY_FAILED" }
-          : {}),
-      delivery: serviceResult.delivery,
-    };
-    if (serviceResult.outcome === "success") return jsonResponse(responseBody, 201);
-    return jsonResponse(
-      { ok: false, code: "DELIVERY_FAILED", requestId: serviceResult.requestId },
-      502
-    );
   };
 }
 
-const handler = createApplicationsHandler();
+const handler = createApplicationsProxy();
 
 export default {
   fetch: handler,

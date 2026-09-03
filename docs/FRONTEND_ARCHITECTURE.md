@@ -34,9 +34,9 @@ Generated `runtime-content.json` and `seo-manifest.json` are ignored build artif
 
 ## Contact transport
 
-The browser posts to `POST /api/applications`. Shared Zod validation runs on the client for feedback and on the server for trust. `api/applications.ts` validates the origin and product slugs, then the server-only Telegram provider sends the formatted payload.
+The browser posts to the same-origin `POST /api/applications` route. Shared Zod validation runs in the browser for immediate feedback. `api/applications.ts` is a bounded transport proxy to the separate Dr-Nona-CRM backend, where the payload, origin and product slugs are validated again before database and Telegram delivery.
 
-The Vite development middleware exposes the same handler locally. Production uses the Vercel Function. Secrets stay in server environment variables and never enter the client bundle.
+The Vite development middleware exposes the same proxy locally. Production uses the Vercel Function. The e-catalog stores only the server-side CRM endpoint URL; Telegram and database secrets exist only in Dr-Nona-CRM and never enter this repository or the client bundle.
 
 ## Style cascade
 

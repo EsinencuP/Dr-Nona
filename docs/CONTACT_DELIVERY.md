@@ -1,86 +1,59 @@
-# How does the contact form deliver an application?
+# How does the e-catalog hand off an application?
 
-The website sends validated order and consultation applications to one approved Telegram chat. Email is not an automated delivery provider.
+The public website keeps a same-origin browser contract while the separate Dr-Nona-CRM deployment owns validation, persistence and Telegram delivery.
 
-Last verified: 2026-09-01 against `api/applications.ts`, `server/applications/`, `src/features/contact/` and the current browser contract tests.
+Last verified: 2026-09-03 against `src/features/contact/`, `api/applications.ts` and the Dr-Nona-CRM API contract.
 
 ## Request flow
 
 1. `ApplicationForm` validates the user-facing fields.
-2. The client sends JSON to `POST /api/applications` with an idempotency attempt key.
-3. The server validates the environment and exact origin, then applies a five-attempt-per-minute guard to the anonymized client address.
-4. The server validates the body, consent, product slugs and attempt-key format.
-5. The service creates a server request ID and formats a plain-text Telegram message.
-6. The provider sends the message with an 8s timeout.
-7. HTTP 201 produces the success state; provider failure produces HTTP 502 and preserves form data.
+2. The browser sends JSON to the e-catalog's `POST /api/applications` route with an idempotency key.
+3. The e-catalog proxy enforces method, content type, body size and a bounded upstream timeout.
+4. The proxy forwards only the JSON body and required transport headers to Dr-Nona-CRM.
+5. Dr-Nona-CRM performs the authoritative origin, schema, product and rate-limit checks.
+6. Dr-Nona-CRM persists the request and sends the Telegram message.
+7. The response status and public JSON body are returned unchanged to the browser.
 
-The Vite development middleware uses the same handler at `http://127.0.0.1:4173`. Vercel hosts the production function.
+Success appears only after the CRM backend returns HTTP 201. Network, validation and provider failures preserve the entered form data.
 
-## Application types
-
-An order includes contact data plus validated product names and SKUs. A consultation includes online/offline mode, preferred date, preferred time and `Europe/Chisinau` timezone.
-
-The selected date and time are preferences, not a confirmed appointment. The form does not create payment or checkout state.
-
-## Environment variables
+## E-catalog environment
 
 Copy `.env.example` to `.env.local` and provide:
 
 ```dotenv
-TELEGRAM_BOT_TOKEN=your_bot_token_here
-TELEGRAM_CHAT_ID=your_chat_id_here
+CRM_APPLICATIONS_API_URL=http://127.0.0.1:3001/api/applications
+VITE_CRM_URL=http://127.0.0.1:3001/dashboard
 ```
 
-`CONTACT_ALLOWED_ORIGINS` is optional and is only needed for an additional
-trusted browser origin. Requests from the site's own origin are accepted
-automatically. On Vercel this covers generated Preview URLs, the Production URL
-and custom domains without weakening the exact-origin check. Vercel system URLs
-are also normalized into the allowlist when available.
+For Vercel, `CRM_APPLICATIONS_API_URL` must be a server-only variable. It must not use the `VITE_` prefix. `VITE_CRM_URL` is intentionally public because it is the destination of the temporary CRM link.
 
-Never expose or commit the token or chat ID.
+## CRM environment
 
-### Vercel configuration
-
-In **Project → Settings → Environment Variables**, add these server-only values:
+Telegram credentials, the database URL, CRM credentials and the allowlist of public e-catalog origins are configured only in the Dr-Nona-CRM deployment:
 
 ```text
+DATABASE_URL
+CONTACT_ALLOWED_ORIGINS
 TELEGRAM_BOT_TOKEN
 TELEGRAM_CHAT_ID
+TELEGRAM_WEBHOOK_SECRET
+CRM_BASIC_USER
+CRM_BASIC_PASSWORD
 ```
 
-Apply them to both **Preview** and **Production** if the form must work in both
-environments. Mark the bot token as sensitive. Environment changes only affect
-new deployments, so redeploy after adding or rotating a value. Do not prefix
-either key with `VITE_`: they must remain unavailable to browser code.
-
-The Vite frontend posts to the same deployment at `/api/applications`, and the
-root `api/applications.ts` file is deployed as a Node.js Vercel Function. No
-external API base URL or SPA proxy is required.
+See the [Dr-Nona-CRM repository](https://github.com/EsinencuP/Dr-Nona-CRM) for the backend and database instructions.
 
 ## Response contract
 
-- HTTP 201: Telegram accepted the application; response contains request ID and `telegram: sent`
-- HTTP 400: schema, product or attempt-key validation failed
-- HTTP 403: request origin is not approved
+- HTTP 201: application persisted and Telegram accepted it
+- HTTP 400: the CRM rejected the payload
+- HTTP 403: the public origin is not approved by the CRM
 - HTTP 405: method is not POST
-- HTTP 429: the application guard rejected more than five attempts in one minute and returns `Retry-After`
-- HTTP 502: Telegram delivery failed
-- HTTP 503: required server configuration is missing
-
-Success appears only after HTTP 201. Network, validation and provider failures keep the entered data available for correction or retry.
-
-## Current protection
-
-The endpoint has exact-origin validation, a bounded application-level fixed-window guard, schema validation, payload limits, product allowlisting, a honeypot and server-only secrets. Client addresses are hashed before they are held in the short-lived in-memory bucket map. Turnstile is absent by design.
-
-Because serverless instances do not share memory, a Vercel WAF rule is still recommended for globally consistent rate limiting. Durable deduplication, approved consent copy and the retention policy remain open under `P0-CONTACT`.
-
-## Operations
-
-Use the server request ID when correlating browser status and Telegram messages. Rotate a leaked bot token in BotFather, update the deployment secret and verify a new test application.
-
-During a Telegram outage, keep the failure state visible and direct visitors to the published Moldova phones. Do not display a success state or silently switch to an unapproved provider.
+- HTTP 413: the e-catalog proxy rejected an oversized body
+- HTTP 429: the CRM rate limit rejected the request
+- HTTP 502: Telegram delivery or the CRM upstream failed
+- HTTP 503: the CRM endpoint or required backend configuration is missing
 
 ## Verification
 
-Run `npm run test`, `npm run test:e2e` and a controlled deployed-form smoke test. Automated tests mock Telegram; a real message proves only the tested environment and recipient.
+Run `npm run test`, `npm run build` and `npm run test:e2e`. A deployed smoke test must cover the full e-catalog proxy → CRM API → database → Telegram path.

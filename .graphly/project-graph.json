@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "format": "graphly-bootstrap-fallback/v1",
+  "graphlyToolAvailable": false,
+  "repository": "EsinencuP/Dr-Nona",
+  "updatedAt": "2026-09-03",
+  "nodes": [
+    { "id": "app.shell", "path": "src/app/AppShell.tsx", "kind": "shell" },
+    { "id": "app.routes", "path": "src/app/routes.tsx", "kind": "router" },
+    { "id": "pages", "path": "src/pages", "kind": "pages" },
+    { "id": "components", "path": "src/components", "kind": "components" },
+    { "id": "styles.tokens", "path": "src/styles/base.css", "kind": "styles" },
+    { "id": "styles.responsive", "path": "src/styles/responsive.css", "kind": "styles" },
+    { "id": "content", "path": "src/data", "kind": "data" },
+    { "id": "contact.client", "path": "src/features/contact", "kind": "feature" },
+    { "id": "contact.contract", "path": "shared/applications/application-schema.ts", "kind": "contract" },
+    { "id": "contact.proxy", "path": "api/applications.ts", "kind": "serverless-proxy" },
+    { "id": "contact.devAdapter", "path": "server/dev/applications-middleware.ts", "kind": "development-adapter" },
+    { "id": "crm.external", "repository": "EsinencuP/Dr-Nona-CRM", "kind": "external-backend" },
+    { "id": "tests.unit", "path": "tests/unit", "kind": "tests" },
+    { "id": "tests.e2e", "path": "tests/e2e", "kind": "tests" }
+  ],
+  "edges": [
+    { "from": "app.routes", "to": "pages", "type": "lazy-loads" },
+    { "from": "app.shell", "to": "app.routes", "type": "hosts" },
+    { "from": "pages", "to": "components", "type": "renders" },
+    { "from": "pages", "to": "content", "type": "reads" },
+    { "from": "styles.responsive", "to": "styles.tokens", "type": "extends" },
+    { "from": "contact.client", "to": "contact.contract", "type": "validates-with" },
+    { "from": "contact.client", "to": "contact.proxy", "type": "posts-to" },
+    { "from": "contact.devAdapter", "to": "contact.proxy", "type": "adapts" },
+    { "from": "contact.proxy", "to": "crm.external", "type": "forwards-to" },
+    { "from": "tests.unit", "to": "contact.client", "type": "covers" },
+    { "from": "tests.unit", "to": "contact.proxy", "type": "covers" },
+    { "from": "tests.e2e", "to": "pages", "type": "covers" }
+  ]
+}

@@ -12,7 +12,7 @@ The frontend passes the documented local technical gates. Production remains blo
 - Vite with route-level lazy modules and static prerendering
 - Vitest and React Testing Library
 - Playwright with Chromium desktop/mobile and axe
-- Vercel Function for Telegram contact delivery
+- Vercel Function proxy to the separate CRM application backend
 
 ## Local setup
 
@@ -24,17 +24,17 @@ Copy-Item .env.example .env.local
 npm run dev
 ```
 
-Open `http://127.0.0.1:4173`. Add Telegram secrets only to `.env.local`; Git ignores that file.
+Open `http://127.0.0.1:4173`. Run the separate CRM at `http://127.0.0.1:3001` so the local application proxy can forward form submissions.
 
 ## Vercel deployment
 
-The contact endpoint is deployed from `api/applications.ts` as a Vercel
-Function. Add `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` as server-only Vercel
-Environment Variables for every environment that should deliver applications,
-then redeploy. Preview, production and custom same-origin domains are accepted
-automatically; `CONTACT_ALLOWED_ORIGINS` is only for an additional trusted
-origin. See [contact delivery](docs/CONTACT_DELIVERY.md) for the complete setup
-and verification contract.
+The contact endpoint in `api/applications.ts` is a same-origin Vercel proxy.
+Set `CRM_APPLICATIONS_API_URL` to the deployed Dr-Nona-CRM
+`/api/applications` route and set `VITE_CRM_URL` to the internal CRM dashboard.
+Telegram and database credentials belong only to the
+[Dr-Nona-CRM repository](https://github.com/EsinencuP/Dr-Nona-CRM). See
+[contact delivery](docs/CONTACT_DELIVERY.md) for the complete deployment
+contract.
 
 ## Available commands
 
@@ -63,7 +63,8 @@ and verification contract.
 | `src/features/` | Catalogue, selection, contact and content features |
 | `src/pages/` | Lazy route modules |
 | `src/data/` | Product, market, claims and official content sources |
-| `api/` and `server/` | Telegram application endpoint and server-only logic |
+| `api/` | Same-origin application proxy to Dr-Nona-CRM |
+| `server/dev/` | Local Vite adapter for the same proxy |
 | `scripts/` | Build, content, security, SEO and repository gates |
 | `tests/` | Unit, component, accessibility and E2E coverage |
 | `public/` | Runtime brand and product assets |
@@ -88,6 +89,7 @@ and verification contract.
 - [Contact delivery](docs/CONTACT_DELIVERY.md)
 - [Current QA report](docs/QA_REPORT.md)
 - [Active decisions](docs/DECISIONS.md)
+- [Repository dependency map](.graphly/project-graph.json)
 
 ## Release rule
 

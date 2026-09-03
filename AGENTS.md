@@ -4,7 +4,7 @@ This file defines how an AI agent may change this repository. Read it before edi
 
 ## Project purpose
 
-Dr. Nona Moldova is an informational electronic catalogue built with React, TypeScript and Vite. It is not an online store. The repository has no checkout, payment, authentication, account area, database or general application backend. A single serverless endpoint sends approved contact-form payloads to Telegram.
+Dr. Nona Moldova is an informational electronic catalogue built with React, TypeScript and Vite. It is not an online store. The repository has no checkout, payment, authentication, account area, database or application backend. A thin same-origin serverless proxy forwards approved contact-form payloads to the separate Dr-Nona-CRM backend.
 
 Production release is blocked. A successful build does not grant release approval.
 
@@ -54,6 +54,8 @@ Ask before adding or changing:
 Do not add cart, checkout, payment, prices, discounts, authentication or account features. Do not fabricate form success, contacts, testimonials, ratings, certificates, medical claims or scientific claims. Do not publish draft products or pending/rejected claims. Do not replace official product assets with AI reconstructions.
 
 Never commit secrets, `dist/`, runtime reports, coverage, test results or archives. Do not bypass errors with `any`, `ts-ignore`, disabled lint rules, empty error handling or deleted tests. Do not mark a release ready while P0 or P1 blockers remain.
+
+The separate CRM and database source of truth is `https://github.com/EsinencuP/Dr-Nona-CRM`. Do not copy CRM UI, Prisma schema, migrations or Telegram credentials back into this repository.
 
 ## Unknown data
 
