@@ -68,22 +68,34 @@ test("selection action stays separated from product copy", async ({ page }) => {
   expect(buttonBox!.y - (descriptionBox!.y + descriptionBox!.height)).toBeGreaterThanOrEqual(20);
 });
 
-test("catalog actions share one vertical position in every card", async ({
+test("catalog actions align within each row without equalizing unrelated rows", async ({
   page,
 }) => {
-  const actionOffsets = await page
+  const cardLayouts = await page
     .locator(".catalog-grid .product-card")
     .evaluateAll((cards) =>
       cards.map((card) => {
         const cardBox = card.getBoundingClientRect();
         const actions = card.querySelector<HTMLElement>(".product-card__actions");
         if (!actions) throw new Error("Product card actions are missing");
-        return Math.round(actions.getBoundingClientRect().top - cardBox.top);
+        const description = card.querySelector<HTMLElement>(".product-card__description");
+        if (!description) throw new Error("Product card description is missing");
+        return {
+          row: Math.round(cardBox.top),
+          actionTop: actions.getBoundingClientRect().top,
+          copyGap: actions.getBoundingClientRect().top - description.getBoundingClientRect().bottom,
+        };
       })
     );
 
-  expect(actionOffsets).toHaveLength(50);
-  expect(Math.max(...actionOffsets) - Math.min(...actionOffsets)).toBeLessThanOrEqual(2);
+  expect(cardLayouts).toHaveLength(50);
+  const rows = new Map<number, typeof cardLayouts>();
+  for (const card of cardLayouts) rows.set(card.row, [...(rows.get(card.row) ?? []), card]);
+  for (const row of rows.values()) {
+    const positions = row.map((card) => card.actionTop);
+    expect(Math.max(...positions) - Math.min(...positions)).toBeLessThanOrEqual(2);
+    if (row.length === 1) expect(row[0].copyGap).toBeLessThanOrEqual(16);
+  }
 });
 
 test("every catalogue card uses a loaded normalized product image", async ({

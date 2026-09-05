@@ -692,7 +692,7 @@ export function ApplicationForm({
           </Link>
         </div>
         {fieldErrors.consentAccepted && (
-          <small id="consentAccepted-error" className="application-error">
+          <small id="consentAccepted-error" className="application-form__error">
             {fieldErrors.consentAccepted}
           </small>
         )}

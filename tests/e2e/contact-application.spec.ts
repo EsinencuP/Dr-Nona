@@ -246,5 +246,8 @@ test("consent is required, linked to privacy policy and receives focus", async (
   ).toBeVisible();
   await expect(consent).toHaveAttribute("aria-invalid", "true");
   await expect(consent).toBeFocused();
+  const consentErrorBox = await page.locator("#consentAccepted-error").boundingBox();
+  expect(consentErrorBox).not.toBeNull();
+  expect(consentErrorBox!.height).toBeLessThan(100);
   expect(requestCount).toBe(0);
 });

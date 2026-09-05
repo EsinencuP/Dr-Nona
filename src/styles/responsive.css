@@ -1,16 +1,18 @@
 @media (hover: hover) and (pointer: fine) {
   .button:hover {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
+  }
+
+  .button:active {
+    transform: scale(0.98);
   }
 
   .text-link:hover svg {
-    transform: translate(3px, -3px);
+    transform: translate(2px, -2px);
   }
 
   .product-card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(78, 153, 167, 0.48);
-    box-shadow: var(--shadow-soft);
+    border-color: var(--border);
   }
 
   .product-card:hover .product-card__stage img {
@@ -18,7 +20,7 @@
   }
 
   .product-card:hover .product-card__image {
-    scale: var(--product-object-hover-scale, 1.012);
+    scale: var(--product-object-scale, 1);
   }
 
   .home-product-spotlight:hover .home-product-spotlight__media img {
@@ -26,9 +28,9 @@
   }
 
   .home-product-mini:hover {
-    transform: translateY(-3px);
+    transform: translateY(-1px);
     border-color: rgba(78, 153, 167, 0.4);
-    box-shadow: 0 15px 34px rgba(20, 38, 45, 0.08);
+    box-shadow: none;
   }
 
   .home-product-mini:hover .home-product-mini__media img {
@@ -45,8 +47,7 @@
   }
 
   .save-button:hover {
-    transform: scale(1.025);
-    border-color: rgba(78, 153, 167, 0.48);
+    border-color: var(--border-strong);
     background: var(--white);
   }
 
@@ -57,8 +58,7 @@
   }
 
   .article-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-soft);
+    border-color: var(--border);
   }
 
   .article-card:hover .article-card__visual img {
@@ -78,9 +78,9 @@
   }
 
   .about-chapter > a:hover {
-    transform: translateY(-4px);
+    transform: translateY(-1px);
     border-color: rgba(78, 153, 167, 0.38);
-    box-shadow: 0 20px 48px rgba(22, 77, 88, 0.11);
+    box-shadow: none;
   }
 
   .about-chapter > a:hover .about-chapter__media img {
@@ -111,6 +111,10 @@
 }
 
 @media (max-width: 1180px) {
+  .selection-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   :root {
     --container: min(100% - 48px, 1100px);
   }
@@ -190,15 +194,15 @@
     top: var(--header-height);
     display: block;
     padding: 24px 18px 40px;
-    background: rgba(247, 251, 252, 0.9);
+    background: var(--bg);
     opacity: 0;
     pointer-events: none;
     visibility: hidden;
-    transform: translateY(-8px) scale(0.985);
+    transform: translateY(-6px);
     transform-origin: calc(100% - 42px) top;
-    transition: opacity 200ms var(--ease-standard), transform 240ms var(--ease-out), visibility 0s linear 240ms;
-    backdrop-filter: blur(22px) saturate(150%);
-    -webkit-backdrop-filter: blur(22px) saturate(150%);
+    transition: opacity var(--motion-standard) var(--ease-standard), transform var(--motion-standard) var(--ease-out), visibility 0s linear var(--motion-standard);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
@@ -898,7 +902,7 @@
     font-size: var(--type-ui);
     font-weight: 700;
     cursor: pointer;
-    transition: transform 100ms var(--ease-out), border-color 160ms var(--ease-standard), background-color 160ms var(--ease-standard);
+    transition: transform var(--motion-micro) var(--ease-out), border-color var(--motion-micro) var(--ease-standard), background-color var(--motion-micro) var(--ease-standard);
   }
 
   .mobile-filters-toggle:active {
@@ -907,7 +911,7 @@
 
   .mobile-filters-toggle svg:last-child {
     margin-left: auto;
-    transition: transform 200ms var(--ease-out);
+    transition: transform var(--motion-standard) var(--ease-out);
   }
 
   .mobile-filters-toggle[aria-expanded="true"] svg:last-child {
@@ -928,7 +932,8 @@
     visibility: hidden;
     transform: translateY(-6px) scale(0.99);
     transform-origin: center top;
-    transition: max-height 240ms var(--ease-out), margin-bottom 240ms var(--ease-out), padding 240ms var(--ease-out), border-width 0s linear 240ms, opacity 180ms var(--ease-standard), transform 240ms var(--ease-out), visibility 0s linear 240ms;
+    /* Disclosure geometry changes immediately; only its presentation transitions. */
+    transition: opacity var(--motion-micro) ease, transform var(--motion-standard) var(--ease-out);
   }
 
   .catalog-categories {
@@ -943,7 +948,8 @@
   .catalog-categories button span {
     min-width: 0;
     line-height: 1.2;
-    overflow-wrap: anywhere;
+    overflow-wrap: normal;
+    word-break: normal;
     text-align: left;
   }
 
@@ -986,11 +992,11 @@
   }
 
   .catalog-categories {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .catalog-grid .product-card__body {
-    padding: 14px 16px 16px;
+    padding: var(--space-4) var(--space-1);
   }
 
   .article-page__header > p:last-child {
@@ -1002,7 +1008,7 @@
 
   .catalog-grid .product-card :is(h2, h3) {
     min-height: 0;
-    font-size: 1.16rem;
+    font-size: var(--type-card-title);
   }
 
   .catalog-grid .product-card p {
@@ -1443,7 +1449,7 @@
   .selection-list article {
     min-height: 124px;
     grid-template-columns: 100px minmax(0, 1fr) auto;
-    gap: 16px;
+    gap: 8px;
     padding-block: 12px;
   }
 
@@ -1456,10 +1462,6 @@
     width: 100%;
     height: 100%;
     scale: var(--selection-object-scale, 1);
-  }
-
-  .selection-list h2 {
-    font-size: 1.34rem;
   }
 
   .selection-list small {
@@ -1518,7 +1520,9 @@
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    animation-delay: 0s !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
   }
 
   .reveal {
@@ -1528,6 +1532,34 @@
 
   .timeline-line path {
     stroke-dashoffset: 0;
+  }
+
+  .button:hover,
+  .button:active,
+  .save-button:hover,
+  .save-button:active,
+  .home-product-mini:hover,
+  .about-chapter > a:hover,
+  .article-card:hover .article-card__visual img,
+  .about-chapter > a:hover .about-chapter__media img,
+  .about-chapter__media img,
+  .about-chapter > a:hover .about-chapter__link svg,
+  .home-product-spotlight:hover .home-product-spotlight__media img,
+  .home-promo-banner:hover > article img,
+  .home-lord-banner:hover .home-lord-banner__visual img,
+  .text-link:hover svg,
+  .about-nav a:hover svg,
+  .mobile-menu-button:active,
+  .crm-entry-link:active,
+  .selection-link:active,
+  .selection-list button:active,
+  .application-mode button:active,
+  .science-points > button:hover,
+  .catalog-categories button:active,
+  .catalog-status button:active,
+  .search-field button:active,
+  .mobile-filters-toggle:active {
+    transform: none;
   }
 }
 

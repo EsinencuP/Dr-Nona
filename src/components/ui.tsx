@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "@phosphor-icons/react/ArrowUpRight";
-import { Heart } from "@phosphor-icons/react/Heart";
+import { BookmarkSimple } from "@phosphor-icons/react/BookmarkSimple";
 import { useEffect, useRef } from "react";
 import type { CSSProperties, ReactNode } from "react";
 import { getProductCopy } from "../claims";
@@ -180,7 +180,7 @@ export function ProductCard({
             title={saved ? t.added : t.add}
             onClick={() => toggle(product.slug)}
           >
-            <Heart aria-hidden="true" weight={saved ? "fill" : "regular"} />
+            <BookmarkSimple aria-hidden="true" weight={saved ? "fill" : "regular"} />
             <span>{saved ? t.added : t.add}</span>
           </button>
         </div>

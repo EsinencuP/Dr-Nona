@@ -85,7 +85,7 @@
   border: 1px solid rgba(78, 153, 167, 0.18);
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.91);
-  box-shadow: 0 20px 54px rgba(20, 38, 45, 0.1);
+  box-shadow: var(--shadow-soft);
   backdrop-filter: blur(14px);
 }
 
@@ -181,7 +181,7 @@
   border: 1px solid rgba(78, 153, 167, 0.22);
   border-radius: var(--radius-xl);
   background: var(--white);
-  box-shadow: 0 16px 45px rgba(20, 38, 45, 0.065);
+  box-shadow: none;
 }
 
 .home-product-spotlight__media {
@@ -203,7 +203,7 @@
   display: block;
   object-fit: contain;
   scale: var(--home-product-scale, 1);
-  transition: transform 260ms var(--ease-out);
+  transition: transform var(--motion-standard) var(--ease-out);
 }
 
 .home-product-spotlight__media .product-picture,
@@ -303,9 +303,9 @@
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.78);
   transition:
-    transform 200ms var(--ease-out),
-    border-color 180ms var(--ease-standard),
-    box-shadow 200ms var(--ease-standard);
+    transform var(--motion-standard) var(--ease-out),
+    border-color var(--motion-micro) var(--ease-standard),
+    box-shadow var(--motion-standard) var(--ease-standard);
 }
 
 .home-product-mini__media {
@@ -323,7 +323,7 @@
   min-height: 0;
   object-fit: contain;
   scale: var(--home-product-scale, 1);
-  transition: scale 240ms var(--ease-out);
+  transition: scale var(--motion-standard) var(--ease-out);
 }
 
 .home-product-mini__body {
@@ -397,7 +397,7 @@
   padding: 0;
   background: transparent;
   scale: var(--home-promo-scale, 1);
-  transition: transform 260ms var(--ease-out);
+  transition: transform var(--motion-standard) var(--ease-out);
 }
 
 .home-promo-banner .product-picture {
@@ -491,7 +491,7 @@
   object-position: center bottom;
   opacity: 1;
   scale: var(--home-lord-scale, 1);
-  transition: transform 260ms var(--ease-out), opacity 180ms var(--ease-standard);
+  transition: transform var(--motion-standard) var(--ease-out), opacity var(--motion-micro) var(--ease-standard);
 }
 
 .home-lord-banner__visual .product-picture {
@@ -703,7 +703,7 @@
   font-size: var(--type-ui);
   cursor: pointer;
   backdrop-filter: blur(8px);
-  transition: transform 180ms var(--ease-out), border-color 180ms var(--ease-standard), background-color 180ms var(--ease-standard);
+  transition: transform var(--motion-micro) var(--ease-out), border-color var(--motion-micro) var(--ease-standard), background-color var(--motion-micro) var(--ease-standard);
 }
 
 .science-points > button.is-active {

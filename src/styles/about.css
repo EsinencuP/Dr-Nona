@@ -127,7 +127,7 @@
   border-bottom: 1px solid var(--line);
   font-family: var(--font-display);
   font-size: 1.08rem;
-  transition: color 180ms var(--ease-standard);
+  transition: color var(--motion-micro) var(--ease-standard);
 }
 
 .about-nav a.active {
@@ -138,7 +138,7 @@
   width: 16px;
   height: 16px;
   color: var(--sea-700);
-  transition: transform 180ms var(--ease-out);
+  transition: transform var(--motion-micro) var(--ease-out);
 }
 
 .about-chapters {
@@ -193,11 +193,11 @@
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: var(--white);
-  box-shadow: 0 12px 34px rgba(22, 77, 88, 0.045);
+  box-shadow: none;
   transition:
-    transform 200ms var(--ease-out),
-    border-color 180ms var(--ease-standard),
-    box-shadow 200ms var(--ease-standard);
+    transform var(--motion-standard) var(--ease-out),
+    border-color var(--motion-micro) var(--ease-standard),
+    box-shadow var(--motion-standard) var(--ease-standard);
 }
 
 .about-chapter--1 > a,
@@ -235,7 +235,7 @@
   display: block;
   object-fit: cover;
   transform: scale(1.01);
-  transition: transform 260ms var(--ease-out);
+  transition: transform var(--motion-standard) var(--ease-out);
 }
 
 .about-chapter__body {
@@ -288,7 +288,7 @@
 .about-chapter__link svg {
   width: 16px;
   height: 16px;
-  transition: transform 180ms var(--ease-out);
+  transition: transform var(--motion-micro) var(--ease-out);
 }
 
 .about-principles {
@@ -485,16 +485,9 @@
   fill: none;
   stroke: var(--sea-400);
   stroke-dasharray: 1;
-  stroke-dashoffset: 1;
+  stroke-dashoffset: 0;
   stroke-width: 2;
   vector-effect: non-scaling-stroke;
-  animation: draw-timeline linear both;
-  animation-timeline: view();
-  animation-range: entry 10% cover 90%;
-}
-
-@keyframes draw-timeline {
-  to { stroke-dashoffset: 0; }
 }
 
 .timeline-entry {
@@ -505,7 +498,7 @@
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: var(--white);
-  box-shadow: 0 16px 50px rgba(20, 38, 45, 0.05);
+  box-shadow: none;
 }
 
 .timeline-entry + .timeline-entry {

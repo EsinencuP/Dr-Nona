@@ -34,10 +34,15 @@ if (undersized.length) {
 }
 
 const base = readFileSync("src/styles/base.css", "utf8");
-const token = (name) => {
-  const value = base.match(new RegExp(`--${name}:\\s*(#[0-9a-f]{6})`, "i"))?.[1];
+const token = (name, visited = new Set()) => {
+  if (visited.has(name)) throw new Error(`Circular color alias --${name}.`);
+  visited.add(name);
+  const value = base.match(new RegExp(`--${name}:\\s*([^;]+);`, "i"))?.[1].trim();
   if (!value) throw new Error(`Missing color token --${name}.`);
-  return value;
+  if (/^#[0-9a-f]{6}$/i.test(value)) return value;
+  const alias = value.match(/^var\(--([a-z0-9-]+)\)$/i)?.[1];
+  if (alias) return token(alias, visited);
+  throw new Error(`Unresolvable color token --${name}: ${value}.`);
 };
 const luminance = (hex) => {
   const channels = hex
@@ -98,6 +103,36 @@ if (focusFailures.length) {
       .join("\n")}`
   );
 }
+
+// Validate roles used by controls and dark surfaces, not only the light body copy.
+const semanticPairs = [
+  ["text-primary", "bg", 4.5],
+  ["text-secondary", "surface", 4.5],
+  ["text-secondary", "surface-raised", 4.5],
+  ["action-text", "action", 4.5],
+  ["action-text", "action-hover", 4.5],
+  ["border-strong", "surface-raised", 3],
+  ["border-strong", "surface", 3],
+  ["focus", "bg", 3],
+  ["premium-accent", "bg", 4.5],
+  ["success", "success-surface", 4.5],
+  ["error", "error-surface", 4.5],
+  ["lord-muted", "lord-950", 4.5],
+  ["lord-muted", "lord-900", 4.5],
+  ["lord-gold", "lord-950", 4.5],
+].map(([foreground, background, minimum]) => ({
+  pair: `${foreground}/${background}`,
+  ratio: contrast(token(foreground), token(background)),
+  minimum,
+}));
+token("border"); // Decorative dividers are not the boundary of an input/control.
+const semanticFailures = semanticPairs.filter(({ ratio, minimum }) => ratio < minimum);
+if (semanticFailures.length) {
+  throw new Error(`Semantic contrast failures:\n${semanticFailures
+    .map(({ pair, ratio, minimum }) => `${pair}: ${ratio.toFixed(2)}:1; needs ${minimum}:1`)
+    .join("\n")}`);
+}
+console.log(`Semantic color roles: PASS (${semanticPairs.length} contrast pairs).`);
 
 const html = readFileSync("index.html", "utf8");
 if (/user-scalable\s*=\s*no|maximum-scale\s*=\s*1/i.test(html)) {

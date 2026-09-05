@@ -55,7 +55,7 @@
   gap: 8px;
   color: var(--lord-muted);
   font-size: var(--type-ui);
-  transition: color 170ms var(--ease-standard);
+  transition: color var(--motion-micro) var(--ease-standard);
 }
 
 .footer-contact-market {
@@ -107,12 +107,12 @@
   border-radius: var(--radius-pill);
   background: var(--ink);
   color: var(--white);
-  box-shadow: 0 16px 40px rgba(20, 38, 45, 0.2);
+  box-shadow: var(--shadow-raised);
   font-size: var(--type-ui);
   opacity: 0;
   pointer-events: none;
   transform: translate(-50%, 16px);
-  transition: opacity 180ms var(--ease-standard), transform 180ms var(--ease-out);
+  transition: opacity var(--motion-micro) var(--ease-standard), transform var(--motion-micro) var(--ease-out);
 }
 
 .toast.is-visible {
@@ -136,12 +136,15 @@
   width: 44px;
   height: 44px;
   border: 2px solid var(--line);
-  border-top-color: var(--sea-700);
+  border-top-color: var(--action);
+  border-bottom-color: var(--premium-accent);
   border-radius: 50%;
   animation: spin 700ms linear infinite;
 }
 
 .page-loader p {
+  max-inline-size: 40ch;
+  margin: 0;
   color: var(--muted);
   font-size: var(--type-body-sm);
 }
@@ -152,9 +155,9 @@
 
 .reveal {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 420ms var(--ease-standard), transform 420ms var(--ease-out);
-  transition-delay: var(--reveal-delay, 0ms);
+  transform: translateY(10px);
+  transition: opacity var(--motion-reveal) var(--ease-standard), transform var(--motion-reveal) var(--ease-out);
+  transition-delay: min(var(--reveal-delay, 0ms), 100ms);
 }
 
 .reveal[data-visible="true"] {

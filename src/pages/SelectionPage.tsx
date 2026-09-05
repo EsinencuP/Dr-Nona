@@ -83,7 +83,7 @@ export default function SelectionPage() {
         <p>{copy.intro}</p>
       </div>
       {chosen.length ? (
-        <>
+        <div className="selection-layout">
           <div className="selection-list">
             {chosen.map((product) => (
               <article key={product.slug}>
@@ -137,7 +137,7 @@ export default function SelectionPage() {
               )}
             </div>
           </div>
-        </>
+        </div>
       ) : (
         <div className="empty-state">
           <BookmarkSimple aria-hidden="true" />

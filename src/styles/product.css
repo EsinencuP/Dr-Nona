@@ -1,5 +1,5 @@
 .product-page {
-  transition: background-color 250ms var(--ease-standard), color 250ms var(--ease-standard);
+  transition: background-color var(--motion-standard) var(--ease-standard), color var(--motion-standard) var(--ease-standard);
 }
 
 .product-detail {
@@ -40,7 +40,7 @@
   border: 1px solid rgba(78, 153, 167, 0.2);
   border-radius: 24px;
   background: var(--white);
-  box-shadow: var(--shadow-soft);
+  box-shadow: none;
 }
 
 .product-stage .product-picture {
@@ -105,8 +105,8 @@
   max-width: 760px;
   margin-bottom: 10px;
   font-size: clamp(2.85rem, 3.35vw, 3.85rem);
-  line-height: 0.98;
-  letter-spacing: -0.025em;
+  line-height: var(--leading-title);
+  letter-spacing: -0.015em;
   overflow-wrap: anywhere;
 }
 
@@ -129,6 +129,7 @@
 
 .product-description {
   max-width: 700px;
+  max-inline-size: var(--measure-copy);
   margin: 0 0 16px;
   color: var(--ink);
   font-size: var(--type-body);
@@ -316,10 +317,9 @@
   display: grid;
   grid-template-columns: 30px minmax(0, 1fr);
   gap: 13px;
-  padding: clamp(18px, 2vw, 26px);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.72);
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--border);
+  background: transparent;
 }
 
 .product-copy-card > svg {
@@ -342,6 +342,7 @@
 
 .product-copy-card p {
   margin: 0;
+  max-inline-size: var(--measure-copy);
   color: var(--muted);
   line-height: 1.68;
 }
@@ -351,8 +352,8 @@
 }
 
 .product-copy-card--overview {
-  border-color: rgba(29, 121, 140, 0.24);
-  background: var(--white);
+  border-color: var(--border-strong);
+  background: transparent;
 }
 
 .product-specification-grid {
