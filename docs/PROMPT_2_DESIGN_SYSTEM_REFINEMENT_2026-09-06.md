@@ -60,7 +60,7 @@ Latin, Cyrillic и Romanian проверены в реальном браузе�
 
 ## Before / after evidence
 
-Локальные generated artifacts: `artifacts/prompt2-2026-09-06/` (ignored, не добавлять в Git). [Интерактивное сравнение](../artifacts/prompt2-2026-09-06/comparison.html): **49 paired screenshots** — 11 route/state surfaces × RU/RO × 375/1440 px = 44, плюс RU/RO menu, RU/RO input focus и font specimen. До и после сняты в этом запуске, с production CSS, загруженными fonts и раскрытыми reveal; ни одна пара не выдается за результат исходного redesign от 2026-09-05.
+Локальные generated artifacts: `artifacts/prompt2-2026-09-06/` (ignored, не добавлять в Git). Интерактивное сравнение хранится локально в `artifacts/prompt2-2026-09-06/comparison.html`; файл отсутствует в чистом checkout и на Vercel и не является обязательной ссылкой документации. Сравнение содержит **49 paired screenshots** — 11 route/state surfaces × RU/RO × 375/1440 px = 44, плюс RU/RO menu, RU/RO input focus и font specimen. До и после сняты в этом запуске, с production CSS, загруженными fonts и раскрытыми reveal; ни одна пара не выдается за результат исходного redesign от 2026-09-05.
 
 Surfaces: home, catalogue, Gonseen PDP, About, History, Lord collection, Halo, editorial listing, contact, empty selection, 404. Дополнительно сохранены saved-card/populated selection и четыре loader-состояния. Это acceptance Prompt 2, не новый полный 50-PDP sweep Prompt 3/6.
 
