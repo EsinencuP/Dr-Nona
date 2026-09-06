@@ -4,16 +4,6 @@
   position: relative;
   overflow: hidden;
   padding: clamp(24px, 3vw, 42px) 0 20px;
-  background-image:
-    linear-gradient(90deg, rgba(247, 251, 252, 0.98) 0%, rgba(247, 251, 252, 0.9) 29%, rgba(247, 251, 252, 0.24) 54%, rgba(247, 251, 252, 0) 76%),
-    image-set(
-      url("/brand/hero/halo-complex-desktop.avif") type("image/avif"),
-      url("/brand/hero/halo-complex-desktop.webp") type("image/webp"),
-      url("/brand/hero/halo-complex-desktop.jpg") type("image/jpeg")
-    );
-  background-position: center, right center;
-  background-size: 100% 100%, auto 100%;
-  background-repeat: no-repeat;
   background-color: var(--surface);
 }
 
@@ -70,8 +60,17 @@
 }
 
 .hero-visual {
-  min-height: 500px;
+  min-height: 0;
+  height: clamp(360px, 40vw, 560px);
   position: relative;
+  background-image: image-set(
+    url("/brand/hero/halo-complex-desktop.avif") type("image/avif"),
+    url("/brand/hero/halo-complex-desktop.webp") type("image/webp"),
+    url("/brand/hero/halo-complex-desktop.jpg") type("image/jpeg")
+  );
+  background-position: right center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .hero-benefits {
@@ -80,7 +79,7 @@
   z-index: 4;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin-top: -18px;
+  margin-top: 24px;
   overflow: hidden;
   border: 1px solid rgba(78, 153, 167, 0.18);
   border-radius: var(--radius-md);

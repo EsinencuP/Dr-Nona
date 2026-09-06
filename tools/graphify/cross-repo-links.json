@@ -1,0 +1,200 @@
+{
+  "nodes": [
+    {
+      "id": "catalog::docs_prompt2_design_system_refinement",
+      "label": "Prompt 2 Design System Refinement PASS: typography, Mineral Light palette, surfaces, motion, Halo chapters",
+      "description": "Completed Prompt 2 on 2026-09-06. Evidence: 49 before/after pairs, 151 unit tests, 332 E2E passed and 18 unchanged skips, 16 axe runs with zero violations. Next: Prompt 3 on user request. G11 and editorial G12 remain open; eight production blockers unchanged.",
+      "file_type": "workflow-evidence",
+      "source_file": "docs/PROMPT_2_DESIGN_SYSTEM_REFINEMENT_2026-09-06.md",
+      "source_location": "Prompt 2 acceptance and handoff",
+      "repo": "catalog",
+      "_origin": "declared",
+      "status": "PASS",
+      "scope": "Visual system, typography, palette, spacing, surfaces, component states, motion; RU/RO desktop/mobile",
+      "evidence_paths": [
+        "docs/DESIGN_SYSTEM.md",
+        "artifacts/prompt2-2026-09-06/comparison.html",
+        "artifacts/prompt2-2026-09-06/e2e-final.log",
+        "artifacts/prompt2-2026-09-06/states/results.json"
+      ],
+      "implementation_paths": [
+        "src/pages/FormulaPage.tsx",
+        "src/styles/formula.css",
+        "src/styles/responsive.css"
+      ],
+      "open_findings": ["G11 content review", "G12 editorial repetition", "Production blockers: docs/release-status.json"],
+      "next_stage": "Prompt 3 responsive typography, text and image geometry"
+    },
+    {
+      "id": "catalog::docs_dr_nona_prompt_workflow",
+      "label": "Dr Nona Prompt 1-6 improvement workflow: visual audit, design system, responsive geometry, RU/RO parity, performance, final QA",
+      "description": "Canonical six-prompt contract for the Dr Nona improvement workflow; open docs/DR_NONA_PROMPT_WORKFLOW.md for the complete requirements.",
+      "file_type": "workflow-document",
+      "source_file": "docs/DR_NONA_PROMPT_WORKFLOW.md",
+      "source_location": "workflow",
+      "repo": "catalog",
+      "_origin": "declared"
+    },
+    {
+      "id": "catalog::src_data_products_public",
+      "label": "products-public.json",
+      "file_type": "data",
+      "source_file": "src/data/products-public.json",
+      "source_location": "data",
+      "repo": "catalog",
+      "_origin": "declared"
+    },
+    {
+      "id": "crm::src_data_products",
+      "label": "products.json",
+      "file_type": "data",
+      "source_file": "src/data/products.json",
+      "source_location": "data",
+      "repo": "crm",
+      "_origin": "declared"
+    },
+    {
+      "id": "crm::database_schema_prisma",
+      "label": "schema.prisma",
+      "file_type": "database-schema",
+      "source_file": "database/schema.prisma",
+      "source_location": "schema",
+      "repo": "crm",
+      "_origin": "declared"
+    }
+  ],
+  "links": [
+    {
+      "source": "catalog::docs_dr_nona_prompt_workflow",
+      "target": "catalog::docs_prompt2_design_system_refinement",
+      "relation": "documents_stage",
+      "evidence": "Workflow Prompt 2 PASS points to the dated acceptance report and next-stage handoff"
+    },
+    {
+      "source": "catalog::docs_prompt2_design_system_refinement",
+      "target": "catalog::src_pages_formulapage",
+      "relation": "documents_implementation",
+      "evidence": "Halo reading chapters use numbered editorial headings; thematic ownership is formula.css and existing responsive.css rules"
+    },
+    {
+      "source": "catalog::docs_prompt2_design_system_refinement",
+      "target": "catalog::tests_e2e_visual_foundation_spec",
+      "relation": "validated_by",
+      "evidence": "RU/RO chapter text bounds, semantic headings, responsive wrapping, text spacing and reduced motion"
+    },
+    {
+      "source": "catalog::docs_prompt2_design_system_refinement",
+      "target": "catalog::tests_e2e_responsive_matrix_spec",
+      "relation": "validated_by",
+      "evidence": "Full Prompt 2 E2E rerun includes existing responsive matrix and visual baselines"
+    },
+    {
+      "source": "catalog::docs_prompt2_design_system_refinement",
+      "target": "catalog::tests_e2e_typography_accessibility_spec",
+      "relation": "validated_by",
+      "evidence": "Typography, minimum informative size, text spacing and zoom-equivalent reflow"
+    },
+    {
+      "source": "catalog::docs_prompt2_design_system_refinement",
+      "target": "catalog::tests_e2e_ui_ux_deep_audit_spec",
+      "relation": "validated_by",
+      "evidence": "Deep UI audit in the passing full E2E run; additional visual review and axe evidence are recorded in the report"
+    },
+    {
+      "source": "catalog::docs_dr_nona_prompt_workflow",
+      "target": "catalog::tests_e2e_ui_ux_deep_audit_spec",
+      "relation": "validated_by",
+      "evidence": "Prompt 1 and Prompt 6 require the deep UI audit route sweep"
+    },
+    {
+      "source": "catalog::docs_dr_nona_prompt_workflow",
+      "target": "catalog::tests_e2e_visual_foundation_spec",
+      "relation": "validated_by",
+      "evidence": "Prompt 2 requires visual-system and motion acceptance checks"
+    },
+    {
+      "source": "catalog::docs_dr_nona_prompt_workflow",
+      "target": "catalog::tests_e2e_responsive_matrix_spec",
+      "relation": "validated_by",
+      "evidence": "Prompts 1, 3 and 6 require the viewport and mobile-landscape matrix"
+    },
+    {
+      "source": "catalog::docs_dr_nona_prompt_workflow",
+      "target": "catalog::tests_e2e_typography_accessibility_spec",
+      "relation": "validated_by",
+      "evidence": "Prompts 1, 2, 3 and 6 require typography and accessibility validation"
+    },
+    {
+      "source": "catalog::src_features_contact_application_client_submitapplication",
+      "target": "catalog::api_applications_handler",
+      "relation": "posts_to",
+      "evidence": "src/features/contact/application-client.ts -> /api/applications; api/applications.ts handler"
+    },
+    {
+      "source": "catalog::api_applications_createapplicationsproxy",
+      "target": "crm::src_app_api_applications_route_post",
+      "relation": "integrates_with",
+      "evidence": "api/applications.ts CRM_APPLICATIONS_API_URL -> CRM src/app/api/applications/route.ts POST"
+    },
+    {
+      "source": "catalog::shared_applications_application_schema_applicationinputschema",
+      "target": "crm::shared_applications_application_schema_applicationinputschema",
+      "relation": "contract_mirror",
+      "evidence": "shared/applications/application-schema.ts exists in both repositories"
+    },
+    {
+      "source": "catalog::src_data_products_public",
+      "target": "catalog::src_features_contact_application_client_submitapplication",
+      "relation": "provides_product_slugs",
+      "evidence": "public catalogue data feeds selected product application payloads"
+    },
+    {
+      "source": "crm::src_app_api_applications_route_post",
+      "target": "crm::server_api_applications_handler_createapplicationshandler",
+      "relation": "delegates_to",
+      "evidence": "src/app/api/applications/route.ts imports applications-handler"
+    },
+    {
+      "source": "crm::server_api_applications_handler_createapplicationshandler",
+      "target": "crm::server_applications_application_service_processapplication",
+      "relation": "delegates_to",
+      "evidence": "server/api/applications-handler.ts imports processApplication"
+    },
+    {
+      "source": "crm::server_applications_application_service_processapplication",
+      "target": "crm::server_applications_application_db_saveapplicationtodb",
+      "relation": "persists_through",
+      "evidence": "server/applications/application-service.ts persists application records through application-db"
+    },
+    {
+      "source": "crm::server_applications_application_db_saveapplicationtodb",
+      "target": "crm::src_lib_prisma_prisma",
+      "relation": "uses_database_client",
+      "evidence": "server/applications/application-db.ts uses PrismaClient"
+    },
+    {
+      "source": "crm::src_lib_prisma_prisma",
+      "target": "crm::database_schema_prisma",
+      "relation": "implements",
+      "evidence": "src/lib/prisma.ts uses @prisma/client generated from database/schema.prisma"
+    },
+    {
+      "source": "crm::database_schema_prisma",
+      "target": "crm::database_migrations_20260902182949_init_crm_schema_migration",
+      "relation": "migrates_to",
+      "evidence": "database/schema.prisma and the checked-in init migration define the CRM database contract"
+    },
+    {
+      "source": "crm::server_api_applications_handler_productsjson",
+      "target": "crm::src_data_products",
+      "relation": "reads_catalog_snapshot",
+      "evidence": "server/api/applications-handler.ts requires ../../src/data/products.json"
+    },
+    {
+      "source": "crm::src_data_products",
+      "target": "crm::database_migrations_20260902182949_init_crm_schema_migration_productcatalog",
+      "relation": "feeds_catalog_table",
+      "evidence": "CRM product snapshot is validated against the ProductCatalog persistence model"
+    }
+  ]
+}

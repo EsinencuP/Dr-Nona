@@ -207,7 +207,7 @@
 
 .about-chapter--2 > a,
 .about-chapter--3 > a {
-  grid-template-rows: 142px 1fr;
+  grid-template-rows: clamp(220px, 21vw, 300px) 1fr;
 }
 
 .about-chapter--4 .about-chapter__media {
@@ -234,8 +234,12 @@
   height: 100%;
   display: block;
   object-fit: cover;
-  transform: scale(1.01);
   transition: transform var(--motion-standard) var(--ease-out);
+}
+
+.about-chapter--portrait .about-chapter__media img {
+  object-fit: contain;
+  object-position: center;
 }
 
 .about-chapter__body {
@@ -441,6 +445,7 @@
 
 .official-media-grid {
   display: grid;
+  align-items: start;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
   margin-top: 30px;
@@ -448,11 +453,11 @@
 
 .official-media-grid img {
   width: 100%;
-  height: 280px;
+  height: auto;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   background: var(--white);
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .timeline {

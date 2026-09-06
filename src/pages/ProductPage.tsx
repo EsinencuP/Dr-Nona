@@ -10,6 +10,7 @@ import {
   splitText,
 } from "../components/ui";
 import { ProductImage } from "../components/ProductImage";
+import { productImageStyle } from "../features/product/productImagePresentation";
 import {
   getProductCopy,
   getProductDisclaimer,
@@ -95,21 +96,8 @@ export default function ProductPage() {
           <span aria-current="page">{product.officialName}</span>
         </nav>
         <div className="product-detail__grid">
-          <figure className="product-stage">
-            <ProductImage
-              src={product.image}
-              alt={product.imageAlt || product.officialName}
-              width="1200"
-              height="1200"
-              loading="eager"
-              fetchPriority="high"
-              sizes="(max-width: 960px) calc(100vw - 36px), 46vw"
-            />
-            <figcaption className="product-stage__caption">
-              {copy.imageCaption} · Dr. Nona
-            </figcaption>
-          </figure>
           <div className="product-info">
+            <header className="product-identity">
             <div className="product-info__kicker">
               <p className="eyebrow">{product.category}</p>
               <span>Dr. Nona Moldova</span>
@@ -125,31 +113,26 @@ export default function ProductPage() {
             >
               {product.officialName}
             </h1>
+            </header>
+            <figure className="product-stage" style={productImageStyle(product.slug)}>
+              <div className="product-stage__media">
+                <ProductImage
+                  src={product.image}
+                  alt={product.imageAlt || product.officialName}
+                  width="1200"
+                  height="1200"
+                  loading="eager"
+                  fetchPriority="high"
+                  sizes="(max-width: 960px) 320px, 560px"
+                />
+              </div>
+              <figcaption className="product-stage__caption">
+                {copy.imageCaption} · Dr. Nona
+              </figcaption>
+            </figure>
+            <div className="product-decision">
             {productShortDescription && (
               <p className="product-purpose">{productShortDescription}</p>
-            )}
-            <p className="product-description">{productSummary}</p>
-            {(ingredientSummary || usageSummary) && (
-              <div className="product-highlights" role="list" aria-label={copy.detailEyebrow}>
-                {ingredientSummary && (
-                  <div className="product-highlight" role="listitem">
-                    <Leaf aria-hidden="true" />
-                    <div>
-                      <strong>{copy.formulaBasis}</strong>
-                      <p>{ingredientSummary}</p>
-                    </div>
-                  </div>
-                )}
-                {usageSummary && (
-                  <div className="product-highlight" role="listitem">
-                    <Drop aria-hidden="true" />
-                    <div>
-                      <strong>{copy.usageSummary}</strong>
-                      <p>{usageSummary}</p>
-                    </div>
-                  </div>
-                )}
-              </div>
             )}
             {productDisclaimer && (
               <aside
@@ -183,6 +166,32 @@ export default function ProductPage() {
               <div><dt>{t.sku}</dt><dd>{product.sku || "NV"}</dd></div>
               <div><dt>{t.category}</dt><dd>{product.category}</dd></div>
             </dl>
+            </div>
+            <div className="product-summary">
+              <p className="product-description">{productSummary}</p>
+              {(ingredientSummary || usageSummary) && (
+                <div className="product-highlights" role="list" aria-label={copy.detailEyebrow}>
+                  {ingredientSummary && (
+                    <div className="product-highlight" role="listitem">
+                      <Leaf aria-hidden="true" />
+                      <div>
+                        <strong>{copy.formulaBasis}</strong>
+                        <p>{ingredientSummary}</p>
+                      </div>
+                    </div>
+                  )}
+                  {usageSummary && (
+                    <div className="product-highlight" role="listitem">
+                      <Drop aria-hidden="true" />
+                      <div>
+                        <strong>{copy.usageSummary}</strong>
+                        <p>{usageSummary}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>

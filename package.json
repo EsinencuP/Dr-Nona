@@ -48,7 +48,8 @@
     "sync:catalog:md": "node scripts/sync-moldova-catalog.mjs",
     "sync:catalog:md:write": "node scripts/sync-moldova-catalog.mjs --write",
     "content:repair:ro": "node scripts/repair-romanian-product-content.mjs",
-    "content:repair:ro:write": "node scripts/repair-romanian-product-content.mjs --write"
+    "content:repair:ro:write": "node scripts/repair-romanian-product-content.mjs --write",
+    "graphify:cross-repo": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/graphify/build-cross-repo-graph.ps1"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",

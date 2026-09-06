@@ -13,6 +13,7 @@ import { useOfficialPageData } from "../../data";
 import { useLocale } from "../../locales/LocaleProvider";
 import { Link, NavLink } from "../../router";
 import NotFoundPage from "../../pages/NotFoundPage";
+import { uncroppedOfficialImage } from "../../components/contentMedia";
 
 const aboutCopy = {
   ru: {
@@ -115,10 +116,7 @@ export function AboutLandingPage() {
       image: page?.images[index]
         ? {
             ...page.images[index],
-            src: page.images[index].src.replace(
-              "f_jpeg,w_300,h_300",
-              "f_auto,q_auto,w_900"
-            ),
+            src: uncroppedOfficialImage(page.images[index].src),
           }
         : undefined,
       excerpt: splitText(chapter?.paragraphs[0] ?? "", 185)[0],
@@ -165,7 +163,7 @@ export function AboutLandingPage() {
           {chapters.map((chapter, index) => (
             <Reveal
               key={chapter.path}
-              className={`about-chapter about-chapter--${index + 1}`}
+              className={`about-chapter about-chapter--${index + 1} about-chapter--${index === 0 ? "photo" : "portrait"}`}
               delay={index * 55}
             >
               <Link to={chapter.path}>
@@ -280,7 +278,7 @@ export function AboutContentPage({ path }: { path: string }) {
               {page.images.map((image, index) => (
                 <img
                   key={`${image.src}-${index}`}
-                  src={image.src}
+                  src={uncroppedOfficialImage(image.src)}
                   alt={image.alt || title}
                   width="800"
                   height="640"

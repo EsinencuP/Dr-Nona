@@ -1,6 +1,54 @@
 import { expect, test } from "@playwright/test";
 
 for (const locale of ["ru", "ro"]) {
+  test(`${locale}: Halo reading chapters retain full text and heading hierarchy under reflow`, async ({ page }) => {
+    test.setTimeout(60_000);
+    await page.goto(`/${locale}/ourformula`);
+    const chapters = page.locator(".formula-chapter");
+    await expect(chapters).toHaveCount(3);
+    await page.evaluate(() => document.fonts.ready);
+    const titles = await page.locator(".formula-pillar h2").allTextContents();
+    await expect(chapters.getByRole("heading", { level: 2 })).toHaveText(titles);
+    const paragraphs = await chapters.locator("p").allTextContents();
+
+    for (const width of [320, 375, 430, 768, 1024, 1440, 1920, 844]) {
+      await page.setViewportSize({ width, height: width === 844 ? 390 : 900 });
+      for (const chapter of await chapters.all()) {
+        await chapter.scrollIntoViewIfNeeded();
+        await expect(chapter).toHaveCSS("opacity", "1");
+      }
+      const problems = await chapters.evaluateAll((elements) => elements.flatMap((element) => {
+        const box = element.getBoundingClientRect();
+        return [...element.querySelectorAll("h2, p")].flatMap((text) => {
+          const range = document.createRange();
+          range.selectNodeContents(text);
+          const bounds = range.getBoundingClientRect();
+          const style = getComputedStyle(text);
+          return bounds.left < box.left - 1 || bounds.right > box.right + 1
+            || bounds.bottom > box.bottom + 1 || parseFloat(style.fontSize) < 16
+            || style.webkitLineClamp !== "none"
+            ? [text.textContent] : [];
+        });
+      }));
+      expect(problems, `${locale} chapters at ${width}px`).toEqual([]);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    }
+
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.setViewportSize({ width: 320, height: 812 });
+    await page.addStyleTag({ content: ".formula-chapter h2, .formula-chapter p { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; }" });
+    for (const chapter of await chapters.all()) {
+      await chapter.scrollIntoViewIfNeeded();
+      await expect(chapter).toHaveCSS("opacity", "1");
+      expect(await chapter.evaluate((element) => {
+        const transform = getComputedStyle(element).transform;
+        return transform === "none" || new DOMMatrixReadOnly(transform).isIdentity;
+      })).toBe(true);
+    }
+    await expect(chapters.locator("p")).toHaveText(paragraphs);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  });
+
   test(`${locale}: category labels and counts fit across the responsive matrix`, async ({ page }) => {
     test.setTimeout(60_000);
     await page.goto(`/${locale}/products`);

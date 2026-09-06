@@ -119,34 +119,44 @@
 
 .formula-chapter {
   display: grid;
-  grid-template-columns: 110px minmax(0, 800px);
-  gap: 24px;
-  padding-block: 28px;
-  border-bottom: 1px solid var(--line);
+  grid-template-columns: 64px minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-6);
+  padding-block: var(--space-8);
+  border-bottom: 1px solid var(--border);
 }
 
 .formula-chapter:first-child {
   padding-top: 0;
 }
 
-.formula-chapter__icon {
-  width: 82px;
-  height: 82px;
+.formula-chapter__index {
+  color: var(--premium-accent);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.5rem + 1.2vw, 3rem);
+  font-weight: 500;
+  font-variant-numeric: lining-nums tabular-nums;
+  line-height: 1;
+}
+
+.formula-chapter__body {
   display: grid;
-  place-items: center;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  background: var(--sea-050);
+  grid-template-columns: minmax(180px, 0.55fr) minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--space-8);
 }
 
-.formula-chapter__icon svg {
-  width: 28px;
-  height: 28px;
-  color: var(--sea-700);
+.formula-chapter h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 1.25rem + 0.8vw, 2rem);
+  line-height: 1.2;
+  text-wrap: pretty;
 }
 
-.formula-chapter > div:last-child > p:last-child {
-  margin-bottom: 0;
-  color: var(--muted);
-  font-size: 1.02rem;
+.formula-chapter__body > p {
+  max-inline-size: var(--measure-copy);
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--type-body);
+  line-height: var(--leading-body);
 }

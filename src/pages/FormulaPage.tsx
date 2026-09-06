@@ -114,13 +114,13 @@ export default function FormulaPage() {
       </section>
       <section className="formula-story container">
         <div className="formula-story__content">
-          {formulaChapters.map(({ title, icon: Icon, text }) => (
+          {formulaChapters.map(({ title, text }, index) => (
             <Reveal key={title} className="formula-chapter">
-              <div className="formula-chapter__icon">
-                <Icon aria-hidden="true" />
-              </div>
-              <div>
-                <p className="eyebrow">{title}</p>
+              <span className="formula-chapter__index" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <div className="formula-chapter__body">
+                <h2>{title}</h2>
                 <p>{text}</p>
               </div>
             </Reveal>

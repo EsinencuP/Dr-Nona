@@ -570,10 +570,10 @@ test("audit layout regressions stay closed", async ({ page }) => {
 
   await page.setViewportSize({ width: 768, height: 1024 });
   await preparePage(page, "/");
-  const tabletHeroBackground = await page.locator(".home-hero").evaluate(
+  const tabletHeroBackground = await page.locator(".hero-visual").evaluate(
     (hero) => getComputedStyle(hero).backgroundImage
   );
-  expect(tabletHeroBackground).toContain("linear-gradient");
+  expect(tabletHeroBackground).not.toContain("linear-gradient");
   expect(tabletHeroBackground).toContain("halo-complex-desktop.jpg");
 
   await page.setViewportSize({ width: 375, height: 812 });

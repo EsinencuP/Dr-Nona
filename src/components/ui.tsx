@@ -2,6 +2,7 @@ import { ArrowUpRight } from "@phosphor-icons/react/ArrowUpRight";
 import { BookmarkSimple } from "@phosphor-icons/react/BookmarkSimple";
 import { useEffect, useRef } from "react";
 import type { CSSProperties, ReactNode } from "react";
+import { productImageStyle } from "../features/product/productImagePresentation";
 import { getProductCopy } from "../claims";
 import type { OfficialPage, Product } from "../data";
 import { useSelection } from "../features/selection/SelectionContext";
@@ -131,12 +132,7 @@ export function ProductCard({
   return (
     <article
       className={`product-card ${compact ? "product-card--compact" : ""}`}
-      style={{
-        "--product-object-scale": product.catalogScale,
-        "--product-object-hover-scale": Number(
-          (product.catalogScale * 1.012).toFixed(3)
-        ),
-      } as CSSProperties}
+      style={productImageStyle(product.slug)}
     >
       <div className="product-card__stage">
         <Link to={`/product/${product.slug}`} tabIndex={-1} aria-hidden="true">

@@ -2,7 +2,7 @@
 
 The visual system combines a light mineral palette, editorial typography and catalogue density. It must feel premium and trustworthy without sacrificing information per viewport.
 
-Last verified: 2026-09-05 against the tokens and component styles in `src/styles/`. This document is the only canonical design specification. Implementation evidence and tradeoffs are recorded in [Visual system refinement](VISUAL_SYSTEM_REFINEMENT_2026-09-05.md).
+Last verified: 2026-09-06 against the tokens and component styles in `src/styles/`. This document is the only canonical design specification. Implementation evidence and tradeoffs are recorded in [Visual system refinement](VISUAL_SYSTEM_REFINEMENT_2026-09-05.md) and the [Prompt 2 acceptance report](PROMPT_2_DESIGN_SYSTEM_REFINEMENT_2026-09-06.md).
 
 ## Visual goals
 
@@ -102,13 +102,23 @@ Empty states use a bookmark, a clear recovery action and separators instead of a
 
 ### Product detail composition
 
-The first useful viewport follows one direct reading path: product media, category context, product name, editorial description, source-backed composition or usage highlights, then the selection action. Product name and description carry the strongest hierarchy. Category and SKU remain available as compact service metadata and must never visually compete with the description.
+The first useful viewport follows one direct document order: product identity, bounded media, short published purpose and any applicable disclaimer, selection action, then detailed summaries. Product name carries the strongest hierarchy; category and SKU remain compact service metadata. Keep the full source-backed overview, composition and usage below the decision area. Do not move long highlights back above the action.
 
-On desktop, media and decision content share a balanced two-column grid aligned at the top. The information section below exposes the product overview, composition and usage without requiring accordion interaction; unavailable or non-applicable fields are omitted instead of replaced with generic filler. On mobile, the media becomes square, the action fills the available width and every information card stays in the document flow. Do not add prices, ratings, urgency, purchase controls or commerce language.
+On desktop, media occupies the left grid area; identity, decision and summary share the right column. The media stage is capped at 560 px. At 960 px and below it has a 240–320 px height budget with a contain image; its height is independent of the viewport width. At 641–960 px and heights up to 500 px, identity/media share the left side and the decision sits at the top right. This also supports real 200% zoom. Every information block and disclaimer stays in document flow. Do not add prices, ratings, urgency, purchase controls or commerce language.
+
+### Home hero safe areas
+
+Hero copy, image and principles occupy separate layout areas. The existing `.hero-visual` owns the approved background image, with no text gradient over the packaging. At desktop widths text and media sit side by side; at 960 px and below the sequence is copy → media → principles. Keep at least 20 px between media and the principles rail. Desktop/tablet use the existing landscape asset; mobile uses the existing portrait asset at a 5:4 stage and 68% vertical position, preserving the full jar. Recheck the safe area if the source asset changes.
+
+### Halo reading chapters
+
+Keep the compact icon-led introduction on the dark sea surface. The reading section below uses small gold serif indices, genuine H2 headings and full Manrope paragraphs on the page surface, separated by rules. Do not repeat the hero's circular icon badges in the reading section. At desktop/tablet widths, titles and paragraphs share baseline-aligned tracks; at 640 px and below the text stacks beside a 36 px index column. Body copy stays 16 px / 1.65 with a 64ch maximum measure. Indices are decorative and hidden from assistive output. This treatment changes presentation, not source copy or claims approval.
 
 ## Product imagery
 
-Use only owner-approved product media. One `image` field supplies catalogue cards, selection, home merchandising, related products, SEO and product detail; there is no separate premium/detail image. All 50 published products have distinct matched assets and no product uses the neutral placeholder. `catalogScale` may adjust compact presentation without changing the source asset.
+Use only owner-approved product media. One `image` field supplies catalogue cards, selection, home merchandising, related products, SEO and product detail; there is no separate premium/detail image. All 50 published products have distinct matched assets and no product uses the neutral placeholder. `catalogScale` remains the existing home/selection campaign control. Catalogue, related cards and PDP use the optically reviewed scale/vertical offset in `src/features/product/productImagePresentation.ts`; this prevents a catalogue correction from unintentionally magnifying a home campaign.
+
+The reviewed profiles are shape-aware: tall tubes/bottles occupy roughly 80% of the image area height; broad cream jars use roughly 64–66% width; Gonseen's wide box uses roughly 85% width; sets retain both box and bottle. These are optical targets, not physical volume comparisons. Do not force every silhouette to equal height. New or replaced assets require individual visual review and clipping checks; the neutral fallback scale does not constitute approval. Runtime QC combines a non-white silhouette bound with visual inspection because pale packaging/shadows cannot be certified by a threshold alone.
 
 Do not retain raw exports, duplicate aliases or unused variants in `public/`. Never use another product as a fallback for a missing match.
 
@@ -137,7 +147,7 @@ Motion explains state or hierarchy. Use CSS; no animation dependency or route tr
 | Category | Timing | Treatment |
 |---|---|---|
 | Navigation underline, buttons, locale switch, save and chips | `--motion-micro: 140ms` | Color, border, underline; restrained press feedback |
-| Card / image hover | `--motion-standard: 220ms` | Border response; editorial images may gently scale; catalogue packshots keep their optical scale |
+| Card / image hover | `--motion-standard: 220ms` | Border response; inspected decorative photos may gently scale; artwork, portraits and catalogue packshots keep their framing |
 | Content reveal | `--motion-reveal: 420ms` | Opacity and 10 px vertical movement, stagger capped at 100 ms; total at most 520 ms |
 | Mobile menu | 220 ms | Opacity and 6 px enter/exit movement on an opaque surface |
 | Filter disclosure | 140 / 220 ms | Opacity / transform; geometry changes immediately |
@@ -147,6 +157,10 @@ Do not animate layout properties for disclosure polish. Spatial hover effects ru
 `prefers-reduced-motion: reduce` removes reveal/transition delays, makes reveal content immediately visible and suppresses hover/press displacement. State changes remain visible through color, borders and labels. The loading ring becomes static while its text remains available. Avoid autoplay loops, scroll hijacking, expensive blur fields and animation that delays access to content.
 
 ## Allowed decisions
+
+Editorial artwork preserves its complete source frame: remove known delivery crops, use `contain`, and place metadata outside the image. Unknown editorial media uses this conservative mode. Article/gallery media keeps its natural aspect ratio. About portraits use a bounded tonal stage without hover zoom. Only inspected decorative photography opts into `cover` and image hover. See [G08/G10 evidence](G08_G10_REFINEMENT_2026-09-06.md).
+
+Cards and articles must remain complete without an excerpt. Exact imported site-wide marketing boilerplate is suppressed without replacing it with invented summaries; original-language content and the claims publication gate remain authoritative.
 
 - Controlled editorial asymmetry
 - Rounded image masks and mineral-inspired surfaces

@@ -4,6 +4,8 @@ coverage/
 playwright-report/
 test-results/
 artifacts/
+graphify-out/
+.codex/hooks.json
 exports/
 
 # Keep reusable QA context files in .agents/, but ignore disposable agent workspaces.

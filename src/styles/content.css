@@ -64,10 +64,12 @@
 
 .article-page__hero {
   width: 100%;
-  height: clamp(300px, 34vw, 460px);
+  height: auto;
+  display: block;
   margin-bottom: 24px;
   border-radius: var(--radius-lg);
-  object-fit: cover;
+  object-fit: contain;
+  background: var(--surface);
 }
 
 .article-page__layout aside,

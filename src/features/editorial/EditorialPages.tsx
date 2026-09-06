@@ -6,6 +6,7 @@ import {
   splitText,
 } from "../../components/ui";
 import { ArticleCard } from "../../components/ArticleCard";
+import { uncroppedOfficialImage } from "../../components/contentMedia";
 import {
   getOfficialPageDescription,
   getOfficialPageParagraphs,
@@ -73,10 +74,10 @@ export function ArticlePage() {
       {page.images[0]?.src && (
         <img
           className="article-page__hero"
-          src={page.images[0].src}
+          src={uncroppedOfficialImage(page.images[0].src)}
           alt={page.images[0].alt || ""}
           width="1200"
-          height="600"
+          height="450"
           fetchPriority="high"
           lang="ru"
         />
@@ -132,7 +133,7 @@ export function GenericOfficialPage() {
               {page.images.map((image, index) => (
                 <img
                   key={`${image.src}-${index}`}
-                  src={image.src}
+                  src={uncroppedOfficialImage(image.src)}
                   alt={image.alt || title}
                   width="800"
                   height="640"

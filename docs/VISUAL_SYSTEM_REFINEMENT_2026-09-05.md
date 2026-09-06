@@ -1,5 +1,7 @@
 # Visual system refinement — Dr. Nona Moldova
 
+Обновление 2026-09-06: [Prompt 2 acceptance report](PROMPT_2_DESIGN_SYSTEM_REFINEMENT_2026-09-06.md) фиксирует повторный visual review, доработку глав Halo и **PASS Prompt 2** после полного E2E. Ниже сохранена история первого refinement; G11 и editorial часть G12 по-прежнему требуют content review и не закрываются этим визуальным статусом.
+
 Дата: 2026-09-05. База сравнения: `3800eb049d10e8fedd8c211bff3362ceaf5812d7` и рабочее дерево до этого этапа. Основание: [Prompt 1: visual gap audit](VISUAL_DESIGN_GAP_AUDIT_2026-09-05.md). Канонические правила обновлены в [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md).
 
 Выполнен refinement существующей системы: типографическая иерархия, semantic colors, spacing, поверхности, состояния и CSS motion. Шрифты, брендовые цвета, продуктовые изображения и контейнер сохранены. Переводы, публичные тексты, ассортимент, маршруты, порядок PDP и транспорт формы не изменялись. Новых зависимостей нет. Production approval не предоставляется: остаются 8 существующих release blockers.
@@ -160,7 +162,7 @@ Evidence находится в игнорируемом `artifacts/visual-system
 
 Regression contract каталога изменён осознанно: прежний тест требовал одинакового смещения действий во всех 50 карточках и тем самым закреплял G03. Теперь он проверяет совпадение action baselines внутри каждого ряда и отсутствие лишнего gap у одиночной карточки. Новый `audit-partial-closure.spec.ts` дополнительно проверяет независимость первого ряда от диагностически удлинённого последнего названия, placement подборки и последовательность intro/modes/form в RU/RO. Проверки количества 50 карточек, image containment и существующие функциональные assertions сохранены.
 
-Проверки этого продолжения: targeted E2E — **41 passed, 1 предусмотренный skip**; typecheck/lint/typography/build — PASS, unit tests — **144 passed**. Семь catalogue visual fixtures обновлены после просмотра результата, их проверка — **7 passed**. Полный E2E-прогон выполняется отдельно после завершения сборки; его итог будет зафиксирован перед сдачей.
+Проверки этого продолжения: targeted E2E — **41 passed, 1 предусмотренный skip**; typecheck/lint/typography/build — PASS, unit tests — **144 passed**. Семь catalogue visual fixtures обновлены после просмотра результата, их проверка — **7 passed**. Полный E2E-прогон после завершения сборки: **308 passed, 18 предусмотренных skips**, 6.6 минуты; итог подтверждён по `partial-closure/e2e.log` 2026-09-06.
 
 ## Ownership и риски
 
@@ -168,31 +170,33 @@ Regression contract каталога изменён осознанно: преж
 
 Сверка исходного audit, текущего кода, сохранённых before/after и последних test logs. После первоначальной сверки 4/3/7 проведено продолжение G03/G09/G14 выше с новым визуальным прогоном трёх затронутых страниц. Новый полный визуальный прогон всех страниц исходного аудита не заявляется. Положительный automated result сам по себе не закрывает композиционный finding.
 
-**Итого: 7 исправлены, 0 частично исправлены, 7 открыты.** «Исправлен» относится к подтверждённому дефекту, а не к обязательному внедрению всех предложенных вариантов дизайна.
+После отдельного задания G02/G04/G05 статус обновлён 2026-09-06; evidence и проверка находятся в [отчёте продолжения](G02_G04_G05_REFINEMENT_2026-09-06.md). Предыдущие разделы этого документа сохраняют историю итераций.
+
+**Итого: 12 исправлены, 0 частично исправлены, 2 открыты.** «Исправлен» относится к подтверждённому дефекту, а не к обязательному внедрению всех предложенных вариантов дизайна. Продолжение G08/G10: [evidence и границы исправления](G08_G10_REFINEMENT_2026-09-06.md).
 
 | ID | Статус | Что подтверждено / что осталось |
 |---|---|---|
 | G01 | Исправлен | Whole-word category labels/counts, две mobile колонки, RU/RO matrix и 200% zoom |
-| G02 | Открыт | Media-first PDP и поздняя CTA на длинном mobile content сохраняются |
+| G02 | Исправлен | Identity перед bounded media; action перед подробностями, предупреждения сохранены; 50 PDP × RU/RO × mobile/landscape проверены |
 | G03 | Исправлен | Title hierarchy сохранена, каждый row имеет естественную высоту; удалён глобальный резерв `1fr`, проверена независимость rows и baselines внутри ряда |
-| G04 | Открыт | Asset-by-asset optical normalization не выполнялась; исходные `catalogScale` сохранены |
-| G05 | Открыт | Безопасные зоны hero object/gradient/benefits rail не переработаны |
+| G04 | Исправлен | Все 50 силуэтов просмотрены, отдельные presentation scale/Y profiles для catalogue/related/PDP; 350 состояний без clipping обнаруженного силуэта |
+| G05 | Исправлен | Изображение принадлежит `.hero-visual`, текст/маска и benefits не перекрывают упаковку; RU/RO matrix и zoom |
 | G06 | Исправлен | Mobile panel opaque, background text не просвечивает; Escape/reduced-motion проверены |
 | G07 | Исправлен | Удалён лишний второй grid row у editorial feature, сохранён порядок материалов |
-| G08 | Открыт | Ролевое разделение crops для poster/portrait/lifestyle не реализовано |
+| G08 | Исправлен | Удалён server crop известных official assets; artwork/портреты сохраняют полный кадр, metadata вынесена из image, gallery имеет естественный ratio; RU/RO matrix и 200% zoom |
 | G09 | Исправлен | Полные названия, leading, SKU и remove alignment; desktop list ограничен соседней handoff panel, на mobile последовательный layout; RU/RO matrix и zoom |
-| G10 | Открыт | Повторяющиеся English summaries не отредактированы |
+| G10 | Исправлен | Exact site-wide English boilerplate скрыт во всех 114 действующих news/blog; layout работает без excerpt, новые summaries не выдуманы, language/claims gates сохранены |
 | G11 | Открыт | Полнота разрешённого RU/RO content и повторения PDP не согласованы; улучшение surfaces не закрывает проблему содержания |
 | G12 | Открыт | Повторяющаяся Halo triad/composition сохраняется |
 | G13 | Исправлен | Bookmark согласован с selection entry; CRM имеет utility treatment |
 | G14 | Исправлен | Mobile modes — три равных строки; desktop intro над modes/form, panel до 1040 px без пустой боковой колонки; функциональные scenarios сохранены |
 
-Первоначальное устранение обрезания названий закрывало только часть G09; последующее изменение ширины списка и расположения handoff закрывает оставшуюся часть. Помимо исходных пунктов исправлены consent-error/fullscreen selector collision и hover/press cascade; они не компенсируют семь открытых пунктов аудита.
+Первоначальное устранение обрезания названий закрывало только часть G09; последующее изменение ширины списка и расположения handoff закрывает оставшуюся часть. Помимо исходных пунктов исправлены consent-error/fullscreen selector collision и hover/press cascade; они не компенсируют оставшиеся G11/G12.
 
-Исторический общий E2E продолжения typography: 295 passed / 18 skips / 1 timeout; повтор navigation/contact — 14 passed. Причина того timeout не доказана. Текущее продолжение проходит отдельный полный regression run. Release status по-прежнему `release-blocked`, 8 открытых blockers, включая P0-LOCALE. Полное закрытие visual audit, bilingual approval и production release не заявляется.
+Исторический общий E2E продолжения typography: 295 passed / 18 skips / 1 timeout; повтор navigation/contact — 14 passed. Причина того timeout не доказана. Следующий полный прогон закрытия G03/G09/G14: 308 passed / 18 skips. Release status по-прежнему `release-blocked`, 8 открытых blockers, включая P0-LOCALE. Полное закрытие visual audit, bilingual approval и production release не заявляется.
 
 `src/styles.css` по-прежнему только импортирует 12 thematic files. Tokens/primitives/header остаются в `base.css`; catalogue, PDP, contact, content, selection — в своих файлах; footer/loader/reveal — в `shell.css`; cross-page breakpoints и reduced-motion — в `responsive.css`. Не добавлен глобальный override stylesheet. Consent error получил собственный `.application-form__error`, чтобы разорвать подтверждённый конфликт с fullscreen application error boundary; validation, ARIA и payload не изменены.
 
 Главный visual риск — более сильные input borders могут показаться утилитарными; это приемлемый компромисс control contrast для зрелой аудитории. Естественные длинные product titles могут увеличивать высоту своего ряда после будущего изменения контента; другие rows независимы. Эти изменения следует оценивать на новых source-backed названиях при их публикации.
 
-Рекомендуемый следующий этап: product image optical normalization и PDP first viewport, затем hero/editorial composition. Bilingual editorial approval и release blockers ведутся отдельно. Полную performance optimization этот этап не выполняет.
+Product image optical normalization, PDP first viewport, hero composition, editorial crops G08 и suppression бесполезных summaries G10 выполнены в продолжениях 2026-09-06. Остаются source/content G11 и Halo composition G12. Bilingual editorial approval и release blockers ведутся отдельно. Полную performance optimization этот этап не выполняет.

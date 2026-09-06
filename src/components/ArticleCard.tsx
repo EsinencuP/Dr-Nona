@@ -5,6 +5,7 @@ import type { OfficialPage } from "../data";
 import { Link } from "../router";
 import { formatDate, getPageTitle } from "./ui";
 import { useLocale } from "../locales/LocaleProvider";
+import { editorialMediaRole, uncroppedOfficialImage } from "./contentMedia";
 
 function articlePath(page: OfficialPage) {
   return page.path;
@@ -16,11 +17,11 @@ export function ArticleCard({ page, feature = false }: { page: OfficialPage; fea
   const title = getPageTitle(page);
   const description = getOfficialPageDescription(page);
   return (
-    <article className={`article-card ${feature ? "article-card--feature" : ""}`}>
+    <article className={`article-card article-card--${editorialMediaRole(page.path)} ${feature ? "article-card--feature" : ""}`}>
       <div className="article-card__visual">
         {page.images[0]?.src ? (
           <img
-            src={page.images[0].src}
+            src={uncroppedOfficialImage(page.images[0].src)}
             alt={page.images[0].alt || ""}
             width="1200"
             height="400"
@@ -31,10 +32,9 @@ export function ArticleCard({ page, feature = false }: { page: OfficialPage; fea
         ) : (
           <div className="article-card__fallback" aria-hidden="true"><span>DN</span></div>
         )}
-        <span className="article-card__kind">{kind}</span>
       </div>
       <div className="article-card__body">
-        <p><CalendarBlank aria-hidden="true" /> {formatDate(page.sourceLastmod, locale)}</p>
+        <p><span className="article-card__kind">{kind}</span><CalendarBlank aria-hidden="true" /> {formatDate(page.sourceLastmod, locale)}</p>
         <h3 lang="ru"><Link to={articlePath(page)}>{title}</Link></h3>
         {description && <span lang="ru">{description}</span>}
         <Link className="text-link" to={articlePath(page)}>

@@ -139,6 +139,10 @@ export function getProductCopy(
 }
 
 export function getOfficialPageDescription(page: OfficialPage) {
+  // Imported site-wide marketing metadata is not an article summary. Keep the
+  // source dataset intact; suppression does not approve replacement copy.
+  const boilerplate = "Shop Dr. Nona International premium skincare and wellness products. Discover nourishing creams, repairing serums, anti-aging formulas and cleansing care inspired by the Dead Sea. Official store for Halo and Dr. Nona collections.";
+  if (page.description.replace(/\s+/gu, " ").trim() === boilerplate) return "";
   return isClaimFieldPublishable("official-page", page.path, "description")
     ? page.description
     : "";
