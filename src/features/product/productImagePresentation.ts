@@ -63,3 +63,18 @@ export function productImageStyle(slug: string): CSSProperties {
     "--product-object-y": `${offsetY}%`,
   } as CSSProperties;
 }
+
+// Match the rendered square packshot, including its optical scale. A larger
+// canvas transform needs a larger source even when the card column is unchanged.
+export function productCardImageSizes(slug: string, compact: boolean): string {
+  const [scale] = productImagePresentation[slug] ?? [1, 0];
+  const tabletColumns = compact ? 3 : 4;
+  const gap = compact ? 18 : 14;
+  return [
+    `(max-width: 640px) calc((100vw - 28px) * 0.75 * ${scale})`,
+    `(max-width: 960px) calc((min(100vw - 36px, 850px) - ${gap}px) / 2 * ${scale})`,
+    `(max-width: 1180px) calc((min(100vw - 48px, 1100px) - ${gap * (tabletColumns - 1)}px) / ${tabletColumns} * ${scale})`,
+    ...(compact ? [] : [`(max-width: 1380px) calc((100vw - 106px) / 4 * ${scale})`]),
+    `calc((min(100vw - 64px, 1392px) - ${compact ? 54 : 56}px) / ${compact ? 4 : 5} * ${scale})`,
+  ].join(", ");
+}

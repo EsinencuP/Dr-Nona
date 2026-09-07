@@ -1,6 +1,37 @@
 {
   "nodes": [
     {
+      "id": "catalog::docs_prompt3_responsive_geometry",
+      "label": "Prompt 3 Responsive Geometry PASS: complete reading text, facts alignment, product identity and image source sizing",
+      "description": "Completed Prompt 3 on 2026-09-07: 2664 geometry states, all 50 products in RU/RO, 200 loading states, 500 source-selection states, 151 unit tests, 346 final E2E passed and 18 existing skips. No content, brand, API, CRM or database changes. Next: Prompt 4 on user request.",
+      "file_type": "workflow-evidence",
+      "source_file": "docs/PROMPT_3_RESPONSIVE_GEOMETRY_2026-09-07.md",
+      "source_location": "Prompt 3 acceptance and handoff",
+      "repo": "catalog",
+      "_origin": "declared",
+      "status": "PASS",
+      "scope": "Responsive geometry only; 320–1920, tablet boundaries, landscape, long RU/RO names and text spacing; all 50 PDPs and catalogue products",
+      "evidence_paths": [
+        "docs/PROMPT_3_RESPONSIVE_GEOMETRY_2026-09-07.md",
+        "tests/e2e/responsive-content-integrity.spec.ts",
+        "artifacts/prompt3-2026-09-07/comparison.html",
+        "artifacts/prompt3-2026-09-07/e2e-clean-final.log",
+        "artifacts/prompt3-2026-09-07/source-choice.json",
+        "artifacts/prompt3-2026-09-07/about-final.json"
+      ],
+      "implementation_paths": [
+        "src/styles/about.css",
+        "src/styles/home.css",
+        "src/styles/responsive.css",
+        "src/components/ui.tsx",
+        "src/features/product/productImagePresentation.ts"
+      ],
+      "test_commands": ["npm run test:e2e -- --workers=2", "npm run test -- --maxWorkers=2", "npm run build", "npm run typecheck", "npm run lint", "npm run repository:validate"],
+      "persistence_boundary": "None; presentation and browser regression only",
+      "open_findings": ["G11 content review", "G12 editorial repetition", "Production blockers: docs/release-status.json"],
+      "next_stage": "Prompt 4 RU/RO integrity and human-review accounting, only on user request"
+    },
+    {
       "id": "catalog::docs_prompt2_design_system_refinement",
       "label": "Prompt 2 Design System Refinement PASS: typography, Mineral Light palette, surfaces, motion, Halo chapters",
       "description": "Completed Prompt 2 on 2026-09-06. Evidence: 49 before/after pairs, 151 unit tests, 332 E2E passed and 18 unchanged skips, 16 axe runs with zero violations. Next: Prompt 3 on user request. G11 and editorial G12 remain open; eight production blockers unchanged.",
@@ -64,6 +95,48 @@
     }
   ],
   "links": [
+    {
+      "source": "catalog::docs_dr_nona_prompt_workflow",
+      "target": "catalog::docs_prompt3_responsive_geometry",
+      "relation": "documents_stage",
+      "evidence": "Prompt 3 dated report records responsive acceptance, defects, evidence and next-stage boundary"
+    },
+    {
+      "source": "catalog::docs_prompt2_design_system_refinement",
+      "target": "catalog::docs_prompt3_responsive_geometry",
+      "relation": "followed_by",
+      "evidence": "Responsive corrections preserve the approved Prompt 2 font, palette, motion and brand foundation"
+    },
+    {
+      "source": "catalog::docs_prompt3_responsive_geometry",
+      "target": "catalog::tests_e2e_responsive_content_integrity_spec",
+      "relation": "validated_by",
+      "evidence": "RU/RO full About text and aligned facts, long home names, all 50 PDPs across twelve widths, DPR 1/2 source resolution"
+    },
+    {
+      "source": "catalog::docs_prompt3_responsive_geometry",
+      "target": "catalog::src_features_product_productimagepresentation",
+      "relation": "documents_implementation",
+      "evidence": "Card sizes reflect optical scale and real grid widths; optical asset profiles remain unchanged"
+    },
+    {
+      "source": "catalog::docs_prompt3_responsive_geometry",
+      "target": "catalog::src_components_ui",
+      "relation": "documents_implementation",
+      "evidence": "ProductCard consumes corrected responsive source-size hints"
+    },
+    {
+      "source": "catalog::docs_prompt3_responsive_geometry",
+      "target": "catalog::src_features_about_aboutpages",
+      "relation": "documents_implementation",
+      "evidence": "About geometry owners are about.css and existing responsive.css rules; page content is unchanged"
+    },
+    {
+      "source": "catalog::docs_prompt3_responsive_geometry",
+      "target": "catalog::src_pages_homepage",
+      "relation": "documents_implementation",
+      "evidence": "Home mini-product titles are complete under long-name and text-spacing stress; owner is home.css"
+    },
     {
       "source": "catalog::docs_dr_nona_prompt_workflow",
       "target": "catalog::docs_prompt2_design_system_refinement",

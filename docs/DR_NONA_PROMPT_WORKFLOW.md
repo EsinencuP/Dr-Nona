@@ -19,18 +19,18 @@ Prompt 1 считается пройденным только при налич�
 
 По состоянию текущего checkout Prompt 1 **PASS по документированному evidence** и повторно запускать его только из-за предположения о наличии бага не требуется: [VISUAL_DESIGN_GAP_AUDIT_2026-09-05.md](VISUAL_DESIGN_GAP_AUDIT_2026-09-05.md) фиксирует RU/RO surfaces, 320–2048 px, landscape, настоящий 200% zoom, long-text stress, 358 состояний и design-gap report; [SOURCE_STUDY.md](visual-direction/SOURCE_STUDY.md) содержит Saleor, Shopify Hydrogen, Medusa DTC и три дополнительных source/layout references.
 
-Статусы обновляются по отдельному evidence каждого этапа. Prompt 2 повторно проверен и принят 2026-09-06; остальные незавершённые этапы сохраняют свою оценку:
+Статусы обновляются по отдельному evidence каждого этапа. Prompt 2 принят 2026-09-06, Prompt 3 выполнен и принят 2026-09-07; остальные незавершённые этапы сохраняют свою оценку:
 
 | Prompt | Текущий статус | Evidence / незакрытая часть |
 |---|---|---|
 | 1 | **PASS** | Audit и reference research зафиксированы; P0 visual defects не подтверждены. |
 | 2 | **PASS** | [Prompt 2 acceptance report](PROMPT_2_DESIGN_SYSTEM_REFINEMENT_2026-09-06.md): visual foundation повторно проверена, Halo chapters доработаны; 49 before/after pairs, 16 axe runs / 0 violations, 151 unit tests, 332 E2E passed / 18 skipped, build и relevant gates PASS. G11 и editorial часть G12 остаются открытыми за пределами design-system scope. |
-| 3 | **PARTIAL** | G02/G04/G05 и image geometry имеют regression evidence; полный единый Prompt 3 отчёт по всем responsive surfaces и каждому acceptance пункту не зафиксирован как отдельный PASS. |
+| 3 | **PASS** | [Prompt 3 acceptance report](PROMPT_3_RESPONSIVE_GEOMETRY_2026-09-07.md): 2,664 geometry states, все 50 продуктов RU/RO на 12 ширинах, 200 loading/caption states, 500 DPR 1/2 source checks. Исправлены обрезание About, alignment фактов, устойчивость mini-product titles и выбор разрешения packshot. Финально: 151 unit passed, 346 E2E passed / 18 existing skipped, build и relevant gates PASS. |
 | 4 | **PARTIAL / HUMAN REVIEW REQUIRED** | Технические parity/quarantine gates существуют, но 50 RO product records, claims, source gaps и editorial approval остаются human-review scope; P0-LOCALE нельзя закрывать программно. См. [TEXT_BILINGUAL_AUDIT.md](TEXT_BILINGUAL_AUDIT.md). |
 | 5 | **NOT VERIFIED** | Runtime/performance budget checks существуют, но отдельный Prompt 5 baseline → optimization report с полным asset inventory и всеми LCP/CLS/INP/request/decode deltas не подтверждён. |
 | 6 | **BLOCKED / NOT RUN AS A FINAL PASS** | Отдельные audits и CI gates зелёные, но нет единого final report по всем route surfaces, 50 PDP, RU/RO, 200% zoom, full performance/runtime и `release:check`; repository release остаётся blocked внешними approvals. |
 
-Следовательно, все шесть промптов **не считаются полностью пройденными**. Prompt 1 и Prompt 2 приняты по evidence; следующий рабочий этап по запросу пользователя — Prompt 3, затем отдельно Prompt 4 human-review accounting, Prompt 5 baseline/after measurement и только после этого Prompt 6.
+Следовательно, все шесть промптов **не считаются полностью пройденными**. Prompt 1, Prompt 2 и Prompt 3 приняты по evidence; следующий рабочий этап по запросу пользователя — Prompt 4 human-review accounting, затем отдельно Prompt 5 baseline/after measurement и только после этого Prompt 6.
 
 Перед каждым следующим промптом агент должен:
 

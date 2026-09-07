@@ -343,13 +343,11 @@
 }
 
 .home-product-mini h3 {
-  display: -webkit-box;
-  overflow: hidden;
   margin-bottom: 12px;
   font-size: clamp(1.45rem, 1.75vw, 1.9rem);
   line-height: 1.08;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
 }
 
 .home-product-mini .text-link {

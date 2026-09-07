@@ -128,6 +128,10 @@ The supported minimum width is 320 px. Layout changes occur at 1180, 960 and 640
 
 Mobile layouts may reduce secondary copy and collapse controls, but they must preserve the page CTA, product identity, selection action and error recovery. No document-level horizontal scrolling is allowed.
 
+Primary reading paragraphs and product names must not be line-clamped. Bounded secondary previews need an explicit route to the complete content. Home mini-product titles grow with user text spacing; mobile About facts share intrinsic number/label columns, with unbroken numbers and wrapping labels. See [Prompt 3 geometry evidence](PROMPT_3_RESPONSIVE_GEOMETRY_2026-09-07.md).
+
+Responsive product-card source sizes must track actual grid columns, gaps and the reviewed optical scale. Keep intrinsic dimensions and reserved image stages; verify the selected source against rendered pixels at DPR 1 and 2 when changing these relationships.
+
 At 640 px and below, the hero principles rail shows one complete card per snap point and a localized continuation hint. Product or explanatory text must not be used as a clipped preview of the next item.
 
 ## Accessibility

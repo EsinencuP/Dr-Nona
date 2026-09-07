@@ -2,7 +2,7 @@ import { ArrowUpRight } from "@phosphor-icons/react/ArrowUpRight";
 import { BookmarkSimple } from "@phosphor-icons/react/BookmarkSimple";
 import { useEffect, useRef } from "react";
 import type { CSSProperties, ReactNode } from "react";
-import { productImageStyle } from "../features/product/productImagePresentation";
+import { productCardImageSizes, productImageStyle } from "../features/product/productImagePresentation";
 import { getProductCopy } from "../claims";
 import type { OfficialPage, Product } from "../data";
 import { useSelection } from "../features/selection/SelectionContext";
@@ -142,7 +142,7 @@ export function ProductCard({
             alt=""
             width="1600"
             height="1600"
-            sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1023px) calc((100vw - 52px) / 2), (max-width: 1380px) calc((100vw - 116px) / 4), 260px"
+            sizes={productCardImageSizes(product.slug, compact)}
           />
         </Link>
       </div>
