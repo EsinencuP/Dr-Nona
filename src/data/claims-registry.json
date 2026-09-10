@@ -5566,12 +5566,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-AB8E827809",
-    "fingerprint": "ab8e8278090bcc494afc7e7e7d56e1a54b9f8d44b4918e9b48241fb5d89d51e0",
+    "id": "CLM-F85EE2CDA8",
+    "fingerprint": "f85ee2cda8bcdc75f249481d498308ac9224f8ad644119d238ed78f79e068bb0",
     "scope": "product",
     "contentId": "ro:anti-aging-serum",
     "field": "ingredients",
-    "claimText": "Componente active anti-îmbătrânire.",
+    "claimText": "Componente active anti-îmbătrânire",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function-ro"
@@ -6591,26 +6591,6 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-A9C8737EF1",
-    "fingerprint": "a9c8737ef1c8b0904d8be6a44093adc26a27e67b76a43211dfe9b2a99e834566",
-    "scope": "product",
-    "contentId": "ro:halo-shenseen-toothpaste",
-    "field": "ingredients",
-    "claimText": "SHENSEEN înseamnă curățenie, prospețime și grijă pentru sănătatea cavității bucale, zi de zi.",
-    "claimType": "health",
-    "detectionReasons": [
-      "health-or-body-function-ro"
-    ],
-    "sourceUrl": "https://www.drnona.md/shenseen_mousse_toothpaste_ro",
-    "sourceLastmod": "2026-02-06T14:39:14+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
     "id": "CLM-62192F2E29",
     "fingerprint": "62192f2e296d6f72bf2f59c0183706a6fbc973f52331ebee4c8b140e2be98af1",
     "scope": "product",
@@ -7085,47 +7065,6 @@
     ],
     "sourceUrl": "https://www.drnona.md/okseen_ro",
     "sourceLastmod": "2026-02-06T14:38:55+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-6A6BD65608",
-    "fingerprint": "6a6bd656080111c2bce1ea9fc63c1d5401340a46e5913eb1e8143c9e8ef7c240",
-    "scope": "product",
-    "contentId": "ro:pulmoseen",
-    "field": "ingredients",
-    "claimText": "Ai grijă de sănătatea plămânilor tăi împreună cu PULMOSEEN!",
-    "claimType": "health",
-    "detectionReasons": [
-      "health-or-body-function-ro"
-    ],
-    "sourceUrl": "https://www.drnona.md/pulmoseen_ro",
-    "sourceLastmod": "2026-02-06T14:39:01+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-8CDABE22B4",
-    "fingerprint": "8cdabe22b4202328915ea0694ea258e4a005e799fd68f64c0b458991a603ba04",
-    "scope": "product",
-    "contentId": "ro:pulmoseen",
-    "field": "ingredients",
-    "claimText": "Recomandat pentru. — Afecțiuni ale căilor respiratorii. — Răceli frecvente și imunitate scăzută. — Fumători și locuitorii orașelor. — Perioada de recuperare.",
-    "claimType": "medical",
-    "detectionReasons": [
-      "diagnosis-treatment-or-disease-ro",
-      "health-or-body-function-ro"
-    ],
-    "sourceUrl": "https://www.drnona.md/pulmoseen_ro",
-    "sourceLastmod": "2026-02-06T14:39:01+00:00",
     "market": "MD",
     "status": "pending",
     "reviewer": null,

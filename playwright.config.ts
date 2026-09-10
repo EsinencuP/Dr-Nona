@@ -2,6 +2,7 @@ import { defineConfig, devices } from "@playwright/test";
 
 const playwrightPort = process.env.PLAYWRIGHT_PORT ?? "4173";
 const playwrightBaseUrl = `http://127.0.0.1:${playwrightPort}`;
+const playwrightServerCommand = process.env.PLAYWRIGHT_PRODUCTION === "1" ? "preview" : "dev";
 
 export default defineConfig({
   testDir: "./tests/e2e",
@@ -39,8 +40,8 @@ export default defineConfig({
   webServer: {
     command:
       process.platform === "win32"
-        ? `npm.cmd run dev -- --host 127.0.0.1 --port ${playwrightPort}`
-        : `npm run dev -- --host 127.0.0.1 --port ${playwrightPort}`,
+        ? `npm.cmd run ${playwrightServerCommand} -- --host 127.0.0.1 --port ${playwrightPort}`
+        : `npm run ${playwrightServerCommand} -- --host 127.0.0.1 --port ${playwrightPort}`,
     url: playwrightBaseUrl,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

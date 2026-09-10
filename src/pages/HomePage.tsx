@@ -11,15 +11,14 @@ import { getProductCopy } from "../claims";
 import { ArticleCard } from "../components/ArticleCard";
 import { ProductImage } from "../components/ProductImage";
 import { Reveal, SectionHeading, splitText } from "../components/ui";
-import { useProductData } from "../data";
 import type { OfficialPage, Product } from "../data";
+import homeProducts from "../data/home-products.json";
 import runtimeContent from "../data/runtime-content.json";
 import { useSelection } from "../features/selection/SelectionContext";
 import { useLocale } from "../locales/LocaleProvider";
 import { Link } from "../router";
 
 export default function HomePage() {
-  const { productBySlug: localizedProducts } = useProductData();
   const { locale } = useLocale();
   const copy = locale === "ro"
     ? {
@@ -88,9 +87,7 @@ export default function HomePage() {
         blogNews: "Блог и новости",
         readAll: "Читать всё",
       };
-  const products = (runtimeContent.home.productSlugs as string[])
-    .map((slug) => localizedProducts.get(slug))
-    .filter((product): product is Product => Boolean(product));
+  const products = homeProducts[locale] as Product[];
   const productBySlug = new Map(
     products.map((product) => [product.slug, product])
   );

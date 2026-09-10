@@ -76,9 +76,16 @@ function extractSection(lines, starts, ends, forbidden) {
   const selected = [];
   const startLine = lines[startIndex];
   const inline = cleanRomanianText(startLine.split(":").slice(1).join(":"));
-  if (inline) selected.push(inline);
-  for (const line of lines.slice(startIndex + 1)) {
-    if (ends.some((pattern) => pattern.test(line))) break;
+  // An imperative carries usage information (for example frequency), rather
+  // than being a disposable section label.
+  const first = /^(?:utilizați|aplicați)\b/iu.test(startLine) ? startLine : inline;
+  for (const line of [first, ...lines.slice(startIndex + 1)].filter(Boolean)) {
+    const boundaries = ends.map((pattern) => line.search(pattern)).filter((index) => index >= 0);
+    if (boundaries.length) {
+      const preceding = cleanRomanianText(line.slice(0, Math.min(...boundaries)));
+      if (preceding) selected.push(preceding);
+      break;
+    }
     selected.push(line);
   }
   const value = cleanRomanianText(
@@ -103,10 +110,14 @@ const ingredientStarts = [
   /^acest (?:ceai|produs) conține/iu,
 ];
 const ingredientEnds = [
+  /^(?:ce face\b|recomandat pentru\b)/iu,
+  /această formulă(?:\s|$)/iu,
+  /^[A-Z][A-Z0-9 -]{4,80}:?$/u,
   /^(?:datorită formulei|beneficii|ideal pentru|recomandări|mod de utilizare|utilizare|cum se utilizează|utilizați|ajută la)/iu,
   /^(?:lasă|după ce|încearcă|cu\s+[A-Z])/iu,
 ];
 const ingredientForbidden = [
+  /^se dezvăluie\b/iu,
   /\b(?:ajută la|ideal pentru|mod de utilizare|utilizați|vindecarea|ameliorează durer)/iu,
 ];
 const useStarts = [

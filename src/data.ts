@@ -177,11 +177,14 @@ export function loadProductData(locale: Locale = "ru") {
       RomanianProductCopy
     >;
     return createProductData(
-      products.map((product) => ({
-        ...product,
-        ...localizedCopy[product.slug],
-        officialName: product.officialName,
-      })),
+      products.map((product) => {
+        const copy = localizedCopy[product.slug];
+        const fields = ["shortDescription", "longDescription", "ingredients", "howToUse", "category", "imageAlt", "sourceUrl"] as const;
+        if (!copy || fields.some((field) => !Object.hasOwn(copy, field))) {
+          throw new Error(`Incomplete Romanian product record: ${product.slug}`);
+        }
+        return { ...product, ...copy, officialName: product.officialName };
+      }),
       locale
     );
   });
@@ -194,6 +197,9 @@ export function loadOfficialPageData(locale: Locale = "ru") {
   if (cached) return cached;
   const promise = import("./data/official-pages.json").then((module) => {
     const localizedPages = companyPages[locale];
+    if (Object.keys(companyPages.ru).some((path) => !localizedPages[path])) {
+      throw new Error(`Incomplete company page translations: ${locale}`);
+    }
     const pages = (module.default as OfficialPage[]).map((page) => {
       const localizedCopy = localizedPages[page.path];
       return localizedCopy ? { ...page, ...localizedCopy } : page;

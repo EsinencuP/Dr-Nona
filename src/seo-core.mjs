@@ -238,10 +238,18 @@ export function renderPrerenderedContent(metadata, siteOrigin) {
         `<a href="${escapeHtml(absoluteUrl(item.path, origin))}">${escapeHtml(item.name)}</a>`
     )
     .join(" <span aria-hidden=\"true\">/</span> ");
-  const image =
+  let image =
     metadata.image && metadata.image !== "/brand/dr-nona-logo.png"
       ? `<img src="${escapeHtml(absoluteUrl(metadata.image, origin))}" alt="" width="1200" height="630">`
       : "";
+  const packshot = /^\/products\/catalog-normalized\/([^/?]+)\.png$/.exec(metadata.image ?? "");
+  if (packshot) {
+    const sources = ["avif", "webp"].map((format) => {
+      const srcset = [480, 800, 1200].map((width) => `/products/catalog-responsive/${packshot[1]}-${width}.${format} ${width}w`).join(", ");
+      return `<source type="image/${format}" srcset="${escapeHtml(srcset)}" sizes="(max-width: 960px) 320px, 560px">`;
+    }).join("");
+    image = `<picture>${sources}<img src="${escapeHtml(metadata.image)}" alt="" width="1200" height="1200" decoding="async" fetchpriority="high"></picture>`;
+  }
 
   const breadcrumbsLabel = metadata.locale === "ro" ? "Fir de navigare" : "Хлебные крошки";
   return `<main id="main-content" data-prerendered-route="${escapeHtml(metadata.path)}">

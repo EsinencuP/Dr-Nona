@@ -24,9 +24,9 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 | Published products | 50 |
 | Draft products | 0 |
 | Official content records | 137 |
-| Claims | 399 |
+| Claims | 396 |
 | Approved claims | 0 |
-| Pending claims | 399 |
+| Pending claims | 396 |
 | Rejected claims | 0 |
 
 ## Open release blockers

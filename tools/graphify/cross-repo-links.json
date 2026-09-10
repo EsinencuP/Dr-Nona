@@ -1,6 +1,44 @@
 {
   "nodes": [
     {
+      "id": "catalog::docs_prompt5_performance",
+      "label": "Prompt 5 Performance PASS: bounded Home PDP data, prerender SEO reuse, responsive media and measured runtime",
+      "description": "2026-09-10: 60 baseline and 60 after lab navigations; 437 local assets and 200 verified external delivery URLs. Home browser JS falls 33.7%, sampled PDP 30.8%. 169 unit tests, 360 full E2E passed with 18 existing skips, 14 production network tests pass. 19 screenshot pairs identical; one baseline missed lazy external images. Timing tradeoffs and field-INP limitation are explicit; eight production blockers remain open.",
+      "file_type": "workflow-evidence",
+      "source_file": "docs/PROMPT_5_PERFORMANCE_2026-09-10.md",
+      "source_location": "Prompt 5 acceptance, measurements and Prompt 6 handoff",
+      "repo": "catalog",
+      "_origin": "declared",
+      "status": "PASS",
+      "scope": "Performance only; no redesign, font or asset replacement, new production dependency, translation or claim approval",
+      "evidence_paths": ["docs/PROMPT_5_PERFORMANCE_2026-09-10.md", "artifacts/prompt5-2026-09-09/comparison.json", "artifacts/prompt5-2026-09-09/asset-inventory.json", "artifacts/prompt5-2026-09-09/remote-assets.json"],
+      "implementation_paths": ["scripts/generate-runtime-content.mjs", "src/pages/HomePage.tsx", "src/pages/ProductPage.tsx", "src/features/product/productDetailData.ts", "src/seo.ts", "src/seo-core.mjs", "scripts/prerender-routes.mjs", "scripts/measure-page-performance.mjs", ".github/workflows/ci.yml"],
+      "test_commands": ["npm run performance:validate", "npm run performance:runtime", "npm run performance:pages -- <output-directory> 3", "npm run test", "npm run build", "npm run test:e2e", "PLAYWRIGHT_PRODUCTION=1 PLAYWRIGHT_PORT=4285 npm run test:e2e -- tests/e2e/performance.spec.ts"],
+      "persistence_boundary": "Ignored build-time public Home/PDP projections preserve existing quarantine. No API, CRM or database changes.",
+      "open_findings": ["Field INP not verified; scripted interaction timing only", "Desktop editorial LCP variation and Home long-task duration tradeoff", "One original screenshot lacks three lazy external images", "Prompt 4 editorial approval and all eight release blockers remain open"],
+      "next_stage": "Prompt 6 on user request: final visual/technical QA; retain measurement caveats and human-review blockers"
+    },
+    {
+      "id": "catalog::docs_prompt4_bilingual_integrity",
+      "label": "Prompt 4 RU RO Bilingual Integrity: technical PASS, HUMAN REVIEW REQUIRED",
+      "description": "2026-09-09: 3070 field comparisons, 148 source URL checks, six repaired RO source mappings. 33/33 central UI keys, 64/64 localized routes, 161 unit tests, 60 scoped E2E and six final bilingual sweep tests pass. 50 products / 200 RO descriptive slots remain quarantined; 71 MISSING_RO comparisons. All 396 claims pending and eight production blockers open.",
+      "file_type": "workflow-evidence",
+      "source_file": "docs/PROMPT_4_BILINGUAL_INTEGRITY_2026-09-09.md",
+      "source_location": "Prompt 4 technical acceptance and editorial handoff",
+      "repo": "catalog",
+      "_origin": "declared",
+      "status": "PARTIAL",
+      "technical_status": "PASS",
+      "content_status": "HUMAN_REVIEW_REQUIRED",
+      "scope": "Bilingual integrity only; no redesign, new claims, translation approval or CRM/database changes",
+      "evidence_paths": ["docs/bilingual/parity-audit.json", "docs/bilingual/EDITORIAL_REVIEW.md", "docs/bilingual/editorial-review.json", "docs/bilingual/extraction-repairs.json", "docs/bilingual/source-verification.json"],
+      "implementation_paths": ["scripts/audit-bilingual.mjs", "scripts/bilingual-parity-lib.mjs", "scripts/romanian-product-content-lib.mjs", "src/data.ts", "src/features/editorial/EditorialPages.tsx", "src/data/products-ro.json"],
+      "test_commands": ["npm run bilingual:validate", "npm run bilingual:audit", "npm run content:validate", "npm run test", "npm run build"],
+      "persistence_boundary": "Local source and audit datasets; six RO source-field repairs remain quarantined. No API, CRM or database mutation.",
+      "open_findings": ["P0-LOCALE human approval", "71 MISSING_RO field comparisons", "21 summary/excerpt flags", "83 missing original-source image captions", "All eight blockers in docs/release-status.json"],
+      "next_stage": "Prompt 5 performance measurement on user request; preserve Prompt 4 human-review blockers"
+    },
+    {
       "id": "catalog::docs_prompt3_responsive_geometry",
       "label": "Prompt 3 Responsive Geometry PASS: complete reading text, facts alignment, product identity and image source sizing",
       "description": "Completed Prompt 3 on 2026-09-07: 2664 geometry states, all 50 products in RU/RO, 200 loading states, 500 source-selection states, 151 unit tests, 346 final E2E passed and 18 existing skips. No content, brand, API, CRM or database changes. Next: Prompt 4 on user request.",
@@ -95,6 +133,59 @@
     }
   ],
   "links": [
+    { "source": "catalog::docs_dr_nona_prompt_workflow", "target": "catalog::docs_prompt5_performance", "relation": "tracks_stage", "evidence": "Prompt 5 performance scope accepted 2026-09-10; next Prompt 6 on request" },
+    { "source": "catalog::docs_prompt4_bilingual_integrity", "target": "catalog::docs_prompt5_performance", "relation": "precedes", "evidence": "Prompt 5 baseline includes Prompt 4 technical fixes, preserving editorial quarantine" },
+    { "source": "catalog::docs_prompt5_performance", "target": "catalog::scripts_generate_runtime_content", "relation": "implemented_by", "evidence": "Six-product Home projection and per-product PDP projections generated after quarantine" },
+    { "source": "catalog::docs_prompt5_performance", "target": "catalog::src_features_product_productdetaildata", "relation": "implemented_by", "evidence": "Lazy per-product data and four unchanged recommendations; no full catalogue download" },
+    { "source": "catalog::docs_prompt5_performance", "target": "catalog::src_seo", "relation": "implemented_by", "evidence": "Reuse exact complete prerendered metadata until client-side navigation" },
+    { "source": "catalog::docs_prompt5_performance", "target": "catalog::src_seo_core", "relation": "implemented_by", "evidence": "Responsive PDP picture in initial HTML; unchanged metadata image identity" },
+    { "source": "catalog::docs_prompt5_performance", "target": "catalog::scripts_measure_page_performance", "relation": "measured_by", "evidence": "Full-media cold-context RU/RO lab measurements with CPU x4" },
+    { "source": "catalog::docs_prompt5_performance", "target": "catalog::scripts_check_performance_budget", "relation": "validated_by", "evidence": "Existing budgets retained; all-route hero and locale font preload scope assertions" },
+    { "source": "catalog::docs_prompt5_performance", "target": "catalog::tests_e2e_performance_spec", "relation": "validated_by", "evidence": "Production and development network regression tests; production command added to CI" },
+    { "source": "catalog::docs_prompt5_performance", "target": "catalog::tests_unit_product_projections_test", "relation": "validated_by", "evidence": "All 50 RU/RO projection records and recommendations equal existing public catalogue; Home identity and 404 preserved" },
+    { "source": "catalog::docs_prompt5_performance", "target": "catalog::tests_unit_seo_prerender_reuse_test", "relation": "validated_by", "evidence": "StrictMode metadata reuse, navigation/back, incomplete-head recovery and responsive prerender source" },
+    {
+      "source": "catalog::docs_dr_nona_prompt_workflow",
+      "target": "catalog::docs_prompt4_bilingual_integrity",
+      "relation": "documents_stage",
+      "evidence": "Prompt 4 has technical acceptance and a separate human-review queue; full stage remains PARTIAL"
+    },
+    {
+      "source": "catalog::docs_prompt3_responsive_geometry",
+      "target": "catalog::docs_prompt4_bilingual_integrity",
+      "relation": "followed_by",
+      "evidence": "Bilingual work preserves Prompt 3 geometry and the established brand"
+    },
+    {
+      "source": "catalog::docs_prompt4_bilingual_integrity",
+      "target": "catalog::scripts_audit_bilingual",
+      "relation": "validated_by",
+      "evidence": "Build-integrated keyset, route, metadata and quarantine validation; bounded entity lookup in docs/bilingual/parity-audit.json"
+    },
+    {
+      "source": "catalog::docs_prompt4_bilingual_integrity",
+      "target": "catalog::scripts_romanian_product_content_lib",
+      "relation": "documents_implementation",
+      "evidence": "Preserve source imperative frequency and stop ingredient extraction at explicit section boundaries"
+    },
+    {
+      "source": "catalog::docs_prompt4_bilingual_integrity",
+      "target": "catalog::src_data",
+      "relation": "documents_implementation",
+      "evidence": "Reject incomplete Romanian products/company overlays rather than silently inheriting Russian content"
+    },
+    {
+      "source": "catalog::docs_prompt4_bilingual_integrity",
+      "target": "catalog::tests_e2e_bilingual_integrity_spec",
+      "relation": "validated_by",
+      "evidence": "All 64 Romanian route shells, all 50 product identities/actions/metadata and original-language gallery UI"
+    },
+    {
+      "source": "catalog::docs_prompt4_bilingual_integrity",
+      "target": "catalog::tests_unit_bilingual_integrity_test",
+      "relation": "validated_by",
+      "evidence": "Nested UI keysets, missing localized records and no inferred approval for unknown fields"
+    },
     {
       "source": "catalog::docs_dr_nona_prompt_workflow",
       "target": "catalog::docs_prompt3_responsive_geometry",

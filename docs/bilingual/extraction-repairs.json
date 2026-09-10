@@ -1,0 +1,72 @@
+{
+  "date": "2026-09-09",
+  "approvalGranted": false,
+  "repairs": [
+    {
+      "entity": "anti-aging-serum",
+      "field": "ingredients",
+      "before": "Apă și minerale din Marea Moartă. Extracte naturale din plante. Vitamine și antioxidanți. Componente active anti-îmbătrânire. ANTI-AGING SERUM. Netezește ridurile și liniile fine. Crește fermitatea și elasticitatea pielii. Hidratează și hrănește în profunzime. Îmbunătățește tonul și textura pielii. Oferă efect de piele „luminoasă” și îngrijită. Potrivit. Pentru toate tipurile de piele. Pentru femei și bărbați. Pentru îngrijire zilnică (dimineața/seara). Textura ușoară se absoarbe rapid, fără a lăsa senzație lipicioasă — ideal sub cremă sau ca îngrijire de sine stătătoare. ANTI-AGING SERUM Dr. Nona este o investiție în tinerețea, încrederea și frumusețea pielii tale. Îl încerci o dată și vei vedea diferența",
+      "after": "Apă și minerale din Marea Moartă. Extracte naturale din plante. Vitamine și antioxidanți. Componente active anti-îmbătrânire",
+      "source": "https://www.drnona.md/anti_aging_serum_ro",
+      "sourceSha256": "71195cd0b3958556de377b04de3bfeab90920359603d1897c6f06365856262f4",
+      "status": "NEEDS_EDITORIAL_REVIEW",
+      "reason": "Stop at the explicit next source section; remove adjacent benefits.",
+      "published": false
+    },
+    {
+      "entity": "halo-pure-unisex-deodorant-stick",
+      "field": "ingredients",
+      "before": "Conține ingrediente precum. Apă din flori de mușețel. Amidon de orez. Proteine din lapte. Enzime naturale. Sunătoare albastră. Extract de cuișoare. Această formulă și compoziție unică fac deodorantul nu doar eficient, ci și complet sigur, distrugând bacteriile care provoacă mirosul neplăcut al transpirației. Are efect antiseptic și antibacterian. Nu usucă pielea și nu provoacă iritații. Nu lasă urme albe pe haine. Potrivit pentru pielea cea mai sensibilă. Menține senzația de uscăciune chiar și după antrenamente și un stil de viață activ. Potrivit pentru femei, bărbați și adolescenți",
+      "after": "Conține ingrediente precum. Apă din flori de mușețel. Amidon de orez. Proteine din lapte. Enzime naturale. Sunătoare albastră. Extract de cuișoare",
+      "source": "https://www.drnona.md/unisex_deodorant_stick_ro",
+      "sourceSha256": "28d9a8020ef98a410c80961f8b51399e07510b51f573f2c477973018b22c7016",
+      "status": "NEEDS_EDITORIAL_REVIEW",
+      "reason": "Stop at the explicit next source section; remove adjacent benefits.",
+      "published": false
+    },
+    {
+      "entity": "halo-shenseen-toothpaste",
+      "field": "ingredients",
+      "before": "Minerale din Marea Moartă. Complexul brevetat Halo Complex. Extracte naturale din plante. Componente active de curățare. Ingrediente antiseptice de origine naturală. Ce face SHENSEEN specială?. Curăță eficient dinții și spațiile interdentare. Protejează împotriva cariilor și a plăcii bacteriene. Întărește gingiile și reduce sângerarea acestora. Are acțiune antibacteriană. Oferă o respirație proaspătă de durată. Nu deteriorează smalțul și nu irită mucoasa orală. SHENSEEN înseamnă curățenie, prospețime și grijă pentru sănătatea cavității bucale, zi de zi. Zâmbește cu încredere — zâmbetul tău este sub protecția Dr. Nona",
+      "after": "Minerale din Marea Moartă. Complexul brevetat Halo Complex. Extracte naturale din plante. Componente active de curățare. Ingrediente antiseptice de origine naturală",
+      "source": "https://www.drnona.md/shenseen_mousse_toothpaste_ro",
+      "sourceSha256": "7e1603ecffa127e4c6a38a3c68c4a839dd5427f67722a2f9ac0ed09c2be59520",
+      "status": "NEEDS_EDITORIAL_REVIEW",
+      "reason": "Stop at the explicit next source section; remove adjacent benefits.",
+      "published": false
+    },
+    {
+      "entity": "pulmoseen",
+      "field": "ingredients",
+      "before": "— Vitaminele C, A, E. — Zinc. — Beta-caroten obținut din arhebacterii. — HaloComplex (brevet al companiei pentru utilizarea arhebacteriilor și a dunalielllei). Recomandat pentru. — Afecțiuni ale căilor respiratorii. — Răceli frecvente și imunitate scăzută. — Fumători și locuitorii orașelor. — Perioada de recuperare. Potrivit pentru întreaga familie — copii și adulți. Ai grijă de sănătatea plămânilor tăi împreună cu PULMOSEEN!",
+      "after": "— Vitaminele C, A, E. — Zinc. — Beta-caroten obținut din arhebacterii. — HaloComplex (brevet al companiei pentru utilizarea arhebacteriilor și a dunalielllei)",
+      "source": "https://www.drnona.md/pulmoseen_ro",
+      "sourceSha256": "67eecb201cc03da6ca6303997bed4fe29f1924da8980bade22cf92eeeb5daefa",
+      "status": "NEEDS_EDITORIAL_REVIEW",
+      "reason": "Stop at the explicit next source section; remove adjacent benefits.",
+      "published": false
+    },
+    {
+      "entity": "parfum-faya",
+      "field": "ingredients",
+      "before": "se dezvăluie treptat, încălzind și atrăgând, asemenea energiei focului. Ideal atât pentru viața de zi cu zi, cât și pentru momente speciale —. atunci când vrei să îți evidențiezi caracterul și încrederea în tine. Persistent, intens, dar în același timp nobil —. parfumul te însoțește pe parcursul întregii zile, fără a încărca imaginea. FAYA este echilibrul dintre forță și eleganță. aroma oamenilor care își cunosc valoarea și merg înainte cu încredere",
+      "after": null,
+      "source": "https://www.drnona.md/parfume_faya_ro",
+      "sourceSha256": "f2132de3564d4e271968cf0d8416f2bfceac13dcf2090c16e8b00d9926e0426b",
+      "status": "NEEDS_EDITORIAL_REVIEW",
+      "reason": "Fragrance narrative is not an ingredient list; composition remains unknown.",
+      "published": false
+    },
+    {
+      "entity": "dynamic-hydrating-cream",
+      "field": "howToUse",
+      "before": "în caz de uscăciune și descuamare. după ras sau epilare. în caz de iritații. ca cremă de bază pentru hidratare",
+      "after": "Utilizați zilnic. în caz de uscăciune și descuamare. după ras sau epilare. în caz de iritații. ca cremă de bază pentru hidratare",
+      "source": "https://www.drnona.md/dynamic_ro",
+      "sourceSha256": "66d6d6ab7da5b3495b8271860fb7fad902231938ecccdcc5ea9f38eb37664430",
+      "status": "NEEDS_EDITORIAL_REVIEW",
+      "reason": "Preserve the source imperative and its frequency.",
+      "published": false
+    }
+  ]
+}

@@ -9,6 +9,7 @@ import {
 
 let manifestPromise: Promise<SeoManifest> | undefined;
 let latestMetadataRequest = 0;
+let appliedMetadataKey: string | undefined;
 
 function loadManifest() {
   manifestPromise ??= import("./data/seo-manifest.json").then(
@@ -56,6 +57,21 @@ export async function getSeoMetadata(
 
 export async function applyRouteMetadata(pathname: string, locale?: "ru" | "ro") {
   const request = ++latestMetadataRequest;
+  const key = `${locale ?? "ru"}:${pathname}`;
+  if (appliedMetadataKey === key) return;
+  const root = document.documentElement;
+  if (
+    appliedMetadataKey === undefined &&
+    root.dataset.prerenderedPath === pathname &&
+    root.dataset.prerenderedLocale === (locale ?? "ru") &&
+    document.querySelector('link[rel="canonical"][data-route-seo]') &&
+    document.querySelector('script[type="application/ld+json"][data-route-seo]')
+  ) {
+    // Build already emitted this exact route's complete head. Preserve it and
+    // defer the full SEO manifest until the first client-side route change.
+    appliedMetadataKey = key;
+    return;
+  }
   const manifest = await loadManifest();
   if (request !== latestMetadataRequest) return;
   const metadata = getRouteMetadata(manifest, pathname, locale);
@@ -119,4 +135,5 @@ export async function applyRouteMetadata(pathname: string, locale?: "ru" | "ro")
     "\\u003c"
   );
   document.head.append(jsonLd);
+  appliedMetadataKey = key;
 }

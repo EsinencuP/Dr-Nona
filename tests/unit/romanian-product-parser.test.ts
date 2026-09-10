@@ -14,7 +14,7 @@ describe("Romanian product semantic parser", () => {
       "Cu DYNAMIC CREAM, îngrijirea zilnică devine simplă și plăcută pentru fiecare membru al familiei.",
     ].join("")));
     expect(result.ingredients).toBe("Minerale din Marea Moartă. Ulei de jojoba și avocado");
-    expect(result.howToUse).toBe("aplicați pe pielea curată. masați ușor până la absorbție");
+    expect(result.howToUse).toBe("Utilizați zilnic. aplicați pe pielea curată. masați ușor până la absorbție");
     expect(result.ingredients).not.toContain("Utilizați");
     expect(result.howToUse).not.toContain("Cu DYNAMIC");
   });
@@ -64,5 +64,22 @@ describe("Romanian product semantic parser", () => {
       "howToUse starts with a fragment",
       "howToUse contains promotional or composition copy",
     ]));
+  });
+
+  test.each(["ANTI-AGING SERUM", "Ce face SHENSEEN specială?", "Această formulă și compoziție unică", "Recomandat pentru:"])("stops composition before the source boundary %s", (boundary) => {
+    const result = parseRomanianProductHtml(page([
+      "Fișa sursă a produsului Dr. Nona prezintă ingredientele separat de descrierea generală. Acest text oferă context pentru verificarea structurii.",
+      "Compoziție:", "Minerale din Marea Moartă", "Extracte naturale din plante",
+      boundary, "Acesta este paragraful următoarei secțiuni din sursă.",
+    ].join("<br>")));
+    expect(result.ingredients).toBe("Minerale din Marea Moartă. Extracte naturale din plante");
+  });
+
+  test("does not map fragrance narrative into an ingredient list", () => {
+    const result = parseRomanianProductHtml(page([
+      "Fișa sursă a parfumului prezintă caracterul aromei și evoluția acesteia. Lista ingredientelor nu este disponibilă în acest material.",
+      "Compoziția sa:", "se dezvăluie treptat, încălzind și atrăgând, asemenea energiei focului.",
+    ].join("<br>")));
+    expect(result.ingredients).toBeNull();
   });
 });

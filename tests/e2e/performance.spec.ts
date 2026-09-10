@@ -30,6 +30,12 @@ function isCatalogDataAsset(url: string) {
   );
 }
 
+function isRawCatalogAsset(url: string) {
+  // Match the actual dataset filename, not the six-item home-products.json
+  // projection (the old substring assertion treated those as the same file).
+  return /\/products(?:-ro)?\.json$/.test(new URL(url).pathname);
+}
+
 test("home does not load complete product or official content datasets", async ({
   page,
 }) => {
@@ -40,7 +46,15 @@ test("home does not load complete product or official content datasets", async (
   expect(requests.some((url) => url.includes("official-pages.json"))).toBe(
     false
   );
-  expect(requests.some((url) => url.includes("products.json"))).toBe(false);
+  expect(requests.filter(isRawCatalogAsset)).toEqual([]);
+  expect(requests.some(isCatalogDataAsset)).toBe(false);
+  expect(requests.some(isCatalogRouteAsset)).toBe(false);
+  if (await page.locator("html").getAttribute("data-prerendered-path")) {
+    expect(requests.some((url) => url.includes("seo-manifest-"))).toBe(false);
+    await page.locator('main a[href$="/products"]').first().click();
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/products$/);
+    expect(requests.some((url) => url.includes("seo-manifest-"))).toBe(true);
+  }
 });
 
 test("direct contact route does not load product or official datasets", async ({
@@ -53,12 +67,38 @@ test("direct contact route does not load product or official datasets", async ({
     "Контакты в Молдове"
   );
 
-  expect(requests.some((url) => url.includes("products.json"))).toBe(false);
+  expect(requests.filter(isRawCatalogAsset)).toEqual([]);
   expect(requests.some((url) => url.includes("official-pages.json"))).toBe(
     false
   );
   expect(requests.some(isCatalogRouteAsset)).toBe(false);
+  expect(requests.some(isCatalogDataAsset)).toBe(false);
 });
+
+for (const locale of ["ru", "ro"]) {
+  test(`${locale}: direct PDP loads a bounded detail projection without catalogue data`, async ({ page }) => {
+    const requests = observeModuleRequests(page);
+    const images: string[] = [];
+    page.on("request", (request) => {
+      if (request.resourceType() === "image") images.push(request.url());
+    });
+    await page.goto(`/${locale}/product/dynamic-hydrating-cream`);
+    await expect(page.locator("main h1")).toContainText("Dynamic");
+    await expect(page.locator(".product-card")).toHaveCount(4);
+    expect(requests.some(isCatalogDataAsset)).toBe(false);
+    expect(requests.some(isCatalogRouteAsset)).toBe(false);
+    expect(requests.some((url) => url.includes("official-pages.json") || /official-content-/.test(url))).toBe(false);
+    expect(images.some((url) => url.includes("/catalog-normalized/") && url.endsWith(".png"))).toBe(false);
+  });
+
+  test(`${locale}: editorial does not load catalogue data`, async ({ page }) => {
+    const requests = observeModuleRequests(page);
+    await page.goto(`/${locale}/editorial`);
+    await expect(page.locator("main h1")).toBeVisible();
+    expect(requests.some(isCatalogDataAsset)).toBe(false);
+    expect(requests.some(isCatalogRouteAsset)).toBe(false);
+  });
+}
 
 test("catalogue loads its own route module and product data only", async ({
   page,

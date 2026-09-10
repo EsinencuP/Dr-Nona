@@ -2,6 +2,7 @@ import { mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import { brotliCompressSync, gzipSync } from "node:zlib";
 import { load } from "cheerio";
+import manifest from "../src/data/seo-manifest.json" with { type: "json" };
 
 const html = readFileSync("dist/index.html", "utf8");
 const $ = load(html);
@@ -74,6 +75,16 @@ const officialContentChunk = assetNames.find((name) =>
 expect(Boolean(catalogRouteChunk), "CatalogPage route chunk is missing.");
 expect(Boolean(catalogDataChunk), "Product data chunk is missing.");
 expect(Boolean(officialContentChunk), "Official content chunk is missing.");
+
+for (const route of manifest.routes) {
+  const routeHtml = load(readFileSync(join("dist", route.path, "index.html"), "utf8"));
+  const home = ["/", "/ru", "/ro", "/main", "/ru/main", "/ro/main"].includes(route.path);
+  const heroPreloads = routeHtml('link[rel="preload"][as="image"][href^="/brand/hero/"]');
+  expect(heroPreloads.length === (home ? 2 : 0), `${route.path}: home hero preload scope is incorrect.`);
+  if (route.locale === "ro") {
+    expect(routeHtml('link[rel="preload"][href="/fonts/manrope-cyrillic.woff2"]').length === 0, `${route.path}: Russian-only font subset preloaded for Romanian shell.`);
+  }
+}
 
 if (catalogDataChunk) {
   const catalogBundle = readFileSync(join("dist/assets", catalogDataChunk), "utf8");

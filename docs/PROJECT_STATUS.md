@@ -18,7 +18,7 @@ Last verified: 2026-09-02 against base commit `a57d149` and the current product-
 | Published products | 50 |
 | Draft products | 0 |
 | Official content records | 137 |
-| Claims | 399 total: 0 approved, 399 pending, 0 rejected |
+| Claims | 396 total: 0 approved, 396 pending, 0 rejected (Prompt 4 removed adjacent promotional text from quarantined ingredient fields; no approval granted) |
 
 ## Implemented
 

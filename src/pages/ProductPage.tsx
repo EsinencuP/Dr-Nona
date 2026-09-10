@@ -15,7 +15,7 @@ import {
   getProductCopy,
   getProductDisclaimer,
 } from "../claims";
-import { useProductData } from "../data";
+import { useProductDetail } from "../features/product/productDetailData";
 import {
   buildProductOverview,
   summarizeProductField,
@@ -27,8 +27,7 @@ import NotFoundPage from "./NotFoundPage";
 
 export default function ProductPage() {
   const { slug = "" } = useParams();
-  const { productBySlug, getRelatedProducts } = useProductData();
-  const product = productBySlug.get(slug);
+  const { product, related } = useProductDetail(slug);
   const { contains, toggle } = useSelection();
   const { locale, t } = useLocale();
   const copy = locale === "ro"
@@ -63,7 +62,6 @@ export default function ProductPage() {
         nextStep: "Следующий шаг",
       };
   if (!product) return <NotFoundPage />;
-  const related = getRelatedProducts(product);
   const saved = contains(product.slug);
   const productShortDescription = getProductCopy(product, "shortDescription");
   const productLongDescription = getProductCopy(product, "longDescription");

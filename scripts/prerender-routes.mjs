@@ -26,6 +26,18 @@ for (const route of manifest.routes) {
   $("#root").html(renderPrerenderedContent(route, siteOrigin));
   $("html").attr("lang", route.locale === "ro" ? "ro" : "ru");
   $("html").attr("data-site-origin", siteOrigin);
+  $("html").attr("data-prerendered-path", route.path);
+  $("html").attr("data-prerendered-locale", route.locale);
+
+  // The home background is LCP-critical only on home. Other routes must not
+  // spend bandwidth decoding an unused hero; keep responsive home preloads.
+  if (!["/", "/ru", "/ro", "/main", "/ru/main", "/ro/main"].includes(route.path)) {
+    $('link[rel="preload"][as="image"][href^="/brand/hero/"]').remove();
+  }
+  if (route.locale === "ro") {
+    $('link[rel="preload"][href="/fonts/manrope-cyrillic.woff2"]')
+      .attr("href", "/fonts/manrope-latin-ext.woff2");
+  }
 
   const destination = outputPath(route.path);
   mkdirSync(dirname(destination), { recursive: true });

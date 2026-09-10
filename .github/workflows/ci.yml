@@ -89,6 +89,12 @@ jobs:
       - name: Measure production runtime performance
         run: npm run performance:runtime
 
+      - name: Verify production request boundaries
+        env:
+          PLAYWRIGHT_PRODUCTION: "1"
+          PLAYWRIGHT_PORT: "4285"
+        run: npm run test:e2e -- tests/e2e/performance.spec.ts
+
       - name: Run Playwright desktop and mobile
         run: npm run test:e2e
 

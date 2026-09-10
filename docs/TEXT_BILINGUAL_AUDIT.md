@@ -8,6 +8,8 @@ Commit: `10f41f3d413c` (`main`)
 
 ## Статус устранения на 2026-09-01
 
+Актуализация 2026-09-09: [Prompt 4 bilingual integrity report](PROMPT_4_BILINGUAL_INTEGRITY_2026-09-09.md) содержит свежий machine-readable parity audit, 148 source checks и шесть исправленных RO source mappings. Историческое утверждение о полном устранении semantic section bleed оказалось слишком широким: повторная проверка нашла соседние абзацы в пяти composition fields и потерю частоты применения. Technical integrity PASS; content approval по-прежнему HUMAN REVIEW REQUIRED. Текущий registry после удаления ошибочно перенесённых фрагментов: 396 pending, 0 approved, 0 rejected; восемь blockers остаются открытыми. Исторические цифры ниже не являются текущим release status.
+
 Исходные наблюдения ниже сохранены как доказательство состояния commit `10f41f3d`. Реализация исправлена: product claims проходят единый publication gate; неутверждённые RO-поля находятся в редакционном карантине; выбранная локаль сохраняется в URL, storage и заявке; Telegram получает `RU`/`RO`; recovery, certificates и editorial shell локализованы; оригинальные статьи явно размечены `lang="ru"`; SEO не использует английский boilerplate, соблюдает диапазоны длины и объявляет только существующие alternates; четыре недоступных source URL имеют статус `tombstone`; документация синхронизирована с 50 продуктами, 137 source records, 399 pending claims и 315 маршрутами.
 
 Не являются программными дефектами и остаются release blockers: human approval румынского product copy, legal review claims, privacy/recipient approval, подтверждение production origin, media rights, ranking source и branch protection. Эти данные не были выдуманы или помечены как закрытые.

@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 
 const pages = JSON.parse(
   readFileSync("src/data/official-pages.json", "utf8")
@@ -78,6 +78,36 @@ const publicRomanianProducts = Object.fromEntries(
     ];
   })
 );
+
+// Projections are derived only after the existing claims/editorial quarantine.
+// A direct PDP needs its own product and the same four recommendations as the
+// catalogue comparator; it must not fetch all 50 detailed records.
+const published = publicProducts.filter((product) => product.publicationStatus === "published");
+function localize(product, locale) {
+  return locale === "ro"
+    ? { ...product, ...publicRomanianProducts[product.slug], officialName: product.officialName, contentLocale: locale }
+    : { ...product, contentLocale: locale };
+}
+function relatedProducts(product) {
+  const explicit = product.relatedSlugs.map((slug) => published.find((item) => item.slug === slug)).filter(Boolean);
+  const sameCategory = published.filter((item) => item.slug !== product.slug && item.category === product.category && !explicit.includes(item));
+  const remaining = published.filter((item) => item.slug !== product.slug && !explicit.includes(item) && !sameCategory.includes(item));
+  return [...explicit, ...sameCategory, ...remaining].slice(0, 4);
+}
+mkdirSync("src/data/product-details", { recursive: true });
+for (const product of published) {
+  const related = relatedProducts(product);
+  writeFileSync(`src/data/product-details/${product.slug}.json`, `${JSON.stringify(Object.fromEntries(
+    ["ru", "ro"].map((locale) => [locale, { product: localize(product, locale), related: related.map((item) => localize(item, locale)) }])
+  ))}\n`);
+}
+writeFileSync("src/data/home-products.json", `${JSON.stringify(Object.fromEntries(
+  ["ru", "ro"].map((locale) => [locale, homeProductSlugs.map((slug) => {
+    const product = published.find((item) => item.slug === slug);
+    if (!product) throw new Error(`Missing published home product: ${slug}`);
+    return localize(product, locale);
+  })])
+))}\n`);
 
 function editorial(kind, limit) {
   return pages

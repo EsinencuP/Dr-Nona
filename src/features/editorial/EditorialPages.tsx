@@ -129,12 +129,13 @@ export function GenericOfficialPage() {
           {page.headings.slice(1).map((heading) => <h2 key={heading}>{heading}</h2>)}
           {body.map((paragraph, index) => <p key={`${index}-${paragraph.slice(0, 12)}`}>{paragraph}</p>)}
           {page.images.length > 0 && (
-            <div className="official-media-grid" aria-label={`${copy.images}: ${title}`}>
+            <div className="official-media-grid" lang={locale} aria-label={`${copy.images}: ${title}`}>
               {page.images.map((image, index) => (
                 <img
                   key={`${image.src}-${index}`}
                   src={uncroppedOfficialImage(image.src)}
                   alt={image.alt || title}
+                  lang="ru"
                   width="800"
                   height="640"
                   loading="lazy"
@@ -144,7 +145,7 @@ export function GenericOfficialPage() {
             </div>
           )}
           {!body.length && page.headings.length <= 1 && (
-            <a className="button button--quiet" href={page.sourceUrl} target="_blank" rel="noreferrer">
+            <a className="button button--quiet" lang={locale} href={page.sourceUrl} target="_blank" rel="noreferrer">
               {copy.openPage} <ArrowUpRight aria-hidden="true" />
             </a>
           )}

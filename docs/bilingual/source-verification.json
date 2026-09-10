@@ -1,0 +1,1352 @@
+{
+  "started": "2026-09-08",
+  "records": [
+    {
+      "slug": "after-shave-lord",
+      "locale": "official",
+      "url": "https://drnona.com/product/after-shave-lord",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/after-shave-lord",
+      "checkedAt": "2026-09-08T20:56:53.582Z",
+      "sha256": "b219439d466a1edfe59de8a5a6fd29b4867a36b02ed005e6fb9f512b73ead326"
+    },
+    {
+      "slug": "after-shave-lord",
+      "locale": "ro",
+      "url": "https://www.drnona.md/parfume_lord_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/parfume_lord_ro",
+      "checkedAt": "2026-09-08T20:56:53.261Z",
+      "sha256": "2a2f9cc3aa2e45107da2d1de046ac36f2d7130e58cd0d4ccb6b624669d1d994e"
+    },
+    {
+      "slug": "after-shave-lord",
+      "locale": "ru",
+      "url": "https://www.drnona.md/parfume_lord",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/parfume_lord",
+      "checkedAt": "2026-09-08T20:56:52.887Z",
+      "sha256": "47c31d750d8b40ad364cd4ddaf47c19b91a0b04fae54750f50ed2a5ad665819f"
+    },
+    {
+      "slug": "anti-aging-serum",
+      "locale": "official",
+      "url": "https://drnona.com/product/anti-aging-serum",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/anti-aging-serum",
+      "checkedAt": "2026-09-08T20:56:39.475Z",
+      "sha256": "8e4ce99b9e39612f52683f11d075e5fa399d1adb0e473b91312f841782cc6454"
+    },
+    {
+      "slug": "anti-aging-serum",
+      "locale": "ro",
+      "url": "https://www.drnona.md/anti_aging_serum_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/anti_aging_serum_ro",
+      "checkedAt": "2026-09-08T20:56:39.473Z",
+      "sha256": "71195cd0b3958556de377b04de3bfeab90920359603d1897c6f06365856262f4"
+    },
+    {
+      "slug": "anti-aging-serum",
+      "locale": "ru",
+      "url": "https://www.drnona.md/anti_aging_serum",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/anti_aging_serum",
+      "checkedAt": "2026-09-08T20:56:39.473Z",
+      "sha256": "d854a6ecddd98851bbf32db55884b8f8d8bc6c512b9d43e3b9dd8bb6830fe42b"
+    },
+    {
+      "slug": "ard-complex",
+      "locale": "official",
+      "url": "https://drnona.com/product/ard-complex",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/ard-complex",
+      "checkedAt": "2026-09-08T20:56:39.881Z",
+      "sha256": "11f4a6bb90938dcaed07b19517ae6858d5416f1dca4d90177472e58116504136"
+    },
+    {
+      "slug": "ard-complex",
+      "locale": "ro",
+      "url": "https://www.drnona.md/ard_cream_for_face_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/ard_cream_for_face_ro",
+      "checkedAt": "2026-09-08T20:56:39.684Z",
+      "sha256": "5b0f132b175db48b32696adb0c36e4ce11fa1a435c5b3ed1ee97809e51060b87"
+    },
+    {
+      "slug": "ard-complex",
+      "locale": "ru",
+      "url": "https://www.drnona.md/ard_cream_for_face",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/ard_cream_for_face",
+      "checkedAt": "2026-09-08T20:56:39.880Z",
+      "sha256": "e45707e878b6d32f120e8cb1f058a9b9c22f14aecadb4f90b70ffdaaaa9d928d"
+    },
+    {
+      "slug": "beauty-mask-for-face",
+      "locale": "official",
+      "url": "https://drnona.com/product/beauty-mask-for-face",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/beauty-mask-for-face",
+      "checkedAt": "2026-09-08T20:56:49.712Z",
+      "sha256": "c1203ba8f400a89712a6a7d0e451a91ef2df05d51c0cee578b26bfb71c09a3cc"
+    },
+    {
+      "slug": "beauty-mask-for-face",
+      "locale": "ro",
+      "url": "https://www.drnona.md/recovering_mud_musk_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/recovering_mud_musk_ro",
+      "checkedAt": "2026-09-08T20:56:49.351Z",
+      "sha256": "f30a956f271df81e88c3d31dc365231527561222149ebdcd7348b8e5814781c4"
+    },
+    {
+      "slug": "beauty-mask-for-face",
+      "locale": "ru",
+      "url": "https://www.drnona.md/recovering_mud_musk",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/recovering_mud_musk",
+      "checkedAt": "2026-09-08T20:56:49.315Z",
+      "sha256": "3bac54e048f53b5ea1dc7dbb7e8c21e75ea0526a7adf896df9a4216ca7e294b9"
+    },
+    {
+      "slug": "body-butter",
+      "locale": "ro",
+      "url": "https://www.drnona.md/body_butter_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/body_butter_ro",
+      "checkedAt": "2026-09-08T20:56:38.040Z",
+      "sha256": "000e83f72814db7ea9242300cffc7c99446d0afaa987c9898169716f2f6b9767"
+    },
+    {
+      "slug": "body-butter",
+      "locale": "ru",
+      "url": "https://www.drnona.md/body_butter",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/body_butter",
+      "checkedAt": "2026-09-08T20:56:37.730Z",
+      "sha256": "8c263d016bede9befc0386fdd65868e23175fcf3d297f1677a1edc0d9456c459"
+    },
+    {
+      "slug": "chocoseen",
+      "locale": "official",
+      "url": "https://drnona.com/product/chocoseen",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/chocoseen",
+      "checkedAt": "2026-09-08T20:56:41.128Z",
+      "sha256": "49162fb2ccf5e11e80a934f8a4e4ea1a397b100db81017a0e5ef5bd17cc42b39"
+    },
+    {
+      "slug": "chocoseen",
+      "locale": "ro",
+      "url": "https://www.drnona.md/chocoseen_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/chocoseen_ro",
+      "checkedAt": "2026-09-08T20:56:41.010Z",
+      "sha256": "70b0dd46f68c0f495c00d959c86e5cf3928da1bb75fb26b7fbc4f121ea7d3f07"
+    },
+    {
+      "slug": "chocoseen",
+      "locale": "ru",
+      "url": "https://www.drnona.md/chocoseen",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/chocoseen",
+      "checkedAt": "2026-09-08T20:56:41.061Z",
+      "sha256": "84e3326c0445eb5fa13cf5558bb9e7a1c72eabeb1c876f6f4eb6624c85497ef3"
+    },
+    {
+      "slug": "cleanseen",
+      "locale": "official",
+      "url": "https://drnona.com/product/cleanseen",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/cleanseen",
+      "checkedAt": "2026-09-08T20:56:42.869Z",
+      "sha256": "5360ee156c626d29ca3bab3cd4f2573a4e0015fccb0b9b0aaff784ce7ef99606"
+    },
+    {
+      "slug": "cleanseen",
+      "locale": "ro",
+      "url": "https://www.drnona.md/cleanseen_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/cleanseen_ro",
+      "checkedAt": "2026-09-08T20:56:42.591Z",
+      "sha256": "3930d2b924f7ff690d0ff2873540efa57b925a23e6532f58a2e3365a3d082308"
+    },
+    {
+      "slug": "cleanseen",
+      "locale": "ru",
+      "url": "https://www.drnona.md/cleanseen",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/cleanseen",
+      "checkedAt": "2026-09-08T20:56:42.748Z",
+      "sha256": "6ce181b2d21843a3f7c57d98f4ea545f42186c0047e8aff462cfba44b02abcca"
+    },
+    {
+      "slug": "coffee-mix",
+      "locale": "official",
+      "url": "https://drnona.com/product/coffee-mix",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/coffee-mix",
+      "checkedAt": "2026-09-08T20:56:41.047Z",
+      "sha256": "a032c2bbaead8e373467afe418bf1ff51e6d09a6bb222d5e170c21d931afabb8"
+    },
+    {
+      "slug": "coffee-mix",
+      "locale": "ro",
+      "url": "https://www.drnona.md/slimseen_coffee_mix_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/slimseen_coffee_mix_ro",
+      "checkedAt": "2026-09-08T20:56:40.703Z",
+      "sha256": "1c4786a38a786ddc9b6de865b1e3e9c5158639b34b932fefe773fe3e58a20cba"
+    },
+    {
+      "slug": "coffee-mix",
+      "locale": "ru",
+      "url": "https://www.drnona.md/slimseen_coffee_mix",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/slimseen_coffee_mix",
+      "checkedAt": "2026-09-08T20:56:40.704Z",
+      "sha256": "c798dc34e7a2afa790db6e8604f14ea004bd626ce17a5572fb3639750824b988"
+    },
+    {
+      "slug": "conditioner",
+      "locale": "official",
+      "url": "https://drnona.com/product/conditioner",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/conditioner",
+      "checkedAt": "2026-09-08T20:56:48.687Z",
+      "sha256": "3ec2b6a2faba4d5bd7f55ab8168364e26707c9ececbe5bcb5997d3d570609501"
+    },
+    {
+      "slug": "conditioner",
+      "locale": "ro",
+      "url": "https://www.drnona.md/mineral_hair_conditioner_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/mineral_hair_conditioner_ro",
+      "checkedAt": "2026-09-08T20:56:48.482Z",
+      "sha256": "20338849aa55c7616968e19acc19129ea1ba91e949f03a691fe7c1fd61f16205"
+    },
+    {
+      "slug": "conditioner",
+      "locale": "ru",
+      "url": "https://www.drnona.md/mineral_hair_conditioner",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/mineral_hair_conditioner",
+      "checkedAt": "2026-09-08T20:56:48.278Z",
+      "sha256": "8489d582a987d85d6e3d2568d7ece396b2cbd76be44dddd8d0ee77171443479c"
+    },
+    {
+      "slug": "dead-sea-water-compresses",
+      "locale": "official",
+      "url": "https://drnona.com/product/dead-sea-water-compresses",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/dead-sea-water-compresses",
+      "checkedAt": "2026-09-08T20:56:44.610Z",
+      "sha256": "c362e1a5dc3096b0612de63fd61f663b76879aad6e78dfdf9f9490773fccea28"
+    },
+    {
+      "slug": "dead-sea-water-compresses",
+      "locale": "ro",
+      "url": "https://www.drnona.md/compressed_wipes_ro",
+      "status": 200,
+      "checkedAt": "2026-09-08T21:11:48.180Z",
+      "previousAttempt": {
+        "status": "UNAVAILABLE",
+        "error": "The operation was aborted due to timeout",
+        "checkedAt": "2026-09-08T20:56:56.262Z"
+      },
+      "finalUrl": "https://www.drnona.md/compressed_wipes_ro",
+      "sha256": "1df0fa1743750598c9a0378d9409d6ec5de3a47bc8453ca6efb1b1d6559cd2af"
+    },
+    {
+      "slug": "dead-sea-water-compresses",
+      "locale": "ru",
+      "url": "https://www.drnona.md/compressed_wipes_ru",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/compressed_wipes_ru",
+      "checkedAt": "2026-09-08T20:56:44.278Z",
+      "sha256": "a515d7f59b04dfdfbce862b2571d73366ea895e14f4596132165ac7a2e3964f4"
+    },
+    {
+      "slug": "dnd-chewing-gum-tablets",
+      "locale": "official",
+      "url": "https://drnona.com/product/dnd-chewing-gum-tablets",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/dnd-chewing-gum-tablets",
+      "checkedAt": "2026-09-08T20:56:42.140Z",
+      "sha256": "818f9319709c0bb28797f3fa541e7cf769096efb21aed6d3cf3bab733c9a5d09"
+    },
+    {
+      "slug": "dnd-chewing-gum-tablets",
+      "locale": "ro",
+      "url": "https://www.drnona.md/dnd_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/dnd_ro",
+      "checkedAt": "2026-09-08T20:56:42.143Z",
+      "sha256": "b28425688bb554c807d9e4328affa2c1c8c38477c3966027062de998b25e6885"
+    },
+    {
+      "slug": "dnd-chewing-gum-tablets",
+      "locale": "ru",
+      "url": "https://www.drnona.md/dnd",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/dnd",
+      "checkedAt": "2026-09-08T20:56:41.743Z",
+      "sha256": "1327280e75f2715313ee4ee75dc2447c37fbc6f943533731624e159283a390a1"
+    },
+    {
+      "slug": "dynamic-hydrating-cream",
+      "locale": "official",
+      "url": "https://drnona.com/product/dynamic-hydrating-cream",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/dynamic-hydrating-cream",
+      "checkedAt": "2026-09-08T20:56:37.803Z",
+      "sha256": "3712df04d30244034ed1e8d2b4654553babed799c35c7cc01b08a1d20384c602"
+    },
+    {
+      "slug": "dynamic-hydrating-cream",
+      "locale": "ro",
+      "url": "https://www.drnona.md/dynamic_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/dynamic_ro",
+      "checkedAt": "2026-09-08T20:56:37.451Z",
+      "sha256": "66d6d6ab7da5b3495b8271860fb7fad902231938ecccdcc5ea9f38eb37664430"
+    },
+    {
+      "slug": "dynamic-hydrating-cream",
+      "locale": "ru",
+      "url": "https://www.drnona.md/dynamic",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/dynamic",
+      "checkedAt": "2026-09-08T20:56:38.134Z",
+      "sha256": "d9df33cee73462665258ad1b3f83557f48126f1a497e9a41a20186a1f9244e43"
+    },
+    {
+      "slug": "eye-contour-balm",
+      "locale": "official",
+      "url": "https://drnona.com/product/eye-contour-balm",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/eye-contour-balm",
+      "checkedAt": "2026-09-08T20:56:38.754Z",
+      "sha256": "abc488588d18f74320154190321a49e8157359831826a5fbed086190bcaa7616"
+    },
+    {
+      "slug": "eye-contour-balm",
+      "locale": "ro",
+      "url": "https://www.drnona.md/eye_care_balm_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/eye_care_balm_ro",
+      "checkedAt": "2026-09-08T20:56:38.463Z",
+      "sha256": "586b0176b13e790a3c8c0031c9cc84d29cee4d5fc6c6d08cbdc48c70d3dc560c"
+    },
+    {
+      "slug": "eye-contour-balm",
+      "locale": "ru",
+      "url": "https://www.drnona.md/eye_care_balm",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/eye_care_balm",
+      "checkedAt": "2026-09-08T20:56:38.295Z",
+      "sha256": "4f3eea1178a4b4a41068814bd21b6883ef1157363bc95574fc0e3919d2d15504"
+    },
+    {
+      "slug": "face-milk",
+      "locale": "official",
+      "url": "https://drnona.com/product/face-milk",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/face-milk",
+      "checkedAt": "2026-09-08T20:56:38.959Z",
+      "sha256": "4c842717876a97136ae31d14f89e9a4aa1ea5c6852469dfe37c084aa2f133b85"
+    },
+    {
+      "slug": "face-milk",
+      "locale": "ro",
+      "url": "https://www.drnona.md/face_milk_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/face_milk_ro",
+      "checkedAt": "2026-09-08T20:56:38.973Z",
+      "sha256": "a6ff7f3ca5ee4ae53cef320049489b9f4f06470a9bc895609ac335de43006cbb"
+    },
+    {
+      "slug": "face-milk",
+      "locale": "ru",
+      "url": "https://www.drnona.md/face_milk",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/face_milk",
+      "checkedAt": "2026-09-08T20:56:38.558Z",
+      "sha256": "e144d9535066a136c4e82afd73d54dc7fb84e0ef8ae505abc918d67ea127d893"
+    },
+    {
+      "slug": "face-soap",
+      "locale": "official",
+      "url": "https://drnona.com/product/face-soap",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/face-soap",
+      "checkedAt": "2026-09-08T20:56:46.127Z",
+      "sha256": "1110d246443db26915e1d58fcc64949844cd6bb51a9b6d8c6d19e8412f499adf"
+    },
+    {
+      "slug": "face-soap",
+      "locale": "ro",
+      "url": "https://www.drnona.md/facial_foam_soap_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/facial_foam_soap_ro",
+      "checkedAt": "2026-09-08T20:56:46.544Z",
+      "sha256": "0f7e464379d3f73ea384c67e98470255dfe54d7d973b18bd38746c6281e309b2"
+    },
+    {
+      "slug": "face-soap",
+      "locale": "ru",
+      "url": "https://www.drnona.md/facial_foam_soap",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/facial_foam_soap",
+      "checkedAt": "2026-09-08T20:56:45.821Z",
+      "sha256": "463330e15642d8ed6409a37d4f0953f2b97ea3e31f9773bf7314ac5be9d52fa6"
+    },
+    {
+      "slug": "facial-solaris",
+      "locale": "official",
+      "url": "https://drnona.com/product/facial-solaris",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/facial-solaris",
+      "checkedAt": "2026-09-08T20:56:38.447Z",
+      "sha256": "447d7f57be8fd1ea41f4395ceda87cc6376d35ca40f052ff7dacc7fcff832c23"
+    },
+    {
+      "slug": "facial-solaris",
+      "locale": "ro",
+      "url": "https://www.drnona.md/facial_solaris_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/facial_solaris_ro",
+      "checkedAt": "2026-09-08T20:56:38.258Z",
+      "sha256": "f077cbf170c4af915735c8708c7c225c9ca6e04c5dfd3f33b38f7582607a40a0"
+    },
+    {
+      "slug": "facial-solaris",
+      "locale": "ru",
+      "url": "https://www.drnona.md/facial_solaris",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/facial_solaris",
+      "checkedAt": "2026-09-08T20:56:38.041Z",
+      "sha256": "87a09c81e0b780e8b53b420f8e905ec2d71354fb4a0ce6ce18d3b1278a47808f"
+    },
+    {
+      "slug": "fase-9",
+      "locale": "official",
+      "url": "https://drnona.com/product/fase-9",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/fase-9",
+      "checkedAt": "2026-09-08T20:56:41.812Z",
+      "sha256": "7c77f05ed58dc27106644be4a177901c737bbb3f535b8a8018c179ce0cc2cf87"
+    },
+    {
+      "slug": "fase-9",
+      "locale": "ro",
+      "url": "https://www.drnona.md/phase_9_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/phase_9_ro",
+      "checkedAt": "2026-09-08T20:56:41.743Z",
+      "sha256": "ff11c34ba53ef234cda9fcb66f4cec03e26a8587af422c02d60123c6c24cff0d"
+    },
+    {
+      "slug": "fase-9",
+      "locale": "ru",
+      "url": "https://www.drnona.md/phase_9",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/phase_9",
+      "checkedAt": "2026-09-08T20:56:41.391Z",
+      "sha256": "da31ec1575f376fd3289b1e885126c3d625918c308c01d54f3d7b6f82a229cfc"
+    },
+    {
+      "slug": "femseen",
+      "locale": "official",
+      "url": "https://drnona.com/product/femseen",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/femseen",
+      "checkedAt": "2026-09-08T20:56:44.263Z",
+      "sha256": "4d6b6534f3e5e0e70065687d33389b8cf374e985d2720097d0f2294b45b17458"
+    },
+    {
+      "slug": "femseen",
+      "locale": "ro",
+      "url": "https://www.drnona.md/femseen_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/femseen_ro",
+      "checkedAt": "2026-09-08T20:56:44.191Z",
+      "sha256": "485b2b54b9990f242625b566e29585f744c82f9b627b434fd5ec3a893378437c"
+    },
+    {
+      "slug": "femseen",
+      "locale": "ru",
+      "url": "https://www.drnona.md/femseen",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/femseen",
+      "checkedAt": "2026-09-08T20:56:44.059Z",
+      "sha256": "0eb47da31c08e984714f0d5dd6a7afd64b317cf33733f3144df8f0515da06533"
+    },
+    {
+      "slug": "frequent-use-tonic-shampoo",
+      "locale": "official",
+      "url": "https://drnona.com/product/frequent-use-tonic-shampoo",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/frequent-use-tonic-shampoo",
+      "checkedAt": "2026-09-08T20:56:48.279Z",
+      "sha256": "e845cc99442f7db213bdf65b7015608eab4b39879ee4ec19ee92d105f7c6e9a1"
+    },
+    {
+      "slug": "frequent-use-tonic-shampoo",
+      "locale": "ro",
+      "url": "https://www.drnona.md/mineral_shampoo_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/mineral_shampoo_ro",
+      "checkedAt": "2026-09-08T20:56:47.973Z",
+      "sha256": "db45cc520226f7c5b1b0cad6dd2ecc0ea578d70511c7f1d5417a9ff1162706d8"
+    },
+    {
+      "slug": "frequent-use-tonic-shampoo",
+      "locale": "ru",
+      "url": "https://www.drnona.md/mineral_shampoo",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/mineral_shampoo",
+      "checkedAt": "2026-09-08T20:56:47.972Z",
+      "sha256": "d1109a42021c78bb46242bda0780ef3fa61487504c68b91e52ad1f6cdaec8d57"
+    },
+    {
+      "slug": "goldseen",
+      "locale": "official",
+      "url": "https://drnona.com/product/goldseen",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/goldseen",
+      "checkedAt": "2026-09-08T20:56:42.546Z",
+      "sha256": "865621cd5c8107d7426d8c7be7112d6e237043e874c36d5c4c7b656a3e24eac8"
+    },
+    {
+      "slug": "goldseen",
+      "locale": "ro",
+      "url": "https://www.drnona.md/goldseen_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/goldseen_ro",
+      "checkedAt": "2026-09-08T20:56:42.291Z",
+      "sha256": "31c23aebe23da92115148110a18665e673d75d930ef162c09e954d8766852e65"
+    },
+    {
+      "slug": "goldseen",
+      "locale": "ru",
+      "url": "https://www.drnona.md/goldseen",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/goldseen",
+      "checkedAt": "2026-09-08T20:56:42.224Z",
+      "sha256": "4ee65b7f17154c2c6a5ff40ed8a025ad0fc3c9dd78aed94c787e4ef39521974b"
+    },
+    {
+      "slug": "gonseen",
+      "locale": "official",
+      "url": "https://drnona.com/product/gonseen",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/gonseen",
+      "checkedAt": "2026-09-08T20:56:40.705Z",
+      "sha256": "ba7f04d4583c9f670b179b1e3d78e838082aed353f43bbe5c798dc10ac0caf00"
+    },
+    {
+      "slug": "gonseen",
+      "locale": "ro",
+      "url": "https://www.drnona.md/gonseen_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/gonseen_ro",
+      "checkedAt": "2026-09-08T20:56:40.703Z",
+      "sha256": "8213e7848a72fb0239b65b5ae133a53b12172b5ca1694a8d1542c54909c2d4b2"
+    },
+    {
+      "slug": "gonseen",
+      "locale": "ru",
+      "url": "https://www.drnona.md/gonseen",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/gonseen",
+      "checkedAt": "2026-09-08T20:56:40.292Z",
+      "sha256": "80f6a35d96336c38c54a156366231d687b2abe5aa741cfe958d770c3ebada072"
+    },
+    {
+      "slug": "halo-gel",
+      "locale": "official",
+      "url": "https://drnona.com/product/halo-gel",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/halo-gel",
+      "checkedAt": "2026-09-08T20:56:47.765Z",
+      "sha256": "5d41bcfe0e949b9d81524f661afe63883b6f52cc4f9b282a2e650681e3cbfddb"
+    },
+    {
+      "slug": "halo-gel",
+      "locale": "ro",
+      "url": "https://www.drnona.md/shower_gel_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/shower_gel_ro",
+      "checkedAt": "2026-09-08T20:56:47.769Z",
+      "sha256": "0a9a0b1e12322cc14b86e3bb7b67f348ba3cb213b36e9656ac3562d48242d5b0"
+    },
+    {
+      "slug": "halo-gel",
+      "locale": "ru",
+      "url": "https://www.drnona.md/shower_gel",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/shower_gel",
+      "checkedAt": "2026-09-08T20:56:47.352Z",
+      "sha256": "edc3251d23e516464e454a561e1656911adfc4cd5541c07bbaf5ea943946d268"
+    },
+    {
+      "slug": "halo-pure-unisex-deodorant-stick",
+      "locale": "official",
+      "url": "https://drnona.com/product/halo-pure-unisex-deodorant-stick",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/halo-pure-unisex-deodorant-stick",
+      "checkedAt": "2026-09-08T20:56:46.946Z",
+      "sha256": "d6b29bee29eadc407211c6f9d84bd4303b14c65d2d6b151ddea32828b62d19f9"
+    },
+    {
+      "slug": "halo-pure-unisex-deodorant-stick",
+      "locale": "ro",
+      "url": "https://www.drnona.md/unisex_deodorant_stick_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/unisex_deodorant_stick_ro",
+      "checkedAt": "2026-09-08T20:56:46.544Z",
+      "sha256": "28d9a8020ef98a410c80961f8b51399e07510b51f573f2c477973018b22c7016"
+    },
+    {
+      "slug": "halo-pure-unisex-deodorant-stick",
+      "locale": "ru",
+      "url": "https://www.drnona.md/unisex_deodorant_stick",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/unisex_deodorant_stick",
+      "checkedAt": "2026-09-08T20:56:46.342Z",
+      "sha256": "9f676cedcdfea0f9f10d97718fa079582f395e8117cad9a7d1fb1b6df0ca4a16"
+    },
+    {
+      "slug": "halo-shenseen-toothpaste",
+      "locale": "official",
+      "url": "https://drnona.com/product/halo-shenseen-toothpaste",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/halo-shenseen-toothpaste",
+      "checkedAt": "2026-09-08T20:56:47.313Z",
+      "sha256": "5db148ea551f3be7c36c7e3f5d5fd21de42e2460263fe9997de67f9d0d1bfc9c"
+    },
+    {
+      "slug": "halo-shenseen-toothpaste",
+      "locale": "ro",
+      "url": "https://www.drnona.md/shenseen_mousse_toothpaste_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/shenseen_mousse_toothpaste_ro",
+      "checkedAt": "2026-09-08T20:56:47.023Z",
+      "sha256": "7e1603ecffa127e4c6a38a3c68c4a839dd5427f67722a2f9ac0ed09c2be59520"
+    },
+    {
+      "slug": "halo-shenseen-toothpaste",
+      "locale": "ru",
+      "url": "https://www.drnona.md/shenseen_mousse_toothpaste",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/shenseen_mousse_toothpaste",
+      "checkedAt": "2026-09-08T20:56:46.695Z",
+      "sha256": "65b43b1af0797ebcb3b9b609029facdca26c1def915bebaa6343bc132fa9ea5e"
+    },
+    {
+      "slug": "hand-and-nail-treatment",
+      "locale": "official",
+      "url": "https://drnona.com/product/hand-and-nail-treatment",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/hand-and-nail-treatment",
+      "checkedAt": "2026-09-08T20:56:37.739Z",
+      "sha256": "619abe7e677a858a428e20193f32bf25c1fe8f14630313c26cf33f3e96226558"
+    },
+    {
+      "slug": "hand-and-nail-treatment",
+      "locale": "ro",
+      "url": "https://www.drnona.md/hand_and_nail_cream_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/hand_and_nail_cream_ro",
+      "checkedAt": "2026-09-08T20:56:37.628Z",
+      "sha256": "f816c62f292258a389fee08449027764e16024c9bc537a5b57dbda4d35fc46a6"
+    },
+    {
+      "slug": "hand-and-nail-treatment",
+      "locale": "ru",
+      "url": "https://www.drnona.md/hand_and_nail_cream",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/hand_and_nail_cream",
+      "checkedAt": "2026-09-08T20:56:37.131Z",
+      "sha256": "b56cd49a054b2825c6357be5613ba604f5c289825d4748b27bc42165f003b896"
+    },
+    {
+      "slug": "imunseen",
+      "locale": "official",
+      "url": "https://drnona.com/product/imunseen",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/imunseen",
+      "checkedAt": "2026-09-08T20:56:42.545Z",
+      "sha256": "58cdaac2ae14e619fcc4e56f211ad24a0b9cc5b7c050d678dc9141c319718f5e"
+    },
+    {
+      "slug": "imunseen",
+      "locale": "ro",
+      "url": "https://www.drnona.md/imunseen_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/imunseen_ro",
+      "checkedAt": "2026-09-08T20:56:42.142Z",
+      "sha256": "100ee496d8d75318bec144713b64bd22d7abd50911bbd1815a35e30d0828714d"
+    },
+    {
+      "slug": "imunseen",
+      "locale": "ru",
+      "url": "https://www.drnona.md/imunseen",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/imunseen",
+      "checkedAt": "2026-09-08T20:56:42.134Z",
+      "sha256": "11fc3f785a1a5405b337eb67b0fb65cd9c410a00ac565bfb55c26be059b4c051"
+    },
+    {
+      "slug": "kiwi-deodorant",
+      "locale": "official",
+      "url": "https://drnona.com/product/kiwi-deodorant",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/kiwi-deodorant",
+      "checkedAt": "2026-09-08T20:56:45.308Z",
+      "sha256": "284e35dc9e273cf8f77d62479e8eceeb5cd4567ef1e330456ef1e6d30f9aca2d"
+    },
+    {
+      "slug": "kiwi-deodorant",
+      "locale": "ro",
+      "url": "https://www.drnona.md/deodorant_kiwi_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/deodorant_kiwi_ro",
+      "checkedAt": "2026-09-08T20:56:45.169Z",
+      "sha256": "1f7a63c15d51e2ac02843ea4acf992e3b67fba32fff517e1bbb58b829cb56137"
+    },
+    {
+      "slug": "kiwi-deodorant",
+      "locale": "ru",
+      "url": "https://www.drnona.md/deodorant_kiwi",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/deodorant_kiwi",
+      "checkedAt": "2026-09-08T20:56:45.002Z",
+      "sha256": "2ff20c5e4d77b618f65e57789e7977b3b5d1721bb8de602e36a8dfa30e44cd89"
+    },
+    {
+      "slug": "lady-deodorant",
+      "locale": "official",
+      "url": "https://drnona.com/product/lady-deodorant",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/lady-deodorant",
+      "checkedAt": "2026-09-08T20:56:45.002Z",
+      "sha256": "5cbd0905eb07ecf3b1203c10126f301fde868306e28d6ac6353e07ff44444eec"
+    },
+    {
+      "slug": "lady-deodorant",
+      "locale": "ro",
+      "url": "https://www.drnona.md/deodorant_lady_ro",
+      "status": 200,
+      "checkedAt": "2026-09-08T21:11:48.374Z",
+      "previousAttempt": {
+        "status": "UNAVAILABLE",
+        "error": "The operation was aborted due to timeout",
+        "checkedAt": "2026-09-08T20:56:56.579Z"
+      },
+      "finalUrl": "https://www.drnona.md/deodorant_lady_ro",
+      "sha256": "775136f4d2f891307864435a9da20ee37156a1e2dbdd1ef52dbda51ea5564397"
+    },
+    {
+      "slug": "lady-deodorant",
+      "locale": "ru",
+      "url": "https://www.drnona.md/deodorant_lady",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/deodorant_lady",
+      "checkedAt": "2026-09-08T20:56:44.598Z",
+      "sha256": "ba3ea58ffb94c055621fc57f550b2fabd5780cfab07ff63b5810cb76e478c677"
+    },
+    {
+      "slug": "lipstick-new",
+      "locale": "official",
+      "url": "https://drnona.com/product/lipstick-new",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/lipstick-new",
+      "checkedAt": "2026-09-08T20:56:49.037Z",
+      "sha256": "00fad7e9c81f8348f948b78b3e8fb935223415e68c9212ccf7b6c0e242933e4d"
+    },
+    {
+      "slug": "lipstick-new",
+      "locale": "ro",
+      "url": "https://www.drnona.md/mineral_lipstick_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/mineral_lipstick_ro",
+      "checkedAt": "2026-09-08T20:56:48.995Z",
+      "sha256": "f652f191b6e1cd21ad8bcc89f8f052dfde3789dafc9cb853112c15910b7c4159"
+    },
+    {
+      "slug": "lipstick-new",
+      "locale": "ru",
+      "url": "https://www.drnona.md/mineral_lipstick",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/mineral_lipstick",
+      "checkedAt": "2026-09-08T20:56:48.732Z",
+      "sha256": "b5e8cb2e28bd7854d8417ba5ac151d40f488594315cfc46cf0f0742159e978c7"
+    },
+    {
+      "slug": "lord-deodorant",
+      "locale": "official",
+      "url": "https://drnona.com/product/lord-deodorant",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/lord-deodorant",
+      "checkedAt": "2026-09-08T20:56:45.681Z",
+      "sha256": "629ca16b120a14f0072db65969abed9c852c05640d402752c2dbcd5148dcbf9a"
+    },
+    {
+      "slug": "lord-deodorant",
+      "locale": "ro",
+      "url": "https://www.drnona.md/deodorant_lord_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/deodorant_lord_ro",
+      "checkedAt": "2026-09-08T20:56:45.688Z",
+      "sha256": "91e9298993353845b61132fb4adae6c7a7f5377c6c6054835104a1e952c6438f"
+    },
+    {
+      "slug": "lord-deodorant",
+      "locale": "ru",
+      "url": "https://www.drnona.md/deodorant_lord",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/deodorant_lord",
+      "checkedAt": "2026-09-08T20:56:45.320Z",
+      "sha256": "eaabbcac0a3c87f8d676ebeb015acfb51619b90fe4932c9bb2cdbb53281a3474"
+    },
+    {
+      "slug": "mouthwash",
+      "locale": "official",
+      "url": "https://drnona.com/product/mouthwash",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/mouthwash",
+      "checkedAt": "2026-09-08T20:56:44.490Z",
+      "sha256": "7209959d1cce185a8cb6fbd2a3e1547c97d89f511a4ba805a07c666f50a53e9e"
+    },
+    {
+      "slug": "mouthwash",
+      "locale": "ro",
+      "url": "https://www.drnona.md/mouthwash_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/mouthwash_ro",
+      "checkedAt": "2026-09-08T20:56:44.193Z",
+      "sha256": "c55458dd906ded9574b090b3c8ad5a3aaff8270475f49df758cf183c180c426c"
+    },
+    {
+      "slug": "mouthwash",
+      "locale": "ru",
+      "url": "https://www.drnona.md/mouthwash",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/mouthwash",
+      "checkedAt": "2026-09-08T20:56:44.192Z",
+      "sha256": "5bb9a76e5007548cde4103ecd8e60380ec764e71dfe1e487d04f0366fb1734ee"
+    },
+    {
+      "slug": "newseen",
+      "locale": "official",
+      "url": "https://drnona.com/product/newseen",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/newseen",
+      "checkedAt": "2026-09-08T20:56:44.021Z",
+      "sha256": "0addce75fd87a1ac83cb76db46ab0c5b026d8c1d89ae28308ce3741a54d22d2e"
+    },
+    {
+      "slug": "newseen",
+      "locale": "ro",
+      "url": "https://www.drnona.md/newseen_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/newseen_ro",
+      "checkedAt": "2026-09-08T20:56:43.876Z",
+      "sha256": "f821d0bc48a4121277e8b2d51b58c6eb47796c602dd87760bedac8bffb2f83af"
+    },
+    {
+      "slug": "newseen",
+      "locale": "ru",
+      "url": "https://www.drnona.md/newseen",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/newseen",
+      "checkedAt": "2026-09-08T20:56:43.672Z",
+      "sha256": "e0eb991c1e475d767db59bf6bea74f2ce2916f6ec39142bc5df59f8e7e949e9b"
+    },
+    {
+      "slug": "night-cream",
+      "locale": "official",
+      "url": "https://drnona.com/product/night-cream",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/night-cream",
+      "checkedAt": "2026-09-08T20:56:39.474Z",
+      "sha256": "ac9fe639603c1222ec6b124c7c84d1d732640e1b88da75f26c1b036807d627ec"
+    },
+    {
+      "slug": "night-cream",
+      "locale": "ro",
+      "url": "https://www.drnona.md/night_cream_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/night_cream_ro",
+      "checkedAt": "2026-09-08T20:56:39.070Z",
+      "sha256": "24dfec9d7bab5910d623dfcf4b847450401da83ad7a88169e165a97ac361e25d"
+    },
+    {
+      "slug": "night-cream",
+      "locale": "ru",
+      "url": "https://www.drnona.md/night_cream",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/night_cream",
+      "checkedAt": "2026-09-08T20:56:38.972Z",
+      "sha256": "c828a7c767bf667c8219c2d3f6ca3a8a890ed3003829011c39b3904b8890e3fd"
+    },
+    {
+      "slug": "okseen",
+      "locale": "official",
+      "url": "https://drnona.com/product/okseen",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/okseen",
+      "checkedAt": "2026-09-08T20:56:41.727Z",
+      "sha256": "42546878e1ce640cebc42a4b678955d86e2836f5506cfa242f5961d680def6ff"
+    },
+    {
+      "slug": "okseen",
+      "locale": "ro",
+      "url": "https://www.drnona.md/okseen_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/okseen_ro",
+      "checkedAt": "2026-09-08T20:56:41.409Z",
+      "sha256": "98c7a9808cd047b38f3e7d659bb01f29f6695474944d34bc0380e40eaf7f2d1f"
+    },
+    {
+      "slug": "okseen",
+      "locale": "ru",
+      "url": "https://www.drnona.md/okseen",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/okseen",
+      "checkedAt": "2026-09-08T20:56:41.316Z",
+      "sha256": "4f0676ac962c459463530fefd3bba9ca5564db9c7847589c20582285e79e227c"
+    },
+    {
+      "slug": "parfum-faya",
+      "locale": "official",
+      "url": "https://drnona.com/product/parfum-faya",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/parfum-faya",
+      "checkedAt": "2026-09-08T20:56:56.062Z",
+      "sha256": "22a855eeccc5819ab39eec7456d8e1366543d8b4c577ec0b5170f4531e62c002"
+    },
+    {
+      "slug": "parfum-faya",
+      "locale": "ro",
+      "url": "https://www.drnona.md/parfume_faya_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/parfume_faya_ro",
+      "checkedAt": "2026-09-08T20:56:55.689Z",
+      "sha256": "f2132de3564d4e271968cf0d8416f2bfceac13dcf2090c16e8b00d9926e0426b"
+    },
+    {
+      "slug": "parfum-faya",
+      "locale": "ru",
+      "url": "https://www.drnona.md/parfume_faya",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/parfume_faya",
+      "checkedAt": "2026-09-08T20:56:55.547Z",
+      "sha256": "dfefcafa8d10370b117a3f5abb10663e5123071080d132f4080ffb12c46e51aa"
+    },
+    {
+      "slug": "perfume-kiwi",
+      "locale": "official",
+      "url": "https://drnona.com/product/perfume-kiwi",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/perfume-kiwi",
+      "checkedAt": "2026-09-08T20:56:54.423Z",
+      "sha256": "353e17f249b02f11f81c80665661ea941d160f4ffc16bed63252b2800bc1148c"
+    },
+    {
+      "slug": "perfume-kiwi",
+      "locale": "ro",
+      "url": "https://www.drnona.md/parfume_kiwi_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/parfume_kiwi_ro",
+      "checkedAt": "2026-09-08T20:56:54.117Z",
+      "sha256": "9eac3bfa1e2a71c8ad52d55d12878384bce7d2438951c326b2b6cc36798f9de2"
+    },
+    {
+      "slug": "perfume-kiwi",
+      "locale": "ru",
+      "url": "https://www.drnona.md/parfume_kiwi",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/parfume_kiwi",
+      "checkedAt": "2026-09-08T20:56:53.776Z",
+      "sha256": "cb1d93236d6bdc6951c9c5ed85c08d09993a0f927985187947871f1091dab551"
+    },
+    {
+      "slug": "perfume-lady",
+      "locale": "official",
+      "url": "https://drnona.com/product/perfume-lady",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/perfume-lady",
+      "checkedAt": "2026-09-08T20:56:55.343Z",
+      "sha256": "46a64c303696c925804a538e709418fb3c49ebf6db7d2fdae6195782bad1d048"
+    },
+    {
+      "slug": "perfume-lady",
+      "locale": "ro",
+      "url": "https://www.drnona.md/parfume_lady_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/parfume_lady_ro",
+      "checkedAt": "2026-09-08T20:56:55.036Z",
+      "sha256": "37a9db70f933e13ebaa1999ee0bfbc039b1ed0b0d04a2c1cc9df25f215de19ea"
+    },
+    {
+      "slug": "perfume-lady",
+      "locale": "ru",
+      "url": "https://www.drnona.md/parfume_lady",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/parfume_lady",
+      "checkedAt": "2026-09-08T20:56:54.841Z",
+      "sha256": "e006ac90c4b320382571be885e40891c85a1c70c80b55c83262142e9653b02df"
+    },
+    {
+      "slug": "pulmoseen",
+      "locale": "official",
+      "url": "https://drnona.com/product/pulmoseen",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/pulmoseen",
+      "checkedAt": "2026-09-08T20:56:43.261Z",
+      "sha256": "c5ec3cc90c0e670e738135400d5a165f5dc9aba69935fd621d92aa3b78cac6b5"
+    },
+    {
+      "slug": "pulmoseen",
+      "locale": "ro",
+      "url": "https://www.drnona.md/pulmoseen_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/pulmoseen_ro",
+      "checkedAt": "2026-09-08T20:56:43.069Z",
+      "sha256": "67eecb201cc03da6ca6303997bed4fe29f1924da8980bade22cf92eeeb5daefa"
+    },
+    {
+      "slug": "pulmoseen",
+      "locale": "ru",
+      "url": "https://www.drnona.md/pulmoseen",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/pulmoseen",
+      "checkedAt": "2026-09-08T20:56:43.068Z",
+      "sha256": "8ae8f1df3e64bed1a5ed2125017d458d9b2901fd0e6354847f83d85a7f6e5a5b"
+    },
+    {
+      "slug": "ravseen",
+      "locale": "official",
+      "url": "https://drnona.com/product/ravseen",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/ravseen",
+      "checkedAt": "2026-09-08T20:56:43.080Z",
+      "sha256": "bbdd24322769a278db2ce7448b4e34839a000eb46f094f8ca9b4b0175501d159"
+    },
+    {
+      "slug": "ravseen",
+      "locale": "ro",
+      "url": "https://www.drnona.md/ravseen_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/ravseen_ro",
+      "checkedAt": "2026-09-08T20:56:42.910Z",
+      "sha256": "c9042e482c5f42e04c5412c8f81e45605471dd1f27880b9628ed98b3e161a28b"
+    },
+    {
+      "slug": "ravseen",
+      "locale": "ru",
+      "url": "https://www.drnona.md/ravseen",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/ravseen",
+      "checkedAt": "2026-09-08T20:56:42.851Z",
+      "sha256": "a4e2c0ed4481785215beda58ce8411c6658edf06a2e4bf0077ed2521e647c830"
+    },
+    {
+      "slug": "reumoseen",
+      "locale": "official",
+      "url": "https://drnona.com/product/reumoseen",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/reumoseen",
+      "checkedAt": "2026-09-08T20:56:43.466Z",
+      "sha256": "13ca6c745ba6d625fbf91a8bf1653f4e167943ae94a853d0824668c6c03d10d0"
+    },
+    {
+      "slug": "reumoseen",
+      "locale": "ro",
+      "url": "https://www.drnona.md/reumoseen_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/reumoseen_ro",
+      "checkedAt": "2026-09-08T20:56:43.472Z",
+      "sha256": "7d7c660b45754ed47099e1868f64f1678c6feb21b8b1d817e83e1ca345ee0093"
+    },
+    {
+      "slug": "reumoseen",
+      "locale": "ru",
+      "url": "https://www.drnona.md/reumoseen",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/reumoseen",
+      "checkedAt": "2026-09-08T20:56:43.260Z",
+      "sha256": "6657187849eddb55020ab1a905879a97934662817f0d9a5b54b0acac8840fb90"
+    },
+    {
+      "slug": "salts-camomile",
+      "locale": "official",
+      "url": "https://drnona.com/product/salts-camomile",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/salts-camomile",
+      "checkedAt": "2026-09-08T20:56:50.037Z",
+      "sha256": "af60a77a4ce1393ee2813ac5ee566434e76846a89e29b1e4ae1a0c248c7483b4"
+    },
+    {
+      "slug": "salts-camomile",
+      "locale": "ro",
+      "url": "https://www.drnona.md/bath_salts_with_chamomile_extract_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/bath_salts_with_chamomile_extract_ro",
+      "checkedAt": "2026-09-08T20:56:49.917Z",
+      "sha256": "891f01935b9bd75a9d3936bee9104e58b7563aa3791bcd47890e793aff1bae49"
+    },
+    {
+      "slug": "salts-camomile",
+      "locale": "ru",
+      "url": "https://www.drnona.md/bath_salts_with_chamomile_extract",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/bath_salts_with_chamomile_extract",
+      "checkedAt": "2026-09-08T20:56:49.712Z",
+      "sha256": "48192f666c8baa79581534d70f8b8098531266d32153faf72ad3490f7dd8adf8"
+    },
+    {
+      "slug": "salts-lavander",
+      "locale": "official",
+      "url": "https://drnona.com/product/salts-lavander",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/salts-lavander",
+      "checkedAt": "2026-09-08T20:56:52.579Z",
+      "sha256": "d231034f953a5ad2177324b15eaefa6ca2f935372f830fa7ab845d82c915fecc"
+    },
+    {
+      "slug": "salts-lavander",
+      "locale": "ro",
+      "url": "https://www.drnona.md/bath_salts_with_lavander_extract_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/bath_salts_with_lavander_extract_ro",
+      "checkedAt": "2026-09-08T20:56:52.169Z",
+      "sha256": "1be21a8c130803b690b28a2b79250c1d9d0ddcae8df1b593ceeac8a05c95b8b2"
+    },
+    {
+      "slug": "salts-lavander",
+      "locale": "ru",
+      "url": "https://www.drnona.md/bath_salts_with_lavender_extract",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/bath_salts_with_lavender_extract",
+      "checkedAt": "2026-09-08T20:56:51.772Z",
+      "sha256": "ca403d1602a81acc10acbf6a0aac19241dc7760fb3e93d352c3819f63f8bb7c4"
+    },
+    {
+      "slug": "salts-rosemary",
+      "locale": "official",
+      "url": "https://drnona.com/product/salts-rosemary",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/salts-rosemary",
+      "checkedAt": "2026-09-08T20:56:51.582Z",
+      "sha256": "1ecbc10363f054b37d1065f63a88e1889e7a393aa72c7c2668e1da8f6f22172d"
+    },
+    {
+      "slug": "salts-rosemary",
+      "locale": "ro",
+      "url": "https://www.drnona.md/bath_salts_with_rosemary_extract_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/bath_salts_with_rosemary_extract_ro",
+      "checkedAt": "2026-09-08T20:56:51.264Z",
+      "sha256": "1ac4fcff1de55f50caf177cb06f971235432da71ff7ebeba7a66632875b07929"
+    },
+    {
+      "slug": "salts-rosemary",
+      "locale": "ru",
+      "url": "https://www.drnona.md/bath_salts_with_rosemary_extract",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/bath_salts_with_rosemary_extract",
+      "checkedAt": "2026-09-08T20:56:50.839Z",
+      "sha256": "06d70f803524ed0144924ea4aa840cab7201700603569b6702dd928cc903496d"
+    },
+    {
+      "slug": "salts-ylangylang",
+      "locale": "official",
+      "url": "https://drnona.com/product/salts-ylangylang",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/salts-ylangylang",
+      "checkedAt": "2026-09-08T20:56:50.632Z",
+      "sha256": "3a62707aa1380a5cd5691ff7756293fbeaca85ad6926b7771a3c85461487b35e"
+    },
+    {
+      "slug": "salts-ylangylang",
+      "locale": "ro",
+      "url": "https://www.drnona.md/bath_salts_with_ylang_ylang_extract_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/bath_salts_with_ylang_ylang_extract_ro",
+      "checkedAt": "2026-09-08T20:56:50.223Z",
+      "sha256": "97a4cbfcf2187c21226ea2863959abdb3e8048070da7447a3e90eeee8dde68db"
+    },
+    {
+      "slug": "salts-ylangylang",
+      "locale": "ru",
+      "url": "https://www.drnona.md/bath_salts_with_ylang_ylang_extract",
+      "status": 200,
+      "checkedAt": "2026-09-08T21:11:48.577Z",
+      "previousAttempt": {
+        "status": "UNAVAILABLE",
+        "error": "The operation was aborted due to timeout",
+        "checkedAt": "2026-09-08T20:57:01.941Z"
+      },
+      "finalUrl": "https://www.drnona.md/bath_salts_with_ylang_ylang_extract",
+      "sha256": "3fca70402ab7948f5b65a894ba53ff04d6f39933bdfcb295f2e29d7ae73e47a2"
+    },
+    {
+      "slug": "samples-kit",
+      "locale": "official",
+      "url": "https://drnona.com/product/samples-kit",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/samples-kit",
+      "checkedAt": "2026-09-08T20:56:40.314Z",
+      "sha256": "d286d32aa5fac74c627b9b134841dbf92ea451f8ead3b619473e6ba4f989a167"
+    },
+    {
+      "slug": "samples-kit",
+      "locale": "ro",
+      "url": "https://www.drnona.md/top_samples_kit_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/top_samples_kit_ro",
+      "checkedAt": "2026-09-08T20:56:39.989Z",
+      "sha256": "0744bb4bef4d42c6a3caf5c4150941700fba268708e58cb5e6810d971f0bdd1b"
+    },
+    {
+      "slug": "samples-kit",
+      "locale": "ru",
+      "url": "https://www.drnona.md/top_samples_kit",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/top_samples_kit",
+      "checkedAt": "2026-09-08T20:56:40.293Z",
+      "sha256": "876cd7ab4324b6d2af69433a0a6c40156ba24b910f922398b14649e3c253ed77"
+    },
+    {
+      "slug": "shower-gel-lord",
+      "locale": "ro",
+      "url": "https://www.drnona.md/shower_gel_lord_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/shower_gel_lord_ro",
+      "checkedAt": "2026-09-08T20:56:44.558Z",
+      "sha256": "9acf5f7ddc5c8acaeed1ccb02e2067afaaf65b923944f25ecfb870effe98056d"
+    },
+    {
+      "slug": "shower-gel-lord",
+      "locale": "ru",
+      "url": "https://www.drnona.md/shower_gel_lord",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/shower_gel_lord",
+      "checkedAt": "2026-09-08T20:56:44.490Z",
+      "sha256": "f9db352fb59cca98048b31cfd7a0d66c74d192985f0e1ca7546db0547a89e6e8"
+    },
+    {
+      "slug": "shp-day-time-face-cream-lc",
+      "locale": "official",
+      "url": "https://drnona.com/product/shp-day-time-face-cream-lc",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/shp-day-time-face-cream-lc",
+      "checkedAt": "2026-09-08T20:56:40.291Z",
+      "sha256": "00306a8cf3a680b724fe9fd0edc76c761840bf029e781de720e893117cd4ee0a"
+    },
+    {
+      "slug": "shp-day-time-face-cream-lc",
+      "locale": "ro",
+      "url": "https://www.drnona.md/shp_day_time_face_cream_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/shp_day_time_face_cream_ro",
+      "checkedAt": "2026-09-08T20:56:40.105Z",
+      "sha256": "ad1e48c517bf1793997851a2e39705ad3abd8bfdee5e9c02bf814d8ab0c45def"
+    },
+    {
+      "slug": "shp-day-time-face-cream-lc",
+      "locale": "ru",
+      "url": "https://www.drnona.md/shp_day_time_face_cream",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/shp_day_time_face_cream",
+      "checkedAt": "2026-09-08T20:56:39.797Z",
+      "sha256": "8fd44ab98aed32195e183c3a2208cb0ea1894f34bbdd086c6e48b3a0839abd0d"
+    },
+    {
+      "slug": "solaris-body-lotion",
+      "locale": "official",
+      "url": "https://drnona.com/product/solaris-body-lotion",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/solaris-body-lotion",
+      "checkedAt": "2026-09-08T20:56:37.312Z",
+      "sha256": "d84e82302247613dcb8a245bf6da67b58f85ca9bdf483c3c0d66e195f3dfed43"
+    },
+    {
+      "slug": "solaris-body-lotion",
+      "locale": "ro",
+      "url": "https://www.drnona.md/solaris_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/solaris_ro",
+      "checkedAt": "2026-09-08T20:56:37.139Z",
+      "sha256": "b565bd3f9ae76b07a41decf2febcd69c423bb9cca4465c375adc1db7c50756c6"
+    },
+    {
+      "slug": "solaris-body-lotion",
+      "locale": "ru",
+      "url": "https://www.drnona.md/solaris",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/solaris",
+      "checkedAt": "2026-09-08T20:56:37.270Z",
+      "sha256": "6c112c80ac40ff1585e1ca31a911a93b3a9485e567e408c989ae0fc1b197c1e4"
+    },
+    {
+      "slug": "soupseen",
+      "locale": "official",
+      "url": "https://drnona.com/product/soupseen",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/soupseen",
+      "checkedAt": "2026-09-08T20:56:41.390Z",
+      "sha256": "5f7d03f9124db219169ccd1af0191266fcf1b1b20fe8767b283a6790b8d2c908"
+    },
+    {
+      "slug": "soupseen",
+      "locale": "ro",
+      "url": "https://www.drnona.md/soupseen_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/soupseen_ro",
+      "checkedAt": "2026-09-08T20:56:41.149Z",
+      "sha256": "cb2ea29f6c0c52d1eaadd647f08c8d8d2770a91a5f2e3fca8cb84196c17a5111"
+    },
+    {
+      "slug": "soupseen",
+      "locale": "ru",
+      "url": "https://www.drnona.md/soupseen",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/soupseen",
+      "checkedAt": "2026-09-08T20:56:41.316Z",
+      "sha256": "e87e344005fdef4e75fc527ec543cec5c964f6c0607c847606e7d662abbd6ad3"
+    },
+    {
+      "slug": "yamseen",
+      "locale": "official",
+      "url": "https://drnona.com/product/yamseen",
+      "status": 200,
+      "finalUrl": "https://drnona.com/product/yamseen",
+      "checkedAt": "2026-09-08T20:56:43.875Z",
+      "sha256": "86ab08f305874ffa9212ad85c1c2c982d218bb9e3545939f929cf35fed4d5755"
+    },
+    {
+      "slug": "yamseen",
+      "locale": "ro",
+      "url": "https://www.drnona.md/yamseen_ro",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/yamseen_ro",
+      "checkedAt": "2026-09-08T20:56:43.520Z",
+      "sha256": "31fa37769dc5271c1e33ff9d8d66c2b0afa46475d798f9dbc9bb920ba3cfeb28"
+    },
+    {
+      "slug": "yamseen",
+      "locale": "ru",
+      "url": "https://www.drnona.md/yamseen",
+      "status": 200,
+      "finalUrl": "https://www.drnona.md/yamseen",
+      "checkedAt": "2026-09-08T20:56:43.730Z",
+      "sha256": "a0e37cbe618ca816ae8584c696f16ced082a9952deabe3724ae5705728326ea8"
+    }
+  ]
+}
