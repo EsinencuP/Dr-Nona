@@ -431,7 +431,7 @@ for (const baseRoute of localizableRoutes) {
       ? localizedStaticCopy.ro[baseRoute.path]
       : null;
     const pageTitleValue = isProduct
-      ? product.officialName
+      ? isRomanian ? romanian.officialName : product.officialName
       : baseRoute.path === "/products" && isRomanian
         ? "Catalogul produselor Dr. Nona"
         : localizedCompanyPage?.title ?? localizedStatic?.title ?? baseRoute.pageTitle;
@@ -442,8 +442,8 @@ for (const baseRoute of localizableRoutes) {
       isRomanian
         ? isProduct
         ? romanianDescriptionApproved
-          ? truncate(`${product.officialName}. ${romanian.shortDescription}`)
-          : `Informații despre produsul ${product.officialName} din catalogul Dr. Nona Moldova.`
+          ? truncate(`${romanian.officialName}. ${romanian.shortDescription}`)
+          : `Informații despre produsul ${romanian.officialName} din catalogul Dr. Nona Moldova.`
         : "Catalogul complet Dr. Nona Moldova, cu descrieri, compoziție și mod de utilizare."
         : baseRoute.description
     );
@@ -457,7 +457,7 @@ for (const baseRoute of localizableRoutes) {
             name: isRomanian ? "Catalog" : "Каталог",
             path: localizedPaths[locale].replace(`/product/${slug}`, "/products"),
           },
-          { name: product.officialName, path },
+          { name: pageTitleValue, path },
         ]
       : baseRoute.path.startsWith("/about/")
         ? [
@@ -484,6 +484,7 @@ for (const baseRoute of localizableRoutes) {
       locale,
       alternates,
       breadcrumbs: localizedBreadcrumbs,
+      schema: isProduct ? { ...baseRoute.schema, name: pageTitleValue } : baseRoute.schema,
     });
   }
 }

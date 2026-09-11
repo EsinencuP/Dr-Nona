@@ -1,9 +1,30 @@
 import { expect, test } from "@playwright/test";
 
 const cyrillic = /[А-Яа-яЁё]/u;
-const testBaseUrl = `http://127.0.0.1:${process.env.PLAYWRIGHT_PORT ?? "4173"}`;
+// A production build can be previewed on a different port than its canonical origin.
+const testBaseUrl = process.env.SITE_URL ?? `http://127.0.0.1:${process.env.PLAYWRIGHT_PORT ?? "4173"}`;
 
-test("Romanian catalogue keeps complete English product names and Romanian copy", async ({
+test("Romanian alphabet sorting places S before Ș in both directions", async ({ page }, testInfo) => {
+  await page.goto("/ro/products");
+  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50);
+  if (testInfo.project.name === "chromium-mobile") await page.getByRole("button", { name: "Căutare și sortare", exact: true }).click();
+  const sorting = page.getByRole("combobox", { name: "Sortare", exact: true });
+  await sorting.selectOption("az");
+  await expect(page).toHaveURL(/sort=az/u);
+  const titles = page.locator(".catalog-grid .product-card h2");
+  await expect.poll(async () => {
+    const names = await titles.allTextContents();
+    return names.indexOf("Supliment alimentar YAMSEEN") < names.indexOf("Șampon mineral");
+  }).toBe(true);
+  await sorting.selectOption("za");
+  await expect(page).toHaveURL(/sort=za/u);
+  await expect.poll(async () => {
+    const names = await titles.allTextContents();
+    return names.indexOf("Șampon mineral") < names.indexOf("Supliment alimentar YAMSEEN");
+  }).toBe(true);
+});
+
+test("Romanian catalogue uses authorized Romanian product names and copy", async ({
   page,
 }) => {
   await page.goto("/ro/products");
@@ -11,16 +32,16 @@ test("Romanian catalogue keeps complete English product names and Romanian copy"
   await expect(page.locator("html")).toHaveAttribute("lang", "ro");
   await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50);
   await expect(
-    page.getByRole("heading", { level: 2, name: "Dynamic Cream" })
+    page.getByRole("heading", { level: 2, name: "Cremă Dynamic" })
   ).toBeVisible();
   await expect(
-    page.getByRole("heading", { level: 2, name: "Solaris Body Lotion" })
+    page.getByRole("heading", { level: 2, name: "Loțiune de corp Solaris" })
   ).toBeVisible();
   await expect(
-    page.getByRole("heading", { level: 2, name: "Multi Mouthwash" })
+    page.getByRole("heading", { level: 2, name: "Apă de gură Multi Mouthwash" })
   ).toBeVisible();
   await expect(
-    page.getByRole("heading", { level: 2, name: "Eau De Parfume ( FAYA )" })
+    page.getByRole("heading", { level: 2, name: "Apă de parfum FAYA" })
   ).toBeVisible();
 
   const visibleText = await page.locator("body").innerText();
@@ -31,21 +52,21 @@ test("Romanian catalogue keeps complete English product names and Romanian copy"
   );
 });
 
-test("Romanian product route quarantines unreviewed copy and keeps its source", async ({
+test("Romanian product route publishes authorized factual copy and keeps its source", async ({
   page,
 }) => {
   await page.goto("/ro/product/dynamic-hydrating-cream");
 
   await expect(
-    page.getByRole("heading", { level: 1, name: "Dynamic Cream" })
+    page.getByRole("heading", { level: 1, name: "Cremă Dynamic" })
   ).toBeVisible();
   await expect(
-    page.getByText("Cremă din gama Dr. Nona pentru îngrijirea zilnică a pielii.").first()
+    page.getByText("Cremă Dr. Nona pentru față și corp, cu aloe vera, mușețel și uleiuri vegetale.").first()
   ).toBeVisible();
   await expect(page.getByText(/Cremă universală care îngrijește pielea/)).toHaveCount(0);
   await expect(page.getByRole("link", { name: /drnona\.md/i })).toHaveAttribute(
     "href",
-    "https://www.drnona.md/dynamic_ro"
+    "https://www.drnona.md/dynamic"
   );
   const visibleText = await page.locator("body").innerText();
   expect(visibleText).not.toMatch(cyrillic);

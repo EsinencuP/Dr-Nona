@@ -41,13 +41,16 @@ const existing = JSON.parse(await readFile(romanianPath, "utf8"));
 const existingReview = JSON.parse(await readFile(reviewPath, "utf8"));
 const repairedEntries = await mapConcurrent(products, 5, async (product) => {
   const current = existing[product.slug];
-  if (!current?.sourceUrl) throw new Error(`${product.slug}: Romanian source URL is missing.`);
+  // Owner-authorized translations cite their RU source publicly. Re-extraction
+  // must still fetch the original Romanian source, never parse RU as Romanian.
+  const sourceUrl = existingReview.evidence?.[product.slug]?.previousRomanianSourceUrl ?? current?.sourceUrl;
+  if (!sourceUrl) throw new Error(`${product.slug}: Romanian source URL is missing.`);
   try {
-    const parsed = parseRomanianProductHtml(await fetchText(current.sourceUrl));
+    const parsed = parseRomanianProductHtml(await fetchText(sourceUrl));
     return [product.slug, { ...current, ...parsed }];
   } catch (error) {
     throw new Error(
-      `${product.slug} (${current.sourceUrl}): ${error instanceof Error ? error.message : String(error)}`,
+      `${product.slug} (${sourceUrl}): ${error instanceof Error ? error.message : String(error)}`,
       { cause: error }
     );
   }

@@ -1,6 +1,92 @@
 {
   "nodes": [
     {
+      "id": "catalog::docs_ro_md_owner_localization",
+      "label": "Current RO-MD localization PASS: User Direct Decision 1 resolves P0-LOCALE",
+      "description": "2026-09-10 owner-authorized automated factual localization: 50 products, 350 nonempty fields, 35 paired UI keys, 64 locale route pairs. 31 source issues across 19 products are disclosed; seven production blockers remain, no legal claim approval. Earlier Prompt 4/6 quarantine counts are historical.",
+      "file_type": "workflow-evidence",
+      "source_file": "docs/RO_MD_LOCALIZATION_OWNER_DECISION_2026-09-10.md",
+      "source_location": "Owner authorization, translation provenance and validation outcome",
+      "repo": "catalog",
+      "_origin": "declared",
+      "status": "PASS",
+      "production_status": "BLOCKED",
+      "persistence_boundary": "Local catalog source/projections/SEO only; canonical SKU/slugs retained; no API, CRM or database changes.",
+      "implementation_paths": [
+        "src/data/products-ro.json",
+        "src/data/products-ro-review.json",
+        "src/data.ts",
+        "src/locales/ro.ts",
+        "src/product-sort.ts",
+        "scripts/generate-runtime-content.mjs",
+        "scripts/generate-seo-manifest.mjs",
+        "scripts/romanian-translation-approval-lib.mjs",
+        "scripts/check-product-content.mjs",
+        "scripts/check-documentation.mjs"
+      ],
+      "evidence_paths": [
+        "docs/RO_MD_LOCALIZATION_OWNER_DECISION_2026-09-10.md",
+        "docs/bilingual/parity-audit.json",
+        "docs/bilingual/editorial-review.json",
+        "docs/release-status.json"
+      ],
+      "test_commands": [
+        "npm run content:validate",
+        "npm run typecheck",
+        "npm run test",
+        "npm run build",
+        "npm run test:e2e -- tests/e2e/romanian-product-publication.spec.ts tests/e2e/catalog-localization.spec.ts",
+        "npm run release:check"
+      ],
+      "open_findings": [
+        "31 source-information issues; explicit Romanian notices or partial lists",
+        "Seven remaining P0/P1 blockers in docs/release-status.json"
+      ],
+      "approval_reference": "USER-DIRECT-DECISION-1-2026-09-10"
+    },
+    {
+      "id": "catalog::docs_prompt6_final_qa",
+      "label": "Prompt 6 Final QA PASS: frontend visual technical RU RO parity; production BLOCKED",
+      "description": "2026-09-10 final QA: 565 addresses, 4520 geometry states, 565 real browser zoom captures, 40 state captures and 40 axe scans with zero violations. 169 unit tests, 360 full E2E passed and 18 existing project exclusions, 14 production request checks and 2 strengthened search checks pass. Eight production blockers and Prompt 4 human review remain open.",
+      "file_type": "workflow-evidence",
+      "source_file": "docs/PROMPT_6_FINAL_QA_2026-09-10.md",
+      "source_location": "Prompt 6 acceptance and six-stage conclusion",
+      "repo": "catalog",
+      "_origin": "declared",
+      "status": "PASS",
+      "technical_status": "PASS",
+      "visual_status": "PASS",
+      "production_status": "BLOCKED",
+      "scope": "Final QA only; test assertion strengthened, production UI and content unchanged",
+      "evidence_paths": [
+        "docs/PROMPT_6_FINAL_QA_2026-09-10.md",
+        "artifacts/prompt6-2026-09-10/sweep.json",
+        "artifacts/prompt6-2026-09-10/zoom-reviewed.json",
+        "artifacts/prompt6-2026-09-10/states.json",
+        "artifacts/prompt6-2026-09-10/comparison.json"
+      ],
+      "implementation_paths": [
+        "tests/e2e/ui-ux-deep-audit.spec.ts"
+      ],
+      "test_commands": [
+        "npm run build",
+        "npm run test",
+        "npm run test:e2e -- --workers=2",
+        "npm run performance:runtime",
+        "npm run security:runtime",
+        "npm run release:check"
+      ],
+      "persistence_boundary": "Test and documentation only; no catalog, API, CRM or database behavior changed",
+      "open_findings": [
+        "Eight unchanged P0/P1 items in docs/release-status.json",
+        "Prompt 4 HUMAN_REVIEW_REQUIRED",
+        "G11/G12 editorial limitations",
+        "Field INP and physical Safari/Firefox devices not verified",
+        "Prompt 5 timing caveats retained"
+      ],
+      "next_stage": "Frontend QA complete. Follow real approval queue or a new scoped user request; do not infer production approval or restart the workflow automatically."
+    },
+    {
       "id": "catalog::docs_prompt5_performance",
       "label": "Prompt 5 Performance PASS: bounded Home PDP data, prerender SEO reuse, responsive media and measured runtime",
       "description": "2026-09-10: 60 baseline and 60 after lab navigations; 437 local assets and 200 verified external delivery URLs. Home browser JS falls 33.7%, sampled PDP 30.8%. 169 unit tests, 360 full E2E passed with 18 existing skips, 14 production network tests pass. 19 screenshot pairs identical; one baseline missed lazy external images. Timing tradeoffs and field-INP limitation are explicit; eight production blockers remain open.",
@@ -11,11 +97,39 @@
       "_origin": "declared",
       "status": "PASS",
       "scope": "Performance only; no redesign, font or asset replacement, new production dependency, translation or claim approval",
-      "evidence_paths": ["docs/PROMPT_5_PERFORMANCE_2026-09-10.md", "artifacts/prompt5-2026-09-09/comparison.json", "artifacts/prompt5-2026-09-09/asset-inventory.json", "artifacts/prompt5-2026-09-09/remote-assets.json"],
-      "implementation_paths": ["scripts/generate-runtime-content.mjs", "src/pages/HomePage.tsx", "src/pages/ProductPage.tsx", "src/features/product/productDetailData.ts", "src/seo.ts", "src/seo-core.mjs", "scripts/prerender-routes.mjs", "scripts/measure-page-performance.mjs", ".github/workflows/ci.yml"],
-      "test_commands": ["npm run performance:validate", "npm run performance:runtime", "npm run performance:pages -- <output-directory> 3", "npm run test", "npm run build", "npm run test:e2e", "PLAYWRIGHT_PRODUCTION=1 PLAYWRIGHT_PORT=4285 npm run test:e2e -- tests/e2e/performance.spec.ts"],
+      "evidence_paths": [
+        "docs/PROMPT_5_PERFORMANCE_2026-09-10.md",
+        "artifacts/prompt5-2026-09-09/comparison.json",
+        "artifacts/prompt5-2026-09-09/asset-inventory.json",
+        "artifacts/prompt5-2026-09-09/remote-assets.json"
+      ],
+      "implementation_paths": [
+        "scripts/generate-runtime-content.mjs",
+        "src/pages/HomePage.tsx",
+        "src/pages/ProductPage.tsx",
+        "src/features/product/productDetailData.ts",
+        "src/seo.ts",
+        "src/seo-core.mjs",
+        "scripts/prerender-routes.mjs",
+        "scripts/measure-page-performance.mjs",
+        ".github/workflows/ci.yml"
+      ],
+      "test_commands": [
+        "npm run performance:validate",
+        "npm run performance:runtime",
+        "npm run performance:pages -- <output-directory> 3",
+        "npm run test",
+        "npm run build",
+        "npm run test:e2e",
+        "PLAYWRIGHT_PRODUCTION=1 PLAYWRIGHT_PORT=4285 npm run test:e2e -- tests/e2e/performance.spec.ts"
+      ],
       "persistence_boundary": "Ignored build-time public Home/PDP projections preserve existing quarantine. No API, CRM or database changes.",
-      "open_findings": ["Field INP not verified; scripted interaction timing only", "Desktop editorial LCP variation and Home long-task duration tradeoff", "One original screenshot lacks three lazy external images", "Prompt 4 editorial approval and all eight release blockers remain open"],
+      "open_findings": [
+        "Field INP not verified; scripted interaction timing only",
+        "Desktop editorial LCP variation and Home long-task duration tradeoff",
+        "One original screenshot lacks three lazy external images",
+        "Prompt 4 editorial approval and all eight release blockers remain open"
+      ],
       "next_stage": "Prompt 6 on user request: final visual/technical QA; retain measurement caveats and human-review blockers"
     },
     {
@@ -31,11 +145,36 @@
       "technical_status": "PASS",
       "content_status": "HUMAN_REVIEW_REQUIRED",
       "scope": "Bilingual integrity only; no redesign, new claims, translation approval or CRM/database changes",
-      "evidence_paths": ["docs/bilingual/parity-audit.json", "docs/bilingual/EDITORIAL_REVIEW.md", "docs/bilingual/editorial-review.json", "docs/bilingual/extraction-repairs.json", "docs/bilingual/source-verification.json"],
-      "implementation_paths": ["scripts/audit-bilingual.mjs", "scripts/bilingual-parity-lib.mjs", "scripts/romanian-product-content-lib.mjs", "src/data.ts", "src/features/editorial/EditorialPages.tsx", "src/data/products-ro.json"],
-      "test_commands": ["npm run bilingual:validate", "npm run bilingual:audit", "npm run content:validate", "npm run test", "npm run build"],
+      "evidence_paths": [
+        "docs/bilingual/parity-audit.json",
+        "docs/bilingual/EDITORIAL_REVIEW.md",
+        "docs/bilingual/editorial-review.json",
+        "docs/bilingual/extraction-repairs.json",
+        "docs/bilingual/source-verification.json"
+      ],
+      "implementation_paths": [
+        "scripts/audit-bilingual.mjs",
+        "scripts/bilingual-parity-lib.mjs",
+        "scripts/romanian-product-content-lib.mjs",
+        "src/data.ts",
+        "src/features/editorial/EditorialPages.tsx",
+        "src/data/products-ro.json"
+      ],
+      "test_commands": [
+        "npm run bilingual:validate",
+        "npm run bilingual:audit",
+        "npm run content:validate",
+        "npm run test",
+        "npm run build"
+      ],
       "persistence_boundary": "Local source and audit datasets; six RO source-field repairs remain quarantined. No API, CRM or database mutation.",
-      "open_findings": ["P0-LOCALE human approval", "71 MISSING_RO field comparisons", "21 summary/excerpt flags", "83 missing original-source image captions", "All eight blockers in docs/release-status.json"],
+      "open_findings": [
+        "P0-LOCALE human approval",
+        "71 MISSING_RO field comparisons",
+        "21 summary/excerpt flags",
+        "83 missing original-source image captions",
+        "All eight blockers in docs/release-status.json"
+      ],
       "next_stage": "Prompt 5 performance measurement on user request; preserve Prompt 4 human-review blockers"
     },
     {
@@ -64,9 +203,20 @@
         "src/components/ui.tsx",
         "src/features/product/productImagePresentation.ts"
       ],
-      "test_commands": ["npm run test:e2e -- --workers=2", "npm run test -- --maxWorkers=2", "npm run build", "npm run typecheck", "npm run lint", "npm run repository:validate"],
+      "test_commands": [
+        "npm run test:e2e -- --workers=2",
+        "npm run test -- --maxWorkers=2",
+        "npm run build",
+        "npm run typecheck",
+        "npm run lint",
+        "npm run repository:validate"
+      ],
       "persistence_boundary": "None; presentation and browser regression only",
-      "open_findings": ["G11 content review", "G12 editorial repetition", "Production blockers: docs/release-status.json"],
+      "open_findings": [
+        "G11 content review",
+        "G12 editorial repetition",
+        "Production blockers: docs/release-status.json"
+      ],
       "next_stage": "Prompt 4 RU/RO integrity and human-review accounting, only on user request"
     },
     {
@@ -91,7 +241,11 @@
         "src/styles/formula.css",
         "src/styles/responsive.css"
       ],
-      "open_findings": ["G11 content review", "G12 editorial repetition", "Production blockers: docs/release-status.json"],
+      "open_findings": [
+        "G11 content review",
+        "G12 editorial repetition",
+        "Production blockers: docs/release-status.json"
+      ],
       "next_stage": "Prompt 3 responsive typography, text and image geometry"
     },
     {
@@ -133,17 +287,102 @@
     }
   ],
   "links": [
-    { "source": "catalog::docs_dr_nona_prompt_workflow", "target": "catalog::docs_prompt5_performance", "relation": "tracks_stage", "evidence": "Prompt 5 performance scope accepted 2026-09-10; next Prompt 6 on request" },
-    { "source": "catalog::docs_prompt4_bilingual_integrity", "target": "catalog::docs_prompt5_performance", "relation": "precedes", "evidence": "Prompt 5 baseline includes Prompt 4 technical fixes, preserving editorial quarantine" },
-    { "source": "catalog::docs_prompt5_performance", "target": "catalog::scripts_generate_runtime_content", "relation": "implemented_by", "evidence": "Six-product Home projection and per-product PDP projections generated after quarantine" },
-    { "source": "catalog::docs_prompt5_performance", "target": "catalog::src_features_product_productdetaildata", "relation": "implemented_by", "evidence": "Lazy per-product data and four unchanged recommendations; no full catalogue download" },
-    { "source": "catalog::docs_prompt5_performance", "target": "catalog::src_seo", "relation": "implemented_by", "evidence": "Reuse exact complete prerendered metadata until client-side navigation" },
-    { "source": "catalog::docs_prompt5_performance", "target": "catalog::src_seo_core", "relation": "implemented_by", "evidence": "Responsive PDP picture in initial HTML; unchanged metadata image identity" },
-    { "source": "catalog::docs_prompt5_performance", "target": "catalog::scripts_measure_page_performance", "relation": "measured_by", "evidence": "Full-media cold-context RU/RO lab measurements with CPU x4" },
-    { "source": "catalog::docs_prompt5_performance", "target": "catalog::scripts_check_performance_budget", "relation": "validated_by", "evidence": "Existing budgets retained; all-route hero and locale font preload scope assertions" },
-    { "source": "catalog::docs_prompt5_performance", "target": "catalog::tests_e2e_performance_spec", "relation": "validated_by", "evidence": "Production and development network regression tests; production command added to CI" },
-    { "source": "catalog::docs_prompt5_performance", "target": "catalog::tests_unit_product_projections_test", "relation": "validated_by", "evidence": "All 50 RU/RO projection records and recommendations equal existing public catalogue; Home identity and 404 preserved" },
-    { "source": "catalog::docs_prompt5_performance", "target": "catalog::tests_unit_seo_prerender_reuse_test", "relation": "validated_by", "evidence": "StrictMode metadata reuse, navigation/back, incomplete-head recovery and responsive prerender source" },
+    {
+      "source": "catalog::docs_dr_nona_prompt_workflow",
+      "target": "catalog::docs_prompt6_final_qa",
+      "relation": "tracks_stage",
+      "evidence": "Final frontend QA accepted; production remains blocked"
+    },
+    {
+      "source": "catalog::docs_prompt5_performance",
+      "target": "catalog::docs_prompt6_final_qa",
+      "relation": "precedes",
+      "evidence": "Final QA preserves Prompt 5 UI, payload improvements and measurement caveats"
+    },
+    {
+      "source": "catalog::docs_prompt6_final_qa",
+      "target": "catalog::tests_e2e_ui_ux_deep_audit_spec",
+      "relation": "validated_by",
+      "evidence": "Mandatory accessible search assertion replaces conditional skip path"
+    },
+    {
+      "source": "catalog::docs_prompt6_final_qa",
+      "target": "catalog::tests_e2e_responsive_matrix_spec",
+      "relation": "validated_by",
+      "evidence": "Responsive, visual baseline and zoom-equivalent gates pass"
+    },
+    {
+      "source": "catalog::docs_prompt6_final_qa",
+      "target": "catalog::scripts_check_release_readiness",
+      "relation": "constrained_by",
+      "evidence": "Eight external P0/P1 blockers remain open; final release check BLOCKED"
+    },
+    {
+      "source": "catalog::docs_dr_nona_prompt_workflow",
+      "target": "catalog::docs_prompt5_performance",
+      "relation": "tracks_stage",
+      "evidence": "Prompt 5 performance scope accepted 2026-09-10; next Prompt 6 on request"
+    },
+    {
+      "source": "catalog::docs_prompt4_bilingual_integrity",
+      "target": "catalog::docs_prompt5_performance",
+      "relation": "precedes",
+      "evidence": "Prompt 5 baseline includes Prompt 4 technical fixes, preserving editorial quarantine"
+    },
+    {
+      "source": "catalog::docs_prompt5_performance",
+      "target": "catalog::scripts_generate_runtime_content",
+      "relation": "implemented_by",
+      "evidence": "Six-product Home projection and per-product PDP projections generated after quarantine"
+    },
+    {
+      "source": "catalog::docs_prompt5_performance",
+      "target": "catalog::src_features_product_productdetaildata",
+      "relation": "implemented_by",
+      "evidence": "Lazy per-product data and four unchanged recommendations; no full catalogue download"
+    },
+    {
+      "source": "catalog::docs_prompt5_performance",
+      "target": "catalog::src_seo",
+      "relation": "implemented_by",
+      "evidence": "Reuse exact complete prerendered metadata until client-side navigation"
+    },
+    {
+      "source": "catalog::docs_prompt5_performance",
+      "target": "catalog::src_seo_core",
+      "relation": "implemented_by",
+      "evidence": "Responsive PDP picture in initial HTML; unchanged metadata image identity"
+    },
+    {
+      "source": "catalog::docs_prompt5_performance",
+      "target": "catalog::scripts_measure_page_performance",
+      "relation": "measured_by",
+      "evidence": "Full-media cold-context RU/RO lab measurements with CPU x4"
+    },
+    {
+      "source": "catalog::docs_prompt5_performance",
+      "target": "catalog::scripts_check_performance_budget",
+      "relation": "validated_by",
+      "evidence": "Existing budgets retained; all-route hero and locale font preload scope assertions"
+    },
+    {
+      "source": "catalog::docs_prompt5_performance",
+      "target": "catalog::tests_e2e_performance_spec",
+      "relation": "validated_by",
+      "evidence": "Production and development network regression tests; production command added to CI"
+    },
+    {
+      "source": "catalog::docs_prompt5_performance",
+      "target": "catalog::tests_unit_product_projections_test",
+      "relation": "validated_by",
+      "evidence": "All 50 RU/RO projection records and recommendations equal existing public catalogue; Home identity and 404 preserved"
+    },
+    {
+      "source": "catalog::docs_prompt5_performance",
+      "target": "catalog::tests_unit_seo_prerender_reuse_test",
+      "relation": "validated_by",
+      "evidence": "StrictMode metadata reuse, navigation/back, incomplete-head recovery and responsive prerender source"
+    },
     {
       "source": "catalog::docs_dr_nona_prompt_workflow",
       "target": "catalog::docs_prompt4_bilingual_integrity",
@@ -359,6 +598,24 @@
       "target": "crm::database_migrations_20260902182949_init_crm_schema_migration_productcatalog",
       "relation": "feeds_catalog_table",
       "evidence": "CRM product snapshot is validated against the ProductCatalog persistence model"
+    },
+    {
+      "source": "catalog::docs_dr_nona_prompt_workflow",
+      "target": "catalog::docs_ro_md_owner_localization",
+      "relation": "current_localization_decision",
+      "evidence": "Owner explicitly authorizes automated translation/publication and resolves P0-LOCALE after validation."
+    },
+    {
+      "source": "catalog::docs_ro_md_owner_localization",
+      "target": "catalog::docs_prompt4_bilingual_integrity",
+      "relation": "supersedes_publication_restriction",
+      "evidence": "Historical quarantine is replaced by the source/translation hash-bound owner authorization; original source deficiencies remain recorded."
+    },
+    {
+      "source": "catalog::docs_ro_md_owner_localization",
+      "target": "catalog::docs_prompt6_final_qa",
+      "relation": "post_qa_localization_update",
+      "evidence": "Prompt 6 precedes localization; its eight-blocker snapshot remains historical. Current release status has seven open blockers."
     }
   ]
 }

@@ -34,7 +34,7 @@ describe("product content publication gate", () => {
     ).toMatchObject({ complete: true, nullFields: ["ingredients", "howToUse"] });
   });
 
-  test("keeps complete English product names in both locales", () => {
+  test("preserves source trade names and uses authorized Romanian display names", () => {
     const expectedNames = [
       "Solaris Body Lotion",
       "Hand and Nail Cream",
@@ -51,7 +51,10 @@ describe("product content publication gate", () => {
     const names = allProducts.map((product) => product.officialName);
 
     expect(names).toEqual(expect.arrayContaining(expectedNames));
-    expect(romanianProducts.map((product) => product.officialName)).toEqual(names);
+    expect(romanianProducts.map((product) => product.officialName)).toEqual(expect.arrayContaining([
+      "Loțiune de corp Solaris", "Cremă Dynamic", "Apă de parfum FAYA",
+    ]));
+    expect(romanianProducts.map((product) => product.slug)).toEqual(allProducts.map(product => product.slug));
     expect(
       romanianProducts.every(
         (product) => !/[А-Яа-яЁё]/u.test(JSON.stringify(product))

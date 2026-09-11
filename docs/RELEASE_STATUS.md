@@ -2,7 +2,7 @@
 
 No. Technical quality gates pass locally, but production approval remains blocked by the items below.
 
-Last verified: 2026-09-01 against base commit `ada4aa0e9c5e` and the current cleanup worktree.
+Last verified: 2026-09-10 against base commit `ada4aa0e9c5e` and the current cleanup worktree.
 
 This file is generated from `docs/release-status.json`. Run `npm run release:status:generate` after changing the machine-readable status.
 
@@ -24,16 +24,15 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 | Published products | 50 |
 | Draft products | 0 |
 | Official content records | 137 |
-| Claims | 396 |
+| Claims | 291 |
 | Approved claims | 0 |
-| Pending claims | 396 |
+| Pending claims | 291 |
 | Rejected claims | 0 |
 
 ## Open release blockers
 
 | ID | Priority | Owner | Summary |
 |---|---|---|---|
-| `P0-LOCALE` | P0 | content | Romanian routes and interface are implemented; imported Romanian descriptive product copy remains quarantined pending editorial approval. |
 | `P0-CONTACT` | P0 | product | Telegram delivery and an application-level rate guard are implemented, but privacy, production origin and platform-wide abuse protection are not approved. |
 | `P0-LEGAL` | P0 | legal | Moldova legal review has not approved any regulated product claim. |
 | `P1-MEDIA-RIGHTS` | P1 | legal | Production publication rights for product, brand and editorial media are not confirmed. |
@@ -43,12 +42,6 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 | `P1-SEO-ORIGIN` | P1 | engineering | The production origin and live search-engine validation are not approved. |
 
 ## Acceptance criteria
-
-### `P0-LOCALE`
-
-- Approve or reject each quarantined Romanian product description, ingredient list and usage instruction.
-- Approve Romanian metadata and alt text; keep original-language articles explicitly marked as Russian.
-- Pass Russian and Romanian smoke, accessibility and SEO checks.
 
 ### `P0-CONTACT`
 
@@ -89,6 +82,12 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 - Approve the public production origin and build with SITE_URL.
 - Deploy prerendered canonical routes, sitemap and robots policy.
 - Pass live Rich Results and URL inspection without critical errors.
+
+## Resolved blockers
+
+| ID | Status | Date | Resolution |
+|---|---|---|---|
+| `P0-LOCALE` | resolved | 2026-09-10 | User Direct Decision #1 authorizes automated ro-MD localization: 50 products, 350 nonempty fields, 35 paired UI keys and localized product SEO. 31 source issues remain explicit Romanian disclosures; no medical/legal claims were approved. |
 
 ## Release rule
 

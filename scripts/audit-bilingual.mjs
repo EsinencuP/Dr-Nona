@@ -30,21 +30,23 @@ for (const p of products) {
   const r = ro[p.slug], pub = published.find(item => item.slug === p.slug), pubRo = publishedRo[p.slug];
   const source = { ru: p.sourceUrl, ro: r?.sourceUrl, official: p.officialSourceUrl ?? null };
   if (!r || !pubRo) { errors.push(`Missing Romanian product: ${p.slug}`); continue; }
-  for (const field of [...descriptive, "category", "imageAlt", "sourceUrl"]) {
+  for (const field of ["officialName", ...descriptive, "category", "imageAlt", "sourceUrl"]) {
     if (!Object.hasOwn(r, field) || !Object.hasOwn(pubRo, field)) errors.push(`Missing Romanian field: ${p.slug}.${field}`);
   }
-  add("product", p.slug, "officialName", p.officialName, p.officialName, source, "EXACT/PARITY", { basis: "Shared official trade name; no translated duplicate." });
+  add("product", p.slug, "officialName", p.officialName, r.officialName, source, "SEMANTIC_PARITY", { basis: "Owner-authorized Romanian product name; trade names and canonical slugs preserved." });
   add("product", p.slug, "category", p.category, r.category, source, "SEMANTIC_PARITY");
-  add("product", p.slug, "imageAlt", p.imageAlt, r.imageAlt, source, "SEMANTIC_PARITY", { humanApproval: "P0-LOCALE metadata/alt approval remains open" });
+  add("product", p.slug, "imageAlt", p.imageAlt, r.imageAlt, source, "SEMANTIC_PARITY", { authorization: review.authorization?.id });
   for (const field of descriptive) {
     const approval = review.products[p.slug]?.[field] ?? review.defaultStatus;
     if (approval !== "approved" && pubRo[field] != null) errors.push(`Quarantine leak: ${p.slug}.${field}`);
     const blockedRu = claims.some(c => c.scope === "product" && c.contentId === p.slug && c.field === field && c.status !== "approved");
     if (blockedRu && pub?.[field] != null) errors.push(`RU claim leak: ${p.slug}.${field}`);
-    add("product", p.slug, field, p[field], r[field], source, productFieldStatus(p[field], r[field], field), {
-      approval, requiresEditorialReview: true, publicRu: pub?.[field] ?? null, publicRo: pubRo[field],
+    const sourceIssue = review.evidence?.[p.slug]?.sourceIssues.find(issue => issue.field === field);
+    const authorized = approval === "approved";
+    add("product", p.slug, field, p[field], r[field], source, sourceIssue ? "NEEDS_EDITORIAL_REVIEW" : authorized ? "SEMANTIC_PARITY" : productFieldStatus(p[field], r[field], field), {
+      approval, requiresEditorialReview: !authorized || Boolean(sourceIssue), publicRu: pub?.[field] ?? null, publicRo: pubRo[field],
       quarantine: approval !== "approved", repaired: repairs.some(item => item.entity === p.slug && item.field === field),
-      note: p[field] == null && r[field] == null ? "Neither source dataset supplies this field; applicability is not established." : "Source-language text requires semantic/editorial review; absence or quarantine must not be filled from Russian.",
+      note: sourceIssue?.reason ?? (authorized ? "Owner-authorized automated translation/condensed factual adaptation; not independent linguistic or legal approval. Regulated marketing claims were omitted, not approved." : "Source-language text requires semantic/editorial review."),
     });
   }
   for (const key of ["add", "added", "related", "ingredients", "use", "details"]) add("product-ui", p.slug, key, messages.ru[key], messages.ro[key], "src/locales/ru.ts + src/locales/ro.ts", "SEMANTIC_PARITY");
@@ -70,7 +72,7 @@ for (const ruRoute of localeRoutes) {
   const roPath = ruRoute.path.replace(/^\/ru/u, "/ro"), roRoute = routeMap.get(roPath);
   if (!roRoute) errors.push(`Missing RO route: ${roPath}`);
   for (const field of ["path", "pageTitle", "title", "description", "canonicalPath", "locale", "alternates", "ogType", "image", "schema", "breadcrumbs", "indexable", "robots", "kind"]) {
-    add("route", ruRoute.path.replace(/^\/ru/u, "") || "/", field, ruRoute[field], roRoute?.[field], "src/data/seo-manifest.json", !roRoute ? "MISSING_RO" : ruRoute[field] == null && roRoute[field] == null ? "NOT_APPLICABLE" : "EXACT/PARITY", { basis: "Metadata structure/route pairing; wording approval evaluated separately.", humanApproval: ["title", "description", "pageTitle"].includes(field) ? "P0-LOCALE remains open" : null });
+    add("route", ruRoute.path.replace(/^\/ru/u, "") || "/", field, ruRoute[field], roRoute?.[field], "src/data/seo-manifest.json", !roRoute ? "MISSING_RO" : ruRoute[field] == null && roRoute[field] == null ? "NOT_APPLICABLE" : "EXACT/PARITY", { basis: "Metadata structure/route pairing. Product wording follows the owner-authorized localization; original editorial content retains its language." });
   }
   if (!roRoute) continue;
   if (roRoute.locale !== "ro" || roRoute.canonicalPath !== roPath) errors.push(`Wrong RO route language/canonical: ${roPath}`);
@@ -92,27 +94,28 @@ for (const page of pages) {
 }
 const counts = values => values.reduce((result, value) => ({ ...result, [value]: (result[value] ?? 0) + 1 }), {});
 const audit = {
-  schemaVersion: 1, date: "2026-09-09", technicalStatus: errors.length ? "BLOCKED" : "PASS", contentStatus: "HUMAN_REVIEW_REQUIRED", approvalGranted: false,
+  schemaVersion: 2, date: "2026-09-10", technicalStatus: errors.length ? "BLOCKED" : "PASS", contentStatus: "PRODUCT_LOCALIZATION_AUTHORIZED_SOURCE_GAPS_RETAINED", approvalGranted: Boolean(review.authorization), authorization: review.authorization,
   statusVocabulary: ["EXACT/PARITY", "SEMANTIC_PARITY", "MISSING_RO", "MISSING_RU", "SUSPICIOUS_TRANSLATION", "TRUNCATED", "WRONG_FIELD_MAPPING", "NEEDS_EDITORIAL_REVIEW", "NOT_APPLICABLE"],
   contentEntityTotals: { ru: products.length + pages.length + formulaRu.length, ro: Object.keys(ro).length + Object.keys(company.ro).length + formulaRo.length, definition: "Source/content dataset records: products + official pages (RU), company overlays (RO) + formula chapters. Company RU pages already belong to official records. Includes quarantined records; excludes UI keys and route aliases. Counts do not imply published translation coverage." },
+  sourceVerificationBasis: "Historical Prompt 4 requests in docs/bilingual/source-verification.json; not fetched again for the 2026-09-10 owner decision. Translation evidence binds the checked-in source snapshot.",
   entityCounts: { products: { ru: products.length, ro: Object.keys(ro).length }, company: { ru: Object.keys(company.ru).length, ro: Object.keys(company.ro).length }, formula: { ru: formulaRu.length, ro: formulaRo.length }, sharedUiKeys: { ru: Object.keys(messages.ru).length, ro: Object.keys(messages.ro).length }, localizedRoutes: { ru: localeRoutes.length, ro: routes.filter(r => /^\/ro(?:\/|$)/u.test(r.path)).length }, officialSourceRecords: pages.length, inlineUiDictionaries: uiResources.length - 1 },
-  summary: { rows: rows.length, statuses: counts(rows.map(r => r.status)), repairedSourceFields: repairs.length, quarantinedProducts: products.filter(p => descriptive.some(field => (review.products[p.slug]?.[field] ?? review.defaultStatus) !== "approved")).length, quarantinedFieldSlots: rows.filter(r => r.quarantine).length, quarantinedNonemptyValues: rows.filter(r => r.quarantine && r.ro != null).length, humanReviewProducts: products.length, sourceRequests: sources.length, successfulSourceRequests: sources.filter(s => s.status === 200).length, technicalErrors: errors.length },
+  summary: { rows: rows.length, statuses: counts(rows.map(r => r.status)), repairedSourceFields: repairs.length, quarantinedProducts: products.filter(p => descriptive.some(field => (review.products[p.slug]?.[field] ?? review.defaultStatus) !== "approved")).length, quarantinedFieldSlots: rows.filter(r => r.quarantine).length, quarantinedNonemptyValues: rows.filter(r => r.quarantine && r.ro != null).length, humanReviewProducts: products.filter(p => rows.some(r => r.entityType === "product" && r.entity === p.slug && r.requiresEditorialReview)).length, sourceReviewFields: rows.filter(r => r.entityType === "product" && r.requiresEditorialReview).length, localizedProductFields: products.length * 7, sourceRequests: sources.length, successfulSourceRequests: sources.filter(s => s.status === 200).length, technicalErrors: errors.length },
   routeInventory: routes.map(route => ({ path: route.path, locale: route.locale ?? "ru", canonical: route.canonicalPath, alternates: route.alternates ?? null, kind: route.kind, source: "src/data/seo-manifest.json", status: route.indexable ? "EXACT/PARITY" : "NOT_APPLICABLE", note: "Route instance inventory, including unprefixed aliases and original-language pages; metadata values are checked during SEO build validation." })),
   errors, rows,
-  repairedFindings: repairs.map(repair => ({ entity: repair.entity, field: repair.field, previousStatus: repair.field === "howToUse" ? "TRUNCATED" : "WRONG_FIELD_MAPPING", currentStatus: "NEEDS_EDITORIAL_REVIEW", source: repair.source, approvalGranted: false, publicValue: publishedRo[repair.entity]?.[repair.field] ?? null })),
+  repairedFindings: repairs.map(repair => ({ entity: repair.entity, field: repair.field, previousStatus: repair.field === "howToUse" ? "TRUNCATED" : "WRONG_FIELD_MAPPING", currentStatus: rows.find(row => row.entityType === "product" && row.entity === repair.entity && row.field === repair.field)?.status, source: repair.source, approvalGranted: review.products[repair.entity]?.[repair.field] === "approved", publicValue: publishedRo[repair.entity]?.[repair.field] ?? null })),
 };
 if (process.argv.includes("--write")) {
   mkdirSync("docs/bilingual", { recursive: true });
   writeFileSync("docs/bilingual/parity-audit.json", `${JSON.stringify(audit, null, 2)}\n`);
   const pending = rows.filter(r => r.requiresEditorialReview || r.status === "NEEDS_EDITORIAL_REVIEW" || r.humanApproval);
-  writeFileSync("docs/bilingual/editorial-review.json", `${JSON.stringify({ date: audit.date, approvalGranted: false, rows: pending }, null, 2)}\n`);
+  writeFileSync("docs/bilingual/editorial-review.json", `${JSON.stringify({ date: audit.date, productPublicationAuthorization: review.authorization, independentProfessionalReview: false, rows: pending }, null, 2)}\n`);
   const table = products.map(product => {
     const record = ro[product.slug];
     const missing = value => descriptive.filter(field => value[field] == null).join(", ") || "—";
-    const issues = rows.filter(row => row.entityType === "product" && row.entity === product.slug && descriptive.includes(row.field)).map(row => `${row.field}: ${row.status}${row.repaired ? " (source mapping repaired; still pending)" : ""}`).join("; ");
+    const issues = rows.filter(row => row.entityType === "product" && row.entity === product.slug && descriptive.includes(row.field)).map(row => `${row.field}: ${row.status}${row.repaired ? " (source mapping repaired; current decision shown)" : ""}`).join("; ");
     return `| \`${product.slug}\` | ${missing(product)} | ${missing(record)} | ${issues} | [RU](${product.sourceUrl}) / [RO](${record.sourceUrl}) |`;
   });
-  writeFileSync("docs/bilingual/EDITORIAL_REVIEW.md", `# RU/RO editorial review queue\n\nDate: ${audit.date}. All 50 products require human review. No approval is granted by this audit. Missing fields are unknown, not automatically inapplicable. A repaired source mapping remains quarantined. TRUNCATED flags include existing preview excerpts and require contextual review; they are not an instruction to publish longer claims.\n\nCompany/formula copy, metadata and alt approval items are additionally listed in [editorial-review.json](editorial-review.json). Source access checks are in [source-verification.json](source-verification.json); HTTP 200 alone is not semantic approval.\n\n| Product | Missing RU source fields | Missing RO source fields | Field decisions required | Sources |\n|---|---|---|---|---|\n${table.join("\n")}\n`);
+  writeFileSync("docs/bilingual/EDITORIAL_REVIEW.md", `# RU/RO editorial review queue\n\nDate: ${audit.date}. The owner authorized automated product localization and publication on 2026-09-10. This audit records that decision, not independent professional review. ${audit.summary.humanReviewProducts} products retain ${audit.summary.sourceReviewFields} source issues. Missing information is explicitly disclosed in Romanian, not invented; partial ingredient lists remain partial. Source issues and legal claims remain separate from the resolved language-publication decision.\n\nExisting company/formula copy and original-language media review items are additionally listed in [editorial-review.json](editorial-review.json). Source access checks are in [source-verification.json](source-verification.json); HTTP 200 alone is not semantic approval.\n\n| Product | Missing RU source fields | Missing RO source fields | Field decisions required | Sources |\n|---|---|---|---|---|\n${table.join("\n")}\n`);
 }
 console.log(JSON.stringify({ ...audit.entityCounts, ...audit.summary, errors }, null, 2));
 if (errors.length) process.exitCode = 1;

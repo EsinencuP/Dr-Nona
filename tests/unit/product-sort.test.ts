@@ -17,6 +17,13 @@ function productFixture(overrides: Partial<Product>): Product {
 }
 
 describe("catalog date comparators", () => {
+  test("sorts Romanian letters in their own alphabet rather than Russian collation order", () => {
+    const names = ["Ăba", "Aza", "Îba", "Iza", "Șba", "Sza", "Țba", "Tza"];
+    const items = names.map(officialName => productFixture({ officialName, contentLocale: "ro" }));
+    const ascending = ["Aza", "Ăba", "Iza", "Îba", "Sza", "Șba", "Tza", "Țba"];
+    expect([...items].sort((a, b) => compareCatalogProducts(a, b, "az")).map(p => p.officialName)).toEqual(ascending);
+    expect([...items].sort((a, b) => compareCatalogProducts(a, b, "za")).map(p => p.officialName)).toEqual([...ascending].reverse());
+  });
   test("sorts approved product release dates newest first", () => {
     const older = productFixture({
       slug: "older",

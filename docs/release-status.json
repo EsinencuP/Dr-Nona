@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "asOf": "2026-09-01",
+  "asOf": "2026-09-10",
   "commit": "ada4aa0e9c5e",
   "branch": "main",
   "status": "release-blocked",
@@ -12,25 +12,13 @@
     "draftProducts": 0,
     "officialContentRecords": 137,
     "claims": {
-      "total": 396,
+      "total": 291,
       "approved": 0,
-      "pending": 396,
+      "pending": 291,
       "rejected": 0
     }
   },
   "blockers": [
-    {
-      "id": "P0-LOCALE",
-      "priority": "P0",
-      "owner": "content",
-      "status": "open",
-      "summary": "Romanian routes and interface are implemented; imported Romanian descriptive product copy remains quarantined pending editorial approval.",
-      "acceptanceCriteria": [
-        "Approve or reject each quarantined Romanian product description, ingredient list and usage instruction.",
-        "Approve Romanian metadata and alt text; keep original-language articles explicitly marked as Russian.",
-        "Pass Russian and Romanian smoke, accessibility and SEO checks."
-      ]
-    },
     {
       "id": "P0-CONTACT",
       "priority": "P0",
@@ -112,6 +100,24 @@
         "Deploy prerendered canonical routes, sitemap and robots policy.",
         "Pass live Rich Results and URL inspection without critical errors."
       ]
+    }
+  ],
+  "resolvedBlockers": [
+    {
+      "id": "P0-LOCALE",
+      "priority": "P0",
+      "owner": "content",
+      "status": "resolved",
+      "summary": "Owner-authorized Romanian catalogue localization is published for all 50 products; source deficiencies are explicitly disclosed and legal claims remain independently gated.",
+      "acceptanceCriteria": [
+        "Approve or reject each quarantined Romanian product description, ingredient list and usage instruction.",
+        "Approve Romanian metadata and alt text; keep original-language articles explicitly marked as Russian.",
+        "Pass Russian and Romanian smoke, accessibility and SEO checks."
+      ],
+      "resolvedAt": "2026-09-10",
+      "resolutionReference": "docs/RO_MD_LOCALIZATION_OWNER_DECISION_2026-09-10.md",
+      "resolution": "User Direct Decision #1 authorizes automated ro-MD localization: 50 products, 350 nonempty fields, 35 paired UI keys and localized product SEO. 31 source issues remain explicit Romanian disclosures; no medical/legal claims were approved.",
+      "originalSummary": "Romanian routes and interface are implemented; imported Romanian descriptive product copy remains quarantined pending editorial approval."
     }
   ]
 }

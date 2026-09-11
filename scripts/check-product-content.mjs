@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { evaluateProductDataset } from "./product-content-lib.mjs";
 import { assessRomanianProductCopy } from "./romanian-product-content-lib.mjs";
+import { hasCurrentTranslationApproval } from "./romanian-translation-approval-lib.mjs";
 
 const products = JSON.parse(readFileSync("src/data/products.json", "utf8"));
 const romanianProducts = JSON.parse(
@@ -60,7 +61,7 @@ for (const product of products) {
     report.errors.push(`${product.slug}: Romanian content record is missing.`);
     continue;
   }
-  for (const field of ["category", "imageAlt", "sourceUrl"]) {
+  for (const field of ["officialName", "category", "imageAlt", "sourceUrl"]) {
     if (typeof localized[field] !== "string" || !localized[field].trim()) {
       report.errors.push(`${product.slug}: Romanian ${field} is empty.`);
     }
@@ -68,15 +69,13 @@ for (const product of products) {
   if (/[А-Яа-яЁё]/u.test(JSON.stringify(localized))) {
     report.errors.push(`${product.slug}: Romanian content contains Cyrillic text.`);
   }
-  if ("officialName" in localized) {
-    report.errors.push(
-      `${product.slug}: product names must not be translated or duplicated in Romanian content.`
-    );
-  }
   for (const error of assessRomanianProductCopy(localized)) {
     report.errors.push(`${product.slug}: Romanian semantic validation failed: ${error}.`);
   }
   const productReview = romanianReview.products[product.slug] ?? {};
+  if (Object.values(productReview).includes("approved") && !hasCurrentTranslationApproval(product, localized, romanianReview)) {
+    report.errors.push(`${product.slug}: approved translation does not match its source/translation evidence.`);
+  }
   for (const field of descriptiveFields) {
     const status = productReview[field] ?? romanianReview.defaultStatus;
     if (!reviewStatuses.has(status)) {
@@ -110,5 +109,5 @@ if (report.errors.length) {
 }
 
 console.log(
-  `Product content gate: PASS (${report.total} records; ${report.published} published, ${report.drafts} drafts; Romanian structure valid, descriptive fields quarantined until approval).`
+  `Product content gate: PASS (${report.total} records; ${report.published} published, ${report.drafts} drafts; Romanian structure and publication evidence valid; claims quarantine enforced).`
 );

@@ -2,15 +2,15 @@
 
 The application is a functional local QA candidate. Its technical gates pass, but production release remains blocked.
 
-Last verified: 2026-09-02 against base commit `a57d149` and the current product-detail worktree.
+Current localization update: 2026-09-10 against base commit `b79e968` and the owner-authorized RO-MD worktree. Older verification rows below retain their original dates.
 
 ## Status identity
 
 | Field | Current value |
 |---|---|
 | Branch | `main` |
-| Base commit | `a57d149` |
-| Working tree | Product-detail redesign and synchronized QA evidence; commit and push follow verification |
+| Base commit | `b79e968` |
+| Working tree | Owner-authorized Romanian localization; no deployment or production approval implied |
 | Environment | Windows, Node 22.23.1, npm 10.9.8, Chromium desktop/mobile |
 | Release verdict | `release-blocked` |
 | UI language | Complete RU/RO route pairs for catalogue, products, company chapters and Halo Complex; editorial remains in its original language |
@@ -18,7 +18,7 @@ Last verified: 2026-09-02 against base commit `a57d149` and the current product-
 | Published products | 50 |
 | Draft products | 0 |
 | Official content records | 137 |
-| Claims | 396 total: 0 approved, 396 pending, 0 rejected (Prompt 4 removed adjacent promotional text from quarantined ingredient fields; no approval granted) |
+| Claims | 291 total: 0 approved, 291 pending, 0 rejected. On 2026-09-10, 105 superseded RO claim candidates were archived when owner-authorized factual adaptations replaced their text; no legal approval was granted. |
 
 ## Implemented
 
@@ -54,7 +54,9 @@ Last verified: 2026-09-02 against base commit `a57d149` and the current product-
 
 ## Known limitations
 
-Use blocker IDs in [the release status](RELEASE_STATUS.md). The current blockers are `P0-LOCALE`, `P0-CONTACT`, `P0-LEGAL`, `P1-MEDIA-RIGHTS`, `P1-CONTENT`, `P1-RANKING`, `P1-CI-PROTECTION` and `P1-SEO-ORIGIN`.
+Use blocker IDs in [the release status](RELEASE_STATUS.md). The current blockers are `P0-CONTACT`, `P0-LEGAL`, `P1-MEDIA-RIGHTS`, `P1-CONTENT`, `P1-RANKING`, `P1-CI-PROTECTION` and `P1-SEO-ORIGIN`.
+
+`P0-LOCALE` is resolved by [User Direct Decision #1 and the localization evidence](RO_MD_LOCALIZATION_OWNER_DECISION_2026-09-10.md). All 50 RO products have seven nonempty localized fields. 31 source-information issues across 19 products remain disclosed; resolving the localization publication decision does not verify missing composition, instructions or legal claims.
 
 ## Verification record
 

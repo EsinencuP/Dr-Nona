@@ -1,306 +1,1039 @@
 {
-  "version": 1,
+  "version": 2,
   "defaultStatus": "pending",
+  "authorization": {
+    "id": "USER-DIRECT-DECISION-1-2026-09-10",
+    "date": "2026-09-10",
+    "reference": "docs/RO_MD_LOCALIZATION_OWNER_DECISION_2026-09-10.md",
+    "scope": "Owner-authorized automated Romanian product localization and publication; not independent linguistic or medical/legal review.",
+    "locale": "ro-MD"
+  },
   "products": {
     "solaris-body-lotion": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "hand-and-nail-treatment": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "dynamic-hydrating-cream": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "body-butter": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "facial-solaris": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "eye-contour-balm": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "face-milk": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "night-cream": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "anti-aging-serum": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "ard-complex": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "shp-day-time-face-cream-lc": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "samples-kit": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "gonseen": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "coffee-mix": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "chocoseen": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "soupseen": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "okseen": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "fase-9": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "dnd-chewing-gum-tablets": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "imunseen": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "goldseen": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "cleanseen": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "ravseen": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "pulmoseen": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "reumoseen": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "yamseen": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "newseen": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "femseen": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "mouthwash": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "dead-sea-water-compresses": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "shower-gel-lord": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "lady-deodorant": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "kiwi-deodorant": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "lord-deodorant": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "face-soap": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "halo-pure-unisex-deodorant-stick": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "halo-shenseen-toothpaste": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "halo-gel": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "frequent-use-tonic-shampoo": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "conditioner": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "lipstick-new": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "beauty-mask-for-face": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "salts-camomile": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "salts-ylangylang": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "salts-rosemary": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "salts-lavander": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "after-shave-lord": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "perfume-kiwi": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "perfume-lady": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
     },
     "parfum-faya": {
-      "shortDescription": "pending",
-      "longDescription": "pending",
-      "ingredients": "pending",
-      "howToUse": "pending"
+      "shortDescription": "approved",
+      "longDescription": "approved",
+      "ingredients": "approved",
+      "howToUse": "approved"
+    }
+  },
+  "evidence": {
+    "solaris-body-lotion": {
+      "sourceUrl": "https://www.drnona.md/solaris",
+      "previousRomanianSourceUrl": "https://www.drnona.md/solaris_ro",
+      "officialSourceUrl": "https://drnona.com/product/solaris-body-lotion",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "daff4662559d1a34384caf1daf5b19126f9880b1c4325de815232012795e35ed",
+      "translationHash": "49f5f2eada46827d6974cb4d45d551fa7ffe6c6f7bbbc620932e8215957c5c99",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "hand-and-nail-treatment": {
+      "sourceUrl": "https://www.drnona.md/hand_and_nail_cream",
+      "previousRomanianSourceUrl": "https://www.drnona.md/hand_and_nail_cream_ro",
+      "officialSourceUrl": "https://drnona.com/product/hand-and-nail-treatment",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "72880d7abb10e360fae3a73b2fbf25897ce9e39bdf966346e5299702893df5fd",
+      "translationHash": "9b30952d7fbcd4e7369af99bd354dc2ac6b3a9cd71205f464d9de5d741ea71a8",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "dynamic-hydrating-cream": {
+      "sourceUrl": "https://www.drnona.md/dynamic",
+      "previousRomanianSourceUrl": "https://www.drnona.md/dynamic_ro",
+      "officialSourceUrl": "https://drnona.com/product/dynamic-hydrating-cream",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "7a362de31f577d4c94b635c0d76841fc7856db437cb8e61b32102549aa5d51ee",
+      "translationHash": "5608eecb3cb4e28d1166c24994c36be499c9bf05a70d35ebf01e2df0546e11c6",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "body-butter": {
+      "sourceUrl": "https://www.drnona.md/body_butter",
+      "previousRomanianSourceUrl": "https://www.drnona.md/body_butter_ro",
+      "officialSourceUrl": null,
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "94fbe9e6be08c86616046afbf597c1626fc64877422700603bfb39cdc953bd82",
+      "translationHash": "bc2351fea8d126ed7f42fd0fbaa519c805ff449972528c61d63915787fcfb169",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": [
+        {
+          "field": "ingredients",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        },
+        {
+          "field": "howToUse",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        }
+      ]
+    },
+    "facial-solaris": {
+      "sourceUrl": "https://www.drnona.md/facial_solaris",
+      "previousRomanianSourceUrl": "https://www.drnona.md/facial_solaris_ro",
+      "officialSourceUrl": "https://drnona.com/product/facial-solaris",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "f0ff2ca03cb1ad0c86c7df1f4875059c884ca750097fadd969926867e1074320",
+      "translationHash": "5f3ad94c1b97afb8712aeba3780d7e46687b704d2efc7cf0579d155061ac327a",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "eye-contour-balm": {
+      "sourceUrl": "https://www.drnona.md/eye_care_balm",
+      "previousRomanianSourceUrl": "https://www.drnona.md/eye_care_balm_ro",
+      "officialSourceUrl": "https://drnona.com/product/eye-contour-balm",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "72c9e0e3a9adf635cf437530248c261e87b49e22f52c7b88424b85df15431803",
+      "translationHash": "69856976c7ec28af498a224bd05bba726aa00d00fad35588eb3657c79db4ca03",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "face-milk": {
+      "sourceUrl": "https://www.drnona.md/face_milk",
+      "previousRomanianSourceUrl": "https://www.drnona.md/face_milk_ro",
+      "officialSourceUrl": "https://drnona.com/product/face-milk",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "9caf5c780cf5281c52b73c6da476d542d68685c804ac898c28ad3aed4605d6ef",
+      "translationHash": "a4d4c046b092d0c5226dae595b193d036fb1d76f8637f08e8abaf0a0c96420f0",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "night-cream": {
+      "sourceUrl": "https://www.drnona.md/night_cream",
+      "previousRomanianSourceUrl": "https://www.drnona.md/night_cream_ro",
+      "officialSourceUrl": "https://drnona.com/product/night-cream",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "5542db15fbe9b38d5b42540f91371a608a01ce08b27b9456478dd2b6f1c07526",
+      "translationHash": "3dc54148f7f6c63a541975d1fd0adf964197f7f7dd0e3f338d7835377cc32ba3",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "anti-aging-serum": {
+      "sourceUrl": "https://www.drnona.md/anti_aging_serum",
+      "previousRomanianSourceUrl": "https://www.drnona.md/anti_aging_serum_ro",
+      "officialSourceUrl": "https://drnona.com/product/anti-aging-serum",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "fc5eba5880859016e3cd0d7164ccbddbf6bd14cc6b3f3fd677da94f8799bdbff",
+      "translationHash": "1063fad6887631a5bc91b2784a947253941c65b1a41fa70b0dd45ba83a8c0ac7",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": [
+        {
+          "field": "ingredients",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source gives a partial descriptive list; translation explicitly preserves its incompleteness."
+        }
+      ]
+    },
+    "ard-complex": {
+      "sourceUrl": "https://www.drnona.md/ard_cream_for_face",
+      "previousRomanianSourceUrl": "https://www.drnona.md/ard_cream_for_face_ro",
+      "officialSourceUrl": "https://drnona.com/product/ard-complex",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "bf8554aaed8848b544a2c4a6ca548cdf092fb793e01c5c820e43149e7b0b7243",
+      "translationHash": "f1c6abed1ec17c1c5f048337f4c433354edc446f0b7454503e0cd2fe7b7727f5",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": [
+        {
+          "field": "ingredients",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        }
+      ]
+    },
+    "shp-day-time-face-cream-lc": {
+      "sourceUrl": "https://www.drnona.md/shp_day_time_face_cream",
+      "previousRomanianSourceUrl": "https://www.drnona.md/shp_day_time_face_cream_ro",
+      "officialSourceUrl": "https://drnona.com/product/shp-day-time-face-cream-lc",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "a053c9bd2c94b2928f148c16346d1b1eb10f66b759207a0836281fc87d24c923",
+      "translationHash": "66d7cdf9b8115cd3cf6f8bbeb2cc5e150a5cdfd744b8fa6555fc9855ec73b1b4",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": [
+        {
+          "field": "ingredients",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        },
+        {
+          "field": "howToUse",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        }
+      ]
+    },
+    "samples-kit": {
+      "sourceUrl": "https://www.drnona.md/top_samples_kit",
+      "previousRomanianSourceUrl": "https://www.drnona.md/top_samples_kit_ro",
+      "officialSourceUrl": "https://drnona.com/product/samples-kit",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "787bc790b8f3520db698b586703bf5caabdce9374d7c46d37f630c3b2cbe9eff",
+      "translationHash": "7ca44f6537aef92e873fe7a741bd41b94b57bacbaa16c33030a2a507790c615e",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": [
+        {
+          "field": "ingredients",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        },
+        {
+          "field": "howToUse",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        }
+      ]
+    },
+    "gonseen": {
+      "sourceUrl": "https://www.drnona.md/gonseen",
+      "previousRomanianSourceUrl": "https://www.drnona.md/gonseen_ro",
+      "officialSourceUrl": "https://drnona.com/product/gonseen",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "a2f2646a3181a3ed21b901ab54f5c99bdcb9f19fbf2a94065ab30dbde64b4d80",
+      "translationHash": "39a6e7c6ff4e8a7b3e31aeeafac17a8e0e43aeb6a99f362ef333c1ed9a4c98a4",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "coffee-mix": {
+      "sourceUrl": "https://www.drnona.md/slimseen_coffee_mix",
+      "previousRomanianSourceUrl": "https://www.drnona.md/slimseen_coffee_mix_ro",
+      "officialSourceUrl": "https://drnona.com/product/coffee-mix",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "8354ba47d42d9bd72b4b9ecfe6ffa621931fd773270f23635565517c0190b71c",
+      "translationHash": "baf5dade446fb431bb21fd71921b9c7d33b8092d9aae073fa6b7b520371a67a5",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "chocoseen": {
+      "sourceUrl": "https://www.drnona.md/chocoseen",
+      "previousRomanianSourceUrl": "https://www.drnona.md/chocoseen_ro",
+      "officialSourceUrl": "https://drnona.com/product/chocoseen",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "39259a74a0be59482dedc6f7dd398c19e03dcf688564bbfeef097b6b5f42d49b",
+      "translationHash": "b53a322628d2feb209d38562f2fd377cc1cd77ed82901947931c5c87a26caf19",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "soupseen": {
+      "sourceUrl": "https://www.drnona.md/soupseen",
+      "previousRomanianSourceUrl": "https://www.drnona.md/soupseen_ro",
+      "officialSourceUrl": "https://drnona.com/product/soupseen",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "af82f193007971064c630de93078fa2e48685412422883bc4332264b6835099b",
+      "translationHash": "8b7d5a8a397eb1d225c370b839065949118df8a24b6a843f869e93fffcb2286a",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "okseen": {
+      "sourceUrl": "https://www.drnona.md/okseen",
+      "previousRomanianSourceUrl": "https://www.drnona.md/okseen_ro",
+      "officialSourceUrl": "https://drnona.com/product/okseen",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "c5a45a5b2c31a61aa443ab319c69aa3d1527ae605acf37ae70c65960fb0d109a",
+      "translationHash": "caf3be81283fbf14e35634be03e8ba41cb75359bbb3f49593b836bb92ffc72de",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "fase-9": {
+      "sourceUrl": "https://www.drnona.md/phase_9",
+      "previousRomanianSourceUrl": "https://www.drnona.md/phase_9_ro",
+      "officialSourceUrl": "https://drnona.com/product/fase-9",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "336a23738a26f25728e18b2be4a328f8c428f56f0c52aa352060d55faa8e54a3",
+      "translationHash": "28cd90109974d4c9b91c864dc06a75992327786156ca2c5d20271f0544a6ce53",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "dnd-chewing-gum-tablets": {
+      "sourceUrl": "https://www.drnona.md/dnd",
+      "previousRomanianSourceUrl": "https://www.drnona.md/dnd_ro",
+      "officialSourceUrl": "https://drnona.com/product/dnd-chewing-gum-tablets",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "bf5db676103b130636d7baf670ab77ba67b6020484efdf7ed5c654dae5a0c019",
+      "translationHash": "a83329464c128cf3bdf4fb446be1e0442b449a5ae0ee4d90e7f19e44df6f7362",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "imunseen": {
+      "sourceUrl": "https://www.drnona.md/imunseen",
+      "previousRomanianSourceUrl": "https://www.drnona.md/imunseen_ro",
+      "officialSourceUrl": "https://drnona.com/product/imunseen",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "b60c22783d557228f69f44bb6ed987902a607f82abb5a90bae41b4aff573bf77",
+      "translationHash": "e0912b8e8ba293a2c73814194d5fb07b2a02fc2963df827ff956f9e3c9914840",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "goldseen": {
+      "sourceUrl": "https://www.drnona.md/goldseen",
+      "previousRomanianSourceUrl": "https://www.drnona.md/goldseen_ro",
+      "officialSourceUrl": "https://drnona.com/product/goldseen",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "3bbb9004e90adc97050fb3b3c439ed7056f0fb86e6ccfad20ed1a9f2e80d25fe",
+      "translationHash": "96979d4b57385b08a755a3d8b0cc70e4c753b1890c363712683c1ef53fcfe92d",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": [
+        {
+          "field": "ingredients",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Incomplete, ambiguous or conflicting source; a Romanian absence notice is published instead of a reconstructed formula/instruction."
+        }
+      ]
+    },
+    "cleanseen": {
+      "sourceUrl": "https://www.drnona.md/cleanseen",
+      "previousRomanianSourceUrl": "https://www.drnona.md/cleanseen_ro",
+      "officialSourceUrl": "https://drnona.com/product/cleanseen",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "da60b9b9f30da361e8008596968318c0b74bbb2c6fafd625649dcd4e407835fa",
+      "translationHash": "c60359a700402955cda86dc8165d4119ac81eaa666e14533ae6c206d82a21b95",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "ravseen": {
+      "sourceUrl": "https://www.drnona.md/ravseen",
+      "previousRomanianSourceUrl": "https://www.drnona.md/ravseen_ro",
+      "officialSourceUrl": "https://drnona.com/product/ravseen",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "b664db1cb5a358c949d2ae2274a2f920e09d377d8d294bf0ee7624e775da0983",
+      "translationHash": "44c50d6566c9a670d7081c309356f5c3c7668c2ca8186911e6c944eeddf819e6",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "pulmoseen": {
+      "sourceUrl": "https://www.drnona.md/pulmoseen",
+      "previousRomanianSourceUrl": "https://www.drnona.md/pulmoseen_ro",
+      "officialSourceUrl": "https://drnona.com/product/pulmoseen",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "74b97854b4d07952470eb0d32ac912c3231e92ccc068a1b8cbcae89e2caaea97",
+      "translationHash": "aa892f630dfe3e64b9508f38fc1a86848a011953bcf4baab42308f2ef686d19b",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "reumoseen": {
+      "sourceUrl": "https://www.drnona.md/reumoseen",
+      "previousRomanianSourceUrl": "https://www.drnona.md/reumoseen_ro",
+      "officialSourceUrl": "https://drnona.com/product/reumoseen",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "0a0d511fafe3f8a75a3779dad68dc40e1c845e9d7a479cf554effd5927ab9068",
+      "translationHash": "d9357ca6c5c96b5748a484ec46ba28614041f15e1ca6895701c3e0742b28d66c",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": [
+        {
+          "field": "ingredients",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Incomplete, ambiguous or conflicting source; a Romanian absence notice is published instead of a reconstructed formula/instruction."
+        }
+      ]
+    },
+    "yamseen": {
+      "sourceUrl": "https://www.drnona.md/yamseen",
+      "previousRomanianSourceUrl": "https://www.drnona.md/yamseen_ro",
+      "officialSourceUrl": "https://drnona.com/product/yamseen",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "fd19d24e357c883619f1b3ab16d5895518dd2a52602bec339f83ac98b0136317",
+      "translationHash": "b7a834ac5f16d0d5ac6ce56af16db14dbbb27cbaa97c62b07e8515c905b456e4",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "newseen": {
+      "sourceUrl": "https://www.drnona.md/newseen",
+      "previousRomanianSourceUrl": "https://www.drnona.md/newseen_ro",
+      "officialSourceUrl": "https://drnona.com/product/newseen",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "d736ff7dee781ce5f03ecd117d6c1e5e424cfb6048cf75c5633e95886280a4d4",
+      "translationHash": "c15161c2f818b75eaf705376a4e12b49d28755dcc2b1c0e930fcb5e5ceb70a1d",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "femseen": {
+      "sourceUrl": "https://www.drnona.md/femseen",
+      "previousRomanianSourceUrl": "https://www.drnona.md/femseen_ro",
+      "officialSourceUrl": "https://drnona.com/product/femseen",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "a584fb7e7ca378cfcbdb5d16dd303f7cbc0aa58698f1742a423bca72d1226dc5",
+      "translationHash": "3e0e7766b1b00882a29ca51a661d8c3b0bdbffd67264ee35f59a197975fa5df8",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "mouthwash": {
+      "sourceUrl": "https://www.drnona.md/mouthwash",
+      "previousRomanianSourceUrl": "https://www.drnona.md/mouthwash_ro",
+      "officialSourceUrl": "https://drnona.com/product/mouthwash",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "a2bd77b1ac678464ad1084dc7eadb2fb4f5c2136332102a615840947a0c420c9",
+      "translationHash": "db5b162f7fdbe59b1348d204a1f59d3bee5d58222828067de49f4f8f88b0de5f",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "dead-sea-water-compresses": {
+      "sourceUrl": "https://www.drnona.md/compressed_wipes_ru",
+      "previousRomanianSourceUrl": "https://www.drnona.md/compressed_wipes_ro",
+      "officialSourceUrl": "https://drnona.com/product/dead-sea-water-compresses",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "49bfd04b6f6669137b68c252ac840cc6dcf8350aaa0b71ec89c1dc95ed2fffa6",
+      "translationHash": "702f4049feaf7ee924fdd8ad5c8e391325f9be0752389d8ffe4c4f236632ab54",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "shower-gel-lord": {
+      "sourceUrl": "https://www.drnona.md/shower_gel_lord",
+      "previousRomanianSourceUrl": "https://www.drnona.md/shower_gel_lord_ro",
+      "officialSourceUrl": null,
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "e6f9d554687b9ef4c13a1bc1decaed1729e5a62c1520bc1f5b56846be0ecb92f",
+      "translationHash": "d8206aea32b03938680f51be63c53db812dbad87330a179260e9c65cecd0397e",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": [
+        {
+          "field": "ingredients",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Incomplete, ambiguous or conflicting source; a Romanian absence notice is published instead of a reconstructed formula/instruction."
+        },
+        {
+          "field": "howToUse",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        }
+      ]
+    },
+    "lady-deodorant": {
+      "sourceUrl": "https://www.drnona.md/deodorant_lady",
+      "previousRomanianSourceUrl": "https://www.drnona.md/deodorant_lady_ro",
+      "officialSourceUrl": "https://drnona.com/product/lady-deodorant",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "7bf2847f0d1bfcb60b2a353803358724abc28189a8a9af30cd7c054b79fd6e49",
+      "translationHash": "f33ca0310044465ba1da77fd857a356818652c14e49ac9ee31bf315240920e45",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "kiwi-deodorant": {
+      "sourceUrl": "https://www.drnona.md/deodorant_kiwi",
+      "previousRomanianSourceUrl": "https://www.drnona.md/deodorant_kiwi_ro",
+      "officialSourceUrl": "https://drnona.com/product/kiwi-deodorant",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "1c592d8488bead8fa4618f8a6601468225268cfebeb242f8644164dc5c771fa3",
+      "translationHash": "1ba8201843aa138cd509091b50ce4e3b3a4b240ba9b31c7a311a10a0be7c16d8",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "lord-deodorant": {
+      "sourceUrl": "https://www.drnona.md/deodorant_lord",
+      "previousRomanianSourceUrl": "https://www.drnona.md/deodorant_lord_ro",
+      "officialSourceUrl": "https://drnona.com/product/lord-deodorant",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "71a2bf96912954629dce8ef0449bc67ab4f5edc7ce01619a88e5faf78bb50e8d",
+      "translationHash": "f00a6caed2b11b83c6f4626e546eb13d3d72f31762a227656299c4be152b0dda",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "face-soap": {
+      "sourceUrl": "https://www.drnona.md/facial_foam_soap",
+      "previousRomanianSourceUrl": "https://www.drnona.md/facial_foam_soap_ro",
+      "officialSourceUrl": "https://drnona.com/product/face-soap",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "667629c00be56a76f439b7038cc886dc492a273f82b1a30a5345dc28bbc4dbbf",
+      "translationHash": "77d4db034ee07767981c49ebd2c42a4807a52c30e14d34e3bb829d8fbb6213d6",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": [
+        {
+          "field": "ingredients",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        },
+        {
+          "field": "howToUse",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        }
+      ]
+    },
+    "halo-pure-unisex-deodorant-stick": {
+      "sourceUrl": "https://www.drnona.md/unisex_deodorant_stick",
+      "previousRomanianSourceUrl": "https://www.drnona.md/unisex_deodorant_stick_ro",
+      "officialSourceUrl": "https://drnona.com/product/halo-pure-unisex-deodorant-stick",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "f3c2b91c41fee867bb6f3c37442d9494f94daa7b34e998481a98c028bb1b07e5",
+      "translationHash": "96e8affde6ffe8d55620f6a66ccd9f5010f0940f19ee762fb6495ff2448d0e0b",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": [
+        {
+          "field": "ingredients",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Incomplete, ambiguous or conflicting source; a Romanian absence notice is published instead of a reconstructed formula/instruction."
+        }
+      ]
+    },
+    "halo-shenseen-toothpaste": {
+      "sourceUrl": "https://www.drnona.md/shenseen_mousse_toothpaste",
+      "previousRomanianSourceUrl": "https://www.drnona.md/shenseen_mousse_toothpaste_ro",
+      "officialSourceUrl": "https://drnona.com/product/halo-shenseen-toothpaste",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "2e9fbbfd7ff568aa959c2d45e9063b17c6bf96a395481880b8ed2f507e41368b",
+      "translationHash": "511ff1be6da56715e291f8e36524e6d2e93f44b6930f91100d71131bd97cf58c",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": [
+        {
+          "field": "ingredients",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Incomplete, ambiguous or conflicting source; a Romanian absence notice is published instead of a reconstructed formula/instruction."
+        },
+        {
+          "field": "howToUse",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        }
+      ]
+    },
+    "halo-gel": {
+      "sourceUrl": "https://www.drnona.md/shower_gel",
+      "previousRomanianSourceUrl": "https://www.drnona.md/shower_gel_ro",
+      "officialSourceUrl": "https://drnona.com/product/halo-gel",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "38af8d3ed84b35d18212c924ac3bdd51ed770d354a75872274e644de2db0de6a",
+      "translationHash": "4d5522d8251d0207495eb021faf50f6aef980ad582849d5a30cb780eb6f4a80e",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "frequent-use-tonic-shampoo": {
+      "sourceUrl": "https://www.drnona.md/mineral_shampoo",
+      "previousRomanianSourceUrl": "https://www.drnona.md/mineral_shampoo_ro",
+      "officialSourceUrl": "https://drnona.com/product/frequent-use-tonic-shampoo",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "edf501ea7b4285682696ab2b877cfbc55d322f233d4677d6f4a7976d6076aace",
+      "translationHash": "939828e288caf19412b6d007634ad42ae6f7c6dde136334163ec8aae95dc8a3e",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "conditioner": {
+      "sourceUrl": "https://www.drnona.md/mineral_hair_conditioner",
+      "previousRomanianSourceUrl": "https://www.drnona.md/mineral_hair_conditioner_ro",
+      "officialSourceUrl": "https://drnona.com/product/conditioner",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "4ca195c688b070c00a44c31b59a86457f27afcdf502740c4406207e728270e8e",
+      "translationHash": "208199caabc194819f03834791cf9b9087946e3ff07484a03b06ed059e1acb36",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "lipstick-new": {
+      "sourceUrl": "https://www.drnona.md/mineral_lipstick",
+      "previousRomanianSourceUrl": "https://www.drnona.md/mineral_lipstick_ro",
+      "officialSourceUrl": "https://drnona.com/product/lipstick-new",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "61fb30fb18d1eee124b92d90ff0b5cadcee20027bbcc42c6c6b72ee0fc8b3fc8",
+      "translationHash": "e6cc7b0c9c41c09c4f5e7d8aa3465432e8745a7c7f31b13130b314f58ff8ca7d",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "beauty-mask-for-face": {
+      "sourceUrl": "https://www.drnona.md/recovering_mud_musk",
+      "previousRomanianSourceUrl": "https://www.drnona.md/recovering_mud_musk_ro",
+      "officialSourceUrl": "https://drnona.com/product/beauty-mask-for-face",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "c6bcd9e39e7bc9de1d02f23c326971a7452188ff8baea7549059c7b45569d4f1",
+      "translationHash": "f7987c351194539f1528696c4360d48a2ddc9fa39fb69b773201da07ba3fb3aa",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": []
+    },
+    "salts-camomile": {
+      "sourceUrl": "https://www.drnona.md/bath_salts_with_chamomile_extract",
+      "previousRomanianSourceUrl": "https://www.drnona.md/bath_salts_with_chamomile_extract_ro",
+      "officialSourceUrl": "https://drnona.com/product/salts-camomile",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "729f77241f84e9bf93bab0d1a14a746f3e438a5865057d1d40b08305700f4ea9",
+      "translationHash": "def767f7022c03070f21993648b795b3f9022d1585963ca1221724583bcee61b",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": [
+        {
+          "field": "howToUse",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        },
+        {
+          "field": "ingredients",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source gives a partial descriptive list; translation explicitly preserves its incompleteness."
+        }
+      ]
+    },
+    "salts-ylangylang": {
+      "sourceUrl": "https://www.drnona.md/bath_salts_with_ylang_ylang_extract",
+      "previousRomanianSourceUrl": "https://www.drnona.md/bath_salts_with_ylang_ylang_extract_ro",
+      "officialSourceUrl": "https://drnona.com/product/salts-ylangylang",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "b5bb09b2d8d876b5f759ec3f99f2cb035d0bd818e51a6ab3f4e60b5567b7c2fc",
+      "translationHash": "ce7026a3658808156b134bcb2557e9b20c09057229ce11fab5d90e681933fbdc",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": [
+        {
+          "field": "howToUse",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        },
+        {
+          "field": "ingredients",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source gives a partial descriptive list; translation explicitly preserves its incompleteness."
+        }
+      ]
+    },
+    "salts-rosemary": {
+      "sourceUrl": "https://www.drnona.md/bath_salts_with_rosemary_extract",
+      "previousRomanianSourceUrl": "https://www.drnona.md/bath_salts_with_rosemary_extract_ro",
+      "officialSourceUrl": "https://drnona.com/product/salts-rosemary",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "31b8da1e8756a9333754c3ef7ae78be84565b429d0140ff415a37cd7a1465d02",
+      "translationHash": "9715ada24a373db369aad233b168c6e73624b55aa11133955ee234bbd0115809",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": [
+        {
+          "field": "howToUse",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        },
+        {
+          "field": "ingredients",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source gives a partial descriptive list; translation explicitly preserves its incompleteness."
+        }
+      ]
+    },
+    "salts-lavander": {
+      "sourceUrl": "https://www.drnona.md/bath_salts_with_lavender_extract",
+      "previousRomanianSourceUrl": "https://www.drnona.md/bath_salts_with_lavander_extract_ro",
+      "officialSourceUrl": "https://drnona.com/product/salts-lavander",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "6d7ac1787c0b0045366842ac0911cd0a632dd23035f75edd8f8a223762939387",
+      "translationHash": "cf91792e47bca9d0017c44c20be91ff9d7770d5ca10c3b0abe898baf7bccbfa8",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": [
+        {
+          "field": "howToUse",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        },
+        {
+          "field": "ingredients",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source gives a partial descriptive list; translation explicitly preserves its incompleteness."
+        }
+      ]
+    },
+    "after-shave-lord": {
+      "sourceUrl": "https://www.drnona.md/parfume_lord",
+      "previousRomanianSourceUrl": "https://www.drnona.md/parfume_lord_ro",
+      "officialSourceUrl": "https://drnona.com/product/after-shave-lord",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "1f4e0495664b9f57e3c0a76a330ec973348d8be30c49753f29088b558cf65ce3",
+      "translationHash": "4ff4ea0c33bec1ab5184fd064e73111e581d63983e42c8e512f1fbc43b061e6f",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": [
+        {
+          "field": "ingredients",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        },
+        {
+          "field": "howToUse",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        }
+      ]
+    },
+    "perfume-kiwi": {
+      "sourceUrl": "https://www.drnona.md/parfume_kiwi",
+      "previousRomanianSourceUrl": "https://www.drnona.md/parfume_kiwi_ro",
+      "officialSourceUrl": "https://drnona.com/product/perfume-kiwi",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "0e5de1f1dc406936de94f59989ccaaba4989b983df49466c769a50fe1ad37b23",
+      "translationHash": "e9931d5d91b327757a9e22ff2e80782f15b4a5f2ee2d27e08d0e64f50e09604a",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": [
+        {
+          "field": "howToUse",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        }
+      ]
+    },
+    "perfume-lady": {
+      "sourceUrl": "https://www.drnona.md/parfume_lady",
+      "previousRomanianSourceUrl": "https://www.drnona.md/parfume_lady_ro",
+      "officialSourceUrl": "https://drnona.com/product/perfume-lady",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "09c734592eaa258dba0075e4daccdb4e5e40bbaa90333b365a20c5d0953494f1",
+      "translationHash": "a0d361265d182315139268500a6daf027dd22e61f34ff16d423c5878da1445be",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": [
+        {
+          "field": "howToUse",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        }
+      ]
+    },
+    "parfum-faya": {
+      "sourceUrl": "https://www.drnona.md/parfume_faya",
+      "previousRomanianSourceUrl": "https://www.drnona.md/parfume_faya_ro",
+      "officialSourceUrl": "https://drnona.com/product/parfum-faya",
+      "sourceDataset": "src/data/products.json",
+      "sourceHash": "328ad25e582d6510e55296e25179306014f55b8328b535d3f9a6631c841d8f1e",
+      "translationHash": "a5c361b2e5d741d145db1a126c5236eb975752275ccc8cb39c42c0f53e97a791",
+      "method": "automated-source-grounded-translation-and-condensed-adaptation",
+      "claimsApproval": false,
+      "sourceIssues": [
+        {
+          "field": "ingredients",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        },
+        {
+          "field": "howToUse",
+          "status": "NEEDS_EDITORIAL_REVIEW",
+          "reason": "Source field absent; a Romanian absence notice is published, not invented product information."
+        }
+      ]
     }
   }
 }

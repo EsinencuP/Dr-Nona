@@ -1,4 +1,5 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { hasCurrentTranslationApproval } from "./romanian-translation-approval-lib.mjs";
 
 const pages = JSON.parse(
   readFileSync("src/data/official-pages.json", "utf8")
@@ -61,6 +62,9 @@ const publicRomanianProducts = Object.fromEntries(
     const localized = romanianProducts[product.slug];
     if (!localized) throw new Error(`Missing Romanian product record: ${product.slug}`);
     const review = romanianReview.products[product.slug] ?? {};
+    if (Object.values(review).includes("approved") && !hasCurrentTranslationApproval(product, localized, romanianReview)) {
+      throw new Error(`Stale or missing Romanian translation approval: ${product.slug}`);
+    }
     return [
       product.slug,
       {
@@ -85,7 +89,7 @@ const publicRomanianProducts = Object.fromEntries(
 const published = publicProducts.filter((product) => product.publicationStatus === "published");
 function localize(product, locale) {
   return locale === "ro"
-    ? { ...product, ...publicRomanianProducts[product.slug], officialName: product.officialName, contentLocale: locale }
+    ? { ...product, ...publicRomanianProducts[product.slug], contentLocale: locale }
     : { ...product, contentLocale: locale };
 }
 function relatedProducts(product) {

@@ -53,10 +53,10 @@ export function compareCatalogProducts(
   sort: CatalogSort
 ) {
   if (sort === "az") {
-    return left.officialName.localeCompare(right.officialName, "ru");
+    return left.officialName.localeCompare(right.officialName, left.contentLocale === "ro" ? "ro-MD" : "ru");
   }
   if (sort === "za") {
-    return right.officialName.localeCompare(left.officialName, "ru");
+    return right.officialName.localeCompare(left.officialName, left.contentLocale === "ro" ? "ro-MD" : "ru");
   }
   if (sort === "updated") return compareBySourceUpdatedAt(left, right);
   const popularityDifference = left.popularityRank - right.popularityRank;

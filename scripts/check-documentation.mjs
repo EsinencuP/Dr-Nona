@@ -7,6 +7,7 @@ import {
   writeFileSync,
 } from "node:fs";
 import { dirname, resolve } from "node:path";
+import { hasCurrentTranslationApproval, romanianFields } from "./romanian-translation-approval-lib.mjs";
 
 const readJson = (path) => JSON.parse(readFileSync(path, "utf8"));
 const release = readJson("docs/release-status.json");
@@ -72,6 +73,9 @@ const actualCounts = {
 };
 
 function renderReleaseStatus(status) {
+  const resolvedRows = (status.resolvedBlockers ?? []).map(blocker =>
+    `| \`${blocker.id}\` | ${blocker.status} | ${blocker.resolvedAt} | ${blocker.resolution} |`
+  ).join("\n");
   const blockerRows = status.blockers
     .map(
       (blocker) =>
@@ -85,7 +89,7 @@ function renderReleaseStatus(status) {
         .join("\n")}`
     )
     .join("\n\n");
-  return `# Is the Dr. Nona Moldova site ready for production?\n\nNo. Technical quality gates pass locally, but production approval remains blocked by the items below.\n\nLast verified: ${status.asOf} against base commit \`${status.commit}\` and the current cleanup worktree.\n\nThis file is generated from \`docs/release-status.json\`. Run \`npm run release:status:generate\` after changing the machine-readable status.\n\n## Status identity\n\n| Field | Value |\n|---|---|\n| Verdict | \`${status.status}\` |\n| Label | ${status.label} |\n| Branch | \`${status.branch}\` |\n| Base commit | \`${status.commit}\` |\n| Environment | ${status.environment} |\n\n## Current dataset\n\n| Dataset | Count |\n|---|---:|\n| Source products | ${status.counts.sourceProducts} |\n| Published products | ${status.counts.publishedProducts} |\n| Draft products | ${status.counts.draftProducts} |\n| Official content records | ${status.counts.officialContentRecords} |\n| Claims | ${status.counts.claims.total} |\n| Approved claims | ${status.counts.claims.approved} |\n| Pending claims | ${status.counts.claims.pending} |\n| Rejected claims | ${status.counts.claims.rejected} |\n\n## Open release blockers\n\n| ID | Priority | Owner | Summary |\n|---|---|---|---|\n${blockerRows}\n\n## Acceptance criteria\n\n${criteria}\n\n## Release rule\n\nA successful build confirms compilation, generated output and automated checks. It does not approve legal content, business data, production operations or deployment.\n\nChange the verdict to \`release-ready\` only when every P0 and P1 blocker is closed and \`npm run release:check\` exits successfully.\n`;
+  return `# Is the Dr. Nona Moldova site ready for production?\n\nNo. Technical quality gates pass locally, but production approval remains blocked by the items below.\n\nLast verified: ${status.asOf} against base commit \`${status.commit}\` and the current cleanup worktree.\n\nThis file is generated from \`docs/release-status.json\`. Run \`npm run release:status:generate\` after changing the machine-readable status.\n\n## Status identity\n\n| Field | Value |\n|---|---|\n| Verdict | \`${status.status}\` |\n| Label | ${status.label} |\n| Branch | \`${status.branch}\` |\n| Base commit | \`${status.commit}\` |\n| Environment | ${status.environment} |\n\n## Current dataset\n\n| Dataset | Count |\n|---|---:|\n| Source products | ${status.counts.sourceProducts} |\n| Published products | ${status.counts.publishedProducts} |\n| Draft products | ${status.counts.draftProducts} |\n| Official content records | ${status.counts.officialContentRecords} |\n| Claims | ${status.counts.claims.total} |\n| Approved claims | ${status.counts.claims.approved} |\n| Pending claims | ${status.counts.claims.pending} |\n| Rejected claims | ${status.counts.claims.rejected} |\n\n## Open release blockers\n\n| ID | Priority | Owner | Summary |\n|---|---|---|---|\n${blockerRows}\n\n## Acceptance criteria\n\n${criteria}\n\n## Resolved blockers\n\n| ID | Status | Date | Resolution |\n|---|---|---|---|\n${resolvedRows}\n\n## Release rule\n\nA successful build confirms compilation, generated output and automated checks. It does not approve legal content, business data, production operations or deployment.\n\nChange the verdict to \`release-ready\` only when every P0 and P1 blocker is closed and \`npm run release:check\` exits successfully.\n`;
 }
 
 const normalizeLineEndings = (value) => value.replace(/\r\n?/g, "\n");
@@ -108,6 +112,24 @@ for (const blocker of release.blockers ?? []) {
   if (blocker.status !== "open") errors.push(`Non-open blocker remains listed: ${blocker.id}`);
   if (!Array.isArray(blocker.acceptanceCriteria) || blocker.acceptanceCriteria.length === 0) {
     errors.push(`Missing acceptance criteria: ${blocker.id}`);
+  }
+}
+for (const blocker of release.resolvedBlockers ?? []) {
+  if (!/^P[01]-[A-Z0-9-]+$/.test(blocker.id) || blockerIds.has(blocker.id)) errors.push(`Invalid/duplicate resolved blocker: ${blocker.id}`);
+  blockerIds.add(blocker.id);
+  if (blocker.status !== "resolved" || !blocker.resolvedAt || !blocker.resolution || !existsSync(blocker.resolutionReference ?? "")) errors.push(`Incomplete blocker resolution evidence: ${blocker.id}`);
+  if (blocker.id === "P0-LOCALE") {
+    const translations = readJson("src/data/products-ro.json");
+    const publicTranslations = readJson("src/data/products-ro-public.json");
+    const review = readJson("src/data/products-ro-review.json");
+    for (const product of products) {
+      const translation = translations[product.slug];
+      if (!translation || !hasCurrentTranslationApproval(product, translation, review) ||
+          romanianFields.some(field => !publicTranslations[product.slug]?.[field]?.trim()) ||
+          ["shortDescription", "longDescription", "ingredients", "howToUse"].some(field => review.products[product.slug]?.[field] !== "approved")) {
+        errors.push(`P0-LOCALE resolution is no longer supported: ${product.slug}`);
+      }
+    }
   }
 }
 if (release.status === "release-ready" && release.blockers.length) {

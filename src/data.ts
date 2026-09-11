@@ -76,6 +76,7 @@ export type ProductData = {
 
 type RomanianProductCopy = Pick<
   Product,
+  | "officialName"
   | "shortDescription"
   | "longDescription"
   | "ingredients"
@@ -179,11 +180,11 @@ export function loadProductData(locale: Locale = "ru") {
     return createProductData(
       products.map((product) => {
         const copy = localizedCopy[product.slug];
-        const fields = ["shortDescription", "longDescription", "ingredients", "howToUse", "category", "imageAlt", "sourceUrl"] as const;
+        const fields = ["officialName", "shortDescription", "longDescription", "ingredients", "howToUse", "category", "imageAlt", "sourceUrl"] as const;
         if (!copy || fields.some((field) => !Object.hasOwn(copy, field))) {
           throw new Error(`Incomplete Romanian product record: ${product.slug}`);
         }
-        return { ...product, ...copy, officialName: product.officialName };
+        return { ...product, ...copy };
       }),
       locale
     );

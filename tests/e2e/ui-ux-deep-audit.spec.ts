@@ -755,20 +755,15 @@ test.describe("7 · Interaction polish", () => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await prepare(page, "/products");
 
-    const input = page.locator(
-      ".catalog-toolbar input[type='search'], .catalog-toolbar input[type='text']"
-    ).first();
-
-    if (!(await input.isVisible())) {
-      test.skip();
-      return;
-    }
-
-    const initial = await page.locator(".product-card").count();
-    await input.fill("Solaris");
-    await page.waitForTimeout(500);
-    const filtered = await page.locator(".product-card").count();
-    expect(filtered, "Search did not filter products").toBeLessThan(initial);
+    const input = page.getByRole("searchbox", { name: "Поиск по названию" });
+    await expect(input).toBeVisible();
+    const cards = page.locator(".catalog-grid .product-card");
+    await expect(cards).toHaveCount(50);
+    await input.fill("404001");
+    await expect(cards).toHaveCount(1);
+    await expect(cards.getByRole("heading", { name: "Dynamic Cream" })).toBeVisible();
+    await input.clear();
+    await expect(cards).toHaveCount(50);
   });
 
   test("form validation: errors appear without navigation", async ({ page }) => {

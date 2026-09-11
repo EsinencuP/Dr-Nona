@@ -21,6 +21,8 @@ export const ro: LocaleMessages = {
   source: "Sursă",
   ingredients: "Compoziție",
   use: "Mod de utilizare",
+  ingredientsUnavailable: "Sursa disponibilă nu oferă o listă completă și clară a ingredientelor. Compoziția rămâne de verificat pe eticheta produsului.",
+  useUnavailable: "Modul de utilizare nu este precizat în sursa disponibilă. Consultați instrucțiunile de pe ambalaj înainte de utilizare.",
   related: "Completează îngrijirea",
   category: "Categorie",
   sku: "Cod produs",

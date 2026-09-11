@@ -67,13 +67,13 @@ describe("regulated claims publication guard", () => {
     }
   });
 
-  it("does not expose unreviewed Romanian descriptive fields", async () => {
+  it("publishes owner-authorized Romanian factual copy independently of legal claim approval", async () => {
     const { productBySlug: romanianProducts } = await loadProductData("ro");
     const product = romanianProducts.get("solaris-body-lotion");
     expect(product?.contentLocale).toBe("ro");
-    expect(product?.longDescription).toBeNull();
+    expect(product?.longDescription).toContain("Solaris este o loțiune");
     expect(getProductCopy(product!, "shortDescription")).toContain(
-      "îngrijirea zilnică"
+      "Loțiune de corp Dr. Nona"
     );
   });
 

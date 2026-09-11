@@ -26,11 +26,11 @@ Prompt 1 считается пройденным только при налич�
 | 1 | **PASS** | Audit и reference research зафиксированы; P0 visual defects не подтверждены. |
 | 2 | **PASS** | [Prompt 2 acceptance report](PROMPT_2_DESIGN_SYSTEM_REFINEMENT_2026-09-06.md): visual foundation повторно проверена, Halo chapters доработаны; 49 before/after pairs, 16 axe runs / 0 violations, 151 unit tests, 332 E2E passed / 18 skipped, build и relevant gates PASS. G11 и editorial часть G12 остаются открытыми за пределами design-system scope. |
 | 3 | **PASS** | [Prompt 3 acceptance report](PROMPT_3_RESPONSIVE_GEOMETRY_2026-09-07.md): 2,664 geometry states, все 50 продуктов RU/RO на 12 ширинах, 200 loading/caption states, 500 DPR 1/2 source checks. Исправлены обрезание About, alignment фактов, устойчивость mini-product titles и выбор разрешения packshot. Финально: 151 unit passed, 346 E2E passed / 18 existing skipped, build и relevant gates PASS. |
-| 4 | **PARTIAL / HUMAN REVIEW REQUIRED** | [Prompt 4 report](PROMPT_4_BILINGUAL_INTEGRITY_2026-09-09.md): technical integrity PASS, 3,070 field comparisons, 148 source checks, 6 repaired source fields; 33/33 UI keys and 64/64 localized routes. 161 unit tests, 60 scoped E2E + 6 final bilingual sweep tests passed. 50 RO records / 200 field slots remain quarantined, 71 MISSING_RO comparisons; P0-LOCALE stays open. |
+| 4 | **PASS — owner-authorized product localization; source issues disclosed** | [User Direct Decision #1 and localization report](RO_MD_LOCALIZATION_OWNER_DECISION_2026-09-10.md) supersedes the historical editorial-publication restriction in [Prompt 4](PROMPT_4_BILINGUAL_INTEGRITY_2026-09-09.md). 50/50 products, 350 nonempty RO fields, 35/35 UI keys, 64/64 locale routes; P0-LOCALE resolved. 31 incomplete/ambiguous source fields across 19 products remain explicitly disclosed; legal approval is not granted. |
 | 5 | **PASS — performance scope** | [Prompt 5 report](PROMPT_5_PERFORMANCE_2026-09-10.md): 60 baseline + 60 after navigations, 437 local assets and 200 remote delivery URLs, 20 screenshot pairs. Home browser JS −33.7%, sampled PDP −30.8%; Home LCP improves in RU/RO. 169 unit tests, 360 E2E passed / 18 existing skips, 14 production request-boundary checks. Field INP is not verified; editorial timing variation and long-task tradeoff remain explicit in the report. |
-| 6 | **BLOCKED / NOT RUN AS A FINAL PASS** | Отдельные audits и CI gates зелёные, но нет единого final report по всем route surfaces, 50 PDP, RU/RO, 200% zoom, full performance/runtime и `release:check`; repository release остаётся blocked внешними approvals. |
+| 6 | **PASS — frontend visual/technical QA; production BLOCKED** | [Prompt 6 final report](PROMPT_6_FINAL_QA_2026-09-10.md): 565 адресов, 4,520 geometry states, все 50 PDP RU/RO, 565 настоящих browser zoom 200% captures, 40 state screenshots и 40 axe scans / 0 violations. 169 unit, 360 E2E passed / 18 existing skips, 14 production network tests; build/runtime/security/SEO PASS. Восемь production blockers остаются открытыми. |
 
-Следовательно, все шесть промптов **не считаются полностью пройденными**. Prompt 1, Prompt 2, Prompt 3 и Prompt 5 приняты по evidence; техническая часть Prompt 4 выполнена, редакторское согласование остаётся открытым. Следующий этап по запросу пользователя — Prompt 6, final release-quality QA; он обязан учитывать незакрытые human approvals и ограничения performance-измерений.
+Следовательно, все шесть промптов **не считаются полностью согласованными для production**. Prompt 1, Prompt 2, Prompt 3, Prompt 5 и Prompt 6 приняты в своём scope; техническая часть Prompt 4 выполнена, редакторское согласование остаётся открытым. Финальный frontend QA завершён 2026-09-10. Следующая работа — реальные approvals из release-status либо новая отдельная задача пользователя; повторно запускать весь workflow без причины не нужно. Ограничения performance-измерений сохранены в отчётах Prompt 5/6.
 
 Перед каждым следующим промптом агент должен:
 
@@ -51,6 +51,8 @@ Prompt 1 считается пройденным только при налич�
 - зависимости следующего промпта.
 
 Graphify используется как карта навигации и памяти, а исходники и отчёты остаются source of truth. При конфликте карта обновляется из checkout; предположение не считается evidence. Для запроса контекста сначала используется bounded `graphify query`, затем `path`/`affected`, и только после этого читаются найденные файлы.
+
+Current owner decision (2026-09-10): [RO-MD localization](RO_MD_LOCALIZATION_OWNER_DECISION_2026-09-10.md) resolves P0-LOCALE. Earlier Prompt 5/6 evidence retains its historical eight-blocker snapshot; the current release has seven open blockers. The six original prompt texts below remain unchanged.
 
 ## Общий workflow после шести промптов
 
