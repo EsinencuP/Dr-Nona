@@ -1,6 +1,29 @@
 {
   "nodes": [
     {
+      "id": "crm::docs_results_sales_forecast",
+      "label": "CRM Results sales forecast fixed prices: /results analytics and procurement",
+      "description": "Owner-authorized fifth CRM route. DONE order cohorts, 30/90/180/365 day comparisons, immutable retail/distributor snapshots, weighted 90-day SKU forecasts and 15 percent reorder buffer, promotion and seasonal advice, 36 Moldova regions. Unknown historical prices remain unavailable, never inferred. Local checks and deployment limitations are in docs/RESULTS.md.",
+      "file_type": "workflow-evidence",
+      "source_file": "docs/RESULTS.md",
+      "source_location": "Results implementation, formulas, fixed prices and rollout",
+      "repo": "crm",
+      "_origin": "declared",
+      "persistence_boundary": "CRM PostgreSQL only; price snapshots recorded during application transaction; no prices exposed in e-catalog or public API responses.",
+      "implementation_paths": [
+        "server/analytics/results-service.ts",
+        "server/analytics/results-calculations.ts",
+        "server/catalog/fixed-prices.ts",
+        "server/applications/application-db.ts",
+        "src/app/(crm)/results/page.tsx",
+        "src/app/(crm)/results/components",
+        "src/app/(crm)/catalog/_components/price-form.tsx",
+        "src/app/(crm)/actions.ts",
+        "database/schema.prisma"
+      ],
+      "test_commands": ["npm run db:generate", "npm run db:migrate:deploy", "npm run typecheck", "npm run lint", "npm run check", "npm run test", "npm run build"]
+    },
+    {
       "id": "catalog::docs_ro_md_owner_localization",
       "label": "Current RO-MD localization PASS: User Direct Decision 1 resolves P0-LOCALE",
       "description": "2026-09-10 owner-authorized automated factual localization: 50 products, 350 nonempty fields, 35 paired UI keys, 64 locale route pairs. 31 source issues across 19 products are disclosed; seven production blockers remain, no legal claim approval. Earlier Prompt 4/6 quarantine counts are historical.",
@@ -287,6 +310,24 @@
     }
   ],
   "links": [
+    {
+      "source": "crm::docs_results_sales_forecast",
+      "target": "crm::database_schema_prisma",
+      "relation": "documents",
+      "evidence": "Additive approved retail/distributor catalogue prices and immutable OrderItem purchase snapshots; historical zero means unavailable"
+    },
+    {
+      "source": "crm::docs_results_sales_forecast",
+      "target": "crm::server_applications_application_db_saveapplicationtodb",
+      "relation": "documents",
+      "evidence": "Snapshot server-side approved prices within the application transaction before Telegram delivery"
+    },
+    {
+      "source": "crm::docs_results_sales_forecast",
+      "target": "crm::src_data_products",
+      "relation": "uses",
+      "evidence": "Published product identity, SKU and categories reused for /results and seasonal rules"
+    },
     {
       "source": "catalog::docs_dr_nona_prompt_workflow",
       "target": "catalog::docs_prompt6_final_qa",
