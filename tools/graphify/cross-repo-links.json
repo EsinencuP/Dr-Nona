@@ -3,16 +3,17 @@
     {
       "id": "crm::docs_dashboard_redesign",
       "label": "CRM dashboard executive operations 90d: local implementation and QA PASS",
-      "description": "Owner dashboard_redesign_prompt.md implemented: four KPI, equal previous windows, global status counts, revenue/orders chart, top products, regions, source donut, 24 Chisinau hours and last eight applications. 180 tests pass against isolated migrated PostgreSQL; six viewport checks and three axe scans pass. Standard environment still lacks prior results price migration; deployment not performed.",
+      "description": "Owner dashboard_redesign_prompt.md implemented; 180 tests, six viewport checks and three axe scans pass. Production Prisma P2022 repaired 2026-09-12: vercel.json applies existing results price migration before build. Deployment dpl_G42ZgJXVKcQLpUqLAVVLBQKNn5Ao READY; dashboard, orders, results and catalog runtime smoke pass. Local and production Neon endpoints differ; historical missing prices remain disclosed.",
       "file_type": "workflow-evidence",
       "source_file": "docs/DASHBOARD_REDESIGN.md",
       "source_location": "Dashboard acceptance, metric definitions, source ownership and rollout prerequisites",
       "repo": "crm",
       "_origin": "declared",
       "status": "LOCAL_QA_PASS",
-      "production_status": "NOT_DEPLOYED",
-      "persistence_boundary": "Read-only CRM PostgreSQL snapshot behind requireCrmAccess. Existing OrderItem retail/distributor snapshots only; no schema changes or public financial data. Missing prices produce explicit partial dashboard totals; /results retains its stricter unavailable-total policy.",
+      "production_status": "DEPLOYED_RUNTIME_SMOKE_PASS",
+      "persistence_boundary": "Dashboard reads CRM PostgreSQL behind requireCrmAccess. Existing results_fixed_prices migration applied additively during production recovery; no public financial data or invented historical prices. Vercel migrate deploy precedes build; runtime/direct URLs must target the same environment database.",
       "implementation_paths": [
+        "vercel.json",
         "src/app/(crm)/dashboard/page.tsx",
         "src/app/(crm)/dashboard/dashboard.module.css",
         "src/app/(crm)/dashboard/_components/dashboard-data.ts",
@@ -26,7 +27,7 @@
         "tests/unit/dashboard-service.test.ts"
       ],
       "test_commands": ["npm run db:generate", "npm run typecheck", "npm run lint", "npm run check", "npm run test", "npm run build"],
-      "open_findings": ["Apply existing results_fixed_prices migration to target environment", "Enter approved prices; do not invent historical snapshots", "Target CI/deployment/runtime verification not performed"]
+      "open_findings": ["Enter approved prices; two historical DONE orders lack snapshots", "GitHub CI for the new deployment-config commit not run in this recovery pass"]
     },
     {
       "id": "crm::docs_results_sales_forecast",
