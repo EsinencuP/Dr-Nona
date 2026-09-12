@@ -1,6 +1,34 @@
 {
   "nodes": [
     {
+      "id": "crm::docs_dashboard_redesign",
+      "label": "CRM dashboard executive operations 90d: local implementation and QA PASS",
+      "description": "Owner dashboard_redesign_prompt.md implemented: four KPI, equal previous windows, global status counts, revenue/orders chart, top products, regions, source donut, 24 Chisinau hours and last eight applications. 180 tests pass against isolated migrated PostgreSQL; six viewport checks and three axe scans pass. Standard environment still lacks prior results price migration; deployment not performed.",
+      "file_type": "workflow-evidence",
+      "source_file": "docs/DASHBOARD_REDESIGN.md",
+      "source_location": "Dashboard acceptance, metric definitions, source ownership and rollout prerequisites",
+      "repo": "crm",
+      "_origin": "declared",
+      "status": "LOCAL_QA_PASS",
+      "production_status": "NOT_DEPLOYED",
+      "persistence_boundary": "Read-only CRM PostgreSQL snapshot behind requireCrmAccess. Existing OrderItem retail/distributor snapshots only; no schema changes or public financial data. Missing prices produce explicit partial dashboard totals; /results retains its stricter unavailable-total policy.",
+      "implementation_paths": [
+        "src/app/(crm)/dashboard/page.tsx",
+        "src/app/(crm)/dashboard/dashboard.module.css",
+        "src/app/(crm)/dashboard/_components/dashboard-data.ts",
+        "src/app/(crm)/dashboard/_components/dashboard-format.ts",
+        "src/app/(crm)/dashboard/_components",
+        "src/app/(crm)/dashboard/error.tsx",
+        "src/app/(crm)/dashboard/loading.tsx",
+        "src/app/(crm)/actions.ts",
+        "src/lib/crm-types.ts",
+        "tests/unit/dashboard-data.test.ts",
+        "tests/unit/dashboard-service.test.ts"
+      ],
+      "test_commands": ["npm run db:generate", "npm run typecheck", "npm run lint", "npm run check", "npm run test", "npm run build"],
+      "open_findings": ["Apply existing results_fixed_prices migration to target environment", "Enter approved prices; do not invent historical snapshots", "Target CI/deployment/runtime verification not performed"]
+    },
+    {
       "id": "crm::docs_results_sales_forecast",
       "label": "CRM Results sales forecast fixed prices: /results analytics and procurement",
       "description": "Owner-authorized fifth CRM route. DONE order cohorts, 30/90/180/365 day comparisons, immutable retail/distributor snapshots, weighted 90-day SKU forecasts and 15 percent reorder buffer, promotion and seasonal advice, 36 Moldova regions. Unknown historical prices remain unavailable, never inferred. Local checks and deployment limitations are in docs/RESULTS.md.",
@@ -310,6 +338,30 @@
     }
   ],
   "links": [
+    {
+      "source": "crm::docs_dashboard_redesign",
+      "target": "crm::src_app_crm_actions_getdashboardstats",
+      "relation": "documents",
+      "evidence": "Guarded RepeatableRead query for current and previous periods, global statuses and minimal recent-eight identity data"
+    },
+    {
+      "source": "crm::docs_dashboard_redesign",
+      "target": "crm::src_app_crm_dashboard_page_dashboardpage",
+      "relation": "documents",
+      "evidence": "Executive dashboard responsive composition with URL periods and partial-price disclosure"
+    },
+    {
+      "source": "crm::docs_dashboard_redesign",
+      "target": "crm::docs_results_sales_forecast",
+      "relation": "depends_on",
+      "evidence": "Uses existing immutable fixed-price snapshots; explicitly different missing-data display policy"
+    },
+    {
+      "source": "crm::docs_dashboard_redesign",
+      "target": "crm::database_schema_prisma",
+      "relation": "reads",
+      "evidence": "No new migration; target database must already contain results price columns"
+    },
     {
       "source": "crm::docs_results_sales_forecast",
       "target": "crm::database_schema_prisma",
