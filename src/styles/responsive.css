@@ -687,7 +687,7 @@
   }
 
   .home-lord-banner > article {
-    min-height: 286px;
+    min-height: 488px;
   }
 
   .home-promo-banner > article {
@@ -728,20 +728,15 @@
   }
 
   .home-lord-banner__visual {
-    inset: 12px 12px 12px 52%;
-    padding: 8px 4px;
+    inset: 226px 12px 12px;
     opacity: 1;
   }
 
-  .home-lord-banner__visual::after {
-    background:
-      linear-gradient(90deg, var(--lord-950) 0%, rgba(7, 24, 39, 0.92) 50%, rgba(7, 24, 39, 0.25) 100%),
-      linear-gradient(180deg, transparent 45%, rgba(7, 24, 39, 0.62));
-  }
-
   .home-lord-banner__content {
-    width: 54%;
-    padding: 18px;
+    width: auto;
+    min-height: 226px;
+    justify-content: flex-start;
+    padding: 18px 18px 0;
   }
 
   .home-lord-banner h3 {

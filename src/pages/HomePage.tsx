@@ -401,25 +401,31 @@ export default function HomePage() {
 
           <Reveal className="home-lord-banner" delay={70}>
             <article>
-              <div className="home-lord-banner__visual" aria-hidden="true">
-                {lordProducts.map((product) => (
-                  <ProductImage
-                    key={product.slug}
-                    src={product.image}
-                    alt=""
+              <div className="home-lord-banner__visual">
+                <picture>
+                  <source
+                    type="image/avif"
+                    srcSet="/collections/lord-collection-480w.avif 480w, /collections/lord-collection-800w.avif 800w, /collections/lord-collection-1200w.avif 1200w"
+                    sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 960px) 44vw, 420px"
+                  />
+                  <source
+                    type="image/webp"
+                    srcSet="/collections/lord-collection-480w.webp 480w, /collections/lord-collection-800w.webp 800w, /collections/lord-collection-1200w.webp 1200w"
+                    sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 960px) 44vw, 420px"
+                  />
+                  <img
+                    src="/collections/lord-collection-800w.webp"
+                    alt={
+                      locale === "ro"
+                        ? "Colecția Lord Dr. Nona: deodorant, parfum și gel de duș"
+                        : "Коллекция Lord Dr. Nona: дезодорант, парфюм и гель для душа"
+                    }
                     width="1254"
                     height="1254"
-                    sizes="(max-width: 640px) 60vw, (max-width: 960px) 30vw, 360px"
-                    style={{
-                      "--home-lord-scale": Number(
-                        (
-                          product.catalogScale *
-                          (product.slug === "lord-deodorant" ? 1.45 : 1.15)
-                        ).toFixed(3)
-                      ),
-                    } as CSSProperties}
+                    loading="lazy"
+                    decoding="async"
                   />
-                ))}
+                </picture>
               </div>
               <div className="home-lord-banner__content">
                 <span>{copy.collection}</span>

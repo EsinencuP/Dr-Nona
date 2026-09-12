@@ -69,11 +69,9 @@ test("home and selection keep the approved composition at priority widths", asyn
       const promoContent = promo?.querySelector<HTMLElement>(
         ".home-promo-banner__content"
       );
-      const lordImages = [
-        ...document.querySelectorAll<HTMLImageElement>(
-          ".home-lord-banner__visual img"
-        ),
-      ];
+      const lordImage = document.querySelector<HTMLImageElement>(
+        ".home-lord-banner__visual img"
+      );
       const heroRect = hero?.getBoundingClientRect();
       const scienceRect = science?.getBoundingClientRect();
       const spotlightRect = spotlight?.getBoundingClientRect();
@@ -103,7 +101,7 @@ test("home and selection keep the approved composition at priority widths", asyn
         promoContentBottom: promoContentRect?.bottom ?? 0,
         promoContentRight: promoContentRect?.right ?? 0,
         promoImageFit: promoImageStyle?.objectFit ?? "",
-        lordImageFits: lordImages.map((image) => getComputedStyle(image).objectFit),
+        lordImageFit: lordImage ? getComputedStyle(lordImage).objectFit : "",
         documentWidth: document.documentElement.scrollWidth,
         viewportWidth: document.documentElement.clientWidth,
       };
@@ -127,8 +125,21 @@ test("home and selection keep the approved composition at priority widths", asyn
       homeLayout.spotlightMediaHeight + 1
     );
     expect(homeLayout.promoImageFit).toBe("contain");
-    expect(homeLayout.lordImageFits).toEqual(["contain", "contain"]);
+    expect(homeLayout.lordImageFit).toBe("contain");
     expect(homeLayout.documentWidth).toBeLessThanOrEqual(homeLayout.viewportWidth + 1);
+
+    const lordImage = page.locator(".home-lord-banner__visual img");
+    await lordImage.scrollIntoViewIfNeeded();
+    await expect(lordImage).toHaveJSProperty("complete", true);
+    const lordMedia = await lordImage.evaluate((image: HTMLImageElement) => ({
+      naturalWidth: image.naturalWidth,
+      naturalHeight: image.naturalHeight,
+      currentSrc: image.currentSrc,
+    }));
+    expect(lordMedia.naturalWidth).toBeGreaterThan(0);
+    expect(lordMedia.naturalHeight).toBeGreaterThan(0);
+    expect(lordMedia.naturalWidth).toBe(lordMedia.naturalHeight);
+    expect(lordMedia.currentSrc).toContain("/collections/lord-collection-");
 
     if (viewport.width <= 640) {
       expect(homeLayout.promoColumns.trim().split(/\s+/)).toHaveLength(1);
