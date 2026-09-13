@@ -1,0 +1,465 @@
+{
+  "schemaVersion": 1,
+  "auditVersion": "2.0",
+  "task": 1,
+  "generatedAt": "2026-09-13",
+  "source": "C:\\Users\\User.DESKTOP\\.gemini\\antigravity\\brain\\7737fd0e-b347-42b1-a5fd-897f24963d07\\business_logic_audit_v2.md",
+  "catalogCommit": "3e77119c8732d9ab2752c0e5b8100cb869b1e2df",
+  "crmCommit": "9e5daa09060b2f531c4b93b85bfd856cfde43d88",
+  "allowedStatuses": [
+    "CONFIRMED",
+    "PARTIAL",
+    "RESOLVED",
+    "FALSE_POSITIVE",
+    "DECISION_REQUIRED"
+  ],
+  "summary": {
+    "total": 26,
+    "CONFIRMED": 8,
+    "PARTIAL": 10,
+    "RESOLVED": 2,
+    "FALSE_POSITIVE": 0,
+    "DECISION_REQUIRED": 6
+  },
+  "currentReleaseBlockers": [
+    "P0-CONTACT",
+    "P0-LEGAL",
+    "P1-MEDIA-RIGHTS",
+    "P1-CONTENT",
+    "P1-RANKING",
+    "P1-CI-PROTECTION",
+    "P1-SEO-ORIGIN"
+  ],
+  "items": [
+    {
+      "id": "I-1",
+      "title": "CRM route authentication",
+      "status": "RESOLVED",
+      "currentSeverity": "closed",
+      "owner": "engineering",
+      "repositories": ["crm"],
+      "decisionRequired": false,
+      "implementationTask": 4,
+      "assessment": "The audit claim is stale. CRM pages and server actions use Basic Auth and production fails closed.",
+      "evidence": [
+        { "path": "crm:src/proxy.ts", "lines": "9-32", "observation": "The proxy protects application routes and excludes only required static assets." },
+        { "path": "crm:src/server/crm-auth.ts", "lines": "6-38", "observation": "Server actions independently require the configured Authorization header." },
+        { "path": "production:/dashboard,/orders", "lines": "HTTP", "observation": "Anonymous requests returned 401 on 2026-09-13." }
+      ],
+      "closureRequirement": "Task 4 should verify coverage and close without replacing Basic Auth unless the owner rejects it."
+    },
+    {
+      "id": "I-2",
+      "title": "Persistent idempotency",
+      "status": "CONFIRMED",
+      "currentSeverity": "P1",
+      "owner": "engineering",
+      "repositories": ["crm"],
+      "decisionRequired": false,
+      "implementationTask": 5,
+      "assessment": "The header is syntax-checked but is not stored, fingerprinted, or used to suppress a replay.",
+      "evidence": [
+        { "path": "crm:server/api/applications-handler.ts", "lines": "75-85", "observation": "Validation ends after checking key syntax." },
+        { "path": "crm:server/applications/application-service.ts", "lines": "25-161", "observation": "Each accepted call creates a new random request ID and runs persistence and Telegram delivery." }
+      ],
+      "closureRequirement": "Task 5 must implement PostgreSQL-backed concurrency-safe replay semantics."
+    },
+    {
+      "id": "I-3",
+      "title": "Distributed rate limiting",
+      "status": "CONFIRMED",
+      "currentSeverity": "P0-CONTACT",
+      "owner": "product+engineering",
+      "repositories": ["crm", "catalog"],
+      "decisionRequired": true,
+      "implementationTask": 6,
+      "assessment": "The guard works inside one process but counters are not shared across serverless instances.",
+      "evidence": [
+        { "path": "crm:server/http/application-rate-limit.ts", "lines": "20-72", "observation": "A module-local Map owns all counters." },
+        { "path": "catalog:docs/release-status.json", "lines": "23-33", "observation": "Platform-wide abuse protection remains part of open P0-CONTACT." }
+      ],
+      "closureRequirement": "Task 6 requires an approved distributed store or platform control and a trusted client-address model."
+    },
+    {
+      "id": "I-4",
+      "title": "Quantity lost by slug deduplication",
+      "status": "RESOLVED",
+      "currentSeverity": "closed",
+      "owner": "engineering",
+      "repositories": ["catalog", "crm"],
+      "decisionRequired": false,
+      "implementationTask": 9,
+      "assessment": "The selected slug list is unique by design, while quantities are carried separately in items and persist through CRM.",
+      "evidence": [
+        { "path": "catalog:shared/applications/application-schema.ts", "lines": "69-100", "observation": "The contract supports items with integer quantity 1 through 99." },
+        { "path": "catalog:src/features/contact/ApplicationForm.tsx", "lines": "206-287,493-521", "observation": "The form has quantity controls and submits items." },
+        { "path": "crm:server/applications/application-service.ts", "lines": "44-56,110-115", "observation": "Quantity is mapped into persisted order items." }
+      ],
+      "closureRequirement": "Task 9 should regression-test end-to-end quantity parity and close without redesign if it passes."
+    },
+    {
+      "id": "I-5",
+      "title": "Prisma singleton and pooling",
+      "status": "PARTIAL",
+      "currentSeverity": "P2",
+      "owner": "engineering",
+      "repositories": ["crm"],
+      "decisionRequired": false,
+      "implementationTask": 10,
+      "assessment": "The audit overstates failure: CRM UI already uses globalThis and production uses pooled/direct URLs, but the application service owns a second module singleton.",
+      "evidence": [
+        { "path": "crm:src/lib/prisma.ts", "lines": "1-8", "observation": "The CRM UI uses the globalThis pattern." },
+        { "path": "crm:server/applications/application-db.ts", "lines": "1-10", "observation": "Application persistence creates a separate module-level client." },
+        { "path": "crm:database/schema.prisma", "lines": "5-9", "observation": "Runtime and migration URLs are separated." }
+      ],
+      "closureRequirement": "Task 10 should measure actual client ownership and consolidate only if it improves the current boundary."
+    },
+    {
+      "id": "I-6",
+      "title": "Database enums for order type and status",
+      "status": "CONFIRMED",
+      "currentSeverity": "P1",
+      "owner": "engineering",
+      "repositories": ["crm"],
+      "decisionRequired": false,
+      "implementationTask": 11,
+      "assessment": "Application types are constrained in TypeScript and Zod, but PostgreSQL accepts arbitrary strings.",
+      "evidence": [
+        { "path": "crm:database/schema.prisma", "lines": "32-40", "observation": "Order.type and Order.status are String fields." },
+        { "path": "crm:src/lib/crm-types.ts", "lines": "1-5", "observation": "Runtime UI constants provide only application-level constraints." }
+      ],
+      "closureRequirement": "Task 11 needs a value audit, reversible migration, compatibility deployment order, and rollback rehearsal."
+    },
+    {
+      "id": "I-7",
+      "title": "Client UPSERT overwrites canonical profile",
+      "status": "CONFIRMED",
+      "currentSeverity": "P1",
+      "owner": "product+engineering",
+      "repositories": ["crm"],
+      "decisionRequired": true,
+      "implementationTask": 12,
+      "assessment": "Every repeated phone updates name, email, and region without preserving submitted-versus-canonical history.",
+      "evidence": [
+        { "path": "crm:server/applications/application-db.ts", "lines": "76-92", "observation": "Client upsert overwrites profile fields on every application." },
+        { "path": "crm:database/schema.prisma", "lines": "13-29", "observation": "Client has no profile revision or audit model." }
+      ],
+      "closureRequirement": "Task 12 requires an owner-approved canonical-data and history policy."
+    },
+    {
+      "id": "I-8",
+      "title": "Maximum appointment horizon",
+      "status": "CONFIRMED",
+      "currentSeverity": "P2",
+      "owner": "product",
+      "repositories": ["catalog", "crm"],
+      "decisionRequired": true,
+      "implementationTask": 13,
+      "assessment": "Past dates are rejected, but no maximum future date exists for consultations or masterclasses.",
+      "evidence": [
+        { "path": "catalog:shared/applications/application-schema.ts", "lines": "217-233", "observation": "Validation checks calendar validity and the lower time boundary only." }
+      ],
+      "closureRequirement": "Task 13 must first obtain approved horizons and timezone boundary rules."
+    },
+    {
+      "id": "II-1",
+      "title": "Structured Telegram status references",
+      "status": "PARTIAL",
+      "currentSeverity": "P2",
+      "owner": "engineering",
+      "repositories": ["crm"],
+      "decisionRequired": false,
+      "implementationTask": 14,
+      "assessment": "Orders are linked to telegramMessageId, but the handler still requires a recognizable status line before updating the database.",
+      "evidence": [
+        { "path": "crm:server/applications/application-db.ts", "lines": "138-167", "observation": "Telegram message ID is persisted and used to locate an order." },
+        { "path": "crm:server/api/telegram-webhook-handler.ts", "lines": "135-159", "observation": "replaceAnyStatus must succeed before the DB update executes." }
+      ],
+      "closureRequirement": "Task 14 should make message wording presentation-only while preserving exact order identity."
+    },
+    {
+      "id": "II-2",
+      "title": "Quantity-aware selection",
+      "status": "PARTIAL",
+      "currentSeverity": "P2",
+      "owner": "product+engineering",
+      "repositories": ["catalog"],
+      "decisionRequired": false,
+      "implementationTask": 9,
+      "assessment": "SelectionContext persists unique slugs, while the contact form adds non-persistent per-product quantities. Ordering is accurate, but quantity is not part of the saved selection model.",
+      "evidence": [
+        { "path": "catalog:src/features/selection/SelectionContext.tsx", "lines": "15-100", "observation": "Saved selection remains string[]." },
+        { "path": "catalog:src/features/contact/ApplicationForm.tsx", "lines": "206-287,493-521", "observation": "Quantity is available and submitted from the form." }
+      ],
+      "closureRequirement": "Task 9 must decide whether persisted selection quantities are necessary after verifying the current user flow."
+    },
+    {
+      "id": "II-3",
+      "title": "Truthful popularity ranking",
+      "status": "CONFIRMED",
+      "currentSeverity": "P1-RANKING",
+      "owner": "product",
+      "repositories": ["catalog", "crm"],
+      "decisionRequired": true,
+      "implementationTask": 19,
+      "assessment": "The visible popularity sort uses static JSON rank without an approved demand source.",
+      "evidence": [
+        { "path": "catalog:src/product-sort.ts", "lines": "59-69", "observation": "popular compares static popularityRank." },
+        { "path": "catalog:docs/release-status.json", "lines": "70-79", "observation": "P1-RANKING remains open." }
+      ],
+      "closureRequirement": "Task 19 needs an owner-approved label and source before Task 20 can automate sales-based ranking."
+    },
+    {
+      "id": "II-4",
+      "title": "Fuzzy catalogue search",
+      "status": "CONFIRMED",
+      "currentSeverity": "P3",
+      "owner": "product",
+      "repositories": ["catalog"],
+      "decisionRequired": false,
+      "implementationTask": 21,
+      "assessment": "Search uses normalized substring matching and has no typo-distance behavior. This is an optional improvement, not a defect without real failed-query evidence.",
+      "evidence": [
+        { "path": "catalog:src/features/catalog/filterProducts.ts", "lines": "1-40", "observation": "Matching ends with normalized includes checks." }
+      ],
+      "closureRequirement": "Task 21 should start from measured RU/RO query misses and avoid a heavy dependency."
+    },
+    {
+      "id": "II-5",
+      "title": "UTM capture and trust model",
+      "status": "PARTIAL",
+      "currentSeverity": "P2",
+      "owner": "product+engineering",
+      "repositories": ["catalog", "crm"],
+      "decisionRequired": false,
+      "implementationTask": 16,
+      "assessment": "The desired URL-to-session capture already exists. UTM still travels in the request body, which is normal untrusted attribution data but lacks explicit semantics and normalization policy.",
+      "evidence": [
+        { "path": "catalog:src/main.tsx", "lines": "1-12", "observation": "UTM capture runs at application startup." },
+        { "path": "catalog:src/features/contact/ApplicationForm.tsx", "lines": "256-274", "observation": "Captured UTM and entry data are attached automatically." },
+        { "path": "crm:shared/applications/application-schema.ts", "lines": "44-50", "observation": "Server accepts bounded UTM strings as untrusted input." }
+      ],
+      "closureRequirement": "Task 16 should define attribution semantics; UTM must never become authorization input."
+    },
+    {
+      "id": "II-6",
+      "title": "Delivery monitoring and retry",
+      "status": "PARTIAL",
+      "currentSeverity": "P1",
+      "owner": "product+engineering",
+      "repositories": ["crm"],
+      "decisionRequired": true,
+      "implementationTask": 8,
+      "assessment": "The audit premise that Telegram failure loses the application is false: the CRM record is written first. Monitoring, an outbox, and automatic retry are still absent.",
+      "evidence": [
+        { "path": "crm:server/applications/application-service.ts", "lines": "117-153", "observation": "DB persistence precedes Telegram; DB failure skips Telegram." },
+        { "path": "crm:server/api/applications-handler.ts", "lines": "98-104", "observation": "Telegram failure returns DELIVERY_FAILED with the persisted request ID." }
+      ],
+      "closureRequirement": "Task 8 covers alerts; Task 15 separately covers a durable outbox after provider approval."
+    },
+    {
+      "id": "II-7",
+      "title": "Extended CRM results",
+      "status": "PARTIAL",
+      "currentSeverity": "P2",
+      "owner": "product+engineering",
+      "repositories": ["crm"],
+      "decisionRequired": true,
+      "implementationTask": 22,
+      "assessment": "Revenue, profit, AOV, conversion, regions, forecasts, and comparisons already exist. Reliable processing-time metrics need status-history timestamps that the current model does not store.",
+      "evidence": [
+        { "path": "crm:server/analytics/results-calculations.ts", "lines": "55-245", "observation": "Current analytics include financial summaries, forecasts, regions, and recommendations." },
+        { "path": "crm:src/app/(crm)/dashboard/_components/dashboard-data.ts", "lines": "33-251", "observation": "Dashboard includes conversion, regions, sources, products, and time series." },
+        { "path": "crm:database/schema.prisma", "lines": "32-62", "observation": "Order has only createdAt and updatedAt, not transition history." }
+      ],
+      "closureRequirement": "Task 22 must freeze formulas and add status history before claiming processing-time accuracy."
+    },
+    {
+      "id": "II-8",
+      "title": "Telegram webhook chat verification",
+      "status": "CONFIRMED",
+      "currentSeverity": "P2",
+      "owner": "engineering",
+      "repositories": ["crm"],
+      "decisionRequired": false,
+      "implementationTask": 7,
+      "assessment": "Webhook secret is required, but message.chat.id is not compared with TELEGRAM_CHAT_ID before mutation.",
+      "evidence": [
+        { "path": "crm:server/api/telegram-webhook-handler.ts", "lines": "87-179", "observation": "Environment includes bot token and webhook secret only; incoming chatId is used directly." },
+        { "path": "crm:server/config/contact-env.ts", "lines": "31-44", "observation": "TELEGRAM_CHAT_ID already exists in the application environment contract." }
+      ],
+      "closureRequirement": "Task 7 should add validated chat identity and negative tests without exposing the identifier."
+    },
+    {
+      "id": "III-1",
+      "title": "Consultation slot management",
+      "status": "DECISION_REQUIRED",
+      "currentSeverity": "feature",
+      "owner": "product",
+      "repositories": ["catalog", "crm"],
+      "decisionRequired": true,
+      "implementationTask": 24,
+      "assessment": "The current form records a preferred date and time and explicitly avoids promising confirmation. There is no availability or slot model.",
+      "evidence": [
+        { "path": "catalog:src/features/contact/ApplicationForm.tsx", "lines": "542-588", "observation": "Consultation date and time are preference inputs." },
+        { "path": "crm:database/schema.prisma", "lines": "41-47", "observation": "Order stores event strings but no ConsultationSlot relation." }
+      ],
+      "closureRequirement": "Task 24 starts only after schedule, capacity, cancellation, and API approval."
+    },
+    {
+      "id": "III-2",
+      "title": "Customer status notifications",
+      "status": "DECISION_REQUIRED",
+      "currentSeverity": "feature",
+      "owner": "product+legal",
+      "repositories": ["crm"],
+      "decisionRequired": true,
+      "implementationTask": 25,
+      "assessment": "No SMS, WhatsApp, or Viber provider is configured; this is a new external communication channel.",
+      "evidence": [
+        { "path": "crm:server/applications/application-types.ts", "lines": "59-77", "observation": "Telegram is the only delivery provider type." }
+      ],
+      "closureRequirement": "Task 25 requires provider, consent, cost, privacy, and RU/RO template approval."
+    },
+    {
+      "id": "III-3",
+      "title": "Operational dashboard",
+      "status": "PARTIAL",
+      "currentSeverity": "P2",
+      "owner": "product+engineering",
+      "repositories": ["crm"],
+      "decisionRequired": true,
+      "implementationTask": 17,
+      "assessment": "A substantial dashboard already exists with periods, status counts, time series, regions, sources, and products. SLA aging and approved live semantics are missing.",
+      "evidence": [
+        { "path": "crm:src/app/(crm)/dashboard/page.tsx", "lines": "35-148", "observation": "The deployed dashboard renders current operational and analytical widgets." },
+        { "path": "crm:src/app/(crm)/orders/_components/orders-table.tsx", "lines": "200-260", "observation": "Orders refresh periodically and on user actions." }
+      ],
+      "closureRequirement": "Task 17 should add only approved SLA indicators; WebSockets require measured need."
+    },
+    {
+      "id": "III-4",
+      "title": "Repeat-client history and profile intelligence",
+      "status": "PARTIAL",
+      "currentSeverity": "P2",
+      "owner": "product+engineering",
+      "repositories": ["crm"],
+      "decisionRequired": true,
+      "implementationTask": 26,
+      "assessment": "Client history, counts, totals, and previous orders already exist. Tags, preferences, notes, and profile-change history do not.",
+      "evidence": [
+        { "path": "crm:src/app/(crm)/actions.ts", "lines": "277-327", "observation": "Client view includes order history, order count, dates, and total value." },
+        { "path": "crm:src/app/(crm)/clients/_components/clients-table.tsx", "lines": "18-220", "observation": "Desktop and mobile client detail views render the history." }
+      ],
+      "closureRequirement": "Task 26 must depend on the canonical profile policy from Task 12."
+    },
+    {
+      "id": "III-5",
+      "title": "Masterclass workflow",
+      "status": "PARTIAL",
+      "currentSeverity": "P3",
+      "owner": "product",
+      "repositories": ["catalog", "crm"],
+      "decisionRequired": true,
+      "implementationTask": 27,
+      "assessment": "The audit is stale about absence: public RU/RO forms, validation, CRM persistence, Telegram formatting, and CRM display already support masterclass requests. A separate published schedule does not exist.",
+      "evidence": [
+        { "path": "catalog:src/features/contact/ApplicationForm.tsx", "lines": "27,303-305,363-374,601-663", "observation": "The public form implements masterclass requests in both locales." },
+        { "path": "crm:server/applications/application-service.ts", "lines": "69-87,103-108", "observation": "CRM persists and formats masterclass fields." }
+      ],
+      "closureRequirement": "Task 27 should first decide whether a separate page and schedule add real value."
+    },
+    {
+      "id": "III-6",
+      "title": "Regional customer experience",
+      "status": "PARTIAL",
+      "currentSeverity": "P2",
+      "owner": "product+content",
+      "repositories": ["catalog", "crm"],
+      "decisionRequired": true,
+      "implementationTask": 28,
+      "assessment": "The shared Moldova region dropdown and RU/RO labels already replace free text. Office, distributor, delivery-time, and regional-manager personalization need verified source data.",
+      "evidence": [
+        { "path": "catalog:src/features/contact/ApplicationForm.tsx", "lines": "406-424", "observation": "The form renders a shared region select with Romanian labels." },
+        { "path": "catalog:shared/applications/application-schema.ts", "lines": "33-40", "observation": "The server accepts only shared Moldova regions." }
+      ],
+      "closureRequirement": "Task 28 cannot publish regional promises or contacts without approved data."
+    },
+    {
+      "id": "III-7",
+      "title": "CRM exports",
+      "status": "DECISION_REQUIRED",
+      "currentSeverity": "feature",
+      "owner": "product+privacy",
+      "repositories": ["crm"],
+      "decisionRequired": true,
+      "implementationTask": 23,
+      "assessment": "No controlled CSV or PDF export workflow exists. This would create a new personal-data egress surface.",
+      "evidence": [
+        { "path": "crm:src/app", "lines": "route inventory", "observation": "Current routes contain dashboard, results, orders, clients, and catalogue views but no export handler." }
+      ],
+      "closureRequirement": "Task 23 requires approved roles, columns, retention, audit logging, and spreadsheet-injection controls."
+    },
+    {
+      "id": "III-8",
+      "title": "Telegram bot CRM commands",
+      "status": "DECISION_REQUIRED",
+      "currentSeverity": "feature",
+      "owner": "product+security",
+      "repositories": ["crm"],
+      "decisionRequired": true,
+      "implementationTask": 18,
+      "assessment": "The webhook recognizes reply keywords for status changes but has no /today, /pending, /stats, or /client command surface.",
+      "evidence": [
+        { "path": "crm:server/api/telegram-webhook-handler.ts", "lines": "10-42,122-181", "observation": "Only status keyword replies are handled." }
+      ],
+      "closureRequirement": "Task 18 requires role, chat, privacy, rate-limit, and audit decisions."
+    },
+    {
+      "id": "III-9",
+      "title": "CRM-to-catalogue popularity loop",
+      "status": "DECISION_REQUIRED",
+      "currentSeverity": "P1-RANKING",
+      "owner": "product",
+      "repositories": ["catalog", "crm"],
+      "decisionRequired": true,
+      "implementationTask": 20,
+      "assessment": "CRM has aggregate product sales data, but no approved export, formula, schedule, or catalogue sync exists.",
+      "evidence": [
+        { "path": "crm:src/app/(crm)/dashboard/_components/dashboard-data.ts", "lines": "187-251", "observation": "CRM calculates top products from completed sales." },
+        { "path": "catalog:src/product-sort.ts", "lines": "59-69", "observation": "Catalogue still reads static ranks." }
+      ],
+      "closureRequirement": "Task 20 depends on Task 19 approving the public meaning of popularity."
+    },
+    {
+      "id": "III-10",
+      "title": "Shared package or equivalent contract architecture",
+      "status": "DECISION_REQUIRED",
+      "currentSeverity": "P2",
+      "owner": "engineering",
+      "repositories": ["catalog", "crm"],
+      "decisionRequired": true,
+      "implementationTask": 29,
+      "assessment": "The audit overstates five active duplicates because Telegram and persistence code now live in CRM. Shared schema and constants are duplicated with equivalent semantics, so drift risk remains but a package is not automatically justified.",
+      "evidence": [
+        { "path": "catalog:shared/applications/application-schema.ts", "lines": "1-242", "observation": "Catalogue owns a formatting-different but semantically equivalent schema copy." },
+        { "path": "crm:shared/applications/application-schema.ts", "lines": "1-190", "observation": "CRM owns the paired schema copy." },
+        { "path": "catalog:api/applications.ts", "lines": "1-91", "observation": "Catalogue application endpoint is now a thin CRM proxy, not a Telegram service fork." }
+      ],
+      "closureRequirement": "Task 29 must compare package, generated contract, CI comparison, and repository coupling before selecting an architecture."
+    }
+  ],
+  "releaseClassification": {
+    "externalOrOwnerControlled": [
+      "P0-LEGAL",
+      "P1-MEDIA-RIGHTS",
+      "P1-CONTENT",
+      "P1-RANKING",
+      "P1-CI-PROTECTION",
+      "P1-SEO-ORIGIN"
+    ],
+    "mixedProductAndEngineering": ["P0-CONTACT"],
+    "confirmedEngineeringWork": ["I-2", "I-3", "I-6", "I-7", "I-8", "II-8"],
+    "optionalDevelopment": ["II-4", "III-1", "III-2", "III-3", "III-4", "III-5", "III-6", "III-7", "III-8", "III-9", "III-10"]
+  }
+}

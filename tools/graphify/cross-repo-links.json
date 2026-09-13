@@ -320,7 +320,20 @@
       "repo": "catalog",
       "task_count": 33,
       "block_count": 7,
-      "next_task": 1,
+      "completed_tasks": [1],
+      "task1_status": "PASS",
+      "task1_evidence": "docs/BUSINESS_LOGIC_AUDIT_V2_RECONCILIATION_2026-09-13.md",
+      "next_task": 2,
+      "_origin": "declared"
+    },
+    {
+      "id": "catalog::docs_business_logic_audit_v2_reconciliation",
+      "label": "Business logic audit V2 Task 1 reconciliation: 26 of 26 findings classified",
+      "description": "Task 1 PASS evidence with 8 confirmed, 10 partial, 2 resolved and 6 decision-required findings. No production implementation was performed.",
+      "file_type": "workflow-evidence",
+      "source_file": "docs/BUSINESS_LOGIC_AUDIT_V2_RECONCILIATION_2026-09-13.md",
+      "source_location": "Task 1 reconciliation",
+      "repo": "catalog",
       "_origin": "declared"
     },
     {
@@ -405,6 +418,12 @@
       "target": "catalog::docs_dr_nona_prompt_workflow",
       "relation": "follows",
       "evidence": "Business-logic work starts after the six-stage visual and technical frontend workflow"
+    },
+    {
+      "source": "catalog::docs_business_logic_audit_v2_tasks",
+      "target": "catalog::docs_business_logic_audit_v2_reconciliation",
+      "relation": "has_task_evidence",
+      "evidence": "Task 1 reconciles all 26 V2 findings before any implementation task starts"
     },
     {
       "source": "catalog::docs_business_logic_audit_v2_tasks",
