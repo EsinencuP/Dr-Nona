@@ -375,12 +375,59 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(240px, 1fr);
   background:
-    radial-gradient(circle at 18% 12%, rgba(201, 235, 239, 0.9), transparent 44%),
-    linear-gradient(135deg, #0d6272, #073c49);
+    radial-gradient(circle at 13% 8%, rgba(205, 239, 242, 0.72), transparent 36%),
+    radial-gradient(circle at 78% 42%, rgba(144, 211, 217, 0.28), transparent 34%),
+    linear-gradient(118deg, #2b8692 0%, #0c6673 43%, #06414c 100%);
 }
 
-.home-promo-banner > article::after {
-  display: none;
+.home-promo-banner__stage {
+  min-width: 0;
+  min-height: 0;
+  position: relative;
+  z-index: 1;
+  grid-column: 2;
+  grid-row: 1;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.home-promo-banner__stage::before {
+  width: min(88%, 360px);
+  aspect-ratio: 1;
+  position: absolute;
+  top: 47%;
+  left: 50%;
+  z-index: -2;
+  border: 1px solid rgba(223, 246, 246, 0.18);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 42%,
+    rgba(231, 249, 247, 0.34),
+    rgba(121, 198, 205, 0.1) 48%,
+    transparent 72%
+  );
+  content: "";
+  transform: translate(-50%, -50%);
+}
+
+.home-promo-banner__stage::after {
+  width: min(62%, 250px);
+  height: 28px;
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    rgba(1, 31, 39, 0.42) 0%,
+    rgba(2, 43, 52, 0.2) 48%,
+    transparent 74%
+  );
+  content: "";
+  transform: translateX(-50%);
 }
 
 .home-promo-banner > article img {
@@ -388,13 +435,16 @@
   height: 100%;
   min-width: 0;
   min-height: 0;
-  grid-column: 2;
-  grid-row: 1;
+  position: relative;
+  z-index: 2;
   object-fit: contain;
   padding: 0;
   background: transparent;
+  filter: drop-shadow(0 18px 18px rgba(1, 28, 36, 0.28));
   scale: var(--home-promo-scale, 1);
-  transition: transform var(--motion-standard) var(--ease-out);
+  transition:
+    transform var(--motion-standard) var(--ease-out),
+    filter var(--motion-standard) var(--ease-standard);
 }
 
 .home-promo-banner .product-picture {
@@ -402,16 +452,14 @@
   height: 100%;
   min-width: 0;
   min-height: 0;
-  grid-column: 2;
-  grid-row: 1;
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: minmax(0, 1fr);
   place-items: center;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 50% 52%, rgba(190, 232, 237, 0.68), transparent 54%),
-    linear-gradient(145deg, rgba(43, 132, 146, 0.38), rgba(5, 55, 68, 0.16));
+  background: transparent;
 }
 
 .home-promo-banner__content {

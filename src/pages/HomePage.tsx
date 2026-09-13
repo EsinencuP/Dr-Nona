@@ -379,13 +379,15 @@ export default function HomePage() {
                 ),
               } as CSSProperties}
             >
-              <ProductImage
-                src={promoProduct.image}
-                alt={promoProduct.officialName}
-                width="1254"
-                height="1254"
-                sizes="(max-width: 640px) calc(100vw - 28px), (max-width: 960px) 48vw, 620px"
-              />
+              <div className="home-promo-banner__stage">
+                <ProductImage
+                  src={promoProduct.image}
+                  alt={promoProduct.officialName}
+                  width="1254"
+                  height="1254"
+                  sizes="(max-width: 640px) calc(100vw - 28px), (max-width: 960px) 48vw, 620px"
+                />
+              </div>
               <div className="home-promo-banner__content">
                 <span>{copy.promo}</span>
                 <h3>{promoProduct.officialName}</h3>

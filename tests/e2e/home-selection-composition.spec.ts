@@ -63,6 +63,9 @@ test("home and selection keep the approved composition at priority widths", asyn
         ".home-promo-banner > article"
       );
       const promoImage = promo?.querySelector<HTMLImageElement>("img");
+      const promoStage = promo?.querySelector<HTMLElement>(
+        ".home-promo-banner__stage"
+      );
       const promoPicture = promo?.querySelector<HTMLElement>(
         ".product-picture"
       );
@@ -89,6 +92,7 @@ test("home and selection keep the approved composition at priority widths", asyn
       const promoImageStyle = promoImage ? getComputedStyle(promoImage) : null;
       const promoPictureRect = promoPicture?.getBoundingClientRect();
       const promoContentRect = promoContent?.getBoundingClientRect();
+      const promoStageRect = promoStage?.getBoundingClientRect();
       const miniMediaRect = miniMedia?.getBoundingClientRect();
       const miniImageStyle = miniImage ? getComputedStyle(miniImage) : null;
 
@@ -107,6 +111,10 @@ test("home and selection keep the approved composition at priority widths", asyn
         promoRows: promoStyle?.gridTemplateRows ?? "",
         promoPictureTop: promoPictureRect?.top ?? 0,
         promoPictureLeft: promoPictureRect?.left ?? 0,
+        promoStageWidth: promoStageRect?.width ?? 0,
+        promoStageHeight: promoStageRect?.height ?? 0,
+        promoStageColumn: promoStage ? getComputedStyle(promoStage).gridColumnStart : "",
+        promoStageRow: promoStage ? getComputedStyle(promoStage).gridRowStart : "",
         promoContentBottom: promoContentRect?.bottom ?? 0,
         promoContentRight: promoContentRect?.right ?? 0,
         promoImageFit: promoImageStyle?.objectFit ?? "",
@@ -142,6 +150,8 @@ test("home and selection keep the approved composition at priority widths", asyn
       homeLayout.spotlightMediaHeight + 1
     );
     expect(homeLayout.promoImageFit).toBe("contain");
+    expect(homeLayout.promoStageWidth).toBeGreaterThan(0);
+    expect(homeLayout.promoStageHeight).toBeGreaterThan(0);
     expect(homeLayout.lordImageFit).toBe("contain");
     expect(homeLayout.miniImageLayoutHeight).toBeCloseTo(
       homeLayout.miniMediaHeight,
@@ -165,11 +175,15 @@ test("home and selection keep the approved composition at priority widths", asyn
     expect(lordMedia.currentSrc).toContain("/collections/lord-collection-");
 
     if (viewport.width <= 640) {
+      expect(homeLayout.promoStageColumn).toBe("1");
+      expect(homeLayout.promoStageRow).toBe("2");
       expect(homeLayout.promoColumns.trim().split(/\s+/)).toHaveLength(1);
       expect(homeLayout.promoPictureTop).toBeGreaterThanOrEqual(
         homeLayout.promoContentBottom - 1
       );
     } else {
+      expect(homeLayout.promoStageColumn).toBe("2");
+      expect(homeLayout.promoStageRow).toBe("1");
       expect(homeLayout.promoColumns.trim().split(/\s+/)).toHaveLength(2);
       expect(homeLayout.promoPictureLeft).toBeGreaterThanOrEqual(
         homeLayout.promoContentRight - 1

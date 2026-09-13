@@ -702,20 +702,19 @@
     padding: 24px 20px 20px;
   }
 
-  .home-promo-banner > article::after {
-    display: none;
+  .home-promo-banner__stage {
+    grid-column: 1;
+    grid-row: 2;
   }
 
   .home-promo-banner > article img {
-    grid-column: 1;
-    grid-row: 2;
     padding: 0;
     scale: var(--home-promo-mobile-scale, 1);
   }
 
   .home-promo-banner .product-picture {
-    grid-column: 1;
-    grid-row: 2;
+    grid-column: auto;
+    grid-row: auto;
   }
 
   .home-promo-banner h3 {
