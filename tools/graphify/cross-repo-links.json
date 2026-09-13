@@ -311,6 +311,19 @@
       "_origin": "declared"
     },
     {
+      "id": "catalog::docs_business_logic_audit_v2_tasks",
+      "label": "Dr Nona business logic audit V2 task workflow: 7 blocks and 33 sequential tasks",
+      "description": "Canonical task backlog for the catalogue and CRM business-logic audit. Open docs/BUSINESS_LOGIC_AUDIT_V2_TASKS.md and execute only the task number explicitly selected by the user.",
+      "file_type": "workflow-document",
+      "source_file": "docs/BUSINESS_LOGIC_AUDIT_V2_TASKS.md",
+      "source_location": "workflow",
+      "repo": "catalog",
+      "task_count": 33,
+      "block_count": 7,
+      "next_task": 1,
+      "_origin": "declared"
+    },
+    {
       "id": "catalog::src_data_products_public",
       "label": "products-public.json",
       "file_type": "data",
@@ -386,6 +399,18 @@
       "target": "catalog::docs_prompt6_final_qa",
       "relation": "tracks_stage",
       "evidence": "Final frontend QA accepted; production remains blocked"
+    },
+    {
+      "source": "catalog::docs_business_logic_audit_v2_tasks",
+      "target": "catalog::docs_dr_nona_prompt_workflow",
+      "relation": "follows",
+      "evidence": "Business-logic work starts after the six-stage visual and technical frontend workflow"
+    },
+    {
+      "source": "catalog::docs_business_logic_audit_v2_tasks",
+      "target": "crm::database_schema_prisma",
+      "relation": "plans_changes_to",
+      "evidence": "Tasks 5, 10, 11, 12, 15, 20, 22 and 24 include guarded persistence or migration work"
     },
     {
       "source": "catalog::docs_prompt5_performance",
