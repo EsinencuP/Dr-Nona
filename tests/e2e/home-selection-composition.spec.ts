@@ -72,6 +72,13 @@ test("home and selection keep the approved composition at priority widths", asyn
       const lordImage = document.querySelector<HTMLImageElement>(
         ".home-lord-banner__visual img"
       );
+      const miniMedia = document.querySelector<HTMLElement>(
+        ".home-product-mini__media"
+      );
+      const miniPicture = miniMedia?.querySelector<HTMLElement>(
+        ".product-picture"
+      );
+      const miniImage = miniPicture?.querySelector<HTMLImageElement>("img");
       const heroRect = hero?.getBoundingClientRect();
       const scienceRect = science?.getBoundingClientRect();
       const spotlightRect = spotlight?.getBoundingClientRect();
@@ -82,6 +89,8 @@ test("home and selection keep the approved composition at priority widths", asyn
       const promoImageStyle = promoImage ? getComputedStyle(promoImage) : null;
       const promoPictureRect = promoPicture?.getBoundingClientRect();
       const promoContentRect = promoContent?.getBoundingClientRect();
+      const miniMediaRect = miniMedia?.getBoundingClientRect();
+      const miniImageStyle = miniImage ? getComputedStyle(miniImage) : null;
 
       return {
         heroBottom: heroRect?.bottom ?? 0,
@@ -102,6 +111,14 @@ test("home and selection keep the approved composition at priority widths", asyn
         promoContentRight: promoContentRect?.right ?? 0,
         promoImageFit: promoImageStyle?.objectFit ?? "",
         lordImageFit: lordImage ? getComputedStyle(lordImage).objectFit : "",
+        miniMediaHeight: miniMediaRect?.height ?? 0,
+        miniImageLayoutHeight: Number.parseFloat(miniImageStyle?.height ?? "0"),
+        miniSourceDisplays: miniPicture
+          ? [...miniPicture.querySelectorAll("source")].map(
+              (source) => getComputedStyle(source).display
+            )
+          : [],
+        miniImageSource: miniImage?.currentSrc ?? "",
         documentWidth: document.documentElement.scrollWidth,
         viewportWidth: document.documentElement.clientWidth,
       };
@@ -126,6 +143,12 @@ test("home and selection keep the approved composition at priority widths", asyn
     );
     expect(homeLayout.promoImageFit).toBe("contain");
     expect(homeLayout.lordImageFit).toBe("contain");
+    expect(homeLayout.miniImageLayoutHeight).toBeCloseTo(
+      homeLayout.miniMediaHeight,
+      0
+    );
+    expect(homeLayout.miniSourceDisplays).toEqual(["none", "none"]);
+    expect(homeLayout.miniImageSource).toContain("/products/catalog-responsive/");
     expect(homeLayout.documentWidth).toBeLessThanOrEqual(homeLayout.viewportWidth + 1);
 
     const lordImage = page.locator(".home-lord-banner__visual img");

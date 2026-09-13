@@ -434,3 +434,7 @@
 .product-picture {
   display: contents;
 }
+
+.product-picture > source {
+  display: none;
+}
