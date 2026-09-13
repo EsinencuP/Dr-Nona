@@ -320,10 +320,16 @@
       "repo": "catalog",
       "task_count": 33,
       "block_count": 7,
-      "completed_tasks": [1],
+      "completed_tasks": [1, 2, 3],
+      "completed_blocks": [0],
+      "block0_status": "PASS",
       "task1_status": "PASS",
       "task1_evidence": "docs/BUSINESS_LOGIC_AUDIT_V2_RECONCILIATION_2026-09-13.md",
-      "next_task": 2,
+      "task2_status": "PASS",
+      "task2_evidence": "docs/BUSINESS_LOGIC_TASK_2_CONTRACT_OWNERSHIP_2026-09-13.md",
+      "task3_status": "PASS",
+      "task3_evidence": "docs/BUSINESS_LOGIC_TASK_3_BASELINE_ROLLBACK_2026-09-13.md",
+      "next_task": 4,
       "_origin": "declared"
     },
     {
@@ -334,6 +340,31 @@
       "source_file": "docs/BUSINESS_LOGIC_AUDIT_V2_RECONCILIATION_2026-09-13.md",
       "source_location": "Task 1 reconciliation",
       "repo": "catalog",
+      "_origin": "declared"
+    },
+    {
+      "id": "catalog::docs_business_logic_task_2_contract_ownership",
+      "label": "Business logic Task 2 PASS: cross-repository contract and ownership frozen",
+      "description": "Catalog-to-CRM request fields, responses, enum-like values, identifiers, quantities, canonical owners, drift classification and compatibility rules are explicit. No shared package or source refactor was started.",
+      "file_type": "workflow-evidence",
+      "source_file": "docs/BUSINESS_LOGIC_TASK_2_CONTRACT_OWNERSHIP_2026-09-13.md",
+      "source_location": "Task 2 contract and ownership",
+      "repo": "catalog",
+      "status": "PASS",
+      "machine_evidence": "docs/business-logic-contract-v1.json",
+      "_origin": "declared"
+    },
+    {
+      "id": "catalog::docs_business_logic_task_3_baseline_rollback",
+      "label": "Business logic Task 3 PASS: migration rollback and verification baseline",
+      "description": "Clean repository SHAs, CI/deployment state, migration state, sanitized CRM counts, rollback procedures, smoke matrix, external approvals and evidence rules are captured without production mutation.",
+      "file_type": "workflow-evidence",
+      "source_file": "docs/BUSINESS_LOGIC_TASK_3_BASELINE_ROLLBACK_2026-09-13.md",
+      "source_location": "Task 3 baseline rollback and verification",
+      "repo": "catalog",
+      "status": "PASS",
+      "machine_evidence": "docs/business-logic-baseline-2026-09-13.json",
+      "next_task": 4,
       "_origin": "declared"
     },
     {
@@ -424,6 +455,24 @@
       "target": "catalog::docs_business_logic_audit_v2_reconciliation",
       "relation": "has_task_evidence",
       "evidence": "Task 1 reconciles all 26 V2 findings before any implementation task starts"
+    },
+    {
+      "source": "catalog::docs_business_logic_audit_v2_tasks",
+      "target": "catalog::docs_business_logic_task_2_contract_ownership",
+      "relation": "has_task_evidence",
+      "evidence": "Task 2 freezes the current cross-repository request contract, canonical owners and compatibility rules"
+    },
+    {
+      "source": "catalog::docs_business_logic_task_2_contract_ownership",
+      "target": "catalog::docs_business_logic_task_3_baseline_rollback",
+      "relation": "precedes",
+      "evidence": "Task 3 uses the frozen contract to define rollback and cross-repository smoke coverage"
+    },
+    {
+      "source": "catalog::docs_business_logic_task_3_baseline_rollback",
+      "target": "crm::database_schema_prisma",
+      "relation": "documents",
+      "evidence": "Captures the up-to-date two-migration baseline and safe expand-migrate-verify-contract rollback procedure"
     },
     {
       "source": "catalog::docs_business_logic_audit_v2_tasks",

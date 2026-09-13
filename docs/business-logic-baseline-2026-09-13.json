@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "task": 3,
+  "status": "PASS",
+  "capturedAt": "2026-09-13T22:40:48+03:00",
+  "productionMutationPerformed": false,
+  "repositories": {
+    "catalog": {
+      "repository": "EsinencuP/Dr-Nona",
+      "branch": "main",
+      "sha": "659359c987bbb7f8ccb42934b5bce025ce7d58ee",
+      "cleanAtCapture": true,
+      "branchProtection": "ABSENT",
+      "ci": {
+        "runId": 34775413716,
+        "status": "completed",
+        "conclusion": "failure",
+        "url": "https://github.com/EsinencuP/Dr-Nona/actions/runs/34775413716",
+        "passedE2e": 358,
+        "failedE2e": 3,
+        "failures": [
+          "stale Romanian alt-text assertion in desktop project",
+          "stale Romanian alt-text assertion in mobile project",
+          "tablet-768 catalogue visual baseline mismatch"
+        ]
+      },
+      "production": {
+        "provider": "Vercel",
+        "project": "dr-nona",
+        "deploymentId": "dpl_FFF8F9xyoeA2Z99j44UjohAgU4GR",
+        "deploymentUrl": "https://dr-nona-q3xy8wvga-themrack26-1196s-projects.vercel.app",
+        "alias": "https://dr-nona-bice.vercel.app",
+        "status": "READY"
+      }
+    },
+    "crm": {
+      "repository": "EsinencuP/Dr-Nona-CRM",
+      "branch": "main",
+      "sha": "9e5daa09060b2f531c4b93b85bfd856cfde43d88",
+      "cleanAtCapture": true,
+      "branchProtection": "ABSENT",
+      "ci": {
+        "runId": 34727832117,
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/EsinencuP/Dr-Nona-CRM/actions/runs/34727832117",
+        "tests": 181
+      },
+      "production": {
+        "provider": "Vercel",
+        "project": "dr.nona.crm",
+        "deploymentId": "dpl_HjYP5L3jnbeSReGqw3r5HYuz2enj",
+        "deploymentUrl": "https://drnona-4eulboari-themrack26-1196s-projects.vercel.app",
+        "alias": "https://drnonacrm-zeta.vercel.app",
+        "status": "READY"
+      }
+    }
+  },
+  "database": {
+    "provider": "PostgreSQL on Neon",
+    "migrationStatus": "UP_TO_DATE",
+    "migrationCount": 2,
+    "migrations": [
+      "20260902182949_init_crm_schema",
+      "20260912000000_results_fixed_prices"
+    ],
+    "sanitizedProductionCounts": {
+      "orders": 20,
+      "clients": 9,
+      "catalogProducts": 50,
+      "productsWithConfiguredPrices": 50,
+      "completedOrdersInDefaultResultsRange": 5
+    },
+    "runtimeDisclosure": "Historical monetary metrics remain explicitly partial when an order lacks immutable price snapshots."
+  },
+  "rollback": {
+    "application": [
+      "Record current deployment ID and target commit before rollout.",
+      "Keep the previous READY Vercel deployment available.",
+      "Re-promote the previous deployment or revert the owning Git commit if smoke checks fail.",
+      "Verify both sides of the catalog/CRM contract after rollback."
+    ],
+    "schema": [
+      "Create a Neon branch or verified logical backup before any migration.",
+      "Run prisma migrate deploy with the direct migration URL; never use db push in production.",
+      "Use expand, migrate/backfill, verify, contract for breaking changes.",
+      "Prefer a forward repair migration; restore only from a verified snapshot when destructive rollback is unavoidable."
+    ],
+    "data": [
+      "Use deterministic IDs or an explicit demo marker for test fixtures.",
+      "Dry-run cleanup and report sanitized counts before deletion.",
+      "Never bulk-delete real customer records as part of demo rollback.",
+      "Verify totals, price snapshots, and analytics after cleanup."
+    ]
+  },
+  "smokeMatrix": [
+    { "id": "AUTH-ANON", "surface": "CRM protected routes", "expected": "401 without credentials", "baseline": "PASS" },
+    { "id": "AUTH-VALID", "surface": "dashboard/orders/clients/catalog/results", "expected": "200 with valid credentials and no runtime error", "baseline": "PASS" },
+    { "id": "FORM-RU", "surface": "RU public application", "expected": "valid request conforms to frozen contract", "baseline": "DEFINED_NOT_MUTATED" },
+    { "id": "FORM-RO", "surface": "RO public application", "expected": "same fields and behavior with locale ro-MD", "baseline": "DEFINED_NOT_MUTATED" },
+    { "id": "FORM-INVALID", "surface": "public validation", "expected": "400 with safe field errors; no DB row or Telegram message", "baseline": "DEFINED_NOT_MUTATED" },
+    { "id": "PERSIST-FIRST", "surface": "CRM application service", "expected": "DB transaction completes before Telegram delivery", "baseline": "SOURCE_VERIFIED" },
+    { "id": "TELEGRAM-SUCCESS", "surface": "Telegram delivery", "expected": "201 and one stored telegramMessageId", "baseline": "DEFINED_NOT_MUTATED" },
+    { "id": "TELEGRAM-FAIL", "surface": "Telegram delivery failure", "expected": "502 DELIVERY_FAILED with persisted request and no fabricated success", "baseline": "SOURCE_AND_TEST_VERIFIED" },
+    { "id": "WEBHOOK", "surface": "Telegram webhook", "expected": "valid secret/status updates exactly one mapped order; invalid update cannot mutate", "baseline": "DEFINED_FOR_TASK_7_AND_14" },
+    { "id": "IDEMPOTENCY", "surface": "duplicate submission", "expected": "one order and one delivery per accepted key", "baseline": "KNOWN_GAP_TASK_5" },
+    { "id": "RATE", "surface": "abuse guard", "expected": "stable limit across instances with Retry-After", "baseline": "KNOWN_GAP_TASK_6" },
+    { "id": "ANALYTICS", "surface": "CRM results", "expected": "counts match DB and missing price data is disclosed", "baseline": "PASS" }
+  ],
+  "externalApprovals": [
+    { "topic": "distributed rate limiting / KV / Redis / WAF", "owner": "product+engineering", "requiredBefore": 6 },
+    { "topic": "monitoring provider and alert destination", "owner": "product+operations", "requiredBefore": 8 },
+    { "topic": "SMS, WhatsApp or Viber provider and consent", "owner": "product+legal", "requiredBefore": 25 },
+    { "topic": "new external APIs or shared package publication", "owner": "owner+engineering", "requiredBefore": "implementation" },
+    { "topic": "Moldova consent, privacy recipient and retention policy", "owner": "legal+product", "requiredBefore": "P0-CONTACT closure" },
+    { "topic": "claims, certificates, media rights and publication", "owner": "legal+content", "requiredBefore": "production release" },
+    { "topic": "analytics/cookie/monitoring policy", "owner": "product+legal", "requiredBefore": "provider integration" },
+    { "topic": "production origin and branch protection", "owner": "engineering+owner", "requiredBefore": "release approval" }
+  ],
+  "evidenceRules": [
+    "Store commit SHAs, run IDs, deployment IDs, timestamps, status codes, migration names, and sanitized counts.",
+    "Never store credentials, tokens, connection strings, raw authorization headers, customer names, phones, emails, comments, IP addresses, or Telegram payloads.",
+    "Redact provider host details when they do not help reproduce the check.",
+    "Use request IDs only when they cannot be connected to customer data in public artifacts.",
+    "Keep runtime screenshots and logs out of Git unless deliberately sanitized and required as durable evidence.",
+    "Record failed checks honestly; PASS for this task means the baseline is complete, not that the full project or CI is release-ready."
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": "1.0",
+  "task": 2,
+  "status": "PASS",
+  "asOf": "2026-09-13",
+  "catalogCommit": "659359c987bbb7f8ccb42934b5bce025ce7d58ee",
+  "crmCommit": "9e5daa09060b2f531c4b93b85bfd856cfde43d88",
+  "flow": [
+    "catalog:ApplicationForm",
+    "catalog:application-client",
+    "catalog:/api/applications proxy",
+    "crm:applications-handler",
+    "crm:application-service",
+    "crm:Prisma transaction",
+    "crm:Telegram delivery",
+    "crm:Telegram webhook",
+    "crm:dashboard/orders/clients/catalog/results"
+  ],
+  "wireContract": {
+    "endpoint": "POST /api/applications",
+    "contentType": "application/json",
+    "idempotencyHeader": "Idempotency-Key",
+    "locales": ["ru-MD", "ro-MD"],
+    "commonFields": [
+      { "name": "type", "required": true, "values": ["order", "consultation", "masterclass"] },
+      { "name": "locale", "required": true, "values": ["ru-MD", "ro-MD"] },
+      { "name": "firstName", "required": true },
+      { "name": "lastName", "required": true },
+      { "name": "phone", "required": true },
+      { "name": "city", "required": true, "valuesSource": "MOLDOVA_REGIONS" },
+      { "name": "consentAccepted", "required": true, "value": true },
+      { "name": "website", "required": false, "constraint": "honeypot must be empty" },
+      { "name": "email", "required": false },
+      { "name": "comment", "required": false, "maxLength": 500 },
+      { "name": "preferredCallTime", "required": false, "maxLength": 100 },
+      { "name": "utmSource", "required": false, "maxLength": 200 },
+      { "name": "utmMedium", "required": false, "maxLength": 200 },
+      { "name": "utmCampaign", "required": false, "maxLength": 200 },
+      { "name": "utmContent", "required": false, "maxLength": 200 },
+      { "name": "entryPoint", "required": false, "maxLength": 500 },
+      { "name": "sessionHistory", "required": false, "maxLength": 2000 }
+    ],
+    "variants": {
+      "order": {
+        "productSlugs": { "required": true, "minItems": 1, "maxItems": 20, "unique": true },
+        "items": {
+          "required": false,
+          "maxItems": 20,
+          "fields": {
+            "slug": "canonical published product slug",
+            "quantity": { "type": "integer", "minimum": 1, "maximum": 99 }
+          }
+        }
+      },
+      "consultation": {
+        "consultationMode": ["online", "offline"],
+        "date": "YYYY-MM-DD, future only",
+        "time": "HH:mm",
+        "timezone": "Europe/Chisinau"
+      },
+      "masterclass": {
+        "topic": { "valuesSource": "MASTERCLASS_TOPICS", "count": 5 },
+        "eventDate": "YYYY-MM-DD, future only",
+        "eventTime": "HH:mm",
+        "timezone": "Europe/Chisinau"
+      }
+    }
+  },
+  "responses": [
+    { "status": 201, "owner": "crm", "meaning": "persisted and Telegram sent", "shape": "{ok:true,requestId,delivery:{telegram:'sent'}}" },
+    { "status": 400, "owner": "catalog-proxy-or-crm", "meaning": "invalid content type, body, fields, or idempotency key" },
+    { "status": 403, "owner": "crm", "meaning": "origin forbidden" },
+    { "status": 405, "owner": "catalog-proxy-or-crm", "meaning": "method not allowed" },
+    { "status": 413, "owner": "catalog-proxy-or-crm", "meaning": "request body exceeds bound" },
+    { "status": 429, "owner": "crm", "meaning": "rate limited; Retry-After supplied" },
+    { "status": 502, "owner": "catalog-proxy", "meaning": "CRM upstream unavailable" },
+    { "status": 502, "owner": "crm", "meaning": "record persisted but Telegram delivery failed", "code": "DELIVERY_FAILED" },
+    { "status": 503, "owner": "catalog-proxy-or-crm", "meaning": "required runtime configuration unavailable" }
+  ],
+  "enumLikeValues": {
+    "applicationTypes": ["order", "consultation", "masterclass"],
+    "orderStatuses": ["NEW", "PROCESSING", "DELIVERY", "DONE", "CANCELLED"],
+    "consultationModes": ["online", "offline"],
+    "dashboardRanges": ["7d", "30d", "90d", "all"],
+    "regionCount": 36,
+    "masterclassTopicCount": 5
+  },
+  "identifiers": [
+    { "concept": "product", "identifier": "slug", "owner": "catalog", "rule": "immutable after publication; CRM copies it as a convention, not a foreign key" },
+    { "concept": "product secondary identity", "identifier": "sku", "owner": "catalog", "rule": "copied to CRM projections" },
+    { "concept": "request/order", "identifier": "UUID string", "owner": "crm" },
+    { "concept": "client", "identifier": "UUID plus unique normalized phone", "owner": "crm" },
+    { "concept": "Telegram message", "identifier": "telegramMessageId unique when present", "owner": "crm" }
+  ],
+  "ownership": [
+    { "concept": "published product identity, localization, category, image, publication", "owner": "catalog" },
+    { "concept": "application wire schema semantics", "owner": "crm", "consumer": "catalog", "syncRule": "coordinated copies plus parity validation until a separately approved shared architecture exists" },
+    { "concept": "Moldova regions and masterclass topic wire values", "owner": "catalog+crm coordinated business contract", "rule": "Russian tokens are canonical wire values; Romanian labels are presentation" },
+    { "concept": "public form UI, client validation, selection, UTM capture", "owner": "catalog" },
+    { "concept": "same-origin API proxy and upstream endpoint configuration", "owner": "catalog" },
+    { "concept": "server validation, origin policy, rate limiting, idempotency", "owner": "crm" },
+    { "concept": "Prisma schema, migrations, persistence, clients and orders", "owner": "crm" },
+    { "concept": "Telegram delivery, webhook and Telegram-derived status changes", "owner": "crm" },
+    { "concept": "internal prices and immutable order price snapshots", "owner": "crm" },
+    { "concept": "dashboard and results formulas", "owner": "crm" },
+    { "concept": "project release blockers, legal/content approval evidence", "owner": "catalog docs/release-status.json" },
+    { "concept": "merged code knowledge graph", "owner": "catalog tools/graphify" }
+  ],
+  "driftAssessment": {
+    "formatOnly": [
+      "application schema formatting",
+      "relative import extension style",
+      "repository-local module paths"
+    ],
+    "semanticDrift": [],
+    "knownGaps": [
+      "idempotency key is syntax-validated but not persisted",
+      "rate limiting is process-local",
+      "order type and status are database strings rather than database enums",
+      "application service constructs a second Prisma client"
+    ]
+  },
+  "compatibilityRules": [
+    "Add optional fields before any producer sends them.",
+    "Deploy CRM acceptance before catalog emission.",
+    "Required-field, enum-value, removal, or meaning changes require a two-phase rollout and explicit contract version decision.",
+    "Keep the previous producer contract accepted for at least one release window unless a security issue requires a documented exception.",
+    "Product slugs are immutable after publication; stale or unknown slugs must be rejected or quarantined, never remapped silently.",
+    "Response status and error-code meaning are stable API behavior.",
+    "Database breaking changes use expand, migrate, verify, contract; do not rely on simultaneous deployments.",
+    "Do not create a shared package or cross-repository refactor without a separate approved task."
+  ]
+}
