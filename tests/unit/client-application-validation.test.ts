@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { validateClientApplication } from "../../src/features/contact/client-application-validation";
 import { MASTERCLASS_TOPICS } from "../../shared/constants/masterclass-topics";
+import productsJson from "../../src/data/products-public.json";
 
 const common = {
   firstName: " Ana ",
@@ -21,6 +22,30 @@ const common = {
 };
 
 describe("client application validation", () => {
+  test("preserves quantity boundaries for all 50 published products", () => {
+    const products = productsJson as Array<{ slug: string }>;
+    expect(products).toHaveLength(50);
+    const allowed = new Set(products.map((product) => product.slug));
+
+    for (const product of products) {
+      for (const quantity of [1, 99]) {
+        const result = validateClientApplication(
+          {
+            ...common,
+            type: "order",
+            productSlugs: [product.slug],
+            items: [{ slug: product.slug, quantity }],
+          },
+          allowed
+        );
+        expect(result.success, `${product.slug} × ${quantity}`).toBe(true);
+        if (result.success && result.data.type === "order") {
+          expect(result.data.items).toEqual([{ slug: product.slug, quantity }]);
+        }
+      }
+    }
+  });
+
   test.each([
     [
       "order",
@@ -32,7 +57,7 @@ describe("client application validation", () => {
       {
         type: "consultation",
         consultationMode: "online",
-        consultationDate: "2099-01-01",
+        consultationDate: "2030-01-15",
         consultationTime: "10:00",
       },
       new Set<string>(),
@@ -42,7 +67,7 @@ describe("client application validation", () => {
       {
         type: "masterclass",
         masterclassTopic: MASTERCLASS_TOPICS[0],
-        eventDate: "2099-01-01",
+        eventDate: "2030-02-15",
         eventTime: "10:00",
       },
       new Set<string>(),
@@ -50,7 +75,9 @@ describe("client application validation", () => {
   ])("passes optional fields through for %s", (_label, variant, allowed) => {
     const result = validateClientApplication(
       { ...common, ...variant },
-      allowed
+      allowed,
+      "ru",
+      new Date("2030-01-01T10:00:00.000Z")
     );
 
     expect(result.success).toBe(true);
@@ -69,7 +96,7 @@ describe("client application validation", () => {
     }
   });
 
-  test("normalizes order quantities and ignores unselected item records", () => {
+  test("rejects out-of-range and unselected quantity records", () => {
     const result = validateClientApplication(
       {
         ...common,
@@ -83,12 +110,49 @@ describe("client application validation", () => {
       new Set(["lord-deodorant"])
     );
 
+    expect(result.success).toBe(false);
+    if (!result.success) expect(result.fieldErrors).toHaveProperty("items");
+  });
+
+  test.each([1, 99])("preserves exact order quantity %s", (quantity) => {
+    const result = validateClientApplication(
+      {
+        ...common,
+        type: "order",
+        productSlugs: ["lord-deodorant"],
+        items: [{ slug: "lord-deodorant", quantity }],
+      },
+      new Set(["lord-deodorant"])
+    );
+
     expect(result.success).toBe(true);
     if (result.success && result.data.type === "order") {
-      expect(result.data.items).toEqual([
-        { slug: "lord-deodorant", quantity: 99 },
-      ]);
+      expect(result.data.items).toEqual([{ slug: "lord-deodorant", quantity }]);
     }
+  });
+
+  test.each([
+    {
+      productSlugs: ["lord-deodorant", "lord-deodorant"],
+      items: [
+        { slug: "lord-deodorant", quantity: 1 },
+        { slug: "lord-deodorant", quantity: 1 },
+      ],
+    },
+    {
+      productSlugs: ["lord-deodorant", "hand-nail-cream"],
+      items: [{ slug: "lord-deodorant", quantity: 1 }],
+    },
+    {
+      productSlugs: ["lord-deodorant"],
+      items: [{ slug: "lord-deodorant", quantity: 1.5 }],
+    },
+  ])("rejects conflicting order representations", (order) => {
+    const result = validateClientApplication(
+      { ...common, type: "order", ...order },
+      new Set(["lord-deodorant", "hand-nail-cream"])
+    );
+    expect(result.success).toBe(false);
   });
 
   test("rejects an arbitrary region before submission", () => {
@@ -115,11 +179,12 @@ describe("client application validation", () => {
         ...common,
         type: "masterclass",
         masterclassTopic: "Произвольная тема",
-        eventDate: "2099-01-01",
+        eventDate: "2030-02-15",
         eventTime: "10:00",
       },
       new Set(),
-      "ro"
+      "ro",
+      new Date("2030-01-01T10:00:00.000Z")
     );
 
     expect(result).toEqual({

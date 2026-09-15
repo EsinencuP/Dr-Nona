@@ -1,6 +1,13 @@
 import { expect, test, type Page } from "@playwright/test";
 import { MASTERCLASS_TOPICS } from "../../shared/constants/masterclass-topics";
 
+const validConsultationDate = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Europe/Chisinau",
+}).format(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000));
+const validMasterclassDate = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Europe/Chisinau",
+}).format(new Date(Date.now() + 60 * 24 * 60 * 60 * 1000));
+
 async function fillCommon(page: Page) {
   await page.getByLabel("Имя").fill("Ana");
   await page.getByLabel("Фамилия").fill("Popescu");
@@ -44,7 +51,7 @@ test("consultation success uses mocked API and focuses status", async ({ page })
   await page
     .getByLabel("Удобное время для звонка (необязательно)")
     .fill("После 18:00");
-  await page.getByLabel("Предпочтительная дата").fill("2099-01-01");
+  await page.getByLabel("Предпочтительная дата").fill(validConsultationDate);
   await page.getByLabel("Предпочтительное время").fill("10:00");
   await page.getByRole("button", { name: "Отправить заявку" }).click();
   await expect(page.getByText(/Заявка №request-e2e отправлена/)).toBeVisible();
@@ -87,7 +94,7 @@ test("Romanian contact form submits ro-MD through the same API contract", async 
     .getByLabel("Regiunea de livrare (Moldova)")
     .selectOption("Кишинёв");
   await page.getByRole("checkbox").check();
-  await page.getByLabel("Data preferată").fill("2099-01-01");
+  await page.getByLabel("Data preferată").fill(validConsultationDate);
   await page.getByLabel("Ora preferată").fill("10:00");
   await page.getByRole("button", { name: "Trimite solicitarea" }).click();
 
@@ -161,7 +168,7 @@ test("masterclass submits its canonical topic and preferred schedule", async ({
   await page
     .getByLabel("Тема мастер-класса")
     .selectOption(MASTERCLASS_TOPICS[3]);
-  await page.getByLabel("Желаемая дата").fill("2099-01-01");
+  await page.getByLabel("Желаемая дата").fill(validMasterclassDate);
   await page.getByLabel("Желаемое время").fill("14:30");
   await page.getByRole("button", { name: "Отправить заявку" }).click();
 
@@ -172,7 +179,7 @@ test("masterclass submits its canonical topic and preferred schedule", async ({
     locale: "ru-MD",
     type: "masterclass",
     masterclassTopic: MASTERCLASS_TOPICS[3],
-    eventDate: "2099-01-01",
+    eventDate: validMasterclassDate,
     eventTime: "14:30",
   });
 });
@@ -190,7 +197,7 @@ test("client validation and complete failure preserve data", async ({ page }) =>
   await page.getByRole("button", { name: "Отправить заявку" }).click();
   await expect(page.getByText("Проверьте отмеченные поля.")).toBeVisible();
   await fillCommon(page);
-  await page.getByLabel("Предпочтительная дата").fill("2099-01-01");
+  await page.getByLabel("Предпочтительная дата").fill(validConsultationDate);
   await page.getByLabel("Предпочтительное время").fill("10:00");
   const submit = page.getByRole("button", { name: "Отправить заявку" });
   await submit.click();
@@ -205,7 +212,7 @@ test("offline submission reports failure and preserves entered data", async ({
   await page.route("**/api/applications", (route) => route.abort("internetdisconnected"));
   await page.goto("/contactus");
   await fillCommon(page);
-  await page.getByLabel("Предпочтительная дата").fill("2099-01-01");
+  await page.getByLabel("Предпочтительная дата").fill(validConsultationDate);
   await page.getByLabel("Предпочтительное время").fill("10:00");
 
   await page.getByRole("button", { name: "Отправить заявку" }).click();
@@ -228,7 +235,7 @@ test("consent is required, linked to privacy policy and receives focus", async (
   await page.getByLabel("Фамилия").fill("Popescu");
   await page.getByLabel("Телефон").fill("069 123 456");
   await page.getByLabel("Регион доставки (Молдова)").selectOption("Кишинёв");
-  await page.getByLabel("Предпочтительная дата").fill("2099-01-01");
+  await page.getByLabel("Предпочтительная дата").fill(validConsultationDate);
   await page.getByLabel("Предпочтительное время").fill("10:00");
 
   const consent = page.getByRole("checkbox");

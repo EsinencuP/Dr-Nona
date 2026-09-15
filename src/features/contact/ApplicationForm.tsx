@@ -16,6 +16,7 @@ import {
   MOLDOVA_REGIONS,
   MOLDOVA_REGION_LABELS_RO,
 } from "../../../shared/constants/moldova-regions";
+import { getAppointmentBounds } from "../../../shared/applications/appointment-policy";
 import { marketData } from "../../market";
 import { useLocale } from "../../locales/LocaleProvider";
 import { Link } from "../../router";
@@ -84,6 +85,12 @@ function localizeServerErrors(
     "Некорректное время": "Oră incorectă",
     "Выберите будущую дату и время по часовому поясу Кишинёва":
       "Selectați o dată și o oră viitoare în fusul orar al Chișinăului",
+    "Выберите дату консультации не позднее чем через 90 дней":
+      "Selectați o dată pentru consultație în următoarele 90 de zile",
+    "Выберите дату мастер-класса начиная со следующего дня":
+      "Selectați o dată pentru masterclass începând de mâine",
+    "Выберите дату мастер-класса не позднее чем через 180 дней":
+      "Selectați o dată pentru masterclass în următoarele 180 de zile",
   };
   return Object.fromEntries(
     Object.entries(errors).map(([field, message]) => [
@@ -98,6 +105,13 @@ export function ApplicationForm({
   submit = submitApplication,
 }: ApplicationFormProps) {
   const { locale, t } = useLocale();
+  const appointmentBounds = useMemo(
+    () => ({
+      consultation: getAppointmentBounds("consultation"),
+      masterclass: getAppointmentBounds("masterclass"),
+    }),
+    []
+  );
   const copy = locale === "ro"
     ? {
         eyebrow: "Contactați un consultant",
@@ -564,6 +578,8 @@ export function ApplicationForm({
                 <input
                   name="consultationDate"
                   type="date"
+                  min={appointmentBounds.consultation.minimumDate}
+                  max={appointmentBounds.consultation.maximumDate}
                   disabled={accepted}
                   aria-invalid={Boolean(fieldErrors.consultationDate)}
                   aria-describedby={describedBy(
@@ -637,6 +653,8 @@ export function ApplicationForm({
                 <input
                   name="eventDate"
                   type="date"
+                  min={appointmentBounds.masterclass.minimumDate}
+                  max={appointmentBounds.masterclass.maximumDate}
                   disabled={accepted}
                   aria-invalid={Boolean(fieldErrors.eventDate)}
                   aria-describedby={describedBy("eventDate", fieldErrors)}

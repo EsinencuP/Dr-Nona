@@ -5,6 +5,7 @@ import {
 } from "../../shared/applications/application-schema";
 import { MASTERCLASS_TOPICS } from "../../shared/constants/masterclass-topics";
 import { MOLDOVA_REGIONS } from "../../shared/constants/moldova-regions";
+import orderContractFixtures from "../../shared/applications/order-contract-fixtures.json";
 
 const allowed = new Set(["lord-deodorant"]);
 const base = {
@@ -44,7 +45,7 @@ describe("application schema", () => {
       expect(result.success).toBe(false);
     }
   });
-  test("accepts and trims a valid order, while deduplicating products", () => {
+  test("rejects duplicate product representations instead of silently deduplicating", () => {
     const result = validateApplicationInput(
       {
         ...base,
@@ -54,17 +55,31 @@ describe("application schema", () => {
       },
       { allowedProductSlugs: allowed }
     );
-    expect(result.success).toBe(true);
-    if (result.success) {
-      expect(result.data.firstName).toBe("Ana-Maria");
-      expect(result.data.type === "order" && result.data.productSlugs).toEqual([
-        "lord-deodorant",
-      ]);
-      expect(result.data.type === "order" && result.data.items).toEqual([
-        { slug: "lord-deodorant", quantity: 3 },
-      ]);
-    }
+    expect(result.success).toBe(false);
+    if (!result.success) expect(result.fieldErrors).toHaveProperty("productSlugs");
   });
+
+  test.each(orderContractFixtures.valid)(
+    "accepts cross-repository order fixture: $name",
+    (fixture) => {
+      const result = validateApplicationInput(
+        { ...base, type: "order", ...fixture },
+        { allowedProductSlugs: new Set(orderContractFixtures.allowedProductSlugs) }
+      );
+      expect(result.success).toBe(true);
+    }
+  );
+
+  test.each(orderContractFixtures.invalid)(
+    "rejects cross-repository order fixture: $name",
+    (fixture) => {
+      const result = validateApplicationInput(
+        { ...base, type: "order", ...fixture },
+        { allowedProductSlugs: new Set(orderContractFixtures.allowedProductSlugs) }
+      );
+      expect(result.success).toBe(false);
+    }
+  );
 
   test("accepts and normalizes optional contact and analytics fields", () => {
     const result = validateApplicationInput(

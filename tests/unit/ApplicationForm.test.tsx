@@ -2,6 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 import type { ApplicationInput } from "../../shared/applications/application-schema";
+import { getAppointmentBounds } from "../../shared/applications/appointment-policy";
 import {
   MASTERCLASS_TOPICS,
   MASTERCLASS_TOPIC_LABELS_RO,
@@ -12,6 +13,12 @@ import { LocaleProvider } from "../../src/locales/LocaleProvider";
 import { Router } from "../../src/router";
 
 const { products } = await loadProductData();
+const validConsultationDate = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Europe/Chisinau",
+}).format(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000));
+const validMasterclassDate = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Europe/Chisinau",
+}).format(new Date(Date.now() + 60 * 24 * 60 * 60 * 1000));
 
 async function fillCommon(user: ReturnType<typeof userEvent.setup>) {
   await user.type(screen.getByLabelText("Имя"), "Ana");
@@ -25,6 +32,31 @@ async function fillCommon(user: ReturnType<typeof userEvent.setup>) {
 }
 
 describe("ApplicationForm", () => {
+  test("mirrors the approved appointment date windows in native controls", async () => {
+    const user = userEvent.setup();
+    render(<ApplicationForm products={[]} />);
+    const consultationBounds = getAppointmentBounds("consultation");
+    expect(screen.getByLabelText("Предпочтительная дата")).toHaveAttribute(
+      "min",
+      consultationBounds.minimumDate
+    );
+    expect(screen.getByLabelText("Предпочтительная дата")).toHaveAttribute(
+      "max",
+      consultationBounds.maximumDate
+    );
+
+    await user.click(screen.getByRole("button", { name: "Мастер-класс" }));
+    const masterclassBounds = getAppointmentBounds("masterclass");
+    expect(screen.getByLabelText("Желаемая дата")).toHaveAttribute(
+      "min",
+      masterclassBounds.minimumDate
+    );
+    expect(screen.getByLabelText("Желаемая дата")).toHaveAttribute(
+      "max",
+      masterclassBounds.maximumDate
+    );
+  });
+
   test("focuses the first invalid field after client validation", async () => {
     const user = userEvent.setup();
     render(<ApplicationForm products={[]} />);
@@ -51,7 +83,7 @@ describe("ApplicationForm", () => {
       screen.getByRole("button", { name: "Консультация" })
     ).toHaveAttribute("aria-pressed", "true");
     await fillCommon(user);
-    await user.type(screen.getByLabelText("Предпочтительная дата"), "2099-01-01");
+    await user.type(screen.getByLabelText("Предпочтительная дата"), validConsultationDate);
     await user.type(screen.getByLabelText("Предпочтительное время"), "10:00");
     await user.click(screen.getByRole("button", { name: "Отправить заявку" }));
     await waitFor(() =>
@@ -164,7 +196,7 @@ describe("ApplicationForm", () => {
       screen.getByLabelText("Тема мастер-класса"),
       MASTERCLASS_TOPICS[2]
     );
-    await user.type(screen.getByLabelText("Желаемая дата"), "2099-01-01");
+    await user.type(screen.getByLabelText("Желаемая дата"), validMasterclassDate);
     await user.type(screen.getByLabelText("Желаемое время"), "14:30");
     await user.click(screen.getByRole("button", { name: "Отправить заявку" }));
 
@@ -172,7 +204,7 @@ describe("ApplicationForm", () => {
     expect(submit.mock.calls[0][0]).toMatchObject({
       type: "masterclass",
       masterclassTopic: MASTERCLASS_TOPICS[2],
-      eventDate: "2099-01-01",
+      eventDate: validMasterclassDate,
       eventTime: "14:30",
     });
   });
@@ -186,7 +218,7 @@ describe("ApplicationForm", () => {
       />
     );
     await fillCommon(user);
-    await user.type(screen.getByLabelText("Предпочтительная дата"), "2099-01-01");
+    await user.type(screen.getByLabelText("Предпочтительная дата"), validConsultationDate);
     await user.type(screen.getByLabelText("Предпочтительное время"), "10:00");
     await user.click(screen.getByRole("button", { name: "Отправить заявку" }));
     await waitFor(() =>
@@ -230,7 +262,7 @@ describe("ApplicationForm", () => {
       screen.getByLabelText("Удобное время для звонка (необязательно)"),
       "После 18:00"
     );
-    await user.type(screen.getByLabelText("Предпочтительная дата"), "2099-01-01");
+    await user.type(screen.getByLabelText("Предпочтительная дата"), validConsultationDate);
     await user.type(screen.getByLabelText("Предпочтительное время"), "10:00");
     await user.click(screen.getByRole("button", { name: "Отправить заявку" }));
 

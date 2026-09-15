@@ -4,6 +4,7 @@ import {
   type MasterclassTopic,
 } from "../../../shared/constants/masterclass-topics";
 import { MOLDOVA_REGIONS } from "../../../shared/constants/moldova-regions";
+import { validateAppointmentWindow } from "../../../shared/applications/appointment-policy";
 
 export type ClientValidationResult =
   | { success: true; data: ApplicationInput }
@@ -26,30 +27,49 @@ function isMasterclassTopic(value: unknown): value is MasterclassTopic {
   );
 }
 
-function normalizeOrderItems(rawItems: unknown, slugs: string[]) {
-  const quantities = new Map<string, number>();
-  if (Array.isArray(rawItems)) {
-    for (const candidate of rawItems) {
-      if (typeof candidate !== "object" || candidate === null) continue;
-      const item = candidate as Record<string, unknown>;
-      if (typeof item.slug !== "string") continue;
-      const quantity = Number(item.quantity);
-      quantities.set(
-        item.slug,
-        Math.max(1, Math.min(99, Number.isFinite(quantity) ? quantity : 1))
-      );
-    }
+function isProductSlug(value: unknown): value is string {
+  return (
+    typeof value === "string" &&
+    value.length > 0 &&
+    value.length <= 100 &&
+    /^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(value)
+  );
+}
+
+function validateOrderItems(rawItems: unknown, slugs: string[]) {
+  if (rawItems === undefined) {
+    return slugs.map((slug) => ({ slug, quantity: 1 }));
   }
-  return slugs.map((slug) => ({
-    slug,
-    quantity: Math.round(quantities.get(slug) ?? 1),
-  }));
+  if (!Array.isArray(rawItems) || rawItems.length !== slugs.length) return null;
+
+  const selectedSlugs = new Set(slugs);
+  const seen = new Set<string>();
+  const items: Array<{ slug: string; quantity: number }> = [];
+  for (const candidate of rawItems) {
+    if (typeof candidate !== "object" || candidate === null) return null;
+    const item = candidate as Record<string, unknown>;
+    if (
+      !isProductSlug(item.slug) ||
+      !selectedSlugs.has(item.slug) ||
+      seen.has(item.slug) ||
+      typeof item.quantity !== "number" ||
+      !Number.isInteger(item.quantity) ||
+      item.quantity < 1 ||
+      item.quantity > 99
+    ) {
+      return null;
+    }
+    seen.add(item.slug);
+    items.push({ slug: item.slug, quantity: item.quantity });
+  }
+  return seen.size === selectedSlugs.size ? items : null;
 }
 
 export function validateClientApplication(
   raw: Record<string, unknown>,
   allowedProductSlugs: ReadonlySet<string>,
-  locale: "ru" | "ro" = "ru"
+  locale: "ru" | "ro" = "ru",
+  now = new Date()
 ): ClientValidationResult {
   const fieldErrors: Record<string, string> = {};
   const copy = locale === "ro"
@@ -65,10 +85,15 @@ export function validateClientApplication(
         selectProduct: "Selectați cel puțin un produs",
         productLimit: "Puteți selecta cel mult 20 de produse",
         unavailableProduct: "Unul sau mai multe produse nu sunt disponibile",
+        invalidItems: "Date incorecte despre cantitatea produselor",
         consultationMode: "Selectați formatul consultației",
         masterclassTopic: "Selectați o temă de masterclass din listă",
         date: "Dată incorectă",
         time: "Oră incorectă",
+        futureConsultation: "Selectați o dată și o oră viitoare în fusul orar al Chișinăului",
+        consultationMaximum: "Selectați o dată pentru consultație în următoarele 90 de zile",
+        masterclassMinimum: "Selectați o dată pentru masterclass începând de mâine",
+        masterclassMaximum: "Selectați o dată pentru masterclass în următoarele 180 de zile",
         type: "Tip de solicitare necunoscut",
       }
     : {
@@ -83,10 +108,15 @@ export function validateClientApplication(
         selectProduct: "Выберите хотя бы один товар",
         productLimit: "Можно выбрать не более 20 товаров",
         unavailableProduct: "Один или несколько товаров недоступны",
+        invalidItems: "Некорректные данные о количестве товаров",
         consultationMode: "Выберите формат консультации",
         masterclassTopic: "Выберите тему мастер-класса из списка",
         date: "Некорректная дата",
         time: "Некорректное время",
+        futureConsultation: "Выберите будущую дату и время по часовому поясу Кишинёва",
+        consultationMaximum: "Выберите дату консультации не позднее чем через 90 дней",
+        masterclassMinimum: "Выберите дату мастер-класса начиная со следующего дня",
+        masterclassMaximum: "Выберите дату мастер-класса не позднее чем через 180 дней",
         type: "Неизвестный тип заявки",
       };
   const requiredText = [
@@ -132,16 +162,21 @@ export function validateClientApplication(
   };
 
   if (raw.type === "order") {
-    const slugs = Array.isArray(raw.productSlugs)
-      ? [...new Set(raw.productSlugs.filter((slug): slug is string => typeof slug === "string"))]
-      : [];
+    const rawSlugs = Array.isArray(raw.productSlugs) ? raw.productSlugs : [];
+    const slugs = rawSlugs.filter(isProductSlug);
     if (!slugs.length) fieldErrors.productSlugs = copy.selectProduct;
-    else if (slugs.length > 20) {
+    else if (
+      slugs.length !== rawSlugs.length ||
+      new Set(slugs).size !== slugs.length
+    ) {
+      fieldErrors.productSlugs = copy.unavailableProduct;
+    } else if (slugs.length > 20) {
       fieldErrors.productSlugs = copy.productLimit;
     } else if (slugs.some((slug) => !allowedProductSlugs.has(slug))) {
       fieldErrors.productSlugs = copy.unavailableProduct;
     }
-    const items = normalizeOrderItems(raw.items, slugs);
+    const items = validateOrderItems(raw.items, slugs);
+    if (!items) fieldErrors.items = copy.invalidItems;
     if (Object.keys(fieldErrors).length) return { success: false, fieldErrors };
     return {
       success: true,
@@ -155,7 +190,7 @@ export function validateClientApplication(
         consentAccepted: true,
         website: String(raw.website ?? ""),
         productSlugs: slugs,
-        items,
+        items: items!,
         ...optionalFields,
       },
     };
@@ -176,6 +211,22 @@ export function validateClientApplication(
       !/^(?:[01]\d|2[0-3]):[0-5]\d$/u.test(raw.consultationTime)
     ) {
       fieldErrors.consultationTime = copy.time;
+    }
+    if (
+      typeof raw.consultationDate === "string" &&
+      typeof raw.consultationTime === "string" &&
+      !fieldErrors.consultationDate &&
+      !fieldErrors.consultationTime
+    ) {
+      const violation = validateAppointmentWindow(
+        "consultation",
+        raw.consultationDate,
+        raw.consultationTime,
+        now
+      );
+      if (violation === "invalid") fieldErrors.consultationDate = copy.date;
+      else if (violation === "before_minimum") fieldErrors.consultationDate = copy.futureConsultation;
+      else if (violation === "after_maximum") fieldErrors.consultationDate = copy.consultationMaximum;
     }
     if (Object.keys(fieldErrors).length) return { success: false, fieldErrors };
     return {
@@ -214,6 +265,22 @@ export function validateClientApplication(
       !/^(?:[01]\d|2[0-3]):[0-5]\d$/u.test(raw.eventTime)
     ) {
       fieldErrors.eventTime = copy.time;
+    }
+    if (
+      typeof raw.eventDate === "string" &&
+      typeof raw.eventTime === "string" &&
+      !fieldErrors.eventDate &&
+      !fieldErrors.eventTime
+    ) {
+      const violation = validateAppointmentWindow(
+        "masterclass",
+        raw.eventDate,
+        raw.eventTime,
+        now
+      );
+      if (violation === "invalid") fieldErrors.eventDate = copy.date;
+      else if (violation === "before_minimum") fieldErrors.eventDate = copy.masterclassMinimum;
+      else if (violation === "after_maximum") fieldErrors.eventDate = copy.masterclassMaximum;
     }
     if (!masterclassTopicIsValid || Object.keys(fieldErrors).length) {
       return { success: false, fieldErrors };
