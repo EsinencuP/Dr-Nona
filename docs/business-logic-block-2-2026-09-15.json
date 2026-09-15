@@ -1,0 +1,86 @@
+{
+  "date": "2026-09-15",
+  "block": 2,
+  "status": "PASS",
+  "tasks": [
+    {
+      "id": 9,
+      "status": "PASS",
+      "evidence": "exact quantity contract, shared fixtures, all 50 products at quantity boundaries and legacy fallback telemetry"
+    },
+    {
+      "id": 10,
+      "status": "PASS",
+      "evidence": "single request-time Prisma owner and production pooled-URL guard"
+    },
+    {
+      "id": 11,
+      "status": "PASS",
+      "evidence": "PostgreSQL enums with audited values and forward/rollback rehearsal"
+    },
+    {
+      "id": 12,
+      "status": "PASS",
+      "evidence": "immutable order snapshot, conservative canonical profile policy and audited explicit edits"
+    },
+    {
+      "id": 13,
+      "status": "PASS",
+      "evidence": "shared Europe/Chisinau horizon, RU/RO native bounds and DST boundary tests"
+    }
+  ],
+  "contracts": {
+    "quantity": {
+      "minimum": 1,
+      "maximum": 99,
+      "legacyProductSlugsOnly": "one release window with logged quantity-1 fallback"
+    },
+    "clientProfile": {
+      "newSubmissionsOverwriteCanonicalProfile": false,
+      "orderSnapshotImmutable": true,
+      "explicitEditsAudited": true,
+      "automaticPhoneMerge": false
+    },
+    "appointments": {
+      "timeZone": "Europe/Chisinau",
+      "consultation": { "minimum": "current local minute", "maximumCalendarDays": 90 },
+      "masterclass": { "minimum": "next local day", "maximumCalendarDays": 180 },
+      "availabilityPromised": false
+    }
+  },
+  "database": {
+    "productionBranchId": "br-soft-feather-ay49kkt7",
+    "backupBranchId": "br-red-bread-aywhu26u",
+    "rehearsalBranchId": "br-little-tooth-aynt6j83",
+    "migrations": [
+      "20260915020000_order_type_status_enums",
+      "20260915030000_client_submission_snapshot"
+    ],
+    "countsAfter": {
+      "orders": 20,
+      "clients": 9,
+      "profileAudits": 0,
+      "ordersMissingRequiredSnapshot": 0
+    },
+    "orderStatuses": { "NEW": 2, "PROCESSING": 2, "DELIVERY": 2, "DONE": 11, "CANCELLED": 3 },
+    "orderTypes": { "order": 20 }
+  },
+  "ci": {
+    "catalogRun": 35013492476,
+    "crmRun": 35014027149,
+    "status": "PASS"
+  },
+  "deployments": {
+    "catalog": "dpl_C7ncbUZuD4omEPWV4RYqP13iABSF",
+    "crm": "dpl_512fgF1oRdpPFJaWnCT4SHj4e3Bq",
+    "status": "Ready"
+  },
+  "runtime": {
+    "catalogRuContact": 200,
+    "catalogRoContact": 200,
+    "crmUnauthenticated": 401,
+    "crmAuthenticated": 200,
+    "productionMutationPerformed": false
+  },
+  "nextTask": 14
+}

@@ -320,10 +320,11 @@
       "repo": "catalog",
       "task_count": 33,
       "block_count": 7,
-      "completed_tasks": [1, 2, 3, 4, 5, 6, 7, 8],
-      "completed_blocks": [0, 1],
+      "completed_tasks": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+      "completed_blocks": [0, 1, 2],
       "block0_status": "PASS",
       "block1_status": "PASS",
+      "block2_status": "PASS",
       "task1_status": "PASS",
       "task1_evidence": "docs/BUSINESS_LOGIC_AUDIT_V2_RECONCILIATION_2026-09-13.md",
       "task2_status": "PASS",
@@ -340,7 +341,17 @@
       "task7_evidence": "docs/BUSINESS_LOGIC_BLOCK_1_2026-09-15.md",
       "task8_status": "PASS",
       "task8_evidence": "docs/BUSINESS_LOGIC_BLOCK_1_2026-09-15.md",
-      "next_task": 9,
+      "task9_status": "PASS",
+      "task9_evidence": "docs/BUSINESS_LOGIC_BLOCK_2_2026-09-15.md",
+      "task10_status": "PASS",
+      "task10_evidence": "docs/BUSINESS_LOGIC_BLOCK_2_2026-09-15.md",
+      "task11_status": "PASS",
+      "task11_evidence": "docs/BUSINESS_LOGIC_BLOCK_2_2026-09-15.md",
+      "task12_status": "PASS",
+      "task12_evidence": "docs/BUSINESS_LOGIC_BLOCK_2_2026-09-15.md",
+      "task13_status": "PASS",
+      "task13_evidence": "docs/BUSINESS_LOGIC_BLOCK_2_2026-09-15.md",
+      "next_task": 14,
       "_origin": "declared"
     },
     {
@@ -389,6 +400,19 @@
       "status": "PASS",
       "machine_evidence": "docs/business-logic-block-1-2026-09-15.json",
       "next_task": 9,
+      "_origin": "declared"
+    },
+    {
+      "id": "catalog::docs_business_logic_block_2",
+      "label": "Business logic Block 2 PASS: cross-repository data integrity",
+      "description": "Tasks 9-13 PASS evidence for the exact quantity contract, pooled Prisma ownership, PostgreSQL order enums, immutable submitted client snapshots, audited canonical profile edits and Chișinău appointment horizons.",
+      "file_type": "workflow-evidence",
+      "source_file": "docs/BUSINESS_LOGIC_BLOCK_2_2026-09-15.md",
+      "source_location": "Block 2 data contracts and persistence",
+      "repo": "catalog",
+      "status": "PASS",
+      "machine_evidence": "docs/business-logic-block-2-2026-09-15.json",
+      "next_task": 14,
       "_origin": "declared"
     },
     {
@@ -509,6 +533,54 @@
       "target": "crm::database_schema_prisma",
       "relation": "documents",
       "evidence": "Persistent idempotency and distributed rate-limit schema migrations are deployed"
+    },
+    {
+      "source": "catalog::docs_business_logic_block_1",
+      "target": "catalog::docs_business_logic_block_2",
+      "relation": "precedes",
+      "evidence": "Block 2 builds on the authenticated and persistent intake boundary completed in Block 1"
+    },
+    {
+      "source": "catalog::docs_business_logic_audit_v2_tasks",
+      "target": "catalog::docs_business_logic_block_2",
+      "relation": "has_block_evidence",
+      "evidence": "Tasks 9-13 are implemented, migrated, tested, deployed and runtime verified"
+    },
+    {
+      "source": "catalog::docs_business_logic_block_2",
+      "target": "catalog::shared_applications_application_schema_applicationinputschema",
+      "relation": "documents",
+      "evidence": "Catalogue side enforces the exact quantity representation and appointment horizon"
+    },
+    {
+      "source": "catalog::docs_business_logic_block_2",
+      "target": "crm::shared_applications_application_schema_applicationinputschema",
+      "relation": "documents",
+      "evidence": "CRM boundary rejects duplicate or conflicting order representations and invalid appointment dates"
+    },
+    {
+      "source": "catalog::docs_business_logic_block_2",
+      "target": "crm::src_lib_prisma_getprismaclient",
+      "relation": "documents",
+      "evidence": "One pooled request-time Prisma owner is shared by CRM UI and application persistence"
+    },
+    {
+      "source": "catalog::docs_business_logic_block_2",
+      "target": "crm::database_schema_prisma",
+      "relation": "documents",
+      "evidence": "Order enums, submitted snapshots and canonical profile audit schema are deployed"
+    },
+    {
+      "source": "catalog::docs_business_logic_block_2",
+      "target": "crm::server_clients_client_profile_updatecanonicalclientprofile",
+      "relation": "documents",
+      "evidence": "Canonical changes are explicit, conflict checked and recorded with actor and timestamp"
+    },
+    {
+      "source": "catalog::docs_business_logic_block_2",
+      "target": "catalog::shared_applications_appointment_policy_getappointmentbounds",
+      "relation": "documents",
+      "evidence": "RU and RO native date limits mirror the shared Europe/Chisinau policy"
     },
     {
       "source": "catalog::docs_business_logic_task_3_baseline_rollback",
