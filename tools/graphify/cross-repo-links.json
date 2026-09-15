@@ -320,16 +320,27 @@
       "repo": "catalog",
       "task_count": 33,
       "block_count": 7,
-      "completed_tasks": [1, 2, 3],
-      "completed_blocks": [0],
+      "completed_tasks": [1, 2, 3, 4, 5, 6, 7, 8],
+      "completed_blocks": [0, 1],
       "block0_status": "PASS",
+      "block1_status": "PASS",
       "task1_status": "PASS",
       "task1_evidence": "docs/BUSINESS_LOGIC_AUDIT_V2_RECONCILIATION_2026-09-13.md",
       "task2_status": "PASS",
       "task2_evidence": "docs/BUSINESS_LOGIC_TASK_2_CONTRACT_OWNERSHIP_2026-09-13.md",
       "task3_status": "PASS",
       "task3_evidence": "docs/BUSINESS_LOGIC_TASK_3_BASELINE_ROLLBACK_2026-09-13.md",
-      "next_task": 4,
+      "task4_status": "PASS",
+      "task4_evidence": "docs/BUSINESS_LOGIC_BLOCK_1_2026-09-15.md",
+      "task5_status": "PASS",
+      "task5_evidence": "docs/BUSINESS_LOGIC_BLOCK_1_2026-09-15.md",
+      "task6_status": "PASS",
+      "task6_evidence": "docs/BUSINESS_LOGIC_BLOCK_1_2026-09-15.md",
+      "task7_status": "PASS",
+      "task7_evidence": "docs/BUSINESS_LOGIC_BLOCK_1_2026-09-15.md",
+      "task8_status": "PASS",
+      "task8_evidence": "docs/BUSINESS_LOGIC_BLOCK_1_2026-09-15.md",
+      "next_task": 9,
       "_origin": "declared"
     },
     {
@@ -365,6 +376,19 @@
       "status": "PASS",
       "machine_evidence": "docs/business-logic-baseline-2026-09-13.json",
       "next_task": 4,
+      "_origin": "declared"
+    },
+    {
+      "id": "catalog::docs_business_logic_block_1",
+      "label": "Business logic Block 1 PASS: authenticated resilient application intake",
+      "description": "Tasks 4-8 PASS evidence for CRM route authentication, persistent idempotency, distributed rate limiting, Telegram chat restriction and operator delivery health.",
+      "file_type": "workflow-evidence",
+      "source_file": "docs/BUSINESS_LOGIC_BLOCK_1_2026-09-15.md",
+      "source_location": "Block 1 application intake",
+      "repo": "catalog",
+      "status": "PASS",
+      "machine_evidence": "docs/business-logic-block-1-2026-09-15.json",
+      "next_task": 9,
       "_origin": "declared"
     },
     {
@@ -467,6 +491,24 @@
       "target": "catalog::docs_business_logic_task_3_baseline_rollback",
       "relation": "precedes",
       "evidence": "Task 3 uses the frozen contract to define rollback and cross-repository smoke coverage"
+    },
+    {
+      "source": "catalog::docs_business_logic_task_3_baseline_rollback",
+      "target": "catalog::docs_business_logic_block_1",
+      "relation": "precedes",
+      "evidence": "Block 1 used the Task 3 backup, migration and runtime verification baseline"
+    },
+    {
+      "source": "catalog::docs_business_logic_audit_v2_tasks",
+      "target": "catalog::docs_business_logic_block_1",
+      "relation": "has_block_evidence",
+      "evidence": "Tasks 4-8 are implemented, migrated, tested, deployed and runtime verified"
+    },
+    {
+      "source": "catalog::docs_business_logic_block_1",
+      "target": "crm::database_schema_prisma",
+      "relation": "documents",
+      "evidence": "Persistent idempotency and distributed rate-limit schema migrations are deployed"
     },
     {
       "source": "catalog::docs_business_logic_task_3_baseline_rollback",
