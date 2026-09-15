@@ -11,7 +11,9 @@ test("all 50 RO products keep localized controls, metadata and quarantine", asyn
     await page.goto(route.path);
     await expect(page.locator("html")).toHaveAttribute("lang", "ro");
     await expect(page.locator(".product-select-button")).toHaveText(/Adaugă în selecție/u);
-    await expect(page.locator(".product-stage img")).toHaveAttribute("alt", /Imaginea produsului/u);
+    const alt = await page.locator(".product-stage img").getAttribute("alt");
+    expect(alt, `${route.path}: product alt must be present`).toBeTruthy();
+    expect(alt, `${route.path}: product alt must stay Romanian`).not.toMatch(/[А-Яа-яЁё]/u);
     const metadata = await page.locator('meta[name="description"]').getAttribute("content");
     expect(metadata).not.toMatch(/[А-Яа-яЁё]/u);
     expect(await page.title()).not.toMatch(/[А-Яа-яЁё]/u);

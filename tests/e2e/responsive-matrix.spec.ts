@@ -519,7 +519,11 @@ test.describe("catalogue visual baselines", () => {
       });
       await page.evaluate(() => window.scrollTo(0, 0));
 
-      await expect(page).toHaveScreenshot(`catalog-${viewport.name}.png`, {
+      const screenshotName =
+        process.platform === "linux" && viewport.name === "tablet-768"
+          ? "catalog-tablet-768-linux.png"
+          : `catalog-${viewport.name}.png`;
+      await expect(page).toHaveScreenshot(screenshotName, {
         animations: "disabled",
         caret: "hide",
         fullPage: true,
