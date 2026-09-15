@@ -1,9 +1,13 @@
+import { createApplicationProxySignature } from "./application-proxy-signature.js";
+
 const MAX_PROXY_BODY_BYTES = 16 * 1024;
 const PROXY_TIMEOUT_MS = 10_000;
 
 export type ApplicationsProxyDependencies = {
   endpoint?: () => string | undefined;
+  proxySecret?: () => string | undefined;
   fetch?: typeof fetch;
+  now?: () => number;
 };
 
 function jsonResponse(body: unknown, status: number, headers: Record<string, string> = {}) {
@@ -40,7 +44,8 @@ export function createApplicationsProxy(
     }
 
     const endpoint = readEndpoint(dependencies);
-    if (!endpoint) {
+    const proxySecret = dependencies.proxySecret?.() ?? process.env.CONTACT_PROXY_SHARED_SECRET;
+    if (!endpoint || !proxySecret?.trim()) {
       return jsonResponse({ ok: false, code: "SERVICE_UNAVAILABLE" }, 503);
     }
 
@@ -57,10 +62,15 @@ export function createApplicationsProxy(
     const headers = new Headers({
       "Content-Type": "application/json",
     });
-    for (const name of ["idempotency-key", "origin", "x-forwarded-for", "x-real-ip"]) {
+    for (const name of ["idempotency-key", "origin"]) {
       const value = request.headers.get(name);
       if (value) headers.set(name, value);
     }
+    const signed = createApplicationProxySignature(request, body, proxySecret, dependencies.now);
+    headers.set("x-dr-nona-proxy-version", signed.version);
+    headers.set("x-dr-nona-proxy-timestamp", signed.timestamp);
+    headers.set("x-dr-nona-client-key", signed.clientKey);
+    headers.set("x-dr-nona-proxy-signature", signed.signature);
 
     try {
       const upstream = await (dependencies.fetch ?? fetch)(endpoint, {

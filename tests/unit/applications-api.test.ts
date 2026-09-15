@@ -6,6 +6,7 @@ const applicationBody = {
   type: "consultation",
   firstName: "Ana",
 };
+const proxySecret = "test-shared-secret-at-least-32-bytes";
 
 function request(
   body: unknown = applicationBody,
@@ -48,7 +49,9 @@ describe("POST /api/applications proxy", () => {
     };
     const handler = createApplicationsProxy({
       endpoint: () => "https://crm.example/api/applications",
+      proxySecret: () => proxySecret,
       fetch: upstreamFetch,
+      now: () => 1_800_000_000_000,
     });
 
     const response = await handler(request());
@@ -69,6 +72,15 @@ describe("POST /api/applications proxy", () => {
     expect(new Headers(init?.headers).get("idempotency-key")).toBe(
       "attempt-1"
     );
+    expect(new Headers(init?.headers).get("x-forwarded-for")).toBeNull();
+    expect(new Headers(init?.headers).get("x-dr-nona-proxy-version")).toBe("1");
+    expect(new Headers(init?.headers).get("x-dr-nona-proxy-timestamp")).toBe("1800000000");
+    expect(new Headers(init?.headers).get("x-dr-nona-client-key")).toBe(
+      "tF6F8G4h8B5npHadMGeGvVvVoCOVu5u4JLz-UAIars8"
+    );
+    expect(new Headers(init?.headers).get("x-dr-nona-proxy-signature")).toBe(
+      "0v55Hs8WlyNFhC7uOZTXMG_3DE3jyLnK_5YWzAwNG_w"
+    );
     expect(JSON.parse(new TextDecoder().decode(init?.body as ArrayBuffer))).toEqual(
       applicationBody
     );
@@ -77,6 +89,7 @@ describe("POST /api/applications proxy", () => {
   test("returns a controlled error when the CRM endpoint is unavailable", async () => {
     const handler = createApplicationsProxy({
       endpoint: () => "https://crm.example/api/applications",
+      proxySecret: () => proxySecret,
       fetch: vi.fn(async () => {
         throw new Error("offline");
       }) as typeof fetch,
@@ -92,7 +105,7 @@ describe("POST /api/applications proxy", () => {
 
   test("fails closed when the CRM destination is missing or invalid", async () => {
     for (const endpoint of [undefined, "file:///tmp/applications"]) {
-      const response = await createApplicationsProxy({ endpoint: () => endpoint })(
+      const response = await createApplicationsProxy({ endpoint: () => endpoint, proxySecret: () => proxySecret })(
         request()
       );
       expect(response.status).toBe(503);
@@ -102,6 +115,7 @@ describe("POST /api/applications proxy", () => {
   test("rejects unsupported methods, content types and oversized bodies", async () => {
     const handler = createApplicationsProxy({
       endpoint: () => "https://crm.example/api/applications",
+      proxySecret: () => proxySecret,
     });
     const methodResponse = await handler(
       request(undefined, { method: "GET" })
@@ -118,5 +132,13 @@ describe("POST /api/applications proxy", () => {
       request({ value: "x".repeat(17 * 1024) })
     );
     expect(oversizedResponse.status).toBe(413);
+  });
+
+  test("fails closed when the shared proxy secret is missing", async () => {
+    const response = await createApplicationsProxy({
+      endpoint: () => "https://crm.example/api/applications",
+      proxySecret: () => undefined,
+    })(request());
+    expect(response.status).toBe(503);
   });
 });
