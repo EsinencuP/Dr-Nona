@@ -53,6 +53,21 @@ test("an unknown query shows a recoverable empty state", async ({ page }) => {
   await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50);
 });
 
+test("Romanian diacritics and a bounded product-name typo remain searchable", async ({ page }, testInfo) => {
+  await page.goto("/ro/products");
+  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50);
+  if (testInfo.project.name === "chromium-mobile") {
+    await page.getByRole("button", { name: "Căutare și sortare" }).click();
+  }
+  const search = page.getByRole("searchbox", { name: "Caută după denumire" });
+  await search.fill("sampon mineral");
+  await expect(page.getByRole("heading", { level: 2, name: "Șampon mineral" })).toBeVisible();
+  await search.fill("musetel");
+  await expect(page.getByRole("heading", { level: 2, name: "Sare de baie cu mușețel" })).toBeVisible();
+  await search.fill("solairs");
+  await expect(page.getByRole("heading", { level: 2, name: "Loțiune de corp Solaris" })).toBeVisible();
+});
+
 test("selection action stays separated from product copy", async ({ page }) => {
   await page.goto("/products");
   const card = page.locator(".catalog-grid .product-card").first();

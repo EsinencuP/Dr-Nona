@@ -58,4 +58,37 @@ describe("catalog filtering", () => {
     });
     expect(fixtures.map(({ slug }) => slug)).toEqual(originalOrder);
   });
+
+  test("finds Romanian product names without diacritics and across punctuation", async () => {
+    const romanian = (await loadProductData("ro")).products;
+    const search = (query: string) => filterCatalogProducts({ products: romanian, query, category: "all", sort: "popular" });
+    expect(search("sampon mineral").map(({ slug }) => slug)).toContain("frequent-use-tonic-shampoo");
+    expect(search("musetel").map(({ slug }) => slug)).toContain("salts-camomile");
+    expect(search("ylang ylang").map(({ slug }) => slug)).toContain("salts-ylangylang");
+  });
+
+  test("accepts one bounded title typo only when exact search has no result", () => {
+    const exact = productFixture({ slug: "exact", officialName: "Solaris", category: "Кремы", popularityRank: 2, shortDescription: null, longDescription: null, ingredients: null });
+    const near = productFixture({ slug: "near", officialName: "Solairs", category: "Кремы", popularityRank: 1, shortDescription: null, longDescription: null, ingredients: null });
+    const search = (query: string, products = [near, exact]) =>
+      filterCatalogProducts({ products, query, category: "all", sort: "popular" }).map(({ slug }) => slug);
+    expect(search("Solaris")).toEqual(["exact"]);
+    expect(search("Solares", [exact])).toEqual(["exact"]);
+    expect(search("sloraiz", [exact])).toEqual([]);
+    expect(search("solaris", [near])).toEqual(["near"]);
+  });
+
+  test("does not fuzzy-match descriptions, short terms, or unrelated products", () => {
+    const item = productFixture({
+      slug: "one",
+      officialName: "Solaris Body Lotion",
+      category: "Кремы",
+      shortDescription: "Минералы Мёртвого моря",
+    });
+    const search = (query: string) =>
+      filterCatalogProducts({ products: [item], query, category: "all", sort: "popular" });
+    expect(search("минерали")).toEqual([]);
+    expect(search("crem")).toEqual([]);
+    expect(search("imunseen")).toEqual([]);
+  });
 });
