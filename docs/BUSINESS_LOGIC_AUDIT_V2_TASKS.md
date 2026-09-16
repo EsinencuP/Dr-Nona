@@ -5,6 +5,8 @@
 **Repositories:** `EsinencuP/Dr-Nona` and `EsinencuP/Dr-Nona-CRM`  
 **State:** planning only; no task in this document is started by creating this file.
 
+**Execution ledger:** Blocks 0–3 (Tasks 1–18) were completed through 2026-09-16. Evidence for Block 3 is in `BUSINESS_LOGIC_BLOCK_3_2026-09-16.md`. The next selectable item is Task 19; its owner decision is still required.
+
 ## How to use this workflow
 
 The user starts exactly one unit of work by saying `таск N`, where `N` is the global task number below. Work must remain inside that task until it is `PASS`, `PARTIAL`, or `BLOCKED` with evidence. A later task must not be started implicitly.

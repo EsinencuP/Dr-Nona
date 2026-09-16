@@ -87,7 +87,7 @@ describe("ApplicationForm", () => {
     await user.type(screen.getByLabelText("Предпочтительное время"), "10:00");
     await user.click(screen.getByRole("button", { name: "Отправить заявку" }));
     await waitFor(() =>
-      expect(screen.getByText(/Заявка №request-1 отправлена/)).toBeVisible()
+      expect(screen.getByText(/Заявка №request-1 принята и сохранена/)).toBeVisible()
     );
     expect(screen.getByRole("heading", { name: "Статус заявки" })).toHaveFocus();
   });
@@ -131,7 +131,7 @@ describe("ApplicationForm", () => {
       delivery: { telegram: "sent" },
     });
     await waitFor(() =>
-      expect(screen.getByText(/Заявка №request-2 отправлена/)).toBeVisible()
+      expect(screen.getByText(/Заявка №request-2 принята и сохранена/)).toBeVisible()
     );
   });
 
@@ -275,7 +275,7 @@ describe("ApplicationForm", () => {
       utmMedium: "story",
       utmCampaign: "autumn-care",
       utmContent: "product-card",
-      entryPoint: "/contactus?source=selection",
+      entryPoint: "/contactus",
       sessionHistory: '["lord-deodorant"]',
     });
     window.history.replaceState({}, "", "/");

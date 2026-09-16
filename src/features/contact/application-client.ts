@@ -1,7 +1,7 @@
 import type { ApplicationInput } from "../../../shared/applications/application-schema";
 
 export type ApplicationDelivery = {
-  telegram: "sent" | "failed";
+  telegram: "sent" | "failed" | "pending";
 };
 
 export type ApplicationApiResult =
@@ -50,7 +50,7 @@ export async function submitApplication(
       ? (payload as Record<string, unknown>)
       : {};
   if (
-    response.status === 201 &&
+    (response.status === 201 || response.status === 202) &&
     typeof body.requestId === "string" &&
     typeof body.delivery === "object" &&
     body.delivery !== null

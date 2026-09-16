@@ -54,7 +54,7 @@ test("consultation success uses mocked API and focuses status", async ({ page })
   await page.getByLabel("Предпочтительная дата").fill(validConsultationDate);
   await page.getByLabel("Предпочтительное время").fill("10:00");
   await page.getByRole("button", { name: "Отправить заявку" }).click();
-  await expect(page.getByText(/Заявка №request-e2e отправлена/)).toBeVisible();
+  await expect(page.getByText(/Заявка №request-e2e принята и сохранена/)).toBeVisible();
   await expect(page.getByRole("heading", { name: "Статус заявки" })).toBeFocused();
   expect(submittedBody).toMatchObject({
     locale: "ru-MD",
@@ -65,9 +65,28 @@ test("consultation success uses mocked API and focuses status", async ({ page })
     utmMedium: "story",
     utmCampaign: "autumn-care",
     utmContent: "product-card",
-    entryPoint:
-      "/contactus?utm_source=instagram&utm_medium=story&utm_campaign=autumn-care&utm_content=product-card",
+    entryPoint: "/contactus",
     sessionHistory: '["dynamic-hydrating-cream"]',
+    attribution: {
+      version: 1,
+      consent: "application_submission",
+      firstTouch: {
+        kind: "campaign",
+        source: "instagram",
+        medium: "story",
+        campaign: "autumn-care",
+        content: "product-card",
+      },
+      lastTouch: {
+        kind: "campaign",
+        source: "instagram",
+        medium: "story",
+        campaign: "autumn-care",
+        content: "product-card",
+      },
+      entry: { path: "/contactus", locale: "ru-MD" },
+      sessionHistory: ["dynamic-hydrating-cream"],
+    },
   });
 });
 
@@ -98,7 +117,7 @@ test("Romanian contact form submits ro-MD through the same API contract", async 
   await page.getByLabel("Ora preferată").fill("10:00");
   await page.getByRole("button", { name: "Trimite solicitarea" }).click();
 
-  await expect(page.getByText(/Solicitarea nr\. request-ro a fost trimisă/u)).toBeVisible();
+  await expect(page.getByText(/Solicitarea nr\. request-ro a fost acceptată și salvată/u)).toBeVisible();
   expect(submittedBody).toMatchObject({
     locale: "ro-MD",
     type: "consultation",
@@ -136,7 +155,7 @@ test("order defaults from selection and Telegram delivery succeeds", async ({
     .getByRole("button", { name: /Увеличить количество/u })
     .click();
   await page.getByRole("button", { name: "Отправить заявку" }).click();
-  await expect(page.getByText(/Заявка №request-order отправлена/)).toBeVisible();
+  await expect(page.getByText(/Заявка №request-order принята и сохранена/)).toBeVisible();
   expect(submittedBody).toMatchObject({
     productSlugs: ["lord-deodorant"],
     items: [{ slug: "lord-deodorant", quantity: 2 }],
@@ -173,7 +192,7 @@ test("masterclass submits its canonical topic and preferred schedule", async ({
   await page.getByRole("button", { name: "Отправить заявку" }).click();
 
   await expect(
-    page.getByText(/Заявка №request-masterclass отправлена/u)
+    page.getByText(/Заявка №request-masterclass принята и сохранена/u)
   ).toBeVisible();
   expect(submittedBody).toMatchObject({
     locale: "ru-MD",

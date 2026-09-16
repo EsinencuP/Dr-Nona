@@ -114,6 +114,55 @@ describe("client application validation", () => {
     if (!result.success) expect(result.fieldErrors).toHaveProperty("items");
   });
 
+  test("preserves valid structured attribution and rejects spoofed locale or product history", () => {
+    const attribution = {
+      version: 1 as const,
+      consent: "application_submission" as const,
+      firstTouch: {
+        kind: "campaign" as const,
+        source: "instagram",
+        capturedAt: "2026-09-16T08:00:00.000Z",
+      },
+      lastTouch: {
+        kind: "campaign" as const,
+        source: "instagram",
+        capturedAt: "2026-09-16T08:05:00.000Z",
+      },
+      entry: { path: "/contactus", locale: "ru-MD" as const },
+      sessionHistory: ["lord-deodorant"],
+    };
+    const valid = validateClientApplication(
+      {
+        ...common,
+        type: "order",
+        productSlugs: ["lord-deodorant"],
+        attribution,
+      },
+      new Set(["lord-deodorant"])
+    );
+    expect(valid.success).toBe(true);
+    if (valid.success) expect(valid.data.attribution).toEqual(attribution);
+
+    for (const spoofed of [
+      { ...attribution, entry: { ...attribution.entry, locale: "ro-MD" as const } },
+      { ...attribution, sessionHistory: ["unknown-product"] },
+    ]) {
+      const result = validateClientApplication(
+        {
+          ...common,
+          type: "order",
+          productSlugs: ["lord-deodorant"],
+          attribution: spoofed,
+        },
+        new Set(["lord-deodorant"])
+      );
+      expect(result).toEqual({
+        success: false,
+        fieldErrors: { attribution: "Некорректные данные атрибуции" },
+      });
+    }
+  });
+
   test.each([1, 99])("preserves exact order quantity %s", (quantity) => {
     const result = validateClientApplication(
       {

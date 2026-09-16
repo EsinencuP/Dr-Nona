@@ -1,4 +1,7 @@
-import type { ApplicationInput } from "../../../shared/applications/application-schema";
+import type {
+  ApplicationAttribution,
+  ApplicationInput,
+} from "../../../shared/applications/application-schema";
 import {
   MASTERCLASS_TOPICS,
   type MasterclassTopic,
@@ -34,6 +37,65 @@ function isProductSlug(value: unknown): value is string {
     value.length <= 100 &&
     /^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(value)
   );
+}
+
+function isBoundedSafeText(value: unknown, max: number): value is string {
+  return (
+    typeof value === "string" &&
+    value.trim().length > 0 &&
+    value.length <= max &&
+    Array.from(value).every((character) => {
+      const codePoint = character.codePointAt(0) ?? 0;
+      return codePoint > 31 && codePoint !== 127;
+    })
+  );
+}
+
+function isAttributionTouch(value: unknown) {
+  if (typeof value !== "object" || value === null) return false;
+  const touch = value as Record<string, unknown>;
+  if (touch.kind !== "direct" && touch.kind !== "campaign") return false;
+  if (
+    !["source", "medium", "campaign", "content"].every(
+      (key) => touch[key] === undefined || isBoundedSafeText(touch[key], 100)
+    ) ||
+    typeof touch.capturedAt !== "string" ||
+    !Number.isFinite(Date.parse(touch.capturedAt))
+  ) {
+    return false;
+  }
+  if (touch.raw === undefined) return true;
+  if (typeof touch.raw !== "object" || touch.raw === null) return false;
+  const raw = touch.raw as Record<string, unknown>;
+  return ["source", "medium", "campaign", "content"].every(
+    (key) => raw[key] === undefined || isBoundedSafeText(raw[key], 200)
+  );
+}
+
+function parseAttribution(value: unknown): ApplicationAttribution | undefined {
+  if (typeof value !== "object" || value === null) return undefined;
+  const attribution = value as Record<string, unknown>;
+  const entry = attribution.entry;
+  if (typeof entry !== "object" || entry === null) return undefined;
+  const route = entry as Record<string, unknown>;
+  if (
+    attribution.version !== 1 ||
+    attribution.consent !== "application_submission" ||
+    !isAttributionTouch(attribution.firstTouch) ||
+    !isAttributionTouch(attribution.lastTouch) ||
+    !isBoundedSafeText(route.path, 300) ||
+    !route.path.startsWith("/") ||
+    route.path.startsWith("//") ||
+    route.path.includes("?") ||
+    route.path.includes("#") ||
+    (route.locale !== "ru-MD" && route.locale !== "ro-MD") ||
+    !Array.isArray(attribution.sessionHistory) ||
+    attribution.sessionHistory.length > 20 ||
+    !attribution.sessionHistory.every(isProductSlug)
+  ) {
+    return undefined;
+  }
+  return value as ApplicationAttribution;
 }
 
 function validateOrderItems(rawItems: unknown, slugs: string[]) {
@@ -95,6 +157,7 @@ export function validateClientApplication(
         masterclassMinimum: "Selectați o dată pentru masterclass începând de mâine",
         masterclassMaximum: "Selectați o dată pentru masterclass în următoarele 180 de zile",
         type: "Tip de solicitare necunoscut",
+        attribution: "Date de atribuire nevalide",
       }
     : {
         firstName: "Имя",
@@ -118,6 +181,7 @@ export function validateClientApplication(
         masterclassMinimum: "Выберите дату мастер-класса начиная со следующего дня",
         masterclassMaximum: "Выберите дату мастер-класса не позднее чем через 180 дней",
         type: "Неизвестный тип заявки",
+        attribution: "Некорректные данные атрибуции",
       };
   const requiredText = [
     ["firstName", 60, copy.firstName],
@@ -149,6 +213,20 @@ export function validateClientApplication(
   if (typeof raw.website === "string" && raw.website.length > 0) {
     fieldErrors.website = copy.form;
   }
+  const parsedAttribution = parseAttribution(raw.attribution);
+  if (raw.attribution !== undefined && !parsedAttribution) {
+    fieldErrors.attribution = copy.attribution;
+  } else if (parsedAttribution) {
+    const expectedLocale = locale === "ro" ? "ro-MD" : "ru-MD";
+    if (
+      parsedAttribution.entry.locale !== expectedLocale ||
+      parsedAttribution.sessionHistory.some(
+        (slug) => !allowedProductSlugs.has(slug)
+      )
+    ) {
+      fieldErrors.attribution = copy.attribution;
+    }
+  }
   const optionalFields = {
     email: optionalTrimmedText(raw.email),
     comment: optionalTrimmedText(raw.comment),
@@ -159,6 +237,7 @@ export function validateClientApplication(
     utmContent: optionalString(raw.utmContent),
     entryPoint: optionalString(raw.entryPoint),
     sessionHistory: optionalString(raw.sessionHistory),
+    attribution: parsedAttribution,
   };
 
   if (raw.type === "order") {

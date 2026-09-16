@@ -8,6 +8,7 @@ import {
 } from "react";
 import type { FormEvent } from "react";
 import type { Product } from "../../data";
+import publishedProductSlugs from "../../data/published-product-slugs.json";
 import {
   MASTERCLASS_TOPICS,
   MASTERCLASS_TOPIC_LABELS_RO,
@@ -23,7 +24,7 @@ import { Link } from "../../router";
 import { submitApplication } from "./application-client";
 import type { ApplicationApiResult } from "./application-client";
 import { validateClientApplication } from "./client-application-validation";
-import { readSessionValue } from "./utm-capture";
+import { buildApplicationAttribution, readApprovedProductHistory, readSessionValue } from "./utm-capture";
 
 type FormMode = "order" | "consultation" | "masterclass";
 type FormStatus =
@@ -155,7 +156,7 @@ export function ApplicationForm({
         accepted: "Solicitare acceptată",
         submit: "Trimite solicitarea",
         success: (id: string) =>
-          `Solicitarea nr. ${id} a fost trimisă. Consultantul vă va contacta la numărul indicat.`,
+          `Solicitarea nr. ${id} a fost acceptată și salvată. Consultantul o va procesa și vă va contacta la numărul indicat.`,
         failure:
           "Solicitarea nu a fost trimisă. Datele au rămas în formular — încercați din nou sau sunați la filială.",
         validation: "Verificați câmpurile marcate.",
@@ -205,7 +206,7 @@ export function ApplicationForm({
         accepted: "Заявка принята",
         submit: "Отправить заявку",
         success: (id: string) =>
-          `Заявка №${id} отправлена. Менеджер свяжется с вами по указанному номеру.`,
+          `Заявка №${id} принята и сохранена. Менеджер обработает её и свяжется с вами по указанному номеру.`,
         failure:
           "Заявка не отправлена. Данные сохранены в форме — повторите попытку или используйте телефон филиала.",
         validation: "Проверьте отмеченные поля.",
@@ -223,10 +224,7 @@ export function ApplicationForm({
   const attemptKey = useRef(createAttemptKey());
   const formRef = useRef<HTMLFormElement>(null);
   const statusHeading = useRef<HTMLHeadingElement>(null);
-  const allowedSlugs = useMemo(
-    () => new Set(products.map((product) => product.slug)),
-    [products]
-  );
+  const publishedSlugs = useMemo(() => new Set(publishedProductSlugs), []);
   const accepted = status === "success";
 
   const updateQuantity = (slug: string, delta: number) => {
@@ -266,8 +264,9 @@ export function ApplicationForm({
     event.preventDefault();
     if (status === "submitting" || accepted) return;
     const form = new FormData(event.currentTarget);
+    const applicationLocale: "ru-MD" | "ro-MD" = locale === "ro" ? "ro-MD" : "ru-MD";
     const common = {
-      locale: locale === "ro" ? "ro-MD" : "ru-MD",
+      locale: applicationLocale,
       firstName: String(form.get("firstName") ?? ""),
       lastName: String(form.get("lastName") ?? ""),
       phone: String(form.get("phone") ?? ""),
@@ -275,6 +274,13 @@ export function ApplicationForm({
       consentAccepted: form.get("consentAccepted") === "on",
       website: String(form.get("website") ?? ""),
     };
+    const attribution = buildApplicationAttribution({
+      locale: common.locale,
+      path: window.location.pathname,
+      allowedProductSlugs: publishedSlugs,
+      consentAccepted: common.consentAccepted,
+    });
+    const approvedHistory = attribution?.sessionHistory ?? readApprovedProductHistory(publishedSlugs);
     const analyticsFields = {
       email: String(form.get("email") ?? "").trim() || undefined,
       comment: String(form.get("comment") ?? "").trim() || undefined,
@@ -284,8 +290,9 @@ export function ApplicationForm({
       utmMedium: readSessionValue("utm_medium"),
       utmCampaign: readSessionValue("utm_campaign"),
       utmContent: readSessionValue("utm_content"),
-      entryPoint: window.location.pathname + window.location.search,
-      sessionHistory: readSessionValue("session_product_history"),
+      entryPoint: attribution?.entry.path ?? window.location.pathname,
+      sessionHistory: approvedHistory.length ? JSON.stringify(approvedHistory) : undefined,
+      attribution,
     };
     const items = products.map((product) => ({
       slug: product.slug,
@@ -319,7 +326,7 @@ export function ApplicationForm({
               eventDate: String(form.get("eventDate") ?? ""),
               eventTime: String(form.get("eventTime") ?? ""),
             };
-    const validation = validateClientApplication(raw, allowedSlugs, locale);
+    const validation = validateClientApplication(raw, publishedSlugs, locale);
     if (!validation.success) {
       setFieldErrors(validation.fieldErrors);
       setStatus("validation-error");

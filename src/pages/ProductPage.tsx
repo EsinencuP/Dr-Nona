@@ -4,6 +4,7 @@ import { Check } from "@phosphor-icons/react/Check";
 import { Drop } from "@phosphor-icons/react/Drop";
 import { Leaf } from "@phosphor-icons/react/Leaf";
 import { SealCheck } from "@phosphor-icons/react/SealCheck";
+import { useEffect } from "react";
 import {
   ProductCard,
   SectionHeading,
@@ -16,6 +17,7 @@ import {
   getProductDisclaimer,
 } from "../claims";
 import { useProductDetail } from "../features/product/productDetailData";
+import { recordProductView } from "../features/contact/utm-capture";
 import {
   buildProductOverview,
   summarizeProductField,
@@ -30,6 +32,9 @@ export default function ProductPage() {
   const { product, related } = useProductDetail(slug);
   const { contains, toggle } = useSelection();
   const { locale, t } = useLocale();
+  useEffect(() => {
+    if (product) recordProductView(product.slug);
+  }, [product]);
   const copy = locale === "ro"
     ? {
         overview: "Despre produs",

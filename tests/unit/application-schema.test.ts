@@ -113,6 +113,51 @@ describe("application schema", () => {
     }
   });
 
+  test("accepts structured attribution only when locale and approved product history match", () => {
+    const touch = { kind: "campaign" as const, source: "instagram", capturedAt: "2026-09-16T08:00:00.000Z" };
+    const result = validateApplicationInput(
+      {
+        ...base,
+        type: "order",
+        productSlugs: ["lord-deodorant"],
+        attribution: {
+          version: 1,
+          consent: "application_submission",
+          firstTouch: touch,
+          lastTouch: touch,
+          entry: { path: "/contactus", locale: "ru-MD" },
+          sessionHistory: ["lord-deodorant"],
+        },
+      },
+      { allowedProductSlugs: allowed },
+    );
+    expect(result.success).toBe(true);
+  });
+
+  test.each([
+    ["mixed locale", { entry: { path: "/ro/contactus", locale: "ro-MD" }, sessionHistory: ["lord-deodorant"] }],
+    ["unknown product", { entry: { path: "/contactus", locale: "ru-MD" }, sessionHistory: ["unknown-product"] }],
+  ])("rejects %s in untrusted attribution", (_name, override) => {
+    const touch = { kind: "direct" as const, capturedAt: "2026-09-16T08:00:00.000Z" };
+    const result = validateApplicationInput(
+      {
+        ...base,
+        type: "order",
+        productSlugs: ["lord-deodorant"],
+        attribution: {
+          version: 1,
+          consent: "application_submission",
+          firstTouch: touch,
+          lastTouch: touch,
+          ...override,
+        },
+      },
+      { allowedProductSlugs: allowed },
+    );
+    expect(result.success).toBe(false);
+    if (!result.success) expect(result.fieldErrors).toHaveProperty("attribution");
+  });
+
   test.each([
     ["email", { email: "not-an-email" }],
     ["comment", { comment: "x".repeat(501) }],
