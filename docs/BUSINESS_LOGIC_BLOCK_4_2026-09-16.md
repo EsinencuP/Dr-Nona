@@ -2,15 +2,15 @@
 
 **Date:** 2026-09-16  
 **Repositories:** Dr Nona catalogue and Dr-Nona-CRM  
-**State:** in progress. Tasks 19, 20, and 23 contain owner decisions that are not implied by the audit or by test data.
+**State:** implementation and deployment verification in progress. The owner made the missing decisions on 2026-09-16; production evidence is recorded below when available.
 
 | Task | Current evidence | State |
 |---:|---|---|
-| 19 | All 50 `popularityRank` values are unique 1–50 and equal `officialOrder`; current RU/RO option says «По популярности» / «După popularitate». There is no approved demand source. | Owner choice pending: official catalogue order, editorial order, or remove the option. Do not resolve `P1-RANKING` from code alone. |
-| 20 | Production CRM has 15 orders, all with `demo-analytics-order-*` IDs; 10 are DONE. Publishing their aggregate would falsely imply real demand. | Formula, privacy threshold, review and publication policy pending. No public CRM ranking is enabled. |
+| 19 | All 50 legacy `popularityRank` values were identical to `officialOrder`. The owner selected real CRM order frequency for the existing RU/RO popularity sort, with a visibly explained official-order fallback. | Local implementation complete; production review pending. |
+| 20 | The CRM candidate counts distinct completed real orders containing each product in a 90-day creation window, excludes `demo-*`, and requires 10 orders from 5 clients. A daily action prepares a reviewed, expiring, aggregate-only catalogue snapshot. | Local implementation complete; production review pending. Current demo-only orders cannot activate the ranking. |
 | 21 | Search now folds Romanian diacritics and `ё`, normalizes punctuation/spacing, prioritizes exact matches, and permits one bounded title/category typo only when exact search is empty. | PASS: 204 unit tests, 12 focused desktop/mobile E2E tests, repository/type/lint/build/performance gates, full remote CI, production deployment and RU/RO catalogue HTTP smoke. |
 | 22 | CRM operational metrics use created cohorts, immutable submitted region, Chisinau weekdays, and `firstActionAt`; missing historical timestamps stay unknown. Demo data is disclosed on `/results`. | PASS: 240 CRM tests, type/lint/Biome/build, remote CI, production deployment and authenticated `/results` HTTP 200; local production-build rendering at 320, 375, 768, 1024 and 1440 px without document overflow. |
-| 23 | CRM has one Basic Auth manager role and no existing export endpoint. The audit does not define approved PII columns, date range, retention or PDF need. | Export access and data policy pending. No personal-data download route is enabled. |
+| 23 | The owner approved manager access to client data in exports, an Excel-only pop-up, report type and column selection. Four `.xlsx` reports have bounded rows, strict field allowlists, formula-safe text, same-origin/auth checks and database audit records. | Local implementation complete; production migration and export smoke pending. |
 
 ## Task 21 evidence and limits
 
@@ -24,10 +24,12 @@ The published commits are catalogue `7a70047` and CRM `dc5fb59`. Both CI runs pa
 
 The new CRM figures are not website conversion, sale-completion timestamps, or a historical estimate. DONE share uses all order applications created in a selected rolling period as its denominator. First-action time uses only valid `firstActionAt` timestamps. Weekday is local to `Europe/Chisinau`, and regional completion uses the order's immutable submitted region. All calculations are cohort-based and can change as the current status of a past application changes. See the CRM `docs/RESULTS.md` for exact formulas and data-sufficiency rules.
 
-## Decisions needed to finish Block 4
+## Owner decisions and implementation contract
 
-1. Approve the interim catalogue sort meaning. Recommended: official catalogue order, with a truthful RU/RO label; preserve old `?sort=popular` URLs as an alias but do not call this popularity.
-2. Approve or reject automatic aggregate publication from CRM. A safe proposal is: completed real product orders only, exclude all `demo-analytics-*` records, use immutable line quantities, a fixed 90-day creation window, deterministic tie-breaks, a minimum sample/privacy threshold, explicit review, expiry and official-order fallback. The exact window, eligibility and threshold require owner approval. With zero real production orders today, the public result would necessarily remain the fallback.
-3. Approve export role, columns, date range, personal-data handling and retention. A PII-free aggregate CSV is lower risk; clients/orders CSV and PDF need separate scope approval. No export endpoint is activated from a hypothetical policy.
+The owner's 2026-09-16 direct decision supersedes the audit's suggested official-order relabel and CSV/PDF export plan. The RU/RO option remains “By popularity”. A product gains one count for each distinct completed real order containing it in the preceding 90 days; ordered quantity does not increase its count. The CRM has no reliable completion timestamp, so eligibility uses creation time plus the current DONE state. A late status change affects the next candidate. Ties use official catalogue order and SKU. The reviewed snapshot expires after seven days; insufficient or stale data makes the UI explicitly disclose official-order fallback. The initial real sample is below threshold because the existing 15 CRM orders are demonstration records.
 
-`P1-RANKING` remains open until the selected comparator and owner approval are recorded. The catalogue's other release blockers are unaffected.
+Client data may be used inside the protected CRM and its manager-only Excel reports. The popularity candidate uses distinct clients solely to enforce the five-client publication threshold; customer identity and prices never cross into the public catalogue. At least ten eligible orders and five distinct clients are required. Unknown product slugs quarantine the candidate. The catalogue accepts a strict candidate contract, retains only ordered slugs and a digest, and needs a human review/merge before publication. Its scheduled GitHub workflow cannot open pull requests under current repository settings, so it prepares a branch and prints a compare link for a human to open. No catalogue runtime request reaches CRM.
+
+The owner chose `.xlsx` only. The CRM modal offers orders, clients, products and regions reports, optional inclusive Moldova-local date limits, and individual approved columns including names, phones and totals where relevant. The endpoint uses existing manager Basic Auth, same-origin POST, a 10,000-row bound, a database audit row, no server-side file retention and text cells that cannot execute spreadsheet formulas. Demo data is excluded by default and opt-in is visible. Missing historical prices remain blank rather than estimated. See CRM `docs/POPULARITY_AND_EXPORTS.md` for complete field rules.
+
+`P1-RANKING` stays open until the deployed candidate and fallback are verified. Other release blockers are unaffected.

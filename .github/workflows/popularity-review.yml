@@ -1,0 +1,54 @@
+name: Review CRM popularity
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 5 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: popularity-review
+  cancel-in-progress: false
+
+jobs:
+  prepare-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Fetch aggregate candidate without customer data
+        env:
+          POPULARITY_EXPORT_TOKEN: ${{ secrets.POPULARITY_EXPORT_TOKEN }}
+        run: |
+          test -n "$POPULARITY_EXPORT_TOKEN"
+          curl --fail --silent --show-error --retry 3 \
+            --header "Authorization: Bearer $POPULARITY_EXPORT_TOKEN" \
+            'https://drnonacrm-zeta.vercel.app/api/internal/popularity-candidate' \
+            --output "$RUNNER_TEMP/popularity-candidate.json"
+      - name: Prepare a reviewed snapshot or retain the fallback
+        run: |
+          node scripts/import-popularity-candidate.mjs "$RUNNER_TEMP/popularity-candidate.json" --write
+          npm run content:validate
+      - name: Publish candidate on review branch
+        run: |
+          if git diff --quiet -- src/data/popularity-snapshot.json; then
+            echo 'No fresh order change to review.'
+            exit 0
+          fi
+          git config user.name 'dr-nona-popularity-bot'
+          git config user.email 'dr-nona-popularity-bot@users.noreply.github.com'
+          git switch -c automation/popularity-90d
+          git add src/data/popularity-snapshot.json
+          git commit -m 'data: prepare 90-day CRM popularity snapshot for review'
+          git push --force origin HEAD:automation/popularity-90d
+          echo 'Review the generated branch and open a pull request:'
+          echo 'https://github.com/EsinencuP/Dr-Nona/compare/main...automation/popularity-90d?expand=1'

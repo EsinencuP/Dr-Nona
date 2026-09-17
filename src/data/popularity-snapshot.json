@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "mode": "fallback",
+  "source": "crm-completed-orders",
+  "windowDays": 90,
+  "generatedAt": null,
+  "expiresAt": null,
+  "sourceDigest": null,
+  "orderedSlugs": []
+}

@@ -53,6 +53,12 @@ test("an unknown query shows a recoverable empty state", async ({ page }) => {
   await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50);
 });
 
+test("RU and RO explain the official-order fallback when the CRM sample is insufficient", async ({ page }) => {
+  await expect(page.locator(".catalog-popularity-note")).toContainText("порядке каталога");
+  await page.goto("/ro/products");
+  await expect(page.locator(".catalog-popularity-note")).toContainText("ordinea catalogului");
+});
+
 test("Romanian diacritics and a bounded product-name typo remain searchable", async ({ page }, testInfo) => {
   await page.goto("/ro/products");
   await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50);

@@ -1,4 +1,5 @@
 import type { Product } from "./data";
+import { getPopularityState } from "./popularity";
 
 export type CatalogSort = "popular" | "updated" | "az" | "za";
 
@@ -50,7 +51,8 @@ export function normalizeCatalogSort(value: string | null): CatalogSort {
 export function compareCatalogProducts(
   left: Product,
   right: Product,
-  sort: CatalogSort
+  sort: CatalogSort,
+  popularityScores: ReadonlyMap<string, number> | null = getPopularityState().scores
 ) {
   if (sort === "az") {
     return left.officialName.localeCompare(right.officialName, left.contentLocale === "ro" ? "ro-MD" : "ru");
@@ -59,11 +61,11 @@ export function compareCatalogProducts(
     return right.officialName.localeCompare(left.officialName, left.contentLocale === "ro" ? "ro-MD" : "ru");
   }
   if (sort === "updated") return compareBySourceUpdatedAt(left, right);
-  const popularityDifference = left.popularityRank - right.popularityRank;
+  const popularityDifference = (popularityScores?.get(left.slug) ?? Number.MAX_SAFE_INTEGER) -
+    (popularityScores?.get(right.slug) ?? Number.MAX_SAFE_INTEGER);
   if (popularityDifference !== 0) return popularityDifference;
 
-  // Popularity is business-owned data. officialOrder and SKU only make equal
-  // approved ranks deterministic; they do not manufacture a popularity score.
+  // Official order is the transparent fallback when no reviewed CRM snapshot is current.
   const officialOrderDifference = left.officialOrder - right.officialOrder;
   if (officialOrderDifference !== 0) return officialOrderDifference;
   return left.sku.localeCompare(right.sku, "en");

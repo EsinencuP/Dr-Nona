@@ -8,6 +8,7 @@ import { useProductData } from "../data";
 import { filterCatalogProducts } from "../features/catalog/filterProducts";
 import { useLocale } from "../locales/LocaleProvider";
 import { normalizeCatalogSort } from "../product-sort";
+import { getPopularityState } from "../popularity";
 import { useSearchParams } from "../router";
 
 function productCountLabel(count: number, locale: "ru" | "ro") {
@@ -55,6 +56,7 @@ export default function CatalogPage() {
   const query = params.get("q") ?? "";
   const category = params.get("category") ?? "all";
   const sort = normalizeCatalogSort(params.get("sort"));
+  const popularity = getPopularityState();
   const [filtersOpen, setFiltersOpen] = useState(false);
   const deferredQuery = useDeferredValue(query);
 
@@ -194,6 +196,18 @@ export default function CatalogPage() {
           <button type="button" onClick={() => setParams({})}>{t.reset}</button>
         )}
       </div>
+
+      {sort === "popular" && (
+        <p className="catalog-popularity-note">
+          {popularity.active
+            ? locale === "ro"
+              ? "Ordinea reflectă numărul de comenzi finalizate pentru fiecare produs în ultimele 90 de zile."
+              : "Порядок отражает число завершённых заказов с каждым товаром за последние 90 дней."
+            : locale === "ro"
+              ? "Datele despre comenzi sunt încă insuficiente sau necesită actualizare; produsele sunt afișate în ordinea catalogului."
+              : "Данных о заказах пока недостаточно или они требуют обновления; товары показаны в порядке каталога."}
+        </p>
+      )}
 
       {result.length ? (
         <div className="catalog-grid">

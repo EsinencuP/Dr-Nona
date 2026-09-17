@@ -115,6 +115,14 @@
   font-size: var(--type-caption);
 }
 
+.catalog-popularity-note {
+  max-inline-size: 72ch;
+  margin: 0 0 18px 5px;
+  color: var(--muted);
+  font-size: var(--type-caption);
+  line-height: 1.5;
+}
+
 .catalog-categories {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));

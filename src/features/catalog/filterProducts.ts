@@ -1,5 +1,6 @@
 import { getProductCopy } from "../../claims";
 import type { Product } from "../../data";
+import { getPopularityState } from "../../popularity";
 import {
   compareCatalogProducts,
   type CatalogSort,
@@ -73,6 +74,7 @@ export function filterCatalogProducts({
   sort,
 }: CatalogFilterInput) {
   const needle = normalizeSearchText(query);
+  const popularityScores = sort === "popular" ? getPopularityState().scores : null;
   const categoryProducts = products.filter((product) => category === "all" || product.category === category);
   const exact = categoryProducts.filter((product) =>
     !needle || normalizeSearchText([
@@ -84,11 +86,11 @@ export function filterCatalogProducts({
       getProductCopy(product, "ingredients"),
     ].join(" ")).includes(needle)
   );
-  if (exact.length || !needle) return exact.sort((left, right) => compareCatalogProducts(left, right, sort));
+  if (exact.length || !needle) return exact.sort((left, right) => compareCatalogProducts(left, right, sort, popularityScores));
 
   const words = needle.split(" ");
   if (words.length > 3 || !words.some((word) => word.length >= 5)) return [];
   return categoryProducts
     .filter((product) => fuzzyNameMatch(product, words))
-    .sort((left, right) => compareCatalogProducts(left, right, sort));
+    .sort((left, right) => compareCatalogProducts(left, right, sort, popularityScores));
 }

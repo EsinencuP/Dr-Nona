@@ -5,7 +5,7 @@
 **Repositories:** `EsinencuP/Dr-Nona` and `EsinencuP/Dr-Nona-CRM`  
 **State:** planning only; no task in this document is started by creating this file.
 
-**Execution ledger:** Blocks 0–3 (Tasks 1–18) were completed through 2026-09-16. Evidence for Block 3 is in `BUSINESS_LOGIC_BLOCK_3_2026-09-16.md`. The next selectable item is Task 19; its owner decision is still required.
+**Execution ledger:** Blocks 0–3 (Tasks 1–18) were completed through 2026-09-16. Block 4 (Tasks 19–23) is in progress with owner decisions recorded in `BUSINESS_LOGIC_BLOCK_4_2026-09-16.md`; Tasks 21–22 passed earlier, and Tasks 19–20 and 23 await final deployment verification. Evidence for Block 3 is in `BUSINESS_LOGIC_BLOCK_3_2026-09-16.md`.
 
 ## How to use this workflow
 
@@ -503,6 +503,8 @@ This block has five tasks for discovery, ranking, reporting, and exports.
 **Source coverage:** III-7  
 **Dependencies:** Tasks 4, 11, 12, and 22
 
+**Owner override, 2026-09-16:** Use Excel `.xlsx` exclusively, with a manager pop-up for report type, individual approved columns and optional period. Client data is permitted within the protected CRM export. The original CSV/PDF subtasks below remain as audit history, not implementation requirements. See `BUSINESS_LOGIC_BLOCK_4_2026-09-16.md` and CRM `docs/POPULARITY_AND_EXPORTS.md`.
+
 ### Subtasks
 
 1. Approve roles, columns, date ranges, locale, and personal-data handling for each export.
@@ -514,7 +516,7 @@ This block has five tasks for discovery, ranking, reporting, and exports.
 ### Acceptance
 
 - Only authorized users can export approved fields.
-- CSV values cannot execute formulas when opened in spreadsheet software.
+- Untrusted values in the approved XLSX export cannot execute spreadsheet formulas.
 - No export file or customer data is committed or retained unexpectedly.
 
 ---
