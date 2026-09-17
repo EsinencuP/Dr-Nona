@@ -37,6 +37,8 @@ jobs:
       - name: Prepare a reviewed snapshot or retain the fallback
         run: |
           node scripts/import-popularity-candidate.mjs "$RUNNER_TEMP/popularity-candidate.json" --write
+          npm run runtime:generate
+          npm run seo:generate
           npm run content:validate
       - name: Publish candidate on review branch
         run: |
