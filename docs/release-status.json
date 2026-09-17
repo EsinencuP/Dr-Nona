@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "asOf": "2026-09-10",
-  "commit": "ada4aa0e9c5e",
+  "asOf": "2026-09-17",
+  "commit": "3107742bd65b",
   "branch": "main",
   "status": "release-blocked",
   "label": "Technical QA passes; production approval is blocked",
-  "environment": "Windows local QA with Node 22.23.1, npm 10.9.8 and Chromium desktop/mobile",
+  "environment": "Windows local QA with Node 22.23.1, npm 10.9.8 and Chromium desktop/mobile; GitHub Actions and Vercel production smoke",
   "counts": {
     "sourceProducts": 50,
     "publishedProducts": 50,
@@ -67,17 +67,6 @@
       ]
     },
     {
-      "id": "P1-RANKING",
-      "priority": "P1",
-      "owner": "product",
-      "status": "open",
-      "summary": "The popularity ranking has no approved business data source.",
-      "acceptanceCriteria": [
-        "Provide an approved popularity rank or approve official catalogue order as the permanent fallback.",
-        "Document and test the selected comparator."
-      ]
-    },
-    {
       "id": "P1-CI-PROTECTION",
       "priority": "P1",
       "owner": "engineering",
@@ -118,6 +107,21 @@
       "resolutionReference": "docs/RO_MD_LOCALIZATION_OWNER_DECISION_2026-09-10.md",
       "resolution": "User Direct Decision #1 authorizes automated ro-MD localization: 50 products, 350 nonempty fields, 35 paired UI keys and localized product SEO. 31 source issues remain explicit Romanian disclosures; no medical/legal claims were approved.",
       "originalSummary": "Romanian routes and interface are implemented; imported Romanian descriptive product copy remains quarantined pending editorial approval."
+    },
+    {
+      "id": "P1-RANKING",
+      "priority": "P1",
+      "owner": "product",
+      "status": "resolved",
+      "summary": "The owner approved 90-day real completed-order frequency from CRM with an explicit official-catalogue-order fallback.",
+      "acceptanceCriteria": [
+        "Provide an approved popularity rank or approve official catalogue order as the permanent fallback.",
+        "Document and test the selected comparator."
+      ],
+      "resolvedAt": "2026-09-17",
+      "resolutionReference": "docs/BUSINESS_LOGIC_BLOCK_4_2026-09-16.md",
+      "resolution": "Owner-approved distinct completed real-order counts in a rolling 90-day window; at least 10 orders from 5 clients, human-reviewed aggregate snapshot, seven-day expiry, official-order fallback, RU/RO disclosure and no catalogue runtime CRM access. Current production data is below threshold, so fallback is expected.",
+      "originalSummary": "The popularity ranking has no approved business data source."
     }
   ]
 }

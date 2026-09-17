@@ -54,7 +54,7 @@ Current localization update: 2026-09-10 against base commit `b79e968` and the ow
 
 ## Known limitations
 
-Use blocker IDs in [the release status](RELEASE_STATUS.md). The current blockers are `P0-CONTACT`, `P0-LEGAL`, `P1-MEDIA-RIGHTS`, `P1-CONTENT`, `P1-RANKING`, `P1-CI-PROTECTION` and `P1-SEO-ORIGIN`.
+Use blocker IDs in [the release status](RELEASE_STATUS.md). The current blockers are `P0-CONTACT`, `P0-LEGAL`, `P1-MEDIA-RIGHTS`, `P1-CONTENT`, `P1-CI-PROTECTION` and `P1-SEO-ORIGIN`. `P1-RANKING` was resolved by the owner's 90-day CRM order-frequency decision and a disclosed official-order fallback; the real sample is currently too small to activate demand ranking.
 
 `P0-LOCALE` is resolved by [User Direct Decision #1 and the localization evidence](RO_MD_LOCALIZATION_OWNER_DECISION_2026-09-10.md). All 50 RO products have seven nonempty localized fields. 31 source-information issues across 19 products remain disclosed; resolving the localization publication decision does not verify missing composition, instructions or legal claims.
 

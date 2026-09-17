@@ -51,9 +51,9 @@ External owners must resolve these tasks before engineering can mark the release
 ### `P1-RANKING`: define popularity
 
 - **Priority**: P1
-- **Status**: Open
+- **Status**: Implemented with the 2026-09-16 owner decision; final evidence in [Block 4](BUSINESS_LOGIC_BLOCK_4_2026-09-16.md) and the release registry
 - **Owner**: Product
-- **Dependency**: Approved business ranking or fallback decision
+- **Dependency**: Real orders reaching the privacy threshold and a human-reviewed snapshot merge before CRM ordering activates
 - **Goal**: Make “По популярности” semantically accurate
 - **Acceptance criteria**: Provide a ranking dataset or approve official catalogue order; document and test the comparator
 - **Verification commands**: `npm run test`, `npm run build`

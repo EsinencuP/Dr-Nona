@@ -5,7 +5,7 @@
 **Repositories:** `EsinencuP/Dr-Nona` and `EsinencuP/Dr-Nona-CRM`  
 **State:** planning only; no task in this document is started by creating this file.
 
-**Execution ledger:** Blocks 0–3 (Tasks 1–18) were completed through 2026-09-16. Block 4 (Tasks 19–23) is in progress with owner decisions recorded in `BUSINESS_LOGIC_BLOCK_4_2026-09-16.md`; Tasks 21–22 passed earlier, and Tasks 19–20 and 23 await final deployment verification. Evidence for Block 3 is in `BUSINESS_LOGIC_BLOCK_3_2026-09-16.md`.
+**Execution ledger:** Blocks 0–3 (Tasks 1–18) were completed through 2026-09-16. Block 4 (Tasks 19–23) passed its direct acceptance checks on 2026-09-17; the owner decisions, deployed behavior, tests and full CI rerun are recorded in `BUSINESS_LOGIC_BLOCK_4_2026-09-16.md`. Evidence for Block 3 is in `BUSINESS_LOGIC_BLOCK_3_2026-09-16.md`. The project release remains blocked by separate items in `release-status.json`.
 
 ## How to use this workflow
 

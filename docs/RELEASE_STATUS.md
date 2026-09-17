@@ -2,7 +2,7 @@
 
 No. Technical quality gates pass locally, but production approval remains blocked by the items below.
 
-Last verified: 2026-09-10 against base commit `ada4aa0e9c5e` and the current cleanup worktree.
+Last verified: 2026-09-17 against base commit `3107742bd65b` and the current cleanup worktree.
 
 This file is generated from `docs/release-status.json`. Run `npm run release:status:generate` after changing the machine-readable status.
 
@@ -13,8 +13,8 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 | Verdict | `release-blocked` |
 | Label | Technical QA passes; production approval is blocked |
 | Branch | `main` |
-| Base commit | `ada4aa0e9c5e` |
-| Environment | Windows local QA with Node 22.23.1, npm 10.9.8 and Chromium desktop/mobile |
+| Base commit | `3107742bd65b` |
+| Environment | Windows local QA with Node 22.23.1, npm 10.9.8 and Chromium desktop/mobile; GitHub Actions and Vercel production smoke |
 
 ## Current dataset
 
@@ -37,7 +37,6 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 | `P0-LEGAL` | P0 | legal | Moldova legal review has not approved any regulated product claim. |
 | `P1-MEDIA-RIGHTS` | P1 | legal | Production publication rights for product, brand and editorial media are not confirmed. |
 | `P1-CONTENT` | P1 | content | Moldova certificates and the final local scope for service and editorial pages are not approved. |
-| `P1-RANKING` | P1 | product | The popularity ranking has no approved business data source. |
 | `P1-CI-PROTECTION` | P1 | engineering | The repository workflow exists, but the required GitHub branch rule is not verified. |
 | `P1-SEO-ORIGIN` | P1 | engineering | The production origin and live search-engine validation are not approved. |
 
@@ -66,11 +65,6 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 - Approve the Moldova scope for FAQ, branches, Blog and News.
 - Keep foreign certificates clearly separated from Moldova evidence.
 
-### `P1-RANKING`
-
-- Provide an approved popularity rank or approve official catalogue order as the permanent fallback.
-- Document and test the selected comparator.
-
 ### `P1-CI-PROTECTION`
 
 - Push the workflow to GitHub.
@@ -88,6 +82,7 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 | ID | Status | Date | Resolution |
 |---|---|---|---|
 | `P0-LOCALE` | resolved | 2026-09-10 | User Direct Decision #1 authorizes automated ro-MD localization: 50 products, 350 nonempty fields, 35 paired UI keys and localized product SEO. 31 source issues remain explicit Romanian disclosures; no medical/legal claims were approved. |
+| `P1-RANKING` | resolved | 2026-09-17 | Owner-approved distinct completed real-order counts in a rolling 90-day window; at least 10 orders from 5 clients, human-reviewed aggregate snapshot, seven-day expiry, official-order fallback, RU/RO disclosure and no catalogue runtime CRM access. Current production data is below threshold, so fallback is expected. |
 
 ## Release rule
 

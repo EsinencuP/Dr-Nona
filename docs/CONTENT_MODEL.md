@@ -31,7 +31,7 @@ A product is public only when `publicationStatus` is `published`, `editorialStat
 
 `releasedAt` is an approved launch or catalogue-add date. `sourceLastmod` records only source-page freshness. The current UI offers “Недавно обновлённые” because no release dates are approved.
 
-`popularityRank` is a provisional ordering field. `P1-RANKING` remains open until the business approves its source or the permanent fallback.
+`popularityRank` is a legacy import-compatibility field and is not read by the public popularity comparator. The owner approved a reviewed CRM aggregate: each distinct completed real order containing a product in a rolling 90-day window contributes one count. A seven-day snapshot supplies the public order only after a ten-order/five-client threshold and human review; otherwise the UI discloses the deterministic official catalogue order. See [Block 4 evidence](BUSINESS_LOGIC_BLOCK_4_2026-09-16.md).
 
 ## Selection
 
