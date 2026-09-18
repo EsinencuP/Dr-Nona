@@ -21,8 +21,8 @@ import { getAppointmentBounds } from "../../../shared/applications/appointment-p
 import { marketData } from "../../market";
 import { useLocale } from "../../locales/LocaleProvider";
 import { Link } from "../../router";
-import { submitApplication } from "./application-client";
-import type { ApplicationApiResult } from "./application-client";
+import { loadConsultationSlots, submitApplication } from "./application-client";
+import type { ApplicationApiResult, ConsultationSlot } from "./application-client";
 import { validateClientApplication } from "./client-application-validation";
 import { buildApplicationAttribution, readApprovedProductHistory, readSessionValue } from "./utm-capture";
 
@@ -33,11 +33,13 @@ type FormStatus =
   | "success"
   | "validation-error"
   | "network-error"
-  | "server-error";
+  | "server-error"
+  | "slot-unavailable";
 
 type ApplicationFormProps = {
   products: Product[];
   submit?: typeof submitApplication;
+  loadSlots?: typeof loadConsultationSlots;
 };
 
 const createAttemptKey = () =>
@@ -80,6 +82,7 @@ function localizeServerErrors(
     "Один или несколько товаров недоступны":
       "Unul sau mai multe produse nu sunt disponibile",
     "Выберите формат консультации": "Selectați formatul consultației",
+    "Некорректный слот консультации": "Intervalul consultației este incorect",
     "Выберите тему мастер-класса из списка":
       "Selectați o temă de masterclass din listă",
     "Некорректная дата": "Dată incorectă",
@@ -104,6 +107,7 @@ function localizeServerErrors(
 export function ApplicationForm({
   products,
   submit = submitApplication,
+  loadSlots = loadConsultationSlots,
 }: ApplicationFormProps) {
   const { locale, t } = useLocale();
   const appointmentBounds = useMemo(
@@ -144,6 +148,10 @@ export function ApplicationForm({
         offline: "La sediu",
         preferredDate: "Data preferată",
         preferredTime: "Ora preferată",
+        availableSlot: "Interval disponibil",
+        slotPlaceholder: "Selectați un interval disponibil",
+        slotsLoading: "Se încarcă intervalele disponibile…",
+        slotsEmpty: "Nu există intervale publicate momentan. Încercați mai târziu sau alegeți alt tip de solicitare.",
         advisory:
           "Data și ora indicate sunt orientative. Consultantul vă va contacta pentru confirmare.",
         masterclassTopic: "Tema masterclassului",
@@ -157,6 +165,9 @@ export function ApplicationForm({
         submit: "Trimite solicitarea",
         success: (id: string) =>
           `Solicitarea nr. ${id} a fost acceptată și salvată. Consultantul o va procesa și vă va contacta la numărul indicat.`,
+        consultationSuccess: (id: string) =>
+          `Consultația nr. ${id} a fost rezervată pentru intervalul selectat. Dacă sunt necesare detalii suplimentare, consultantul vă va contacta.`,
+        slotUnavailable: "Acest interval tocmai a fost rezervat de alt client. Lista a fost actualizată — selectați alt interval.",
         failure:
           "Solicitarea nu a fost trimisă. Datele au rămas în formular — încercați din nou sau sunați la filială.",
         validation: "Verificați câmpurile marcate.",
@@ -194,6 +205,10 @@ export function ApplicationForm({
         offline: "Офлайн",
         preferredDate: "Предпочтительная дата",
         preferredTime: "Предпочтительное время",
+        availableSlot: "Доступное время",
+        slotPlaceholder: "Выберите доступный слот",
+        slotsLoading: "Загружаем доступные слоты…",
+        slotsEmpty: "Сейчас нет опубликованных слотов. Попробуйте позже или выберите другой тип заявки.",
         advisory:
           "Выбранные дата и время являются предпочтительными. Менеджер свяжется с вами для подтверждения.",
         masterclassTopic: "Тема мастер-класса",
@@ -207,6 +222,9 @@ export function ApplicationForm({
         submit: "Отправить заявку",
         success: (id: string) =>
           `Заявка №${id} принята и сохранена. Менеджер обработает её и свяжется с вами по указанному номеру.`,
+        consultationSuccess: (id: string) =>
+          `Консультация №${id} зарезервирована на выбранное время. Если потребуются детали, консультант свяжется с вами.`,
+        slotUnavailable: "Этот слот только что занял другой клиент. Список обновлён — выберите другое время.",
         failure:
           "Заявка не отправлена. Данные сохранены в форме — повторите попытку или используйте телефон филиала.",
         validation: "Проверьте отмеченные поля.",
@@ -221,6 +239,8 @@ export function ApplicationForm({
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [result, setResult] = useState<ApplicationApiResult | null>(null);
+  const [consultationSlots, setConsultationSlots] = useState<ConsultationSlot[]>([]);
+  const [slotsLoading, setSlotsLoading] = useState(true);
   const attemptKey = useRef(createAttemptKey());
   const formRef = useRef<HTMLFormElement>(null);
   const statusHeading = useRef<HTMLHeadingElement>(null);
@@ -251,6 +271,18 @@ export function ApplicationForm({
     });
     return () => window.cancelAnimationFrame(frame);
   }, [fieldErrors, status]);
+
+  useEffect(() => {
+    let active = true;
+    void loadSlots().then((slots) => {
+      if (!active) return;
+      setConsultationSlots(slots);
+      setSlotsLoading(false);
+    });
+    return () => {
+      active = false;
+    };
+  }, [loadSlots]);
 
   const setFormMode = (nextMode: FormMode) => {
     if (status === "submitting") return;
@@ -312,11 +344,28 @@ export function ApplicationForm({
               ...common,
               ...analyticsFields,
               type: "consultation",
-              consultationMode: String(
-                form.get("consultationMode") ?? "online"
-              ),
-              consultationDate: String(form.get("consultationDate") ?? ""),
-              consultationTime: String(form.get("consultationTime") ?? ""),
+              ...(() => {
+                const slotId = String(form.get("consultationSlotId") ?? "");
+                const slot = consultationSlots.find((candidate) => candidate.id === slotId);
+                const local = slot
+                  ? new Intl.DateTimeFormat("en-CA", {
+                      timeZone: "Europe/Chisinau",
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hourCycle: "h23",
+                    }).formatToParts(new Date(slot.startsAt))
+                  : [];
+                const parts = Object.fromEntries(local.map((part) => [part.type, part.value]));
+                return {
+                  consultationSlotId: slotId,
+                  consultationMode: slot?.mode ?? "online",
+                  consultationDate: slot ? `${parts.year}-${parts.month}-${parts.day}` : "",
+                  consultationTime: slot ? `${parts.hour}:${parts.minute}` : "",
+                };
+              })(),
             }
           : {
               ...common,
@@ -340,6 +389,12 @@ export function ApplicationForm({
     );
     setResult(response);
     setStatus(response.kind);
+    if (response.kind === "slot-unavailable") {
+      setSlotsLoading(true);
+      const slots = await loadSlots();
+      setConsultationSlots(slots);
+      setSlotsLoading(false);
+    }
     if (
       response.kind === "network-error" ||
       response.kind === "server-error" ||
@@ -353,9 +408,11 @@ export function ApplicationForm({
 
   const statusContent =
     result?.kind === "success"
-      ? copy.success(result.requestId)
+      ? mode === "consultation" ? copy.consultationSuccess(result.requestId) : copy.success(result.requestId)
       : status === "network-error" || status === "server-error"
           ? copy.failure
+          : status === "slot-unavailable"
+            ? copy.slotUnavailable
           : status === "validation-error"
             ? copy.validation
             : "";
@@ -557,71 +614,32 @@ export function ApplicationForm({
           </div>
         ) : mode === "consultation" ? (
           <>
-            <fieldset className="application-choice">
-              <legend>{copy.consultationFormat}</legend>
-              <label>
-                <input
-                  type="radio"
-                  name="consultationMode"
-                  value="online"
-                  defaultChecked
-                  disabled={accepted}
-                />
-                {copy.online}
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="consultationMode"
-                  value="offline"
-                  disabled={accepted}
-                />
-                {copy.offline}
-              </label>
-            </fieldset>
-            <div className="application-form__grid">
-              <label className="application-field">
-                <span>{copy.preferredDate}</span>
-                <input
-                  name="consultationDate"
-                  type="date"
-                  min={appointmentBounds.consultation.minimumDate}
-                  max={appointmentBounds.consultation.maximumDate}
-                  disabled={accepted}
-                  aria-invalid={Boolean(fieldErrors.consultationDate)}
-                  aria-describedby={describedBy(
-                    "consultationDate",
-                    fieldErrors
-                  )}
-                />
-                {fieldErrors.consultationDate && (
-                  <small id="consultationDate-error">
-                    {fieldErrors.consultationDate}
-                  </small>
-                )}
-              </label>
-              <label className="application-field">
-                <span>{copy.preferredTime}</span>
-                <input
-                  name="consultationTime"
-                  type="time"
-                  disabled={accepted}
-                  aria-invalid={Boolean(fieldErrors.consultationTime)}
-                  aria-describedby={describedBy(
-                    "consultationTime",
-                    fieldErrors
-                  )}
-                />
-                {fieldErrors.consultationTime && (
-                  <small id="consultationTime-error">
-                    {fieldErrors.consultationTime}
-                  </small>
-                )}
-              </label>
+            <div className="application-field application-field--wide">
+              <label htmlFor="consultation-slot">{copy.availableSlot}</label>
+              <select
+                id="consultation-slot"
+                name="consultationSlotId"
+                defaultValue=""
+                disabled={accepted || slotsLoading || consultationSlots.length === 0}
+                required
+                aria-invalid={Boolean(fieldErrors.consultationSlotId || fieldErrors.consultationDate)}
+                aria-describedby="consultation-slot-help"
+              >
+                <option value="" disabled>{copy.slotPlaceholder}</option>
+                {consultationSlots.map((slot) => (
+                  <option key={slot.id} value={slot.id}>
+                    {new Intl.DateTimeFormat(locale === "ro" ? "ro-MD" : "ru-MD", {
+                      timeZone: "Europe/Chisinau",
+                      dateStyle: "long",
+                      timeStyle: "short",
+                    }).format(new Date(slot.startsAt))} · {slot.mode === "online" ? copy.online : copy.offline}
+                  </option>
+                ))}
+              </select>
+              <small id="consultation-slot-help">
+                {slotsLoading ? copy.slotsLoading : consultationSlots.length ? copy.advisory : copy.slotsEmpty}
+              </small>
             </div>
-            <p className="application-form__advisory">
-              {copy.advisory}
-            </p>
           </>
         ) : (
           <>
@@ -728,7 +746,8 @@ export function ApplicationForm({
           disabled={
             status === "submitting" ||
             accepted ||
-            (mode === "order" && !products.length)
+            (mode === "order" && !products.length) ||
+            (mode === "consultation" && (slotsLoading || !consultationSlots.length))
           }
         >
           {status === "submitting" ? (

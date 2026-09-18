@@ -528,6 +528,7 @@ This block has five tasks. Each one is a new feature and starts only when the us
 ## Task 24 — Add consultation slot management
 
 **Starting state:** `DECISION_REQUIRED`  
+**Current result (2026-09-18):** `DB AND CATALOGUE FLOW VERIFIED / CRM UI SMOKE PENDING` — see [Block 5 verification](BUSINESS_LOGIC_BLOCK_5_VERIFICATION_2026-09-18.md).
 **Source coverage:** III-1  
 **Dependencies:** Tasks 4, 11, and 13
 
@@ -548,6 +549,7 @@ This block has five tasks. Each one is a new feature and starts only when the us
 ## Task 25 — Add customer status notifications
 
 **Starting state:** `DECISION_REQUIRED` for provider, consent, cost, templates, and legal review  
+**Current result (2026-09-18):** `PARTIAL — APPROVAL_REQUIRED`; the fail-closed SMS.MD foundation is verified in unit tests, while legal/provider/template/scheduler approvals remain open. See [Block 5 verification](BUSINESS_LOGIC_BLOCK_5_VERIFICATION_2026-09-18.md).
 **Source coverage:** III-2  
 **Dependencies:** Tasks 11, 14, and 15
 
@@ -568,6 +570,7 @@ This block has five tasks. Each one is a new feature and starts only when the us
 ## Task 26 — Enrich the CRM client profile
 
 **Starting state:** `PARTIAL` because `/clients` already shows contacts and order history  
+**Current result (2026-09-18):** `DB VERIFIED / CRM UI SMOKE PENDING` — calculated insights and auditable internal notes pass code and database checks; authenticated runtime review remains. See [Block 5 verification](BUSINESS_LOGIC_BLOCK_5_VERIFICATION_2026-09-18.md).
 **Source coverage:** III-4  
 **Dependencies:** Task 12
 
@@ -588,6 +591,7 @@ This block has five tasks. Each one is a new feature and starts only when the us
 ## Task 27 — Develop the masterclass workflow
 
 **Starting state:** `VERIFY_FIRST` because the current public form already includes a masterclass request type  
+**Current result (2026-09-18):** `EXISTING REQUEST FLOW VERIFIED / DECISION_REQUIRED`; no event schedule or capacity is published. See [Block 5 verification](BUSINESS_LOGIC_BLOCK_5_VERIFICATION_2026-09-18.md).
 **Source coverage:** III-5  
 **Dependencies:** Tasks 1, 11, and 13
 
@@ -608,6 +612,7 @@ This block has five tasks. Each one is a new feature and starts only when the us
 ## Task 28 — Add regional customer experience
 
 **Starting state:** `PARTIAL` because the catalogue already uses the Moldova region dropdown  
+**Current result (2026-09-18):** `EXISTING REGION CAPTURE VERIFIED / DATA_REQUIRED`; service locations and promises have no approved source. See [Block 5 verification](BUSINESS_LOGIC_BLOCK_5_VERIFICATION_2026-09-18.md).
 **Source coverage:** III-6  
 **Dependencies:** Tasks 2, 12, and 16
 

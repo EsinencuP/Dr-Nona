@@ -13,12 +13,16 @@ import { LocaleProvider } from "../../src/locales/LocaleProvider";
 import { Router } from "../../src/router";
 
 const { products } = await loadProductData();
-const validConsultationDate = new Intl.DateTimeFormat("en-CA", {
-  timeZone: "Europe/Chisinau",
-}).format(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000));
 const validMasterclassDate = new Intl.DateTimeFormat("en-CA", {
   timeZone: "Europe/Chisinau",
 }).format(new Date(Date.now() + 60 * 24 * 60 * 60 * 1000));
+const availableSlot = {
+  id: "11111111-1111-4111-8111-111111111111",
+  startsAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+  endsAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000 + 60 * 60 * 1000).toISOString(),
+  mode: "online" as const,
+};
+const loadSlots = async () => [availableSlot];
 
 async function fillCommon(user: ReturnType<typeof userEvent.setup>) {
   await user.type(screen.getByLabelText("Имя"), "Ana");
@@ -32,18 +36,10 @@ async function fillCommon(user: ReturnType<typeof userEvent.setup>) {
 }
 
 describe("ApplicationForm", () => {
-  test("mirrors the approved appointment date windows in native controls", async () => {
+  test("renders only manager-published consultation slots", async () => {
     const user = userEvent.setup();
-    render(<ApplicationForm products={[]} />);
-    const consultationBounds = getAppointmentBounds("consultation");
-    expect(screen.getByLabelText("Предпочтительная дата")).toHaveAttribute(
-      "min",
-      consultationBounds.minimumDate
-    );
-    expect(screen.getByLabelText("Предпочтительная дата")).toHaveAttribute(
-      "max",
-      consultationBounds.maximumDate
-    );
+    render(<ApplicationForm products={[]} loadSlots={loadSlots} />);
+    expect(await screen.findByLabelText("Доступное время")).toHaveTextContent(/онлайн/i);
 
     await user.click(screen.getByRole("button", { name: "Мастер-класс" }));
     const masterclassBounds = getAppointmentBounds("masterclass");
@@ -59,7 +55,7 @@ describe("ApplicationForm", () => {
 
   test("focuses the first invalid field after client validation", async () => {
     const user = userEvent.setup();
-    render(<ApplicationForm products={[]} />);
+    render(<ApplicationForm products={[]} loadSlots={loadSlots} />);
 
     await user.click(screen.getByRole("button", { name: "Отправить заявку" }));
 
@@ -78,16 +74,15 @@ describe("ApplicationForm", () => {
       delivery: { telegram: "sent" as const },
     }));
     const user = userEvent.setup();
-    render(<ApplicationForm products={[]} submit={submit} />);
+    render(<ApplicationForm products={[]} submit={submit} loadSlots={loadSlots} />);
     expect(
       screen.getByRole("button", { name: "Консультация" })
     ).toHaveAttribute("aria-pressed", "true");
     await fillCommon(user);
-    await user.type(screen.getByLabelText("Предпочтительная дата"), validConsultationDate);
-    await user.type(screen.getByLabelText("Предпочтительное время"), "10:00");
+    await user.selectOptions(await screen.findByLabelText("Доступное время"), availableSlot.id);
     await user.click(screen.getByRole("button", { name: "Отправить заявку" }));
     await waitFor(() =>
-      expect(screen.getByText(/Заявка №request-1 принята и сохранена/)).toBeVisible()
+      expect(screen.getByText(/Консультация №request-1 зарезервирована/)).toBeVisible()
     );
     expect(screen.getByRole("heading", { name: "Статус заявки" })).toHaveFocus();
   });
@@ -188,7 +183,7 @@ describe("ApplicationForm", () => {
       }
     );
     const user = userEvent.setup();
-    render(<ApplicationForm products={[]} submit={submit} />);
+    render(<ApplicationForm products={[]} submit={submit} loadSlots={loadSlots} />);
 
     await user.click(screen.getByRole("button", { name: "Мастер-класс" }));
     await fillCommon(user);
@@ -215,11 +210,11 @@ describe("ApplicationForm", () => {
       <ApplicationForm
         products={[]}
         submit={async () => ({ kind: "server-error" })}
+        loadSlots={loadSlots}
       />
     );
     await fillCommon(user);
-    await user.type(screen.getByLabelText("Предпочтительная дата"), validConsultationDate);
-    await user.type(screen.getByLabelText("Предпочтительное время"), "10:00");
+    await user.selectOptions(await screen.findByLabelText("Доступное время"), availableSlot.id);
     await user.click(screen.getByRole("button", { name: "Отправить заявку" }));
     await waitFor(() =>
       expect(screen.getByText(/Заявка не отправлена/)).toBeVisible()
@@ -250,7 +245,7 @@ describe("ApplicationForm", () => {
       }
     );
     const user = userEvent.setup();
-    render(<ApplicationForm products={[]} submit={submit} />);
+    render(<ApplicationForm products={[]} submit={submit} loadSlots={loadSlots} />);
 
     await fillCommon(user);
     await user.type(screen.getByLabelText("Email (необязательно)"), "ana@example.com");
@@ -262,8 +257,7 @@ describe("ApplicationForm", () => {
       screen.getByLabelText("Удобное время для звонка (необязательно)"),
       "После 18:00"
     );
-    await user.type(screen.getByLabelText("Предпочтительная дата"), validConsultationDate);
-    await user.type(screen.getByLabelText("Предпочтительное время"), "10:00");
+    await user.selectOptions(await screen.findByLabelText("Доступное время"), availableSlot.id);
     await user.click(screen.getByRole("button", { name: "Отправить заявку" }));
 
     await waitFor(() => expect(submit).toHaveBeenCalledTimes(1));
@@ -286,7 +280,7 @@ describe("ApplicationForm", () => {
     render(
       <Router>
         <LocaleProvider>
-          <ApplicationForm products={[]} />
+          <ApplicationForm products={[]} loadSlots={loadSlots} />
         </LocaleProvider>
       </Router>
     );
@@ -307,7 +301,7 @@ describe("ApplicationForm", () => {
     render(
       <Router>
         <LocaleProvider>
-          <ApplicationForm products={[]} />
+          <ApplicationForm products={[]} loadSlots={loadSlots} />
         </LocaleProvider>
       </Router>
     );

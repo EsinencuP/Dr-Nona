@@ -1,0 +1,28 @@
+# Business logic Block 5 — verification and remaining decisions
+
+Date: 2026-09-18. Scope: Tasks 24–28 from `BUSINESS_LOGIC_AUDIT_V2_TASKS.md`. This is an implementation checkpoint, not a release approval.
+
+| Task | Current disposition | Verified evidence | Exact remaining condition for PASS |
+|---|---|---|---|
+| 24 — consultation slots | `DB AND CATALOGUE FLOW VERIFIED / CRM UI SMOKE PENDING` | The development branch migration is current. Database tests cover concurrent reservation and release. RU/RO catalogue submission with a selected slot passes desktop/mobile browser tests. | Authenticated CRM slot-management smoke against the migrated branch; record manager override behavior. |
+| 25 — customer status notifications | `PARTIAL / APPROVAL_REQUIRED` | Fail-closed configuration and unit tests pass. The provider request follows the public SMS.MD v1 example; a queued provider response is recorded as `ACCEPTED`, not delivered. Ambiguous network outcomes require review and cannot automatically resend. | Provider contract and credentials, legal basis, approved RU/RO templates and quiet hours, approved scheduler for deferred sends, verified delivery-report authentication and live provider tests. |
+| 26 — enriched client profile | `DB VERIFIED / CRM UI SMOKE PENDING` | Calculation, typecheck, unit and database integration tests pass; `DONE` orders provide product/value evidence, cancelled requests do not determine preferred contact. Notes and profile edits retain actors and timestamps. | Authenticated `/clients` desktop/mobile runtime checks, including notes and opt-out audit. |
+| 27 — masterclass workflow | `EXISTING REQUEST FLOW VERIFIED / DECISION_REQUIRED` | RU/RO form, shared schema, CRM persistence, Telegram formatter and existing unit tests cover a masterclass *request*. Date is bounded and the UI says a manager confirms the time. No event schedule or capacity is published. | Owner decides whether this request-only flow is sufficient. A published schedule additionally needs an approved event source, capacity, format and owner; current topic/copy claims need editorial/legal review. |
+| 28 — regional experience | `EXISTING REGION CAPTURE VERIFIED / DATA_REQUIRED` | Both repositories share the same 36 canonical region values and RO labels; differences in source files are formatting only. The form submits the canonical value and CRM stores it. | Owner supplies approved office, distributor, manager, delivery-time and service-area data, or explicitly accepts region capture without regional promises. Do not infer service coverage from the dropdown. |
+
+## Verification performed
+
+- Catalogue: after the browser-discovered slot-ID correction, `typecheck`, `lint`, 210 unit/integration tests and the full production build passed, including documentation, architecture, content, SEO and performance gates (315 prerendered routes). The focused RU/RO desktop/mobile contact suite passed 14/14.
+- CRM: Prisma schema validation, client generation, `typecheck`, `lint`, Biome `check`, production build and full suite passed: 34 files, 274 tests.
+- Neon `development` branch `br-steep-meadow-aypvd8c4`: created a data-and-schema backup `br-lingering-math-ay34rn3j` before any migration. On rehearsal branch `br-rapid-hill-ayf644o7`, applied both pending migrations, passed 8/8 database integration tests, executed the Block 5 rollback, removed its rehearsal ledger row and reapplied the migration. The schema is current. Then deployed both additive migrations to `development` through the direct connection. Counts before and after the full suite remained 6 clients, 15 orders, 27 items, 0 submissions. The backup auto-expires after seven days; retain a durable backup before later production promotion.
+- The `development` branch is the configured local environment. After the CRM commit was pushed, Vercel production deployment `dpl_2vCmKwmy4FEGFxddKs3a3jw6XAGy` built from `82abd22` and reached `Ready`; its build log confirms that `20260917010000_customer_workflows` was applied to Neon `main` (`ep-proud-band-ay0h0bol`). Read-only Prisma status reports the schema current. Sanitized counts match the pre-migration backup: 9 clients, 20 orders, 40 items, 0 submissions. Authenticated CRM UI smoke is still pending; `Ready` alone is not a Block 5 PASS.
+- Before publishing the CRM changes, a non-expiring data-and-schema backup of Neon `main` (`br-soft-feather-ay49kkt7`) was created: `pre-block5-production-2026-09-18` (`br-small-king-ayshxoud`). Read-only Prisma status on that backup reports only `20260917010000_customer_workflows` pending. This preserves the pre-migration production rollback point.
+- Browser tests exposed and fixed a real client validation defect: it omitted `consultationSlotId` from the submitted payload, allowing misleading reservation copy. A regression unit test now checks preservation of the slot ID.
+- SMS is disabled in the local environment and no customer message was sent.
+- The cross-repository Graphify map was rebuilt after the catalogue and CRM changes. It emitted extraction warnings for JSON and synthetic nodes but completed with 2,741 nodes and 5,398 links.
+
+## Activation order
+
+1. Re-run catalogue source checks after the browser-discovered slot-ID correction and perform authenticated `/orders` and `/clients` smoke against the migrated `development` branch.
+2. Resolve Task 25 provider/legal/template/scheduler decisions and Task 27–28 scope and source-data decisions before marking the entire block `PASS`.
+3. Verify authenticated CRM UI after the now-complete production deployment. Retain the permanent `main` backup as the rollback point; the deployment status is not approval for the unresolved Block 5 business decisions.

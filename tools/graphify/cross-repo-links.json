@@ -416,6 +416,42 @@
       "_origin": "declared"
     },
     {
+      "id": "crm::docs_nav_dashboard_audit_tasks",
+      "label": "CRM navigation and dashboard audit workflow: five routes, results tabs and separate admin infrastructure",
+      "description": "Canonical 26-task backlog from the 2026-09-17 navigation/dashboard audit. Tasks 1-17 cover evidence, the global status overlay, dashboard hierarchy and tabs within /results. Tasks 18-26 are a separately authorized security and diagnostics stream. No /status, /debug or nested /results routes are permitted.",
+      "file_type": "workflow-document",
+      "source_file": "docs/NAV_DASHBOARD_AUDIT_TASKS_2026-09-18.md",
+      "source_location": "route contract, four blocks and 26 sequential tasks",
+      "repo": "crm",
+      "status": "BLOCK_1_SCOPED_PASS",
+      "task_count": 26,
+      "block_count": 4,
+      "approved_page_routes": ["/dashboard", "/results", "/orders", "/clients", "/catalog"],
+      "forbidden_page_routes": ["/status", "/debug", "/results/sales", "/results/forecast", "/results/promotion"],
+      "ui_scope_tasks": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+      "admin_scope_tasks": [18, 19, 20, 21, 22, 23, 24, 25, 26],
+      "completed_blocks": [0, 1],
+      "completed_tasks": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "block_0_evidence": "docs/NAV_DASHBOARD_BLOCK_0_2026-09-18.md",
+      "block_1_evidence": "docs/NAV_DASHBOARD_BLOCK_1_2026-09-18.md",
+      "verification_scope": "Focused status tests, changed-file formatting and local browser verification. Full repository suite intentionally not run; unrelated Block 5 database drift remains documented.",
+      "next_task": 11,
+      "implementation_paths": [
+        "src/app/(crm)/_components/crm-shell.tsx",
+        "src/app/(crm)/_components/crm-status-widget.tsx",
+        "src/app/(crm)/_components/status-actions.ts",
+        "src/app/(crm)/layout.tsx",
+        "src/server/crm-status.ts",
+        "src/server/application-health.ts",
+        "src/app/(crm)/dashboard/page.tsx",
+        "src/app/(crm)/results/page.tsx",
+        "src/app/(crm)/results/components",
+        "tests/unit/crm-route-contract.test.ts"
+      ],
+      "persistence_boundary": "Tasks 1-17 add no persistence or administrator capability. Tasks 18-26 require separate authorization, server-enforced roles, a PII-safe retention policy and migration review.",
+      "_origin": "declared"
+    },
+    {
       "id": "catalog::src_data_products_public",
       "label": "products-public.json",
       "file_type": "data",
@@ -444,6 +480,36 @@
     }
   ],
   "links": [
+    {
+      "source": "crm::docs_nav_dashboard_audit_tasks",
+      "target": "crm::src_app_crm_components_crm_shell_crmshell",
+      "relation": "implements_ui_changes_in",
+      "evidence": "Tasks 5-6 completed: the shared shell renders a global status indicator and accessible detail overlay while preserving the existing five navigation destinations"
+    },
+    {
+      "source": "crm::docs_nav_dashboard_audit_tasks",
+      "target": "crm::src_server_application_health_getapplicationhealth",
+      "relation": "uses_existing_read_model",
+      "evidence": "Task 4 derives the shell status summary from existing verified health and SLA data without event storage or admin fields"
+    },
+    {
+      "source": "crm::docs_nav_dashboard_audit_tasks",
+      "target": "crm::src_app_crm_dashboard_page_dashboardpage",
+      "relation": "implements_ui_changes_in",
+      "evidence": "Tasks 7-9 completed: static dashboard health cards were removed after overlay parity and the first viewport was recomposed without changing analytics semantics"
+    },
+    {
+      "source": "crm::docs_nav_dashboard_audit_tasks",
+      "target": "crm::src_app_crm_results_page_resultspage",
+      "relation": "plans_ui_changes_to",
+      "evidence": "Tasks 11-17 create sales, forecast and promotion tabs inside /results using validated search parameters, not nested routes"
+    },
+    {
+      "source": "crm::docs_nav_dashboard_audit_tasks",
+      "target": "crm::database_schema_prisma",
+      "relation": "gates_future_admin_infrastructure",
+      "evidence": "Tasks 18-26 are separately authorized and require role, privacy, retention and migration decisions before any audit-event persistence"
+    },
     {
       "source": "crm::docs_dashboard_redesign",
       "target": "crm::src_app_crm_actions_getdashboardstats",

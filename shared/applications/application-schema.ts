@@ -152,6 +152,7 @@ const orderApplicationSchema = baseApplicationSchema.extend({
 
 const consultationApplicationSchema = baseApplicationSchema.extend({
   type: z.literal("consultation"),
+  consultationSlotId: z.string().uuid("Некорректный слот консультации").optional(),
   consultationMode: z.enum(["online", "offline"], {
     error: "Выберите формат консультации",
   }),

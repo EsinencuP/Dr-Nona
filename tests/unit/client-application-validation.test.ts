@@ -22,6 +22,23 @@ const common = {
 };
 
 describe("client application validation", () => {
+  test("preserves a selected consultation slot for transactional reservation", () => {
+    const consultationSlotId = "00000000-0000-4000-8000-000000000024";
+    const result = validateClientApplication({
+      ...common,
+      type: "consultation",
+      consultationSlotId,
+      consultationMode: "online",
+      consultationDate: "2030-01-15",
+      consultationTime: "10:00",
+    }, new Set<string>(), "ru", new Date("2030-01-01T10:00:00.000Z"));
+
+    expect(result.success).toBe(true);
+    if (result.success && result.data.type === "consultation") {
+      expect(result.data.consultationSlotId).toBe(consultationSlotId);
+    }
+  });
+
   test("preserves quantity boundaries for all 50 published products", () => {
     const products = productsJson as Array<{ slug: string }>;
     expect(products).toHaveLength(50);

@@ -149,6 +149,7 @@ export function validateClientApplication(
         unavailableProduct: "Unul sau mai multe produse nu sunt disponibile",
         invalidItems: "Date incorecte despre cantitatea produselor",
         consultationMode: "Selectați formatul consultației",
+        consultationSlot: "Selectați un interval disponibil",
         masterclassTopic: "Selectați o temă de masterclass din listă",
         date: "Dată incorectă",
         time: "Oră incorectă",
@@ -173,6 +174,7 @@ export function validateClientApplication(
         unavailableProduct: "Один или несколько товаров недоступны",
         invalidItems: "Некорректные данные о количестве товаров",
         consultationMode: "Выберите формат консультации",
+        consultationSlot: "Выберите доступный слот",
         masterclassTopic: "Выберите тему мастер-класса из списка",
         date: "Некорректная дата",
         time: "Некорректное время",
@@ -276,6 +278,13 @@ export function validateClientApplication(
   }
 
   if (raw.type === "consultation") {
+    if (
+      raw.consultationSlotId !== undefined &&
+      (typeof raw.consultationSlotId !== "string" ||
+        !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu.test(raw.consultationSlotId))
+    ) {
+      fieldErrors.consultationSlotId = copy.consultationSlot;
+    }
     if (raw.consultationMode !== "online" && raw.consultationMode !== "offline") {
       fieldErrors.consultationMode = copy.consultationMode;
     }
@@ -320,6 +329,7 @@ export function validateClientApplication(
         consentAccepted: true,
         website: String(raw.website ?? ""),
         consultationMode: raw.consultationMode as "online" | "offline",
+        consultationSlotId: raw.consultationSlotId as string | undefined,
         consultationDate: String(raw.consultationDate),
         consultationTime: String(raw.consultationTime),
         ...optionalFields,
