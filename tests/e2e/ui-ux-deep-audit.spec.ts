@@ -767,6 +767,9 @@ test.describe("7 · Interaction polish", () => {
   });
 
   test("form validation: errors appear without navigation", async ({ page }) => {
+    await page.addInitScript(() => {
+      localStorage.setItem("drnona-selection", JSON.stringify(["lord-deodorant"]));
+    });
     await prepare(page, "/contactus");
     const submit = page.locator("button[type='submit'], .button--primary").first();
     await expect(submit).toBeVisible();
