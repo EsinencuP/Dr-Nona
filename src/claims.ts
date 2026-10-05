@@ -93,7 +93,7 @@ function isEditoriallySafe(
     return false;
   }
   if (field === "shortDescription") return value.length >= 50 && value.length <= 200;
-  if (field === "longDescription") return value.length >= 200 && value.length <= 800;
+  if (field === "longDescription") return value.length >= 200;
   return true;
 }
 

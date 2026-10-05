@@ -2,7 +2,7 @@
 
 No. Technical quality gates pass locally, but production approval remains blocked by the items below.
 
-Last verified: 2026-09-17 against base commit `3107742bd65b` and the current cleanup worktree.
+Last verified: 2026-10-05 against base commit `3107742bd65b` and the current cleanup worktree.
 
 This file is generated from `docs/release-status.json`. Run `npm run release:status:generate` after changing the machine-readable status.
 
@@ -11,8 +11,8 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 | Field | Value |
 |---|---|
 | Verdict | `release-blocked` |
-| Label | Technical QA passes; production approval is blocked |
-| Branch | `main` |
+| Label | Product copy is editorially approved; production approval remains blocked |
+| Branch | `content/product-descriptions` |
 | Base commit | `3107742bd65b` |
 | Environment | Windows local QA with Node 22.23.1, npm 10.9.8 and Chromium desktop/mobile; GitHub Actions and Vercel production smoke |
 
@@ -24,9 +24,9 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 | Published products | 50 |
 | Draft products | 0 |
 | Official content records | 137 |
-| Claims | 291 |
+| Claims | 435 |
 | Approved claims | 0 |
-| Pending claims | 291 |
+| Pending claims | 435 |
 | Rejected claims | 0 |
 
 ## Open release blockers
@@ -81,7 +81,7 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 
 | ID | Status | Date | Resolution |
 |---|---|---|---|
-| `P0-LOCALE` | resolved | 2026-09-10 | User Direct Decision #1 authorizes automated ro-MD localization: 50 products, 350 nonempty fields, 35 paired UI keys and localized product SEO. 31 source issues remain explicit Romanian disclosures; no medical/legal claims were approved. |
+| `P0-LOCALE` | resolved | 2026-10-05 | The owner directly approved the current RU/RO texts for all 50 products; four Romanian descriptive fields per product have approved review status and current source/translation fingerprints. Legal claims remain separately gated. |
 | `P1-RANKING` | resolved | 2026-09-17 | Owner-approved distinct completed real-order counts in a rolling 90-day window; at least 10 orders from 5 clients, human-reviewed aggregate snapshot, seven-day expiry, official-order fallback, RU/RO disclosure and no catalogue runtime CRM access. Current production data is below threshold, so fallback is expected. |
 
 ## Release rule

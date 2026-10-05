@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import claimsRegistry from "../../src/data/claims-registry.json";
 import publicProducts from "../../src/data/products-public.json";
 import publicRomanianProducts from "../../src/data/products-ro-public.json";
+import sourceProducts from "../../src/data/products.json";
 import {
   getOfficialPageParagraphs,
   getProductCopy,
@@ -35,12 +36,8 @@ describe("regulated claims publication guard", () => {
   it("quarantines sourced product copy while its claim remains pending", () => {
     const product = productBySlug.get("solaris-body-lotion");
     expect(product).toBeDefined();
-    expect(getProductCopy(product!, "shortDescription")).not.toBe(
-      product!.shortDescription
-    );
-    expect(getProductCopy(product!, "shortDescription")).toContain(
-      "ежедневного ухода"
-    );
+    expect(publicProducts.find(item => item.slug === product!.slug)?.longDescription).toBeNull();
+    expect(publicProducts.find(item => item.slug === product!.slug)?.shortDescription).toBeNull();
     expect(getProductCopy(product!, "longDescription")).toBe("");
     expect(
       isClaimFieldPublishable(
@@ -49,6 +46,9 @@ describe("regulated claims publication guard", () => {
         "longDescription"
       )
     ).toBe(false);
+    expect(isClaimFieldPublishable("product", "solaris-body-lotion", "shortDescription")).toBe(false);
+    expect(claimsRegistry.some(claim => claim.contentId === "solaris-body-lotion" &&
+      claim.field === "shortDescription" && claim.claimText.includes("лечебным эффектом"))).toBe(true);
   });
 
   it("removes pending claim fields from browser-facing product datasets", () => {
@@ -67,22 +67,24 @@ describe("regulated claims publication guard", () => {
     }
   });
 
-  it("publishes owner-authorized Romanian factual copy independently of legal claim approval", async () => {
+  it("quarantines Romanian claim fields independently of editorial approval", async () => {
     const { productBySlug: romanianProducts } = await loadProductData("ro");
     const product = romanianProducts.get("solaris-body-lotion");
     expect(product?.contentLocale).toBe("ro");
-    expect(product?.longDescription).toContain("Solaris este o loțiune");
-    expect(getProductCopy(product!, "shortDescription")).toContain(
-      "Loțiune de corp Dr. Nona"
-    );
+    expect(product?.longDescription).toBeNull();
+    expect(getProductCopy(product!, "longDescription")).toBe("");
+    expect(getProductCopy(product!, "shortDescription")).toContain("Dr. Nona");
   });
 
   it("keeps a product field without a detected regulated claim", () => {
-    const product = productBySlug.get("lord-deodorant");
+    const source = sourceProducts.find(item => item.shortDescription &&
+      item.shortDescription.length >= 50 && item.shortDescription.length <= 200 &&
+      publicProducts.find(publicItem => publicItem.slug === item.slug)?.shortDescription === item.shortDescription);
+    expect(source).toBeDefined();
+    const product = productBySlug.get(source!.slug);
     expect(product).toBeDefined();
-    expect(getProductCopy(product!, "shortDescription")).toBe(
-      product!.shortDescription
-    );
+    expect(isClaimFieldPublishable("product", source!.slug, "shortDescription")).toBe(true);
+    expect(getProductCopy(product!, "shortDescription")).toBe(source!.shortDescription);
   });
 
   it("suppresses claim-bearing official paragraphs", () => {

@@ -30,9 +30,7 @@ test("pending product claims stay out of home, catalogue search and detail", asy
 
   await page.goto("/product/dynamic-hydrating-cream");
   await expect(
-    page.locator(".product-purpose").getByText(
-      "Крем из ассортимента Dr. Nona для ежедневного ухода за кожей."
-    )
+    page.locator(".product-purpose").getByText(/Универсальный крем, который заботится о коже каждый день/)
   ).toBeVisible();
   await expect(page.getByText(/ускоряет регенерацию/u)).toHaveCount(0);
   await expect(page.getByText(/защиты клеток от старения/u)).toHaveCount(0);
