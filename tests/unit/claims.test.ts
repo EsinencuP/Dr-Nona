@@ -37,6 +37,7 @@ describe("regulated claims publication guard", () => {
     const product = productBySlug.get("solaris-body-lotion");
     expect(product).toBeDefined();
     expect(publicProducts.find(item => item.slug === product!.slug)?.longDescription).toBeNull();
+    expect(publicProducts.find(item => item.slug === product!.slug)?.shortDescription).toBeNull();
     expect(getProductCopy(product!, "longDescription")).toBe("");
     expect(
       isClaimFieldPublishable(
@@ -45,6 +46,9 @@ describe("regulated claims publication guard", () => {
         "longDescription"
       )
     ).toBe(false);
+    expect(isClaimFieldPublishable("product", "solaris-body-lotion", "shortDescription")).toBe(false);
+    expect(claimsRegistry.some(claim => claim.contentId === "solaris-body-lotion" &&
+      claim.field === "shortDescription" && claim.claimText.includes("лечебным эффектом"))).toBe(true);
   });
 
   it("removes pending claim fields from browser-facing product datasets", () => {
@@ -63,7 +67,7 @@ describe("regulated claims publication guard", () => {
     }
   });
 
-  it("quarantines revised Romanian copy until a new editorial approval", async () => {
+  it("quarantines Romanian claim fields independently of editorial approval", async () => {
     const { productBySlug: romanianProducts } = await loadProductData("ro");
     const product = romanianProducts.get("solaris-body-lotion");
     expect(product?.contentLocale).toBe("ro");
@@ -74,6 +78,7 @@ describe("regulated claims publication guard", () => {
 
   it("keeps a product field without a detected regulated claim", () => {
     const source = sourceProducts.find(item => item.shortDescription &&
+      item.shortDescription.length >= 50 && item.shortDescription.length <= 200 &&
       publicProducts.find(publicItem => publicItem.slug === item.slug)?.shortDescription === item.shortDescription);
     expect(source).toBeDefined();
     const product = productBySlug.get(source!.slug);

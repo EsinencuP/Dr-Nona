@@ -11,7 +11,7 @@ test("valid and invalid product deep links resolve correctly", async ({ page }) 
   await expect(page.getByText("324001", { exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { level: 3, name: "О продукте" })).toBeVisible();
   await expect(page.getByRole("heading", { level: 3, name: "Состав" })).toBeVisible();
-  await expect(page.getByRole("heading", { level: 3, name: "Способ применения" })).toHaveCount(0);
+  await expect(page.getByRole("heading", { level: 3, name: "Способ применения" })).toBeVisible();
   const relatedImages = page.locator(".related-grid .product-card__image");
   await expect(relatedImages).toHaveCount(4);
   for (const image of await relatedImages.all()) {

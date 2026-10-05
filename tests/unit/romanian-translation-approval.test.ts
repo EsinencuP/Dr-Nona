@@ -3,6 +3,7 @@ import sources from "../../src/data/products.json";
 import translations from "../../src/data/products-ro.json";
 import publicTranslations from "../../src/data/products-ro-public.json";
 import review from "../../src/data/products-ro-review.json";
+import claims from "../../src/data/claims-registry.json";
 import { ro } from "../../src/locales/ro";
 import { hasCurrentTranslationApproval, romanianFields, translationFingerprint } from "../../scripts/romanian-translation-approval-lib.mjs";
 import { getProductCopy } from "../../src/claims";
@@ -18,9 +19,9 @@ describe("Romanian product copy review", () => {
     expect(Object.keys(translations).sort()).toEqual(sources.map(p => p.slug).sort());
     for (const source of sources) {
       const copy = translations[source.slug as keyof typeof translations];
-      expect(hasCurrentTranslationApproval(source, copy, review), source.slug).toBe(false);
+      expect(hasCurrentTranslationApproval(source, copy, review), source.slug).toBe(true);
       for (const field of ["shortDescription", "longDescription", "ingredients", "howToUse"] as const) {
-        expect(review.products[source.slug as keyof typeof review.products][field]).toBe("pending");
+        expect(review.products[source.slug as keyof typeof review.products][field]).toBe("approved");
       }
       for (const field of romanianFields) {
         expect(copy[field as keyof typeof copy], `${source.slug}.${field}`).toEqual(expect.any(String));
@@ -53,16 +54,24 @@ describe("Romanian product copy review", () => {
     expect(translations["beauty-mask-for-face"].howToUse).toContain("1 minut");
   });
 
-  it("quarantines all revised Romanian descriptions until they are reviewed", async () => {
+  it("publishes approved Romanian fields only when their claims are publishable", async () => {
     const { products } = await loadProductData("ro");
+    const blocked = new Set(claims.filter(claim => claim.scope === "product" && claim.status !== "approved")
+      .map(claim => `${claim.contentId}\u001f${claim.field}`));
     for (const product of products) {
       const copy = publicTranslations[product.slug as keyof typeof publicTranslations];
+      const source = translations[product.slug as keyof typeof translations];
       for (const field of ["shortDescription", "longDescription", "ingredients", "howToUse"] as const) {
-        expect(copy[field], `${product.slug}.${field}`).toBeNull();
+        expect(copy[field], `${product.slug}.${field}`).toBe(
+          blocked.has(`ro:${product.slug}\u001f${field}`) ? null : source[field]
+        );
+        expect(product[field], `${product.slug}.${field}`).toBe(copy[field]);
         if (field === "shortDescription") {
           expect(getProductCopy(product, field).trim().length).toBeGreaterThan(0);
-        } else {
+        } else if (copy[field] === null) {
           expect(getProductCopy(product, field)).toBe("");
+        } else {
+          expect(getProductCopy(product, field)).toBe(copy[field].replace(/\s+/gu, " ").trim());
         }
       }
     }

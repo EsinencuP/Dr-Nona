@@ -3075,6 +3075,26 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
+    "id": "CLM-A627B71D2B",
+    "fingerprint": "a627b71d2ba197c4f326de1aa4d96ecdf5f2692bc6169afcbba58bc0a8bb76e1",
+    "scope": "official-page",
+    "contentId": "/blog/tone-skin-at-home",
+    "field": "paragraphs.1",
+    "claimText": "В медицине это средство пользуется широкой популярностью благодаря своим антибактериальным, регенерирующим, противовоспалительным и дезодорирующим свойствам.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/tone-skin-at-home",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
     "id": "CLM-A889FB69F8",
     "fingerprint": "a889fb69f82cb9792d7f2fb303cbe0f941e23e08c2ebe447414f5886641de57b",
     "scope": "official-page",
@@ -3892,6 +3912,46 @@
     ],
     "sourceUrl": "https://www.drnona.md/ard_cream_for_face",
     "sourceLastmod": "2026-02-06T14:38:46+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-42660AE154",
+    "fingerprint": "42660ae154e86bdd8c9e68d432cee5b69c954e0059357a8693afb7142f061108",
+    "scope": "product",
+    "contentId": "beauty-mask-for-face",
+    "field": "longDescription",
+    "claimText": "Лечебная грязь и минералы Мёртвого моря",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://www.drnona.md/recovering_mud_musk",
+    "sourceLastmod": "2026-02-06T14:39:19+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-731BE4363A",
+    "fingerprint": "731be4363a53ce91bdc21bda88fe1b0445f848f77131bfb777937063236429a7",
+    "scope": "product",
+    "contentId": "beauty-mask-for-face",
+    "field": "longDescription",
+    "claimText": "Натуральная восстанавливающая грязевая маска на основе лечебной грязи и минералов Мёртвого моря, созданная для интенсивного очищения, питания и обновления кожи",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://www.drnona.md/recovering_mud_musk",
+    "sourceLastmod": "2026-02-06T14:39:19+00:00",
     "market": "MD",
     "status": "pending",
     "reviewer": null,
@@ -4874,6 +4934,26 @@
     ],
     "sourceUrl": "https://www.drnona.md/shenseen_mousse_toothpaste",
     "sourceLastmod": "2026-02-06T14:39:14+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-3A3CE36A79",
+    "fingerprint": "3a3ce36a794b51b6dacc3921597485d6a042ce8002847047f21d697fdd829304",
+    "scope": "product",
+    "contentId": "hand-and-nail-treatment",
+    "field": "longDescription",
+    "claimText": "• Крем обладает защитным, питательным, противовоспалительным, регенерирующим действием.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://www.drnona.md/hand_and_nail_cream",
+    "sourceLastmod": "2026-02-06T14:38:39+00:00",
     "market": "MD",
     "status": "pending",
     "reviewer": null,
@@ -8511,6 +8591,86 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
+    "id": "CLM-8BC3B3245C",
+    "fingerprint": "8bc3b3245cc6b5150242c8445231959437b35501f38137ac0ae7416c8c5eb9b4",
+    "scope": "product",
+    "contentId": "solaris-body-lotion",
+    "field": "longDescription",
+    "claimText": "Косметический крем с фантастическим лечебным эффектом.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://www.drnona.md/solaris",
+    "sourceLastmod": "2026-02-06T14:38:38+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-FC93E1A6E3",
+    "fingerprint": "fc93e1a6e3e636df10ce4d73e4d357e879352dd0d1a7b631300a5d471525b009",
+    "scope": "product",
+    "contentId": "solaris-body-lotion",
+    "field": "longDescription",
+    "claimText": "Nona – регенерирующий крем для тела.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://www.drnona.md/solaris",
+    "sourceLastmod": "2026-02-06T14:38:38+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-7A89F4BCA9",
+    "fingerprint": "7a89f4bca91f292d8d161e4cabc440d03f3e8a996c09de749d043177dd17d6d0",
+    "scope": "product",
+    "contentId": "solaris-body-lotion",
+    "field": "shortDescription",
+    "claimText": "Косметический крем с фантастическим лечебным эффектом.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://www.drnona.md/solaris",
+    "sourceLastmod": "2026-02-06T14:38:38+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-6390DB3422",
+    "fingerprint": "6390db3422aec59551775177fa64fc9d974bd876da02c2c775d2802896b55962",
+    "scope": "product",
+    "contentId": "solaris-body-lotion",
+    "field": "shortDescription",
+    "claimText": "Nona – регенерирующий крем для тела.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://www.drnona.md/solaris",
+    "sourceLastmod": "2026-02-06T14:38:38+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
     "id": "CLM-6CB1D8834C",
     "fingerprint": "6cb1d8834c60ed0aec2ca382e7dd6984dc015f2d6389e4b40c2d62a649ffcf2a",
     "scope": "product",
@@ -8543,6 +8703,26 @@
     ],
     "sourceUrl": "https://www.drnona.md/soupseen",
     "sourceLastmod": "2026-02-06T14:38:53+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-13A8136972",
+    "fingerprint": "13a81369722224951a3aaef5bb1bcde2ccfc3684ce9024bce4f5861f3fe45726",
+    "scope": "product",
+    "contentId": "yamseen",
+    "field": "longDescription",
+    "claimText": "В составе только сила лечебных трав, минералы Мёртвого моря и Halo Complex ( патент компании на использование АРХЕБАКТЕРИИ и водоросли ДУНАЛИЕЛЛА)",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://www.drnona.md/yamseen",
+    "sourceLastmod": "2026-02-06T14:39:03+00:00",
     "market": "MD",
     "status": "pending",
     "reviewer": null,

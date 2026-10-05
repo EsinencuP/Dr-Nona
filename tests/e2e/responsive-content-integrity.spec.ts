@@ -100,6 +100,9 @@ for (const locale of ["ru", "ro"] as const) {
       await page.evaluate(() => document.fonts.ready);
       for (const width of widths) {
         await page.setViewportSize({ width, height: width === 844 ? 390 : 900 });
+        await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+        await expect(page.locator(".product-stage img")).toBeVisible();
+        await expect(page.locator(".product-select-button")).toBeVisible();
         await page.locator(".product-stage img").evaluate((element: HTMLImageElement) => element.decode());
         const state = await page.evaluate(() => {
           const title = document.querySelector("h1")!, image = document.querySelector<HTMLImageElement>(".product-stage img")!;

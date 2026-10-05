@@ -2,7 +2,7 @@
 
 Every health, medical, therapeutic, anti-aging, cosmetic-efficacy and scientific statement requires a sentence-level decision before publication.
 
-Last verified: 2026-10-05 against `src/data/claims-registry.json`. The registry contains 426 pending claims, 0 approved claims and 0 rejected claims. Russian and Romanian product fields, including ingredients and usage instructions, are scanned; pending fields are removed from public runtime copy.
+Last verified: 2026-10-05 against `src/data/claims-registry.json`. The registry contains 435 pending claims, 0 approved claims and 0 rejected claims. Russian and Romanian product fields, including ingredients and usage instructions, are scanned; pending fields are removed from public runtime copy.
 
 ## Publication rule
 

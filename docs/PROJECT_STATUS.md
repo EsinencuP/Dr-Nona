@@ -2,7 +2,7 @@
 
 The application is a functional local QA candidate. Its technical gates pass, but production release remains blocked.
 
-Current product-content update: 2026-10-05 on `content/product-descriptions`. The 50 revised Romanian product records await editorial review. Older verification rows below retain their original dates.
+Current product-content update: 2026-10-05 on `content/product-descriptions`. The owner approved the current RU/RO texts for all 50 product records; legal claims remain pending. Older verification rows below retain their original dates.
 
 ## Status identity
 
@@ -10,7 +10,7 @@ Current product-content update: 2026-10-05 on `content/product-descriptions`. Th
 |---|---|
 | Branch | `content/product-descriptions` |
 | Base commit | `b79e968` |
-| Working tree | Source-backed RU/RO product copy in review; no deployment or production approval implied |
+| Working tree | Source-backed RU/RO product copy editorially approved; no deployment or production approval implied |
 | Environment | Windows, Node 22.23.1, npm 10.9.8, Chromium desktop/mobile |
 | Release verdict | `release-blocked` |
 | UI language | Complete RU/RO route pairs for catalogue, products, company chapters and Halo Complex; editorial remains in its original language |
@@ -18,7 +18,7 @@ Current product-content update: 2026-10-05 on `content/product-descriptions`. Th
 | Published products | 50 |
 | Draft products | 0 |
 | Official content records | 137 |
-| Claims | 426 total: 0 approved, 426 pending, 0 rejected after the 2026-10-05 product-copy import. On 2026-09-10, 105 superseded RO claim candidates were archived when owner-authorized factual adaptations replaced their text; no legal approval was granted. |
+| Claims | 435 total: 0 approved, 435 pending, 0 rejected after the 2026-10-05 product-copy import and the Russian therapeutic-language detector correction. On 2026-09-10, 105 superseded RO claim candidates were archived when owner-authorized factual adaptations replaced their text; no legal approval was granted. |
 
 ## Implemented
 
@@ -54,9 +54,9 @@ Current product-content update: 2026-10-05 on `content/product-descriptions`. Th
 
 ## Known limitations
 
-Use blocker IDs in [the release status](RELEASE_STATUS.md). The current blockers are `P0-LOCALE`, `P0-CONTACT`, `P0-LEGAL`, `P1-MEDIA-RIGHTS`, `P1-CONTENT`, `P1-CI-PROTECTION` and `P1-SEO-ORIGIN`. `P1-RANKING` was resolved by the owner's 90-day CRM order-frequency decision and a disclosed official-order fallback; the real sample is currently too small to activate demand ranking.
+Use blocker IDs in [the release status](RELEASE_STATUS.md). The current blockers are `P0-CONTACT`, `P0-LEGAL`, `P1-MEDIA-RIGHTS`, `P1-CONTENT`, `P1-CI-PROTECTION` and `P1-SEO-ORIGIN`. `P0-LOCALE` was resolved by the [owner's current RU/RO copy approval](RO_MD_PRODUCT_COPY_APPROVAL_2026-10-05.md). `P1-RANKING` was resolved by the owner's 90-day CRM order-frequency decision and a disclosed official-order fallback; the real sample is currently too small to activate demand ranking.
 
-The [2026-09-10 localization decision](RO_MD_LOCALIZATION_OWNER_DECISION_2026-09-10.md) approved the prior text. The revised RU/RO descriptions were collected from the rendered Moldova product pages; all 50 RO records remain present, but their four revised descriptive fields now have `pending` review status. Public Romanian descriptions stay quarantined until their new fingerprints are approved. Fifteen RU records retain one or more `null` fields where the available sources do not provide a verified list of ingredients or instructions. Product claims remain separately gated.
+The [2026-09-10 localization decision](RO_MD_LOCALIZATION_OWNER_DECISION_2026-09-10.md) approved the prior text. The revised RU/RO descriptions were collected from the rendered Moldova product pages, and the [2026-10-05 direct decision](RO_MD_PRODUCT_COPY_APPROVAL_2026-10-05.md) approves all current texts. All 50 RO records have approved descriptive-field reviews and current source/translation fingerprints. Fifteen RU records retain one or more `null` fields where the available sources do not provide a verified list of ingredients or instructions. Product claims remain separately gated; pending claim fields are omitted from public projections.
 
 ## Verification record
 

@@ -61,9 +61,12 @@ test("Romanian product route publishes authorized factual copy and keeps its sou
     page.getByRole("heading", { level: 1, name: "Cremă Dynamic" })
   ).toBeVisible();
   await expect(
-    page.getByText("Cremă Dr. Nona pentru față și corp, cu aloe vera, mușețel și uleiuri vegetale.").first()
+    page.locator(".product-purpose").getByText(/Cremă universală care îngrijește pielea/)
   ).toBeVisible();
-  await expect(page.getByText(/Cremă universală care îngrijește pielea/)).toHaveCount(0);
+  await expect(page.locator(".product-description")).toContainText("Cremă Dynamic este prezentat în catalogul Dr. Nona Moldova");
+  await expect(page.getByRole("article").filter({ has: page.getByRole("heading", { name: "Compoziție" }) })).toContainText("extract de mușețel");
+  await expect(page.getByRole("article").filter({ has: page.getByRole("heading", { name: "Mod de utilizare" }) })).toContainText("Spălați bine fața");
+  await expect(page.getByText(/accelerează regenerarea celulară/i)).toHaveCount(0);
   await expect(page.getByRole("link", { name: /drnona\.md/i })).toHaveAttribute(
     "href",
     "https://www.drnona.md/dynamic"
