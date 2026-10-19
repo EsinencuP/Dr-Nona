@@ -1,4 +1,6 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { writeGeneratedFile } from "./write-generated-file.mjs";
+import { isRetiredEditorialPath } from "../src/editorial-policy.mjs";
+import { readFileSync } from "node:fs";
 import { isLocaleRouteSupported } from "../src/locale-routing.mjs";
 
 const products = JSON.parse(readFileSync("src/data/products.json", "utf8"));
@@ -220,27 +222,6 @@ add(
 );
 add(
   fixedRoute(
-    "/editorial",
-    "Блог и новости Dr. Nona",
-    "Материалы, знания, события и новости Dr. Nona в едином редакционном разделе."
-  )
-);
-add(
-  fixedRoute(
-    "/blog",
-    "Блог Dr. Nona",
-    "Статьи Dr. Nona о повседневном уходе, образе жизни и новостях бренда."
-  )
-);
-add(
-  fixedRoute(
-    "/news",
-    "Новости Dr. Nona",
-    "События, объявления и международные новости Dr. Nona."
-  )
-);
-add(
-  fixedRoute(
     "/selection",
     "Моя подборка",
     "Сохранённые пользователем продукты Dr. Nona для последующей консультации.",
@@ -259,7 +240,7 @@ add(
   fixedRoute(
     "/contactus",
     "Контакты Dr. Nona в Молдове",
-    "Адрес и официальные телефонные контакты филиала Dr. Nona в Кишинёве."
+    "Телефон для консультаций и форма связи с Dr. Nona в Молдове."
   )
 );
 add(
@@ -308,7 +289,7 @@ for (const product of products.filter(
   });
 }
 
-for (const page of pages.filter((item) => !item.error)) {
+for (const page of pages.filter((item) => !item.error && !isRetiredEditorialPath(item.path) && item.path !== "/warehouses")) {
   if (routes.has(page.path)) continue;
   const title = pageTitle(page);
   const isArticle =
@@ -353,7 +334,6 @@ for (const page of pages.filter((item) => !item.error)) {
             : "BlogPosting",
           headline: title,
           image: page.images[0]?.src || "",
-          sourceUrl: page.sourceUrl,
           dateModified: page.sourceLastmod || "",
         }
       : null,
@@ -375,23 +355,11 @@ const localizedStaticCopy = {
     "/contactus": {
       title: "Contacte Dr. Nona în Moldova",
       description:
-        "Adresa, telefoanele și formularul de contact al filialei Dr. Nona din Chișinău.",
+        "Telefon pentru consultații și formular de contact Dr. Nona în Moldova.",
     },
     "/certificates": {
       title: "Certificate și documente Dr. Nona",
       description: "Arhiva oficială a documentelor și certificatelor Dr. Nona relevante pentru publicul din Moldova.",
-    },
-    "/editorial": {
-      title: "Blog și noutăți Dr. Nona",
-      description: "Materiale, cunoștințe, evenimente și noutăți Dr. Nona într-o singură secțiune editorială.",
-    },
-    "/blog": {
-      title: "Blog Dr. Nona",
-      description: "Articole Dr. Nona despre îngrijirea de zi cu zi, stilul de viață și noutățile mărcii.",
-    },
-    "/news": {
-      title: "Noutăți Dr. Nona",
-      description: "Evenimente, anunțuri și noutăți internaționale despre marca Dr. Nona.",
     },
   },
 };
@@ -576,7 +544,7 @@ const manifest = {
   routes: routeList.sort((left, right) => left.path.localeCompare(right.path)),
 };
 
-writeFileSync(
+writeGeneratedFile(
   "src/data/seo-manifest.json",
   `${JSON.stringify(manifest, null, 2)}\n`,
   "utf8"

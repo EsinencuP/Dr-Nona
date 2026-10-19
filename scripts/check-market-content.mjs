@@ -11,8 +11,8 @@ if (marketData.market !== "Moldova" || contact?.country !== "Молдова") {
   errors.push("The primary contact must target Moldova.");
 }
 
-if (!contact?.city?.trim() || !contact?.address?.trim()) {
-  errors.push("The Moldova contact requires a city and address.");
+if (contact && ("city" in contact || "address" in contact)) {
+  errors.push("Physical contact locations must remain unpublished by owner decision.");
 }
 
 if (!Array.isArray(contact?.phones) || contact.phones.length === 0) {
@@ -21,6 +21,9 @@ if (!Array.isArray(contact?.phones) || contact.phones.length === 0) {
   for (const phone of contact.phones) {
     if (!phone.label?.trim() || !phone.href?.startsWith("tel:+373")) {
       errors.push("Every Moldova phone must have a label and a +373 tel link.");
+    }
+    if (/69049793/u.test(`${phone.label}${phone.href}`.replace(/\D/gu, ""))) {
+      errors.push("The withdrawn Moldova phone must not be published.");
     }
   }
 }

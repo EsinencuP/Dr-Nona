@@ -45,7 +45,7 @@ test("Romanian generic-page shell overrides Russian content language for its con
 
 test("all remaining RO route shells preserve their locale and metadata", async ({ page }) => {
   const routes = manifest.routes.filter(route => /^\/ro(?:\/|$)/u.test(route.path) && !route.path.startsWith("/ro/product/"));
-  expect(routes).toHaveLength(14);
+  expect(routes).toHaveLength(11);
   for (const route of routes) {
     await page.goto(route.path);
     await expect(page.locator("main h1")).toBeVisible();

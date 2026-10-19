@@ -154,7 +154,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          if (id.includes("official-pages.json")) return "official-content";
+          if (id.includes("official-pages-public.json")) return "official-content";
           if (/products(?:-ro)?-public\.json$/u.test(id)) return "catalog-data";
           if (id.includes("node_modules/react")) return "react-core";
           if (id.includes("@phosphor-icons")) return "icons";
@@ -166,6 +166,9 @@ export default defineConfig({
     host: "127.0.0.1",
     port: 4173,
     headers: securityHeaders,
+    watch: {
+      ignored: ["**/artifacts/**", "**/graphify-out/**", "**/test-results/**", "**/playwright-report/**"],
+    },
   },
   preview: {
     host: "127.0.0.1",

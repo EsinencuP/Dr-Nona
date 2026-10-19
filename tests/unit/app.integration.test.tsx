@@ -96,7 +96,7 @@ describe("Dr. Nona application", () => {
     renderApp("/");
 
     expect(
-      await screen.findByRole("link", { name: "Подборка: 0" })
+      await screen.findByRole("link", { name: "Оформить заказ: 0" })
     ).toBeInTheDocument();
 
     window.dispatchEvent(
@@ -108,7 +108,7 @@ describe("Dr. Nona application", () => {
     );
 
     expect(
-      await screen.findByRole("link", { name: "Подборка: 1" })
+      await screen.findByRole("link", { name: "Оформить заказ: 1" })
     ).toBeInTheDocument();
   });
 
@@ -145,7 +145,7 @@ describe("Dr. Nona application", () => {
     renderApp("/");
 
     const selectionLink = await screen.findByRole("link", {
-      name: "Подборка: 0",
+      name: "Оформить заказ: 0",
     });
     expect(within(selectionLink).getByText("0")).toBeInTheDocument();
     await waitFor(() => {
@@ -171,7 +171,7 @@ describe("Dr. Nona application", () => {
     expect(
       screen.getAllByRole("link", { name: "+373 69 281 916" }).length
     ).toBeGreaterThan(0);
-    expect(screen.getByText("Филиал в Молдове")).toBeInTheDocument();
+    expect(screen.queryByText("Филиал в Молдове")).not.toBeInTheDocument();
     expect(screen.queryByText(/Израиль/)).not.toBeInTheDocument();
     expect(screen.queryByText(/Telegram/)).not.toBeInTheDocument();
   });
@@ -179,7 +179,7 @@ describe("Dr. Nona application", () => {
   test("keeps the primary market contact explicit and source-backed", () => {
     expect(marketData.market).toBe("Moldova");
     expect(marketData.contact.country).toBe("Молдова");
-    expect(marketData.contact.phones).toHaveLength(2);
+    expect(marketData.contact.phones).toHaveLength(1);
     expect(
       marketData.contact.phones.every((phone) =>
         phone.href.startsWith("tel:+373")
@@ -189,7 +189,7 @@ describe("Dr. Nona application", () => {
     expect(marketData.contact.telegram).toBeNull();
   });
 
-  test("links to the international document archive without review copy", async () => {
+  test("shows local document availability without an outbound archive", async () => {
     renderApp("/certificates");
 
     expect(
@@ -198,18 +198,14 @@ describe("Dr. Nona application", () => {
         name: "Сертификаты и документы",
       })
     ).toBeInTheDocument();
-    expect(
-      screen.getByRole("heading", {
-        level: 2,
-        name: "Международный архив сертификатов",
-      })
-    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Запросить документы" })).toHaveAttribute("href", "/contactus");
     expect(screen.queryByRole("combobox")).not.toBeInTheDocument();
     expect(screen.queryByText("Russia")).not.toBeInTheDocument();
     expect(screen.queryByText(/провер/i)).not.toBeInTheDocument();
     expect(
-      screen.getByRole("link", { name: /Открыть международный архив/i })
-    ).toBeInTheDocument();
+      screen.queryByRole("link", { name: /Открыть международный архив/i })
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText("Документы для Молдовы пока не опубликованы.")).not.toBeInTheDocument();
   });
 
   test("publishes all current products with explicit nulls for unavailable fields", () => {
@@ -280,8 +276,8 @@ describe("Dr. Nona application", () => {
       within(breadcrumb).getByText("Deodorant ( LORD )")
     ).toHaveAttribute("aria-current", "page");
 
-    const overview = screen.getByRole("heading", { level: 3, name: "О продукте" });
-    const ingredients = screen.getByRole("heading", { level: 3, name: "Состав" });
+    const overview = screen.getByRole("heading", { level: 2, name: "О продукте" });
+    const ingredients = screen.getByRole("heading", { level: 2, name: "Состав" });
     expect(overview.closest("article")).toHaveClass("product-copy-card");
     expect(ingredients.closest("article")).toHaveClass("product-copy-card");
     expect(overview.closest("article")).toBeVisible();
@@ -306,6 +302,7 @@ describe("Dr. Nona application", () => {
     ).not.toBeInTheDocument();
     expect(mainSections[0]).toHaveClass("home-hero");
     expect(mainSections[1]).toHaveClass("science-section");
-    expect(mainSections[2]).toHaveClass("home-product-showcase");
+    expect(mainSections[2]).toHaveClass("home-about");
+    expect(mainSections[3]).toHaveClass("home-product-showcase");
   });
 });

@@ -1,5 +1,4 @@
 import { ArrowRight } from "@phosphor-icons/react/ArrowRight";
-import { ArrowUpRight } from "@phosphor-icons/react/ArrowUpRight";
 import { CalendarBlank } from "@phosphor-icons/react/CalendarBlank";
 import { Flask } from "@phosphor-icons/react/Flask";
 import { Heart } from "@phosphor-icons/react/Heart";
@@ -7,13 +6,11 @@ import { SealCheck } from "@phosphor-icons/react/SealCheck";
 import {
   Reveal,
   getPageTitle,
-  splitText,
 } from "../../components/ui";
 import { useOfficialPageData } from "../../data";
 import { useLocale } from "../../locales/LocaleProvider";
 import { Link, NavLink } from "../../router";
 import NotFoundPage from "../../pages/NotFoundPage";
-import { uncroppedOfficialImage } from "../../components/contentMedia";
 
 const aboutCopy = {
   ru: {
@@ -23,27 +20,11 @@ const aboutCopy = {
       ["/about/founders", "Основатели"],
       ["/about/science", "Наука и технологии"],
     ],
-    sectionsLabel: "Разделы о компании",
-    since: "с 1994 года",
-    vision: "Наше",
-    visionAccent: "видение",
-    factsLabel: "Dr. Nona в цифрах",
+    sectionsLabel: "Разделы о компании",    factsLabel: "Dr. Nona в цифрах",
     founded: "год основания",
     countries: "стран мира",
-    distributors: "дистрибьюторов",
-    chaptersEyebrow: "О компании · четыре главы",
-    chaptersTitle: "Компания Dr. Nona",
-    openSection: "Открыть раздел",
-    principles: "Принципы Dr. Nona",
-    principlesQuote:
-      "Вера в мудрость природы, непрерывный творческий поиск и приверженность качеству.",
-    aboutCompany: "О компании",
-    historyEyebrow: "О компании · История",
-    today: "Сегодня",
-    historyStage: "Этап истории",
-    aboutEyebrow: "О компании",
-    officialSource: "Официальный источник",
-    imagesLabel: "Изображения",
+    distributors: "дистрибьюторов",    openSection: "Открыть раздел",    aboutCompany: "О компании",    today: "Сегодня",
+    historyStage: "Этап истории",    foundersCaption: "Доктор Нонна и Михаил Шнеерсон",
   },
   ro: {
     links: [
@@ -52,27 +33,11 @@ const aboutCopy = {
       ["/about/founders", "Fondatori"],
       ["/about/science", "Știință și tehnologie"],
     ],
-    sectionsLabel: "Secțiuni despre companie",
-    since: "din 1994",
-    vision: "Viziunea",
-    visionAccent: "noastră",
-    factsLabel: "Dr. Nona în cifre",
+    sectionsLabel: "Secțiuni despre companie",    factsLabel: "Dr. Nona în cifre",
     founded: "anul fondării",
     countries: "țări din întreaga lume",
-    distributors: "distribuitori",
-    chaptersEyebrow: "Despre companie · patru capitole",
-    chaptersTitle: "Compania Dr. Nona",
-    openSection: "Deschide secțiunea",
-    principles: "Principiile Dr. Nona",
-    principlesQuote:
-      "Încredere în înțelepciunea naturii, cercetare creativă continuă și angajament față de calitate.",
-    aboutCompany: "Despre companie",
-    historyEyebrow: "Despre companie · Istorie",
-    today: "Astăzi",
-    historyStage: "Etapă din istorie",
-    aboutEyebrow: "Despre companie",
-    officialSource: "Sursa oficială",
-    imagesLabel: "Imagini",
+    distributors: "distribuitori",    openSection: "Deschide secțiunea",    aboutCompany: "Despre companie",    today: "Astăzi",
+    historyStage: "Etapă din istorie",    foundersCaption: "Dr. Nona și Mihail Shneerson",
   },
 } as const;
 
@@ -104,35 +69,45 @@ export function AboutLandingPage() {
   const { pageByPath } = useOfficialPageData();
   const page = pageByPath.get("/about");
   const text = page?.paragraphs[0] ?? "";
-  const companyExcerpt = splitText(
-    pageByPath.get("/about/company")?.paragraphs[0] ?? "",
-    210
-  )[0];
-  const chapters = copy.links.map(([path, label], index) => {
+  const chapters = copy.links.map(([path, label]) => {
     const chapter = pageByPath.get(path);
     return {
       path,
       label,
-      image: page?.images[index]
-        ? {
-            ...page.images[index],
-            src: uncroppedOfficialImage(page.images[index].src),
-          }
-        : undefined,
-      excerpt: splitText(chapter?.paragraphs[0] ?? "", 185)[0],
+      excerpt: chapter?.description ?? "",
     };
   });
   return (
     <div className="about-page">
-      <section className="about-overview">
+      <section className="about-chapters container" aria-label={copy.sectionsLabel}>
+        <h1 className="about-chapters__title">{pageByPath.get("/about/company")?.title}</h1>
+        <div className="about-chapter-grid">
+          {chapters.map((chapter, index) => (
+            <Reveal
+              key={chapter.path}
+              className="about-chapter"
+              delay={index * 55}
+            >
+              <Link to={chapter.path}>
+                <div className="about-chapter__body">
+                  <div className="about-chapter__meta">
+                    <AboutChapterIcon path={chapter.path} />
+                  </div>
+                  <h2>{chapter.label}</h2>
+                  <p>{chapter.excerpt}</p>
+                  <span className="about-chapter__link">
+                    {copy.openSection} <ArrowRight aria-hidden="true" />
+                  </span>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+      <section className="about-overview" aria-label={copy.aboutCompany}>
         <div className="about-overview__inner container">
-          <div className="about-overview__heading">
-            <p className="eyebrow">Dr. Nona International · {copy.since}</p>
-            <h1>{copy.vision} <em>{copy.visionAccent}</em></h1>
-          </div>
           <div className="about-overview__statement">
-            <span aria-hidden="true">DN</span>
-            <p>{splitText(text, 430)[0]}</p>
+            <p>{text}</p>
           </div>
           <dl className="about-facts" aria-label={copy.factsLabel}>
             <div>
@@ -150,64 +125,6 @@ export function AboutLandingPage() {
           </dl>
         </div>
       </section>
-
-      <section className="about-chapters container" aria-labelledby="about-chapters-title">
-        <header className="about-chapters__heading">
-          <div>
-            <p className="eyebrow">{copy.chaptersEyebrow}</p>
-            <h2 id="about-chapters-title">{copy.chaptersTitle}</h2>
-          </div>
-          <p>{companyExcerpt}</p>
-        </header>
-        <div className="about-chapter-grid">
-          {chapters.map((chapter, index) => (
-            <Reveal
-              key={chapter.path}
-              className={`about-chapter about-chapter--${index + 1} about-chapter--${index === 0 ? "photo" : "portrait"}`}
-              delay={index * 55}
-            >
-              <Link to={chapter.path}>
-                <div className="about-chapter__media">
-                  {chapter.image?.src && (
-                    <img
-                      src={chapter.image.src}
-                      alt={chapter.image.alt || chapter.label}
-                      width="720"
-                      height="560"
-                      loading={index > 1 ? "lazy" : "eager"}
-                      decoding="async"
-                    />
-                  )}
-                </div>
-                <div className="about-chapter__body">
-                  <div className="about-chapter__meta">
-                    <AboutChapterIcon path={chapter.path} />
-                  </div>
-                  <h3>{chapter.label}</h3>
-                  <p>{chapter.excerpt}</p>
-                  <span className="about-chapter__link">
-                    {copy.openSection} <ArrowRight aria-hidden="true" />
-                  </span>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="about-principles">
-        <div className="container">
-          <p className="eyebrow">{copy.principles}</p>
-          <div className="about-principles__content">
-            <blockquote>
-              {copy.principlesQuote}
-            </blockquote>
-            <Link className="button button--light" to="/about/company">
-              {copy.aboutCompany} <ArrowRight aria-hidden="true" />
-            </Link>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
@@ -223,7 +140,7 @@ export function HistoryPage() {
   return (
     <section className="history-page container">
       <div className="page-intro">
-        <div><p className="eyebrow">{copy.historyEyebrow}</p><h1>{title}</h1></div>
+        <div><h1>{title}</h1></div>
         <AboutNavigation />
       </div>
       <div className="timeline">
@@ -248,24 +165,24 @@ export function AboutContentPage({ path }: { path: string }) {
   const page = pageByPath.get(path);
   if (!page) return <NotFoundPage />;
   const title = getPageTitle(page);
-  const paragraphs = page.paragraphs.flatMap((paragraph) =>
-    splitText(paragraph, 280)
-  );
+  const paragraphs = page.paragraphs;
   return (
     <section className="about-content container">
       <div className="page-intro">
-        <div><p className="eyebrow">{copy.aboutEyebrow}</p><h1>{title}</h1></div>
+        <div><h1>{title}</h1></div>
         <AboutNavigation />
       </div>
       <div className="about-content__layout">
-        <aside>
-          <div className="about-symbol">
+        <aside className={path === "/about/founders" ? "about-founders-aside" : undefined}>
+          {path === "/about/founders" ? (
+            <figure className="about-founders-photo">
+              <img src="/brand/about/founders.jpg" alt={copy.foundersCaption} width="300" height="300" decoding="async" />
+              <figcaption>{copy.foundersCaption}</figcaption>
+            </figure>
+          ) : <div className="about-symbol">
             {path.includes("science") ? <Flask aria-hidden="true" /> : <SealCheck aria-hidden="true" />}
-          </div>
+          </div>}
           <p>Dr. Nona International</p>
-          <a href={page.sourceUrl} target="_blank" rel="noreferrer">
-            {copy.officialSource} <ArrowUpRight aria-hidden="true" />
-          </a>
         </aside>
         <div className="prose">
           {paragraphs.map((paragraph, index) => (
@@ -273,21 +190,6 @@ export function AboutContentPage({ path }: { path: string }) {
               <p className={index === 0 ? "prose-lead" : ""}>{paragraph}</p>
             </Reveal>
           ))}
-          {page.images.length > 0 && (
-            <div className="official-media-grid" aria-label={`${copy.imagesLabel}: ${title}`}>
-              {page.images.map((image, index) => (
-                <img
-                  key={`${image.src}-${index}`}
-                  src={uncroppedOfficialImage(image.src)}
-                  alt={image.alt || title}
-                  width="800"
-                  height="640"
-                  loading="lazy"
-                  decoding="async"
-                />
-              ))}
-            </div>
-          )}
         </div>
       </div>
     </section>

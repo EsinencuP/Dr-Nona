@@ -3,7 +3,7 @@ import { BookmarkSimple } from "@phosphor-icons/react/BookmarkSimple";
 import { useEffect, useRef } from "react";
 import type { CSSProperties, ReactNode } from "react";
 import { productCardImageSizes, productImageStyle } from "../features/product/productImagePresentation";
-import { getProductCopy } from "../claims";
+import { getLocalizedProductName, getProductTitle } from "../features/product/productNames";
 import type { OfficialPage, Product } from "../data";
 import { useSelection } from "../features/selection/SelectionContext";
 import { useLocale } from "../locales/LocaleProvider";
@@ -88,14 +88,11 @@ export function Reveal({
 }
 
 export function SectionHeading({
-  eyebrow,
   title,
   text,
   action,
   align = "left",
-}: {
-  eyebrow: string;
-  title: string;
+}: {  title: string;
   text?: string;
   action?: ReactNode;
   align?: "left" | "split";
@@ -103,7 +100,6 @@ export function SectionHeading({
   return (
     <div className={`section-heading section-heading--${align}`}>
       <div>
-        <p className="eyebrow">{eyebrow}</p>
         <h2>{title}</h2>
       </div>
       {(text || action) && (
@@ -126,9 +122,13 @@ export function ProductCard({
   headingLevel?: 2 | 3;
 }) {
   const { contains, toggle } = useSelection();
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
   const saved = contains(product.slug);
-  const shortDescription = getProductCopy(product, "shortDescription");
+  const title = getProductTitle(product);
+  const subtitle = getLocalizedProductName(product, locale);
+  const packageUnits = locale === "ro"
+    ? { ml: "ml", g: "g", caps: "caps", pieces: "buc.", "tea-bags": "plicuri", samples: "mostre" }
+    : { ml: "мл", g: "г", caps: "caps", pieces: "шт.", "tea-bags": "пак.", samples: "проб." };
   return (
     <article
       className={`product-card ${compact ? "product-card--compact" : ""}`}
@@ -149,20 +149,25 @@ export function ProductCard({
       <div className="product-card__body">
         <div className="product-card__meta">
           <span>{product.category}</span>
+          {product.packageSize && (
+            <span className="product-card__volume" title={locale === "ro" ? "Cantitate în ambalaj" : "Фасовка"}>
+              {new Intl.NumberFormat(locale).format(product.packageSize.quantity)}&nbsp;{packageUnits[product.packageSize.unit]}
+            </span>
+          )}
         </div>
         {headingLevel === 2 ? (
-          <h2>
-            <Link to={`/product/${product.slug}`}>{product.officialName}</Link>
+          <h2 lang="en">
+            <Link to={`/product/${product.slug}`}>{title}</Link>
           </h2>
         ) : (
-          <h3>
-            <Link to={`/product/${product.slug}`}>{product.officialName}</Link>
+          <h3 lang="en">
+            <Link to={`/product/${product.slug}`}>{title}</Link>
           </h3>
         )}
         <p
-          className="product-card__description"
+          className="product-card__description product-card__localized-name"
         >
-          {shortDescription}
+          {subtitle}
         </p>
         <div className="product-card__actions">
           <Link className="text-link" to={`/product/${product.slug}`}>

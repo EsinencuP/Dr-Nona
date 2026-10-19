@@ -5,87 +5,73 @@ import { Flask } from "@phosphor-icons/react/Flask";
 import { Heart } from "@phosphor-icons/react/Heart";
 import { Leaf } from "@phosphor-icons/react/Leaf";
 import { TestTube } from "@phosphor-icons/react/TestTube";
+import { Pill } from "@phosphor-icons/react/Pill";
+import { Atom } from "@phosphor-icons/react/Atom";
 import { useState } from "react";
 import type { CSSProperties } from "react";
 import { getProductCopy } from "../claims";
-import { ArticleCard } from "../components/ArticleCard";
 import { ProductImage } from "../components/ProductImage";
+import { getLocalizedProductName, getProductTitle } from "../features/product/productNames";
 import { Reveal, SectionHeading, splitText } from "../components/ui";
-import type { OfficialPage, Product } from "../data";
+import type { Product } from "../data";
 import homeProducts from "../data/home-products.json";
-import runtimeContent from "../data/runtime-content.json";
 import { useSelection } from "../features/selection/SelectionContext";
 import { useLocale } from "../locales/LocaleProvider";
 import { Link } from "../router";
 
 export default function HomePage() {
   const { locale } = useLocale();
+  const today = new Date();
+  const companyYears = today.getFullYear() - 1994 - Number(today < new Date(today.getFullYear(), 7, 22));
+  const yearForm = new Intl.PluralRules(locale).select(companyYears);
   const copy = locale === "ro"
-    ? {
-        heroEyebrow: "Marea Moartă · Știință · Dr. Nona",
-        heroTagline: "Creat de natură",
+    ? {        heroTagline: "Creat de natură",
         heroLead:
           "Combinăm forța mineralelor Mării Moarte cu cercetarea științifică modernă pentru a crea produse de îngrijire zilnică și frumusețe.",
         heroPrinciples: "Principiile Dr. Nona",
-        heroBenefitsHint: "Încă 3 principii — derulați orizontal",
-        science: "Știință",
-        scienceIntro: "Creat de natură. Dezvăluit de știință.",
+        heroBenefitsHint: "Încă 3 principii — derulați orizontal",        scienceIntro: "Creat de natură. Dezvăluit de știință.",
         scienceFallback:
           "Formula proprie reunește originea Mării Moarte cu abordarea științifică Dr. Nona.",
         formulaStory: "Istoria formulei",
-        products: "Produse",
-        editorsChoice: "Recomandarea noastră",
+        aboutTitle: "Despre noi",
+        aboutIntro:
+          "Suntem reprezentanții oficiali ai companiei israeliene Dr. Nona în Moldova, oferind produse originale și o abordare profesionistă pentru fiecare client.",
+        aboutMission:
+          "Misiunea noastră este să facem produsele originale Dr. Nona accesibile în Moldova, ajutând oamenii să aibă grijă de sănătatea, frumusețea și calitatea vieții lor în fiecare zi.",        editorsChoice: "Recomandarea noastră",
         allProducts: "Toate produsele",
         openProduct: "Vezi produsul",
         saved: "Adăugat",
         add: "Adaugă în selecție",
         moreProducts: "Alte două produse recomandate",
-        details: "Detalii",
-        promo: "Produs în prim-plan",
-        collection: "Colecție",
-        viewCollection: "Descoperă colecția",
-        history: "Istorie",
-        companyHistory: "Istoria companiei",
+        details: "Detalii",        viewCollection: "Descoperă colecția",        companyHistory: "Istoria companiei",
         historyText:
           "Compania Dr. Nona International a fost fondată la 22 august 1994, pe acoperișul casei doctorului Nona și a lui Mihail Șneerson.",
         continueHistory: "Descoperă istoria",
-        years: "de ani de istorie",
-        knowledge: "Informații utile",
-        blogNews: "Blog și noutăți",
-        readAll: "Vezi toate materialele",
+        years: companyYears === 1 ? "an de istorie" : "de ani de istorie",
       }
-    : {
-        heroEyebrow: "Мёртвое море · Наука · Dr. Nona",
-        heroTagline: "Сделано природой",
+    : {        heroTagline: "Сделано природой",
         heroLead:
           "Мы объединяем силу минералов Мёртвого моря и передовые научные разработки, чтобы создавать продукты для ежедневного ухода и красоты.",
         heroPrinciples: "Принципы Dr. Nona",
-        heroBenefitsHint: "Ещё 3 принципа — листайте горизонтально",
-        science: "Наука",
-        scienceIntro: "Сделано природой. Раскрыто наукой.",
+        heroBenefitsHint: "Ещё 3 принципа — листайте горизонтально",        scienceIntro: "Сделано природой. Раскрыто наукой.",
         scienceFallback:
           "Фирменная формула объединяет происхождение Мёртвого моря и научный подход Dr. Nona.",
         formulaStory: "История формулы",
-        products: "Продукты",
-        editorsChoice: "Выбор редакции",
+        aboutTitle: "О нас",
+        aboutIntro:
+          "Мы являемся официальными представителями израильской компании Dr. Nona в Молдове, предоставляя оригинальную продукцию и профессиональный подход к каждому клиенту.",
+        aboutMission:
+          "Наша миссия — сделать оригинальную продукцию Dr. Nona доступной в Молдове, помогая людям заботиться о своём здоровье, красоте и качестве жизни каждый день.",        editorsChoice: "Выбор редакции",
         allProducts: "Все продукты",
         openProduct: "Смотреть продукт",
         saved: "Добавлено",
         add: "В подборку",
         moreProducts: "Ещё два продукта",
-        details: "Подробнее",
-        promo: "Промо-фокус",
-        collection: "Коллекция",
-        viewCollection: "Смотреть коллекцию",
-        history: "История",
-        companyHistory: "История компании",
+        details: "Подробнее",        viewCollection: "Смотреть коллекцию",        companyHistory: "История компании",
         historyText:
           "Компания Dr. Nona International была основана 22 августа 1994 года, на крыше дома Доктора Нонны и Михаила Шнеерсона.",
         continueHistory: "Продолжить историю",
-        years: "лет истории",
-        knowledge: "Знания",
-        blogNews: "Блог и новости",
-        readAll: "Читать всё",
+        years: yearForm === "one" ? "год истории" : yearForm === "few" ? "года истории" : "лет истории",
       };
   const products = homeProducts[locale] as Product[];
   const productBySlug = new Map(
@@ -105,8 +91,7 @@ export default function HomePage() {
     productBySlug.get("lord-deodorant"),
   ].filter((product): product is Product => Boolean(product));
   const spotlightSaved = contains(spotlight.slug);
-  const articles = runtimeContent.home.editorial as OfficialPage[];
-  const [scienceFocus, setScienceFocus] = useState<"archaea" | "minerals" | "extracts">("minerals");
+  const [scienceFocus, setScienceFocus] = useState<"archaea" | "minerals" | "extracts" | "vitamins" | "amino-acids">("minerals");
   const scienceNodes = locale === "ro" ? [
     {
       id: "archaea" as const,
@@ -129,6 +114,18 @@ export default function HomePage() {
         "Componentele vegetale completează formulele de îngrijire zilnică.",
       icon: Leaf,
     },
+    {
+      id: "vitamins" as const,
+      label: "Vitamine",
+      description: "Vitaminele fac parte din formulele unor produse Dr. Nona, precum Goldseen și Okseen.",
+      icon: Pill,
+    },
+    {
+      id: "amino-acids" as const,
+      label: "Aminoacizi",
+      description: "În formula Phase 9, aminoacizii sunt combinați cu vitamine și minerale.",
+      icon: Atom,
+    },
   ] : [
     {
       id: "archaea" as const,
@@ -148,6 +145,18 @@ export default function HomePage() {
       description: "Растительные компоненты дополняют формулы ежедневного ухода.",
       icon: Leaf,
     },
+    {
+      id: "vitamins" as const,
+      label: "Витамины",
+      description: "Витамины входят в состав отдельных формул Dr. Nona, например Goldseen и Okseen.",
+      icon: Pill,
+    },
+    {
+      id: "amino-acids" as const,
+      label: "Аминокислоты",
+      description: "В составе Phase 9 аминокислоты сочетаются с витаминами и минералами.",
+      icon: Atom,
+    },
   ];
   const activeScienceNode = scienceNodes.find((node) => node.id === scienceFocus) ?? scienceNodes[1];
   const ActiveScienceIcon = activeScienceNode.icon;
@@ -164,7 +173,6 @@ export default function HomePage() {
       <section className="home-hero">
         <div className="home-hero__inner container">
           <div className="hero-copy">
-            <p className="eyebrow">{copy.heroEyebrow}</p>
             <h1>
               <span className="hero-title-line hero-title-line--ink">Halo</span>
               <span className="hero-title-line hero-title-line--sea">Complex™</span>
@@ -177,7 +185,7 @@ export default function HomePage() {
           <div
             className="hero-visual"
             role="img"
-            aria-label={locale === "ro" ? "Halo Night Cream într-un peisaj al Mării Moarte" : "Halo Night Cream в пейзаже Мёртвого моря"}
+            aria-label={locale === "ro" ? "Produse Dr. Nona pe malul Mării Moarte" : "Продукция Dr. Nona на берегу Мёртвого моря"}
           />
         </div>
         <div
@@ -201,7 +209,6 @@ export default function HomePage() {
       <section className="science-section" id="halo-science">
         <div className="container science-grid">
           <Reveal className="science-copy">
-            <p className="eyebrow eyebrow--light">{copy.science}</p>
             <h2>Halo Complex™</h2>
             <p className="science-intro">{copy.scienceIntro}</p>
             <p>
@@ -253,10 +260,20 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="home-about" aria-labelledby="home-about-title">
+        <div className="container home-about__inner">
+          <Reveal className="home-about__heading">
+            <h2 id="home-about-title">{copy.aboutTitle}</h2>
+          </Reveal>
+          <Reveal className="home-about__body" delay={70}>
+            <p>{copy.aboutIntro} {copy.aboutMission}</p>
+          </Reveal>
+        </div>
+      </section>
+
       <section className="section container home-product-showcase">
         <Reveal>
           <SectionHeading
-            eyebrow={copy.products}
             title={copy.editorsChoice}
             action={
               <Link className="text-link text-link--large" to="/products">
@@ -273,7 +290,7 @@ export default function HomePage() {
               <Link
                 className="home-product-spotlight__media"
                 to={`/product/${spotlight.slug}`}
-                aria-label={`${copy.openProduct}: ${spotlight.officialName}`}
+                aria-label={`${copy.openProduct}: ${getProductTitle(spotlight)}`}
                 style={{
                   "--home-product-scale": Number(
                     (spotlight.catalogScale * 1.18).toFixed(3)
@@ -292,13 +309,10 @@ export default function HomePage() {
               </Link>
               <div className="home-product-spotlight__body">
                 <div className="home-product-spotlight__meta">
-                  <span>{copy.editorsChoice}</span>
                   <small>{spotlight.category}</small>
                 </div>
-                <h3>{spotlight.officialName}</h3>
-                {getProductCopy(spotlight, "shortDescription") && (
-                  <p>{getProductCopy(spotlight, "shortDescription")}</p>
-                )}
+                <h3 lang="en">{getProductTitle(spotlight)}</h3>
+                <p>{getLocalizedProductName(spotlight, locale)}</p>
                 <div className="home-product-spotlight__actions">
                   <Link className="button button--primary" to={`/product/${spotlight.slug}`}>
                     {copy.openProduct} <ArrowRight aria-hidden="true" />
@@ -352,11 +366,12 @@ export default function HomePage() {
                   </Link>
                   <div className="home-product-mini__body">
                     <span>{product.category}</span>
-                    <h3>
+                    <h3 lang="en">
                       <Link to={`/product/${product.slug}`}>
-                        {product.officialName}
+                        {getProductTitle(product)}
                       </Link>
                     </h3>
+                    <p className="home-product-mini__name">{getLocalizedProductName(product, locale)}</p>
                     <Link className="text-link" to={`/product/${product.slug}`}>
                       {copy.details} <ArrowUpRight aria-hidden="true" />
                     </Link>
@@ -389,11 +404,8 @@ export default function HomePage() {
                 />
               </div>
               <div className="home-promo-banner__content">
-                <span>{copy.promo}</span>
-                <h3>{promoProduct.officialName}</h3>
-                {getProductCopy(promoProduct, "shortDescription") && (
-                  <p>{getProductCopy(promoProduct, "shortDescription")}</p>
-                )}
+                <h3 lang="en">{getProductTitle(promoProduct)}</h3>
+                <p>{getLocalizedProductName(promoProduct, locale)}</p>
                 <Link className="button button--light" to={`/product/${promoProduct.slug}`}>
                   {copy.openProduct} <ArrowRight aria-hidden="true" />
                 </Link>
@@ -430,7 +442,6 @@ export default function HomePage() {
                 </picture>
               </div>
               <div className="home-lord-banner__content">
-                <span>{copy.collection}</span>
                 <h3>Lord</h3>
                 {lordProducts[1] &&
                   getProductCopy(lordProducts[1], "shortDescription") && (
@@ -449,10 +460,9 @@ export default function HomePage() {
         <Reveal className="history-preview__visual">
           <span className="history-year">1994</span>
           <div className="history-sea" aria-hidden="true" />
-          <div className="history-seal"><span>30</span><small>{copy.years}</small></div>
+          <div className="history-seal"><span>{companyYears}</span><small>{copy.years}</small></div>
         </Reveal>
         <Reveal className="history-preview__copy" delay={90}>
-          <p className="eyebrow">{copy.history}</p>
           <h2>{copy.companyHistory}</h2>
           <p>{copy.historyText}</p>
           <Link className="text-link text-link--large" to="/about/our-history">
@@ -461,29 +471,6 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      <section className="section editorial-preview">
-        <div className="container">
-          <Reveal>
-            <SectionHeading
-              eyebrow={copy.knowledge}
-              title={copy.blogNews}
-              action={
-                <Link className="text-link text-link--large" to="/editorial">
-                  {copy.readAll} <ArrowRight aria-hidden="true" />
-                </Link>
-              }
-              align="split"
-            />
-          </Reveal>
-          <div className="editorial-grid">
-            {articles.map((article, index) => (
-              <Reveal key={article.path} delay={index * 55}>
-                <ArticleCard page={article} feature={index === 0} />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
     </>
   );
 }

@@ -1,5 +1,6 @@
 import { getProductCopy } from "../../claims";
 import type { Product } from "../../data";
+import { getLocalizedProductName, getProductTitle } from "../product/productNames";
 import { getPopularityState } from "../../popularity";
 import {
   compareCatalogProducts,
@@ -55,7 +56,7 @@ function isOneEditAway(left: string, right: string) {
 }
 
 function fuzzyNameMatch(product: Product, words: string[]) {
-  const titleWords = normalizeSearchText(`${product.officialName} ${product.category}`).split(" ");
+  const titleWords = normalizeSearchText(`${getProductTitle(product)} ${getLocalizedProductName(product)} ${product.officialName} ${product.category}`).split(" ");
   let usedCorrection = false;
   for (const word of words) {
     if (titleWords.includes(word)) continue;
@@ -79,6 +80,8 @@ export function filterCatalogProducts({
   const exact = categoryProducts.filter((product) =>
     !needle || normalizeSearchText([
       product.officialName,
+      getProductTitle(product),
+      getLocalizedProductName(product),
       product.sku,
       product.category,
       getProductCopy(product, "shortDescription"),

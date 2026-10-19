@@ -8,7 +8,6 @@ import { useProductData } from "../data";
 import { filterCatalogProducts } from "../features/catalog/filterProducts";
 import { useLocale } from "../locales/LocaleProvider";
 import { normalizeCatalogSort } from "../product-sort";
-import { getPopularityState } from "../popularity";
 import { useSearchParams } from "../router";
 
 function productCountLabel(count: number, locale: "ru" | "ro") {
@@ -31,23 +30,13 @@ export default function CatalogPage() {
   const { products, categories } = useProductData();
   const { locale, t } = useLocale();
   const copy = locale === "ro"
-    ? {
-        eyebrow: `Catalog · ${products.length} produse`,
-        title: "Catalog",
-        intro:
-          "Gama completă Dr. Nona Moldova, cu descrieri, compoziție și mod de utilizare.",
-        showFilters: "Căutare și sortare",
+    ? {        title: "Catalog",        showFilters: "Căutare și sortare",
         hideFilters: "Ascunde căutarea și sortarea",
         clearSearch: "Șterge căutarea",
         sorting: "Sortare",
         categoryFilter: "Filtru după categorie",
       }
-    : {
-        eyebrow: `Каталог · ${products.length} товаров`,
-        title: "Каталог",
-        intro:
-          "Полный ассортимент Dr. Nona Moldova с описаниями, составом и способом применения.",
-        showFilters: "Поиск и сортировка",
+    : {        title: "Каталог",        showFilters: "Поиск и сортировка",
         hideFilters: "Скрыть поиск и сортировку",
         clearSearch: "Очистить поиск",
         sorting: "Сортировка",
@@ -56,7 +45,6 @@ export default function CatalogPage() {
   const query = params.get("q") ?? "";
   const category = params.get("category") ?? "all";
   const sort = normalizeCatalogSort(params.get("sort"));
-  const popularity = getPopularityState();
   const [filtersOpen, setFiltersOpen] = useState(false);
   const deferredQuery = useDeferredValue(query);
 
@@ -92,10 +80,8 @@ export default function CatalogPage() {
     <section className="catalog-page container">
       <div className="page-intro page-intro--catalog">
         <div>
-          <p className="eyebrow">{copy.eyebrow}</p>
           <h1>{copy.title} <em>Dr. Nona</em></h1>
         </div>
-        <p>{copy.intro}</p>
       </div>
 
       <button
@@ -197,17 +183,6 @@ export default function CatalogPage() {
         )}
       </div>
 
-      {sort === "popular" && (
-        <p className="catalog-popularity-note">
-          {popularity.active
-            ? locale === "ro"
-              ? "Ordinea reflectă numărul de comenzi finalizate pentru fiecare produs în ultimele 90 de zile."
-              : "Порядок отражает число завершённых заказов с каждым товаром за последние 90 дней."
-            : locale === "ro"
-              ? "Datele despre comenzi sunt încă insuficiente sau necesită actualizare; produsele sunt afișate în ordinea catalogului."
-              : "Данных о заказах пока недостаточно или они требуют обновления; товары показаны в порядке каталога."}
-        </p>
-      )}
 
       {result.length ? (
         <div className="catalog-grid">

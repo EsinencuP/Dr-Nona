@@ -9,9 +9,9 @@ test("valid and invalid product deep links resolve correctly", async ({ page }) 
     })
   ).toBeVisible();
   await expect(page.getByText("324001", { exact: true })).toBeVisible();
-  await expect(page.getByRole("heading", { level: 3, name: "О продукте" })).toBeVisible();
-  await expect(page.getByRole("heading", { level: 3, name: "Состав" })).toBeVisible();
-  await expect(page.getByRole("heading", { level: 3, name: "Способ применения" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2, name: "О продукте" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2, name: "Состав" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2, name: "Способ применения" })).toBeVisible();
   const relatedImages = page.locator(".related-grid .product-card__image");
   await expect(relatedImages).toHaveCount(4);
   for (const image of await relatedImages.all()) {
@@ -31,7 +31,7 @@ test("valid and invalid product deep links resolve correctly", async ({ page }) 
   await expect(page.getByText("309001", { exact: true })).toBeVisible();
 });
 
-test("every catalog category exposes product identity and source", async ({ page }) => {
+test("every catalog category exposes product identity without outbound sources", async ({ page }) => {
   await page.goto("/products");
   const catalogLinks = page.locator(".catalog-grid .product-card :is(h2, h3) a");
   await expect(catalogLinks).toHaveCount(50);
@@ -46,9 +46,17 @@ test("every catalog category exposes product identity and source", async ({ page
   for (const href of categorySamples) {
     await page.goto(href);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-    await expect(page.locator(".product-purpose")).toBeVisible();
-    await expect(page.locator(".product-copy-card--overview")).toBeVisible();
-    await expect(page.getByRole("link", { name: "Источник: drnona.md" })).toBeVisible();
+    await expect(page.locator(".product-purpose")).toHaveCount(0);
+    await expect(page.locator(".product-copy-card--overview")).toHaveCount(0);
+    for (const name of ["Состав", "Способ применения"]) {
+      const heading = page.getByRole("heading", { level: 2, name });
+      if (href === "/product/parfum-faya") {
+        await expect(heading).toHaveCount(0);
+      } else {
+        await expect(heading).toBeVisible();
+      }
+    }
+    await expect(page.locator('a[href*="drnona.md"], a[href*="drnona.com"]')).toHaveCount(0);
     await expect(page.getByTestId("claims-review-notice")).toHaveCount(0);
   }
 });
@@ -64,7 +72,7 @@ test("stale selection entries do not inflate the header count", async ({
   });
   await page.goto("/");
 
-  await expect(page.getByRole("link", { name: "Подборка: 0" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Оформить заказ: 0" })).toBeVisible();
   await expect
     .poll(() => page.evaluate(() => localStorage.getItem("drnona-selection")))
     .toBe("[]");
@@ -81,14 +89,14 @@ test("selection persists after refresh and removal updates storage", async ({
   const productName = await firstCard.getByRole("heading", { level: 2 }).innerText();
   await firstCard.getByRole("button", { name: "В подборку" }).click();
   await expect(
-    page.getByRole("link", { name: "Подборка: 1" })
+    page.getByRole("link", { name: "Оформить заказ: 1" })
   ).toBeVisible();
 
   await page.reload();
   await expect(
-    page.getByRole("link", { name: "Подборка: 1" })
+    page.getByRole("link", { name: "Оформить заказ: 1" })
   ).toBeVisible();
-  await page.getByRole("link", { name: "Подборка: 1" }).click();
+  await page.getByRole("link", { name: "Оформить заказ: 1" }).click();
   await expect(
     page.getByRole("heading", { level: 2, name: productName })
   ).toBeVisible();
@@ -114,7 +122,7 @@ test("selection count synchronizes between open tabs", async ({ context }) => {
   const secondTab = await context.newPage();
   await Promise.all([firstTab.goto("/products"), secondTab.goto("/products")]);
   await expect(firstTab.locator(".catalog-grid .product-card")).toHaveCount(50);
-  await expect(secondTab.getByRole("link", { name: "Подборка: 0" })).toBeVisible();
+  await expect(secondTab.getByRole("link", { name: "Оформить заказ: 0" })).toBeVisible();
 
   await firstTab
     .locator(".catalog-grid .product-card")
@@ -122,7 +130,7 @@ test("selection count synchronizes between open tabs", async ({ context }) => {
     .getByRole("button", { name: "В подборку" })
     .click();
 
-  await expect(secondTab.getByRole("link", { name: "Подборка: 1" })).toBeVisible();
+  await expect(secondTab.getByRole("link", { name: "Оформить заказ: 1" })).toBeVisible();
 });
 
 test("unknown deep links render the site 404", async ({ page }) => {

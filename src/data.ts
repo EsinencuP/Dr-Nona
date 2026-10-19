@@ -9,6 +9,11 @@ type Locale = "ru" | "ro";
 export type Product = {
   slug: string;
   officialName: string;
+  cardTitle?: string;
+  packageSize?: {
+    quantity: number;
+    unit: "ml" | "g" | "caps" | "pieces" | "tea-bags" | "samples";
+  };
   shortDescription: string | null;
   longDescription: string | null;
   ingredients: string | null;
@@ -196,7 +201,7 @@ export function loadProductData(locale: Locale = "ru") {
 export function loadOfficialPageData(locale: Locale = "ru") {
   const cached = officialPageDataPromises.get(locale);
   if (cached) return cached;
-  const promise = import("./data/official-pages.json").then((module) => {
+  const promise = import("./data/official-pages-public.json").then((module) => {
     const localizedPages = companyPages[locale];
     if (Object.keys(companyPages.ru).some((path) => !localizedPages[path])) {
       throw new Error(`Incomplete company page translations: ${locale}`);

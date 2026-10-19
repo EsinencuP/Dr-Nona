@@ -183,7 +183,7 @@
   margin: 0;
 }
 
-.application-error > p:not(.eyebrow) {
+.application-error > p {
   color: var(--muted);
 }
 

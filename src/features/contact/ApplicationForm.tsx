@@ -19,6 +19,7 @@ import {
 } from "../../../shared/constants/moldova-regions";
 import { getAppointmentBounds } from "../../../shared/applications/appointment-policy";
 import { marketData } from "../../market";
+import { getProductTitle } from "../product/productNames";
 import { useLocale } from "../../locales/LocaleProvider";
 import { Link } from "../../router";
 import { loadConsultationSlots, submitApplication } from "./application-client";
@@ -118,9 +119,7 @@ export function ApplicationForm({
     []
   );
   const copy = locale === "ro"
-    ? {
-        eyebrow: "Contactați un consultant",
-        title: "Trimiteți o solicitare",
+    ? {        title: "Trimiteți o solicitare",
         intro:
           "Alegeți tipul solicitării. Formularul nu reprezintă plata comenzii; ora consultației sau a masterclassului va fi confirmată de manager.",
         requestType: "Tipul solicitării",
@@ -169,15 +168,13 @@ export function ApplicationForm({
           `Consultația nr. ${id} a fost rezervată pentru intervalul selectat. Dacă sunt necesare detalii suplimentare, consultantul vă va contacta.`,
         slotUnavailable: "Acest interval tocmai a fost rezervat de alt client. Lista a fost actualizată — selectați alt interval.",
         failure:
-          "Solicitarea nu a fost trimisă. Datele au rămas în formular — încercați din nou sau sunați la filială.",
+          "Solicitarea nu a fost trimisă. Datele au rămas în formular — încercați din nou sau contactați-ne telefonic.",
         validation: "Verificați câmpurile marcate.",
         status: "Statutul solicitării",
         errorTitle: "Trimiterea nu a putut fi finalizată",
         call: "Sunați",
       }
-    : {
-        eyebrow: "Связаться с менеджером",
-        title: "Оставить заявку",
+    : {        title: "Оставить заявку",
         intro:
           "Выберите нужный сценарий. Заявка не является оплатой заказа; время консультации или мастер-класса подтвердит менеджер.",
         requestType: "Тип заявки",
@@ -226,7 +223,7 @@ export function ApplicationForm({
           `Консультация №${id} зарезервирована на выбранное время. Если потребуются детали, консультант свяжется с вами.`,
         slotUnavailable: "Этот слот только что занял другой клиент. Список обновлён — выберите другое время.",
         failure:
-          "Заявка не отправлена. Данные сохранены в форме — повторите попытку или используйте телефон филиала.",
+          "Заявка не отправлена. Данные сохранены в форме — повторите попытку или свяжитесь с нами по телефону.",
         validation: "Проверьте отмеченные поля.",
         status: "Статус заявки",
         errorTitle: "Не удалось завершить отправку",
@@ -420,7 +417,6 @@ export function ApplicationForm({
   return (
     <section className="application-panel" aria-labelledby="application-title">
       <div className="application-panel__heading">
-        <p className="eyebrow">{copy.eyebrow}</p>
         <h2 id="application-title">{copy.title}</h2>
         <p>{copy.intro}</p>
       </div>
@@ -572,19 +568,19 @@ export function ApplicationForm({
                   return (
                     <li key={product.slug}>
                       <div className="application-product__identity">
-                        <span>{product.officialName}</span>
+                        <span lang="en">{getProductTitle(product)}</span>
                         <small>SKU {product.sku || copy.missingSku}</small>
                       </div>
                       <div
                         className="application-quantity"
                         role="group"
-                        aria-label={`${copy.quantity}: ${product.officialName}`}
+                        aria-label={`${copy.quantity}: ${getProductTitle(product)}`}
                       >
                         <button
                           type="button"
                           onClick={() => updateQuantity(product.slug, -1)}
                           disabled={accepted || quantity <= 1}
-                          aria-label={copy.decreaseQuantity(product.officialName)}
+                          aria-label={copy.decreaseQuantity(getProductTitle(product))}
                         >
                           −
                         </button>
@@ -593,7 +589,7 @@ export function ApplicationForm({
                           type="button"
                           onClick={() => updateQuantity(product.slug, 1)}
                           disabled={accepted || quantity >= 99}
-                          aria-label={copy.increaseQuantity(product.officialName)}
+                          aria-label={copy.increaseQuantity(getProductTitle(product))}
                         >
                           +
                         </button>

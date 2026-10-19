@@ -6,6 +6,7 @@ import { X } from "@phosphor-icons/react/X";
 import { useState } from "react";
 import type { CSSProperties } from "react";
 import { ProductImage } from "../components/ProductImage";
+import { getProductTitle } from "../features/product/productNames";
 import { useProductData } from "../data";
 import type { Product } from "../data";
 import {
@@ -22,16 +23,12 @@ export default function SelectionPage() {
   const { productBySlug } = useProductData();
   const { locale } = useLocale();
   const copy = locale === "ro"
-    ? {
-        eyebrow: "Selecția mea",
-        title: "Produse selectate",
+    ? {        title: "Produse selectate",
         intro:
           "Păstrați produsele care vă interesează și transmiteți selecția consultantului.",
         sku: "Cod produs",
         missingSku: "nu este indicat",
-        remove: "Elimină",
-        next: "Pasul următor",
-        handoff: "Trimiteți selecția pentru consultație",
+        remove: "Elimină",        handoff: "Trimiteți selecția pentru consultație",
         handoffSummary: (count: number) =>
           `Consultantul va primi denumirile, codurile și linkurile celor ${count} produse selectate.`,
         continue: "Verifică și continuă",
@@ -45,16 +42,12 @@ export default function SelectionPage() {
           "Adăugați produse din catalog — ele vor rămâne aici și după schimbarea paginii.",
         openCatalog: "Deschide catalogul",
       }
-    : {
-        eyebrow: "Личная подборка",
-        title: "Выбранные продукты",
+    : {        title: "Выбранные продукты",
         intro:
           "Сохраните интересующие позиции и передайте готовый список консультанту.",
         sku: "Артикул",
         missingSku: "не указан",
-        remove: "Удалить",
-        next: "Следующий шаг",
-        handoff: "Передать подборку для консультации",
+        remove: "Удалить",        handoff: "Передать подборку для консультации",
         handoffSummary: (count: number) =>
           `Консультант получит названия, артикулы и ссылки для ${count} выбранных позиций.`,
         continue: "Проверить и продолжить",
@@ -79,7 +72,7 @@ export default function SelectionPage() {
   return (
     <section className="selection-page container">
       <div className="page-intro">
-        <div><p className="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1></div>
+        <div><h1>{copy.title}</h1></div>
         <p>{copy.intro}</p>
       </div>
       {chosen.length ? (
@@ -90,7 +83,7 @@ export default function SelectionPage() {
                 <Link
                   className="selection-list__media"
                   to={`/product/${product.slug}`}
-                  aria-label={product.officialName}
+                  aria-label={getProductTitle(product)}
                   style={{
                     "--selection-object-scale": product.catalogScale,
                   } as CSSProperties}
@@ -105,16 +98,15 @@ export default function SelectionPage() {
                 </Link>
                 <div>
                   <small>{product.category}</small>
-                  <h2><Link to={`/product/${product.slug}`}>{product.officialName}</Link></h2>
+                  <h2 lang="en"><Link to={`/product/${product.slug}`}>{getProductTitle(product)}</Link></h2>
                   <p className="selection-list__sku">{copy.sku}: {product.sku || copy.missingSku}</p>
                 </div>
-                <button type="button" onClick={() => toggle(product.slug)} aria-label={`${copy.remove} ${product.officialName}`}><X aria-hidden="true" /></button>
+                <button type="button" onClick={() => toggle(product.slug)} aria-label={`${copy.remove} ${getProductTitle(product)}`}><X aria-hidden="true" /></button>
               </article>
             ))}
           </div>
           <div className="selection-contact">
             <div>
-              <p className="eyebrow eyebrow--light">{copy.next}</p>
               <h2>{copy.handoff}</h2>
               <p className="selection-contact__summary">
                 {copy.handoffSummary(chosen.length)}

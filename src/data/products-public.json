@@ -24,7 +24,12 @@
       "dynamic-hydrating-cream",
       "body-butter",
       "facial-solaris"
-    ]
+    ],
+    "cardTitle": "Solaris Body Lotion",
+    "packageSize": {
+      "quantity": 250,
+      "unit": "ml"
+    }
   },
   {
     "slug": "hand-and-nail-treatment",
@@ -51,7 +56,12 @@
       "body-butter",
       "facial-solaris",
       "eye-contour-balm"
-    ]
+    ],
+    "cardTitle": "Hand and Nail Cream",
+    "packageSize": {
+      "quantity": 50,
+      "unit": "ml"
+    }
   },
   {
     "slug": "dynamic-hydrating-cream",
@@ -78,7 +88,12 @@
       "facial-solaris",
       "eye-contour-balm",
       "face-milk"
-    ]
+    ],
+    "cardTitle": "Dynamic Cream",
+    "packageSize": {
+      "quantity": 50,
+      "unit": "ml"
+    }
   },
   {
     "slug": "body-butter",
@@ -105,7 +120,12 @@
       "eye-contour-balm",
       "face-milk",
       "night-cream"
-    ]
+    ],
+    "cardTitle": "Shea Body Butter",
+    "packageSize": {
+      "quantity": 200,
+      "unit": "ml"
+    }
   },
   {
     "slug": "facial-solaris",
@@ -132,7 +152,12 @@
       "face-milk",
       "night-cream",
       "anti-aging-serum"
-    ]
+    ],
+    "cardTitle": "Solaris Facial Cream",
+    "packageSize": {
+      "quantity": 50,
+      "unit": "ml"
+    }
   },
   {
     "slug": "eye-contour-balm",
@@ -159,7 +184,12 @@
       "night-cream",
       "anti-aging-serum",
       "ard-complex"
-    ]
+    ],
+    "cardTitle": "Eye Care Balm",
+    "packageSize": {
+      "quantity": 50,
+      "unit": "ml"
+    }
   },
   {
     "slug": "face-milk",
@@ -186,7 +216,12 @@
       "anti-aging-serum",
       "ard-complex",
       "shp-day-time-face-cream-lc"
-    ]
+    ],
+    "cardTitle": "Face Milk",
+    "packageSize": {
+      "quantity": 250,
+      "unit": "ml"
+    }
   },
   {
     "slug": "night-cream",
@@ -213,7 +248,12 @@
       "ard-complex",
       "shp-day-time-face-cream-lc",
       "samples-kit"
-    ]
+    ],
+    "cardTitle": "Night Cream",
+    "packageSize": {
+      "quantity": 50,
+      "unit": "ml"
+    }
   },
   {
     "slug": "anti-aging-serum",
@@ -240,7 +280,12 @@
       "shp-day-time-face-cream-lc",
       "samples-kit",
       "solaris-body-lotion"
-    ]
+    ],
+    "cardTitle": "Anti-Aging Serum",
+    "packageSize": {
+      "quantity": 50,
+      "unit": "ml"
+    }
   },
   {
     "slug": "ard-complex",
@@ -267,7 +312,12 @@
       "samples-kit",
       "solaris-body-lotion",
       "hand-and-nail-treatment"
-    ]
+    ],
+    "cardTitle": "Moisturizing Cream / For Face",
+    "packageSize": {
+      "quantity": 50,
+      "unit": "ml"
+    }
   },
   {
     "slug": "shp-day-time-face-cream-lc",
@@ -294,7 +344,12 @@
       "solaris-body-lotion",
       "hand-and-nail-treatment",
       "dynamic-hydrating-cream"
-    ]
+    ],
+    "cardTitle": "Day Time Face Cream",
+    "packageSize": {
+      "quantity": 50,
+      "unit": "ml"
+    }
   },
   {
     "slug": "samples-kit",
@@ -321,7 +376,12 @@
       "hand-and-nail-treatment",
       "dynamic-hydrating-cream",
       "body-butter"
-    ]
+    ],
+    "cardTitle": "Top Samples Kit",
+    "packageSize": {
+      "quantity": 8,
+      "unit": "samples"
+    }
   },
   {
     "slug": "gonseen",
@@ -347,7 +407,12 @@
       "coffee-mix",
       "chocoseen",
       "soupseen"
-    ]
+    ],
+    "cardTitle": "Gonseen Tea",
+    "packageSize": {
+      "quantity": 24,
+      "unit": "tea-bags"
+    }
   },
   {
     "slug": "coffee-mix",
@@ -373,7 +438,12 @@
       "chocoseen",
       "soupseen",
       "gonseen"
-    ]
+    ],
+    "cardTitle": "Slimseen Coffee Mix",
+    "packageSize": {
+      "quantity": 250,
+      "unit": "g"
+    }
   },
   {
     "slug": "chocoseen",
@@ -399,7 +469,12 @@
       "soupseen",
       "gonseen",
       "coffee-mix"
-    ]
+    ],
+    "cardTitle": "Chocoseen",
+    "packageSize": {
+      "quantity": 250,
+      "unit": "g"
+    }
   },
   {
     "slug": "soupseen",
@@ -425,7 +500,12 @@
       "gonseen",
       "coffee-mix",
       "chocoseen"
-    ]
+    ],
+    "cardTitle": "Soupseen",
+    "packageSize": {
+      "quantity": 300,
+      "unit": "g"
+    }
   },
   {
     "slug": "okseen",
@@ -452,7 +532,12 @@
       "dnd-chewing-gum-tablets",
       "imunseen",
       "goldseen"
-    ]
+    ],
+    "cardTitle": "OKSEEN",
+    "packageSize": {
+      "quantity": 60,
+      "unit": "caps"
+    }
   },
   {
     "slug": "fase-9",
@@ -479,7 +564,12 @@
       "imunseen",
       "goldseen",
       "cleanseen"
-    ]
+    ],
+    "cardTitle": "PHASE-9",
+    "packageSize": {
+      "quantity": 60,
+      "unit": "caps"
+    }
   },
   {
     "slug": "dnd-chewing-gum-tablets",
@@ -506,7 +596,12 @@
       "goldseen",
       "cleanseen",
       "ravseen"
-    ]
+    ],
+    "cardTitle": "DND",
+    "packageSize": {
+      "quantity": 60,
+      "unit": "pieces"
+    }
   },
   {
     "slug": "imunseen",
@@ -533,7 +628,12 @@
       "cleanseen",
       "ravseen",
       "pulmoseen"
-    ]
+    ],
+    "cardTitle": "IMUNSEEN",
+    "packageSize": {
+      "quantity": 125,
+      "unit": "ml"
+    }
   },
   {
     "slug": "goldseen",
@@ -560,7 +660,12 @@
       "ravseen",
       "pulmoseen",
       "reumoseen"
-    ]
+    ],
+    "cardTitle": "GOLDSEEN",
+    "packageSize": {
+      "quantity": 60,
+      "unit": "caps"
+    }
   },
   {
     "slug": "cleanseen",
@@ -587,7 +692,12 @@
       "pulmoseen",
       "reumoseen",
       "yamseen"
-    ]
+    ],
+    "cardTitle": "CLEANSEEN",
+    "packageSize": {
+      "quantity": 60,
+      "unit": "caps"
+    }
   },
   {
     "slug": "ravseen",
@@ -614,7 +724,12 @@
       "reumoseen",
       "yamseen",
       "newseen"
-    ]
+    ],
+    "cardTitle": "RAVSEEN",
+    "packageSize": {
+      "quantity": 100,
+      "unit": "caps"
+    }
   },
   {
     "slug": "pulmoseen",
@@ -641,7 +756,12 @@
       "yamseen",
       "newseen",
       "femseen"
-    ]
+    ],
+    "cardTitle": "PULMOSEEN",
+    "packageSize": {
+      "quantity": 60,
+      "unit": "caps"
+    }
   },
   {
     "slug": "reumoseen",
@@ -668,7 +788,12 @@
       "newseen",
       "femseen",
       "okseen"
-    ]
+    ],
+    "cardTitle": "REUMOSEEN",
+    "packageSize": {
+      "quantity": 60,
+      "unit": "caps"
+    }
   },
   {
     "slug": "yamseen",
@@ -695,7 +820,12 @@
       "femseen",
       "okseen",
       "fase-9"
-    ]
+    ],
+    "cardTitle": "YAMSEEN",
+    "packageSize": {
+      "quantity": 60,
+      "unit": "caps"
+    }
   },
   {
     "slug": "newseen",
@@ -722,7 +852,12 @@
       "okseen",
       "fase-9",
       "dnd-chewing-gum-tablets"
-    ]
+    ],
+    "cardTitle": "NEWSEEN",
+    "packageSize": {
+      "quantity": 60,
+      "unit": "caps"
+    }
   },
   {
     "slug": "femseen",
@@ -749,7 +884,12 @@
       "fase-9",
       "dnd-chewing-gum-tablets",
       "imunseen"
-    ]
+    ],
+    "cardTitle": "FEMSEEN",
+    "packageSize": {
+      "quantity": 60,
+      "unit": "caps"
+    }
   },
   {
     "slug": "mouthwash",
@@ -776,7 +916,12 @@
       "shower-gel-lord",
       "lady-deodorant",
       "kiwi-deodorant"
-    ]
+    ],
+    "cardTitle": "Multi Mouthwash",
+    "packageSize": {
+      "quantity": 250,
+      "unit": "ml"
+    }
   },
   {
     "slug": "dead-sea-water-compresses",
@@ -803,7 +948,12 @@
       "lady-deodorant",
       "kiwi-deodorant",
       "lord-deodorant"
-    ]
+    ],
+    "cardTitle": "Compressed Wipes",
+    "packageSize": {
+      "quantity": 15,
+      "unit": "pieces"
+    }
   },
   {
     "slug": "shower-gel-lord",
@@ -830,7 +980,12 @@
       "kiwi-deodorant",
       "lord-deodorant",
       "face-soap"
-    ]
+    ],
+    "cardTitle": "Shower Gel ( LORD )",
+    "packageSize": {
+      "quantity": 270,
+      "unit": "ml"
+    }
   },
   {
     "slug": "lady-deodorant",
@@ -857,7 +1012,12 @@
       "lord-deodorant",
       "face-soap",
       "halo-pure-unisex-deodorant-stick"
-    ]
+    ],
+    "cardTitle": "Deodorant ( LADY )",
+    "packageSize": {
+      "quantity": 95,
+      "unit": "ml"
+    }
   },
   {
     "slug": "kiwi-deodorant",
@@ -884,7 +1044,12 @@
       "face-soap",
       "halo-pure-unisex-deodorant-stick",
       "halo-shenseen-toothpaste"
-    ]
+    ],
+    "cardTitle": "Deodorant ( KIWI )",
+    "packageSize": {
+      "quantity": 95,
+      "unit": "ml"
+    }
   },
   {
     "slug": "lord-deodorant",
@@ -911,7 +1076,12 @@
       "halo-pure-unisex-deodorant-stick",
       "halo-shenseen-toothpaste",
       "halo-gel"
-    ]
+    ],
+    "cardTitle": "Deodorant ( LORD )",
+    "packageSize": {
+      "quantity": 95,
+      "unit": "ml"
+    }
   },
   {
     "slug": "face-soap",
@@ -938,7 +1108,12 @@
       "halo-shenseen-toothpaste",
       "halo-gel",
       "frequent-use-tonic-shampoo"
-    ]
+    ],
+    "cardTitle": "Facial Foam Soap",
+    "packageSize": {
+      "quantity": 150,
+      "unit": "ml"
+    }
   },
   {
     "slug": "halo-pure-unisex-deodorant-stick",
@@ -965,7 +1140,12 @@
       "halo-gel",
       "frequent-use-tonic-shampoo",
       "conditioner"
-    ]
+    ],
+    "cardTitle": "Unisex Deodorant Stick",
+    "packageSize": {
+      "quantity": 50,
+      "unit": "ml"
+    }
   },
   {
     "slug": "halo-shenseen-toothpaste",
@@ -992,7 +1172,12 @@
       "frequent-use-tonic-shampoo",
       "conditioner",
       "lipstick-new"
-    ]
+    ],
+    "cardTitle": "Shenseen Mousse Toothpaste",
+    "packageSize": {
+      "quantity": 100,
+      "unit": "ml"
+    }
   },
   {
     "slug": "halo-gel",
@@ -1019,7 +1204,12 @@
       "conditioner",
       "lipstick-new",
       "beauty-mask-for-face"
-    ]
+    ],
+    "cardTitle": "Shower Gel",
+    "packageSize": {
+      "quantity": 270,
+      "unit": "ml"
+    }
   },
   {
     "slug": "frequent-use-tonic-shampoo",
@@ -1046,7 +1236,12 @@
       "lipstick-new",
       "beauty-mask-for-face",
       "salts-camomile"
-    ]
+    ],
+    "cardTitle": "Mineral Shampoo",
+    "packageSize": {
+      "quantity": 270,
+      "unit": "ml"
+    }
   },
   {
     "slug": "conditioner",
@@ -1073,7 +1268,12 @@
       "beauty-mask-for-face",
       "salts-camomile",
       "salts-ylangylang"
-    ]
+    ],
+    "cardTitle": "Mineral Hair Conditioner",
+    "packageSize": {
+      "quantity": 270,
+      "unit": "ml"
+    }
   },
   {
     "slug": "lipstick-new",
@@ -1100,7 +1300,12 @@
       "salts-camomile",
       "salts-ylangylang",
       "salts-rosemary"
-    ]
+    ],
+    "cardTitle": "Mineral Lipstick",
+    "packageSize": {
+      "quantity": 4,
+      "unit": "g"
+    }
   },
   {
     "slug": "beauty-mask-for-face",
@@ -1127,7 +1332,12 @@
       "salts-ylangylang",
       "salts-rosemary",
       "salts-lavander"
-    ]
+    ],
+    "cardTitle": "Recovering Mud Musk",
+    "packageSize": {
+      "quantity": 75,
+      "unit": "ml"
+    }
   },
   {
     "slug": "salts-camomile",
@@ -1154,7 +1364,12 @@
       "salts-rosemary",
       "salts-lavander",
       "mouthwash"
-    ]
+    ],
+    "cardTitle": "Bath Salts with Camomile extract",
+    "packageSize": {
+      "quantity": 300,
+      "unit": "g"
+    }
   },
   {
     "slug": "salts-ylangylang",
@@ -1181,7 +1396,12 @@
       "salts-lavander",
       "mouthwash",
       "dead-sea-water-compresses"
-    ]
+    ],
+    "cardTitle": "Bath Salts with Ylang Ylang, Patchouli & Anis Star Extract",
+    "packageSize": {
+      "quantity": 300,
+      "unit": "g"
+    }
   },
   {
     "slug": "salts-rosemary",
@@ -1208,7 +1428,12 @@
       "mouthwash",
       "dead-sea-water-compresses",
       "shower-gel-lord"
-    ]
+    ],
+    "cardTitle": "Bath Salts with Rosemary, Eucalyptus & Thyme extract",
+    "packageSize": {
+      "quantity": 300,
+      "unit": "g"
+    }
   },
   {
     "slug": "salts-lavander",
@@ -1235,7 +1460,12 @@
       "dead-sea-water-compresses",
       "shower-gel-lord",
       "lady-deodorant"
-    ]
+    ],
+    "cardTitle": "Bath Salts with Lavander extract",
+    "packageSize": {
+      "quantity": 300,
+      "unit": "g"
+    }
   },
   {
     "slug": "after-shave-lord",
@@ -1261,7 +1491,12 @@
       "perfume-kiwi",
       "perfume-lady",
       "parfum-faya"
-    ]
+    ],
+    "cardTitle": "Eau De Parfume ( LORD )",
+    "packageSize": {
+      "quantity": 100,
+      "unit": "ml"
+    }
   },
   {
     "slug": "perfume-kiwi",
@@ -1287,7 +1522,12 @@
       "perfume-lady",
       "parfum-faya",
       "after-shave-lord"
-    ]
+    ],
+    "cardTitle": "Eau De Parfume ( KIWI )",
+    "packageSize": {
+      "quantity": 100,
+      "unit": "ml"
+    }
   },
   {
     "slug": "perfume-lady",
@@ -1313,7 +1553,12 @@
       "parfum-faya",
       "after-shave-lord",
       "perfume-kiwi"
-    ]
+    ],
+    "cardTitle": "Eau De Parfume ( LADY )",
+    "packageSize": {
+      "quantity": 100,
+      "unit": "ml"
+    }
   },
   {
     "slug": "parfum-faya",
@@ -1339,6 +1584,11 @@
       "after-shave-lord",
       "perfume-kiwi",
       "perfume-lady"
-    ]
+    ],
+    "cardTitle": "Eau De Parfume ( FAYA )",
+    "packageSize": {
+      "quantity": 100,
+      "unit": "ml"
+    }
   }
 ]

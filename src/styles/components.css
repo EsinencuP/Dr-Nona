@@ -182,6 +182,14 @@
   color: var(--gold-800);
 }
 
+.product-card__volume {
+  flex-shrink: 0;
+  margin-left: auto;
+  white-space: nowrap;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
 .product-card :is(h2, h3) {
   width: 100%;
   margin-bottom: var(--space-2);
@@ -213,6 +221,13 @@
   line-height: 1.55;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+}
+
+.product-card__localized-name {
+  display: block;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  -webkit-line-clamp: none;
 }
 
 .product-card .text-link {

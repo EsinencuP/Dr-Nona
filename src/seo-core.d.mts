@@ -15,7 +15,6 @@ export type ArticleSeoSchema = {
   articleType: "BlogPosting" | "NewsArticle";
   headline: string;
   image: string;
-  sourceUrl: string;
   dateModified: string;
 };
 

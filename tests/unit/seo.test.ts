@@ -55,22 +55,12 @@ describe("route SEO contract", () => {
     expect(breadcrumbs).toBeTruthy();
   });
 
-  test("emits Article metadata without inventing a publication date", () => {
-    const route = getRouteMetadata(
-      manifest,
-      "/blog/what-to-eat-after-coronavirus"
-    );
-    const jsonLd = buildJsonLd(route, origin);
-    const article = jsonLd["@graph"].find(
-      (item) => item["@type"] === "BlogPosting"
-    );
-
-    expect(article).toMatchObject({
-      "@type": "BlogPosting",
-      headline: "Чем питаться после коронавируса",
-      dateModified: "2022-02-17T00:00:00.000Z",
-    });
-    expect(article).not.toHaveProperty("datePublished");
+  test("retired editorial routes have no publication metadata", () => {
+    expect(manifest.routes.some((route) => /^\/(?:editorial|news|blog)(?:\/|$)/u.test(route.path))).toBe(false);
+    const route = getRouteMetadata(manifest, "/blog/what-to-eat-after-coronavirus");
+    expect(route.robots).toBe("noindex,follow");
+    expect(route.schema).toBeNull();
+    expect(buildJsonLd(route, origin)["@graph"].map((item) => item["@type"])).toEqual(["WebPage", "BreadcrumbList"]);
   });
 
   test("excludes the legacy duplicate and marks private and unknown routes noindex", () => {

@@ -72,6 +72,10 @@
   background: var(--surface);
 }
 
+.official-page__content {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .article-page__layout aside,
 .official-page__content aside {
   display: grid;
@@ -198,7 +202,6 @@
   color: var(--sea-400);
 }
 
-.certificate-market-status__message .eyebrow,
 .certificate-market-status__message h2,
 .certificate-market-status__message p,
 .certificate-international-note p {
@@ -212,7 +215,7 @@
   line-height: 1.02;
 }
 
-.certificate-market-status__message p:not(.eyebrow) {
+.certificate-market-status__message p {
   max-width: 820px;
   margin-top: 16px;
   color: var(--muted);
@@ -251,7 +254,7 @@
   max-width: 760px;
 }
 
-.certificate-international-note p:not(.eyebrow) {
+.certificate-international-note p {
   color: var(--muted);
   line-height: 1.55;
 }
@@ -262,7 +265,9 @@
 
 .contact-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.46fr);
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 1040px;
+  margin-inline: auto;
   gap: clamp(28px, 4vw, 56px);
   align-items: start;
   padding-top: 26px;
@@ -280,10 +285,6 @@
   box-shadow: none;
 }
 
-.contact-direct .eyebrow {
-  margin-bottom: 0;
-}
-
 .contact-direct h2 {
   max-width: 640px;
   margin-bottom: 0;
@@ -291,7 +292,7 @@
   line-height: 0.98;
 }
 
-.contact-direct > p:not(.eyebrow) {
+.contact-direct > p {
   max-width: 680px;
   margin-bottom: 0;
   color: var(--muted);

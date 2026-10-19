@@ -1,0 +1,507 @@
+{
+  "checkedAt": "2026-10-15",
+  "source": "https://www.drnona.md/catalog",
+  "products": {
+    "solaris-body-lotion": {
+      "officialName": "Solaris Body Lotion",
+      "packageSize": {
+        "quantity": 250,
+        "unit": "ml"
+      },
+      "sourceText": "250 ML",
+      "sourceUrl": "https://www.drnona.md/creams",
+      "productSourceUrl": "https://www.drnona.md/solaris"
+    },
+    "hand-and-nail-treatment": {
+      "officialName": "Hand and Nail Cream",
+      "packageSize": {
+        "quantity": 50,
+        "unit": "ml"
+      },
+      "sourceText": "50 ML",
+      "sourceUrl": "https://www.drnona.md/creams",
+      "productSourceUrl": "https://www.drnona.md/hand_and_nail_cream"
+    },
+    "dynamic-hydrating-cream": {
+      "officialName": "Dynamic Cream",
+      "packageSize": {
+        "quantity": 50,
+        "unit": "ml"
+      },
+      "sourceText": "50 ML",
+      "sourceUrl": "https://www.drnona.md/creams",
+      "productSourceUrl": "https://www.drnona.md/dynamic"
+    },
+    "body-butter": {
+      "officialName": "Shea Body Butter",
+      "packageSize": {
+        "quantity": 200,
+        "unit": "ml"
+      },
+      "sourceText": "200 ML",
+      "sourceUrl": "https://www.drnona.md/creams",
+      "productSourceUrl": "https://www.drnona.md/body_butter"
+    },
+    "facial-solaris": {
+      "officialName": "Solaris Facial Cream",
+      "packageSize": {
+        "quantity": 50,
+        "unit": "ml"
+      },
+      "sourceText": "50 ML",
+      "sourceUrl": "https://www.drnona.md/creams",
+      "productSourceUrl": "https://www.drnona.md/facial_solaris"
+    },
+    "eye-contour-balm": {
+      "officialName": "Eye Care Balm",
+      "packageSize": {
+        "quantity": 50,
+        "unit": "ml"
+      },
+      "sourceText": "50 ML",
+      "sourceUrl": "https://www.drnona.md/creams",
+      "productSourceUrl": "https://www.drnona.md/eye_care_balm"
+    },
+    "face-milk": {
+      "officialName": "Face Milk",
+      "packageSize": {
+        "quantity": 250,
+        "unit": "ml"
+      },
+      "sourceText": "250 ML",
+      "sourceUrl": "https://www.drnona.md/creams",
+      "productSourceUrl": "https://www.drnona.md/face_milk"
+    },
+    "night-cream": {
+      "officialName": "Night Cream",
+      "packageSize": {
+        "quantity": 50,
+        "unit": "ml"
+      },
+      "sourceText": "50 ML",
+      "sourceUrl": "https://www.drnona.md/creams",
+      "productSourceUrl": "https://www.drnona.md/night_cream"
+    },
+    "anti-aging-serum": {
+      "officialName": "Anti-Aging Serum",
+      "packageSize": {
+        "quantity": 50,
+        "unit": "ml"
+      },
+      "sourceText": "50 ML",
+      "sourceUrl": "https://www.drnona.md/creams",
+      "productSourceUrl": "https://www.drnona.md/anti_aging_serum"
+    },
+    "ard-complex": {
+      "officialName": "Moisturizing Cream / For Face",
+      "packageSize": {
+        "quantity": 50,
+        "unit": "ml"
+      },
+      "sourceText": "50 ml",
+      "sourceUrl": "https://www.drnona.md/creams",
+      "productSourceUrl": "https://www.drnona.md/ard_cream_for_face"
+    },
+    "shp-day-time-face-cream-lc": {
+      "officialName": "Day Time Face Cream",
+      "packageSize": {
+        "quantity": 50,
+        "unit": "ml"
+      },
+      "sourceText": "50 ml",
+      "sourceUrl": "https://www.drnona.md/creams",
+      "productSourceUrl": "https://www.drnona.md/shp_day_time_face_cream"
+    },
+    "samples-kit": {
+      "officialName": "Top Samples Kit",
+      "packageSize": {
+        "quantity": 8,
+        "unit": "samples"
+      },
+      "sourceText": "Solaris Body Lotion ( 10 ml ); Face Milk ( 3 ml ); Eye Care Balm ( 3 ml ); Hand And Nail Cream ( 3 ml ); Solaris Facial Cream ( 3 ml ); Dynamic Cream ( 3 ml ); Night Cream ( 3 ml ); Shower Gel ( 10 ml )",
+      "sourceUrl": "https://www.drnona.md/top_samples_kit",
+      "productSourceUrl": "https://www.drnona.md/top_samples_kit",
+      "note": "Count of individually listed samples; no volume conversion or estimate applied."
+    },
+    "gonseen": {
+      "officialName": "Gonseen Tea",
+      "packageSize": {
+        "quantity": 24,
+        "unit": "tea-bags"
+      },
+      "sourceText": "24 tea bags",
+      "sourceUrl": "https://www.drnona.md/drinks",
+      "productSourceUrl": "https://www.drnona.md/gonseen"
+    },
+    "coffee-mix": {
+      "officialName": "Slimseen Coffee Mix",
+      "packageSize": {
+        "quantity": 250,
+        "unit": "g"
+      },
+      "sourceText": "250 g",
+      "sourceUrl": "https://www.drnona.md/drinks",
+      "productSourceUrl": "https://www.drnona.md/slimseen_coffee_mix"
+    },
+    "chocoseen": {
+      "officialName": "Chocoseen",
+      "packageSize": {
+        "quantity": 250,
+        "unit": "g"
+      },
+      "sourceText": "250 g",
+      "sourceUrl": "https://www.drnona.md/drinks",
+      "productSourceUrl": "https://www.drnona.md/chocoseen"
+    },
+    "soupseen": {
+      "officialName": "Soupseen",
+      "packageSize": {
+        "quantity": 300,
+        "unit": "g"
+      },
+      "sourceText": "300 g",
+      "sourceUrl": "https://www.drnona.md/drinks",
+      "productSourceUrl": "https://www.drnona.md/soupseen"
+    },
+    "okseen": {
+      "officialName": "OKSEEN",
+      "packageSize": {
+        "quantity": 60,
+        "unit": "caps"
+      },
+      "sourceText": "60 capsules",
+      "sourceUrl": "https://www.drnona.md/supplements",
+      "productSourceUrl": "https://www.drnona.md/okseen"
+    },
+    "fase-9": {
+      "officialName": "PHASE-9",
+      "packageSize": {
+        "quantity": 60,
+        "unit": "caps"
+      },
+      "sourceText": "60 capsules",
+      "sourceUrl": "https://www.drnona.md/supplements",
+      "productSourceUrl": "https://www.drnona.md/phase_9"
+    },
+    "dnd-chewing-gum-tablets": {
+      "officialName": "DND",
+      "packageSize": {
+        "quantity": 60,
+        "unit": "pieces"
+      },
+      "sourceText": "60 gums",
+      "sourceUrl": "https://www.drnona.md/supplements",
+      "productSourceUrl": "https://www.drnona.md/dnd"
+    },
+    "imunseen": {
+      "officialName": "IMUNSEEN",
+      "packageSize": {
+        "quantity": 125,
+        "unit": "ml"
+      },
+      "sourceText": "125 ml",
+      "sourceUrl": "https://www.drnona.md/supplements",
+      "productSourceUrl": "https://www.drnona.md/imunseen"
+    },
+    "goldseen": {
+      "officialName": "GOLDSEEN",
+      "packageSize": {
+        "quantity": 60,
+        "unit": "caps"
+      },
+      "sourceText": "60 capsules",
+      "sourceUrl": "https://www.drnona.md/supplements",
+      "productSourceUrl": "https://www.drnona.md/goldseen"
+    },
+    "cleanseen": {
+      "officialName": "CLEANSEEN",
+      "packageSize": {
+        "quantity": 60,
+        "unit": "caps"
+      },
+      "sourceText": "60 capsules",
+      "sourceUrl": "https://www.drnona.md/supplements",
+      "productSourceUrl": "https://www.drnona.md/cleanseen"
+    },
+    "ravseen": {
+      "officialName": "RAVSEEN",
+      "packageSize": {
+        "quantity": 100,
+        "unit": "caps"
+      },
+      "sourceText": "100 capsules",
+      "sourceUrl": "https://www.drnona.md/supplements",
+      "productSourceUrl": "https://www.drnona.md/ravseen"
+    },
+    "pulmoseen": {
+      "officialName": "PULMOSEEN",
+      "packageSize": {
+        "quantity": 60,
+        "unit": "caps"
+      },
+      "sourceText": "60 capsules",
+      "sourceUrl": "https://www.drnona.md/supplements",
+      "productSourceUrl": "https://www.drnona.md/pulmoseen"
+    },
+    "reumoseen": {
+      "officialName": "REUMOSEEN",
+      "packageSize": {
+        "quantity": 60,
+        "unit": "caps"
+      },
+      "sourceText": "60 capsules",
+      "sourceUrl": "https://www.drnona.md/supplements",
+      "productSourceUrl": "https://www.drnona.md/reumoseen"
+    },
+    "yamseen": {
+      "officialName": "YAMSEEN",
+      "packageSize": {
+        "quantity": 60,
+        "unit": "caps"
+      },
+      "sourceText": "60 capsules",
+      "sourceUrl": "https://www.drnona.md/supplements",
+      "productSourceUrl": "https://www.drnona.md/yamseen"
+    },
+    "newseen": {
+      "officialName": "NEWSEEN",
+      "packageSize": {
+        "quantity": 60,
+        "unit": "caps"
+      },
+      "sourceText": "60 capsules",
+      "sourceUrl": "https://www.drnona.md/supplements",
+      "productSourceUrl": "https://www.drnona.md/newseen"
+    },
+    "femseen": {
+      "officialName": "FEMSEEN",
+      "packageSize": {
+        "quantity": 60,
+        "unit": "caps"
+      },
+      "sourceText": "60 capsules",
+      "sourceUrl": "https://www.drnona.md/supplements",
+      "productSourceUrl": "https://www.drnona.md/femseen"
+    },
+    "mouthwash": {
+      "officialName": "Multi Mouthwash",
+      "packageSize": {
+        "quantity": 250,
+        "unit": "ml"
+      },
+      "sourceText": "250 ml",
+      "sourceUrl": "https://www.drnona.md/hygiene",
+      "productSourceUrl": "https://www.drnona.md/mouthwash"
+    },
+    "dead-sea-water-compresses": {
+      "officialName": "Compressed Wipes",
+      "packageSize": {
+        "quantity": 15,
+        "unit": "pieces"
+      },
+      "sourceText": "15 compresses",
+      "sourceUrl": "https://www.drnona.md/hygiene",
+      "productSourceUrl": "https://www.drnona.md/compressed_wipes_ru"
+    },
+    "shower-gel-lord": {
+      "officialName": "Shower Gel ( LORD )",
+      "packageSize": {
+        "quantity": 270,
+        "unit": "ml"
+      },
+      "sourceText": "270 ml",
+      "sourceUrl": "https://www.drnona.md/hygiene",
+      "productSourceUrl": "https://www.drnona.md/shower_gel_lord"
+    },
+    "lady-deodorant": {
+      "officialName": "Deodorant ( LADY )",
+      "packageSize": {
+        "quantity": 95,
+        "unit": "ml"
+      },
+      "sourceText": "95 ml",
+      "sourceUrl": "https://www.drnona.md/hygiene",
+      "productSourceUrl": "https://www.drnona.md/deodorant_lady"
+    },
+    "kiwi-deodorant": {
+      "officialName": "Deodorant ( KIWI )",
+      "packageSize": {
+        "quantity": 95,
+        "unit": "ml"
+      },
+      "sourceText": "95 ml",
+      "sourceUrl": "https://www.drnona.md/hygiene",
+      "productSourceUrl": "https://www.drnona.md/deodorant_kiwi"
+    },
+    "lord-deodorant": {
+      "officialName": "Deodorant ( LORD )",
+      "packageSize": {
+        "quantity": 95,
+        "unit": "ml"
+      },
+      "sourceText": "95 ml",
+      "sourceUrl": "https://www.drnona.md/hygiene",
+      "productSourceUrl": "https://www.drnona.md/deodorant_lord"
+    },
+    "face-soap": {
+      "officialName": "Facial Foam Soap",
+      "packageSize": {
+        "quantity": 150,
+        "unit": "ml"
+      },
+      "sourceText": "150 ml",
+      "sourceUrl": "https://www.drnona.md/hygiene",
+      "productSourceUrl": "https://www.drnona.md/facial_foam_soap"
+    },
+    "halo-pure-unisex-deodorant-stick": {
+      "officialName": "Unisex Deodorant Stick",
+      "packageSize": {
+        "quantity": 50,
+        "unit": "ml"
+      },
+      "sourceText": "50 ml",
+      "sourceUrl": "https://www.drnona.md/hygiene",
+      "productSourceUrl": "https://www.drnona.md/unisex_deodorant_stick"
+    },
+    "halo-shenseen-toothpaste": {
+      "officialName": "Shenseen Mousse Toothpaste",
+      "packageSize": {
+        "quantity": 100,
+        "unit": "ml"
+      },
+      "sourceText": "100 ml",
+      "sourceUrl": "https://www.drnona.md/hygiene",
+      "productSourceUrl": "https://www.drnona.md/shenseen_mousse_toothpaste"
+    },
+    "halo-gel": {
+      "officialName": "Shower Gel",
+      "packageSize": {
+        "quantity": 270,
+        "unit": "ml"
+      },
+      "sourceText": "270 ml",
+      "sourceUrl": "https://www.drnona.md/hygiene",
+      "productSourceUrl": "https://www.drnona.md/shower_gel"
+    },
+    "frequent-use-tonic-shampoo": {
+      "officialName": "Mineral Shampoo",
+      "packageSize": {
+        "quantity": 270,
+        "unit": "ml"
+      },
+      "sourceText": "270 ml",
+      "sourceUrl": "https://www.drnona.md/hygiene",
+      "productSourceUrl": "https://www.drnona.md/mineral_shampoo"
+    },
+    "conditioner": {
+      "officialName": "Mineral Hair Conditioner",
+      "packageSize": {
+        "quantity": 270,
+        "unit": "ml"
+      },
+      "sourceText": "270 ml",
+      "sourceUrl": "https://www.drnona.md/hygiene",
+      "productSourceUrl": "https://www.drnona.md/mineral_hair_conditioner"
+    },
+    "lipstick-new": {
+      "officialName": "Mineral Lipstick",
+      "packageSize": {
+        "quantity": 4,
+        "unit": "g"
+      },
+      "sourceText": "4 g",
+      "sourceUrl": "https://www.drnona.md/hygiene",
+      "productSourceUrl": "https://www.drnona.md/mineral_lipstick"
+    },
+    "beauty-mask-for-face": {
+      "officialName": "Recovering Mud Musk",
+      "packageSize": {
+        "quantity": 75,
+        "unit": "ml"
+      },
+      "sourceText": "75 ml",
+      "sourceUrl": "https://www.drnona.md/hygiene",
+      "productSourceUrl": "https://www.drnona.md/recovering_mud_musk"
+    },
+    "salts-camomile": {
+      "officialName": "Bath Salts with Camomile extract",
+      "packageSize": {
+        "quantity": 300,
+        "unit": "g"
+      },
+      "sourceText": "300 g",
+      "sourceUrl": "https://www.drnona.md/hygiene",
+      "productSourceUrl": "https://www.drnona.md/bath_salts_with_chamomile_extract"
+    },
+    "salts-ylangylang": {
+      "officialName": "Bath Salts with Ylang Ylang, Patchouli & Anis Star Extract",
+      "packageSize": {
+        "quantity": 300,
+        "unit": "g"
+      },
+      "sourceText": "300 g",
+      "sourceUrl": "https://www.drnona.md/hygiene",
+      "productSourceUrl": "https://www.drnona.md/bath_salts_with_ylang_ylang_extract"
+    },
+    "salts-rosemary": {
+      "officialName": "Bath Salts with Rosemary, Eucalyptus & Thyme extract",
+      "packageSize": {
+        "quantity": 300,
+        "unit": "g"
+      },
+      "sourceText": "300 g",
+      "sourceUrl": "https://www.drnona.md/hygiene",
+      "productSourceUrl": "https://www.drnona.md/bath_salts_with_rosemary_extract"
+    },
+    "salts-lavander": {
+      "officialName": "Bath Salts with Lavander extract",
+      "packageSize": {
+        "quantity": 300,
+        "unit": "g"
+      },
+      "sourceText": "300 g",
+      "sourceUrl": "https://www.drnona.md/hygiene",
+      "productSourceUrl": "https://www.drnona.md/bath_salts_with_lavender_extract"
+    },
+    "after-shave-lord": {
+      "officialName": "Eau De Parfume ( LORD )",
+      "packageSize": {
+        "quantity": 100,
+        "unit": "ml"
+      },
+      "sourceText": "100 ML",
+      "sourceUrl": "https://www.drnona.md/parfumes",
+      "productSourceUrl": "https://www.drnona.md/parfume_lord"
+    },
+    "perfume-kiwi": {
+      "officialName": "Eau De Parfume ( KIWI )",
+      "packageSize": {
+        "quantity": 100,
+        "unit": "ml"
+      },
+      "sourceText": "100 ML",
+      "sourceUrl": "https://www.drnona.md/parfumes",
+      "productSourceUrl": "https://www.drnona.md/parfume_kiwi"
+    },
+    "perfume-lady": {
+      "officialName": "Eau De Parfume ( LADY )",
+      "packageSize": {
+        "quantity": 100,
+        "unit": "ml"
+      },
+      "sourceText": "100 ML",
+      "sourceUrl": "https://www.drnona.md/parfumes",
+      "productSourceUrl": "https://www.drnona.md/parfume_lady"
+    },
+    "parfum-faya": {
+      "officialName": "Eau De Parfume ( FAYA )",
+      "packageSize": {
+        "quantity": 100,
+        "unit": "ml"
+      },
+      "sourceText": "100 ML",
+      "sourceUrl": "https://www.drnona.md/parfumes",
+      "productSourceUrl": "https://www.drnona.md/parfume_faya"
+    }
+  }
+}

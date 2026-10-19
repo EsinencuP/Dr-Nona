@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 for (const locale of ["ru", "ro"]) {
-  test(`${locale}: product identity and save action precede detailed reading`, async ({ page }) => {
+  test(`${locale}: full product information precedes the save action`, async ({ page }) => {
     test.setTimeout(90_000);
     for (const slug of ["solaris-body-lotion", "dynamic-hydrating-cream", "gonseen", "okseen", "reumoseen", "salts-ylangylang"]) {
       for (const viewport of [{ width: 375, height: 812 }, { width: 844, height: 390 }, { width: 1440, height: 900 }]) {
@@ -12,14 +12,20 @@ for (const locale of ["ru", "ro"]) {
         const geometry = await page.evaluate(() => {
           const title = document.querySelector("h1")!;
           const action = document.querySelector(".product-select-button")!;
-          const summary = document.querySelector(".product-summary")!;
-          return { titleTop: title.getBoundingClientRect().top, actionBottom: action.getBoundingClientRect().bottom,
-            actionBeforeSummary: Boolean(action.compareDocumentPosition(summary) & Node.DOCUMENT_POSITION_FOLLOWING),
+          const knowledge = document.querySelector(".product-knowledge__content")!;
+          const cards = [...knowledge.querySelectorAll(".product-copy-card")];
+          return { titleTop: title.getBoundingClientRect().top,
+            actionAfterKnowledge: Boolean(knowledge.compareDocumentPosition(action) & Node.DOCUMENT_POSITION_FOLLOWING),
+            actionBelowKnowledge: action.getBoundingClientRect().top >= knowledge.getBoundingClientRect().bottom,
+            cardsBeforeAction: cards.every((card) => card.getBoundingClientRect().bottom <= action.getBoundingClientRect().top),
+            duplicateBlocks: document.querySelectorAll(".product-purpose, .product-summary, .product-highlights, .product-knowledge__intro").length,
             overflow: document.documentElement.scrollWidth > innerWidth };
         });
         expect(geometry.titleTop).toBeLessThan(240);
-        expect(geometry.actionBottom).toBeLessThanOrEqual(viewport.height + 2);
-        expect(geometry.actionBeforeSummary).toBe(true);
+        expect(geometry.actionAfterKnowledge).toBe(true);
+        expect(geometry.actionBelowKnowledge).toBe(true);
+        expect(geometry.cardsBeforeAction).toBe(true);
+        expect(geometry.duplicateBlocks).toBe(0);
         expect(geometry.overflow).toBe(false);
         await page.locator(".product-select-button").click();
         await expect(page.locator(".product-select-button")).toHaveAttribute("aria-pressed", "true");

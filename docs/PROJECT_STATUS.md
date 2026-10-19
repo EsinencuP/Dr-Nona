@@ -4,6 +4,8 @@ The application is a functional local QA candidate. Its technical gates pass, bu
 
 Current product-content update: 2026-10-05 on `content/product-descriptions`. The owner approved the current RU/RO texts for all 50 product records; legal claims remain pending. Older verification rows below retain their original dates.
 
+Local UI update: 2026-10-15. The owner's annotations retire Blog/News, external source controls, branch/address information and an invalid contact phone; they revise card subtitles, product-detail composition and add a homepage About module. The current route inventory is 191 pages with 187 indexable URLs. Follow [SITE_POLISH_2026-10-15.md](SITE_POLISH_2026-10-15.md) for the subsequent polish and its verification boundaries. Older implementation/verification rows retain their original scope and dates.
+
 ## Status identity
 
 | Field | Current value |

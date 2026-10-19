@@ -1,23 +1,19 @@
 import { Drop } from "@phosphor-icons/react/Drop";
 import { Leaf } from "@phosphor-icons/react/Leaf";
 import { TestTube } from "@phosphor-icons/react/TestTube";
-import {
-  ProductCard,
-  Reveal,
-  SectionHeading,
-} from "../components/ui";
+import { ArrowRight } from "@phosphor-icons/react/ArrowRight";
+import { Reveal } from "../components/ui";
 import { isClaimFieldPublishable } from "../claims";
 import {
   useFormulaContent,
   useOfficialPageData,
-  useProductData,
 } from "../data";
 import { useLocale } from "../locales/LocaleProvider";
+import { Link } from "../router";
 
 export default function FormulaPage() {
   const { locale } = useLocale();
   const { pageByPath } = useOfficialPageData();
-  const { products } = useProductData();
   const formulaContent = useFormulaContent();
   const page = pageByPath.get("/ourformula");
   const formulaIcons = {
@@ -26,25 +22,19 @@ export default function FormulaPage() {
     "new-generation": Leaf,
   };
   const pageCopy = locale === "ro"
-    ? {
-        eyebrow: "Formulă exclusivă",
-        nature: "Creat de natură",
+    ? {        nature: "Creat de natură",
         science: "Dezvăluit de știință.",
         summary:
           "Formula reunește studiul arhebacteriei cu mineralele Mării Moarte.",
         pillarsLabel: "Fundamentele Halo Complex",
-        productsEyebrow: "Formula în acțiune",
-        productsTitle: "Produse pe bază de Halo Complex™",
+        catalogue: "Vezi catalogul complet",
       }
-    : {
-        eyebrow: "Эксклюзивная формула",
-        nature: "Создано природой",
+    : {        nature: "Создано природой",
         science: "Раскрыто наукой.",
         summary:
           "Формула объединяет исследование архебактерии и минералы Мёртвого моря.",
         pillarsLabel: "Основа Halo Complex",
-        productsEyebrow: "Формула в действии",
-        productsTitle: "Продукты на основе Halo Complex™",
+        catalogue: "Перейти в каталог",
       };
   const neutralFormulaCopy = locale === "ro"
     ? {
@@ -90,7 +80,6 @@ export default function FormulaPage() {
       <section className="formula-hero">
         <div className="container formula-hero__grid">
           <div className="formula-hero__copy">
-            <p className="eyebrow eyebrow--light">{pageCopy.eyebrow}</p>
             <h1>Halo <em>Complex™</em></h1>
             <p className="formula-hero__lead">
               {page?.description || pageCopy.nature}. {pageCopy.science}
@@ -127,14 +116,11 @@ export default function FormulaPage() {
           ))}
         </div>
       </section>
-      <section className="formula-products section container">
-        <SectionHeading eyebrow={pageCopy.productsEyebrow} title={pageCopy.productsTitle} />
-        <div className="related-grid">
-          {products.slice(0, 4).map((product) => (
-            <ProductCard key={product.slug} product={product} compact />
-          ))}
-        </div>
-      </section>
+      <div className="section container">
+        <Link className="button button--primary" to="/products">
+          {pageCopy.catalogue} <ArrowRight aria-hidden="true" />
+        </Link>
+      </div>
     </>
   );
 }

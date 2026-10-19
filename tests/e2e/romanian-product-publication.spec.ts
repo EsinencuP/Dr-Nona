@@ -1,7 +1,15 @@
 import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import products from "../../src/data/products-ro.json" with { type: "json" };
+import englishProducts from "../../src/data/products.json" with { type: "json" };
 import { join } from "node:path";
+
+function publicCopy(value: string) {
+  return value
+    .replace("Sursa disponibilă nu oferă o listă completă și clară a ingredientelor.", "Lista completă a ingredientelor nu este disponibilă.")
+    .replace("Sursa indică până la", "Modul de utilizare indicat: până la")
+    .replace("Pentru adulți, sursa indică maximum", "Pentru adulți: maximum");
+}
 
 test("all 50 Romanian PDPs publish complete copy, localized SEO and resilient geometry", async ({ page }, testInfo) => {
   test.setTimeout(240_000);
@@ -11,11 +19,13 @@ test("all 50 Romanian PDPs publish complete copy, localized SEO and resilient ge
   for (const [slug, product] of Object.entries(products)) {
     await page.goto(`/ro/product/${slug}`);
     await expect(page.locator("html")).toHaveAttribute("lang", "ro");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText(product.officialName);
+    const englishName = englishProducts.find((candidate) => candidate.slug === slug)?.officialName;
+    expect(englishName, `${slug}: official English name`).toBeTruthy();
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(englishName!);
     await expect(page.locator(".product-page")).toBeVisible();
     for (const [heading, value] of [["Compoziție", product.ingredients], ["Mod de utilizare", product.howToUse]]) {
-      const article = page.locator(".product-copy-card").filter({ has: page.getByRole("heading", { level: 3, name: heading, exact: true }) });
-      await expect(article.locator("p"), `${slug}: ${heading}`).toHaveText(value);
+      const article = page.locator(".product-copy-card").filter({ has: page.getByRole("heading", { level: 2, name: heading, exact: true }) });
+      await expect(article.locator("p"), `${slug}: ${heading}`).toHaveText(publicCopy(value));
     }
     expect(await page.locator("body").innerText(), slug).not.toMatch(/[А-Яа-яЁё]/u);
     await expect(page).toHaveTitle(new RegExp(product.officialName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));

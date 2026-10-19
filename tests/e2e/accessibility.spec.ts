@@ -43,11 +43,11 @@ test("product breadcrumbs and visible information expose their relationships", a
     breadcrumb.getByText("Deodorant ( LORD )")
   ).toHaveAttribute("aria-current", "page");
 
-  const overview = page.getByRole("heading", { level: 3, name: "О продукте" });
-  const ingredients = page.getByRole("heading", { level: 3, name: "Состав" });
-  await expect(overview).toBeVisible();
+  const usage = page.getByRole("heading", { level: 2, name: "Способ применения" });
+  const ingredients = page.getByRole("heading", { level: 2, name: "Состав" });
+  await expect(usage).toBeVisible();
   await expect(ingredients).toBeVisible();
-  await expect(overview.locator("xpath=ancestor::article[1]")).toHaveClass(
+  await expect(usage.locator("xpath=ancestor::article[1]")).toHaveClass(
     /product-copy-card/
   );
   await expect(ingredients.locator("xpath=ancestor::article[1]")).toHaveClass(

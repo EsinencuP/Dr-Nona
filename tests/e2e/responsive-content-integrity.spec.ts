@@ -29,11 +29,27 @@ for (const locale of ["ru", "ro"] as const) {
   test(`${locale}: About reading text and facts remain complete on mobile`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(`/${locale}/about`);
-    const paragraphs = page.locator(".about-overview__statement p, .about-chapters__heading > p");
-    await expect(paragraphs).toHaveCount(2);
+    const paragraphs = page.locator(".about-overview__statement p, .about-chapter__body > p");
+    await expect(paragraphs).toHaveCount(5);
     await page.evaluate(() => document.fonts.ready);
+    const order = await page.evaluate(() => {
+      const cards = document.querySelector(".about-chapters")!.getBoundingClientRect();
+      const description = document.querySelector(".about-overview__statement")!.getBoundingClientRect();
+      const facts = document.querySelector(".about-facts")!.getBoundingClientRect();
+      return cards.bottom <= description.top && description.bottom < facts.top;
+    });
+    expect(order).toBe(true);
+    await expect(page.locator(".about-overview__statement > span")).toHaveCount(0);
     for (const width of [320, 375, 430, 641, 768, 960, 1024, 1180, 1440, 1920]) {
       await page.setViewportSize({ width, height: 900 });
+      const sizes = await page.evaluate(() => ({
+        paragraph: parseFloat(getComputedStyle(document.querySelector(".about-overview__statement p")!).fontSize),
+        number: parseFloat(getComputedStyle(document.querySelector(".about-facts dt")!).fontSize),
+        label: parseFloat(getComputedStyle(document.querySelector(".about-facts dd")!).fontSize),
+      }));
+      expect(sizes.paragraph).toBeGreaterThanOrEqual(18);
+      expect(sizes.number).toBeGreaterThanOrEqual(40);
+      expect(sizes.label).toBeGreaterThanOrEqual(16);
       for (const paragraph of await paragraphs.all()) {
         await expect(paragraph).toHaveCSS("-webkit-line-clamp", "none");
         const overflow = await paragraph.evaluate((element) => {

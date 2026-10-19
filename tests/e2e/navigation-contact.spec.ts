@@ -12,7 +12,7 @@ test("home exposes a complete locale switch and preserves Romanian navigation", 
   await expect(
     page.getByRole("heading", { level: 2, name: "Recomandarea noastră" })
   ).toBeVisible();
-  await page.getByRole("link", { name: "Selecție: 0" }).click();
+  await page.getByRole("link", { name: "Plasează comanda: 0" }).click();
   await expect(page).toHaveURL(/\/ro\/selection$/);
   await expect(
     page.getByRole("heading", { level: 2, name: "Selecția este goală" })
@@ -99,9 +99,9 @@ test("contact flow preserves context and exposes the real application form", asy
   ).toBeVisible();
   await expect(
     page.getByRole("heading", { level: 2, name: "Филиал в Молдове" })
-  ).toBeVisible();
-  await expect(page.getByRole("link", { name: "+373 69 281 916" })).toHaveCount(3);
-  await expect(page.getByRole("link", { name: "+373 69 049 793" })).toHaveCount(3);
+  ).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "+373 69 281 916" })).toHaveCount(2);
+  await expect(page.getByRole("link", { name: "+373 69 049 793" })).toHaveCount(0);
   await expect(page.getByText("Израиль")).toHaveCount(0);
   await expect(page.getByText(/Telegram/)).toHaveCount(0);
   const email = page.getByRole("link", { name: "Подготовить письмо" });
@@ -132,7 +132,7 @@ test("Romanian contact route localizes the form and keeps the selected language"
   await expect(page.locator("html")).toHaveAttribute("lang", "ro");
 });
 
-test("certificates page links to the international archive without review copy", async ({
+test("certificates page shows local document availability without an outbound archive", async ({
   page,
 }) => {
   await page.goto("/certificates");
@@ -140,12 +140,7 @@ test("certificates page links to the international archive without review copy",
   await expect(
     page.getByRole("heading", { level: 1, name: "Сертификаты и документы" })
   ).toBeVisible();
-  await expect(
-    page.getByRole("heading", {
-      level: 2,
-      name: "Международный архив сертификатов",
-    })
-  ).toBeVisible();
+  await expect(page.getByRole("link", { name: "Запросить документы" })).toHaveAttribute("href", "/contactus");
   await expect(page.getByRole("combobox")).toHaveCount(0);
   await expect(page.getByText("Russia")).toHaveCount(0);
   await expect(page.getByText("Israel")).toHaveCount(0);
@@ -153,5 +148,6 @@ test("certificates page links to the international archive without review copy",
   await expect(page.getByText(/провер/i)).toHaveCount(0);
   await expect(
     page.getByRole("link", { name: /Открыть международный архив/i })
-  ).toBeVisible();
+  ).toHaveCount(0);
+  await expect(page.getByText("Документы для Молдовы пока не опубликованы.")).toHaveCount(0);
 });

@@ -38,6 +38,7 @@ Thumbs.db
 src/data/runtime-content.json
 src/data/seo-manifest.json
 src/data/home-products.json
+src/data/official-pages-public.json
 src/data/product-details/
 
 # Prisma local database

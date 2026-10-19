@@ -1,6 +1,37 @@
 import { expect, test } from "@playwright/test";
 
 for (const locale of ["ru", "ro"]) {
+  test(`${locale}: all five Halo controls stay clear of the diagram and remain interactive`, async ({ page }) => {
+    test.setTimeout(60_000);
+    for (const width of [320, 390, 768, 1024, 1440, 1920]) {
+      await page.setViewportSize({ width, height: 844 });
+      await page.goto(`/${locale}`);
+      const controls = page.locator(".science-points button");
+      await expect(controls).toHaveCount(5);
+      await page.evaluate(() => document.fonts.ready);
+      const overlaps = await page.locator(".science-orbit").evaluate((orbit) => {
+        const core = orbit.querySelector(".science-core")?.getBoundingClientRect();
+        if (!core) return ["Missing diagram core"];
+        const buttons = [...orbit.querySelectorAll("button")].map((button) => button.getBoundingClientRect());
+        const intersects = (a: DOMRect, b: DOMRect) => a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+        return buttons.flatMap((button, index) => [core, ...buttons.slice(index + 1)].filter((other) => intersects(button, other)).map(() => `Control ${index} overlaps`));
+      });
+      expect(overlaps, `${locale}, ${width}px`).toEqual([]);
+      for (const control of await controls.all()) {
+        await control.click();
+        await expect(control).toHaveAttribute("aria-pressed", "true");
+        await expect(page.locator(".science-points button[aria-pressed=true]")).toHaveCount(1);
+        await expect(page.locator(".science-focus-panel > div:last-child > span")).toHaveText(await control.innerText());
+      }
+      await controls.nth(3).click();
+      await expect(page.locator(".science-focus-panel p")).toContainText("Goldseen");
+      await controls.nth(4).click();
+      await expect(page.locator(".science-focus-panel p")).toContainText("Phase 9");
+    }
+  });
+}
+
+for (const locale of ["ru", "ro"]) {
   test(`${locale}: Halo reading chapters retain full text and heading hierarchy under reflow`, async ({ page }) => {
     test.setTimeout(60_000);
     await page.goto(`/${locale}/ourformula`);

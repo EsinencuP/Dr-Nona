@@ -29,9 +29,8 @@ test("pending product claims stay out of home, catalogue search and detail", asy
   ).toBeVisible();
 
   await page.goto("/product/dynamic-hydrating-cream");
-  await expect(
-    page.locator(".product-purpose").getByText(/Универсальный крем, который заботится о коже каждый день/)
-  ).toBeVisible();
+  await expect(page.locator(".product-purpose")).toHaveCount(0);
+  await expect(page.locator(".product-copy-card--overview")).toHaveCount(0);
   await expect(page.getByText(/ускоряет регенерацию/u)).toHaveCount(0);
   await expect(page.getByText(/защиты клеток от старения/u)).toHaveCount(0);
 });

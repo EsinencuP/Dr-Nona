@@ -105,7 +105,6 @@ function Header() {
     ["/products", t.catalog],
     ["/about", t.about],
     ["/ourformula", t.formula],
-    ["/editorial", t.editorial],
   ];
 
   return (
@@ -164,11 +163,11 @@ function Header() {
           <Link
             className="selection-link"
             to="/selection"
-            aria-label={`${t.selection}: ${selected.length}`}
+            aria-label={`${t.placeOrder}: ${selected.length}`}
             onClick={() => setOpen(false)}
           >
             <BookmarkSimple aria-hidden="true" weight={selected.length ? "fill" : "regular"} />
-            <span>{t.selection}</span>
+            <span>{t.placeOrder}</span>
             <b>{selected.length}</b>
           </Link>
           <button
@@ -202,7 +201,7 @@ function Header() {
             </NavLink>
           ))}
           <NavLink to="/selection" onClick={() => setOpen(false)}>
-            <span>{t.selection}</span>
+            <span>{t.placeOrder}</span>
             <b>{selected.length}</b>
           </NavLink>
           <a href={CRM_ENTRY_URL} onClick={() => setOpen(false)}>
@@ -224,11 +223,9 @@ function Footer() {
         sections: "Secțiuni",
         information: "Informații",
         contacts: "Contacte",
-        branches: "Filiale",
         certificates: "Certificate",
         faq: "Întrebări și răspunsuri",
         contact: "Contact",
-        city: "Chișinău · Moldova",
         terms: "Termeni de utilizare",
         privacy: "Politica de confidențialitate",
         accessibility: "Accesibilitate",
@@ -239,11 +236,9 @@ function Footer() {
         sections: "Разделы",
         information: "Информация",
         contacts: "Контакты",
-        branches: "Филиалы",
         certificates: "Сертификаты",
         faq: "Вопросы и ответы",
         contact: "Связь",
-        city: "Кишинёв · Молдова",
         terms: "Условия использования",
         privacy: "Политика конфиденциальности",
         accessibility: "Доступность",
@@ -261,24 +256,20 @@ function Footer() {
           <Link to="/products">{t.catalog}</Link>
           <Link to="/about">{t.about}</Link>
           <Link to="/ourformula">Halo Complex™</Link>
-          <Link to="/editorial">{t.editorial}</Link>
         </div>
         <div>
           <p className="footer-title">{copy.information}</p>
           <Link to="/contactus">{copy.contacts}</Link>
-          <Link to="/warehouses">{copy.branches}</Link>
           <Link to="/certificates">{copy.certificates}</Link>
           <Link to="/faq">{copy.faq}</Link>
         </div>
         <div>
           <p className="footer-title">{copy.contact}</p>
-          <a href={marketData.contact.phones[0].href}>
-            <Phone aria-hidden="true" /> {marketData.contact.phones[0].label}
-          </a>
-          <a href={marketData.contact.phones[1].href}>
-            <Phone aria-hidden="true" /> {marketData.contact.phones[1].label}
-          </a>
-          <span className="footer-contact-market">{copy.city}</span>
+          {marketData.contact.phones.map((phone) => (
+            <a href={phone.href} key={phone.href}>
+              <Phone aria-hidden="true" /> {phone.label}
+            </a>
+          ))}
         </div>
       </div>
       <div className="footer-bottom">
