@@ -2,6 +2,7 @@ import { writeGeneratedFile } from "./write-generated-file.mjs";
 import { isRetiredEditorialPath } from "../src/editorial-policy.mjs";
 import { readFileSync } from "node:fs";
 import { isLocaleRouteSupported } from "../src/locale-routing.mjs";
+import { getSearchCopy } from "./seo-copy.mjs";
 
 const products = JSON.parse(readFileSync("src/data/products.json", "utf8"));
 const romanianProducts = JSON.parse(
@@ -53,26 +54,6 @@ function truncate(value, max = 158) {
 
 function isImportedEnglishBoilerplate(value) {
   return /^Shop Dr\. Nona International premium skincare/iu.test(clean(value));
-}
-
-function fitMeta(value, min, max, suffix) {
-  let text = clean(value);
-  while (text.length < min) text = `${text}${suffix}`;
-  return truncate(text, max);
-}
-
-function stableRouteMarker(path) {
-  let hash = 2166136261;
-  for (const char of path) {
-    hash ^= char.codePointAt(0);
-    hash = Math.imul(hash, 16777619);
-  }
-  return Math.abs(hash >>> 0).toString(36).slice(0, 6);
-}
-
-function uniqueMeta(value, route, max) {
-  const marker = ` · ${stableRouteMarker(route.path)}`;
-  return `${truncate(value, max - marker.length)}${marker}`;
 }
 
 function pageTitle(page) {
@@ -250,6 +231,12 @@ add(
     "Статус документов и сертификатов Dr. Nona, применимых к рынку Молдовы."
   )
 );
+add(fixedRoute(
+  "/privacypolicy",
+  "Политика конфиденциальности",
+  "Данные обращений и хранилище браузера Dr. Nona Moldova. Рабочая версия политики; реквизиты оператора и сроки хранения требуют уточнения.",
+  { indexable: false }
+));
 
 for (const product of products.filter(
   (item) =>
@@ -342,6 +329,10 @@ for (const page of pages.filter((item) => !item.error && !isRetiredEditorialPath
 
 const localizedStaticCopy = {
   ro: {
+    "/privacypolicy": {
+      title: "Politica de confidențialitate",
+      description: "Datele solicitărilor și stocarea în browser pentru Dr. Nona Moldova. Versiune de lucru; datele operatorului necesită precizare.",
+    },
     "/": {
       title: "Dr. Nona Moldova",
       description:
@@ -445,10 +436,8 @@ for (const baseRoute of localizableRoutes) {
       path,
       canonicalPath: path,
       pageTitle: pageTitleValue,
-      title: `${pageTitleValue} (${locale.toUpperCase()}) — ${SITE_NAME}`,
-      description: truncate(
-        locale === "ru" ? `Русская версия. ${description}` : description
-      ),
+      title: `${pageTitleValue} — ${SITE_NAME}`,
+      description: truncate(description),
       locale,
       alternates,
       breadcrumbs: localizedBreadcrumbs,
@@ -459,43 +448,11 @@ for (const baseRoute of localizableRoutes) {
 
 const routeList = [...routes.values()];
 
-function disambiguate(field, valueFactory) {
-  const groups = new Map();
-  for (const route of routeList.filter((item) => item.indexable)) {
-    const value = route[field];
-    const group = groups.get(value) ?? [];
-    group.push(route);
-    groups.set(value, group);
-  }
-  for (const group of groups.values()) {
-    if (group.length < 2) continue;
-    for (const route of group) {
-      route[field] = valueFactory(route);
-    }
-  }
-}
-
-disambiguate(
-  "title",
-  (route) =>
-    `${route.pageTitle} · ${humanizePath(route.path)} — ${SITE_NAME}`
-);
-
 for (const route of routeList) {
-  route.title = fitMeta(
-    route.title,
-    30,
-    65,
-    route.locale === "ro" ? " · site oficial" : " · официальный сайт"
-  );
-  route.description = fitMeta(
-    route.description,
-    70,
-    160,
-    route.locale === "ro"
-      ? " Informații oficiale suplimentare sunt disponibile pe site-ul Dr. Nona Moldova."
-      : " Дополнительная официальная информация доступна на сайте Dr. Nona Moldova."
-  );
+  const product = route.kind === "product"
+    ? products.find((item) => item.slug === route.path.split("/").at(-1))
+    : undefined;
+  Object.assign(route, getSearchCopy(route, product, product && romanianProducts[product.slug]));
   if (route.indexable && !route.alternates) {
     route.alternates = {
       "ru-MD": route.canonicalPath,
@@ -504,13 +461,6 @@ for (const route of routeList) {
     route.locale = "ru";
   }
 }
-disambiguate("title", (route) => uniqueMeta(route.title, route, 65));
-disambiguate(
-  "description",
-  (route) => truncate(`${humanizePath(route.path)}. ${route.description}`)
-);
-disambiguate("description", (route) => uniqueMeta(route.description, route, 160));
-
 const unsafePath = routeList.find(
   (route) =>
     !route.path.startsWith("/") ||

@@ -37,6 +37,7 @@ const requiredPages = [
   "SelectionPage",
   "ContactPage",
   "CertificatesPage",
+  "PrivacyPage",
   "BadRequestPage",
   "DynamicOfficialPage",
 ];

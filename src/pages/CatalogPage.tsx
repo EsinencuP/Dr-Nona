@@ -4,6 +4,7 @@ import { MagnifyingGlass } from "@phosphor-icons/react/MagnifyingGlass";
 import { X } from "@phosphor-icons/react/X";
 import { useDeferredValue, useMemo, useState } from "react";
 import { ProductCard } from "../components/ui";
+import { PageBreadcrumbs, ReadingLinks } from "../components/PageNavigation";
 import { useProductData } from "../data";
 import { filterCatalogProducts } from "../features/catalog/filterProducts";
 import { useLocale } from "../locales/LocaleProvider";
@@ -78,6 +79,7 @@ export default function CatalogPage() {
 
   return (
     <section className="catalog-page container">
+      <PageBreadcrumbs current={copy.title} />
       <div className="page-intro page-intro--catalog">
         <div>
           <h1>{copy.title} <em>Dr. Nona</em></h1>
@@ -203,6 +205,13 @@ export default function CatalogPage() {
           </button>
         </div>
       )}
+      <ReadingLinks links={locale === "ro" ? [
+        { to: "/ourformula", label: "Ce este Halo Complex™?", description: "Descoperă povestea formulei Dr. Nona." },
+        { to: "/contactus", label: "Pune o întrebare despre produse", description: "Contactează un consultant în Moldova." },
+      ] : [
+        { to: "/ourformula", label: "Что такое Halo Complex™?", description: "Познакомьтесь с историей формулы Dr. Nona." },
+        { to: "/contactus", label: "Задать вопрос о продукции", description: "Свяжитесь с консультантом в Молдове." },
+      ]} />
     </section>
   );
 }

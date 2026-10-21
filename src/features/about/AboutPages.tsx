@@ -11,6 +11,7 @@ import { useOfficialPageData } from "../../data";
 import { useLocale } from "../../locales/LocaleProvider";
 import { Link, NavLink } from "../../router";
 import NotFoundPage from "../../pages/NotFoundPage";
+import { PageBreadcrumbs, ReadingLinks } from "../../components/PageNavigation";
 
 const aboutCopy = {
   ru: {
@@ -23,7 +24,8 @@ const aboutCopy = {
     sectionsLabel: "Разделы о компании",    factsLabel: "Dr. Nona в цифрах",
     founded: "год основания",
     countries: "стран мира",
-    distributors: "дистрибьюторов",    openSection: "Открыть раздел",    aboutCompany: "О компании",    today: "Сегодня",
+    distributors: "дистрибьюторов",    openSection: "Читать",
+    aboutCompany: "О компании",    today: "Сегодня",
     historyStage: "Этап истории",    foundersCaption: "Доктор Нонна и Михаил Шнеерсон",
   },
   ro: {
@@ -36,7 +38,8 @@ const aboutCopy = {
     sectionsLabel: "Secțiuni despre companie",    factsLabel: "Dr. Nona în cifre",
     founded: "anul fondării",
     countries: "țări din întreaga lume",
-    distributors: "distribuitori",    openSection: "Deschide secțiunea",    aboutCompany: "Despre companie",    today: "Astăzi",
+    distributors: "distribuitori",    openSection: "Citește",
+    aboutCompany: "Despre companie",    today: "Astăzi",
     historyStage: "Etapă din istorie",    foundersCaption: "Dr. Nona și Mihail Shneerson",
   },
 } as const;
@@ -63,6 +66,21 @@ function AboutNavigation() {
   );
 }
 
+function AboutReadingLinks({ history = false }: { history?: boolean }) {
+  const { locale } = useLocale();
+  return <ReadingLinks links={locale === "ro" ? [
+    history
+      ? { to: "/about/founders", label: "Fondatorii Dr. Nona", description: "Oamenii de la începutul istoriei companiei." }
+      : { to: "/ourformula", label: "Povestea Halo Complex™", description: "De la natura Mării Moarte la formula Dr. Nona." },
+    { to: "/products", label: "Catalogul produselor Dr. Nona", description: "Descoperă produsele și descrierile lor." },
+  ] : [
+    history
+      ? { to: "/about/founders", label: "Основатели Dr. Nona", description: "Люди, с которых началась история компании." }
+      : { to: "/ourformula", label: "История Halo Complex™", description: "От природы Мёртвого моря к формуле Dr. Nona." },
+    { to: "/products", label: "Каталог продукции Dr. Nona", description: "Познакомьтесь с продуктами и их описаниями." },
+  ]} />;
+}
+
 export function AboutLandingPage() {
   const { locale } = useLocale();
   const copy = aboutCopy[locale];
@@ -80,6 +98,7 @@ export function AboutLandingPage() {
   return (
     <div className="about-page">
       <section className="about-chapters container" aria-label={copy.sectionsLabel}>
+        <PageBreadcrumbs current={copy.aboutCompany} />
         <h1 className="about-chapters__title">{pageByPath.get("/about/company")?.title}</h1>
         <div className="about-chapter-grid">
           {chapters.map((chapter, index) => (
@@ -96,7 +115,7 @@ export function AboutLandingPage() {
                   <h2>{chapter.label}</h2>
                   <p>{chapter.excerpt}</p>
                   <span className="about-chapter__link">
-                    {copy.openSection} <ArrowRight aria-hidden="true" />
+                    {copy.openSection}: {chapter.label} <ArrowRight aria-hidden="true" />
                   </span>
                 </div>
               </Link>
@@ -125,6 +144,7 @@ export function AboutLandingPage() {
           </dl>
         </div>
       </section>
+      <div className="container"><AboutReadingLinks /></div>
     </div>
   );
 }
@@ -139,6 +159,7 @@ export function HistoryPage() {
   const years = ["1994", "1998", "1999", "2008", copy.today];
   return (
     <section className="history-page container">
+      <PageBreadcrumbs current={title} parents={[{ to: "/about", label: copy.aboutCompany }]} />
       <div className="page-intro">
         <div><h1>{title}</h1></div>
         <AboutNavigation />
@@ -154,6 +175,7 @@ export function HistoryPage() {
           </Reveal>
         ))}
       </div>
+      <AboutReadingLinks history />
     </section>
   );
 }
@@ -168,6 +190,7 @@ export function AboutContentPage({ path }: { path: string }) {
   const paragraphs = page.paragraphs;
   return (
     <section className="about-content container">
+      <PageBreadcrumbs current={title} parents={[{ to: "/about", label: copy.aboutCompany }]} />
       <div className="page-intro">
         <div><h1>{title}</h1></div>
         <AboutNavigation />
@@ -192,6 +215,7 @@ export function AboutContentPage({ path }: { path: string }) {
           ))}
         </div>
       </div>
+      <AboutReadingLinks />
     </section>
   );
 }

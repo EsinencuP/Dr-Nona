@@ -2,6 +2,7 @@ import { SealCheck } from "@phosphor-icons/react/SealCheck";
 import { marketData } from "../market";
 import { useLocale } from "../locales/LocaleProvider";
 import { Link } from "../router";
+import { PageBreadcrumbs } from "../components/PageNavigation";
 
 export default function CertificatesPage() {
   const { locale } = useLocale();
@@ -17,6 +18,7 @@ export default function CertificatesPage() {
   const certificates = marketData.moldovaCertificates;
   return (
     <section className="official-page container">
+      <PageBreadcrumbs current={copy.title} />
       <div className="official-page__header official-page__header--split">
         <div>
           <h1>{copy.title}</h1>

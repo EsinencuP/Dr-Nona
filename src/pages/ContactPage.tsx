@@ -15,6 +15,7 @@ import { useLocale } from "../locales/LocaleProvider";
 import { marketData } from "../market";
 import { getProductTitle } from "../features/product/productNames";
 import { Link, useSearchParams } from "../router";
+import { PageBreadcrumbs } from "../components/PageNavigation";
 
 function ContactPageWithProducts({ slugs }: { slugs: string[] }) {
   const { productBySlug } = useProductData();
@@ -85,6 +86,7 @@ function ContactPageContent({
 
   return (
     <section className="contact-page container">
+      <PageBreadcrumbs current={copy.title} />
       <div className="official-page__header">
         <h1>{copy.title}</h1>
       </div>

@@ -85,12 +85,13 @@ async function run() {
     `/assets/${assets[0]}`,
   ];
   const errors = [];
+  const missingRoutes = new Set(["/blog/what-to-eat-after-coronavirus", "/definitely-missing"]);
 
   for (const route of routes) {
     const response = await fetch(`${origin}${route}`);
-    if (!response.ok) {
-      errors.push(`${route}: expected successful response, got ${response.status}.`);
-      continue;
+    const expectedStatus = missingRoutes.has(route) ? 404 : 200;
+    if (response.status !== expectedStatus) {
+      errors.push(`${route}: expected ${expectedStatus}, got ${response.status}.`);
     }
     for (const [key, expected] of Object.entries(expectedHeaders)) {
       const actual = response.headers.get(key);

@@ -1,16 +1,22 @@
 import { ArrowUpRight } from "@phosphor-icons/react/ArrowUpRight";
 import { BookmarkSimple } from "@phosphor-icons/react/BookmarkSimple";
+import { FacebookLogo } from "@phosphor-icons/react/FacebookLogo";
+import { InstagramLogo } from "@phosphor-icons/react/InstagramLogo";
 import { List } from "@phosphor-icons/react/List";
 import { Phone } from "@phosphor-icons/react/Phone";
 import { X } from "@phosphor-icons/react/X";
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { useSelection } from "../features/selection/SelectionContext";
+import { MobileContactAction } from "../features/contact/MobileContactAction";
+import { PrivacyNotice } from "../features/privacy/PrivacyNotice";
+import { openPrivacyPreferences } from "../features/privacy/privacyChoice";
 import { useLocale } from "../locales/LocaleProvider";
 import { marketData } from "../market";
 import { applyRouteMetadata } from "../seo";
 import { localePathFor } from "../locale-routing.mjs";
 import { Link, NavLink, useLocation, useSetLocale } from "../router";
+import { socialLinks } from "./social-links";
 
 const CRM_ENTRY_URL =
   import.meta.env.VITE_CRM_URL?.trim() || "http://127.0.0.1:3001/dashboard";
@@ -226,8 +232,11 @@ function Footer() {
         certificates: "Certificate",
         faq: "Întrebări și răspunsuri",
         contact: "Contact",
+        social: "Rețele sociale",
+        socialPending: "Link neadăugat",
         terms: "Termeni de utilizare",
         privacy: "Politica de confidențialitate",
+        cookieSettings: "Setări cookies",
         accessibility: "Accesibilitate",
       }
     : {
@@ -239,8 +248,11 @@ function Footer() {
         certificates: "Сертификаты",
         faq: "Вопросы и ответы",
         contact: "Связь",
+        social: "Социальные сети",
+        socialPending: "Ссылка не добавлена",
         terms: "Условия использования",
         privacy: "Политика конфиденциальности",
+        cookieSettings: "Настройки cookies",
         accessibility: "Доступность",
       };
   return (
@@ -270,6 +282,33 @@ function Footer() {
               <Phone aria-hidden="true" /> {phone.label}
             </a>
           ))}
+          <div className="footer-social" role="group" aria-label={copy.social}>
+            {[
+              { name: "Instagram", href: socialLinks.instagram.trim(), Icon: InstagramLogo },
+              { name: "Facebook", href: socialLinks.facebook.trim(), Icon: FacebookLogo },
+            ].map(({ name, href, Icon }) => href ? (
+              <a
+                className="footer-social__item"
+                key={name}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={name}
+              >
+                <Icon aria-hidden="true" />
+              </a>
+            ) : (
+              <span
+                className="footer-social__item"
+                key={name}
+                role="img"
+                aria-label={`${name} — ${copy.socialPending}`}
+                title={`${name} — ${copy.socialPending}`}
+              >
+                <Icon aria-hidden="true" />
+              </span>
+            ))}
+          </div>
         </div>
       </div>
       <div className="footer-bottom">
@@ -277,6 +316,7 @@ function Footer() {
         <div>
           <Link to="/termsofuse">{copy.terms}</Link>
           <Link to="/privacypolicy">{copy.privacy}</Link>
+          <button className="footer-privacy-settings" type="button" onClick={openPrivacyPreferences}>{copy.cookieSettings}</button>
           <Link to="/accessibility-statement">{copy.accessibility}</Link>
         </div>
       </div>
@@ -292,6 +332,8 @@ function PageShell({ children }: { children: ReactNode }) {
         {children}
       </main>
       <Footer />
+      <MobileContactAction />
+      <PrivacyNotice />
     </>
   );
 }

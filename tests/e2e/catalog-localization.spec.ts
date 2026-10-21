@@ -151,13 +151,17 @@ test("Romanian UI does not invent localized URLs for original generic pages", as
 test("Romanian error states keep localized UI and noindex metadata without a false alias", async ({
   page,
 }) => {
-  await page.goto("/ro/definitely-missing");
+  const response = await page.goto("/ro/definitely-missing");
+  expect(response?.status()).toBe(404);
   await expect(page).toHaveURL(/\/definitely-missing$/u);
   await expect(page.locator("html")).toHaveAttribute("lang", "ro");
   await expect(page.getByRole("heading", { name: "Această pagină a dispărut din orizont" })).toBeVisible();
   await expect(page).toHaveTitle(/Pagină negăsită/u);
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex,follow");
   await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(0);
+  await page.locator(".not-found__actions").getByRole("link", { name: "Vezi catalogul", exact: true }).click();
+  await expect(page).toHaveURL(/\/ro\/products$/u);
+  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50);
 
   await page.goto("/ro/bad-request");
   await expect(page).toHaveURL(/\/bad-request$/u);

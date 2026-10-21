@@ -2,6 +2,22 @@ import { expect, test } from "@playwright/test";
 
 const testBaseUrl = `http://127.0.0.1:${process.env.PLAYWRIGHT_PORT ?? "4173"}`;
 
+for (const locale of ["ru", "ro"]) {
+  test(`${locale}: search copy changes with the page and stays localized`, async ({ page }) => {
+    await page.goto(`/${locale}/about`);
+    await expect(page).toHaveTitle(locale === "ro" ? /Despre brand și fondatori/ : /Знакомство с компанией/);
+    const before = await page.locator('meta[name="description"]').getAttribute("content");
+    await page.locator('.about-chapter a[href$="/about/science"]').click();
+    await expect(page).toHaveTitle(locale === "ro" ? /Știință, producție și tehnologie/ : /Разработка и контроль качества/);
+    const description = page.locator('meta[name="description"]');
+    await expect(description).toHaveCount(1);
+    await expect(description).not.toHaveAttribute("content", before ?? "");
+    await expect(description).toHaveAttribute("content", locale === "ro" ? /controlul calității/ : /контроль качества/);
+    await expect(page.locator('meta[property="og:description"]')).toHaveAttribute("content", await description.getAttribute("content") ?? "");
+    expect(await page.title()).not.toMatch(/\((?:RU|RO)\)| · /);
+  });
+}
+
 test("product route exposes complete route metadata and Product JSON-LD", async ({
   page,
 }) => {

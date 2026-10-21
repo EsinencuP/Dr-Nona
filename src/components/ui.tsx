@@ -170,7 +170,7 @@ export function ProductCard({
           {subtitle}
         </p>
         <div className="product-card__actions">
-          <Link className="text-link" to={`/product/${product.slug}`}>
+          <Link className="text-link" to={`/product/${product.slug}`} aria-label={`${t.details}: ${title}`}>
             {t.details} <ArrowUpRight aria-hidden="true" />
           </Link>
           <button

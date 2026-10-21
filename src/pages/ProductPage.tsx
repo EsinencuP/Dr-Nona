@@ -10,6 +10,7 @@ import {
   splitText,
 } from "../components/ui";
 import { ProductImage } from "../components/ProductImage";
+import { PageBreadcrumbs, ReadingLinks } from "../components/PageNavigation";
 import { withoutExternalReferences } from "../components/contentText";
 import { productImageStyle } from "../features/product/productImagePresentation";
 import { getProductTitle } from "../features/product/productNames";
@@ -38,12 +39,20 @@ export default function ProductPage() {
         overview: "Despre produs",
         selectionHint: "Salvează produsul pentru a-l transmite consultantului împreună cu solicitarea ta.",
         selectedHint: "Produsul este salvat și va rămâne în contextul solicitării tale.",
-        openSelection: "Deschide selecția",      }
+        openSelection: "Deschide selecția",        formula: "Despre formula Halo Complex™",
+        formulaHint: "Originea și istoria formulei Dr. Nona.",
+        consultation: "Întreabă despre acest produs",
+        consultationHint: "Denumirea produsului va fi inclusă în formularul de contact.",
+      }
     : {
         overview: "О продукте",
         selectionHint: "Сохраните продукт, чтобы передать его консультанту вместе с вашей заявкой.",
         selectedHint: "Продукт сохранён и останется в контексте вашей заявки.",
-        openSelection: "Открыть подборку",      };
+        openSelection: "Открыть подборку",        formula: "О формуле Halo Complex™",
+        formulaHint: "Происхождение и история формулы Dr. Nona.",
+        consultation: "Задать вопрос об этом продукте",
+        consultationHint: "Название продукта будет передано в форму обращения.",
+      };
   if (!product) return <NotFoundPage />;
   const title = getProductTitle(product);
   const saved = contains(product.slug);
@@ -53,17 +62,15 @@ export default function ProductPage() {
   const productHowToUse = withoutExternalReferences(getProductCopy(product, "howToUse"));
   const productOverview = buildProductOverview({ longDescription: productLongDescription });
   const overviewParagraphs = splitText(productOverview, 300);
+  const categoryPath = `/products?${new URLSearchParams({ category: product.category })}`;
 
   return (
     <div className="product-page">
       <section className="product-detail container">
-        <nav className="breadcrumbs" aria-label={t.breadcrumbs}>
-          <Link to="/">{t.home}</Link>
-          <span aria-hidden="true">/</span>
-          <Link to="/products">{t.catalog}</Link>
-          <span aria-hidden="true">/</span>
-          <span aria-current="page" lang="en">{title}</span>
-        </nav>
+        <PageBreadcrumbs current={title} currentLang="en" parents={[
+          { to: "/products", label: t.catalog },
+          { to: categoryPath, label: product.category },
+        ]} />
         <div className="product-detail__grid">
           <div className="product-info">
             <header className="product-identity">
@@ -156,13 +163,20 @@ export default function ProductPage() {
               </div>
               <dl className="product-facts">
                 <div><dt>{t.sku}</dt><dd>{product.sku || "NV"}</dd></div>
-                <div><dt>{t.category}</dt><dd>{product.category}</dd></div>
+                <div><dt>{t.category}</dt><dd><Link className="inline-link" to={categoryPath}>{product.category}</Link></dd></div>
               </dl>
 
             </div>
           </div>
         </div>
       </section>
+
+      <div className="container">
+        <ReadingLinks links={[
+          { to: "/ourformula", label: copy.formula, description: copy.formulaHint },
+          { to: `/contactus?${new URLSearchParams({ products: product.slug })}`, label: copy.consultation, description: copy.consultationHint },
+        ]} />
+      </div>
 
       <section className="section container related-section">
         <SectionHeading title={t.related} />

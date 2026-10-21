@@ -6,6 +6,7 @@ import { useOfficialPageData } from "../../data";
 import { useLocation } from "../../router";
 import { useLocale } from "../../locales/LocaleProvider";
 import NotFoundPage from "../../pages/NotFoundPage";
+import { PageBreadcrumbs } from "../../components/PageNavigation";
 
 export function GenericOfficialPage() {
   const { locale } = useLocale();
@@ -23,6 +24,7 @@ export function GenericOfficialPage() {
   );
   return (
     <section className="official-page container">
+      <PageBreadcrumbs current={title} currentLang="ru" />
       <div className="official-page__header">
         <h1 lang="ru">{title}</h1>
         {description && <p lang="ru">{description}</p>}

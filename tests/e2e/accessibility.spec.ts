@@ -10,6 +10,10 @@ const routes = [
   "/certificates",
   "/about",
   "/ourformula",
+  "/privacypolicy",
+  "/ro/privacypolicy",
+  "/missing-page",
+  "/ro/missing-page",
 ];
 
 for (const route of routes) {
@@ -38,7 +42,8 @@ test("product breadcrumbs and visible information expose their relationships", a
   const breadcrumb = page.getByRole("navigation", {
     name: "Хлебные крошки",
   });
-  await expect(breadcrumb.locator('span[aria-hidden="true"]')).toHaveCount(2);
+  await expect(breadcrumb.getByRole("listitem")).toHaveCount(4);
+  await expect(breadcrumb.locator('.breadcrumbs__separator[aria-hidden="true"]')).toHaveCount(3);
   await expect(
     breadcrumb.getByText("Deodorant ( LORD )")
   ).toHaveAttribute("aria-current", "page");

@@ -453,3 +453,141 @@
 .product-picture > source {
   display: none;
 }
+
+.breadcrumbs {
+  padding-block: 12px 18px;
+  color: var(--muted);
+  font-size: var(--type-ui);
+  line-height: 1.5;
+}
+
+.breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumbs__list > li {
+  min-width: 0;
+  max-width: 100%;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.breadcrumbs__separator {
+  flex: 0 0 12px;
+  width: 12px;
+  height: 12px;
+  color: var(--muted);
+}
+
+.breadcrumbs a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  overflow-wrap: anywhere;
+}
+
+.breadcrumbs__home > svg {
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.breadcrumbs [aria-current="page"] {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.breadcrumbs a,
+.inline-link {
+  color: var(--sea-700);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.breadcrumbs a:hover,
+.inline-link:hover {
+  color: var(--ink);
+  text-decoration-thickness: 2px;
+}
+
+.reading-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+  padding-bottom: 40px;
+}
+
+.reading-links > a {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 20px;
+  padding-block: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.reading-links strong,
+.reading-links small {
+  display: block;
+}
+
+.reading-links strong {
+  color: var(--sea-700);
+  font-size: 1.125rem;
+  line-height: 1.5;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.reading-links small {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: var(--type-body-sm);
+  line-height: 1.65;
+}
+
+.reading-links svg {
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  margin-top: 3px;
+  color: var(--sea-700);
+}
+
+.reading-links a:hover strong {
+  color: var(--ink);
+  text-decoration-thickness: 2px;
+}
+
+@media (max-width: 640px) {
+  .breadcrumbs__home {
+    justify-content: center;
+  }
+
+  .breadcrumbs__home > span {
+    display: none;
+  }
+
+  .breadcrumbs__list > .breadcrumbs__current {
+    flex: 1 1 160px;
+    padding-block: 8px;
+  }
+
+  .reading-links {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+}

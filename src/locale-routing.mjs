@@ -4,6 +4,7 @@ const localizedExactPaths = new Set([
   "/selection",
   "/contactus",
   "/certificates",
+  "/privacypolicy",
   "/about",
   "/about/company",
   "/about/our-history",

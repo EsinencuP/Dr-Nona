@@ -17,6 +17,7 @@ import {
 import { useSelection } from "../features/selection/SelectionContext";
 import { useLocale } from "../locales/LocaleProvider";
 import { Link } from "../router";
+import { PageBreadcrumbs } from "../components/PageNavigation";
 
 export default function SelectionPage() {
   const { selected, toggle } = useSelection();
@@ -71,6 +72,7 @@ export default function SelectionPage() {
   };
   return (
     <section className="selection-page container">
+      <PageBreadcrumbs current={copy.title} parents={[{ to: "/products", label: locale === "ro" ? "Catalog" : "Каталог" }]} />
       <div className="page-intro">
         <div><h1>{copy.title}</h1></div>
         <p>{copy.intro}</p>

@@ -34,20 +34,38 @@ for (const locale of ["ru", "ro"]) {
     }
   });
 
-  test(`${locale}: hero media is separate from copy and benefits`, async ({ page }) => {
+  test(`${locale}: hero image fills the background behind readable copy and benefits`, async ({ page }) => {
     for (const width of [320, 375, 430, 768, 1024, 1440, 1920, 2048, 844]) {
       await page.setViewportSize({ width, height: width === 844 ? 390 : 900 });
       await page.goto(`/${locale}`);
       await expect(page.locator(".hero-visual")).toBeVisible();
       const state = await page.evaluate(() => {
         const media = document.querySelector(".hero-visual")!;
-        const m = media.getBoundingClientRect(), c = document.querySelector(".hero-copy")!.getBoundingClientRect(), r = document.querySelector(".hero-benefits")!.getBoundingClientRect();
-        const overlappingCopy = Math.min(m.right, c.right) - Math.max(m.left, c.left) > 1 && Math.min(m.bottom, c.bottom) - Math.max(m.top, c.top) > 1;
-        return { overlappingCopy, gap: r.top - m.bottom, masked: getComputedStyle(media).backgroundImage.includes("gradient"), overflow: document.documentElement.scrollWidth > innerWidth };
+        const m = media.getBoundingClientRect();
+        const hero = document.querySelector(".home-hero")!.getBoundingClientRect();
+        const copy = document.querySelector(".hero-copy")!;
+        const c = copy.getBoundingClientRect();
+        const benefits = document.querySelector(".hero-benefits")!.getBoundingClientRect();
+        const textBounds = [...copy.querySelectorAll("h1, p")].map((element) => {
+          const range = document.createRange();
+          range.selectNodeContents(element);
+          return range.getBoundingClientRect();
+        });
+        return {
+          coversHero: Math.abs(m.left - hero.left) <= 1 && Math.abs(m.right - hero.right) <= 1
+            && Math.abs(m.top - hero.top) <= 1 && Math.abs(m.bottom - hero.bottom) <= 1,
+          copyAboveBenefits: c.bottom <= benefits.top,
+          textFits: textBounds.every((bounds) => bounds.left >= c.left - 1 && bounds.right <= c.right + 1 && bounds.bottom <= c.bottom + 1),
+          overlay: getComputedStyle(media, "::after").backgroundImage.includes("linear-gradient"),
+          copyInFront: Number(getComputedStyle(copy).zIndex) > Number(getComputedStyle(media).zIndex),
+          overflow: document.documentElement.scrollWidth > innerWidth,
+        };
       });
-      expect(state.overlappingCopy).toBe(false);
-      expect(state.gap).toBeGreaterThanOrEqual(16);
-      expect(state.masked).toBe(false);
+      expect(state.coversHero).toBe(true);
+      expect(state.copyAboveBenefits).toBe(true);
+      expect(state.textFits).toBe(true);
+      expect(state.overlay).toBe(true);
+      expect(state.copyInFront).toBe(true);
       expect(state.overflow).toBe(false);
     }
   });

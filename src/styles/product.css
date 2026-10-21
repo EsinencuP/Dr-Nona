@@ -6,21 +6,6 @@
   padding-bottom: clamp(30px, 3.2vw, 44px);
 }
 
-.breadcrumbs {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding-block: 12px 18px;
-  color: var(--muted);
-  font-size: var(--type-ui);
-}
-
-.breadcrumbs span:last-child {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .product-detail__grid {
   display: grid;
   grid-template-columns: minmax(430px, 0.94fr) minmax(470px, 1.06fr);

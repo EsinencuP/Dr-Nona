@@ -32,23 +32,26 @@ for (const locale of ["ru", "ro"]) {
 }
 
 for (const locale of ["ru", "ro"]) {
-  test(`${locale}: Halo reading chapters retain full text and heading hierarchy under reflow`, async ({ page }) => {
+  test(`${locale}: Halo story retains connected prose, patent source and full text under reflow`, async ({ page }) => {
     test.setTimeout(60_000);
     await page.goto(`/${locale}/ourformula`);
-    const chapters = page.locator(".formula-chapter");
-    await expect(chapters).toHaveCount(3);
+    const story = page.locator(".formula-story__content");
+    await expect(story).toBeVisible();
+    await expect(page.locator(".formula-chapter__index")).toHaveCount(0);
     await page.evaluate(() => document.fonts.ready);
-    const titles = await page.locator(".formula-pillar h2").allTextContents();
-    await expect(chapters.getByRole("heading", { level: 2 })).toHaveText(titles);
-    const paragraphs = await chapters.locator("p").allTextContents();
+    await expect(story.getByRole("heading", { level: 2 })).toHaveText(
+      locale === "ro" ? "De la Marea Moartă la Halo Complex™" : "От Мёртвого моря — к Halo Complex™"
+    );
+    await expect(story.locator("p")).toHaveCount(5);
+    await expect(story.getByRole("link", { name: /222127/ })).toHaveAttribute("href", "https://patents.google.com/patent/IL222127B/en");
+    await expect(story).toContainText("Dunaliella");
+    const paragraphs = await story.locator("p").allTextContents();
 
     for (const width of [320, 375, 430, 768, 1024, 1440, 1920, 844]) {
       await page.setViewportSize({ width, height: width === 844 ? 390 : 900 });
-      for (const chapter of await chapters.all()) {
-        await chapter.scrollIntoViewIfNeeded();
-        await expect(chapter).toHaveCSS("opacity", "1");
-      }
-      const problems = await chapters.evaluateAll((elements) => elements.flatMap((element) => {
+      await story.scrollIntoViewIfNeeded();
+      await expect(story).toHaveCSS("opacity", "1");
+      const problems = await story.evaluate((element) => {
         const box = element.getBoundingClientRect();
         return [...element.querySelectorAll("h2, p")].flatMap((text) => {
           const range = document.createRange();
@@ -60,23 +63,21 @@ for (const locale of ["ru", "ro"]) {
             || style.webkitLineClamp !== "none"
             ? [text.textContent] : [];
         });
-      }));
-      expect(problems, `${locale} chapters at ${width}px`).toEqual([]);
+      });
+      expect(problems, `${locale} story at ${width}px`).toEqual([]);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     }
 
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.setViewportSize({ width: 320, height: 812 });
-    await page.addStyleTag({ content: ".formula-chapter h2, .formula-chapter p { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; }" });
-    for (const chapter of await chapters.all()) {
-      await chapter.scrollIntoViewIfNeeded();
-      await expect(chapter).toHaveCSS("opacity", "1");
-      expect(await chapter.evaluate((element) => {
+    await page.addStyleTag({ content: ".formula-story h2, .formula-story p { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; }" });
+    await story.scrollIntoViewIfNeeded();
+    await expect(story).toHaveCSS("opacity", "1");
+    expect(await story.evaluate((element) => {
         const transform = getComputedStyle(element).transform;
         return transform === "none" || new DOMMatrixReadOnly(transform).isIdentity;
-      })).toBe(true);
-    }
-    await expect(chapters.locator("p")).toHaveText(paragraphs);
+    })).toBe(true);
+    await expect(story.locator("p")).toHaveText(paragraphs);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   });
 

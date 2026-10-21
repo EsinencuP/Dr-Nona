@@ -10,7 +10,7 @@ test("home exposes a complete locale switch and preserves Romanian navigation", 
   await expect(page).toHaveURL(/\/ro$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "ro");
   await expect(
-    page.getByRole("heading", { level: 2, name: "Recomandarea noastră" })
+    page.getByRole("heading", { level: 2, name: "Categorii de produse" })
   ).toBeVisible();
   await page.getByRole("link", { name: "Plasează comanda: 0" }).click();
   await expect(page).toHaveURL(/\/ro\/selection$/);

@@ -424,6 +424,10 @@ p {
   color: var(--lord-muted);
 }
 
+.brand-mark--light .brand-mark__logo {
+  filter: brightness(0) invert(1);
+}
+
 .desktop-nav {
   display: flex;
   align-items: center;

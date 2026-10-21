@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("home introduces Halo Complex before product promotion", async ({
+test("home introduces Halo Complex before the category overview", async ({
   page,
 }) => {
   await page.goto("/");
@@ -22,7 +22,7 @@ test("home introduces Halo Complex before product promotion", async ({
   expect(hierarchy[0]).toContain("home-hero");
   expect(hierarchy[1]).toContain("science-section");
   expect(hierarchy[2]).toContain("home-about");
-  expect(hierarchy[3]).toContain("home-product-showcase");
+  expect(hierarchy[3]).toContain("home-categories");
 });
 
 for (const locale of ["ru", "ro"]) {

@@ -14,6 +14,7 @@ const FormulaPage = lazy(() => import("../pages/FormulaPage"));
 const SelectionPage = lazy(() => import("../pages/SelectionPage"));
 const ContactPage = lazy(() => import("../pages/ContactPage"));
 const CertificatesPage = lazy(() => import("../pages/CertificatesPage"));
+const PrivacyPage = lazy(() => import("../pages/PrivacyPage"));
 const BadRequestPage = lazy(() => import("../pages/BadRequestPage"));
 const DynamicOfficialPage = lazy(() => import("../pages/DynamicOfficialPage"));
 
@@ -42,6 +43,7 @@ export function AppRoutes() {
         <Route path="/selection" element={<SelectionPage />} />
         <Route path="/contactus" element={<ContactPage />} />
         <Route path="/certificates" element={<CertificatesPage />} />
+        <Route path="/privacypolicy" element={<PrivacyPage />} />
         <Route path="/bad-request" element={<BadRequestPage />} />
         <Route path="*" element={<DynamicOfficialPage />} />
       </Routes>

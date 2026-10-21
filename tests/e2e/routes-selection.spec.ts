@@ -134,13 +134,21 @@ test("selection count synchronizes between open tabs", async ({ context }) => {
 });
 
 test("unknown deep links render the site 404", async ({ page }) => {
+  for (const route of ["/definitely-not-a-route", "/product/missing-product", "/missing/nested/"]) {
+    const response = await page.goto(route);
+    expect(response?.status()).toBe(404);
+    expect(response?.headers()["x-robots-tag"]).toContain("noindex");
+    await expect(page.getByRole("heading", { level: 1, name: "Эта страница ушла за горизонт" })).toBeVisible();
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex,follow");
+    await expect(page.locator(".not-found__actions a")).toHaveCount(2);
+  }
+  const refreshed = await page.reload();
+  expect(refreshed?.status()).toBe(404);
+  await page.locator(".not-found__actions").getByRole("link", { name: "В каталог", exact: true }).click();
+  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50);
   await page.goto("/definitely-not-a-route");
-  await expect(
-    page.getByRole("heading", {
-      level: 1,
-      name: "Эта страница ушла за горизонт",
-    })
-  ).toBeVisible();
+  await page.locator(".not-found__actions").getByRole("link", { name: "На главную", exact: true }).click();
+  await expect(page.locator(".home-hero h1")).toBeVisible();
 });
 
 for (const malformedPath of ["/product/%", "/product/%E0%A4%A"]) {

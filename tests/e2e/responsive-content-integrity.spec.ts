@@ -78,16 +78,17 @@ for (const locale of ["ru", "ro"] as const) {
     }
   });
 
-  test(`${locale}: home mini product titles support long names and user text spacing`, async ({ page }) => {
+  test(`${locale}: home category titles support long names and user text spacing`, async ({ page }) => {
+    test.setTimeout(60_000);
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(`/${locale}`);
-    const headings = page.locator(".home-product-mini h3");
-    await expect(headings).toHaveCount(2);
+    const headings = page.locator(".home-category h3");
+    await expect(headings).toHaveCount(8);
     const name = locale === "ru"
       ? "Диагностическое длинное название набора средств для ежедневного ухода за кожей"
       : "Denumire diagnostică lungă a colecției de produse pentru îngrijirea zilnică a pielii";
     await headings.evaluateAll((elements, text) => elements.forEach((element) => { element.textContent = text; }), name);
-    await page.addStyleTag({ content: ".home-product-mini h3 { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; }" });
+    await page.addStyleTag({ content: ".home-category h3 { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; }" });
     for (const width of widths) {
       await page.setViewportSize({ width, height: width === 844 ? 390 : 900 });
       for (const heading of await headings.all()) {
@@ -97,8 +98,8 @@ for (const locale of ["ru", "ro"] as const) {
           const range = document.createRange();
           range.selectNodeContents(element);
           const text = range.getBoundingClientRect(), box = element.getBoundingClientRect();
-          const action = element.parentElement!.querySelector(".text-link")!.getBoundingClientRect();
-          return text.right <= box.right + 1 && text.bottom <= box.bottom + 1 && text.bottom <= action.top + 1;
+          const description = element.closest(".home-category")!.querySelector("p")!.getBoundingClientRect();
+          return text.right <= box.right + 1 && text.bottom <= box.bottom + 1 && text.bottom <= description.top + 1;
         });
         expect(fit).toBe(true);
       }

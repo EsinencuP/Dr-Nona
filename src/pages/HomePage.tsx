@@ -1,5 +1,4 @@
 import { ArrowRight } from "@phosphor-icons/react/ArrowRight";
-import { ArrowUpRight } from "@phosphor-icons/react/ArrowUpRight";
 import { Drop } from "@phosphor-icons/react/Drop";
 import { Flask } from "@phosphor-icons/react/Flask";
 import { Heart } from "@phosphor-icons/react/Heart";
@@ -8,14 +7,8 @@ import { TestTube } from "@phosphor-icons/react/TestTube";
 import { Pill } from "@phosphor-icons/react/Pill";
 import { Atom } from "@phosphor-icons/react/Atom";
 import { useState } from "react";
-import type { CSSProperties } from "react";
-import { getProductCopy } from "../claims";
-import { ProductImage } from "../components/ProductImage";
-import { getLocalizedProductName, getProductTitle } from "../features/product/productNames";
-import { Reveal, SectionHeading, splitText } from "../components/ui";
-import type { Product } from "../data";
-import homeProducts from "../data/home-products.json";
-import { useSelection } from "../features/selection/SelectionContext";
+import { Reveal, splitText } from "../components/ui";
+import { HomeProductCategories } from "../features/content/HomeProductCategories";
 import { useLocale } from "../locales/LocaleProvider";
 import { Link } from "../router";
 
@@ -25,72 +18,50 @@ export default function HomePage() {
   const companyYears = today.getFullYear() - 1994 - Number(today < new Date(today.getFullYear(), 7, 22));
   const yearForm = new Intl.PluralRules(locale).select(companyYears);
   const copy = locale === "ro"
-    ? {        heroTagline: "Creat de natură",
+    ? {
+        heroTagline: "Creat de natură",
         heroLead:
           "Combinăm forța mineralelor Mării Moarte cu cercetarea științifică modernă pentru a crea produse de îngrijire zilnică și frumusețe.",
         heroPrinciples: "Principiile Dr. Nona",
-        heroBenefitsHint: "Încă 3 principii — derulați orizontal",        scienceIntro: "Creat de natură. Dezvăluit de știință.",
+        heroBenefitsHint: "Încă 3 principii — derulați orizontal",
+        scienceIntro: "Creat de natură. Dezvăluit de știință.",
         scienceFallback:
           "Formula proprie reunește originea Mării Moarte cu abordarea științifică Dr. Nona.",
-        formulaStory: "Istoria formulei",
+        formulaStory: "Descoperă formula Halo Complex™",
+        aboutLink: "Despre compania Dr. Nona",
         aboutTitle: "Despre noi",
         aboutIntro:
           "Suntem reprezentanții oficiali ai companiei israeliene Dr. Nona în Moldova, oferind produse originale și o abordare profesionistă pentru fiecare client.",
         aboutMission:
-          "Misiunea noastră este să facem produsele originale Dr. Nona accesibile în Moldova, ajutând oamenii să aibă grijă de sănătatea, frumusețea și calitatea vieții lor în fiecare zi.",        editorsChoice: "Recomandarea noastră",
-        allProducts: "Toate produsele",
-        openProduct: "Vezi produsul",
-        saved: "Adăugat",
-        add: "Adaugă în selecție",
-        moreProducts: "Alte două produse recomandate",
-        details: "Detalii",        viewCollection: "Descoperă colecția",        companyHistory: "Istoria companiei",
+          "Misiunea noastră este să facem produsele originale Dr. Nona accesibile în Moldova, ajutând oamenii să aibă grijă de sănătatea, frumusețea și calitatea vieții lor în fiecare zi.",
+        companyHistory: "Istoria companiei",
         historyText:
           "Compania Dr. Nona International a fost fondată la 22 august 1994, pe acoperișul casei doctorului Nona și a lui Mihail Șneerson.",
-        continueHistory: "Descoperă istoria",
+        continueHistory: "Citește istoria Dr. Nona",
         years: companyYears === 1 ? "an de istorie" : "de ani de istorie",
       }
-    : {        heroTagline: "Сделано природой",
+    : {
+        heroTagline: "Сделано природой",
         heroLead:
           "Мы объединяем силу минералов Мёртвого моря и передовые научные разработки, чтобы создавать продукты для ежедневного ухода и красоты.",
         heroPrinciples: "Принципы Dr. Nona",
-        heroBenefitsHint: "Ещё 3 принципа — листайте горизонтально",        scienceIntro: "Сделано природой. Раскрыто наукой.",
+        heroBenefitsHint: "Ещё 3 принципа — листайте горизонтально",
+        scienceIntro: "Сделано природой. Раскрыто наукой.",
         scienceFallback:
           "Фирменная формула объединяет происхождение Мёртвого моря и научный подход Dr. Nona.",
-        formulaStory: "История формулы",
+        formulaStory: "Узнать о формуле Halo Complex™",
+        aboutLink: "О компании Dr. Nona",
         aboutTitle: "О нас",
         aboutIntro:
           "Мы являемся официальными представителями израильской компании Dr. Nona в Молдове, предоставляя оригинальную продукцию и профессиональный подход к каждому клиенту.",
         aboutMission:
-          "Наша миссия — сделать оригинальную продукцию Dr. Nona доступной в Молдове, помогая людям заботиться о своём здоровье, красоте и качестве жизни каждый день.",        editorsChoice: "Выбор редакции",
-        allProducts: "Все продукты",
-        openProduct: "Смотреть продукт",
-        saved: "Добавлено",
-        add: "В подборку",
-        moreProducts: "Ещё два продукта",
-        details: "Подробнее",        viewCollection: "Смотреть коллекцию",        companyHistory: "История компании",
+          "Наша миссия — сделать оригинальную продукцию Dr. Nona доступной в Молдове, помогая людям заботиться о своём здоровье, красоте и качестве жизни каждый день.",
+        companyHistory: "История компании",
         historyText:
           "Компания Dr. Nona International была основана 22 августа 1994 года, на крыше дома Доктора Нонны и Михаила Шнеерсона.",
-        continueHistory: "Продолжить историю",
+        continueHistory: "Читать историю Dr. Nona",
         years: yearForm === "one" ? "год истории" : yearForm === "few" ? "года истории" : "лет истории",
       };
-  const products = homeProducts[locale] as Product[];
-  const productBySlug = new Map(
-    products.map((product) => [product.slug, product])
-  );
-  const { contains, toggle } = useSelection();
-  const spotlight =
-    productBySlug.get("dynamic-hydrating-cream") ?? products[0];
-  const supportingProducts = [
-    productBySlug.get("hand-and-nail-treatment"),
-    productBySlug.get("gonseen"),
-  ].filter((product): product is Product => Boolean(product));
-  const promoProduct =
-    productBySlug.get("solaris-body-lotion") ?? products[1];
-  const lordProducts = [
-    productBySlug.get("after-shave-lord"),
-    productBySlug.get("lord-deodorant"),
-  ].filter((product): product is Product => Boolean(product));
-  const spotlightSaved = contains(spotlight.slug);
   const [scienceFocus, setScienceFocus] = useState<"archaea" | "minerals" | "extracts" | "vitamins" | "amino-acids">("minerals");
   const scienceNodes = locale === "ro" ? [
     {
@@ -267,194 +238,12 @@ export default function HomePage() {
           </Reveal>
           <Reveal className="home-about__body" delay={70}>
             <p>{copy.aboutIntro} {copy.aboutMission}</p>
+            <Link className="text-link" to="/about">{copy.aboutLink} <ArrowRight aria-hidden="true" /></Link>
           </Reveal>
         </div>
       </section>
 
-      <section className="section container home-product-showcase">
-        <Reveal>
-          <SectionHeading
-            title={copy.editorsChoice}
-            action={
-              <Link className="text-link text-link--large" to="/products">
-                {copy.allProducts} <ArrowRight aria-hidden="true" />
-              </Link>
-            }
-            align="split"
-          />
-        </Reveal>
-
-        <div className="home-product-editorial">
-          <Reveal className="home-product-spotlight">
-            <article>
-              <Link
-                className="home-product-spotlight__media"
-                to={`/product/${spotlight.slug}`}
-                aria-label={`${copy.openProduct}: ${getProductTitle(spotlight)}`}
-                style={{
-                  "--home-product-scale": Number(
-                    (spotlight.catalogScale * 1.18).toFixed(3)
-                  ),
-                } as CSSProperties}
-              >
-                <ProductImage
-                  src={spotlight.image}
-                  alt={spotlight.officialName}
-                  width="1254"
-                  height="1254"
-                  loading="lazy"
-                  decoding="async"
-                  sizes="(max-width: 640px) calc(100vw - 28px), (max-width: 960px) 48vw, 620px"
-                />
-              </Link>
-              <div className="home-product-spotlight__body">
-                <div className="home-product-spotlight__meta">
-                  <small>{spotlight.category}</small>
-                </div>
-                <h3 lang="en">{getProductTitle(spotlight)}</h3>
-                <p>{getLocalizedProductName(spotlight, locale)}</p>
-                <div className="home-product-spotlight__actions">
-                  <Link className="button button--primary" to={`/product/${spotlight.slug}`}>
-                    {copy.openProduct} <ArrowRight aria-hidden="true" />
-                  </Link>
-                  <button
-                    className="save-button"
-                    type="button"
-                    aria-label={spotlightSaved ? copy.saved : copy.add}
-                    aria-pressed={spotlightSaved}
-                    onClick={() => toggle(spotlight.slug)}
-                  >
-                    <Heart
-                      aria-hidden="true"
-                      weight={spotlightSaved ? "fill" : "regular"}
-                    />
-                    <span>{spotlightSaved ? copy.saved : copy.add}</span>
-                  </button>
-                </div>
-              </div>
-            </article>
-          </Reveal>
-
-          <div className="home-product-supporting" aria-label={copy.moreProducts}>
-            {supportingProducts.map((product, index) => (
-              <Reveal key={product.slug} delay={70 + index * 55}>
-                <article
-                  className={`home-product-mini${
-                    product.slug === "gonseen"
-                      ? " home-product-mini--landscape"
-                      : ""
-                  }`}
-                >
-                  <Link
-                    className="home-product-mini__media"
-                    to={`/product/${product.slug}`}
-                    tabIndex={-1}
-                    aria-hidden="true"
-                    style={{
-                      "--home-product-scale": Number(
-                        (product.catalogScale * 1.15).toFixed(3)
-                      ),
-                    } as CSSProperties}
-                  >
-                    <ProductImage
-                      src={product.image}
-                      alt=""
-                      width="1600"
-                      height="1600"
-                      sizes="(max-width: 640px) 124px, (max-width: 960px) 28vw, 220px"
-                    />
-                  </Link>
-                  <div className="home-product-mini__body">
-                    <span>{product.category}</span>
-                    <h3 lang="en">
-                      <Link to={`/product/${product.slug}`}>
-                        {getProductTitle(product)}
-                      </Link>
-                    </h3>
-                    <p className="home-product-mini__name">{getLocalizedProductName(product, locale)}</p>
-                    <Link className="text-link" to={`/product/${product.slug}`}>
-                      {copy.details} <ArrowUpRight aria-hidden="true" />
-                    </Link>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-
-        <div className="home-campaign-grid">
-          <Reveal className="home-promo-banner">
-            <article
-              style={{
-                "--home-promo-scale": Number(
-                  (promoProduct.catalogScale * 1.45).toFixed(3)
-                ),
-                "--home-promo-mobile-scale": Number(
-                  (promoProduct.catalogScale * 1.15).toFixed(3)
-                ),
-              } as CSSProperties}
-            >
-              <div className="home-promo-banner__stage">
-                <ProductImage
-                  src={promoProduct.image}
-                  alt={promoProduct.officialName}
-                  width="1254"
-                  height="1254"
-                  sizes="(max-width: 640px) calc(100vw - 28px), (max-width: 960px) 48vw, 620px"
-                />
-              </div>
-              <div className="home-promo-banner__content">
-                <h3 lang="en">{getProductTitle(promoProduct)}</h3>
-                <p>{getLocalizedProductName(promoProduct, locale)}</p>
-                <Link className="button button--light" to={`/product/${promoProduct.slug}`}>
-                  {copy.openProduct} <ArrowRight aria-hidden="true" />
-                </Link>
-              </div>
-            </article>
-          </Reveal>
-
-          <Reveal className="home-lord-banner" delay={70}>
-            <article>
-              <div className="home-lord-banner__visual">
-                <picture>
-                  <source
-                    type="image/avif"
-                    srcSet="/collections/lord-collection-480w.avif 480w, /collections/lord-collection-800w.avif 800w, /collections/lord-collection-1200w.avif 1200w"
-                    sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 960px) 44vw, 420px"
-                  />
-                  <source
-                    type="image/webp"
-                    srcSet="/collections/lord-collection-480w.webp 480w, /collections/lord-collection-800w.webp 800w, /collections/lord-collection-1200w.webp 1200w"
-                    sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 960px) 44vw, 420px"
-                  />
-                  <img
-                    src="/collections/lord-collection-800w.webp"
-                    alt={
-                      locale === "ro"
-                        ? "Colecția Lord Dr. Nona: deodorant, parfum și gel de duș"
-                        : "Коллекция Lord Dr. Nona: дезодорант, парфюм и гель для душа"
-                    }
-                    width="1254"
-                    height="1254"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </picture>
-              </div>
-              <div className="home-lord-banner__content">
-                <h3>Lord</h3>
-                {lordProducts[1] &&
-                  getProductCopy(lordProducts[1], "shortDescription") && (
-                    <p>{getProductCopy(lordProducts[1], "shortDescription")}</p>
-                  )}
-                <Link className="button button--light" to="/products?q=Lord">
-                  {copy.viewCollection} <ArrowRight aria-hidden="true" />
-                </Link>
-              </div>
-            </article>
-          </Reveal>
-        </div>
-      </section>
+      <HomeProductCategories />
 
       <section className="section container history-preview">
         <Reveal className="history-preview__visual">

@@ -267,11 +267,8 @@ describe("Dr. Nona application", () => {
     const breadcrumb = await screen.findByRole("navigation", {
       name: "Хлебные крошки",
     });
-    const separators = within(breadcrumb).getAllByText("/");
-    expect(separators).toHaveLength(2);
-    expect(
-      separators.every((separator) => separator.getAttribute("aria-hidden") === "true")
-    ).toBe(true);
+    expect(within(breadcrumb).getAllByRole("listitem")).toHaveLength(4);
+    expect(within(breadcrumb).getByRole("link", { name: "Главная" })).toHaveAttribute("href", "/");
     expect(
       within(breadcrumb).getByText("Deodorant ( LORD )")
     ).toHaveAttribute("aria-current", "page");
@@ -303,6 +300,8 @@ describe("Dr. Nona application", () => {
     expect(mainSections[0]).toHaveClass("home-hero");
     expect(mainSections[1]).toHaveClass("science-section");
     expect(mainSections[2]).toHaveClass("home-about");
-    expect(mainSections[3]).toHaveClass("home-product-showcase");
+    expect(mainSections[3]).toHaveClass("home-categories");
+    expect(within(mainSections[3] as HTMLElement).getAllByRole("heading", { level: 3 })).toHaveLength(8);
+    expect(screen.queryByRole("heading", { name: "Выбор редакции" })).not.toBeInTheDocument();
   });
 });
