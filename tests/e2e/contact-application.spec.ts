@@ -201,9 +201,10 @@ test("order defaults from selection and Telegram delivery succeeds", async ({
   await expect(thanks).toContainText("Менеджер свяжется с вами");
   await expect(thanks.getByRole("button", { name: "Закрыть", exact: true })).toBeFocused();
   await page.keyboard.press("Tab");
-  // Chromium passes through browser chrome between cycles of a one-button dialog.
-  expect(await thanks.evaluate((element) => document.activeElement === document.body || element.contains(document.activeElement))).toBe(true);
-  await page.keyboard.press("Tab");
+  const reviewLink = thanks.getByRole("link", { name: "Оставить отзыв", exact: true });
+  await expect(reviewLink).toBeFocused();
+  await expect(reviewLink).toHaveAttribute("href", "/reviews?product=lord-deodorant#write-review");
+  await page.keyboard.press("Shift+Tab");
   await expect(thanks.getByRole("button", { name: "Закрыть", exact: true })).toBeFocused();
   const box = await thanks.boundingBox();
   expect(box).not.toBeNull();

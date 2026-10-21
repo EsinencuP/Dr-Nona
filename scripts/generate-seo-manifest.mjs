@@ -143,6 +143,7 @@ function fixedRoute(
 
 const routes = new Map();
 const add = (route) => routes.set(route.path, route);
+add(fixedRoute("/reviews", "Отзывы клиентов", "Отзывы клиентов Dr. Nona и форма отправки отзыва на модерацию."));
 
 add(
   fixedRoute(
@@ -329,6 +330,10 @@ for (const page of pages.filter((item) => !item.error && !isRetiredEditorialPath
 
 const localizedStaticCopy = {
   ro: {
+    "/reviews": {
+      title: "Recenziile clienților",
+      description: "Recenzii despre produsele Dr. Nona și formular pentru trimiterea unei recenzii spre moderare.",
+    },
     "/privacypolicy": {
       title: "Politica de confidențialitate",
       description: "Datele solicitărilor și stocarea în browser pentru Dr. Nona Moldova. Versiune de lucru; datele operatorului necesită precizare.",

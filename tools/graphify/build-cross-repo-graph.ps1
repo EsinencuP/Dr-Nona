@@ -11,7 +11,9 @@ if ([string]::IsNullOrWhiteSpace($CatalogRoot)) {
   $CatalogRoot = (Resolve-Path (Join-Path $scriptRoot "../..")).Path
 }
 if ([string]::IsNullOrWhiteSpace($CrmRoot)) {
-  $CrmRoot = (Resolve-Path (Join-Path $scriptRoot "../../../Dr-Nona-CRM")).Path
+  $crmCandidate = Join-Path $scriptRoot "../../../Dr-Nona-CRM"
+  if (-not (Test-Path -LiteralPath $crmCandidate)) { $crmCandidate = Join-Path $scriptRoot "../../../Dr.Nona.CRM" }
+  $CrmRoot = (Resolve-Path -LiteralPath $crmCandidate).Path
 }
 if ([string]::IsNullOrWhiteSpace($OutputRoot)) {
   $OutputRoot = Join-Path (Resolve-Path (Join-Path $scriptRoot "../..")).Path "graphify-out"
@@ -20,6 +22,8 @@ $catalog = (Resolve-Path $CatalogRoot).Path
 $crm = (Resolve-Path $CrmRoot).Path
 $output = [IO.Path]::GetFullPath($OutputRoot)
 $scratch = Join-Path $catalog "artifacts/graphify-build"
+$scratch = [IO.Path]::GetFullPath($scratch)
+if (-not $scratch.StartsWith($catalog.TrimEnd([IO.Path]::DirectorySeparatorChar) + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) { throw "Scratch path must stay inside catalog: $scratch" }
 $catalogOut = Join-Path $scratch "catalog"
 $crmOut = Join-Path $scratch "crm"
 $merged = Join-Path $output "graph.json"

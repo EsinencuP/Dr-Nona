@@ -111,6 +111,7 @@ function Header() {
     ["/products", t.catalog],
     ["/about", t.about],
     ["/ourformula", t.formula],
+    ["/reviews", locale === "ro" ? "Recenzii" : "Отзывы"],
   ];
 
   return (
@@ -268,6 +269,7 @@ function Footer() {
           <Link to="/products">{t.catalog}</Link>
           <Link to="/about">{t.about}</Link>
           <Link to="/ourformula">Halo Complex™</Link>
+          <Link to="/reviews">{locale === "ro" ? "Recenzii" : "Отзывы"}</Link>
         </div>
         <div>
           <p className="footer-title">{copy.information}</p>

@@ -13,6 +13,7 @@ Last verified: 2026-09-01 against base commit `ada4aa0e9c5e` and the current wor
 | `src/features/catalog/` | Pure filter and sort behavior |
 | `src/features/selection/` | Selection persistence and context |
 | `src/features/contact/` | Form UI, client validation and API client |
+| `src/features/reviews/` | Public review feed contract, localized form and pending acknowledgement; persistence and moderation belong to the separate CRM |
 | `src/features/about/` | Company content surfaces |
 | `src/features/editorial/` | Editorial page composition |
 | `src/pages/` | One lazy module per route surface |

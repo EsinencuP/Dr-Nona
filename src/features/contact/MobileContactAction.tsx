@@ -11,7 +11,7 @@ export function MobileContactAction() {
   const slug = productMatch ? safeDecodeRouteSegment(productMatch[1]) : null;
   if (
     !isLocaleRouteSupported(pathname) ||
-    pathname === "/contactus" || pathname === "/selection" || pathname === "/privacypolicy" ||
+    pathname === "/contactus" || pathname === "/selection" || pathname === "/privacypolicy" || pathname === "/reviews" ||
     (productMatch && (!slug || !publishedSlugs.includes(slug)))
   ) return null;
 

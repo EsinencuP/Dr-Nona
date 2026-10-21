@@ -36,6 +36,11 @@ Telegram and database credentials belong only to the
 [contact delivery](docs/CONTACT_DELIVERY.md) for the complete deployment
 contract.
 
+The owner-authorized [reviews system](docs/REVIEWS_2026-10-21.md) adds public
+RU/RO reviews and anonymous submissions through `/api/reviews`, with moderation
+and persistence owned by the separate CRM. `CRM_REVIEWS_API_URL` is optional;
+the proxy otherwise derives `/api/reviews` from `CRM_APPLICATIONS_API_URL`.
+
 ## Available commands
 
 | Command | Purpose |

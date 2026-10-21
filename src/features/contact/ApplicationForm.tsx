@@ -821,6 +821,11 @@ export function ApplicationForm({
         >
           {copy.closeThanks}
         </button>
+        {mode === "order" && result?.kind === "success" && (
+          <Link className="button button--secondary" to={`/reviews${products.length === 1 ? `?product=${encodeURIComponent(products[0].slug)}` : ""}#write-review`} onClick={() => thanksDialog.current?.close()}>
+            {locale === "ro" ? "Lasă o recenzie" : "Оставить отзыв"}
+          </Link>
+        )}
       </dialog>
     </section>
   );

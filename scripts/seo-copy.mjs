@@ -1,6 +1,7 @@
 // Search copy describes existing pages and product fields, never efficacy claims.
 const staticCopy = {
   default: {
+    "/reviews": ["Отзывы клиентов — Dr. Nona Moldova", "Отзывы о продуктах Dr. Nona и общем опыте клиентов. Выберите продукт по SKU или оставьте свой отзыв для проверки администратором."],
     "/": ["Dr. Nona Moldova — продукция и Halo Complex™", "Продукция Dr. Nona в Молдове: уход за лицом, телом и волосами, пищевые добавки и ароматы. Каталог, история компании и формула Halo Complex™."],
     "/products": ["Каталог продукции — Dr. Nona Moldova", "Каталог Dr. Nona в Молдове: кремы, средства гигиены, напитки, пищевые добавки и парфюмерия. Описания продуктов, поиск и фильтры по категориям."],
     "/about": ["О бренде и его основателях — Dr. Nona Moldova", "Познакомьтесь с Dr. Nona: история бренда, основатели, принципы компании и подход к разработке продукции. Переходы ко всем разделам о компании."],
@@ -22,6 +23,7 @@ const staticCopy = {
     "/about/founders/michael_shneerson": ["Михаил Шнеерсон: биография — Dr. Nona Moldova", "Биография Михаила Шнеерсона, сооснователя Dr. Nona International. Образование, профессиональный путь и история становления компании."],
   },
   ru: {
+    "/reviews": ["Отзывы о Dr. Nona — мнения клиентов", "Читайте отзывы клиентов о Dr. Nona. Поделитесь впечатлениями о конкретном продукте или общим опытом; каждый отзыв проходит модерацию."],
     "/": ["Dr. Nona Moldova — каталог средств для ухода", "Откройте каталог Dr. Nona: уход за лицом и телом, средства для волос, добавки и ароматы. Узнайте об истории бренда и Halo Complex™ в Молдове."],
     "/products": ["Продукты и категории каталога — Dr. Nona Moldova", "Выберите категорию продукции Dr. Nona, найдите нужный продукт по названию и изучите его описание. Каталог для знакомства с ассортиментом в Молдове."],
     "/about": ["Знакомство с компанией — Dr. Nona Moldova", "Dr. Nona: от истории основания до современного производства. Познакомьтесь с компанией, её основателями и научным подходом к созданию продукции."],
@@ -35,6 +37,7 @@ const staticCopy = {
     "/selection": ["Моя подборка для консультанта — Dr. Nona Moldova", "Сохранённые продукты Dr. Nona для обращения к консультанту. Проверьте список перед переходом к форме связи."],
   },
   ro: {
+    "/reviews": ["Recenziile clienților — Dr. Nona Moldova", "Recenzii despre produsele Dr. Nona și experiențele clienților. Alege un produs după SKU sau trimite propria recenzie spre verificare."],
     "/privacypolicy": ["Politica de confidențialitate — Dr. Nona Moldova", "Datele solicitărilor și stocarea în browser pentru Dr. Nona Moldova. Versiune de lucru; datele operatorului necesită precizare."],
     "/": ["Dr. Nona Moldova — produse și Halo Complex™", "Descoperă produsele Dr. Nona în Moldova: îngrijirea feței, corpului și părului, suplimente și parfumuri. Catalogul și povestea Halo Complex™."],
     "/products": ["Catalog de produse și categorii — Dr. Nona Moldova", "Explorează catalogul Dr. Nona: creme, produse de igienă, băuturi, suplimente și parfumuri. Caută produse și consultă descrierile lor în română."],

@@ -137,6 +137,7 @@ describe("ApplicationForm", () => {
       expect(screen.getByText(/Заявка №request-2 принята и сохранена/)).toBeVisible()
     );
     expect(screen.getByRole("dialog", { name: "Спасибо!" })).toHaveTextContent("Номер заявки: request-2");
+    expect(screen.getByRole("link", { name: "Оставить отзыв" })).toHaveAttribute("href", `/reviews?product=${products[0].slug}#write-review`);
     await user.click(screen.getByRole("button", { name: "Закрыть" }));
     await user.click(screen.getByRole("button", { name: "Заявка принята" }));
     expect(submit).toHaveBeenCalledTimes(1);

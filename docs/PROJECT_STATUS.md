@@ -24,6 +24,8 @@ Local UI update: 2026-10-15. The owner's annotations retire Blog/News, external 
 
 ## Implemented
 
+- Owner-authorized moderated reviews: fourth navigation item, RU/RO submission, optional SKU, post-application invitation, separate CRM moderation and audit history. See [reviews implementation](REVIEWS_2026-10-21.md); production approval remains blocked.
+
 - Route-separated React catalogue, product, company, formula, editorial, service and legal pages
 - Search, category filtering and stable catalogue sorting
 - One shared product-image contract with 50 matched product assets and no placeholders

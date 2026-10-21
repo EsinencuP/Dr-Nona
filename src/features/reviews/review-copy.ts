@@ -1,0 +1,56 @@
+export const reviewCopy = {
+  ru: {
+    missingSku: "SKU не указан",
+    title: "Отзывы",
+    write: "Оставить отзыв",
+    formIntro:
+      "Поделитесь впечатлениями о конкретном продукте или о Dr. Nona в целом. Отзыв появится после одобрения администратором.",
+    name: "Ваше имя",
+    body: "Ваш отзыв",
+    product: "О чём отзыв",
+    general: "Общий отзыв о Dr. Nona",
+    submit: "Отправить на проверку",
+    sending: "Отправляем…",
+    accepted:
+      "Спасибо! Отзыв отправлен на проверку. Он появится на сайте после одобрения администратором.",
+    error: "Не удалось отправить отзыв. Ваш текст сохранён в форме. Попробуйте ещё раз.",
+    rate: "Слишком много попыток. Попробуйте через минуту.",
+    consent:
+      "Я согласен на обработку данных и публикацию моего имени и текста отзыва после модерации.",
+    privacy: "Политика конфиденциальности",
+    all: "Все отзывы",
+    empty: "Пока нет опубликованных отзывов. Вы можете поделиться своим опытом первым.",
+    loading: "Загружаем отзывы…",
+    unavailable: "Не удалось загрузить отзывы. Попробуйте ещё раз.",
+    retry: "Повторить",
+    more: "Показать ещё",
+    another: "Написать ещё отзыв",
+  },
+  ro: {
+    missingSku: "SKU neindicat",
+    title: "Recenzii",
+    write: "Lasă o recenzie",
+    formIntro:
+      "Împărtășește experiența cu un produs sau cu Dr. Nona în general. Recenzia va apărea după aprobarea administratorului.",
+    name: "Numele tău",
+    body: "Recenzia ta",
+    product: "Subiectul recenziei",
+    general: "Recenzie generală despre Dr. Nona",
+    submit: "Trimite spre verificare",
+    sending: "Se trimite…",
+    accepted:
+      "Mulțumim! Recenzia a fost trimisă spre verificare. Va apărea pe site după aprobarea administratorului.",
+    error: "Recenzia nu a putut fi trimisă. Textul a rămas în formular. Încearcă din nou.",
+    rate: "Prea multe încercări. Încearcă peste un minut.",
+    consent:
+      "Sunt de acord cu prelucrarea datelor și publicarea numelui și a textului recenziei după moderare.",
+    privacy: "Politica de confidențialitate",
+    all: "Toate recenziile",
+    empty: "Încă nu există recenzii publicate. Poți fi primul care își împărtășește experiența.",
+    loading: "Se încarcă recenziile…",
+    unavailable: "Recenziile nu au putut fi încărcate. Încearcă din nou.",
+    retry: "Reîncearcă",
+    more: "Arată mai multe",
+    another: "Scrie încă o recenzie",
+  },
+};
