@@ -120,12 +120,11 @@ for (const blocker of release.resolvedBlockers ?? []) {
   if (blocker.status !== "resolved" || !blocker.resolvedAt || !blocker.resolution || !existsSync(blocker.resolutionReference ?? "")) errors.push(`Incomplete blocker resolution evidence: ${blocker.id}`);
   if (blocker.id === "P0-LOCALE") {
     const translations = readJson("src/data/products-ro.json");
-    const publicTranslations = readJson("src/data/products-ro-public.json");
     const review = readJson("src/data/products-ro-review.json");
     for (const product of products) {
       const translation = translations[product.slug];
       if (!translation || !hasCurrentTranslationApproval(product, translation, review) ||
-          romanianFields.some(field => !publicTranslations[product.slug]?.[field]?.trim()) ||
+          romanianFields.some(field => !translation[field]?.trim()) ||
           ["shortDescription", "longDescription", "ingredients", "howToUse"].some(field => review.products[product.slug]?.[field] !== "approved")) {
         errors.push(`P0-LOCALE resolution is no longer supported: ${product.slug}`);
       }

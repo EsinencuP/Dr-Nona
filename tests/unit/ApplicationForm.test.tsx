@@ -11,6 +11,7 @@ import { ApplicationForm } from "../../src/features/contact/ApplicationForm";
 import { loadProductData } from "../../src/data";
 import { LocaleProvider } from "../../src/locales/LocaleProvider";
 import { Router } from "../../src/router";
+import { setPrivacyChoice } from "../../src/features/privacy/privacyChoice";
 
 const { products } = await loadProductData();
 const validMasterclassDate = new Intl.DateTimeFormat("en-CA", {
@@ -67,7 +68,7 @@ describe("ApplicationForm", () => {
     );
   });
 
-  test("defaults to consultation without products and focuses success status", async () => {
+  test("thanks the applicant and retains the receipt after closing", async () => {
     const submit = vi.fn(async () => ({
       kind: "success" as const,
       requestId: "request-1",
@@ -84,7 +85,13 @@ describe("ApplicationForm", () => {
     await waitFor(() =>
       expect(screen.getByText(/Консультация №request-1 зарезервирована/)).toBeVisible()
     );
+    expect(screen.getByRole("dialog", { name: "Спасибо!" })).toBeVisible();
+    const close = screen.getByRole("button", { name: "Закрыть" });
+    expect(close).toHaveFocus();
+    await user.click(close);
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Статус заявки" })).toHaveFocus();
+    expect(screen.getByRole("button", { name: "Заявка принята" })).toBeDisabled();
   });
 
   test("defaults to order with products and blocks duplicate submit", async () => {
@@ -120,6 +127,7 @@ describe("ApplicationForm", () => {
     expect(screen.getByRole("button", { name: "Отправляем заявку…" })).toBeDisabled();
     await user.click(screen.getByRole("button", { name: "Отправляем заявку…" }));
     expect(submit).toHaveBeenCalledTimes(1);
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     resolveSubmit?.({
       kind: "success",
       requestId: "request-2",
@@ -128,6 +136,11 @@ describe("ApplicationForm", () => {
     await waitFor(() =>
       expect(screen.getByText(/Заявка №request-2 принята и сохранена/)).toBeVisible()
     );
+    expect(screen.getByRole("dialog", { name: "Спасибо!" })).toHaveTextContent("Номер заявки: request-2");
+    expect(screen.getByRole("link", { name: "Оставить отзыв" })).toHaveAttribute("href", `/reviews?product=${products[0].slug}#write-review`);
+    await user.click(screen.getByRole("button", { name: "Закрыть" }));
+    await user.click(screen.getByRole("button", { name: "Заявка принята" }));
+    expect(submit).toHaveBeenCalledTimes(1);
   });
 
   test("submits the quantity selected for an order product", async () => {
@@ -221,9 +234,11 @@ describe("ApplicationForm", () => {
     );
     expect(screen.getByLabelText("Имя")).toHaveValue("Ana");
     expect(screen.getByLabelText("Телефон")).toHaveValue("069 123 456");
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
   test("submits optional contact fields and stored attribution context", async () => {
+    setPrivacyChoice("accepted");
     window.history.replaceState({}, "", "/contactus?source=selection");
     sessionStorage.setItem("utm_source", "instagram");
     sessionStorage.setItem("utm_medium", "story");

@@ -1,7 +1,5 @@
-import { ArrowUpRight } from "@phosphor-icons/react/ArrowUpRight";
 import { CopySimple } from "@phosphor-icons/react/CopySimple";
 import { EnvelopeSimple } from "@phosphor-icons/react/EnvelopeSimple";
-import { MapPin } from "@phosphor-icons/react/MapPin";
 import { Phone } from "@phosphor-icons/react/Phone";
 import { useState } from "react";
 import { useProductData } from "../data";
@@ -15,7 +13,9 @@ import { ApplicationForm } from "../features/contact/ApplicationForm";
 import { useSelection } from "../features/selection/SelectionContext";
 import { useLocale } from "../locales/LocaleProvider";
 import { marketData } from "../market";
+import { getProductTitle } from "../features/product/productNames";
 import { Link, useSearchParams } from "../router";
+import { PageBreadcrumbs } from "../components/PageNavigation";
 
 function ContactPageWithProducts({ slugs }: { slugs: string[] }) {
   const { productBySlug } = useProductData();
@@ -45,15 +45,11 @@ function ContactPageContent({
 }) {
   const { locale } = useLocale();
   const copy = locale === "ro"
-    ? {
-        eyebrow: "Dr. Nona · Moldova",
-        title: "Contacte în Moldova",
-        directEyebrow: "Chișinău · Contact direct",
-        directTitle: "Consultație în Chișinău",
+    ? {        title: "Contacte în Moldova",        directTitle: "Consultație în Moldova",
         withSelection:
-          "Selecția a fost transferată în formular. Verificați produsele de mai jos și trimiteți solicitarea sau contactați direct filiala.",
+          "Selecția a fost transferată în formular. Verificați produsele de mai jos și trimiteți solicitarea sau contactați-ne direct.",
         withoutSelection:
-          "Pentru o consultație, completați formularul sau contactați direct filiala Dr. Nona din Chișinău.",
+          "Pentru o consultație, completați formularul sau contactați-ne direct.",
         included: "Produse incluse",
         positions: "produse",
         missingSku: "nu este indicat",
@@ -64,19 +60,12 @@ function ContactPageContent({
           "Lista completă a fost copiată. O puteți transmite prin canalul preferat.",
         copyFailed:
           "Lista nu a putut fi copiată. Utilizați emailul pregătit.",
-        branch: "Filiala din Moldova",
-        source: "Lista oficială a filialelor",
-        country: "Moldova",
       }
-    : {
-        eyebrow: "Dr. Nona · Молдова",
-        title: "Контакты в Молдове",
-        directEyebrow: "Кишинёв · Прямая связь",
-        directTitle: "Консультация в Кишинёве",
+    : {        title: "Контакты в Молдове",        directTitle: "Консультация в Молдове",
         withSelection:
-          "Подборка перенесена в форму. Проверьте товары ниже и отправьте заявку или свяжитесь с филиалом напрямую.",
+          "Подборка перенесена в форму. Проверьте товары ниже и отправьте заявку или свяжитесь с нами напрямую.",
         withoutSelection:
-          "Для консультации заполните форму или свяжитесь напрямую с филиалом Dr. Nona в Кишинёве.",
+          "Для консультации заполните форму или свяжитесь с нами напрямую.",
         included: "В заявку войдут",
         positions: "поз.",
         missingSku: "не указан",
@@ -87,9 +76,6 @@ function ContactPageContent({
           "Список скопирован полностью. Вставьте его в удобный канал связи.",
         copyFailed:
           "Не удалось скопировать список. Используйте подготовленное письмо.",
-        branch: "Филиал в Молдове",
-        source: "Официальный список филиалов",
-        country: "Молдова",
       };
   const [copyStatus, setCopyStatus] = useState("");
   const emailHref = buildConsultationEmail(handoffProducts, locale);
@@ -100,14 +86,13 @@ function ContactPageContent({
 
   return (
     <section className="contact-page container">
+      <PageBreadcrumbs current={copy.title} />
       <div className="official-page__header">
-        <p className="eyebrow">{copy.eyebrow}</p>
         <h1>{copy.title}</h1>
       </div>
       <ApplicationForm products={handoffProducts} />
       <div className="contact-layout">
         <div className="contact-direct">
-          <p className="eyebrow">{copy.directEyebrow}</p>
           <h2>{copy.directTitle}</h2>
           <p>
             {handoffProducts.length ? copy.withSelection : copy.withoutSelection}
@@ -121,7 +106,7 @@ function ContactPageContent({
               <ul>
                 {handoffProducts.map((product) => (
                   <li key={product.slug}>
-                    <Link to={`/product/${product.slug}`}>{product.officialName}</Link>
+                    <Link lang="en" to={`/product/${product.slug}`}>{getProductTitle(product)}</Link>
                     <span>SKU {product.sku || copy.missingSku}</span>
                   </li>
                 ))}
@@ -135,13 +120,6 @@ function ContactPageContent({
             >
               <Phone aria-hidden="true" />
               {marketData.contact.phones[0].label}
-            </a>
-            <a
-              className="button button--quiet"
-              href={marketData.contact.phones[1].href}
-            >
-              <Phone aria-hidden="true" />
-              {marketData.contact.phones[1].label}
             </a>
             <a
               className="button button--quiet"
@@ -164,28 +142,6 @@ function ContactPageContent({
             </p>
           )}
         </div>
-        <aside className="contact-card">
-          <MapPin aria-hidden="true" />
-          <h2>{copy.branch}</h2>
-          <p>
-            {copy.country}<br />
-            {marketData.contact.city}<br />
-            {marketData.contact.address}
-          </p>
-          {marketData.contact.phones.map((phone) => (
-            <a href={phone.href} key={phone.href}>
-              <Phone aria-hidden="true" /> {phone.label}
-            </a>
-          ))}
-          <a
-            className="contact-card__source"
-            href={marketData.contact.sourceUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {copy.source} <ArrowUpRight aria-hidden="true" />
-          </a>
-        </aside>
       </div>
     </section>
   );

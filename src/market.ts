@@ -23,8 +23,6 @@ export type MarketData = {
   contact: {
     kind: "official-branch-listing";
     country: "Молдова";
-    city: string;
-    address: string;
     phones: MarketPhone[];
     sourceUrl: string;
     sourceCheckedAt: string;

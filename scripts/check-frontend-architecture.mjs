@@ -34,12 +34,10 @@ const requiredPages = [
   "SciencePage",
   "FoundersPage",
   "FormulaPage",
-  "EditorialPage",
-  "BlogPage",
-  "NewsPage",
   "SelectionPage",
   "ContactPage",
   "CertificatesPage",
+  "PrivacyPage",
   "BadRequestPage",
   "DynamicOfficialPage",
 ];

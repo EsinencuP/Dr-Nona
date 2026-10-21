@@ -5,10 +5,12 @@ import {
   recordProductView,
   readSessionValue,
 } from "../../src/features/contact/utm-capture";
+import { setPrivacyChoice } from "../../src/features/privacy/privacyChoice";
 
 describe("UTM capture", () => {
   beforeEach(() => {
     sessionStorage.clear();
+    setPrivacyChoice("accepted");
     window.history.replaceState({}, "", "/");
   });
 

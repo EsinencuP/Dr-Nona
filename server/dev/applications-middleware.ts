@@ -1,5 +1,6 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
 import applicationsHandler from "../../api/applications.js";
+import reviewsHandler from "../../api/reviews.js";
 
 function requestBody(request: IncomingMessage) {
   return new Promise<Buffer>((resolve, reject) => {
@@ -17,7 +18,7 @@ export async function handleDevApplicationRequest(
   response: ServerResponse
 ) {
   const pathname = new URL(request.url ?? "/", "http://127.0.0.1").pathname;
-  if (pathname !== "/api/applications") return false;
+  if (pathname !== "/api/applications" && pathname !== "/api/reviews") return false;
 
   try {
     const headers = new Headers();
@@ -34,7 +35,8 @@ export async function handleDevApplicationRequest(
         ? undefined
         : (await requestBody(request)).toString("utf8");
     const host = request.headers.host ?? "127.0.0.1:4173";
-    const result = await applicationsHandler.fetch(
+    const handler = pathname === "/api/reviews" ? reviewsHandler : applicationsHandler;
+    const result = await handler.fetch(
       new Request(`http://${host}${request.url ?? "/api/applications"}`, {
         method,
         headers,

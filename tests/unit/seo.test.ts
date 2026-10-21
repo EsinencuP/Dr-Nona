@@ -30,6 +30,29 @@ describe("route SEO contract", () => {
     );
   });
 
+  test("uses descriptive search copy without language markers, URL slugs or padding", () => {
+    const routes = manifest.routes.filter((route) => route.indexable);
+    for (const route of routes) {
+      expect(route.title).not.toMatch(/\((?:RU|RO)\)| · |…/u);
+      expect(route.description).not.toMatch(/Русская версия|Дополнительная официальная|Informații oficiale suplimentare|Official store| · /u);
+      expect(route.title.length).toBeLessThanOrEqual(95);
+      expect(route.description.length).toBeLessThanOrEqual(160);
+    }
+    expect(getRouteMetadata(manifest, "/faq").title).toContain("Вопросы и ответы");
+    expect(getRouteMetadata(manifest, "/ro/ourformula").description).toContain("Dunaliella");
+    expect(getRouteMetadata(manifest, "/product/dnd-chewing-gum-tablets").title).toBe("DND — Dr. Nona Moldova");
+  });
+
+  test("keeps full product identities and describes only applicable information", () => {
+    const title = "Bath Salts with Ylang Ylang, Patchouli & Anis Star Extract";
+    for (const prefix of ["", "/ru", "/ro"]) {
+      expect(getRouteMetadata(manifest, `${prefix}/product/salts-ylangylang`).title).toContain(title);
+    }
+    const samples = getRouteMetadata(manifest, "/ro/product/samples-kit");
+    expect(samples.description).not.toMatch(/compoziție|mod de utilizare/u);
+    expect(getRouteMetadata(manifest, "/product/lord-deodorant").description).toContain("состав");
+  });
+
   test("emits Product and Breadcrumb JSON-LD without invented commerce data", () => {
     const route = getRouteMetadata(
       manifest,
@@ -55,22 +78,12 @@ describe("route SEO contract", () => {
     expect(breadcrumbs).toBeTruthy();
   });
 
-  test("emits Article metadata without inventing a publication date", () => {
-    const route = getRouteMetadata(
-      manifest,
-      "/blog/what-to-eat-after-coronavirus"
-    );
-    const jsonLd = buildJsonLd(route, origin);
-    const article = jsonLd["@graph"].find(
-      (item) => item["@type"] === "BlogPosting"
-    );
-
-    expect(article).toMatchObject({
-      "@type": "BlogPosting",
-      headline: "Чем питаться после коронавируса",
-      dateModified: "2022-02-17T00:00:00.000Z",
-    });
-    expect(article).not.toHaveProperty("datePublished");
+  test("retired editorial routes have no publication metadata", () => {
+    expect(manifest.routes.some((route) => /^\/(?:editorial|news|blog)(?:\/|$)/u.test(route.path))).toBe(false);
+    const route = getRouteMetadata(manifest, "/blog/what-to-eat-after-coronavirus");
+    expect(route.robots).toBe("noindex,follow");
+    expect(route.schema).toBeNull();
+    expect(buildJsonLd(route, origin)["@graph"].map((item) => item["@type"])).toEqual(["WebPage", "BreadcrumbList"]);
   });
 
   test("excludes the legacy duplicate and marks private and unknown routes noindex", () => {

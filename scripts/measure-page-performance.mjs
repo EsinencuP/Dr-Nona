@@ -41,7 +41,7 @@ try {
     await new Promise((resolve) => setTimeout(resolve, 100));
   }
   browser = await chromium.launch();
-  const surfaces = ["/", "/products", "/product/dynamic-hydrating-cream", "/editorial", "/contactus"];
+  const surfaces = ["/", "/products", "/product/dynamic-hydrating-cream", "/about/company", "/contactus"];
   for (let run = 0; run < runs; run++) for (const locale of ["ru", "ro"]) for (const width of [375, 1440]) for (const surface of surfaces) {
     const path = locale === "ro" ? `/ro${surface === "/" ? "" : surface}` : surface;
     const key = `${locale}-${width}-${surface.replaceAll("/", "_") || "home"}`;

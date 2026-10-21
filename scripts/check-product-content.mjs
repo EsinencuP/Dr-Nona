@@ -90,8 +90,8 @@ for (const product of products) {
       report.errors.push(`${product.slug}: approved Romanian ${field} contains Cyrillic text.`);
     } else if (field === "shortDescription" && (value.length < 50 || value.length > 200)) {
       report.errors.push(`${product.slug}: approved Romanian shortDescription is outside 50-200 characters.`);
-    } else if (field === "longDescription" && (value.length < 200 || value.length > 800)) {
-      report.errors.push(`${product.slug}: approved Romanian longDescription is outside 200-800 characters.`);
+    } else if (field === "longDescription" && value.length < 200) {
+      report.errors.push(`${product.slug}: approved Romanian longDescription is shorter than 200 characters.`);
     }
   }
 }

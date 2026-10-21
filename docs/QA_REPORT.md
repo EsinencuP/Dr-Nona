@@ -2,7 +2,7 @@
 
 This report indexes the current automated evidence only. It does not preserve historical screenshots or cumulative implementation logs.
 
-Last verified: 2026-09-02 against base commit `a57d149` and the current product-detail worktree.
+Current local annotation and polish work is described in [SITE_POLISH_2026-10-15.md](SITE_POLISH_2026-10-15.md). The dated tables below are historical evidence from 2026-09-02 against base commit `a57d149`; their route, phone and claim counts do not describe the 2026-10-15 worktree.
 
 ## Scope
 

@@ -10,6 +10,10 @@ const routes = [
   "/certificates",
   "/about",
   "/ourformula",
+  "/privacypolicy",
+  "/ro/privacypolicy",
+  "/missing-page",
+  "/ro/missing-page",
 ];
 
 for (const route of routes) {
@@ -38,16 +42,17 @@ test("product breadcrumbs and visible information expose their relationships", a
   const breadcrumb = page.getByRole("navigation", {
     name: "Хлебные крошки",
   });
-  await expect(breadcrumb.locator('span[aria-hidden="true"]')).toHaveCount(2);
+  await expect(breadcrumb.getByRole("listitem")).toHaveCount(4);
+  await expect(breadcrumb.locator('.breadcrumbs__separator[aria-hidden="true"]')).toHaveCount(3);
   await expect(
     breadcrumb.getByText("Deodorant ( LORD )")
   ).toHaveAttribute("aria-current", "page");
 
-  const overview = page.getByRole("heading", { level: 3, name: "О продукте" });
-  const ingredients = page.getByRole("heading", { level: 3, name: "Состав" });
-  await expect(overview).toBeVisible();
+  const usage = page.getByRole("heading", { level: 2, name: "Способ применения" });
+  const ingredients = page.getByRole("heading", { level: 2, name: "Состав" });
+  await expect(usage).toBeVisible();
   await expect(ingredients).toBeVisible();
-  await expect(overview.locator("xpath=ancestor::article[1]")).toHaveClass(
+  await expect(usage.locator("xpath=ancestor::article[1]")).toHaveClass(
     /product-copy-card/
   );
   await expect(ingredients.locator("xpath=ancestor::article[1]")).toHaveClass(

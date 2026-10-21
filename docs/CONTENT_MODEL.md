@@ -59,6 +59,10 @@ Each sentence-level claim stores stable ID, scope, field, text, status, source U
 
 The generated SEO manifest contains one record per prerendered route. It stores canonical path, language, indexability, title, description, image, route kind and supported structured data. Offers, ratings and reviews are omitted unless approved source data exists.
 
+Search titles and meta descriptions are authored in `scripts/seo-copy.mjs`; product copy uses the official English name, existing category and applicable information fields, without unapproved efficacy claims. Page-specific RU/RO copy replaces technical locale markers, URL fragments, hashes and filler. Each indexable route must have unique metadata; generation fails if a new page lacks search copy or duplicates another record. Titles retain complete names (editorial budget: 95 characters), descriptions remain 70–160 characters, and short titles are not padded. These are project budgets, not Google limits. The same values feed raw prerendered HTML, client navigation, Open Graph and Twitter metadata. Canonical paths, hreflang and indexability follow the existing route policy.
+
+Google guidance: [title links](https://developers.google.com/search/docs/appearance/title-link) and [snippets](https://developers.google.com/search/docs/appearance/snippet). Google may choose its own displayed title or snippet based on the query and page content.
+
 Locale-prefixed URLs are controlled by `src/locale-routing.mjs`. A `/ro` route is generated only when the complete page shell and primary content are localized. Original blog/news articles and generic imported pages keep one unprefixed canonical; Romanian navigation may surround them, but every original Russian text region is explicitly marked `lang="ru"` and no `ro-MD` alternate is emitted.
 
 ## Validation

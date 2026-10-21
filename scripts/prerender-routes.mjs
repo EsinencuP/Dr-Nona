@@ -2,6 +2,8 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { load } from "cheerio";
 import manifest from "../src/data/seo-manifest.json" with { type: "json" };
+import privacyContent from "../src/features/privacy/privacyContent.json" with { type: "json" };
+import { renderNotFoundHtml } from "./render-not-found.mjs";
 import {
   renderPrerenderedContent,
   renderSeoHead,
@@ -24,6 +26,26 @@ for (const route of manifest.routes) {
   $("[data-route-seo]").remove();
   $("head").append(renderSeoHead(route, siteOrigin));
   $("#root").html(renderPrerenderedContent(route, siteOrigin));
+  if ((route.path.replace(/^\/(?:ru|ro)(?=\/|$)/u, "") || "/") === "/privacypolicy") {
+    const copy = privacyContent[route.locale === "ro" ? "ro" : "ru"];
+    const content = $("[data-prerendered-route]");
+    content.append($("<p>").text(copy.updated));
+    content.append($("<h2>").text(copy.statusTitle), $("<p>").text(copy.status));
+    for (const section of copy.sections) {
+      const node = $("<section>").attr("id", section.id).append($("<h2>").text(section.title));
+      for (const paragraph of section.paragraphs) node.append($("<p>").text(paragraph));
+      content.append(node);
+    }
+    content.append($("<h2>").text(copy.storageTitle));
+    const inventory = $("<dl>");
+    for (const item of copy.storage) {
+      inventory.append($("<dt>").text(item.name), $("<dd>").text(`${item.keys}. ${item.detail}`));
+    }
+    content.append(inventory);
+    const prefix = route.path.startsWith("/ro/") ? "/ro" : route.path.startsWith("/ru/") ? "/ru" : "";
+    content.append($("<p>").append($("<a>").attr("href", `${prefix}/contactus`).text(copy.contact)));
+    content.append($("<p>").append($("<a>").attr("href", "https://datepersonale.md/about/faq/").text(copy.authorityLabel)));
+  }
   $("html").attr("lang", route.locale === "ro" ? "ro" : "ru");
   $("html").attr("data-site-origin", siteOrigin);
   $("html").attr("data-prerendered-path", route.path);
@@ -43,6 +65,12 @@ for (const route of manifest.routes) {
   mkdirSync(dirname(destination), { recursive: true });
   writeFileSync(destination, $.html(), "utf8");
 }
+
+writeFileSync(
+  "dist/404.html",
+  renderNotFoundHtml(template, "/404", "ru", siteOrigin),
+  "utf8"
+);
 
 const indexableCanonicalPaths = [
   ...new Set(

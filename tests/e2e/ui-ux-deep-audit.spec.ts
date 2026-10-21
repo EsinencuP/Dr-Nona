@@ -744,11 +744,11 @@ test.describe("7 · Interaction polish", () => {
   test("product information is visible without disclosure friction", async ({ page }) => {
     await prepare(page, "/product/solaris-body-lotion");
     const cards = page.locator(".product-copy-card");
-    await expect(cards).toHaveCount(3);
+    await expect(cards).toHaveCount(2);
     await expect(cards.first()).toBeVisible();
-    await expect(cards.first()).toContainText("О продукте");
-    await expect(cards.nth(1)).toContainText("Состав");
-    await expect(cards.nth(2)).toContainText("Способ применения");
+    await expect(cards.first()).toContainText("Состав");
+    await expect(cards.nth(1)).toContainText("Способ применения");
+    await expect(page.locator(".product-copy-card--overview")).toHaveCount(0);
   });
 
   test("catalogue search filter reduces visible product count", async ({ page }) => {
@@ -858,19 +858,11 @@ test.describe("8 · Page-specific design checks", () => {
     expect(sku, "SKU value is placeholder «—»").not.toBe("—");
   });
 
-  test("product page: category eyebrow appears above H1", async ({ page }) => {
+  test("product page: product identity has no decorative labels and category remains in facts", async ({ page }) => {
     await prepare(page, "/product/solaris-body-lotion");
-    const order = await page.evaluate(() => {
-      const eyebrow = document.querySelector<HTMLElement>(".eyebrow, p.eyebrow");
-      const h1      = document.querySelector<HTMLElement>("h1");
-      if (!eyebrow || !h1) return null;
-      return {
-        eyebrowY: eyebrow.getBoundingClientRect().top,
-        h1Y:      h1.getBoundingClientRect().top,
-      };
-    });
-    expect(order, "Eyebrow or H1 not found").not.toBeNull();
-    expect(order!.eyebrowY, "Eyebrow is not above H1").toBeLessThan(order!.h1Y);
+    await expect(page.locator(".product-identity h1")).toHaveText("Solaris Body Lotion");
+    await expect(page.locator(".eyebrow, .product-info__kicker, .product-stage__caption")).toHaveCount(0);
+    await expect(page.locator(".product-facts")).toContainText("Кремы");
   });
 
   test("catalogue: toolbar/filters appear above product grid", async ({ page }) => {

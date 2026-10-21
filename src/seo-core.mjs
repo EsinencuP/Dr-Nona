@@ -142,9 +142,7 @@ export function buildJsonLd(metadata, siteOrigin) {
       author: {
         "@type": "Organization",
         name: "Dr. Nona",
-        url: "https://drnona.com/",
       },
-      isBasedOn: metadata.schema.sourceUrl,
       inLanguage: metadata.locale === "ro" ? "ro" : "ru",
     };
     if (metadata.schema.image) {

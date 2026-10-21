@@ -118,12 +118,37 @@ async function run() {
     }
   }
 
+  for (const pathname of ["/missing-page", "/missing/nested/", "/product/missing-product", "/ro/missing-page"]) {
+    const response = await fetch(`${localOrigin}${pathname}`);
+    const $ = load(await response.text());
+    if (response.status !== 404) errors.push(`${pathname}: expected HTTP 404, received ${response.status}.`);
+    if ($('meta[name="robots"]').attr("content") !== "noindex,follow") {
+      errors.push(`${pathname}: the raw error response must contain noindex metadata.`);
+    }
+    if ($(".not-found__actions a").length !== 2 || $("h1").length !== 1) {
+      errors.push(`${pathname}: custom error content and recovery links must work without JavaScript.`);
+    }
+    const locale = pathname.startsWith("/ro/") ? "ro" : "ru";
+    if ($("html").attr("lang") !== locale) errors.push(`${pathname}: raw error response locale mismatch.`);
+    if ($('link[rel="canonical"], link[rel="alternate"][hreflang]').length) {
+      errors.push(`${pathname}: error fallback must not claim a canonical page or translated alias.`);
+    }
+    const head = await fetch(`${localOrigin}${pathname}`, { method: "HEAD" });
+    if (head.status !== 404 || !head.headers.get("x-robots-tag")?.includes("noindex")) {
+      errors.push(`${pathname}: HEAD must preserve the 404 status and noindex header.`);
+    }
+  }
+  const fallback = load(readFileSync("dist/404.html", "utf8"));
+  if (fallback('meta[name="robots"]').attr("content") !== "noindex,follow" || fallback(".not-found__actions a").length !== 2) {
+    errors.push("dist/404.html: deployable static error page is missing metadata or recovery links.");
+  }
+
   if (errors.length) {
     throw new Error(`SEO HTTP gate failed:\n- ${errors.join("\n- ")}`);
   }
 
   console.log(
-    `SEO HTTP gate: PASS (${sitemapUrls.length} sitemap URLs returned canonical prerendered HTML; /main returned 308).`
+    `SEO HTTP gate: PASS (${sitemapUrls.length} sitemap URLs returned canonical prerendered HTML; /main returned 308; 4 missing paths returned localized 404/noindex for GET and HEAD).`
   );
 }
 

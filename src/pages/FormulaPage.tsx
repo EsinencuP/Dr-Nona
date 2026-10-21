@@ -1,23 +1,20 @@
 import { Drop } from "@phosphor-icons/react/Drop";
 import { Leaf } from "@phosphor-icons/react/Leaf";
 import { TestTube } from "@phosphor-icons/react/TestTube";
-import {
-  ProductCard,
-  Reveal,
-  SectionHeading,
-} from "../components/ui";
+import { Reveal } from "../components/ui";
+import { PageBreadcrumbs, ReadingLinks } from "../components/PageNavigation";
 import { isClaimFieldPublishable } from "../claims";
 import {
   useFormulaContent,
   useOfficialPageData,
-  useProductData,
 } from "../data";
 import { useLocale } from "../locales/LocaleProvider";
+import { formulaPatentUrl, formulaStoryCopy } from "../features/content/formulaStory";
 
 export default function FormulaPage() {
   const { locale } = useLocale();
+  const story = formulaStoryCopy[locale];
   const { pageByPath } = useOfficialPageData();
-  const { products } = useProductData();
   const formulaContent = useFormulaContent();
   const page = pageByPath.get("/ourformula");
   const formulaIcons = {
@@ -26,53 +23,39 @@ export default function FormulaPage() {
     "new-generation": Leaf,
   };
   const pageCopy = locale === "ro"
-    ? {
-        eyebrow: "Formulă exclusivă",
-        nature: "Creat de natură",
+    ? {        nature: "Creat de natură",
         science: "Dezvăluit de știință.",
         summary:
           "Formula reunește studiul arhebacteriei cu mineralele Mării Moarte.",
         pillarsLabel: "Fundamentele Halo Complex",
-        productsEyebrow: "Formula în acțiune",
-        productsTitle: "Produse pe bază de Halo Complex™",
       }
-    : {
-        eyebrow: "Эксклюзивная формула",
-        nature: "Создано природой",
+    : {        nature: "Создано природой",
         science: "Раскрыто наукой.",
         summary:
           "Формула объединяет исследование архебактерии и минералы Мёртвого моря.",
         pillarsLabel: "Основа Halo Complex",
-        productsEyebrow: "Формула в действии",
-        productsTitle: "Продукты на основе Halo Complex™",
       };
   const neutralFormulaCopy = locale === "ro"
     ? {
         archaea: {
           summary: "Un microorganism identificat în mediul extrem al Mării Moarte.",
-          text: "Istoria Halo Complex™ începe cu studierea arhebacteriei, o formă de viață capabilă să existe în condițiile naturale neobișnuite ale Mării Moarte.",
         },
         "dead-sea": {
           summary: "Compoziția minerală a Mării Moarte face parte din filosofia brandului.",
-          text: "Mineralele Mării Moarte reprezintă o parte importantă a originii brandului și a abordării sale în dezvoltarea produselor pentru îngrijirea zilnică.",
         },
         "new-generation": {
           summary: "Îmbinarea originii naturale cu tehnologiile moderne de producție.",
-          text: "Formula reflectă ideea Dr. Nona de a studia componentele naturale și de a aplica în mod consecvent metode moderne de producție.",
         },
       }
     : {
         archaea: {
           summary: "Микроорганизм, обнаруженный в экстремальной среде Мёртвого моря.",
-          text: "История Halo Complex™ начинается с исследования архебактерии, способной существовать в необычных природных условиях Мёртвого моря.",
         },
         "dead-sea": {
           summary: "Минеральная композиция Мёртвого моря в основе философии бренда.",
-          text: "Минералы Мёртвого моря стали важной частью происхождения бренда и его подхода к созданию продуктов ежедневного ухода.",
         },
         "new-generation": {
           summary: "Соединение природного происхождения и современной технологии производства.",
-          text: "Формула отражает идею Dr. Nona: изучать природные компоненты и последовательно применять современные методы производства.",
         },
       };
   const formulaChapters = formulaContent.map((chapter) => ({
@@ -81,16 +64,13 @@ export default function FormulaPage() {
     summary: isClaimFieldPublishable("formula", chapter.id, "summary")
       ? chapter.summary
       : neutralFormulaCopy[chapter.id as keyof typeof neutralFormulaCopy].summary,
-    text: isClaimFieldPublishable("formula", chapter.id, "text")
-      ? chapter.text
-      : neutralFormulaCopy[chapter.id as keyof typeof neutralFormulaCopy].text,
   }));
   return (
     <>
+      <div className="container"><PageBreadcrumbs current="Halo Complex™" /></div>
       <section className="formula-hero">
         <div className="container formula-hero__grid">
           <div className="formula-hero__copy">
-            <p className="eyebrow eyebrow--light">{pageCopy.eyebrow}</p>
             <h1>Halo <em>Complex™</em></h1>
             <p className="formula-hero__lead">
               {page?.description || pageCopy.nature}. {pageCopy.science}
@@ -112,29 +92,28 @@ export default function FormulaPage() {
           </div>
         </div>
       </section>
-      <section className="formula-story container">
-        <div className="formula-story__content">
-          {formulaChapters.map(({ title, text }, index) => (
-            <Reveal key={title} className="formula-chapter">
-              <span className="formula-chapter__index" aria-hidden="true">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <div className="formula-chapter__body">
-                <h2>{title}</h2>
-                <p>{text}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+      <section className="formula-story container" aria-labelledby="formula-story-title">
+        <Reveal className="formula-story__content">
+          <h2 id="formula-story-title">{story.title}</h2>
+          <p className="formula-story__lead">{story.lead}</p>
+          {story.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+          <p>
+            {story.patentBefore}
+            <a href={formulaPatentUrl}>{story.patentLabel}</a>
+            {story.patentAfter}
+          </p>
+          <p className="formula-story__closing">{story.closing}</p>
+        </Reveal>
       </section>
-      <section className="formula-products section container">
-        <SectionHeading eyebrow={pageCopy.productsEyebrow} title={pageCopy.productsTitle} />
-        <div className="related-grid">
-          {products.slice(0, 4).map((product) => (
-            <ProductCard key={product.slug} product={product} compact />
-          ))}
-        </div>
-      </section>
+      <div className="container">
+        <ReadingLinks links={locale === "ro" ? [
+          { to: "/products", label: "Catalogul produselor Dr. Nona", description: "Vezi compoziția și modul de utilizare al fiecărui produs." },
+          { to: "/about/science", label: "Știință și tehnologie", description: "Află mai multe despre abordarea companiei." },
+        ] : [
+          { to: "/products", label: "Каталог продукции Dr. Nona", description: "Состав и способ применения каждого продукта." },
+          { to: "/about/science", label: "Наука и технологии", description: "Узнайте больше о подходе компании." },
+        ]} />
+      </div>
     </>
   );
 }

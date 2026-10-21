@@ -30,6 +30,19 @@ Object.defineProperty(window, "scrollTo", {
   value: vi.fn(),
 });
 
+// jsdom does not implement the dialog top layer. Browser tests cover native
+// focus containment and Escape; this shim supports form outcome unit tests.
+if (!HTMLDialogElement.prototype.showModal) {
+  HTMLDialogElement.prototype.showModal = function () {
+    this.setAttribute("open", "");
+    this.querySelector<HTMLButtonElement>("button")?.focus();
+  };
+  HTMLDialogElement.prototype.close = function () {
+    this.removeAttribute("open");
+    this.dispatchEvent(new Event("close"));
+  };
+}
+
 class IntersectionObserverMock implements IntersectionObserver {
   readonly root = null;
   readonly rootMargin = "0px";

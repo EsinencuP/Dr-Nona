@@ -5,7 +5,7 @@ import { filterCatalogProducts } from "../../src/features/catalog/filterProducts
 const { products } = await loadProductData();
 
 function productFixture(overrides: Partial<Product>): Product {
-  return { ...products[0], ...overrides };
+  return { ...products[0], cardTitle: undefined, ...overrides };
 }
 
 describe("catalog filtering", () => {
@@ -65,6 +65,13 @@ describe("catalog filtering", () => {
     expect(search("sampon mineral").map(({ slug }) => slug)).toContain("frequent-use-tonic-shampoo");
     expect(search("musetel").map(({ slug }) => slug)).toContain("salts-camomile");
     expect(search("ylang ylang").map(({ slug }) => slug)).toContain("salts-ylangylang");
+    expect(search("Hand and Nail Cream").map(({ slug }) => slug)).toContain("hand-and-nail-treatment");
+    expect(search("Body Lotion").map(({ slug }) => slug)).toContain("solaris-body-lotion");
+  });
+
+  test("finds the Russian translation displayed beneath an English card title", () => {
+    const match = filterCatalogProducts({ products, query: "крем для рук и ногтей", category: "all", sort: "popular" });
+    expect(match.map(({ slug }) => slug)).toContain("hand-and-nail-treatment");
   });
 
   test("accepts one bounded title typo only when exact search has no result", () => {

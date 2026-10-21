@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import AxeBuilder from "@axe-core/playwright";
 import { MASTERCLASS_TOPICS } from "../../shared/constants/masterclass-topics";
 
 const consultationStartsAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
@@ -32,13 +33,17 @@ test.beforeEach(async ({ page }) => {
   }));
 });
 
-test("consultation success uses mocked API and focuses status", async ({ page }) => {
+test("consultation success shows thanks and retains a focused receipt after closing", async ({ page }) => {
   let submittedBody: Record<string, unknown> | undefined;
   await page.addInitScript(() => {
     sessionStorage.setItem(
       "session_product_history",
       JSON.stringify(["dynamic-hydrating-cream"])
     );
+    const decidedAt = Date.now();
+    localStorage.setItem("drnona-privacy-choice-v1", JSON.stringify({
+      version: 1, choice: "accepted", decidedAt, expiresAt: decidedAt + 180 * 24 * 60 * 60 * 1000,
+    }));
   });
   await page.route("**/api/applications", async (route) => {
     submittedBody = route.request().postDataJSON() as Record<string, unknown>;
@@ -70,6 +75,11 @@ test("consultation success uses mocked API and focuses status", async ({ page })
   await page.getByLabel("Доступное время").selectOption(consultationSlotId);
   await page.getByRole("button", { name: "Отправить заявку" }).click();
   await expect(page.getByText(/Консультация №request-e2e зарезервирована/)).toBeVisible();
+  const thanks = page.getByRole("dialog", { name: "Спасибо!" });
+  await expect(thanks).toBeVisible();
+  await expect(thanks.getByRole("button", { name: "Закрыть", exact: true })).toBeFocused();
+  await thanks.getByRole("button", { name: "Закрыть", exact: true }).click();
+  await expect(thanks).not.toBeVisible();
   await expect(page.getByRole("heading", { name: "Статус заявки" })).toBeFocused();
   expect(submittedBody).toMatchObject({
     locale: "ru-MD",
@@ -133,6 +143,11 @@ test("Romanian contact form submits ro-MD through the same API contract", async 
   await page.getByRole("button", { name: "Trimite solicitarea" }).click();
 
   await expect(page.getByText(/Consultația nr\. request-ro a fost rezervată/u)).toBeVisible();
+  const thanks = page.getByRole("dialog", { name: "Vă mulțumim!" });
+  await expect(thanks).toBeVisible();
+  await expect(thanks).toContainText("Numărul solicitării: request-ro");
+  await thanks.getByRole("button", { name: "Închide", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Statutul solicitării" })).toBeFocused();
   expect(submittedBody).toMatchObject({
     locale: "ro-MD",
     type: "consultation",
@@ -146,11 +161,16 @@ test("order defaults from selection and Telegram delivery succeeds", async ({
   page,
 }) => {
   let submittedBody: Record<string, unknown> | undefined;
+  let requestCount = 0;
+  let confirmReceipt: (() => void) | undefined;
+  const serverConfirmation = new Promise<void>((resolve) => { confirmReceipt = resolve; });
   await page.addInitScript(() => {
     localStorage.setItem("drnona-selection", JSON.stringify(["lord-deodorant"]));
   });
   await page.route("**/api/applications", async (route) => {
+    requestCount += 1;
     submittedBody = route.request().postDataJSON() as Record<string, unknown>;
+    await serverConfirmation;
     await route.fulfill({
       status: 201,
       contentType: "application/json",
@@ -171,7 +191,33 @@ test("order defaults from selection and Telegram delivery succeeds", async ({
     .getByRole("button", { name: /Увеличить количество/u })
     .click();
   await page.getByRole("button", { name: "Отправить заявку" }).click();
+  await expect(page.getByRole("button", { name: "Отправляем заявку…" })).toBeDisabled();
+  await expect(page.getByRole("dialog")).not.toBeVisible();
+  confirmReceipt?.();
   await expect(page.getByText(/Заявка №request-order принята и сохранена/)).toBeVisible();
+  const thanks = page.getByRole("dialog", { name: "Спасибо!" });
+  await expect(thanks).toBeVisible();
+  await expect(thanks).toContainText("Номер заявки: request-order");
+  await expect(thanks).toContainText("Менеджер свяжется с вами");
+  await expect(thanks.getByRole("button", { name: "Закрыть", exact: true })).toBeFocused();
+  await page.keyboard.press("Tab");
+  const reviewLink = thanks.getByRole("link", { name: "Оставить отзыв", exact: true });
+  await expect(reviewLink).toBeFocused();
+  await expect(reviewLink).toHaveAttribute("href", "/reviews?product=lord-deodorant#write-review");
+  await page.keyboard.press("Shift+Tab");
+  await expect(thanks.getByRole("button", { name: "Закрыть", exact: true })).toBeFocused();
+  const box = await thanks.boundingBox();
+  expect(box).not.toBeNull();
+  expect(box!.x).toBeGreaterThanOrEqual(0);
+  expect(box!.y).toBeGreaterThanOrEqual(0);
+  expect(box!.x + box!.width).toBeLessThanOrEqual(page.viewportSize()!.width);
+  const accessibility = await new AxeBuilder({ page }).include(".application-thanks").analyze();
+  expect(accessibility.violations).toEqual([]);
+  await page.keyboard.press("Escape");
+  await expect(thanks).not.toBeVisible();
+  await expect(page.getByRole("heading", { name: "Статус заявки" })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Заявка принята" })).toBeDisabled();
+  expect(requestCount).toBe(1);
   expect(submittedBody).toMatchObject({
     productSlugs: ["lord-deodorant"],
     items: [{ slug: "lord-deodorant", quantity: 2 }],
@@ -210,6 +256,7 @@ test("masterclass submits its canonical topic and preferred schedule", async ({
   await expect(
     page.getByText(/Заявка №request-masterclass принята и сохранена/u)
   ).toBeVisible();
+  await expect(page.getByRole("dialog", { name: "Спасибо!" })).toContainText("дату и время");
   expect(submittedBody).toMatchObject({
     locale: "ru-MD",
     type: "masterclass",
@@ -237,6 +284,7 @@ test("client validation and complete failure preserve data", async ({ page }) =>
   await submit.click();
   await expect(page.getByRole("button", { name: "Отправляем заявку…" })).toBeDisabled();
   await expect(page.getByText(/Заявка не отправлена/)).toBeVisible();
+  await expect(page.getByRole("dialog")).not.toBeVisible();
   await expect(page.getByLabel("Имя")).toHaveValue("Ana");
 });
 
@@ -251,6 +299,7 @@ test("offline submission reports failure and preserves entered data", async ({
   await page.getByRole("button", { name: "Отправить заявку" }).click();
 
   await expect(page.getByText(/Заявка не отправлена/)).toBeVisible();
+  await expect(page.getByRole("dialog")).not.toBeVisible();
   await expect(page.getByLabel("Имя")).toHaveValue("Ana");
   await expect(page.getByLabel("Телефон")).toHaveValue("069 123 456");
 });

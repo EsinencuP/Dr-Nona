@@ -8,12 +8,11 @@ const canonicalRoutes = [
   "/contactus",
   "/ourformula",
   "/about",
-  "/editorial",
   "/privacypolicy",
   "/termsofuse",
 ];
 
-const notFoundRoutes = ["/privacy-policy", "/terms", "/unknown-route"];
+const notFoundRoutes = ["/warehouses", "/editorial", "/news", "/blog", "/privacy-policy", "/terms", "/unknown-route"];
 
 test("cleanup preserves canonical routes across direct navigation and refresh", async ({
   page,

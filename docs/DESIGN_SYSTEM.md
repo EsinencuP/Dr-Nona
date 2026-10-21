@@ -108,11 +108,29 @@ On desktop, media occupies the left grid area; identity, decision and summary sh
 
 ### Home hero safe areas
 
-Hero copy, image and principles occupy separate layout areas. The existing `.hero-visual` owns the approved background image, with no text gradient over the packaging. At desktop widths text and media sit side by side; at 960 px and below the sequence is copy → media → principles. Keep at least 20 px between media and the principles rail. Desktop/tablet use the existing landscape asset; mobile uses the existing portrait asset at a 5:4 stage and 68% vertical position, preserving the full jar. Recheck the safe area if the source asset changes.
+The home hero uses the existing Halo Complex image as a full-width background behind the text and principles rail (owner annotation, 2026-10-21, superseding the separate copy/media layout). The existing `.hero-visual` owns the image; a light directional overlay keeps the copy readable. On tablet and mobile, place the copy above the main product area within the same background. Retain the existing desktop/mobile image sources and allow the section to grow for text reflow. Recheck the safe area if the source asset changes.
 
-### Halo reading chapters
+### Home product categories
 
-Keep the compact icon-led introduction on the dark sea surface. The reading section below uses small gold serif indices, genuine H2 headings and full Manrope paragraphs on the page surface, separated by rules. Do not repeat the hero's circular icon badges in the reading section. At desktop/tablet widths, titles and paragraphs share baseline-aligned tracks; at 640 px and below the text stacks beside a 36 px index column. Body copy stays 16 px / 1.65 with a 64ch maximum measure. Indices are decorative and hidden from assistive output. This treatment changes presentation, not source copy or claims approval.
+The owner's 2026-10-21 request replaces the complete editor's-choice product showcase and both product campaign banners with an informational overview of eight product directions. Place it after About and before company history. Use two columns above 960 px and one below, with line icons, serif H3 headings, full 18 px descriptions at 1.75 line height and simple separators. The introduction uses 18–22 px text, followed by a single catalogue link. Do not render individual product offers or save actions in this block.
+
+The Russian and Romanian copy in `src/features/content/HomeProductCategories.tsx` describes face/body/hair care, bath salts, age care, supplements, fragrances and hygiene already represented in the 50 published products. These are editorial groupings, not changes to catalogue filters or assortment. The user's therapeutic, cellular, hormonal and prevention claims remain PENDING APPROVAL; the overview uses factual product formats and care routines instead.
+
+### Halo story
+
+Keep the compact icon-led introduction on the dark sea surface. Following the owner's annotation on 2026-10-21, the reading section is a continuous bilingual story with one H2, an introductory paragraph, connected body paragraphs and a closing thought. Remove numbered chapters and repeated category headings. Use a centered reading column up to 820 px, 18 px body text at 1.8 line height and a 20 px introduction; preserve full text under reflow and user text spacing. Align the catalogue link with the reading column.
+
+The owner authorized the editorial rewrite, including a patent reference. Source the origin narrative from [Dr. Nona's formula page](https://drnona.com/en/ourformula), patent identity/date from [IL222127B](https://patents.google.com/patent/IL222127B/en), and the extract combination/Dunaliella description from the [related AU2013319785B2 specification](https://patents.google.com/patent/AU2013319785B2/en). Copy lives in `src/features/content/formulaStory.ts`. The text describes research history and a specific patented development; it does not assert that every product is patented or clinically effective. The requested universal therapeutic/preventive effects and absence of worldwide equivalents remain NOT VERIFIED / PENDING APPROVAL and are not published. Existing claim registry decisions and release blockers are unchanged.
+
+## Missing pages
+
+The custom 404 retains the shared header/footer and mineral palette, with a decorative sea-blue 404/horizon, one H1, a readable explanation and explicit catalogue/home recovery links. RU and RO share copy between the React page and the static fallback through `src/not-found-copy.mjs`. Support 320 px reflow without a timer, automatic redirect or added animation. The separate malformed-link 400 presentation remains distinct.
+
+The build emits `dist/404.html` for static hosting, following [Vercel's custom 404 guidance](https://vercel.com/kb/guide/custom-404-page). It includes useful content and `noindex,follow` before JavaScript; it has no canonical error alias, hreflang links, publication schema or home hero preload. Local development and preview return HTTP 404 plus `X-Robots-Tag` for unknown document paths, while known routes, assets and the existing API retain their handlers. The preview SEO gate checks GET, HEAD, nested paths, unknown products and the Romanian error response. The fallback is excluded from the sitemap. Live host behaviour still requires deployment verification; this work does not change release approval.
+
+## Brand logo
+
+The owner replaced the gold brand logo with the blue artwork supplied as `unnamed 1.svg` on 2026-10-21. That SVG embeds a PNG; reuse its original seal and signature in the existing horizontal 920 × 293 logo stage without redrawing the artwork. `public/brand/dr-nona-logo.png` remains the shared header, footer and default social image asset. Preserve the supplied blue on light surfaces and use a white CSS silhouette in the dark footer. Favicons use the same supplied seal. This visual approval does not change the documented production media-rights release blocker.
 
 ## Product imagery
 
@@ -128,7 +146,7 @@ The supported minimum width is 320 px. Layout changes occur at 1180, 960 and 640
 
 Mobile layouts may reduce secondary copy and collapse controls, but they must preserve the page CTA, product identity, selection action and error recovery. No document-level horizontal scrolling is allowed.
 
-Primary reading paragraphs and product names must not be line-clamped. Bounded secondary previews need an explicit route to the complete content. Home mini-product titles grow with user text spacing; mobile About facts share intrinsic number/label columns, with unbroken numbers and wrapping labels. See [Prompt 3 geometry evidence](PROMPT_3_RESPONSIVE_GEOMETRY_2026-09-07.md).
+Primary reading paragraphs and product names must not be line-clamped. Bounded secondary previews need an explicit route to the complete content. Home category titles and descriptions grow with user text spacing; mobile About facts share intrinsic number/label columns, with unbroken numbers and wrapping labels. See [Prompt 3 geometry evidence](PROMPT_3_RESPONSIVE_GEOMETRY_2026-09-07.md).
 
 Responsive product-card source sizes must track actual grid columns, gaps and the reviewed optical scale. Keep intrinsic dimensions and reserved image stages; verify the selected source against rendered pixels at DPR 1 and 2 when changing these relationships.
 
@@ -183,5 +201,11 @@ Cards and articles must remain complete without an excerpt. Exact imported site-
 - Commerce language, prices, discount badges or fake urgency
 
 ## Design change criteria
+
+Confirmed application submissions open a native, localized “Thank you” dialog for orders, consultations and masterclasses. It shows the server request ID and the next step for the submitted mode. The dialog opens only for the existing client's successful API result, never for validation, loading or delivery/network errors. The close button and Escape dismiss it; keyboard focus returns to the persistent success receipt. The accepted submit button remains disabled. The modal adds no route, storage, transport or simulated success; tests intercept the API rather than sending customer requests.
+
+Below 768 px, catalogue and company pages expose one fixed contact action. Product pages pass the current published product to the existing contact form. The action is absent from contact, selection and error routes and hidden while the mobile menu or an input is active. A matching spacer, safe-area inset and scroll padding keep the final footer links and focused content reachable. Desktop and print layouts omit this action. The component adds no persistence, API or submission behavior.
+
+Internal page links use destination names rather than standalone “Read more” labels. Shared breadcrumbs expose home, the owning section and the current page as an ordered list; product breadcrumbs also link to the product's existing catalogue category. Decorative chevrons remain attached to their level when wrapping. Each ancestor link has a minimum 44 × 44 px target; the current page is plain text with `aria-current="page"`. On phones the home icon retains its localized accessible name, while long page names wrap without truncation. Contextual links below company, formula and catalogue content explain what the destination contains. Product consultation links pass the current product to the existing contact form. All internal destinations use the locale-aware router; untranslated imported pages keep their original route and content language. These changes add no routes, taxonomy, persistence or transport.
 
 A design change is acceptable only when it preserves the product brief, current tokens, catalogue/product image roles, accessibility checks and responsive matrix. Run `npm run typography:validate`, `npm run test:e2e` and visual regression checks for any visible change.

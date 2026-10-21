@@ -11,12 +11,11 @@ const CompanyPage = lazy(() => import("../pages/CompanyPage"));
 const SciencePage = lazy(() => import("../pages/SciencePage"));
 const FoundersPage = lazy(() => import("../pages/FoundersPage"));
 const FormulaPage = lazy(() => import("../pages/FormulaPage"));
-const EditorialPage = lazy(() => import("../pages/EditorialPage"));
-const BlogPage = lazy(() => import("../pages/BlogPage"));
-const NewsPage = lazy(() => import("../pages/NewsPage"));
 const SelectionPage = lazy(() => import("../pages/SelectionPage"));
 const ContactPage = lazy(() => import("../pages/ContactPage"));
+const ReviewsPage = lazy(() => import("../pages/ReviewsPage"));
 const CertificatesPage = lazy(() => import("../pages/CertificatesPage"));
+const PrivacyPage = lazy(() => import("../pages/PrivacyPage"));
 const BadRequestPage = lazy(() => import("../pages/BadRequestPage"));
 const DynamicOfficialPage = lazy(() => import("../pages/DynamicOfficialPage"));
 
@@ -42,12 +41,11 @@ export function AppRoutes() {
         <Route path="/about/science" element={<SciencePage />} />
         <Route path="/about/founders" element={<FoundersPage />} />
         <Route path="/ourformula" element={<FormulaPage />} />
-        <Route path="/editorial" element={<EditorialPage />} />
-        <Route path="/blog" element={<BlogPage />} />
-        <Route path="/news" element={<NewsPage />} />
         <Route path="/selection" element={<SelectionPage />} />
         <Route path="/contactus" element={<ContactPage />} />
+        <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/certificates" element={<CertificatesPage />} />
+        <Route path="/privacypolicy" element={<PrivacyPage />} />
         <Route path="/bad-request" element={<BadRequestPage />} />
         <Route path="*" element={<DynamicOfficialPage />} />
       </Routes>

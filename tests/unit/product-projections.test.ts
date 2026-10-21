@@ -3,6 +3,7 @@ import { loadProductData } from "../../src/data";
 import { loadProductDetail } from "../../src/features/product/productDetailData";
 import homeProducts from "../../src/data/home-products.json";
 import runtime from "../../src/data/runtime-content.json";
+import packages from "../../src/data/product-volumes.json";
 
 describe("generated public product projections", () => {
   for (const locale of ["ru", "ro"] as const) {
@@ -10,6 +11,10 @@ describe("generated public product projections", () => {
       const catalog = await loadProductData(locale);
       expect(catalog.products).toHaveLength(50);
       for (const product of catalog.products) {
+        const sourcePackage = packages.products[product.slug as keyof typeof packages.products];
+        expect(product.packageSize, product.slug).toEqual(sourcePackage.packageSize);
+        expect(product.packageSize!.quantity).toBeGreaterThan(0);
+        expect(sourcePackage.sourceText.trim(), product.slug).not.toBe("");
         const detail = (await loadProductDetail(product.slug))[locale];
         expect(detail.product).toEqual(product);
         expect(detail.related).toEqual(catalog.getRelatedProducts(product));

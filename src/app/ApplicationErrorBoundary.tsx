@@ -44,18 +44,17 @@ export class ApplicationErrorBoundary extends Component<Props, State> {
 
     const romanian = window.location.pathname.startsWith("/ro") || document.documentElement.lang === "ro";
     const copy = romanian ? {
-      eyebrow: "Eroare de interfață", title: "Pagina este temporar indisponibilă",
+      title: "Pagina este temporar indisponibilă",
       text: "Eroarea a fost înregistrată. Reîncărcați pagina sau reveniți la pagina principală.",
       reload: "Reîncarcă pagina", home: "Pagina principală",
     } : {
-      eyebrow: "Ошибка интерфейса", title: "Страница временно недоступна",
+      title: "Страница временно недоступна",
       text: "Ошибка зафиксирована. Обновите страницу или вернитесь на главную.",
       reload: "Обновить страницу", home: "Вернуться на главную",
     };
 
     return (
       <main className="application-error" role="alert">
-        <p className="eyebrow">{copy.eyebrow}</p>
         <h1>{copy.title}</h1>
         <p>{copy.text}</p>
         <div className="application-error__actions">

@@ -11,7 +11,7 @@ test("Romanian alphabet sorting places S before Ș in both directions", async ({
   const sorting = page.getByRole("combobox", { name: "Sortare", exact: true });
   await sorting.selectOption("az");
   await expect(page).toHaveURL(/sort=az/u);
-  const titles = page.locator(".catalog-grid .product-card h2");
+  const titles = page.locator(".catalog-grid .product-card__localized-name");
   await expect.poll(async () => {
     const names = await titles.allTextContents();
     return names.indexOf("Supliment alimentar YAMSEEN") < names.indexOf("Șampon mineral");
@@ -24,25 +24,25 @@ test("Romanian alphabet sorting places S before Ș in both directions", async ({
   }).toBe(true);
 });
 
-test("Romanian catalogue uses authorized Romanian product names and copy", async ({
+test("Romanian catalogue keeps English headings with Romanian product names below", async ({
   page,
 }) => {
   await page.goto("/ro/products");
 
   await expect(page.locator("html")).toHaveAttribute("lang", "ro");
   await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50);
-  await expect(
-    page.getByRole("heading", { level: 2, name: "Cremă Dynamic" })
-  ).toBeVisible();
-  await expect(
-    page.getByRole("heading", { level: 2, name: "Loțiune de corp Solaris" })
-  ).toBeVisible();
-  await expect(
-    page.getByRole("heading", { level: 2, name: "Apă de gură Multi Mouthwash" })
-  ).toBeVisible();
-  await expect(
-    page.getByRole("heading", { level: 2, name: "Apă de parfum FAYA" })
-  ).toBeVisible();
+  for (const [title, subtitle] of [
+    ["Dynamic Cream", "Cremă Dynamic"],
+    ["Solaris Body Lotion", "Loțiune de corp Solaris"],
+    ["Multi Mouthwash", "Apă de gură Multi Mouthwash"],
+    ["Eau De Parfume ( FAYA )", "Apă de parfum FAYA"],
+  ]) {
+    const card = page.locator(".catalog-grid .product-card").filter({
+      has: page.getByRole("heading", { level: 2, name: title, exact: true }),
+    });
+    await expect(card.getByRole("heading", { level: 2 })).toBeVisible();
+    await expect(card.locator(".product-card__localized-name")).toHaveText(subtitle);
+  }
 
   const visibleText = await page.locator("body").innerText();
   expect(visibleText).not.toMatch(cyrillic);
@@ -52,22 +52,20 @@ test("Romanian catalogue uses authorized Romanian product names and copy", async
   );
 });
 
-test("Romanian product route publishes authorized factual copy and keeps its source", async ({
+test("Romanian product route publishes authorized factual copy without outbound sources", async ({
   page,
 }) => {
   await page.goto("/ro/product/dynamic-hydrating-cream");
 
   await expect(
-    page.getByRole("heading", { level: 1, name: "Cremă Dynamic" })
+    page.getByRole("heading", { level: 1, name: "Dynamic Cream" })
   ).toBeVisible();
-  await expect(
-    page.getByText("Cremă Dr. Nona pentru față și corp, cu aloe vera, mușețel și uleiuri vegetale.").first()
-  ).toBeVisible();
-  await expect(page.getByText(/Cremă universală care îngrijește pielea/)).toHaveCount(0);
-  await expect(page.getByRole("link", { name: /drnona\.md/i })).toHaveAttribute(
-    "href",
-    "https://www.drnona.md/dynamic"
-  );
+  await expect(page.locator(".product-purpose")).toHaveCount(0);
+  await expect(page.locator(".product-copy-card--overview")).toHaveCount(0);
+  await expect(page.getByRole("article").filter({ has: page.getByRole("heading", { name: "Compoziție" }) })).toContainText("extract de mușețel");
+  await expect(page.getByRole("article").filter({ has: page.getByRole("heading", { name: "Mod de utilizare" }) })).toContainText("Spălați bine fața");
+  await expect(page.getByText(/accelerează regenerarea celulară/i)).toHaveCount(0);
+  await expect(page.locator('a[href*="drnona.md"], a[href*="drnona.com"]')).toHaveCount(0);
   const visibleText = await page.locator("body").innerText();
   expect(visibleText).not.toMatch(cyrillic);
 });
@@ -76,7 +74,7 @@ test("company and Halo Complex routes are complete Romanian pages", async ({
   page,
 }) => {
   const routes = [
-    ["/ro/about", "Viziunea noastră"],
+    ["/ro/about", "Compania Dr. Nona"],
     ["/ro/about/company", "Compania Dr. Nona"],
     ["/ro/about/our-history", "Istoria companiei"],
     ["/ro/about/founders", "Fondatorii"],
@@ -119,33 +117,17 @@ test("company navigation and locale switch preserve the selected route", async (
   await page.getByRole("link", { name: "RU", exact: true }).click();
   await expect(page).toHaveURL(/\/ru\/about$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "ru");
-  await expect(page.getByRole("heading", { level: 1, name: "Наше видение" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: "Компания Dr. Nona" })).toBeVisible();
 });
 
-test("Romanian editorial shell keeps original-language pages on their canonical URL", async ({
-  page,
-}) => {
-  await page.goto("/ro/blog");
-
-  const articleLink = page.locator(".article-card h3 a").first();
-  const articlePath = await articleLink.getAttribute("href");
-  expect(articlePath).toMatch(/^\/blog\//u);
-  expect(articlePath).not.toMatch(/^\/ro\//u);
-
-  await articleLink.click();
-  await expect(page).toHaveURL(new RegExp(`${articlePath}$`));
-  await expect(page.locator("html")).toHaveAttribute("lang", "ro");
-  await expect(page.locator(".article-page h1")).toHaveAttribute("lang", "ru");
-  await expect(page.locator(".article-page .prose")).toHaveAttribute("lang", "ru");
-  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
-    "href",
-    `${testBaseUrl}${articlePath}`
-  );
-  await expect(page.locator('link[rel="alternate"][hreflang="ro-MD"]')).toHaveCount(0);
-
-  await page.goto(`/ro${articlePath}`);
-  await expect(page).toHaveURL(new RegExp(`${articlePath}$`));
-  await expect(page.locator("html")).toHaveAttribute("lang", "ro");
+test("Romanian entries to retired editorial sections show a localized 404", async ({ page }) => {
+  for (const route of ["/ro/editorial", "/ro/blog", "/ro/news", "/ro/news/zoom-08-07-2026", "/ro/blog/what-to-eat-after-coronavirus"]) {
+    await page.goto(route);
+    await expect(page.getByRole("heading", { level: 1, name: "Această pagină a dispărut din orizont" })).toBeVisible();
+    await expect(page.locator("html")).toHaveAttribute("lang", "ro");
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex,follow");
+    await expect(page.locator(".article-card, .article-page")).toHaveCount(0);
+  }
 });
 
 test("Romanian UI does not invent localized URLs for original generic pages", async ({
@@ -169,13 +151,17 @@ test("Romanian UI does not invent localized URLs for original generic pages", as
 test("Romanian error states keep localized UI and noindex metadata without a false alias", async ({
   page,
 }) => {
-  await page.goto("/ro/definitely-missing");
+  const response = await page.goto("/ro/definitely-missing");
+  expect(response?.status()).toBe(404);
   await expect(page).toHaveURL(/\/definitely-missing$/u);
   await expect(page.locator("html")).toHaveAttribute("lang", "ro");
   await expect(page.getByRole("heading", { name: "Această pagină a dispărut din orizont" })).toBeVisible();
   await expect(page).toHaveTitle(/Pagină negăsită/u);
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex,follow");
   await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(0);
+  await page.locator(".not-found__actions").getByRole("link", { name: "Vezi catalogul", exact: true }).click();
+  await expect(page).toHaveURL(/\/ro\/products$/u);
+  await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50);
 
   await page.goto("/ro/bad-request");
   await expect(page).toHaveURL(/\/bad-request$/u);

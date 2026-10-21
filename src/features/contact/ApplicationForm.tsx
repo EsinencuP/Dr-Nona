@@ -19,6 +19,7 @@ import {
 } from "../../../shared/constants/moldova-regions";
 import { getAppointmentBounds } from "../../../shared/applications/appointment-policy";
 import { marketData } from "../../market";
+import { getProductTitle } from "../product/productNames";
 import { useLocale } from "../../locales/LocaleProvider";
 import { Link } from "../../router";
 import { loadConsultationSlots, submitApplication } from "./application-client";
@@ -118,9 +119,7 @@ export function ApplicationForm({
     []
   );
   const copy = locale === "ro"
-    ? {
-        eyebrow: "Contactați un consultant",
-        title: "Trimiteți o solicitare",
+    ? {        title: "Trimiteți o solicitare",
         intro:
           "Alegeți tipul solicitării. Formularul nu reprezintă plata comenzii; ora consultației sau a masterclassului va fi confirmată de manager.",
         requestType: "Tipul solicitării",
@@ -169,15 +168,21 @@ export function ApplicationForm({
           `Consultația nr. ${id} a fost rezervată pentru intervalul selectat. Dacă sunt necesare detalii suplimentare, consultantul vă va contacta.`,
         slotUnavailable: "Acest interval tocmai a fost rezervat de alt client. Lista a fost actualizată — selectați alt interval.",
         failure:
-          "Solicitarea nu a fost trimisă. Datele au rămas în formular — încercați din nou sau sunați la filială.",
+          "Solicitarea nu a fost trimisă. Datele au rămas în formular — încercați din nou sau contactați-ne telefonic.",
         validation: "Verificați câmpurile marcate.",
         status: "Statutul solicitării",
+        thanks: "Vă mulțumim!",
+        thanksMessage: {
+          order: "Solicitarea pentru comandă a fost acceptată. Managerul vă va contacta la numărul indicat pentru a clarifica detaliile.",
+          consultation: "Consultația a fost rezervată pentru intervalul selectat. Detaliile solicitării rămân disponibile pe această pagină.",
+          masterclass: "Solicitarea pentru masterclass a fost acceptată. Managerul va confirma data și ora cu dumneavoastră.",
+        },
+        requestNumber: "Numărul solicitării",
+        closeThanks: "Închide",
         errorTitle: "Trimiterea nu a putut fi finalizată",
         call: "Sunați",
       }
-    : {
-        eyebrow: "Связаться с менеджером",
-        title: "Оставить заявку",
+    : {        title: "Оставить заявку",
         intro:
           "Выберите нужный сценарий. Заявка не является оплатой заказа; время консультации или мастер-класса подтвердит менеджер.",
         requestType: "Тип заявки",
@@ -226,9 +231,17 @@ export function ApplicationForm({
           `Консультация №${id} зарезервирована на выбранное время. Если потребуются детали, консультант свяжется с вами.`,
         slotUnavailable: "Этот слот только что занял другой клиент. Список обновлён — выберите другое время.",
         failure:
-          "Заявка не отправлена. Данные сохранены в форме — повторите попытку или используйте телефон филиала.",
+          "Заявка не отправлена. Данные сохранены в форме — повторите попытку или свяжитесь с нами по телефону.",
         validation: "Проверьте отмеченные поля.",
         status: "Статус заявки",
+        thanks: "Спасибо!",
+        thanksMessage: {
+          order: "Ваша заявка на заказ принята. Менеджер свяжется с вами по указанному телефону, чтобы уточнить детали.",
+          consultation: "Консультация зарезервирована на выбранное время. Подробности заявки остаются на этой странице.",
+          masterclass: "Ваша заявка на мастер-класс принята. Менеджер согласует с вами дату и время.",
+        },
+        requestNumber: "Номер заявки",
+        closeThanks: "Закрыть",
         errorTitle: "Не удалось завершить отправку",
         call: "Позвоните",
       };
@@ -244,6 +257,7 @@ export function ApplicationForm({
   const attemptKey = useRef(createAttemptKey());
   const formRef = useRef<HTMLFormElement>(null);
   const statusHeading = useRef<HTMLHeadingElement>(null);
+  const thanksDialog = useRef<HTMLDialogElement>(null);
   const publishedSlugs = useMemo(() => new Set(publishedProductSlugs), []);
   const accepted = status === "success";
 
@@ -256,7 +270,9 @@ export function ApplicationForm({
   };
 
   useEffect(() => {
-    if (accepted) statusHeading.current?.focus();
+    const dialog = thanksDialog.current;
+    if (accepted && dialog && !dialog.open) dialog.showModal();
+    if (!accepted && dialog?.open) dialog.close();
   }, [accepted]);
 
   useEffect(() => {
@@ -420,7 +436,6 @@ export function ApplicationForm({
   return (
     <section className="application-panel" aria-labelledby="application-title">
       <div className="application-panel__heading">
-        <p className="eyebrow">{copy.eyebrow}</p>
         <h2 id="application-title">{copy.title}</h2>
         <p>{copy.intro}</p>
       </div>
@@ -572,19 +587,19 @@ export function ApplicationForm({
                   return (
                     <li key={product.slug}>
                       <div className="application-product__identity">
-                        <span>{product.officialName}</span>
+                        <span lang="en">{getProductTitle(product)}</span>
                         <small>SKU {product.sku || copy.missingSku}</small>
                       </div>
                       <div
                         className="application-quantity"
                         role="group"
-                        aria-label={`${copy.quantity}: ${product.officialName}`}
+                        aria-label={`${copy.quantity}: ${getProductTitle(product)}`}
                       >
                         <button
                           type="button"
                           onClick={() => updateQuantity(product.slug, -1)}
                           disabled={accepted || quantity <= 1}
-                          aria-label={copy.decreaseQuantity(product.officialName)}
+                          aria-label={copy.decreaseQuantity(getProductTitle(product))}
                         >
                           −
                         </button>
@@ -593,7 +608,7 @@ export function ApplicationForm({
                           type="button"
                           onClick={() => updateQuantity(product.slug, 1)}
                           disabled={accepted || quantity >= 99}
-                          aria-label={copy.increaseQuantity(product.officialName)}
+                          aria-label={copy.increaseQuantity(getProductTitle(product))}
                         >
                           +
                         </button>
@@ -786,6 +801,32 @@ export function ApplicationForm({
           </div>
         )}
       </form>
+      <dialog
+        ref={thanksDialog}
+        className="application-thanks"
+        aria-labelledby="application-thanks-title"
+        aria-describedby="application-thanks-message application-thanks-number"
+        onClose={() => statusHeading.current?.focus()}
+      >
+        <CheckCircle className="application-thanks__icon" aria-hidden="true" />
+        <h2 id="application-thanks-title">{copy.thanks}</h2>
+        <p id="application-thanks-message">{copy.thanksMessage[mode]}</p>
+        <p id="application-thanks-number" className="application-thanks__number">
+          {copy.requestNumber}: <strong>{result?.kind === "success" ? result.requestId : ""}</strong>
+        </p>
+        <button
+          type="button"
+          className="button button--primary"
+          onClick={() => thanksDialog.current?.close()}
+        >
+          {copy.closeThanks}
+        </button>
+        {mode === "order" && result?.kind === "success" && (
+          <Link className="button button--secondary" to={`/reviews${products.length === 1 ? `?product=${encodeURIComponent(products[0].slug)}` : ""}#write-review`} onClick={() => thanksDialog.current?.close()}>
+            {locale === "ro" ? "Lasă o recenzie" : "Оставить отзыв"}
+          </Link>
+        )}
+      </dialog>
     </section>
   );
 }
