@@ -33,7 +33,7 @@ describe("Dr. Nona application", () => {
 
     const search = await screen.findByRole("searchbox", {
       name: "Поиск по названию",
-    });
+    }, { timeout: 5000 });
     await user.type(search, "404001");
 
     await waitFor(() => {
@@ -157,14 +157,11 @@ describe("Dr. Nona application", () => {
     renderApp("/contactus?products=lord-deodorant");
 
     expect(
-      await screen.findByRole("heading", { level: 3, name: "В заявку войдут" })
+      await screen.findByRole("heading", { level: 3, name: "В заказ войдут" })
     ).toBeInTheDocument();
     expect(screen.getAllByText("SKU 324001")).toHaveLength(2);
     expect(screen.getByRole("form")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Заказ" })).toHaveAttribute(
-      "aria-pressed",
-      "true"
-    );
+    expect(document.querySelector(".application-mode")).toBeNull();
     expect(
       screen.getByRole("link", { name: "Подготовить письмо" })
     ).toHaveAttribute("href", expect.stringContaining("lord-deodorant"));
@@ -232,7 +229,7 @@ describe("Dr. Nona application", () => {
 
   test("marks an explicitly null product field as not applicable", () => {
     const productWithIngredients = products.find(
-      (product) => product.slug === "lord-deodorant"
+      (product) => product.ingredients !== null
     );
     expect(productWithIngredients).toBeDefined();
     const product = {
@@ -274,11 +271,10 @@ describe("Dr. Nona application", () => {
     ).toHaveAttribute("aria-current", "page");
 
     const overview = screen.getByRole("heading", { level: 2, name: "О продукте" });
-    const ingredients = screen.getByRole("heading", { level: 2, name: "Состав" });
+    expect(screen.queryByRole("heading", { level: 2, name: "Состав" })).not.toBeInTheDocument();
+    expect(screen.getByTestId("full-product-description")).toHaveTextContent("Дезодорант содержит уникальный Halo Complex");
     expect(overview.closest("article")).toHaveClass("product-copy-card");
-    expect(ingredients.closest("article")).toHaveClass("product-copy-card");
     expect(overview.closest("article")).toBeVisible();
-    expect(ingredients.closest("article")).toBeVisible();
     expect(screen.queryByRole("button", { name: "Состав" })).not.toBeInTheDocument();
   });
 

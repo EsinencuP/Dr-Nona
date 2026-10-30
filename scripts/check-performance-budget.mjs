@@ -1,3 +1,4 @@
+import { hasVerbatimMoldovaCopy } from "../src/product-copy-policy.mjs";
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import { brotliCompressSync, gzipSync } from "node:zlib";
@@ -63,6 +64,12 @@ expect(
 
 const assetNames = readdirSync("dist/assets");
 const claims = JSON.parse(readFileSync("src/data/claims-registry.json", "utf8"));
+const originalProducts = JSON.parse(readFileSync("src/data/products.json", "utf8"));
+const originalRoProducts = JSON.parse(readFileSync("src/data/products-ro.json", "utf8"));
+const reproducedContentIds = new Set(originalProducts.flatMap(product => [
+  ...(hasVerbatimMoldovaCopy(product) ? [product.slug] : []),
+  ...(hasVerbatimMoldovaCopy(originalRoProducts[product.slug]) ? [`ro:${product.slug}`] : []),
+]));
 const catalogRouteChunk = assetNames.find((name) =>
   /^CatalogPage-.*\.js$/.test(name)
 );
@@ -92,6 +99,7 @@ if (catalogDataChunk) {
     (claim) =>
       claim.scope === "product" &&
       claim.status !== "approved" &&
+      !reproducedContentIds.has(claim.contentId) &&
       catalogBundle.includes(claim.claimText)
   );
   expect(
@@ -133,7 +141,7 @@ Budgets: initial gzip ≤ 140 KiB; initial Brotli ≤ 115 KiB.
 - separate route chunk: \`${catalogRouteChunk ?? "MISSING"}\`;
 - separate product-data chunk: \`${catalogDataChunk ?? "MISSING"}\`;
 - separate official-content chunk: \`${officialContentChunk ?? "MISSING"}\`;
-- product-data chunk contains no pending/rejected product claim text;
+- product-data chunk excludes unapproved legacy copy; owner-authorized verbatim Moldova originals retain separate pending claim status;
 - route-network assertions for Home, Contact and Catalog run in Playwright.
 `;
 mkdirSync("artifacts/reports", { recursive: true });

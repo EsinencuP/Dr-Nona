@@ -1,3 +1,4 @@
+import { hasVerbatimMoldovaCopy } from "../src/product-copy-policy.mjs";
 import * as cheerio from "cheerio";
 
 const emojiPattern = /\p{Extended_Pictographic}|\p{Emoji_Modifier}|\uFE0F|\u200D/gu;
@@ -136,6 +137,7 @@ const useForbidden = [
 
 export function assessRomanianProductCopy(record) {
   const errors = [];
+  if (hasVerbatimMoldovaCopy(record)) return errors;
   if (record.shortDescription.length < 50 || record.shortDescription.length > 200) {
     errors.push("shortDescription must contain 50-200 characters");
   }

@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "asOf": "2026-10-05",
+  "asOf": "2026-10-30",
   "commit": "3107742bd65b",
   "branch": "content/product-descriptions",
   "status": "release-blocked",
-  "label": "Product copy is editorially approved; production approval remains blocked",
+  "label": "Verbatim Moldova originals restored; editorial and legal review remain separate; production blocked",
   "environment": "Windows local QA with Node 22.23.1, npm 10.9.8 and Chromium desktop/mobile; GitHub Actions and Vercel production smoke",
   "counts": {
     "sourceProducts": 50,
@@ -12,9 +12,9 @@
     "draftProducts": 0,
     "officialContentRecords": 137,
     "claims": {
-      "total": 435,
+      "total": 433,
       "approved": 0,
-      "pending": 435,
+      "pending": 433,
       "rejected": 0
     }
   },
@@ -89,25 +89,20 @@
         "Deploy prerendered canonical routes, sitemap and robots policy.",
         "Pass live Rich Results and URL inspection without critical errors."
       ]
-    }
-  ],
-  "resolvedBlockers": [
+    },
     {
       "id": "P0-LOCALE",
       "priority": "P0",
       "owner": "content",
-      "status": "resolved",
-      "summary": "The revised Romanian descriptions for 50 products awaited the owner's editorial approval.",
+      "status": "open",
+      "summary": "New verbatim RU/RO source originals supersede the 2026-10-05 copy fingerprints. Original text reproduction is owner-authorized; independent editorial review remains pending.",
       "acceptanceCriteria": [
-        "Approve the revised Romanian product descriptions, ingredient lists and usage instructions.",
-        "Record current source and translation fingerprints and regenerate public content.",
-        "Keep pending product claims quarantined and pass Romanian content, accessibility and SEO checks."
-      ],
-      "resolvedAt": "2026-10-05",
-      "resolutionReference": "docs/RO_MD_PRODUCT_COPY_APPROVAL_2026-10-05.md",
-      "resolution": "The owner directly approved the current RU/RO texts for all 50 products; four Romanian descriptive fields per product have approved review status and current source/translation fingerprints. Legal claims remain separately gated.",
-      "originalSummary": "Revised Romanian descriptions for 50 products were quarantined pending editorial review."
-    },
+        "Review the current original RU/RO copy without treating source reproduction as medical/legal approval.",
+        "Record current review evidence for the revised originals; do not reuse stale translation approval."
+      ]
+    }
+  ],
+  "resolvedBlockers": [
     {
       "id": "P1-RANKING",
       "priority": "P1",

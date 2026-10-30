@@ -7,11 +7,9 @@ import { useEffect } from "react";
 import {
   ProductCard,
   SectionHeading,
-  splitText,
 } from "../components/ui";
 import { ProductImage } from "../components/ProductImage";
 import { PageBreadcrumbs, ReadingLinks } from "../components/PageNavigation";
-import { withoutExternalReferences } from "../components/contentText";
 import { productImageStyle } from "../features/product/productImagePresentation";
 import { getProductTitle } from "../features/product/productNames";
 import {
@@ -20,7 +18,7 @@ import {
 } from "../claims";
 import { useProductDetail } from "../features/product/productDetailData";
 import { recordProductView } from "../features/contact/utm-capture";
-import { buildProductOverview } from "../features/product/productPresentation";
+import { ProductSourceText } from "../features/product/ProductSourceText";
 import { useSelection } from "../features/selection/SelectionContext";
 import { useLocale } from "../locales/LocaleProvider";
 import { Link, useParams } from "../router";
@@ -37,31 +35,31 @@ export default function ProductPage() {
   const copy = locale === "ro"
     ? {
         overview: "Despre produs",
-        selectionHint: "Salvează produsul pentru a-l transmite consultantului împreună cu solicitarea ta.",
-        selectedHint: "Produsul este salvat și va rămâne în contextul solicitării tale.",
-        openSelection: "Deschide selecția",        formula: "Despre formula Halo Complex™",
+        selectionHint: "Salvează produsul pentru a-l transmite managerului pentru plasarea comenzii.",
+        selectedHint: "Produsul este salvat și va rămâne în comanda ta.",
+        openSelection: "Deschide selecția",
+        formula: "Despre formula Halo Complex™",
         formulaHint: "Originea și istoria formulei Dr. Nona.",
-        consultation: "Întreabă despre acest produs",
-        consultationHint: "Denumirea produsului va fi inclusă în formularul de contact.",
+        order: "Plasează comanda",
+        orderHint: "Produsul va fi inclus în formularul comenzii.",
       }
     : {
         overview: "О продукте",
-        selectionHint: "Сохраните продукт, чтобы передать его консультанту вместе с вашей заявкой.",
-        selectedHint: "Продукт сохранён и останется в контексте вашей заявки.",
-        openSelection: "Открыть подборку",        formula: "О формуле Halo Complex™",
+        selectionHint: "Сохраните продукт, чтобы передать его менеджеру для оформления заказа.",
+        selectedHint: "Продукт сохранён и останется в вашем заказе.",
+        openSelection: "Открыть подборку",
+        formula: "О формуле Halo Complex™",
         formulaHint: "Происхождение и история формулы Dr. Nona.",
-        consultation: "Задать вопрос об этом продукте",
-        consultationHint: "Название продукта будет передано в форму обращения.",
+        order: "Оформить заказ",
+        orderHint: "Товар будет передан в форму заказа.",
       };
   if (!product) return <NotFoundPage />;
   const title = getProductTitle(product);
   const saved = contains(product.slug);
-  const productLongDescription = withoutExternalReferences(getProductCopy(product, "longDescription"));
+  const productLongDescription = getProductCopy(product, "longDescription");
   const productDisclaimer = getProductDisclaimer(product, locale);
-  const productIngredients = withoutExternalReferences(getProductCopy(product, "ingredients"));
-  const productHowToUse = withoutExternalReferences(getProductCopy(product, "howToUse"));
-  const productOverview = buildProductOverview({ longDescription: productLongDescription });
-  const overviewParagraphs = splitText(productOverview, 300);
+  const productIngredients = getProductCopy(product, "ingredients");
+  const productHowToUse = getProductCopy(product, "howToUse");
   const categoryPath = `/products?${new URLSearchParams({ category: product.category })}`;
 
   return (
@@ -101,13 +99,13 @@ export default function ProductPage() {
               </div>
             </figure>
             <div className="product-knowledge__content">
-              {overviewParagraphs.length > 0 && (
+              {productLongDescription && (
                 <article className="product-copy-card product-copy-card--overview">
                   <div>
                     <h2>{copy.overview}</h2>
-                    {overviewParagraphs.map((paragraph) => (
-                      <p key={paragraph}>{paragraph}</p>
-                    ))}
+                    <div className="product-source-text" data-testid="full-product-description">
+                      <ProductSourceText blocks={product.sourceBlocks} text={productLongDescription} />
+                    </div>
                   </div>
                 </article>
               )}
@@ -174,7 +172,7 @@ export default function ProductPage() {
       <div className="container">
         <ReadingLinks links={[
           { to: "/ourformula", label: copy.formula, description: copy.formulaHint },
-          { to: `/contactus?${new URLSearchParams({ products: product.slug })}`, label: copy.consultation, description: copy.consultationHint },
+          { to: `/contactus?${new URLSearchParams({ products: product.slug })}`, label: copy.order, description: copy.orderHint },
         ]} />
       </div>
 

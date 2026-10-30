@@ -22,7 +22,7 @@ const common = {
 };
 
 describe("client application validation", () => {
-  test("preserves a selected consultation slot for transactional reservation", () => {
+  test("rejects retired consultation bookings even with valid slot data", () => {
     const consultationSlotId = "00000000-0000-4000-8000-000000000024";
     const result = validateClientApplication({
       ...common,
@@ -31,12 +31,10 @@ describe("client application validation", () => {
       consultationMode: "online",
       consultationDate: "2030-01-15",
       consultationTime: "10:00",
-    }, new Set<string>(), "ru", new Date("2030-01-01T10:00:00.000Z"));
+    }, new Set<string>(), "ru");
 
-    expect(result.success).toBe(true);
-    if (result.success && result.data.type === "consultation") {
-      expect(result.data.consultationSlotId).toBe(consultationSlotId);
-    }
+    expect(result.success).toBe(false);
+    if (!result.success) expect(result.fieldErrors).toHaveProperty("type");
   });
 
   test("preserves quantity boundaries for all 50 published products", () => {
@@ -93,11 +91,10 @@ describe("client application validation", () => {
     const result = validateClientApplication(
       { ...common, ...variant },
       allowed,
-      "ru",
-      new Date("2030-01-01T10:00:00.000Z")
+      "ru"
     );
 
-    expect(result.success).toBe(true);
+    expect(result.success).toBe(variant.type === "order");
     if (result.success) {
       expect(result.data).toMatchObject({
         email: "ana@example.com",
@@ -249,14 +246,13 @@ describe("client application validation", () => {
         eventTime: "10:00",
       },
       new Set(),
-      "ro",
-      new Date("2030-01-01T10:00:00.000Z")
+      "ro"
     );
 
     expect(result).toEqual({
       success: false,
       fieldErrors: {
-        masterclassTopic: "Selectați o temă de masterclass din listă",
+        type: "Tip de solicitare necunoscut",
       },
     });
   });

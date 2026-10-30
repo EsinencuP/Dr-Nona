@@ -1,0 +1,1073 @@
+{
+  "schemaVersion": 1,
+  "method": "Live category discovery; original page text; emoji removal only. SKU retained as historical identity metadata, not reverified from drnona.com.",
+  "categories": {
+    "ru": [
+      {
+        "sourceUrl": "https://www.drnona.md/hygiene",
+        "title": "Гигиена",
+        "urls": [
+          "https://www.drnona.md/compressed_wipes_ru",
+          "https://www.drnona.md/mouthwash",
+          "https://www.drnona.md/shower_gel_lord",
+          "https://www.drnona.md/deodorant_kiwi",
+          "https://www.drnona.md/deodorant_lady",
+          "https://www.drnona.md/deodorant_lord",
+          "https://www.drnona.md/unisex_deodorant_stick",
+          "https://www.drnona.md/facial_foam_soap",
+          "https://www.drnona.md/shenseen_mousse_toothpaste",
+          "https://www.drnona.md/mineral_shampoo",
+          "https://www.drnona.md/shower_gel",
+          "https://www.drnona.md/mineral_hair_conditioner",
+          "https://www.drnona.md/recovering_mud_musk",
+          "https://www.drnona.md/mineral_lipstick",
+          "https://www.drnona.md/bath_salts_with_chamomile_extract",
+          "https://www.drnona.md/bath_salts_with_rosemary_extract",
+          "https://www.drnona.md/bath_salts_with_ylang_ylang_extract",
+          "https://www.drnona.md/bath_salts_with_lavender_extract"
+        ]
+      },
+      {
+        "sourceUrl": "https://www.drnona.md/supplements",
+        "title": "Пищевые добавки",
+        "urls": [
+          "https://www.drnona.md/phase_9",
+          "https://www.drnona.md/okseen",
+          "https://www.drnona.md/dnd",
+          "https://www.drnona.md/goldseen",
+          "https://www.drnona.md/imunseen",
+          "https://www.drnona.md/cleanseen",
+          "https://www.drnona.md/pulmoseen",
+          "https://www.drnona.md/ravseen",
+          "https://www.drnona.md/reumoseen",
+          "https://www.drnona.md/newseen",
+          "https://www.drnona.md/yamseen",
+          "https://www.drnona.md/femseen"
+        ]
+      },
+      {
+        "sourceUrl": "https://www.drnona.md/creams",
+        "title": "Кремы",
+        "urls": [
+          "https://www.drnona.md/hand_and_nail_cream",
+          "https://www.drnona.md/solaris",
+          "https://www.drnona.md/dynamic",
+          "https://www.drnona.md/facial_solaris",
+          "https://www.drnona.md/body_butter",
+          "https://www.drnona.md/eye_care_balm",
+          "https://www.drnona.md/night_cream",
+          "https://www.drnona.md/face_milk",
+          "https://www.drnona.md/anti_aging_serum",
+          "https://www.drnona.md/shp_day_time_face_cream",
+          "https://www.drnona.md/ard_cream_for_face",
+          "https://www.drnona.md/top_samples_kit"
+        ]
+      },
+      {
+        "sourceUrl": "https://www.drnona.md/parfumes",
+        "title": "Парфюмерия",
+        "urls": [
+          "https://www.drnona.md/parfume_kiwi",
+          "https://www.drnona.md/parfume_lord",
+          "https://www.drnona.md/parfume_lady",
+          "https://www.drnona.md/parfume_faya"
+        ]
+      },
+      {
+        "sourceUrl": "https://www.drnona.md/drinks",
+        "title": "Напитки",
+        "urls": [
+          "https://www.drnona.md/slimseen_coffee_mix",
+          "https://www.drnona.md/gonseen",
+          "https://www.drnona.md/chocoseen",
+          "https://www.drnona.md/soupseen"
+        ]
+      }
+    ],
+    "ro": [
+      {
+        "sourceUrl": "https://www.drnona.md/supplemets_ro",
+        "title": "Пищевые добавки",
+        "urls": [
+          "https://www.drnona.md/phase_9_ro",
+          "https://www.drnona.md/okseen_ro",
+          "https://www.drnona.md/dnd_ro",
+          "https://www.drnona.md/goldseen_ro",
+          "https://www.drnona.md/imunseen_ro",
+          "https://www.drnona.md/cleanseen_ro",
+          "https://www.drnona.md/pulmoseen_ro",
+          "https://www.drnona.md/ravseen_ro",
+          "https://www.drnona.md/reumoseen_ro",
+          "https://www.drnona.md/newseen_ro",
+          "https://www.drnona.md/yamseen_ro",
+          "https://www.drnona.md/femseen_ro"
+        ]
+      },
+      {
+        "sourceUrl": "https://www.drnona.md/hygiene_ro",
+        "title": "Гигиена",
+        "urls": [
+          "https://www.drnona.md/compressed_wipes_ro",
+          "https://www.drnona.md/mouthwash_ro",
+          "https://www.drnona.md/shower_gel_lord_ro",
+          "https://www.drnona.md/deodorant_kiwi_ro",
+          "https://www.drnona.md/deodorant_lady_ro",
+          "https://www.drnona.md/deodorant_lord_ro",
+          "https://www.drnona.md/unisex_deodorant_stick_ro",
+          "https://www.drnona.md/facial_foam_soap_ro",
+          "https://www.drnona.md/shenseen_mousse_toothpaste_ro",
+          "https://www.drnona.md/mineral_shampoo_ro",
+          "https://www.drnona.md/shower_gel_ro",
+          "https://www.drnona.md/mineral_hair_conditioner_ro",
+          "https://www.drnona.md/recovering_mud_musk_ro",
+          "https://www.drnona.md/mineral_lipstick_ro",
+          "https://www.drnona.md/bath_salts_with_chamomile_extract_ro",
+          "https://www.drnona.md/bath_salts_with_rosemary_extract_ro",
+          "https://www.drnona.md/bath_salts_with_ylang_ylang_extract_ro",
+          "https://www.drnona.md/bath_salts_with_lavander_extract_ro"
+        ]
+      },
+      {
+        "sourceUrl": "https://www.drnona.md/creams_ro",
+        "title": "Кремы",
+        "urls": [
+          "https://www.drnona.md/hand_and_nail_cream_ro",
+          "https://www.drnona.md/solaris_ro",
+          "https://www.drnona.md/dynamic_ro",
+          "https://www.drnona.md/facial_solaris_ro",
+          "https://www.drnona.md/body_butter_ro",
+          "https://www.drnona.md/eye_care_balm_ro",
+          "https://www.drnona.md/night_cream_ro",
+          "https://www.drnona.md/face_milk_ro",
+          "https://www.drnona.md/anti_aging_serum_ro",
+          "https://www.drnona.md/shp_day_time_face_cream_ro",
+          "https://www.drnona.md/ard_cream_for_face_ro",
+          "https://www.drnona.md/top_samples_kit_ro"
+        ]
+      },
+      {
+        "sourceUrl": "https://www.drnona.md/parfumes_ro",
+        "title": "Парфюмерия",
+        "urls": [
+          "https://www.drnona.md/parfume_kiwi_ro",
+          "https://www.drnona.md/parfume_lord_ro",
+          "https://www.drnona.md/parfume_lady_ro",
+          "https://www.drnona.md/parfume_faya_ro"
+        ]
+      },
+      {
+        "sourceUrl": "https://www.drnona.md/drinks_ro",
+        "title": "Напитки",
+        "urls": [
+          "https://www.drnona.md/slimseen_coffee_mix_ro",
+          "https://www.drnona.md/gonseen_ro",
+          "https://www.drnona.md/chocoseen_ro",
+          "https://www.drnona.md/soupseen_ro"
+        ]
+      }
+    ]
+  },
+  "records": [
+    {
+      "slug": "after-shave-lord",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/parfume_lord_ro",
+      "sourceTitle": "Eau De Parfume ( LORD )",
+      "sku": "310001",
+      "textHash": "a831e98cd551cb85f7466e8dcb4f2e6dd4af2b733bfcb6240146624072d5ab45",
+      "blocks": 9
+    },
+    {
+      "slug": "after-shave-lord",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/parfume_lord",
+      "sourceTitle": "Eau De Parfume ( LORD )",
+      "sku": "310001",
+      "textHash": "f96ea6d7552f02a608ad074b5beaada66e2f08b0ffa2cfb86fd8cc4f5283e059",
+      "blocks": 9
+    },
+    {
+      "slug": "anti-aging-serum",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/anti_aging_serum_ro",
+      "sourceTitle": "Anti-Aging Serum",
+      "sku": "439001",
+      "textHash": "8fda5b171712b843c3b84cb55c3409a12ee0d3b7db3f9630b44881fa8d20668e",
+      "blocks": 13
+    },
+    {
+      "slug": "anti-aging-serum",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/anti_aging_serum",
+      "sourceTitle": "Anti-Aging Serum",
+      "sku": "439001",
+      "textHash": "e17fad286392db570404916fe81dabd6ea7816b493e72a645dd328db56b651fd",
+      "blocks": 13
+    },
+    {
+      "slug": "ard-complex",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/ard_cream_for_face_ro",
+      "sourceTitle": "Moisturizing Cream For Face ( ARD )",
+      "sku": "606001",
+      "textHash": "25f34e000dd3198fa1c57c874b5184a22211b8feffa1fe57bdef5df28052c77d",
+      "blocks": 7
+    },
+    {
+      "slug": "ard-complex",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/ard_cream_for_face",
+      "sourceTitle": "Moisturizing Cream For Face ( ARD )",
+      "sku": "606001",
+      "textHash": "33623c1c66c50d6902db9c961d5a1858e09fa7978bf7bb834e871fb3d6847bc0",
+      "blocks": 7
+    },
+    {
+      "slug": "beauty-mask-for-face",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/recovering_mud_musk_ro",
+      "sourceTitle": "Recovering Mud Musk",
+      "sku": "403001",
+      "textHash": "cf814f5135a9674405105e0f0c11cd1c07a55ba6e258ae27ea54859d26d2a679",
+      "blocks": 15
+    },
+    {
+      "slug": "beauty-mask-for-face",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/recovering_mud_musk",
+      "sourceTitle": "Recovering Mud Musk",
+      "sku": "403001",
+      "textHash": "78e1e2440a29841a891ec50d06d6026d41b968b67406ae43d0d64421ca4b71e2",
+      "blocks": 15
+    },
+    {
+      "slug": "body-butter",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/body_butter_ro",
+      "sourceTitle": "Shea Body Butter",
+      "sku": null,
+      "textHash": "fef013a8c462753c6d1cdde44a2575829891aa2d399c10967f0dde95e224ae57",
+      "blocks": 5
+    },
+    {
+      "slug": "body-butter",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/body_butter",
+      "sourceTitle": "Shea Body Butter",
+      "sku": null,
+      "textHash": "559056831adfb47f1805e935f62d695d8db6832102f18e0fbda8fb6edcd1563b",
+      "blocks": 5
+    },
+    {
+      "slug": "chocoseen",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/chocoseen_ro",
+      "sourceTitle": "Chocoseen",
+      "sku": "252001",
+      "textHash": "0087786e86e3d3e63ffae2c3633eb4a0b0d3ec793d331e632c094b2e379405db",
+      "blocks": 20
+    },
+    {
+      "slug": "chocoseen",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/chocoseen",
+      "sourceTitle": "Chocoseen",
+      "sku": "252001",
+      "textHash": "c9196b73c832a7d8c9c91c289f655584fc2e1a4d30f9443e07b627125cbd8031",
+      "blocks": 20
+    },
+    {
+      "slug": "cleanseen",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/cleanseen_ro",
+      "sourceTitle": "Cleanseen",
+      "sku": "208001",
+      "textHash": "f76db533dc0aad0270c7e232c87027df7f4b11fb7d86238df4035487d1b1506b",
+      "blocks": 8
+    },
+    {
+      "slug": "cleanseen",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/cleanseen",
+      "sourceTitle": "Cleanseen",
+      "sku": "208001",
+      "textHash": "6033a006e317685b4fb62be5b1137bf249b5bc362cb9425fd9c48f135ebe4eeb",
+      "blocks": 8
+    },
+    {
+      "slug": "coffee-mix",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/slimseen_coffee_mix_ro",
+      "sourceTitle": "Slimseen Coffee Mix",
+      "sku": "700001",
+      "textHash": "8c84cfdcc7b1a1b0f23e0a8342531317107896b831e7bf4cd709164597466ff7",
+      "blocks": 8
+    },
+    {
+      "slug": "coffee-mix",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/slimseen_coffee_mix",
+      "sourceTitle": "Slimseen Coffee Mix",
+      "sku": "700001",
+      "textHash": "7847772f16100628734fa835cb46b155629db11256f42ccd87331f5ada78d994",
+      "blocks": 8
+    },
+    {
+      "slug": "conditioner",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/mineral_hair_conditioner_ro",
+      "sourceTitle": "Mineral Hair Conditioner",
+      "sku": "440001",
+      "textHash": "89e7b5df7c1c333124ae751cfd768d4759858d4e87df5938c56866ea18011365",
+      "blocks": 15
+    },
+    {
+      "slug": "conditioner",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/mineral_hair_conditioner",
+      "sourceTitle": "Mineral Hair Conditioner",
+      "sku": "440001",
+      "textHash": "e962eaa00667aaadcb3ed28707b1e5b82273d9ab41bddfb5ee27b5491399ab19",
+      "blocks": 15
+    },
+    {
+      "slug": "dead-sea-water-compresses",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/compressed_wipes_ro",
+      "sourceTitle": "Compressed Wipes",
+      "sku": "450001",
+      "textHash": "11bc16efd4e8a90f49234638b481a7c4f05119093f9b94873e0b05fce8498ad3",
+      "blocks": 9
+    },
+    {
+      "slug": "dead-sea-water-compresses",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/compressed_wipes_ru",
+      "sourceTitle": "Compressed Wipes",
+      "sku": "450001",
+      "textHash": "534864fbaa652dfd98113eddb9213e5c6f19bb7085fafc4ce9af71ffafd5de87",
+      "blocks": 9
+    },
+    {
+      "slug": "dnd-chewing-gum-tablets",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/dnd_ro",
+      "sourceTitle": "DND",
+      "sku": "601001",
+      "textHash": "1554c226e675e5de692fc7949b1b5486cbffdb1b83bcdf96dfb977ef343cd635",
+      "blocks": 11
+    },
+    {
+      "slug": "dnd-chewing-gum-tablets",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/dnd",
+      "sourceTitle": "DND",
+      "sku": "601001",
+      "textHash": "6cf95300c5ebb9d4bbdadfb4d44d5215599a920b3e63b1437506abd6e8b23546",
+      "blocks": 11
+    },
+    {
+      "slug": "dynamic-hydrating-cream",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/dynamic_ro",
+      "sourceTitle": "Dynamic",
+      "sku": "404001",
+      "textHash": "bceef8fd44fb0cab787f09bc76d52c1ba291d400cd8fce1e00f8c19f885645cf",
+      "blocks": 7
+    },
+    {
+      "slug": "dynamic-hydrating-cream",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/dynamic",
+      "sourceTitle": "Dynamic",
+      "sku": "404001",
+      "textHash": "20654b0c34ae6698a6a673f14497078dcb0880ff54c907c249117795ea4cd684",
+      "blocks": 8
+    },
+    {
+      "slug": "eye-contour-balm",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/eye_care_balm_ro",
+      "sourceTitle": "Eye Care Balm",
+      "sku": "405001",
+      "textHash": "17d22efe3da796f9699a24e2842dd14b6a6d6fe68cdb20265425e6dbd1940332",
+      "blocks": 6
+    },
+    {
+      "slug": "eye-contour-balm",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/eye_care_balm",
+      "sourceTitle": "Eye Care Balm",
+      "sku": "405001",
+      "textHash": "201f0eaa9a6eb04114a6b908a4b8c79eed64dd01f8adf2070b6ecfc7892a8e1d",
+      "blocks": 6
+    },
+    {
+      "slug": "face-milk",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/face_milk_ro",
+      "sourceTitle": "Face Milk",
+      "sku": "414001",
+      "textHash": "302be42f37105a98f082033e76188ce77608b65968b33bf75ab0f0d3c71bf923",
+      "blocks": 8
+    },
+    {
+      "slug": "face-milk",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/face_milk",
+      "sourceTitle": "Face Milk",
+      "sku": "414001",
+      "textHash": "3003d70d04d18bdc8d3635cf029737866c1c5767378a9e3e3fe060a5973de92a",
+      "blocks": 11
+    },
+    {
+      "slug": "face-soap",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/facial_foam_soap_ro",
+      "sourceTitle": "Purifying Facial Foam Soap",
+      "sku": "510001",
+      "textHash": "ec3654f471b22d5bd799c7426d87ca2d6bfe2eab19bfa79e02676fe7c7b0ecbd",
+      "blocks": 11
+    },
+    {
+      "slug": "face-soap",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/facial_foam_soap",
+      "sourceTitle": "Purifying Facial Foam Soap",
+      "sku": "510001",
+      "textHash": "7ed78c85c5b015c236dedb1ce254027d5462f54dbd161113d9e6a11956d98ef8",
+      "blocks": 14
+    },
+    {
+      "slug": "facial-solaris",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/facial_solaris_ro",
+      "sourceTitle": "Solaris Facial Cream",
+      "sku": "410001",
+      "textHash": "6f350a9a41ae155f9a4fb87b9a4ab455f98e591d53dcc258ca57d25241cf0b2a",
+      "blocks": 8
+    },
+    {
+      "slug": "facial-solaris",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/facial_solaris",
+      "sourceTitle": "Solaris Facial Cream",
+      "sku": "410001",
+      "textHash": "75d6c0e9cd427f95531ac7069e2d6962abf308b41768d845cbe29721eb6d6592",
+      "blocks": 8
+    },
+    {
+      "slug": "fase-9",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/phase_9_ro",
+      "sourceTitle": "Phase-9",
+      "sku": "205101",
+      "textHash": "b5dc465e67ab68cfd0cfa733355e8343764b9815c835438ef6884181bb441a38",
+      "blocks": 2
+    },
+    {
+      "slug": "fase-9",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/phase_9",
+      "sourceTitle": "Phase-9",
+      "sku": "205101",
+      "textHash": "065c9eafe05d88246309ac2a174bf6282f4d760583c77bd458c8426a43c613f6",
+      "blocks": 2
+    },
+    {
+      "slug": "femseen",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/femseen_ro",
+      "sourceTitle": "Femseen",
+      "sku": "210001",
+      "textHash": "94037113e0111aa8b8b025e32a67266917cbba4bd83a16422a155955cd947db7",
+      "blocks": 11
+    },
+    {
+      "slug": "femseen",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/femseen",
+      "sourceTitle": "Femseen",
+      "sku": "210001",
+      "textHash": "0d3679271bec80b40ff718cd5434adf4bbda1e5e7bd1ac268ff7e4f3acb3fb3f",
+      "blocks": 11
+    },
+    {
+      "slug": "frequent-use-tonic-shampoo",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/mineral_shampoo_ro",
+      "sourceTitle": "Mineral Shampoo",
+      "sku": "461001",
+      "textHash": "412f4f94aff401fb17b128c3870ec4348ff6b3130dc1d09e228eec64e2cb9227",
+      "blocks": 15
+    },
+    {
+      "slug": "frequent-use-tonic-shampoo",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/mineral_shampoo",
+      "sourceTitle": "Mineral Shampoo",
+      "sku": "461001",
+      "textHash": "7a76c30f015d322dd00fe8982a8f8535135a3e0f902a5d909dcee23c4dbd7dfe",
+      "blocks": 15
+    },
+    {
+      "slug": "goldseen",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/goldseen_ro",
+      "sourceTitle": "Goldseen",
+      "sku": "212001",
+      "textHash": "e5b509baa38336e578ffd964ce9c0e175d00ce79d6213959b4ec355c24d2ad31",
+      "blocks": 10
+    },
+    {
+      "slug": "goldseen",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/goldseen",
+      "sourceTitle": "Goldseen",
+      "sku": "212001",
+      "textHash": "c13bfa50f64e0a39c78de99120347f0a0c30664f9d23ba1a137dc877bfb7db7d",
+      "blocks": 10
+    },
+    {
+      "slug": "gonseen",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/gonseen_ro",
+      "sourceTitle": "Gonseen Tea",
+      "sku": "230001",
+      "textHash": "4a4ba5361fb3b842a0b0c708ee2b947126bb06768c5c48ba6b41b2a4faece14b",
+      "blocks": 8
+    },
+    {
+      "slug": "gonseen",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/gonseen",
+      "sourceTitle": "Gonseen Tea",
+      "sku": "230001",
+      "textHash": "301e2435369c77ed5a79fea081454e795eea857bc0f0b70dbccbb0976d0bf317",
+      "blocks": 8
+    },
+    {
+      "slug": "halo-gel",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/shower_gel_ro",
+      "sourceTitle": "Shower Gel",
+      "sku": "415001",
+      "textHash": "9a27f72ef0b0326c1a98a69b25361a9b5d16d435467f9b4e83d0a07416fa491a",
+      "blocks": 16
+    },
+    {
+      "slug": "halo-gel",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/shower_gel",
+      "sourceTitle": "Shower Gel",
+      "sku": "415001",
+      "textHash": "cb2247fa69b86aa73be1cab545a3bd63578b9b5b3b5e13e10c350e7297b75ae3",
+      "blocks": 16
+    },
+    {
+      "slug": "halo-pure-unisex-deodorant-stick",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/unisex_deodorant_stick_ro",
+      "sourceTitle": "Pure Unisex Deodorant Stick",
+      "sku": "325001",
+      "textHash": "d5306b55f1ed9a7442891373ac1b829733a7e3401702f1b31515937882d5a10f",
+      "blocks": 10
+    },
+    {
+      "slug": "halo-pure-unisex-deodorant-stick",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/unisex_deodorant_stick",
+      "sourceTitle": "Pure Unisex Deodorant Stick",
+      "sku": "325001",
+      "textHash": "1a4a5476ee23fbb0af2da17413a03474bad250bb73ad153c3b90f81d83b09bca",
+      "blocks": 12
+    },
+    {
+      "slug": "halo-shenseen-toothpaste",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/shenseen_mousse_toothpaste_ro",
+      "sourceTitle": "Shenseen Mousse Toothpaste",
+      "sku": "437001",
+      "textHash": "b4e48e826caa392dbcae211c77d4229cf073ddc6bf036389d85ebb6d53d7752d",
+      "blocks": 10
+    },
+    {
+      "slug": "halo-shenseen-toothpaste",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/shenseen_mousse_toothpaste",
+      "sourceTitle": "Shenseen Mousse Toothpaste",
+      "sku": "437001",
+      "textHash": "b5e11aa4710777c63694004ffcdf0f93f14dcf754449d95b2740d23da4339204",
+      "blocks": 10
+    },
+    {
+      "slug": "hand-and-nail-treatment",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/hand_and_nail_cream_ro",
+      "sourceTitle": "Hand And Nail Cream",
+      "sku": "406001",
+      "textHash": "ac4f9556b776fdcc7792ef7c7ad6f3852881d6d0519bbff7a84d4e86a3d7b4b4",
+      "blocks": 4
+    },
+    {
+      "slug": "hand-and-nail-treatment",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/hand_and_nail_cream",
+      "sourceTitle": "Hand And Nail Cream",
+      "sku": "406001",
+      "textHash": "d7f3eef3780c1b796eebde911af25d0028e20701ada571f2c7e311a6c96ec5e6",
+      "blocks": 4
+    },
+    {
+      "slug": "imunseen",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/imunseen_ro",
+      "sourceTitle": "Imunseen",
+      "sku": "216001",
+      "textHash": "965f4a06404dd1505949d096034e981100035d53c072e5265eb6130e7b8e2a98",
+      "blocks": 11
+    },
+    {
+      "slug": "imunseen",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/imunseen",
+      "sourceTitle": "Imunseen",
+      "sku": "216001",
+      "textHash": "123297a97bccea8a1a81414e6f0bdc25e1e4d126e0bd831679485c224724c87d",
+      "blocks": 11
+    },
+    {
+      "slug": "kiwi-deodorant",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/deodorant_kiwi_ro",
+      "sourceTitle": "Deodorant ( KIWI )",
+      "sku": "321001",
+      "textHash": "d2878af9857450f9e136fa7e889537c24e9f7a14c9c3e93dea88bbc6dea2db99",
+      "blocks": 7
+    },
+    {
+      "slug": "kiwi-deodorant",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/deodorant_kiwi",
+      "sourceTitle": "Deodorant ( KIWI )",
+      "sku": "321001",
+      "textHash": "59e63b65d9591c43e719ffdddc3dd6a8016e45f9c089e228940c140b9bc7f87d",
+      "blocks": 7
+    },
+    {
+      "slug": "lady-deodorant",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/deodorant_lady_ro",
+      "sourceTitle": "Deodorant ( LADY )",
+      "sku": "320001",
+      "textHash": "c47b59dd0c7f94a1284257976d078526b4ff8598c9503d55980b35207ff76c25",
+      "blocks": 7
+    },
+    {
+      "slug": "lady-deodorant",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/deodorant_lady",
+      "sourceTitle": "Deodorant ( LADY )",
+      "sku": "320001",
+      "textHash": "c5dbf9fe0636170cf2ee75765daef2428bc4592e608d06fef8dfdb2589c78ec4",
+      "blocks": 7
+    },
+    {
+      "slug": "lipstick-new",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/mineral_lipstick_ro",
+      "sourceTitle": "Mineral Lipstick",
+      "sku": "330101",
+      "textHash": "1dea693e894faf62058c92b59bb71f88c1e0e8d640a956aecd6ed3be881accaf",
+      "blocks": 6
+    },
+    {
+      "slug": "lipstick-new",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/mineral_lipstick",
+      "sourceTitle": "Mineral Lipstick",
+      "sku": "330101",
+      "textHash": "797408c7bcffa70383fc9ada3fd7b91cfaabe8e499e149603273cdebc155905f",
+      "blocks": 6
+    },
+    {
+      "slug": "lord-deodorant",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/deodorant_lord_ro",
+      "sourceTitle": "Deodorant ( LORD )",
+      "sku": "324001",
+      "textHash": "5fd638fcd774a8863c6ba502948150bc7db3d32298bdb3ef973d5ef1d0c7bc80",
+      "blocks": 4
+    },
+    {
+      "slug": "lord-deodorant",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/deodorant_lord",
+      "sourceTitle": "Deodorant ( LORD )",
+      "sku": "324001",
+      "textHash": "4c33e8035fcf092a04a2f807547dff3d566b9ef057ab5a839ce7453db8626299",
+      "blocks": 4
+    },
+    {
+      "slug": "mouthwash",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/mouthwash_ro",
+      "sourceTitle": "Mouthwash",
+      "sku": "412001",
+      "textHash": "4c639a6a2ad84e49067a28dac7bacd786eeaf64e28cee0c495c6fdc3e2a9093b",
+      "blocks": 16
+    },
+    {
+      "slug": "mouthwash",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/mouthwash",
+      "sourceTitle": "Mouthwash",
+      "sku": "412001",
+      "textHash": "d0c4118e3f02ab06f390a07ab4aa708a4b260111081d905b6516bb42bf2085b4",
+      "blocks": 16
+    },
+    {
+      "slug": "newseen",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/newseen_ro",
+      "sourceTitle": "Newseen",
+      "sku": "213001",
+      "textHash": "10b27eb6b8343faf4b3666a769b81db6e04f27ae5181d50457bb87439459942c",
+      "blocks": 8
+    },
+    {
+      "slug": "newseen",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/newseen",
+      "sourceTitle": "Newseen",
+      "sku": "213001",
+      "textHash": "3400ce6813886c08929062969262bd563510a2d7d23074eff98db7db72023f26",
+      "blocks": 8
+    },
+    {
+      "slug": "night-cream",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/night_cream_ro",
+      "sourceTitle": "Night Cream",
+      "sku": "409001",
+      "textHash": "700ab19a20b5f01bdf661fde1f73619406f0b89fdc35168084222abba5b40295",
+      "blocks": 8
+    },
+    {
+      "slug": "night-cream",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/night_cream",
+      "sourceTitle": "Night Cream",
+      "sku": "409001",
+      "textHash": "b672c6fbc29d9805ee91ef7fcbf24f1ed7b668cefeb3e99818ade2b4f381969d",
+      "blocks": 8
+    },
+    {
+      "slug": "okseen",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/okseen_ro",
+      "sourceTitle": "Okseen",
+      "sku": "204001",
+      "textHash": "da0bb646f09dc83b808cd665bf7a7c2f1a01842eccd28114475d7e43584880fd",
+      "blocks": 10
+    },
+    {
+      "slug": "okseen",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/okseen",
+      "sourceTitle": "Okseen",
+      "sku": "204001",
+      "textHash": "d667b48f2fba56fdfa62c5cdcda9f211c9c37af226d369fb42b73111af8419f6",
+      "blocks": 10
+    },
+    {
+      "slug": "parfum-faya",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/parfume_faya_ro",
+      "sourceTitle": "Eau De Parfume ( FAYA )",
+      "sku": "309001",
+      "textHash": "ee143673a61a33eab3c59a341fa6efc83a574c88eb000b575c4a1aabab5ac9cd",
+      "blocks": 12
+    },
+    {
+      "slug": "parfum-faya",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/parfume_faya",
+      "sourceTitle": "Eau De Parfume ( FAYA )",
+      "sku": "309001",
+      "textHash": "af88e8fd73ec6dfe2e86dca670d865af667ff32fefe709685572906969e7a12c",
+      "blocks": 12
+    },
+    {
+      "slug": "perfume-kiwi",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/parfume_kiwi_ro",
+      "sourceTitle": "Eau De Parfume ( KIWI )",
+      "sku": "302001",
+      "textHash": "b168bdb39d80ea5652eb372027386dbcd0c11e54f56c450246afe10e259a7194",
+      "blocks": 7
+    },
+    {
+      "slug": "perfume-kiwi",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/parfume_kiwi",
+      "sourceTitle": "Eau De Parfume ( KIWI )",
+      "sku": "302001",
+      "textHash": "68c05fd494d0c603b508376b44ecdcea6221bf76823c1a76b29e4151d5be4a1c",
+      "blocks": 7
+    },
+    {
+      "slug": "perfume-lady",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/parfume_lady_ro",
+      "sourceTitle": "Eau De Parfume ( LADY )",
+      "sku": "301001",
+      "textHash": "68b63be08f6cb692e637033cf38711c3ec8f7c4f4fb7de4dd0abdc848d379609",
+      "blocks": 7
+    },
+    {
+      "slug": "perfume-lady",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/parfume_lady",
+      "sourceTitle": "Eau De Parfume( LADY )",
+      "sku": "301001",
+      "textHash": "956655d7a22ad19e8d43d4c52cafe80184130d36a151853ee95ceca02732a2ac",
+      "blocks": 8
+    },
+    {
+      "slug": "pulmoseen",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/pulmoseen_ro",
+      "sourceTitle": "Pulmoseen",
+      "sku": "206001",
+      "textHash": "cdbff7e2960e35ad56bbd5a3d3316af56b7dbad39ac80d5d05520c113b7defac",
+      "blocks": 14
+    },
+    {
+      "slug": "pulmoseen",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/pulmoseen",
+      "sourceTitle": "Pulmoseen",
+      "sku": "206001",
+      "textHash": "4f2bdcc9431f207d6386db9c516233dbc184a1892db2f83569da4d44082d9098",
+      "blocks": 14
+    },
+    {
+      "slug": "ravseen",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/ravseen_ro",
+      "sourceTitle": "Ravseen",
+      "sku": "203001",
+      "textHash": "f532f9aac1fe6446fb64b29938a5051b4bf407d4019f2b0ce8eb77378d71c6ca",
+      "blocks": 4
+    },
+    {
+      "slug": "ravseen",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/ravseen",
+      "sourceTitle": "Ravseen",
+      "sku": "203001",
+      "textHash": "271b62ea6571a1d41552f25436aa2c9c43267fdfff9ba1584560c0d377176716",
+      "blocks": 4
+    },
+    {
+      "slug": "reumoseen",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/reumoseen_ro",
+      "sourceTitle": "Reumoseen",
+      "sku": "207001",
+      "textHash": "46c77e855e839da51f56471ed404b237b668896138f288b165535145ccddf38c",
+      "blocks": 9
+    },
+    {
+      "slug": "reumoseen",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/reumoseen",
+      "sourceTitle": "Reumoseen",
+      "sku": "207001",
+      "textHash": "84cfb302a014c58f5d4ceb2de7ae876bf37de5d85bacc95b5202de88d45a2d01",
+      "blocks": 14
+    },
+    {
+      "slug": "salts-camomile",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/bath_salts_with_chamomile_extract_ro",
+      "sourceTitle": "Bath Salts with Chamomile Extract",
+      "sku": "451153",
+      "textHash": "4c03281f34a693d7cff2d689ab1c401537894d599df9cf6515066c556f395bee",
+      "blocks": 15
+    },
+    {
+      "slug": "salts-camomile",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/bath_salts_with_chamomile_extract",
+      "sourceTitle": "Bath Salts with Chamomile Extract",
+      "sku": "451153",
+      "textHash": "297548c9ebaaaba90e9a86b06260713d8ea897089aa71c3a33567db98a3adb7d",
+      "blocks": 15
+    },
+    {
+      "slug": "salts-lavander",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/bath_salts_with_lavander_extract_ro",
+      "sourceTitle": "Bath Salts with Lavender Extract",
+      "sku": "451154",
+      "textHash": "8e19b4a474dfa10a659d0586641475df7747796ed804baea6fcccf52081364a8",
+      "blocks": 15
+    },
+    {
+      "slug": "salts-lavander",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/bath_salts_with_lavender_extract",
+      "sourceTitle": "Bath Salts with Lavender Extract",
+      "sku": "451154",
+      "textHash": "1648bcab316c0b9be3de9084608f86ea8634c5ad5991ca168fad3518f47cd37c",
+      "blocks": 15
+    },
+    {
+      "slug": "salts-rosemary",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/bath_salts_with_rosemary_extract_ro",
+      "sourceTitle": "Bath Salts with Rosemary, Eucalyptus & Thyme Extract",
+      "sku": "451155",
+      "textHash": "90fd2ea737e79aa65cece3412d9921628358dac10422fccb6d4bedc740537436",
+      "blocks": 15
+    },
+    {
+      "slug": "salts-rosemary",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/bath_salts_with_rosemary_extract",
+      "sourceTitle": "Bath Salts with Rosemary, Eucalyptus & Thyme Extract",
+      "sku": "451155",
+      "textHash": "40d76754e45a79d0b060f2c8fbdce3b8f4c965989e789fa34e9327eeaed6e2d1",
+      "blocks": 15
+    },
+    {
+      "slug": "salts-ylangylang",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/bath_salts_with_ylang_ylang_extract_ro",
+      "sourceTitle": "Bath Salts with Ylang Ylang, Patchouli & Anis Star Extract",
+      "sku": "451156",
+      "textHash": "be5d62e73878fbf426667086ec7da17d094115f5a159423b97e388f2a7017d20",
+      "blocks": 15
+    },
+    {
+      "slug": "salts-ylangylang",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/bath_salts_with_ylang_ylang_extract",
+      "sourceTitle": "Bath Salts with Ylang Ylang, Patchouli & Anis Star Extract",
+      "sku": "451156",
+      "textHash": "8e84db8559fb549c41de5ccd2116f74c5e1aa0ae574f6f5a4494c36d365ee324",
+      "blocks": 15
+    },
+    {
+      "slug": "samples-kit",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/top_samples_kit_ro",
+      "sourceTitle": "Top Samples Kit",
+      "sku": "490001",
+      "textHash": "c5797dc3def45ce090c31eb967e7d29bcf6e81376b6e9a233fa9280df3d9cce4",
+      "blocks": 2
+    },
+    {
+      "slug": "samples-kit",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/top_samples_kit",
+      "sourceTitle": "Top Samples Kit",
+      "sku": "490001",
+      "textHash": "c071ac0b3be0961cd34b2712dc6077f9bf1ffd9a8868f5bf292736c540d5a4c1",
+      "blocks": 2
+    },
+    {
+      "slug": "shower-gel-lord",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/shower_gel_lord_ro",
+      "sourceTitle": "Shower Gel ( LORD )",
+      "sku": null,
+      "textHash": "4bbae3a2dfadc5fb7af035d006d5fff32bcb8fc0113c7d10c59e268d9035ea61",
+      "blocks": 13
+    },
+    {
+      "slug": "shower-gel-lord",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/shower_gel_lord",
+      "sourceTitle": "Shower Gel ( LORD )",
+      "sku": null,
+      "textHash": "cfc5c4c06cb456b1e81010b9470c5c9c677e0a8170a93cc4c072201c598afd56",
+      "blocks": 13
+    },
+    {
+      "slug": "shp-day-time-face-cream-lc",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/shp_day_time_face_cream_ro",
+      "sourceTitle": "Day Time Face Cream ( SHP )",
+      "sku": "602001",
+      "textHash": "ee91132e1c816b15aaaeed2383d312fcb7b8034de73545fe5cb0b60a24ccb727",
+      "blocks": 11
+    },
+    {
+      "slug": "shp-day-time-face-cream-lc",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/shp_day_time_face_cream",
+      "sourceTitle": "Day Time Face Cream ( SHP )",
+      "sku": "602001",
+      "textHash": "ad6e4a77b8931c9d4aa06f6210c1a921f6bde3e1538702b2cf252e56c0672a15",
+      "blocks": 11
+    },
+    {
+      "slug": "solaris-body-lotion",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/solaris_ro",
+      "sourceTitle": "Solaris",
+      "sku": "413001",
+      "textHash": "f458474d10944b55c36955b269b93193181f3cf100c80135b52e59cc9193db2d",
+      "blocks": 13
+    },
+    {
+      "slug": "solaris-body-lotion",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/solaris",
+      "sourceTitle": "Solaris",
+      "sku": "413001",
+      "textHash": "d948b76188e67b46be9fb6682b47a4954af093a22fa3bdeff9332163e5033067",
+      "blocks": 13
+    },
+    {
+      "slug": "soupseen",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/soupseen_ro",
+      "sourceTitle": "Soupseen",
+      "sku": "231001",
+      "textHash": "a29f1a00165fe2cf7b8e0ff53f389bf29d87c549e575eb6b14ee3249be187379",
+      "blocks": 16
+    },
+    {
+      "slug": "soupseen",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/soupseen",
+      "sourceTitle": "Soupseen",
+      "sku": "231001",
+      "textHash": "cf4021221ad1070763bce43265a30506f9a19bf8d95a8ea7b66fe950921467f7",
+      "blocks": 20
+    },
+    {
+      "slug": "yamseen",
+      "locale": "ro",
+      "sourceUrl": "https://www.drnona.md/yamseen_ro",
+      "sourceTitle": "Yamseen",
+      "sku": "202001",
+      "textHash": "671953a5bbd689bd3339e99d806a35da90b56708b0b1484ee8e3779c678ab4ed",
+      "blocks": 6
+    },
+    {
+      "slug": "yamseen",
+      "locale": "ru",
+      "sourceUrl": "https://www.drnona.md/yamseen",
+      "sourceTitle": "Yamseen",
+      "sku": "202001",
+      "textHash": "745f7c6b885b284a6c25981b67dd9806c6c0cdfb447111d8c6456a92f5916e4e",
+      "blocks": 6
+    }
+  ],
+  "errors": []
+}

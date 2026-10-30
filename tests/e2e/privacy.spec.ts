@@ -82,9 +82,9 @@ test("refusal does not block a form and does not authorize attribution through i
   await page.getByLabel("Телефон", { exact: true }).fill("069123456");
   await page.getByLabel("Регион доставки (Молдова)").selectOption("Кишинёв");
   await page.getByRole("checkbox").check();
-  await page.getByRole("button", { name: "Отправить заявку", exact: true }).click();
+  await page.getByRole("button", { name: "Оформить заказ", exact: true }).click();
     await page.getByRole("dialog", { name: "Спасибо!" }).getByRole("button", { name: "Закрыть", exact: true }).click();
-  await expect(page.getByRole("heading", { name: "Статус заявки" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Статус заказа" })).toBeVisible();
   expect(received).toMatchObject({ consentAccepted: true, productSlugs: ["lord-deodorant"] });
   expect(received).not.toHaveProperty("utmSource");
   expect(received).not.toHaveProperty("sessionHistory");

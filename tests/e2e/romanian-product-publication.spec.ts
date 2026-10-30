@@ -4,12 +4,6 @@ import products from "../../src/data/products-ro.json" with { type: "json" };
 import englishProducts from "../../src/data/products.json" with { type: "json" };
 import { join } from "node:path";
 
-function publicCopy(value: string) {
-  return value
-    .replace("Sursa disponibilă nu oferă o listă completă și clară a ingredientelor.", "Lista completă a ingredientelor nu este disponibilă.")
-    .replace("Sursa indică până la", "Modul de utilizare indicat: până la")
-    .replace("Pentru adulți, sursa indică maximum", "Pentru adulți: maximum");
-}
 
 test("all 50 Romanian PDPs publish complete copy, localized SEO and resilient geometry", async ({ page }, testInfo) => {
   test.setTimeout(240_000);
@@ -23,13 +17,15 @@ test("all 50 Romanian PDPs publish complete copy, localized SEO and resilient ge
     expect(englishName, `${slug}: official English name`).toBeTruthy();
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(englishName!);
     await expect(page.locator(".product-page")).toBeVisible();
-    for (const [heading, value] of [["Compoziție", product.ingredients], ["Mod de utilizare", product.howToUse]]) {
+    await expect(page.getByTestId("full-product-description")).toHaveText(product.longDescription.replace(/\s+/gu, " ").trim(), { useInnerText: true });
+    for (const [heading, value] of [["Compoziție", product.ingredients], ["Mod de utilizare", product.howToUse]] as const) {
       const article = page.locator(".product-copy-card").filter({ has: page.getByRole("heading", { level: 2, name: heading, exact: true }) });
-      await expect(article.locator("p"), `${slug}: ${heading}`).toHaveText(publicCopy(value));
+      if (value === null) await expect(article).toHaveCount(0);
+      else await expect(article.locator("p"), `${slug}: ${heading}`).toHaveText(value);
     }
     expect(await page.locator("body").innerText(), slug).not.toMatch(/[А-Яа-яЁё]/u);
-    await expect(page).toHaveTitle(new RegExp(product.officialName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-    await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", new RegExp(product.officialName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+    await expect(page).toHaveTitle(new RegExp(englishName!.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", new RegExp(englishName!.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", new RegExp(`/ro/product/${slug}$`));
     await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute("content", "ro_MD");
     const geometry = await page.evaluate(() => {

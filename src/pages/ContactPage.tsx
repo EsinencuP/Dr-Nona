@@ -5,8 +5,8 @@ import { useState } from "react";
 import { useProductData } from "../data";
 import type { Product } from "../data";
 import {
-  buildConsultationEmail,
-  copyConsultationText,
+  buildOrderEmail,
+  copyOrderText,
   resolveSelectionProducts,
 } from "../features/contact/consultation";
 import { ApplicationForm } from "../features/contact/ApplicationForm";
@@ -17,22 +17,31 @@ import { getProductTitle } from "../features/product/productNames";
 import { Link, useSearchParams } from "../router";
 import { PageBreadcrumbs } from "../components/PageNavigation";
 
-function ContactPageWithProducts({ slugs }: { slugs: string[] }) {
+function ContactPageWithProducts({ slugs, onAccepted }: { slugs: string[]; onAccepted: () => void }) {
   const { productBySlug } = useProductData();
   return (
     <ContactPageContent
       handoffProducts={resolveSelectionProducts(slugs, productBySlug)}
+      onAccepted={onAccepted}
     />
   );
 }
 
 export default function ContactPage() {
-  const [params] = useSearchParams();
-  const { selected } = useSelection();
+  const [params, setParams] = useSearchParams();
+  const { selected, clear } = useSelection();
+  const [completed, setCompleted] = useState(false);
+  const onAccepted = () => {
+    setCompleted(true);
+    clear();
+    const nextParams = new URLSearchParams(params);
+    nextParams.delete("products");
+    setParams(nextParams, { replace: true });
+  };
   const productParam = params.get("products");
-  const slugs = productParam !== null ? productParam.split(",") : selected;
-  return slugs.length ? (
-    <ContactPageWithProducts slugs={slugs} />
+  const slugs = Array.from(new Set([...selected, ...(productParam?.split(",") ?? [])])).filter(Boolean);
+  return slugs.length || completed ? (
+    <ContactPageWithProducts slugs={slugs} onAccepted={onAccepted} />
   ) : (
     <ContactPageContent handoffProducts={[]} />
   );
@@ -40,16 +49,20 @@ export default function ContactPage() {
 
 function ContactPageContent({
   handoffProducts,
+  onAccepted,
 }: {
   handoffProducts: Product[];
+  onAccepted?: () => void;
 }) {
   const { locale } = useLocale();
   const copy = locale === "ro"
-    ? {        title: "Contacte în Moldova",        directTitle: "Consultație în Moldova",
+    ? {
+        title: "Contacte în Moldova",
+        directTitle: "Contact pentru comandă",
         withSelection:
-          "Selecția a fost transferată în formular. Verificați produsele de mai jos și trimiteți solicitarea sau contactați-ne direct.",
+          "Produsele selectate au fost transferate în formularul comenzii.",
         withoutSelection:
-          "Pentru o consultație, completați formularul sau contactați-ne direct.",
+          "Selectați produsele din catalog pentru a plasa o comandă.",
         included: "Produse incluse",
         positions: "produse",
         missingSku: "nu este indicat",
@@ -61,12 +74,14 @@ function ContactPageContent({
         copyFailed:
           "Lista nu a putut fi copiată. Utilizați emailul pregătit.",
       }
-    : {        title: "Контакты в Молдове",        directTitle: "Консультация в Молдове",
+    : {
+        title: "Контакты в Молдове",
+        directTitle: "Связь по заказу",
         withSelection:
-          "Подборка перенесена в форму. Проверьте товары ниже и отправьте заявку или свяжитесь с нами напрямую.",
+          "Выбранные товары перенесены в форму заказа.",
         withoutSelection:
-          "Для консультации заполните форму или свяжитесь с нами напрямую.",
-        included: "В заявку войдут",
+          "Выберите товары в каталоге, чтобы оформить заказ.",
+        included: "В заказ войдут",
         positions: "поз.",
         missingSku: "не указан",
         prepareEmail: "Подготовить письмо",
@@ -78,9 +93,9 @@ function ContactPageContent({
           "Не удалось скопировать список. Используйте подготовленное письмо.",
       };
   const [copyStatus, setCopyStatus] = useState("");
-  const emailHref = buildConsultationEmail(handoffProducts, locale);
+  const emailHref = buildOrderEmail(handoffProducts, locale);
   const handleCopy = async () => {
-    const copied = await copyConsultationText(handoffProducts, locale);
+    const copied = await copyOrderText(handoffProducts, locale);
     setCopyStatus(copied ? copy.copied : copy.copyFailed);
   };
 
@@ -90,7 +105,7 @@ function ContactPageContent({
       <div className="official-page__header">
         <h1>{copy.title}</h1>
       </div>
-      <ApplicationForm products={handoffProducts} />
+      <ApplicationForm products={handoffProducts} onAccepted={onAccepted} />
       <div className="contact-layout">
         <div className="contact-direct">
           <h2>{copy.directTitle}</h2>
@@ -137,7 +152,7 @@ function ContactPageContent({
             )}
           </div>
           {copyStatus && (
-            <p className="consultation-copy-status" role="status" aria-live="polite">
+            <p className="order-copy-status" role="status" aria-live="polite">
               {copyStatus}
             </p>
           )}

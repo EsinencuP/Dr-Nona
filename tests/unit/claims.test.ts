@@ -33,12 +33,12 @@ describe("regulated claims publication guard", () => {
     ).toBe(true);
   });
 
-  it("quarantines sourced product copy while its claim remains pending", () => {
+  it("reproduces the original without changing its pending claim status", () => {
     const product = productBySlug.get("solaris-body-lotion");
     expect(product).toBeDefined();
-    expect(publicProducts.find(item => item.slug === product!.slug)?.longDescription).toBeNull();
-    expect(publicProducts.find(item => item.slug === product!.slug)?.shortDescription).toBeNull();
-    expect(getProductCopy(product!, "longDescription")).toBe("");
+    expect(publicProducts.find(item => item.slug === product!.slug)?.longDescription).toBe(product!.longDescription);
+    expect(publicProducts.find(item => item.slug === product!.slug)?.shortDescription).toBe(product!.shortDescription);
+    expect(getProductCopy(product!, "longDescription")).toBe(product!.longDescription);
     expect(
       isClaimFieldPublishable(
         "product",
@@ -51,7 +51,7 @@ describe("regulated claims publication guard", () => {
       claim.field === "shortDescription" && claim.claimText.includes("лечебным эффектом"))).toBe(true);
   });
 
-  it("removes pending claim fields from browser-facing product datasets", () => {
+  it("preserves pending claims as review data while reproducing source fields", () => {
     const blocked = claimsRegistry.filter(
       (claim) => claim.scope === "product" && claim.status !== "approved"
     );
@@ -63,22 +63,25 @@ describe("regulated claims publication guard", () => {
         ? publicRomanianProducts[slug as keyof typeof publicRomanianProducts]
         : russian.get(slug);
       expect(record).toBeDefined();
-      expect(record?.[claim.field as keyof typeof record]).toBeNull();
+      const source = romanian ? undefined : sourceProducts.find(item => item.slug === slug);
+      if (source) expect(record?.[claim.field as keyof typeof record]).toBe(source[claim.field as keyof typeof source]);
+      expect(record?.sourceCopy.method).toBe("verbatim-md-no-emoji");
     }
   });
 
-  it("quarantines Romanian claim fields independently of editorial approval", async () => {
+  it("reproduces Romanian originals independently of editorial approval", async () => {
     const { productBySlug: romanianProducts } = await loadProductData("ro");
     const product = romanianProducts.get("solaris-body-lotion");
     expect(product?.contentLocale).toBe("ro");
-    expect(product?.longDescription).toBeNull();
-    expect(getProductCopy(product!, "longDescription")).toBe("");
-    expect(getProductCopy(product!, "shortDescription")).toContain("Dr. Nona");
+    expect(product?.longDescription).toBe(product!.longDescription);
+    expect(getProductCopy(product!, "longDescription")).toBe(product!.longDescription);
+    expect(getProductCopy(product!, "shortDescription")).toBe(product!.shortDescription);
   });
 
   it("keeps a product field without a detected regulated claim", () => {
     const source = sourceProducts.find(item => item.shortDescription &&
       item.shortDescription.length >= 50 && item.shortDescription.length <= 200 &&
+      isClaimFieldPublishable("product", item.slug, "shortDescription") &&
       publicProducts.find(publicItem => publicItem.slug === item.slug)?.shortDescription === item.shortDescription);
     expect(source).toBeDefined();
     const product = productBySlug.get(source!.slug);

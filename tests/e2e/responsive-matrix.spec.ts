@@ -388,7 +388,8 @@ async function runViewportContract(
     })
   ).toBeVisible();
   const productInformationCards = page.locator(".product-copy-card");
-  await expect(productInformationCards).toHaveCount(3);
+  await expect(productInformationCards).toHaveCount(1);
+  await expect(page.getByTestId("full-product-description")).toContainText("Halo Complex");
   await expect(productInformationCards.first()).toBeVisible();
   await page.evaluate(() => {
     const title = document.querySelector(".product-info h1");

@@ -3,8 +3,8 @@ import sources from "../../src/data/products.json";
 import translations from "../../src/data/products-ro.json";
 import publicTranslations from "../../src/data/products-ro-public.json";
 import review from "../../src/data/products-ro-review.json";
-import claims from "../../src/data/claims-registry.json";
-import { ro } from "../../src/locales/ro";
+
+
 import { hasCurrentTranslationApproval, romanianFields, translationFingerprint } from "../../scripts/romanian-translation-approval-lib.mjs";
 import { getProductCopy } from "../../src/claims";
 import { loadProductData } from "../../src/data";
@@ -19,13 +19,16 @@ describe("Romanian product copy review", () => {
     expect(Object.keys(translations).sort()).toEqual(sources.map(p => p.slug).sort());
     for (const source of sources) {
       const copy = translations[source.slug as keyof typeof translations];
-      expect(hasCurrentTranslationApproval(source, copy, review), source.slug).toBe(true);
+      expect(hasCurrentTranslationApproval(source, copy, review), source.slug).toBe(false);
       for (const field of ["shortDescription", "longDescription", "ingredients", "howToUse"] as const) {
-        expect(review.products[source.slug as keyof typeof review.products][field]).toBe("approved");
+        expect(review.products[source.slug as keyof typeof review.products][field]).toBe("pending");
       }
       for (const field of romanianFields) {
-        expect(copy[field as keyof typeof copy], `${source.slug}.${field}`).toEqual(expect.any(String));
-        expect(copy[field as keyof typeof copy].trim().length).toBeGreaterThan(0);
+        const value = copy[field as keyof typeof copy];
+        if (value !== null) {
+          expect(value, `${source.slug}.${field}`).toEqual(expect.any(String));
+          expect(String(value).trim().length).toBeGreaterThan(0);
+        }
       }
       expect(JSON.stringify(copy)).not.toMatch(/[А-Яа-яЁё]/u);
     }
@@ -47,23 +50,23 @@ describe("Romanian product copy review", () => {
   });
 
   it("keeps missing and ambiguous source data explicit instead of fabricating instructions", () => {
-    expect(translations["parfum-faya"].ingredients).toBe(ro.ingredientsUnavailable);
-    expect(translations["parfum-faya"].howToUse).toContain("Modul de utilizare nu este precizat");
-    expect(translations.goldseen.ingredients).toContain("coenzima Q10");
-    expect(translations["dnd-chewing-gum-tablets"].howToUse).toContain("maximum 4");
-    expect(translations["beauty-mask-for-face"].howToUse).toContain("1 minut");
+    expect(translations["parfum-faya"].ingredients).toBeNull();
+    expect(translations["parfum-faya"].howToUse).toBeNull();
+    expect(translations.goldseen.longDescription).toContain("Seleniu");
+    expect(translations.goldseen.longDescription).not.toContain("Q10");
+    expect(translations["dnd-chewing-gum-tablets"].longDescription).toContain("98%");
+    expect(translations["beauty-mask-for-face"].howToUse).toBeNull();
+    expect(translations["beauty-mask-for-face"].longDescription).not.toContain("1 minut");
   });
 
-  it("publishes approved Romanian fields only when their claims are publishable", async () => {
+  it("preserves original Romanian fields without promoting editorial or legal status", async () => {
     const { products } = await loadProductData("ro");
-    const blocked = new Set(claims.filter(claim => claim.scope === "product" && claim.status !== "approved")
-      .map(claim => `${claim.contentId}\u001f${claim.field}`));
     for (const product of products) {
       const copy = publicTranslations[product.slug as keyof typeof publicTranslations];
       const source = translations[product.slug as keyof typeof translations];
       for (const field of ["shortDescription", "longDescription", "ingredients", "howToUse"] as const) {
         expect(copy[field], `${product.slug}.${field}`).toBe(
-          blocked.has(`ro:${product.slug}\u001f${field}`) ? null : source[field]
+          source[field]
         );
         expect(product[field], `${product.slug}.${field}`).toBe(copy[field]);
         if (field === "shortDescription") {
@@ -71,13 +74,13 @@ describe("Romanian product copy review", () => {
         } else if (copy[field] === null) {
           expect(getProductCopy(product, field)).toBe("");
         } else {
-          expect(getProductCopy(product, field)).toBe(copy[field].replace(/\s+/gu, " ").trim());
+          expect(getProductCopy(product, field)).toBe(copy[field]);
         }
       }
     }
   });
 
-  it("suppresses a pending Romanian legal claim independently of editorial review", async () => {
+  it("keeps a pending Romanian legal claim identifiable independently of source reproduction", async () => {
     const { products } = await loadProductData("ro");
     const product = { ...products.find(product => product.slug === "solaris-body-lotion")!,
       longDescription: translations["solaris-body-lotion"].longDescription };
@@ -89,7 +92,7 @@ describe("Romanian product copy review", () => {
       blockedScopes: ["product"],
     } } }));
     const guarded = await import("../../src/claims");
-    expect(guarded.getProductCopy(product, "longDescription")).toBe("");
+    expect(guarded.getProductCopy(product, "longDescription")).toBe(product.longDescription);
     expect(guarded.hasBlockedClaims("product", "ro:solaris-body-lotion")).toBe(true);
   });
 });

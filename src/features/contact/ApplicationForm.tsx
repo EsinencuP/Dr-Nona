@@ -1,3 +1,4 @@
+import { X } from "@phosphor-icons/react/X";
 import { CheckCircle } from "@phosphor-icons/react/CheckCircle";
 import { PaperPlaneTilt } from "@phosphor-icons/react/PaperPlaneTilt";
 import {
@@ -10,37 +11,31 @@ import type { FormEvent } from "react";
 import type { Product } from "../../data";
 import publishedProductSlugs from "../../data/published-product-slugs.json";
 import {
-  MASTERCLASS_TOPICS,
-  MASTERCLASS_TOPIC_LABELS_RO,
-} from "../../../shared/constants/masterclass-topics";
-import {
   MOLDOVA_REGIONS,
   MOLDOVA_REGION_LABELS_RO,
 } from "../../../shared/constants/moldova-regions";
-import { getAppointmentBounds } from "../../../shared/applications/appointment-policy";
 import { marketData } from "../../market";
+import { productPublicUrl } from "./consultation";
 import { getProductTitle } from "../product/productNames";
 import { useLocale } from "../../locales/LocaleProvider";
 import { Link } from "../../router";
-import { loadConsultationSlots, submitApplication } from "./application-client";
-import type { ApplicationApiResult, ConsultationSlot } from "./application-client";
+import { submitApplication } from "./application-client";
+import type { ApplicationApiResult } from "./application-client";
 import { validateClientApplication } from "./client-application-validation";
 import { buildApplicationAttribution, readApprovedProductHistory, readSessionValue } from "./utm-capture";
 
-type FormMode = "order" | "consultation" | "masterclass";
 type FormStatus =
   | "idle"
   | "submitting"
   | "success"
   | "validation-error"
   | "network-error"
-  | "server-error"
-  | "slot-unavailable";
+  | "server-error";
 
 type ApplicationFormProps = {
   products: Product[];
   submit?: typeof submitApplication;
-  loadSlots?: typeof loadConsultationSlots;
+  onAccepted?: () => void;
 };
 
 const createAttemptKey = () =>
@@ -82,20 +77,6 @@ function localizeServerErrors(
       "Puteți selecta cel mult 20 de produse",
     "Один или несколько товаров недоступны":
       "Unul sau mai multe produse nu sunt disponibile",
-    "Выберите формат консультации": "Selectați formatul consultației",
-    "Некорректный слот консультации": "Intervalul consultației este incorect",
-    "Выберите тему мастер-класса из списка":
-      "Selectați o temă de masterclass din listă",
-    "Некорректная дата": "Dată incorectă",
-    "Некорректное время": "Oră incorectă",
-    "Выберите будущую дату и время по часовому поясу Кишинёва":
-      "Selectați o dată și o oră viitoare în fusul orar al Chișinăului",
-    "Выберите дату консультации не позднее чем через 90 дней":
-      "Selectați o dată pentru consultație în următoarele 90 de zile",
-    "Выберите дату мастер-класса начиная со следующего дня":
-      "Selectați o dată pentru masterclass începând de mâine",
-    "Выберите дату мастер-класса не позднее чем через 180 дней":
-      "Selectați o dată pentru masterclass în următoarele 180 de zile",
   };
   return Object.fromEntries(
     Object.entries(errors).map(([field, message]) => [
@@ -108,31 +89,23 @@ function localizeServerErrors(
 export function ApplicationForm({
   products,
   submit = submitApplication,
-  loadSlots = loadConsultationSlots,
+  onAccepted,
 }: ApplicationFormProps) {
   const { locale, t } = useLocale();
-  const appointmentBounds = useMemo(
-    () => ({
-      consultation: getAppointmentBounds("consultation"),
-      masterclass: getAppointmentBounds("masterclass"),
-    }),
-    []
-  );
   const copy = locale === "ro"
-    ? {        title: "Trimiteți o solicitare",
+    ? {
+        title: "Plasarea comenzii",
+        thanksMessage: "Consultantul nostru vă va contacta în scurt timp pentru confirmarea comenzii și stabilirea detaliilor de livrare",
+        success: "Comanda a fost trimisă. Managerul vă va contacta pentru confirmare și stabilirea detaliilor de livrare",
         intro:
-          "Alegeți tipul solicitării. Formularul nu reprezintă plata comenzii; ora consultației sau a masterclassului va fi confirmată de manager.",
-        requestType: "Tipul solicitării",
-        order: "Comandă",
-        consultation: "Consultație",
-        masterclass: "Masterclass",
+          "Completați datele de contact. Managerul vă va contacta pentru confirmarea comenzii și stabilirea detaliilor de livrare. Plasarea comenzii nu reprezintă o plată.",
         firstName: "Prenume",
         lastName: "Nume",
         phone: "Telefon",
         region: "Regiunea de livrare (Moldova)",
         regionPlaceholder: "Selectați regiunea sau raionul",
         email: "Email (opțional)",
-        comment: "Comentariu la solicitare (opțional)",
+        comment: "Comentariu la comandă (opțional)",
         preferredCallTime: "Interval potrivit pentru apel (opțional)",
         preferredCallTimePlaceholder: "De exemplu: după ora 18:00",
         selectedProducts: "Produse selectate",
@@ -142,60 +115,33 @@ export function ApplicationForm({
         increaseQuantity: (name: string) => `Măriți cantitatea pentru ${name}`,
         missingSku: "nu este indicat",
         emptyOrder: "Pentru o comandă, adăugați mai întâi produse în selecție.",
-        consultationFormat: "Formatul consultației",
-        online: "Online",
-        offline: "La sediu",
-        preferredDate: "Data preferată",
-        preferredTime: "Ora preferată",
-        availableSlot: "Interval disponibil",
-        slotPlaceholder: "Selectați un interval disponibil",
-        slotsLoading: "Se încarcă intervalele disponibile…",
-        slotsEmpty: "Nu există intervale publicate momentan. Încercați mai târziu sau alegeți alt tip de solicitare.",
-        advisory:
-          "Data și ora indicate sunt orientative. Consultantul vă va contacta pentru confirmare.",
-        masterclassTopic: "Tema masterclassului",
-        masterclassTopicPlaceholder: "Selectați tema masterclassului",
-        masterclassDate: "Data dorită",
-        masterclassTime: "Ora dorită",
-        masterclassAdvisory:
-          "Data și ora vor fi coordonate cu organizatorul. Managerul vă va contacta pentru confirmarea rezervării.",
-        sending: "Se trimite solicitarea…",
-        accepted: "Solicitare acceptată",
-        submit: "Trimite solicitarea",
-        success: (id: string) =>
-          `Solicitarea nr. ${id} a fost acceptată și salvată. Consultantul o va procesa și vă va contacta la numărul indicat.`,
-        consultationSuccess: (id: string) =>
-          `Consultația nr. ${id} a fost rezervată pentru intervalul selectat. Dacă sunt necesare detalii suplimentare, consultantul vă va contacta.`,
-        slotUnavailable: "Acest interval tocmai a fost rezervat de alt client. Lista a fost actualizată — selectați alt interval.",
+        sending: "Se trimite comanda…",
+        accepted: "Comanda a fost trimisă",
+        submit: "Plasează comanda",
         failure:
-          "Solicitarea nu a fost trimisă. Datele au rămas în formular — încercați din nou sau contactați-ne telefonic.",
+          "Comanda nu a putut fi trimisă. Încercați din nou",
         validation: "Verificați câmpurile marcate.",
-        status: "Statutul solicitării",
-        thanks: "Vă mulțumim!",
-        thanksMessage: {
-          order: "Solicitarea pentru comandă a fost acceptată. Managerul vă va contacta la numărul indicat pentru a clarifica detaliile.",
-          consultation: "Consultația a fost rezervată pentru intervalul selectat. Detaliile solicitării rămân disponibile pe această pagină.",
-          masterclass: "Solicitarea pentru masterclass a fost acceptată. Managerul va confirma data și ora cu dumneavoastră.",
-        },
-        requestNumber: "Numărul solicitării",
-        closeThanks: "Închide",
+        status: "Starea comenzii",
+        thanks: "Vă mulțumim pentru comandă!",
+        requestNumber: "Numărul comenzii",
+        closeThanks: "Am înțeles",
+        closeDialog: "Închide",
         errorTitle: "Trimiterea nu a putut fi finalizată",
         call: "Sunați",
       }
-    : {        title: "Оставить заявку",
+    : {
+        title: "Оформление заказа",
+        thanksMessage: "Наш консультант в скором времени свяжется с вами для подтверждения заказа и согласования доставки",
+        success: "Заказ отправлен. Менеджер свяжется с вами для подтверждения и согласования доставки",
         intro:
-          "Выберите нужный сценарий. Заявка не является оплатой заказа; время консультации или мастер-класса подтвердит менеджер.",
-        requestType: "Тип заявки",
-        order: "Заказ",
-        consultation: "Консультация",
-        masterclass: "Мастер-класс",
+          "Заполните контактные данные. Менеджер свяжется с вами для подтверждения заказа и согласования доставки. Оформление заказа не является оплатой",
         firstName: "Имя",
         lastName: "Фамилия",
         phone: "Телефон",
         region: "Регион доставки (Молдова)",
         regionPlaceholder: "Выберите регион или район",
         email: "Email (необязательно)",
-        comment: "Комментарий к заявке (необязательно)",
+        comment: "Комментарий к заказу (необязательно)",
         preferredCallTime: "Удобное время для звонка (необязательно)",
         preferredCallTimePlaceholder: "Например: после 18:00",
         selectedProducts: "Выбранные товары",
@@ -204,60 +150,31 @@ export function ApplicationForm({
         decreaseQuantity: (name: string) => `Уменьшить количество ${name}`,
         increaseQuantity: (name: string) => `Увеличить количество ${name}`,
         missingSku: "не указан",
-        emptyOrder: "Для заявки на заказ сначала добавьте товары в подборку.",
-        consultationFormat: "Формат консультации",
-        online: "Онлайн",
-        offline: "Офлайн",
-        preferredDate: "Предпочтительная дата",
-        preferredTime: "Предпочтительное время",
-        availableSlot: "Доступное время",
-        slotPlaceholder: "Выберите доступный слот",
-        slotsLoading: "Загружаем доступные слоты…",
-        slotsEmpty: "Сейчас нет опубликованных слотов. Попробуйте позже или выберите другой тип заявки.",
-        advisory:
-          "Выбранные дата и время являются предпочтительными. Менеджер свяжется с вами для подтверждения.",
-        masterclassTopic: "Тема мастер-класса",
-        masterclassTopicPlaceholder: "Выберите тему мастер-класса",
-        masterclassDate: "Желаемая дата",
-        masterclassTime: "Желаемое время",
-        masterclassAdvisory:
-          "Дата и время согласовываются с организатором. Менеджер свяжется с вами для подтверждения бронирования.",
-        sending: "Отправляем заявку…",
-        accepted: "Заявка принята",
-        submit: "Отправить заявку",
-        success: (id: string) =>
-          `Заявка №${id} принята и сохранена. Менеджер обработает её и свяжется с вами по указанному номеру.`,
-        consultationSuccess: (id: string) =>
-          `Консультация №${id} зарезервирована на выбранное время. Если потребуются детали, консультант свяжется с вами.`,
-        slotUnavailable: "Этот слот только что занял другой клиент. Список обновлён — выберите другое время.",
+        emptyOrder: "Сначала выберите товары в каталоге.",
+        sending: "Отправляем заказ…",
+        accepted: "Заказ отправлен",
+        submit: "Оформить заказ",
         failure:
-          "Заявка не отправлена. Данные сохранены в форме — повторите попытку или свяжитесь с нами по телефону.",
+          "Не удалось отправить заказ. Попробуйте ещё раз",
         validation: "Проверьте отмеченные поля.",
-        status: "Статус заявки",
-        thanks: "Спасибо!",
-        thanksMessage: {
-          order: "Ваша заявка на заказ принята. Менеджер свяжется с вами по указанному телефону, чтобы уточнить детали.",
-          consultation: "Консультация зарезервирована на выбранное время. Подробности заявки остаются на этой странице.",
-          masterclass: "Ваша заявка на мастер-класс принята. Менеджер согласует с вами дату и время.",
-        },
-        requestNumber: "Номер заявки",
-        closeThanks: "Закрыть",
+        status: "Статус заказа",
+        thanks: "Благодарим за заказ!",
+        requestNumber: "Номер заказа",
+        closeThanks: "Понятно",
+        closeDialog: "Закрыть",
         errorTitle: "Не удалось завершить отправку",
         call: "Позвоните",
       };
-  const [mode, setMode] = useState<FormMode>(
-    products.length ? "order" : "consultation"
-  );
   const [status, setStatus] = useState<FormStatus>("idle");
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [result, setResult] = useState<ApplicationApiResult | null>(null);
-  const [consultationSlots, setConsultationSlots] = useState<ConsultationSlot[]>([]);
-  const [slotsLoading, setSlotsLoading] = useState(true);
   const attemptKey = useRef(createAttemptKey());
+  const sending = useRef(false);
   const formRef = useRef<HTMLFormElement>(null);
   const statusHeading = useRef<HTMLHeadingElement>(null);
   const thanksDialog = useRef<HTMLDialogElement>(null);
+  const acknowledgeButton = useRef<HTMLButtonElement>(null);
   const publishedSlugs = useMemo(() => new Set(publishedProductSlugs), []);
   const accepted = status === "success";
 
@@ -271,7 +188,10 @@ export function ApplicationForm({
 
   useEffect(() => {
     const dialog = thanksDialog.current;
-    if (accepted && dialog && !dialog.open) dialog.showModal();
+    if (accepted && dialog && !dialog.open) {
+      dialog.showModal();
+      acknowledgeButton.current?.focus();
+    }
     if (!accepted && dialog?.open) dialog.close();
   }, [accepted]);
 
@@ -288,29 +208,9 @@ export function ApplicationForm({
     return () => window.cancelAnimationFrame(frame);
   }, [fieldErrors, status]);
 
-  useEffect(() => {
-    let active = true;
-    void loadSlots().then((slots) => {
-      if (!active) return;
-      setConsultationSlots(slots);
-      setSlotsLoading(false);
-    });
-    return () => {
-      active = false;
-    };
-  }, [loadSlots]);
-
-  const setFormMode = (nextMode: FormMode) => {
-    if (status === "submitting") return;
-    setMode(nextMode);
-    setStatus("idle");
-    setResult(null);
-    setFieldErrors({});
-  };
-
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (status === "submitting" || accepted) return;
+    if (sending.current || status === "submitting" || accepted) return;
     const form = new FormData(event.currentTarget);
     const applicationLocale: "ru-MD" | "ro-MD" = locale === "ro" ? "ro-MD" : "ru-MD";
     const common = {
@@ -345,52 +245,11 @@ export function ApplicationForm({
     const items = products.map((product) => ({
       slug: product.slug,
       quantity: quantities[product.slug] ?? 1,
+      officialName: getProductTitle(product),
+      sku: product.sku,
+      url: productPublicUrl(product, locale),
     }));
-    const raw =
-      mode === "order"
-        ? {
-            ...common,
-            ...analyticsFields,
-            type: "order",
-            productSlugs: products.map((product) => product.slug),
-            items,
-          }
-        : mode === "consultation"
-          ? {
-              ...common,
-              ...analyticsFields,
-              type: "consultation",
-              ...(() => {
-                const slotId = String(form.get("consultationSlotId") ?? "");
-                const slot = consultationSlots.find((candidate) => candidate.id === slotId);
-                const local = slot
-                  ? new Intl.DateTimeFormat("en-CA", {
-                      timeZone: "Europe/Chisinau",
-                      year: "numeric",
-                      month: "2-digit",
-                      day: "2-digit",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      hourCycle: "h23",
-                    }).formatToParts(new Date(slot.startsAt))
-                  : [];
-                const parts = Object.fromEntries(local.map((part) => [part.type, part.value]));
-                return {
-                  consultationSlotId: slotId,
-                  consultationMode: slot?.mode ?? "online",
-                  consultationDate: slot ? `${parts.year}-${parts.month}-${parts.day}` : "",
-                  consultationTime: slot ? `${parts.hour}:${parts.minute}` : "",
-                };
-              })(),
-            }
-          : {
-              ...common,
-              ...analyticsFields,
-              type: "masterclass",
-              masterclassTopic: String(form.get("masterclassTopic") ?? ""),
-              eventDate: String(form.get("eventDate") ?? ""),
-              eventTime: String(form.get("eventTime") ?? ""),
-            };
+    const raw = { ...common, ...analyticsFields, type: "order", productSlugs: products.map(product => product.slug), items };
     const validation = validateClientApplication(raw, publishedSlugs, locale);
     if (!validation.success) {
       setFieldErrors(validation.fieldErrors);
@@ -399,17 +258,18 @@ export function ApplicationForm({
     }
     setFieldErrors({});
     setStatus("submitting");
-    const response = await submit(
-      validation.data,
-      attemptKey.current
-    );
+    sending.current = true;
+    let response: ApplicationApiResult;
+    try { response = await submit(validation.data, attemptKey.current); }
+    catch { response = { kind: "network-error" }; }
+    finally { sending.current = false; }
+    sending.current = response.kind === "success";
     setResult(response);
     setStatus(response.kind);
-    if (response.kind === "slot-unavailable") {
-      setSlotsLoading(true);
-      const slots = await loadSlots();
-      setConsultationSlots(slots);
-      setSlotsLoading(false);
+    if (response.kind === "success") {
+      formRef.current?.reset();
+      setQuantities({});
+      onAccepted?.();
     }
     if (
       response.kind === "network-error" ||
@@ -424,11 +284,9 @@ export function ApplicationForm({
 
   const statusContent =
     result?.kind === "success"
-      ? mode === "consultation" ? copy.consultationSuccess(result.requestId) : copy.success(result.requestId)
+      ? copy.success
       : status === "network-error" || status === "server-error"
           ? copy.failure
-          : status === "slot-unavailable"
-            ? copy.slotUnavailable
           : status === "validation-error"
             ? copy.validation
             : "";
@@ -440,39 +298,13 @@ export function ApplicationForm({
         <p>{copy.intro}</p>
       </div>
 
-      <div className="application-mode" role="group" aria-label={copy.requestType}>
-        <button
-          type="button"
-          className={mode === "order" ? "is-active" : ""}
-          aria-pressed={mode === "order"}
-          onClick={() => setFormMode("order")}
-        >
-          {copy.order}
-        </button>
-        <button
-          type="button"
-          className={mode === "consultation" ? "is-active" : ""}
-          aria-pressed={mode === "consultation"}
-          onClick={() => setFormMode("consultation")}
-        >
-          {copy.consultation}
-        </button>
-        <button
-          type="button"
-          className={mode === "masterclass" ? "is-active" : ""}
-          aria-pressed={mode === "masterclass"}
-          onClick={() => setFormMode("masterclass")}
-        >
-          {copy.masterclass}
-        </button>
-      </div>
-
       <form
         ref={formRef}
         className="application-form"
         aria-labelledby="application-title"
         onSubmit={onSubmit}
         noValidate
+        aria-busy={status === "submitting"}
       >
         <div className="application-form__grid">
           {[
@@ -484,9 +316,11 @@ export function ApplicationForm({
               <span>{label}</span>
               <input
                 name={name}
+                aria-label={label}
                 type={type}
                 autoComplete={autoComplete}
-                disabled={accepted}
+                required
+                disabled={accepted || status === "submitting"}
                 aria-invalid={Boolean(fieldErrors[name])}
                 aria-describedby={describedBy(name, fieldErrors)}
               />
@@ -499,9 +333,11 @@ export function ApplicationForm({
             <span>{copy.region}</span>
             <select
               name="city"
+              required
+              aria-label={copy.region}
               defaultValue=""
               autoComplete="address-level1"
-              disabled={accepted}
+              disabled={accepted || status === "submitting"}
               aria-invalid={Boolean(fieldErrors.city)}
               aria-describedby={describedBy("city", fieldErrors)}
             >
@@ -525,9 +361,10 @@ export function ApplicationForm({
             <span>{copy.email}</span>
             <input
               name="email"
+              aria-label={copy.email}
               type="email"
               autoComplete="email"
-              disabled={accepted}
+              disabled={accepted || status === "submitting"}
               aria-invalid={Boolean(fieldErrors.email)}
               aria-describedby={describedBy("email", fieldErrors)}
             />
@@ -539,10 +376,11 @@ export function ApplicationForm({
             <span>{copy.preferredCallTime}</span>
             <input
               name="preferredCallTime"
+              aria-label={copy.preferredCallTime}
               type="text"
               placeholder={copy.preferredCallTimePlaceholder}
               maxLength={100}
-              disabled={accepted}
+              disabled={accepted || status === "submitting"}
               aria-invalid={Boolean(fieldErrors.preferredCallTime)}
               aria-describedby={describedBy(
                 "preferredCallTime",
@@ -559,9 +397,10 @@ export function ApplicationForm({
             <span>{copy.comment}</span>
             <textarea
               name="comment"
+              aria-label={copy.comment}
               rows={3}
               maxLength={500}
-              disabled={accepted}
+              disabled={accepted || status === "submitting"}
               aria-invalid={Boolean(fieldErrors.comment)}
               aria-describedby={describedBy("comment", fieldErrors)}
             />
@@ -571,16 +410,16 @@ export function ApplicationForm({
           </label>
         </div>
 
-        {mode === "order" ? (
+        {(
           <div
             className="application-products"
             aria-labelledby="application-products-title"
           >
             <div>
               <h3 id="application-products-title">{copy.selectedProducts}</h3>
-              <span>{products.length} {copy.positions}</span>
+              <span>{accepted ? 0 : products.length} {copy.positions}</span>
             </div>
-            {products.length ? (
+            {!accepted && products.length ? (
               <ul>
                 {products.map((product) => {
                   const quantity = quantities[product.slug] ?? 1;
@@ -598,7 +437,7 @@ export function ApplicationForm({
                         <button
                           type="button"
                           onClick={() => updateQuantity(product.slug, -1)}
-                          disabled={accepted || quantity <= 1}
+                          disabled={accepted || status === "submitting" || quantity <= 1}
                           aria-label={copy.decreaseQuantity(getProductTitle(product))}
                         >
                           −
@@ -607,7 +446,7 @@ export function ApplicationForm({
                         <button
                           type="button"
                           onClick={() => updateQuantity(product.slug, 1)}
-                          disabled={accepted || quantity >= 99}
+                          disabled={accepted || status === "submitting" || quantity >= 99}
                           aria-label={copy.increaseQuantity(getProductTitle(product))}
                         >
                           +
@@ -618,7 +457,7 @@ export function ApplicationForm({
                 })}
               </ul>
             ) : (
-              <p>{copy.emptyOrder}</p>
+              <p>{copy.emptyOrder} <Link to="/products">{locale === "ro" ? "Deschide catalogul" : "Открыть каталог"}</Link></p>
             )}
             {fieldErrors.productSlugs && (
               <small id="productSlugs-error">{fieldErrors.productSlugs}</small>
@@ -627,100 +466,6 @@ export function ApplicationForm({
               <small id="items-error">{fieldErrors.items}</small>
             )}
           </div>
-        ) : mode === "consultation" ? (
-          <>
-            <div className="application-field application-field--wide">
-              <label htmlFor="consultation-slot">{copy.availableSlot}</label>
-              <select
-                id="consultation-slot"
-                name="consultationSlotId"
-                defaultValue=""
-                disabled={accepted || slotsLoading || consultationSlots.length === 0}
-                required
-                aria-invalid={Boolean(fieldErrors.consultationSlotId || fieldErrors.consultationDate)}
-                aria-describedby="consultation-slot-help"
-              >
-                <option value="" disabled>{copy.slotPlaceholder}</option>
-                {consultationSlots.map((slot) => (
-                  <option key={slot.id} value={slot.id}>
-                    {new Intl.DateTimeFormat(locale === "ro" ? "ro-MD" : "ru-MD", {
-                      timeZone: "Europe/Chisinau",
-                      dateStyle: "long",
-                      timeStyle: "short",
-                    }).format(new Date(slot.startsAt))} · {slot.mode === "online" ? copy.online : copy.offline}
-                  </option>
-                ))}
-              </select>
-              <small id="consultation-slot-help">
-                {slotsLoading ? copy.slotsLoading : consultationSlots.length ? copy.advisory : copy.slotsEmpty}
-              </small>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="application-form__grid">
-              <label className="application-field application-field--wide">
-                <span>{copy.masterclassTopic}</span>
-                <select
-                  name="masterclassTopic"
-                  defaultValue=""
-                  disabled={accepted}
-                  aria-invalid={Boolean(fieldErrors.masterclassTopic)}
-                  aria-describedby={describedBy(
-                    "masterclassTopic",
-                    fieldErrors
-                  )}
-                >
-                  <option value="" disabled>
-                    {copy.masterclassTopicPlaceholder}
-                  </option>
-                  {MASTERCLASS_TOPICS.map((topic) => (
-                    <option key={topic} value={topic}>
-                      {locale === "ro"
-                        ? MASTERCLASS_TOPIC_LABELS_RO[topic]
-                        : topic}
-                    </option>
-                  ))}
-                </select>
-                {fieldErrors.masterclassTopic && (
-                  <small id="masterclassTopic-error">
-                    {fieldErrors.masterclassTopic}
-                  </small>
-                )}
-              </label>
-              <label className="application-field">
-                <span>{copy.masterclassDate}</span>
-                <input
-                  name="eventDate"
-                  type="date"
-                  min={appointmentBounds.masterclass.minimumDate}
-                  max={appointmentBounds.masterclass.maximumDate}
-                  disabled={accepted}
-                  aria-invalid={Boolean(fieldErrors.eventDate)}
-                  aria-describedby={describedBy("eventDate", fieldErrors)}
-                />
-                {fieldErrors.eventDate && (
-                  <small id="eventDate-error">{fieldErrors.eventDate}</small>
-                )}
-              </label>
-              <label className="application-field">
-                <span>{copy.masterclassTime}</span>
-                <input
-                  name="eventTime"
-                  type="time"
-                  disabled={accepted}
-                  aria-invalid={Boolean(fieldErrors.eventTime)}
-                  aria-describedby={describedBy("eventTime", fieldErrors)}
-                />
-                {fieldErrors.eventTime && (
-                  <small id="eventTime-error">{fieldErrors.eventTime}</small>
-                )}
-              </label>
-            </div>
-            <p className="application-form__advisory">
-              {copy.masterclassAdvisory}
-            </p>
-          </>
         )}
 
         <label className="application-honeypot" aria-hidden="true">
@@ -739,7 +484,7 @@ export function ApplicationForm({
               name="consentAccepted"
               type="checkbox"
               required
-              disabled={accepted}
+              disabled={accepted || status === "submitting"}
               aria-invalid={Boolean(fieldErrors.consentAccepted)}
               aria-describedby={describedBy("consentAccepted", fieldErrors)}
             />
@@ -761,8 +506,7 @@ export function ApplicationForm({
           disabled={
             status === "submitting" ||
             accepted ||
-            (mode === "order" && !products.length) ||
-            (mode === "consultation" && (slotsLoading || !consultationSlots.length))
+            !products.length
           }
         >
           {status === "submitting" ? (
@@ -807,25 +551,37 @@ export function ApplicationForm({
         aria-labelledby="application-thanks-title"
         aria-describedby="application-thanks-message application-thanks-number"
         onClose={() => statusHeading.current?.focus()}
+        onKeyDown={(event) => {
+          if (event.key !== "Tab") return;
+          const first = thanksDialog.current?.querySelector<HTMLButtonElement>("button");
+          const last = acknowledgeButton.current;
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last?.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first?.focus();
+          }
+        }}
       >
+        <button type="button" className="application-thanks__close" aria-label={copy.closeDialog} onClick={() => thanksDialog.current?.close()}>
+          <X aria-hidden="true" />
+        </button>
         <CheckCircle className="application-thanks__icon" aria-hidden="true" />
         <h2 id="application-thanks-title">{copy.thanks}</h2>
-        <p id="application-thanks-message">{copy.thanksMessage[mode]}</p>
+        <p id="application-thanks-message">{copy.thanksMessage}</p>
         <p id="application-thanks-number" className="application-thanks__number">
           {copy.requestNumber}: <strong>{result?.kind === "success" ? result.requestId : ""}</strong>
         </p>
         <button
           type="button"
           className="button button--primary"
+          ref={acknowledgeButton}
           onClick={() => thanksDialog.current?.close()}
         >
           {copy.closeThanks}
         </button>
-        {mode === "order" && result?.kind === "success" && (
-          <Link className="button button--secondary" to={`/reviews${products.length === 1 ? `?product=${encodeURIComponent(products[0].slug)}` : ""}#write-review`} onClick={() => thanksDialog.current?.close()}>
-            {locale === "ro" ? "Lasă o recenzie" : "Оставить отзыв"}
-          </Link>
-        )}
+
       </dialog>
     </section>
   );

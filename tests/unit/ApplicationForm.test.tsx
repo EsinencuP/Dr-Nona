@@ -2,11 +2,6 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 import type { ApplicationInput } from "../../shared/applications/application-schema";
-import { getAppointmentBounds } from "../../shared/applications/appointment-policy";
-import {
-  MASTERCLASS_TOPICS,
-  MASTERCLASS_TOPIC_LABELS_RO,
-} from "../../shared/constants/masterclass-topics";
 import { ApplicationForm } from "../../src/features/contact/ApplicationForm";
 import { loadProductData } from "../../src/data";
 import { LocaleProvider } from "../../src/locales/LocaleProvider";
@@ -14,17 +9,6 @@ import { Router } from "../../src/router";
 import { setPrivacyChoice } from "../../src/features/privacy/privacyChoice";
 
 const { products } = await loadProductData();
-const validMasterclassDate = new Intl.DateTimeFormat("en-CA", {
-  timeZone: "Europe/Chisinau",
-}).format(new Date(Date.now() + 60 * 24 * 60 * 60 * 1000));
-const availableSlot = {
-  id: "11111111-1111-4111-8111-111111111111",
-  startsAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-  endsAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000 + 60 * 60 * 1000).toISOString(),
-  mode: "online" as const,
-};
-const loadSlots = async () => [availableSlot];
-
 async function fillCommon(user: ReturnType<typeof userEvent.setup>) {
   await user.type(screen.getByLabelText("Имя"), "Ana");
   await user.type(screen.getByLabelText("Фамилия"), "Popescu");
@@ -37,28 +21,19 @@ async function fillCommon(user: ReturnType<typeof userEvent.setup>) {
 }
 
 describe("ApplicationForm", () => {
-  test("renders only manager-published consultation slots", async () => {
-    const user = userEvent.setup();
-    render(<ApplicationForm products={[]} loadSlots={loadSlots} />);
-    expect(await screen.findByLabelText("Доступное время")).toHaveTextContent(/онлайн/i);
-
-    await user.click(screen.getByRole("button", { name: "Мастер-класс" }));
-    const masterclassBounds = getAppointmentBounds("masterclass");
-    expect(screen.getByLabelText("Желаемая дата")).toHaveAttribute(
-      "min",
-      masterclassBounds.minimumDate
-    );
-    expect(screen.getByLabelText("Желаемая дата")).toHaveAttribute(
-      "max",
-      masterclassBounds.maximumDate
-    );
+  test("renders only order controls without booking tabs or fields", () => {
+    render(<ApplicationForm products={[]} />);
+    expect(screen.getByRole("button", { name: "Оформить заказ" })).toBeDisabled();
+    expect(screen.queryByRole("button", { name: "Консультация" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Мастер-класс" })).not.toBeInTheDocument();
+    expect(document.querySelector('input[type="date"], input[type="time"], .application-mode')).toBeNull();
   });
 
   test("focuses the first invalid field after client validation", async () => {
     const user = userEvent.setup();
-    render(<ApplicationForm products={[]} loadSlots={loadSlots} />);
+    render(<ApplicationForm products={[products[0]]} />);
 
-    await user.click(screen.getByRole("button", { name: "Отправить заявку" }));
+    await user.click(screen.getByRole("button", { name: "Оформить заказ" }));
 
     const firstName = screen.getByRole("textbox", { name: /^Имя/ });
     await waitFor(() => expect(firstName).toHaveFocus());
@@ -75,23 +50,20 @@ describe("ApplicationForm", () => {
       delivery: { telegram: "sent" as const },
     }));
     const user = userEvent.setup();
-    render(<ApplicationForm products={[]} submit={submit} loadSlots={loadSlots} />);
-    expect(
-      screen.getByRole("button", { name: "Консультация" })
-    ).toHaveAttribute("aria-pressed", "true");
+    render(<ApplicationForm products={[products[0]]} submit={submit} />);
+    expect(screen.queryByRole("group", { name: "Тип заявки" })).not.toBeInTheDocument();
     await fillCommon(user);
-    await user.selectOptions(await screen.findByLabelText("Доступное время"), availableSlot.id);
-    await user.click(screen.getByRole("button", { name: "Отправить заявку" }));
+    await user.click(screen.getByRole("button", { name: "Оформить заказ" }));
     await waitFor(() =>
-      expect(screen.getByText(/Консультация №request-1 зарезервирована/)).toBeVisible()
+      expect(screen.getAllByText(/Заказ отправлен. Менеджер свяжется/)[0]).toBeVisible()
     );
-    expect(screen.getByRole("dialog", { name: "Спасибо!" })).toBeVisible();
-    const close = screen.getByRole("button", { name: "Закрыть" });
+    expect(screen.getByRole("dialog", { name: "Благодарим за заказ!" })).toBeVisible();
+    const close = screen.getByRole("button", { name: "Понятно" });
     expect(close).toHaveFocus();
     await user.click(close);
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Статус заявки" })).toHaveFocus();
-    expect(screen.getByRole("button", { name: "Заявка принята" })).toBeDisabled();
+    expect(screen.getByRole("heading", { name: "Статус заказа" })).toHaveFocus();
+    expect(screen.getByRole("button", { name: "Заказ отправлен" })).toBeDisabled();
   });
 
   test("defaults to order with products and blocks duplicate submit", async () => {
@@ -117,15 +89,12 @@ describe("ApplicationForm", () => {
         submit={submit}
       />
     );
-    expect(screen.getByRole("button", { name: "Заказ" })).toHaveAttribute(
-      "aria-pressed",
-      "true"
-    );
+    expect(screen.queryByRole("group", { name: "Тип заявки" })).not.toBeInTheDocument();
     await fillCommon(user);
-    const button = screen.getByRole("button", { name: "Отправить заявку" });
+    const button = screen.getByRole("button", { name: "Оформить заказ" });
     await user.click(button);
-    expect(screen.getByRole("button", { name: "Отправляем заявку…" })).toBeDisabled();
-    await user.click(screen.getByRole("button", { name: "Отправляем заявку…" }));
+    expect(screen.getByRole("button", { name: "Отправляем заказ…" })).toBeDisabled();
+    await user.click(screen.getByRole("button", { name: "Отправляем заказ…" }));
     expect(submit).toHaveBeenCalledTimes(1);
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     resolveSubmit?.({
@@ -134,12 +103,14 @@ describe("ApplicationForm", () => {
       delivery: { telegram: "sent" },
     });
     await waitFor(() =>
-      expect(screen.getByText(/Заявка №request-2 принята и сохранена/)).toBeVisible()
+      expect(screen.getAllByText(/Заказ отправлен. Менеджер свяжется/)[0]).toBeVisible()
     );
-    expect(screen.getByRole("dialog", { name: "Спасибо!" })).toHaveTextContent("Номер заявки: request-2");
-    expect(screen.getByRole("link", { name: "Оставить отзыв" })).toHaveAttribute("href", `/reviews?product=${products[0].slug}#write-review`);
-    await user.click(screen.getByRole("button", { name: "Закрыть" }));
-    await user.click(screen.getByRole("button", { name: "Заявка принята" }));
+    expect(screen.getByRole("dialog", { name: "Благодарим за заказ!" })).toHaveTextContent("Номер заказа: request-2");
+    expect(screen.getByLabelText("Имя")).toHaveValue("");
+    expect(screen.getByRole("checkbox")).not.toBeChecked();
+    expect(document.querySelectorAll(".application-products li")).toHaveLength(0);
+    await user.click(screen.getByRole("button", { name: "Понятно" }));
+    await user.click(screen.getByRole("button", { name: "Заказ отправлен" }));
     expect(submit).toHaveBeenCalledTimes(1);
   });
 
@@ -175,7 +146,7 @@ describe("ApplicationForm", () => {
       })
     ).toHaveTextContent("3");
 
-    await user.click(screen.getByRole("button", { name: "Отправить заявку" }));
+    await user.click(screen.getByRole("button", { name: "Оформить заказ" }));
     await waitFor(() => expect(submit).toHaveBeenCalledTimes(1));
     expect(submit.mock.calls[0][0]).toMatchObject({
       type: "order",
@@ -183,54 +154,28 @@ describe("ApplicationForm", () => {
     });
   });
 
-  test("submits a masterclass topic with the requested date and time", async () => {
-    const submit = vi.fn(
-      async (input: ApplicationInput, idempotencyKey: string) => {
-        void input;
-        void idempotencyKey;
-        return {
-          kind: "success" as const,
-          requestId: "request-masterclass",
-          delivery: { telegram: "sent" as const },
-        };
-      }
-    );
+  test("sends names, SKUs and links with the selected order", async () => {
+    const submit = vi.fn(async (input: ApplicationInput, key: string) => { void input; void key; return { kind: "server-error" as const }; });
     const user = userEvent.setup();
-    render(<ApplicationForm products={[]} submit={submit} loadSlots={loadSlots} />);
-
-    await user.click(screen.getByRole("button", { name: "Мастер-класс" }));
+    render(<ApplicationForm products={[products[0]]} submit={submit} />);
     await fillCommon(user);
-    await user.selectOptions(
-      screen.getByLabelText("Тема мастер-класса"),
-      MASTERCLASS_TOPICS[2]
-    );
-    await user.type(screen.getByLabelText("Желаемая дата"), validMasterclassDate);
-    await user.type(screen.getByLabelText("Желаемое время"), "14:30");
-    await user.click(screen.getByRole("button", { name: "Отправить заявку" }));
-
-    await waitFor(() => expect(submit).toHaveBeenCalledTimes(1));
-    expect(submit.mock.calls[0][0]).toMatchObject({
-      type: "masterclass",
-      masterclassTopic: MASTERCLASS_TOPICS[2],
-      eventDate: validMasterclassDate,
-      eventTime: "14:30",
-    });
+    await user.click(screen.getByRole("button", { name: "Оформить заказ" }));
+    expect(submit).toHaveBeenCalledWith(expect.objectContaining({ type: "order", items: [expect.objectContaining({ officialName: products[0].officialName, sku: products[0].sku, url: expect.stringContaining(`/product/${products[0].slug}`) })] }), expect.any(String));
   });
 
   test("keeps entered values after a server error", async () => {
     const user = userEvent.setup();
     render(
       <ApplicationForm
-        products={[]}
+        products={[products[0]]}
         submit={async () => ({ kind: "server-error" })}
-        loadSlots={loadSlots}
+
       />
     );
     await fillCommon(user);
-    await user.selectOptions(await screen.findByLabelText("Доступное время"), availableSlot.id);
-    await user.click(screen.getByRole("button", { name: "Отправить заявку" }));
+    await user.click(screen.getByRole("button", { name: "Оформить заказ" }));
     await waitFor(() =>
-      expect(screen.getByText(/Заявка не отправлена/)).toBeVisible()
+      expect(screen.getByText(/Не удалось отправить заказ/)).toBeVisible()
     );
     expect(screen.getByLabelText("Имя")).toHaveValue("Ana");
     expect(screen.getByLabelText("Телефон")).toHaveValue("069 123 456");
@@ -260,20 +205,19 @@ describe("ApplicationForm", () => {
       }
     );
     const user = userEvent.setup();
-    render(<ApplicationForm products={[]} submit={submit} loadSlots={loadSlots} />);
+    render(<ApplicationForm products={[products[0]]} submit={submit} />);
 
     await fillCommon(user);
     await user.type(screen.getByLabelText("Email (необязательно)"), "ana@example.com");
     await user.type(
-      screen.getByLabelText("Комментарий к заявке (необязательно)"),
+      screen.getByLabelText("Комментарий к заказу (необязательно)"),
       "Позвоните заранее"
     );
     await user.type(
       screen.getByLabelText("Удобное время для звонка (необязательно)"),
       "После 18:00"
     );
-    await user.selectOptions(await screen.findByLabelText("Доступное время"), availableSlot.id);
-    await user.click(screen.getByRole("button", { name: "Отправить заявку" }));
+    await user.click(screen.getByRole("button", { name: "Оформить заказ" }));
 
     await waitFor(() => expect(submit).toHaveBeenCalledTimes(1));
     expect(submit.mock.calls[0][0]).toMatchObject({
@@ -295,14 +239,14 @@ describe("ApplicationForm", () => {
     render(
       <Router>
         <LocaleProvider>
-          <ApplicationForm products={[]} loadSlots={loadSlots} />
+          <ApplicationForm products={[products[0]]} />
         </LocaleProvider>
       </Router>
     );
 
     expect(screen.getByLabelText("Email (opțional)")).toBeVisible();
     expect(
-      screen.getByLabelText("Comentariu la solicitare (opțional)")
+      screen.getByLabelText("Comentariu la comandă (opțional)")
     ).toBeVisible();
     expect(
       screen.getByLabelText("Interval potrivit pentru apel (opțional)")
@@ -310,23 +254,11 @@ describe("ApplicationForm", () => {
     window.history.replaceState({}, "", "/");
   });
 
-  test("renders the masterclass flow in Romanian while keeping canonical values", async () => {
+  test("has only the Romanian order action without retired booking fields", () => {
     window.history.replaceState({}, "", "/ro/contactus");
-    const user = userEvent.setup();
-    render(
-      <Router>
-        <LocaleProvider>
-          <ApplicationForm products={[]} loadSlots={loadSlots} />
-        </LocaleProvider>
-      </Router>
-    );
-
-    await user.click(screen.getByRole("button", { name: "Masterclass" }));
-    const topic = screen.getByLabelText("Tema masterclassului");
-    expect(topic).toHaveTextContent(MASTERCLASS_TOPIC_LABELS_RO[MASTERCLASS_TOPICS[0]]);
-    expect(topic).not.toHaveTextContent(MASTERCLASS_TOPICS[0]);
-    expect(screen.getByLabelText("Data dorită")).toBeVisible();
-    expect(screen.getByLabelText("Ora dorită")).toBeVisible();
-    window.history.replaceState({}, "", "/");
+    render(<Router><LocaleProvider><ApplicationForm products={[]} /></LocaleProvider></Router>);
+    expect(screen.getByRole("button", { name: "Plasează comanda" })).toBeDisabled();
+    expect(screen.queryByText("Masterclass")).not.toBeInTheDocument();
+    expect(screen.queryByText("Consultație")).not.toBeInTheDocument();
   });
 });

@@ -1,3 +1,7 @@
+Latest order refinement, 2026-10-30: confirm success only after a committed CRM receipt, independently of Telegram status; then clear the form and selected products and show the RU/RO thank-you dialog. Remove the selection email action and introduction. This supersedes the success condition in D-062 and the earlier same-day flow notes. See [order-only flow](ORDER_ONLY_FLOW_2026-10-30.md).
+
+Latest direct decision, 2026-10-30: public submissions now support only orders of selected products. This supersedes the consultation conversion goal and mixed booking forms in older rows; existing constraints on payments, prices and release approval remain. See [order-only flow](ORDER_ONLY_FLOW_2026-10-30.md).
+
 # Which product decisions are active?
 
 This register keeps active decisions that constrain the current code. Superseded prototypes remain only as compact references.

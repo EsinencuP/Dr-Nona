@@ -86,16 +86,13 @@ test("contact flow preserves context and exposes the real application form", asy
   await page.goto("/contactus");
 
   await expect(
-    page.getByRole("heading", { level: 3, name: "В заявку войдут" })
+    page.getByRole("heading", { level: 3, name: "В заказ войдут" })
   ).toBeVisible();
   await expect(page.getByText("SKU 324001")).toHaveCount(2);
   await expect(page.locator("form.application-form")).toHaveCount(1);
-  await expect(page.getByRole("button", { name: "Заказ" })).toHaveAttribute(
-    "aria-pressed",
-    "true"
-  );
+  await expect(page.locator(".application-mode")).toHaveCount(0);
   await expect(
-    page.getByRole("button", { name: "Отправить заявку" })
+    page.getByRole("button", { name: "Оформить заказ" })
   ).toBeVisible();
   await expect(
     page.getByRole("heading", { level: 2, name: "Филиал в Молдове" })
@@ -119,12 +116,9 @@ test("Romanian contact route localizes the form and keeps the selected language"
   ).toBeVisible();
   await expect(page.getByLabel("Prenume")).toBeVisible();
   await expect(page.getByLabel("Nume", { exact: true })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Consultație" })).toHaveAttribute(
-    "aria-pressed",
-    "true"
-  );
+  await expect(page.locator(".application-mode")).toHaveCount(0);
   await expect(
-    page.getByRole("button", { name: "Trimite solicitarea" })
+    page.getByRole("button", { name: "Plasează comanda" })
   ).toBeVisible();
 
   await page.getByRole("link", { name: "Catalog" }).first().click();

@@ -47,21 +47,17 @@ for (const locale of ["ru", "ro"]) {
     }
   });
 
-  test(`${locale}: contact intro precedes full-width modes and fields`, async ({ page }) => {
+  test(`${locale}: order intro precedes full-width form without mode choices`, async ({ page }) => {
     await page.goto(`/${locale}/contactus`);
     await expect(page.locator(".application-form")).toBeVisible();
     for (const width of [320, 768, 1024, 1440, 2048]) {
       await page.setViewportSize({ width, height: 900 });
       const heading = await page.locator(".application-panel__heading").boundingBox();
-      const modes = await page.locator(".application-mode").boundingBox();
+      await expect(page.locator(".application-mode")).toHaveCount(0);
       const form = await page.locator(".application-form").boundingBox();
       expect(heading).not.toBeNull();
-      expect(modes).not.toBeNull();
       expect(form).not.toBeNull();
-      expect(modes!.y).toBeGreaterThanOrEqual(heading!.y + heading!.height);
-      expect(form!.y).toBeGreaterThanOrEqual(modes!.y + modes!.height);
-      expect(Math.abs(form!.x - modes!.x)).toBeLessThanOrEqual(1);
-      expect(Math.abs(form!.width - modes!.width)).toBeLessThanOrEqual(1);
+      expect(form!.y).toBeGreaterThanOrEqual(heading!.y + heading!.height);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     }
   });

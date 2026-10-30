@@ -1,3 +1,7 @@
+Order flow update: 2026-10-30. The owner's latest decision retires public consultation/masterclass booking and leaves only orders of selected products in RU/RO. Form, handoff, server validation, mailto wording and CRM order notifications follow this decision; success requires explicit confirmation of a committed CRM order; Telegram delivery is tracked separately. A confirmed receipt clears the form and selection. See [order-only flow](ORDER_ONLY_FLOW_2026-10-30.md). Historical descriptions below retain their original dates and scope. Production release remains blocked.
+
+Current source restoration: 2026-10-30. The latest direct owner decision requires verbatim drnona.md originals with emoji removed. This overrides older product-copy quarantine and shortening instructions for these source-backed records only. The original paragraphs/lists are reproduced independently of review status. All 50 updated RO records retain pending editorial review; P0-LOCALE is reopened because previous fingerprints do not approve these new originals. Production remains release-blocked. See [catalogue restoration](CATALOG_TEXT_RESTORATION_2026-10-30.md).
+
 # What is the current project state?
 
 The application is a functional local QA candidate. Its technical gates pass, but production release remains blocked.
@@ -77,3 +81,5 @@ The [2026-09-10 localization decision](RO_MD_LOCALIZATION_OWNER_DECISION_2026-09
 | `npm run performance:runtime` | PASS | 2026-09-01 | Home, contact and catalogue within runtime budget |
 | `npm run test:e2e` | PASS | 2026-09-02 | 277 passed, 17 intentionally skipped across 294 desktop/mobile scenarios |
 | `npm run release:check` | EXPECTED BLOCKED | 2026-09-01 | 8 open P0/P1 blockers |
+
+Current 2026-10-30 claim registry: 433 total; 433 pending, 0 approved, 0 rejected. Historical counts above refer to their stated dates.

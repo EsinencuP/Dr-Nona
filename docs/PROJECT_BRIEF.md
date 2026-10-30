@@ -1,6 +1,6 @@
 # What product does this repository deliver?
 
-Dr. Nona Moldova is an informational electronic catalogue for a mature Moldova audience. It explains Halo Complex™, presents approved products and helps a visitor send a contextual consultation or order request.
+Dr. Nona Moldova is an informational electronic catalogue for a mature Moldova audience. It explains Halo Complex™, presents approved products and helps a visitor send an order request for selected products.
 
 Last verified: 2026-09-01. This document describes the stable product contract; current counts and blockers live in `PROJECT_STATUS.md` and `RELEASE_STATUS.md`.
 
@@ -47,7 +47,7 @@ Only `published` and `ready` records appear publicly. A product detail hides fie
 
 Selection is not a cart. It stores product slugs locally and presents name, SKU and public URL to the visitor before submission.
 
-The form supports an order request and an online/offline consultation preference. The server validates the payload and sends it to the approved Telegram chat. A successful UI state appears only after successful provider delivery. Payment and consultation-time confirmation remain outside the form.
+The form supports only orders of selected products in RU/RO. The server validates contact details, consent and product quantities and forwards a signed order to the separate CRM. A successful UI state requires a confirmed 201/sent receipt; pending delivery and errors preserve input for retry. The manager confirms the order and delivery; the form does not take payment. See [the order-only decision](ORDER_ONLY_FLOW_2026-10-30.md).
 
 ## Language and market
 

@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import sourceProducts from "../../src/data/products.json" with { type: "json" };
 
 test("valid and invalid product deep links resolve correctly", async ({ page }) => {
   await page.goto("/product/lord-deodorant");
@@ -9,9 +10,10 @@ test("valid and invalid product deep links resolve correctly", async ({ page }) 
     })
   ).toBeVisible();
   await expect(page.getByText("324001", { exact: true })).toBeVisible();
+  await expect(page.getByTestId("full-product-description")).toContainText("Halo Complex");
   await expect(page.getByRole("heading", { level: 2, name: "О продукте" })).toBeVisible();
-  await expect(page.getByRole("heading", { level: 2, name: "Состав" })).toBeVisible();
-  await expect(page.getByRole("heading", { level: 2, name: "Способ применения" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2, name: "Состав" })).toHaveCount(0);
+  await expect(page.getByRole("heading", { level: 2, name: "Способ применения" })).toHaveCount(0);
   const relatedImages = page.locator(".related-grid .product-card__image");
   await expect(relatedImages).toHaveCount(4);
   for (const image of await relatedImages.all()) {
@@ -47,14 +49,13 @@ test("every catalog category exposes product identity without outbound sources",
     await page.goto(href);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     await expect(page.locator(".product-purpose")).toHaveCount(0);
-    await expect(page.locator(".product-copy-card--overview")).toHaveCount(0);
-    for (const name of ["Состав", "Способ применения"]) {
+    await expect(page.locator(".product-copy-card--overview")).toBeVisible();
+    const source = sourceProducts.find(product => href === `/product/${product.slug}`)!;
+    await expect(page.getByTestId("full-product-description")).toHaveText(source.longDescription, { useInnerText: true });
+    for (const [name, field] of [["Состав", "ingredients"], ["Способ применения", "howToUse"]] as const) {
       const heading = page.getByRole("heading", { level: 2, name });
-      if (href === "/product/parfum-faya") {
-        await expect(heading).toHaveCount(0);
-      } else {
-        await expect(heading).toBeVisible();
-      }
+      if (source[field] === null) await expect(heading).toHaveCount(0);
+      else await expect(heading).toBeVisible();
     }
     await expect(page.locator('a[href*="drnona.md"], a[href*="drnona.com"]')).toHaveCount(0);
     await expect(page.getByTestId("claims-review-notice")).toHaveCount(0);

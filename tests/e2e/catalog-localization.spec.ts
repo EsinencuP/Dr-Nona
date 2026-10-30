@@ -61,10 +61,10 @@ test("Romanian product route publishes authorized factual copy without outbound 
     page.getByRole("heading", { level: 1, name: "Dynamic Cream" })
   ).toBeVisible();
   await expect(page.locator(".product-purpose")).toHaveCount(0);
-  await expect(page.locator(".product-copy-card--overview")).toHaveCount(0);
-  await expect(page.getByRole("article").filter({ has: page.getByRole("heading", { name: "Compoziție" }) })).toContainText("extract de mușețel");
-  await expect(page.getByRole("article").filter({ has: page.getByRole("heading", { name: "Mod de utilizare" }) })).toContainText("Spălați bine fața");
-  await expect(page.getByText(/accelerează regenerarea celulară/i)).toHaveCount(0);
+  await expect(page.locator(".product-copy-card--overview")).toBeVisible();
+  await expect(page.getByTestId("full-product-description")).toContainText("mușețel");
+  await expect(page.getByTestId("full-product-description")).toContainText("DYNAMIC CREAM");
+  await expect(page.getByTestId("full-product-description")).toContainText(/accelerează regenerarea, elimină roșeața și iritațiile/i);
   await expect(page.locator('a[href*="drnona.md"], a[href*="drnona.com"]')).toHaveCount(0);
   const visibleText = await page.locator("body").innerText();
   expect(visibleText).not.toMatch(cyrillic);

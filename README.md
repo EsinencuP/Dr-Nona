@@ -1,6 +1,6 @@
 # Dr. Nona Moldova
 
-This repository contains the Russian-language Moldova catalogue for Dr. Nona. It presents products, Halo Complex™, company information and a consultation handoff without commerce features.
+This repository contains the RU/RO Moldova catalogue for Dr. Nona. It presents products, Halo Complex™, company information and order requests for selected products, without online payment. The [2026-10-30 order-only decision](docs/ORDER_ONLY_FLOW_2026-10-30.md) retires public consultation and masterclass booking.
 
 ## Current status
 

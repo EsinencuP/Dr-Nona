@@ -1,4 +1,8 @@
 import { createApplicationProxySignature } from "./application-proxy-signature.js";
+import { validateApplicationInput } from "../shared/applications/application-schema.js";
+import products from "../src/data/products.json" with { type: "json" };
+
+const productsBySlug = new Map(products.filter(product => product.publicationStatus === "published").map(product => [product.slug, product]));
 
 const MAX_PROXY_BODY_BYTES = 16 * 1024;
 const PROXY_TIMEOUT_MS = 10_000;
@@ -54,10 +58,25 @@ export function createApplicationsProxy(
       return jsonResponse({ ok: false, code: "INVALID_CONTENT_TYPE" }, 400);
     }
 
-    const body = await request.arrayBuffer();
-    if (body.byteLength > MAX_PROXY_BODY_BYTES) {
+    const originalBody = await request.arrayBuffer();
+    if (originalBody.byteLength > MAX_PROXY_BODY_BYTES) {
       return jsonResponse({ ok: false, code: "PAYLOAD_TOO_LARGE" }, 413);
     }
+
+    let raw: unknown;
+    try { raw = JSON.parse(new TextDecoder().decode(originalBody)); }
+    catch { return jsonResponse({ ok: false, code: "INVALID_JSON" }, 400); }
+    const validation = validateApplicationInput(raw, { allowedProductSlugs: new Set(productsBySlug.keys()) });
+    if (!validation.success) return jsonResponse({ ok: false, code: "VALIDATION_ERROR", fieldErrors: validation.fieldErrors }, 400);
+    const order = validation.data;
+    const origin = new URL(request.url).origin;
+    // Names, SKUs and links are canonical server data, never trusted client text.
+    const items = (order.items ?? order.productSlugs.map(slug => ({ slug, quantity: 1 }))).map(item => {
+      const product = productsBySlug.get(item.slug)!;
+      return { slug: item.slug, quantity: item.quantity, officialName: product.officialName, sku: product.sku,
+        url: new URL(`/${order.locale === "ro-MD" ? "ro" : "ru"}/product/${product.slug}`, origin).href };
+    });
+    const body = new TextEncoder().encode(JSON.stringify({ ...order, items })).buffer;
 
     const headers = new Headers({
       "Content-Type": "application/json",

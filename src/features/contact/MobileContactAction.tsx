@@ -19,8 +19,8 @@ export function MobileContactAction() {
     ? `/contactus?${new URLSearchParams({ products: slug })}`
     : "/contactus";
   const label = locale === "ro"
-    ? slug ? "Întreabă despre produs" : "Solicită o consultație"
-    : slug ? "Вопрос о продукте" : "Получить консультацию";
+    ? "Plasează comanda"
+    : "Оформить заказ";
 
   return (
     <div className="mobile-contact-action">

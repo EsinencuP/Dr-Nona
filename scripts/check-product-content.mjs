@@ -1,3 +1,4 @@
+import { hasVerbatimMoldovaCopy } from "../src/product-copy-policy.mjs";
 import { readFileSync } from "node:fs";
 import { evaluateProductDataset } from "./product-content-lib.mjs";
 import { assessRomanianProductCopy } from "./romanian-product-content-lib.mjs";
@@ -44,13 +45,13 @@ for (const product of products) {
   }
   for (const field of descriptiveFields) {
     if (
-      blockedFields.has(`${product.slug}\u001f${field}`) &&
+      !hasVerbatimMoldovaCopy(product) && blockedFields.has(`${product.slug}\u001f${field}`) &&
       publicProduct?.[field] != null
     ) {
       report.errors.push(`${product.slug}: blocked ${field} leaked into public product data.`);
     }
     if (
-      blockedFields.has(`ro:${product.slug}\u001f${field}`) &&
+      !hasVerbatimMoldovaCopy(romanianProducts[product.slug]) && blockedFields.has(`ro:${product.slug}\u001f${field}`) &&
       publicRomanianProducts[product.slug]?.[field] != null
     ) {
       report.errors.push(`${product.slug}: blocked Romanian ${field} leaked into public product data.`);
@@ -71,6 +72,13 @@ for (const product of products) {
   }
   for (const error of assessRomanianProductCopy(localized)) {
     report.errors.push(`${product.slug}: Romanian semantic validation failed: ${error}.`);
+  }
+  for (const [source, projection] of [[product, publicProduct], [localized, publicRomanianProducts[product.slug]]]) {
+    if (hasVerbatimMoldovaCopy(source)) {
+      for (const field of [...descriptiveFields, "sourceBlocks", "sourceCopy"]) {
+        if (JSON.stringify(source[field]) !== JSON.stringify(projection?.[field])) report.errors.push(`${product.slug}: source reproduction mismatch: ${field}`);
+      }
+    }
   }
   const productReview = romanianReview.products[product.slug] ?? {};
   if (Object.values(productReview).includes("approved") && !hasCurrentTranslationApproval(product, localized, romanianReview)) {
@@ -109,5 +117,5 @@ if (report.errors.length) {
 }
 
 console.log(
-  `Product content gate: PASS (${report.total} records; ${report.published} published, ${report.drafts} drafts; Romanian structure and publication evidence valid; claims quarantine enforced).`
+  `Product content gate: PASS (${report.total} records; ${report.published} published, ${report.drafts} drafts; Romanian structure and publication evidence valid; verbatim originals preserved independently of claims review; legacy quarantine enforced).`
 );

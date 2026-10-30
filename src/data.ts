@@ -6,6 +6,10 @@ import { useLocale } from "./locales/LocaleProvider";
 
 type Locale = "ru" | "ro";
 
+export type ProductSourceBlock =
+  | { type: "paragraph" | "heading"; text: string }
+  | { type: "list"; ordered: boolean; items: string[] };
+
 export type Product = {
   slug: string;
   officialName: string;
@@ -16,6 +20,8 @@ export type Product = {
   };
   shortDescription: string | null;
   longDescription: string | null;
+  sourceBlocks?: ProductSourceBlock[];
+  sourceCopy?: { method: string; sourceUrl: string; textHash: string };
   ingredients: string | null;
   howToUse: string | null;
   sku: string;
@@ -89,6 +95,8 @@ type RomanianProductCopy = Pick<
   | "category"
   | "imageAlt"
   | "sourceUrl"
+  | "sourceBlocks"
+  | "sourceCopy"
 >;
 
 export type OfficialPageData = {
@@ -189,7 +197,7 @@ export function loadProductData(locale: Locale = "ru") {
         if (!copy || fields.some((field) => !Object.hasOwn(copy, field))) {
           throw new Error(`Incomplete Romanian product record: ${product.slug}`);
         }
-        return { ...product, ...copy };
+        return { ...product, ...copy, sourceBlocks: copy.sourceBlocks, sourceCopy: copy.sourceCopy };
       }),
       locale
     );

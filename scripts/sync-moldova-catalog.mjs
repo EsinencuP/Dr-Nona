@@ -1,504 +1,124 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import * as cheerio from "cheerio";
-import { parseRomanianProductHtml } from "./romanian-product-content-lib.mjs";
+import { blocksText, discoverLinks, parseMoldovaProductHtml, sourceIdentity } from "./moldova-product-content-lib.mjs";
 
-const moldovaOrigin = "https://www.drnona.md";
-const internationalOrigin = "https://drnona.com";
-const placeholder = "/brand/product-placeholder.svg";
-const outputPath = new URL("../src/data/products.json", import.meta.url);
-const romanianOutputPath = new URL("../src/data/products-ro.json", import.meta.url);
+const origin = "https://www.drnona.md";
+const readJson = async path => JSON.parse(await readFile(path, "utf8"));
+const hash = text => createHash("sha256").update(text).digest("hex");
+const cacheDir = "artifacts/catalog-source";
+const categoriesRo = { "Кремы": "Creme", "Напитки": "Băuturi", "Пищевые добавки": "Suplimente alimentare", "Гигиена": "Igienă", "Парфюмерия": "Parfumerie" };
 
-// Product detail titles on drnona.md are sometimes abbreviated (for example,
-// "Dynamic"), while the category cards contain the complete commercial name.
-// Keep this source-backed inventory explicit so a content sync cannot silently
-// remove the product type from the public catalogue.
-const officialProductNames = {
-  solaris: "Solaris Body Lotion",
-  hand_and_nail_cream: "Hand and Nail Cream",
-  dynamic: "Dynamic Cream",
-  body_butter: "Shea Body Butter",
-  facial_solaris: "Solaris Facial Cream",
-  eye_care_balm: "Eye Care Balm",
-  face_milk: "Face Milk",
-  night_cream: "Night Cream",
-  anti_aging_serum: "Anti-Aging Serum",
-  ard_cream_for_face: "Moisturizing Cream / For Face",
-  shp_day_time_face_cream: "Day Time Face Cream",
-  top_samples_kit: "Top Samples Kit",
-  gonseen: "Gonseen Tea",
-  slimseen_coffee_mix: "Slimseen Coffee Mix",
-  chocoseen: "Chocoseen",
-  soupseen: "Soupseen",
-  okseen: "OKSEEN",
-  phase_9: "PHASE-9",
-  dnd: "DND",
-  imunseen: "IMUNSEEN",
-  goldseen: "GOLDSEEN",
-  cleanseen: "CLEANSEEN",
-  ravseen: "RAVSEEN",
-  pulmoseen: "PULMOSEEN",
-  reumoseen: "REUMOSEEN",
-  yamseen: "YAMSEEN",
-  newseen: "NEWSEEN",
-  femseen: "FEMSEEN",
-  mouthwash: "Multi Mouthwash",
-  compressed_wipes_ru: "Compressed Wipes",
-  shower_gel_lord: "Shower Gel ( LORD )",
-  deodorant_lady: "Deodorant ( LADY )",
-  deodorant_kiwi: "Deodorant ( KIWI )",
-  deodorant_lord: "Deodorant ( LORD )",
-  facial_foam_soap: "Facial Foam Soap",
-  unisex_deodorant_stick: "Unisex Deodorant Stick",
-  shenseen_mousse_toothpaste: "Shenseen Mousse Toothpaste",
-  shower_gel: "Shower Gel",
-  mineral_shampoo: "Mineral Shampoo",
-  mineral_hair_conditioner: "Mineral Hair Conditioner",
-  mineral_lipstick: "Mineral Lipstick",
-  recovering_mud_musk: "Recovering Mud Musk",
-  bath_salts_with_chamomile_extract: "Bath Salts with Camomile extract",
-  bath_salts_with_ylang_ylang_extract:
-    "Bath Salts with Ylang Ylang, Patchouli & Anis Star Extract",
-  bath_salts_with_rosemary_extract:
-    "Bath Salts with Rosemary, Eucalyptus & Thyme extract",
-  bath_salts_with_lavender_extract: "Bath Salts with Lavander extract",
-  parfume_lord: "Eau De Parfume ( LORD )",
-  parfume_kiwi: "Eau De Parfume ( KIWI )",
-  parfume_lady: "Eau De Parfume ( LADY )",
-  parfume_faya: "Eau De Parfume ( FAYA )",
-};
-
-const romanianCategories = {
-  "Кремы": "Creme",
-  "Напитки": "Băuturi",
-  "Пищевые добавки": "Suplimente alimentare",
-  "Гигиена": "Igienă",
-  "Парфюмерия": "Parfumerie",
-};
-
-const romanianSourceSlugs = {
-  compressed_wipes_ru: "compressed_wipes_ro",
-  bath_salts_with_lavender_extract: "bath_salts_with_lavander_extract_ro",
-};
-
-const categoryInventory = {
-  "Кремы": [
-    "solaris",
-    "hand_and_nail_cream",
-    "dynamic",
-    "body_butter",
-    "facial_solaris",
-    "eye_care_balm",
-    "face_milk",
-    "night_cream",
-    "anti_aging_serum",
-    "ard_cream_for_face",
-    "shp_day_time_face_cream",
-    "top_samples_kit",
-  ],
-  "Напитки": ["gonseen", "slimseen_coffee_mix", "chocoseen", "soupseen"],
-  "Пищевые добавки": [
-    "okseen",
-    "phase_9",
-    "dnd",
-    "imunseen",
-    "goldseen",
-    "cleanseen",
-    "ravseen",
-    "pulmoseen",
-    "reumoseen",
-    "yamseen",
-    "newseen",
-    "femseen",
-  ],
-  "Гигиена": [
-    "mouthwash",
-    "compressed_wipes_ru",
-    "shower_gel_lord",
-    "deodorant_lady",
-    "deodorant_kiwi",
-    "deodorant_lord",
-    "facial_foam_soap",
-    "unisex_deodorant_stick",
-    "shenseen_mousse_toothpaste",
-    "shower_gel",
-    "mineral_shampoo",
-    "mineral_hair_conditioner",
-    "mineral_lipstick",
-    "recovering_mud_musk",
-    "bath_salts_with_chamomile_extract",
-    "bath_salts_with_ylang_ylang_extract",
-    "bath_salts_with_rosemary_extract",
-    "bath_salts_with_lavender_extract",
-  ],
-  "Парфюмерия": ["parfume_lord", "parfume_kiwi", "parfume_lady", "parfume_faya"],
-};
-
-const internationalSlugs = {
-  solaris: "solaris-body-lotion",
-  hand_and_nail_cream: "hand-and-nail-treatment",
-  dynamic: "dynamic-hydrating-cream",
-  facial_solaris: "facial-solaris",
-  eye_care_balm: "eye-contour-balm",
-  face_milk: "face-milk",
-  night_cream: "night-cream",
-  anti_aging_serum: "anti-aging-serum",
-  ard_cream_for_face: "ard-complex",
-  shp_day_time_face_cream: "shp-day-time-face-cream-lc",
-  top_samples_kit: "samples-kit",
-  gonseen: "gonseen",
-  slimseen_coffee_mix: "coffee-mix",
-  chocoseen: "chocoseen",
-  soupseen: "soupseen",
-  okseen: "okseen",
-  phase_9: "fase-9",
-  dnd: "dnd-chewing-gum-tablets",
-  imunseen: "imunseen",
-  goldseen: "goldseen",
-  cleanseen: "cleanseen",
-  ravseen: "ravseen",
-  pulmoseen: "pulmoseen",
-  reumoseen: "reumoseen",
-  yamseen: "yamseen",
-  newseen: "newseen",
-  femseen: "femseen",
-  mouthwash: "mouthwash",
-  compressed_wipes_ru: "dead-sea-water-compresses",
-  deodorant_lady: "lady-deodorant",
-  deodorant_kiwi: "kiwi-deodorant",
-  deodorant_lord: "lord-deodorant",
-  facial_foam_soap: "face-soap",
-  unisex_deodorant_stick: "halo-pure-unisex-deodorant-stick",
-  shenseen_mousse_toothpaste: "halo-shenseen-toothpaste",
-  shower_gel: "halo-gel",
-  mineral_shampoo: "frequent-use-tonic-shampoo",
-  mineral_hair_conditioner: "conditioner",
-  mineral_lipstick: "lipstick-new",
-  recovering_mud_musk: "beauty-mask-for-face",
-  bath_salts_with_chamomile_extract: "salts-camomile",
-  bath_salts_with_ylang_ylang_extract: "salts-ylangylang",
-  bath_salts_with_rosemary_extract: "salts-rosemary",
-  bath_salts_with_lavender_extract: "salts-lavander",
-  parfume_lord: "after-shave-lord",
-  parfume_kiwi: "perfume-kiwi",
-  parfume_lady: "perfume-lady",
-  parfume_faya: "parfum-faya",
-};
-
-const expectedCategoryCounts = {
-  "Кремы": 12,
-  "Напитки": 4,
-  "Пищевые добавки": 12,
-  "Гигиена": 18,
-  "Парфюмерия": 4,
-};
-
-const clean = (value = "") =>
-  value
-    .replaceAll("&amp;", "&")
-    .replaceAll("&quot;", '"')
-    .replaceAll("&#39;", "'")
-    .replaceAll("&nbsp;", " ")
-    .replace(/\p{Extended_Pictographic}|\p{Emoji_Modifier}|\uFE0F|\u200D/gu, " ")
-    .replace(/[•▪◾◆◇✓✔]+/g, ". ")
-    .replace(/[—–]\s*(?=\p{Lu})/gu, ". ")
-    .replace(/([.!?])(?=\p{Lu})/gu, "$1 ")
-    .replace(/\s+/g, " ")
-    .replace(/\s+([,.;:!?])/g, "$1")
-    .replace(/\.{2,}/g, ".")
-    .trim();
-
-function extractRichText($, selection) {
-  const content = selection.clone();
-  content.find("br").replaceWith(" ");
-  content.find("p,li,div,h1,h2,h3,h4,h5,h6").each((_, element) => {
-    $(element).append(" ");
-  });
-  return clean(content.text());
-}
-
-function parseSitemap(xml) {
-  return new Map(
-    [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((match) => {
-      const block = match[1];
-      const url = block.match(/<loc>(.*?)<\/loc>/)?.[1]?.replaceAll("&amp;", "&") ?? "";
-      const lastmod = block.match(/<lastmod>(.*?)<\/lastmod>/)?.[1] ?? "";
-      return [url, lastmod];
-    })
-  );
-}
-
-function parseJsonLd($, type) {
-  for (const element of $('script[type="application/ld+json"]').toArray()) {
-    try {
-      const value = JSON.parse($(element).text());
-      const records = Array.isArray(value) ? value : [value];
-      const found = records.find((record) => record?.["@type"] === type);
-      if (found) return found;
-    } catch {
-      // Invalid third-party JSON-LD is ignored; the product page remains usable.
-    }
-  }
-  return null;
-}
-
-function sourceTitle($) {
-  return clean($("title").text().replace(/\s*\(\s*(?:RU|RO)\s*\)\s*$/i, ""));
-}
-
-function stripSourceHeading(text, title, officialName = title) {
-  let value = text;
-  const prefixes = [
-    `${officialName} Dr. Nona`,
-    `${title} Dr. Nona`,
-    officialName,
-    title,
-    "Dr. Nona",
-  ];
-  let changed = true;
-  while (changed) {
-    changed = false;
-    for (const prefix of prefixes) {
-      if (value.toLocaleLowerCase("ru").startsWith(prefix.toLocaleLowerCase("ru"))) {
-        value = value.slice(prefix.length).trim();
-        changed = true;
-        break;
-      }
-    }
-  }
-  return clean(value);
-}
-
-function shortDescription(value, locale = "ru") {
-  const protectedValue = value
-    .replace(/^[\s–—-]+/, "")
-    .replace(/Dr\.\s*Nona/gi, "Dr Nona");
-  const segments = [...new Intl.Segmenter(locale, { granularity: "sentence" }).segment(protectedValue)]
-    .map(({ segment }) => clean(segment).replace(/Dr Nona/gi, "Dr. Nona"))
-    .filter((segment) => segment.length > 25);
-  const first = segments[0] || value;
-  if (first.length <= 260) return first;
-  const clipped = first.slice(0, 257).replace(/\s+\S*$/, "").trim();
-  return `${clipped}…`;
-}
-
-function segmentBetween(value, starts, ends) {
-  const startPattern = starts.map((item) => item.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
-  const endPattern = ends.map((item) => item.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
-  const match = value.match(new RegExp(`(?:${startPattern})\\s*:?\\s*(.+?)(?=(?:${endPattern})|$)`, "iu"));
-  return match ? clean(match[1]) : null;
-}
-
-function extractMoldovaProduct(html, locale = "ru", officialName) {
-  const $ = cheerio.load(html);
-  $("script,style,noscript,svg").remove();
-  const title = sourceTitle($);
-  const body = stripSourceHeading(
-    extractRichText($, $("body")),
-    title,
-    officialName
-  );
-  if (!title || body.length < 40) throw new Error("Moldova product page has no usable title or description.");
-  return {
-    title,
-    shortDescription: shortDescription(body, locale),
-    longDescription: body,
-    ingredients: segmentBetween(
-      body,
-      ["В составе также присутствуют", "В составе", "В его состав входят", "Также в его состав входят"],
-      ["Преимущества", "Благодаря", "Идеален", "Особенно", "помогают", "Способ применения", "Применение"]
-    ),
-    howToUse: segmentBetween(
-      body,
-      ["Способ применения", "Применение", "Как использовать"],
-      ["Состав", "Преимущества", "Важно", "Противопоказания"]
-    ),
-  };
-}
-
-function extractRomanianProduct(html, officialName) {
-  return { title: officialName, ...parseRomanianProductHtml(html) };
-}
-
-function extractInternationalProduct(html) {
-  const $ = cheerio.load(html);
-  const productLd = parseJsonLd($, "Product") ?? {};
-  const title = $("main h1").first();
-  const panel = title.parent();
-  const tabs = panel.find(".w-auto.bg-white.h-auto").first().children("div");
-  return {
-    name: clean(productLd.name || title.text()),
-    sku: clean(productLd.sku || ""),
-    description: extractRichText($, panel.find(".product-description-prose").first()),
-    ingredients: extractRichText($, tabs.eq(0)) || null,
-    howToUse: extractRichText($, tabs.eq(1)) || null,
-  };
-}
-
-async function fetchText(url, attempts = 3) {
+async function fetchPage(url) {
+  const path = `${cacheDir}/${new URL(url).pathname.slice(1)}.html`;
+  if (process.argv.includes("--offline")) return readFile(path, "utf8");
   let error;
-  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+  for (let attempt = 0; attempt < 3; attempt++) {
     try {
-      const response = await fetch(url, {
-        headers: {
-          accept: "text/html,application/xhtml+xml,application/xml",
-          "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/131 Safari/537.36",
-        },
-      });
+      const response = await fetch(url, { signal: AbortSignal.timeout(25000) });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      return await response.text();
-    } catch (caught) {
-      error = caught;
-    }
+      const html = await response.text();
+      await writeFile(path, html);
+      return html;
+    } catch (caught) { error = caught; }
   }
-  throw new Error(`${url}: ${error instanceof Error ? error.message : String(error)}`);
+  throw new Error(`${url}: ${error.message}`);
 }
 
-async function mapConcurrent(records, limit, mapper) {
-  const result = new Array(records.length);
-  let cursor = 0;
-  async function worker() {
-    while (cursor < records.length) {
-      const index = cursor;
-      cursor += 1;
-      result[index] = await mapper(records[index], index);
-    }
+async function discover(locale) {
+  const catalogUrl = `${origin}/catalog${locale === "ro" ? "_ro" : ""}`;
+  const categoryUrls = discoverLinks(await fetchPage(catalogUrl), catalogUrl, "category");
+  if (!categoryUrls.length) throw new Error(`No ${locale} categories discovered`);
+  const categories = [];
+  for (const sourceUrl of categoryUrls) {
+    const html = await fetchPage(sourceUrl);
+    const $ = cheerio.load(html);
+    const title = $("title").text().replace(/\s*\(\s*(?:RU|RO)\s*\)\s*$/iu, "").trim();
+    const urls = discoverLinks(html, sourceUrl, "product");
+    if (!urls.length) throw new Error(`No products discovered: ${sourceUrl}`);
+    categories.push({ sourceUrl, title, urls });
   }
-  await Promise.all(Array.from({ length: Math.min(limit, records.length) }, worker));
-  return result;
+  return categories;
 }
 
-function localSlug(sourceSlug) {
-  return internationalSlugs[sourceSlug] || sourceSlug.replace(/_ru$/, "").replaceAll("_", "-");
+function section(blocks, pattern) {
+  const index = blocks.findIndex(block => block.type !== "list" && pattern.test(block.text));
+  if (index < 0) return null;
+  const heading = blocks[index].text;
+  const inline = heading.slice(heading.indexOf(":") + 1).trim();
+  if (inline) return inline;
+  const next = blocks[index + 1];
+  return next ? blocksText([next]) : null;
 }
 
-function validate(products) {
-  const errors = [];
-  if (products.length !== 50) errors.push(`Expected 50 products, received ${products.length}.`);
-  const slugs = new Set();
-  for (const product of products) {
-    if (slugs.has(product.slug)) errors.push(`Duplicate slug: ${product.slug}.`);
-    slugs.add(product.slug);
-    if (!product.officialName || !product.shortDescription || !product.longDescription) {
-      errors.push(`${product.slug}: required catalog copy is incomplete.`);
-    }
-    if (new URL(product.sourceUrl).origin !== moldovaOrigin) {
-      errors.push(`${product.slug}: primary source is not drnona.md.`);
-    }
-  }
-  for (const [category, expected] of Object.entries(expectedCategoryCounts)) {
-    const actual = products.filter((product) => product.category === category).length;
-    if (actual !== expected) errors.push(`${category}: expected ${expected}, received ${actual}.`);
-  }
-  if (errors.length) throw new Error(`Catalog validation failed:\n${errors.join("\n")}`);
+function copyFrom(parsed, sourceUrl) {
+  return {
+    shortDescription: parsed.shortDescription,
+    longDescription: parsed.longDescription,
+    sourceBlocks: parsed.sourceBlocks,
+    sourceCopy: { method: "verbatim-md-no-emoji", sourceUrl, textHash: hash(parsed.longDescription) },
+    ingredients: section(parsed.sourceBlocks, /^(?:.*ингредиенты|состав|также в его состав входят|в его состав входят|основные ингредиенты.*|ingredientele principale.*|ingrediente.*|compoziție|de asemenea, compoziția sa include):/iu),
+    howToUse: section(parsed.sourceBlocks, /^(?:способ применения|применение|как использовать|mod de utilizare|cum se utilizează):/iu),
+    sourceUrl,
+  };
 }
 
 async function main() {
-  const shouldWrite = process.argv.includes("--write");
-  const existingProducts = JSON.parse(await readFile(outputPath, "utf8"));
-  const existingBySlug = new Map(
-    existingProducts.map((product) => [product.slug, product])
-  );
-  const sitemap = parseSitemap(await fetchText(`${moldovaOrigin}/sitemap.xml`));
-  const inventory = Object.entries(categoryInventory).flatMap(([category, sourceSlugs]) =>
-    sourceSlugs.map((sourceSlug) => ({ category, sourceSlug }))
-  );
-
-  const products = await mapConcurrent(inventory, 6, async ({ category, sourceSlug }, index) => {
-    const sourceUrl = `${moldovaOrigin}/${sourceSlug}`;
-    const internationalSlug = internationalSlugs[sourceSlug];
-    const officialSourceUrl = internationalSlug
-      ? `${internationalOrigin}/product/${internationalSlug}`
-      : null;
-    const officialName = officialProductNames[sourceSlug];
-    const moldova = extractMoldovaProduct(
-      await fetchText(sourceUrl),
-      "ru",
-      officialName
-    );
-    const romanianSourceSlug =
-      romanianSourceSlugs[sourceSlug] || `${sourceSlug.replace(/_ru$/, "")}_ro`;
-    const romanianSourceUrl = `${moldovaOrigin}/${romanianSourceSlug}`;
-    const romanian = extractRomanianProduct(
-      await fetchText(romanianSourceUrl),
-      officialName
-    );
-    let international = null;
-    if (officialSourceUrl) {
-      try {
-        international = extractInternationalProduct(await fetchText(officialSourceUrl));
-      } catch (error) {
-        console.warn(`Enrichment skipped for ${sourceSlug}: ${error instanceof Error ? error.message : error}`);
-      }
-    }
-    const slug = localSlug(sourceSlug);
-    const existing = existingBySlug.get(slug);
-    const sameCategory = categoryInventory[category].map(localSlug);
-    const ownIndex = sameCategory.indexOf(slug);
-    const relatedSlugs = Array.from({ length: Math.min(4, sameCategory.length - 1) }, (_, offset) =>
-      sameCategory[(ownIndex + offset + 1) % sameCategory.length]
-    );
-    return {
-      slug,
-      officialName: officialName || moldova.title,
-      shortDescription: moldova.shortDescription,
-      longDescription: moldova.longDescription || international?.description || "",
-      ingredients: international?.ingredients || moldova.ingredients || null,
-      howToUse: international?.howToUse || moldova.howToUse || null,
-      sku: international?.sku || "",
-      category,
-      publicationStatus: "published",
-      editorialStatus: "ready",
-      image: existing?.image || placeholder,
-      catalogScale: existing?.catalogScale || 1,
-      imageAlt:
-        existing?.imageAlt ||
-        `Изображение продукта ${officialName || moldova.title}`,
-      sourceUrl,
-      officialSourceUrl,
-      releasedAt: null,
-      sourceLastmod: sitemap.get(sourceUrl) || "",
-      officialOrder: index + 1,
-      popularityRank: index + 1,
-      relatedSlugs,
-      romanian: {
-        shortDescription: romanian.shortDescription,
-        longDescription: romanian.longDescription,
-        ingredients: romanian.ingredients,
-        howToUse: romanian.howToUse,
-        category: romanianCategories[category],
-        imageAlt: `Imaginea produsului ${officialName || moldova.title}`,
-        sourceUrl: romanianSourceUrl,
-      },
-    };
-  });
-
-  validate(products);
-  const enriched = products.filter((product) => product.officialSourceUrl).length;
-  const withSku = products.filter((product) => product.sku).length;
-  const withIngredients = products.filter((product) => product.ingredients).length;
-  const withHowToUse = products.filter((product) => product.howToUse).length;
-
-  if (shouldWrite) {
-    const russianProducts = products.map((product) =>
-      Object.fromEntries(
-        Object.entries(product).filter(([key]) => key !== "romanian")
-      )
-    );
-    const romanianProducts = Object.fromEntries(
-      products.map((product) => [product.slug, product.romanian])
-    );
-    await writeFile(outputPath, `${JSON.stringify(russianProducts, null, 2)}\n`, "utf8");
-    await writeFile(
-      romanianOutputPath,
-      `${JSON.stringify(romanianProducts, null, 2)}\n`,
-      "utf8"
-    );
-  } else {
-    await readFile(outputPath, "utf8");
+  await mkdir(cacheDir, { recursive: true });
+  const existing = await readJson("src/data/products.json");
+  const existingRo = await readJson("src/data/products-ro.json");
+  const review = await readJson("src/data/products-ro-review.json");
+  const byIdentity = new Map(existing.map(p => [sourceIdentity(new URL(p.sourceUrl).pathname), p]));
+  const ruCategories = await discover("ru");
+  const roCategories = await discover("ro");
+  const roUrls = new Map(roCategories.flatMap(c => c.urls.map(url => [sourceIdentity(new URL(url).pathname), url])));
+  const discovered = new Map();
+  for (const category of ruCategories) for (const url of category.urls) {
+    if (discovered.has(url)) throw new Error(`Duplicate product in source categories: ${url}`);
+    discovered.set(url, category.title);
   }
-  console.log(
-    `Moldova catalog: PASS (${products.length} products; ${enriched} cross-referenced; ${withSku} SKU; ${withIngredients} ingredients; ${withHowToUse} usage guides; ${shouldWrite ? "written" : "dry run"}).`
-  );
+  const removed = existing.filter(p => !discovered.has(p.sourceUrl));
+  if (removed.length) throw new Error(`Source inventory no longer includes: ${removed.map(p => p.slug).join(", ")}; review removals explicitly.`);
+  const products = [], romanian = {}, records = [], errors = [];
+  const tasks = [...discovered];
+  let cursor = 0;
+  await Promise.all(Array.from({ length: 5 }, async () => {
+    while (cursor < tasks.length) {
+      const [sourceUrl, category] = tasks[cursor++];
+      try {
+        const identity = sourceIdentity(new URL(sourceUrl).pathname);
+        const previous = byIdentity.get(identity);
+        if (!previous) throw new Error(`New source product ${sourceUrl}; requires asset, SKU and route mapping before publication.`);
+        const parsed = parseMoldovaProductHtml(await fetchPage(sourceUrl));
+        const product = { ...previous, ...copyFrom(parsed, sourceUrl), category };
+        products.push(product);
+        records.push({ slug: product.slug, locale: "ru", sourceUrl, sourceTitle: parsed.title, sku: product.sku || null, textHash: hash(parsed.plainSourceText), blocks: parsed.sourceBlocks.length });
+        const roUrl = roUrls.get(identity);
+        if (!roUrl) throw new Error(`Romanian source not linked by live categories: ${sourceUrl}; no translation substituted.`);
+        const localized = parseMoldovaProductHtml(await fetchPage(roUrl));
+        romanian[product.slug] = { ...existingRo[product.slug], ...copyFrom(localized, roUrl), category: categoriesRo[category] };
+        records.push({ slug: product.slug, locale: "ro", sourceUrl: roUrl, sourceTitle: localized.title, sku: product.sku || null, textHash: hash(localized.plainSourceText), blocks: localized.sourceBlocks.length });
+        // A newly imported original is not a reviewed translation. Do not move
+        // approval hashes forward or turn an earlier approval into a blanket one.
+        if (JSON.stringify(previous) !== JSON.stringify(product) || JSON.stringify(existingRo[product.slug]) !== JSON.stringify(romanian[product.slug])) {
+          review.products[product.slug] = Object.fromEntries(["shortDescription", "longDescription", "ingredients", "howToUse"].map(field => [field, "pending"]));
+        }
+      } catch (error) { errors.push(`${sourceUrl}: ${error.message}`); }
+    }
+  }));
+  const importedIds = new Set(products.map(p => sourceIdentity(new URL(p.sourceUrl).pathname)));
+  for (const [identity, url] of roUrls) if (!importedIds.has(identity)) errors.push(`RO-only product needs mapping: ${url}`);
+  const manifest = { schemaVersion: 1, method: "Live category discovery; original page text; emoji removal only. SKU retained as historical identity metadata, not reverified from drnona.com.", categories: { ru: ruCategories, ro: roCategories }, records: records.sort((a,b) => `${a.slug}:${a.locale}`.localeCompare(`${b.slug}:${b.locale}`)), errors };
+  await writeFile(`${cacheDir}/manifest.json`, `${JSON.stringify(manifest, null, 2)}\n`);
+  if (errors.length) throw new Error(`Import incomplete; source datasets were not written:\n${errors.join("\n")}`);
+  products.sort((a,b) => a.officialOrder - b.officialOrder);
+  const orderedRo = Object.fromEntries(products.map(p => [p.slug, romanian[p.slug]]));
+  if (process.argv.includes("--write")) {
+    for (const [path, value] of [["src/data/products.json", products], ["src/data/products-ro.json", orderedRo], ["src/data/products-ro-review.json", review], ["src/data/catalog-source-manifest.json", manifest]]) {
+      await writeFile(path, `${JSON.stringify(value, null, 2)}\n`);
+    }
+  }
+  console.log(`Moldova catalog: ${products.length} RU + ${roUrls.size} RO products; ${ruCategories.length} + ${roCategories.length} categories; all source blocks preserved; ${process.argv.includes("--write") ? "written" : "dry run"}.`);
 }
 
 await main();

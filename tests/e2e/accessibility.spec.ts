@@ -48,15 +48,11 @@ test("product breadcrumbs and visible information expose their relationships", a
     breadcrumb.getByText("Deodorant ( LORD )")
   ).toHaveAttribute("aria-current", "page");
 
-  const usage = page.getByRole("heading", { level: 2, name: "Способ применения" });
-  const ingredients = page.getByRole("heading", { level: 2, name: "Состав" });
-  await expect(usage).toBeVisible();
-  await expect(ingredients).toBeVisible();
-  await expect(usage.locator("xpath=ancestor::article[1]")).toHaveClass(
-    /product-copy-card/
-  );
-  await expect(ingredients.locator("xpath=ancestor::article[1]")).toHaveClass(
-    /product-copy-card/
-  );
+  const overview = page.getByRole("heading", { level: 2, name: "О продукте" });
+  await expect(overview).toBeVisible();
+  await expect(overview.locator("xpath=ancestor::article[1]")).toHaveClass(/product-copy-card/);
+  await expect(page.getByTestId("full-product-description")).toContainText("Дезодорант содержит уникальный Halo Complex");
+  await expect(page.getByRole("heading", { level: 2, name: "Способ применения" })).toHaveCount(0);
+  await expect(page.getByRole("heading", { level: 2, name: "Состав" })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Состав" })).toHaveCount(0);
 });

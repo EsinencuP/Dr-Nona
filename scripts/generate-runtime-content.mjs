@@ -1,3 +1,5 @@
+import { hasVerbatimMoldovaCopy } from "../src/product-copy-policy.mjs";
+import { createHash } from "node:crypto";
 import { writeGeneratedFile } from "./write-generated-file.mjs";
 import { isRetiredEditorialPath } from "../src/editorial-policy.mjs";
 import { mkdirSync, readFileSync } from "node:fs";
@@ -69,6 +71,13 @@ function fieldIsPublishable(contentId, field) {
   return fieldPublishability[`product\u001f${contentId}\u001f${field}`] ?? true;
 }
 
+for (const product of [...products, ...Object.values(romanianProducts)]) {
+  if ((product.sourceCopy || product.sourceBlocks) && (!hasVerbatimMoldovaCopy(product) ||
+      createHash("sha256").update(product.longDescription).digest("hex") !== product.sourceCopy.textHash)) {
+    throw new Error(`Invalid verbatim source evidence: ${product.sourceUrl}`);
+  }
+}
+
 const publicProducts = products.map((product) => ({
   ...product,
   cardTitle: product.officialName,
@@ -76,7 +85,7 @@ const publicProducts = products.map((product) => ({
   ...Object.fromEntries(
     productCopyFields.map((field) => [
       field,
-      fieldIsPublishable(product.slug, field) ? product[field] : null,
+      hasVerbatimMoldovaCopy(product) || fieldIsPublishable(product.slug, field) ? product[field] : null,
     ])
   ),
 }));
@@ -96,8 +105,8 @@ const publicRomanianProducts = Object.fromEntries(
         ...Object.fromEntries(
           productCopyFields.map((field) => [
             field,
-            review[field] === "approved" &&
-            fieldIsPublishable(`ro:${product.slug}`, field)
+            hasVerbatimMoldovaCopy(localized) || (review[field] === "approved" &&
+            fieldIsPublishable(`ro:${product.slug}`, field))
               ? localized[field]
               : null,
           ])
@@ -107,13 +116,14 @@ const publicRomanianProducts = Object.fromEntries(
   })
 );
 
-// Projections are derived only after the existing claims/editorial quarantine.
+// Verbatim source reproduction is independent of claims/editorial review.
+// Legacy copy continues to use the claims/editorial quarantine.
 // A direct PDP needs its own product and the same four recommendations as the
 // catalogue comparator; it must not fetch all 50 detailed records.
 const published = publicProducts.filter((product) => product.publicationStatus === "published");
 function localize(product, locale) {
   return locale === "ro"
-    ? { ...product, ...publicRomanianProducts[product.slug], contentLocale: locale }
+    ? { ...product, ...publicRomanianProducts[product.slug], sourceBlocks: publicRomanianProducts[product.slug].sourceBlocks, sourceCopy: publicRomanianProducts[product.slug].sourceCopy, contentLocale: locale }
     : { ...product, contentLocale: locale };
 }
 function relatedProducts(product) {

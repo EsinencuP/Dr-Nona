@@ -744,11 +744,10 @@ test.describe("7 · Interaction polish", () => {
   test("product information is visible without disclosure friction", async ({ page }) => {
     await prepare(page, "/product/solaris-body-lotion");
     const cards = page.locator(".product-copy-card");
-    await expect(cards).toHaveCount(2);
     await expect(cards.first()).toBeVisible();
-    await expect(cards.first()).toContainText("Состав");
-    await expect(cards.nth(1)).toContainText("Способ применения");
-    await expect(page.locator(".product-copy-card--overview")).toHaveCount(0);
+    await expect(page.locator(".product-copy-card--overview")).toBeVisible();
+    await expect(page.getByTestId("full-product-description")).toContainText("Бестселлер компании");
+    await expect(page.getByTestId("full-product-description")).toContainText("Вода и соли Мёртвого моря");
   });
 
   test("catalogue search filter reduces visible product count", async ({ page }) => {

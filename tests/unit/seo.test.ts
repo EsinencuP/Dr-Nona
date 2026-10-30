@@ -50,7 +50,8 @@ describe("route SEO contract", () => {
     }
     const samples = getRouteMetadata(manifest, "/ro/product/samples-kit");
     expect(samples.description).not.toMatch(/compoziție|mod de utilizare/u);
-    expect(getRouteMetadata(manifest, "/product/lord-deodorant").description).toContain("состав");
+    expect(getRouteMetadata(manifest, "/product/okseen").description).toContain("состав");
+    expect(getRouteMetadata(manifest, "/product/lord-deodorant").description).not.toContain("состав");
   });
 
   test("emits Product and Breadcrumb JSON-LD without invented commerce data", () => {

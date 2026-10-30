@@ -367,7 +367,7 @@
   min-width: 190px;
 }
 
-.consultation-copy-status {
+.order-copy-status {
   max-width: 680px;
   margin: -2px 0 0;
   color: var(--sea-700);
@@ -587,4 +587,10 @@
   align-items: center;
   gap: 20px;
   margin-block: 32px;
+}
+
+.selection-page__heading h1 {
+  margin: 0;
+  font-size: var(--type-title);
+  line-height: var(--leading-title);
 }

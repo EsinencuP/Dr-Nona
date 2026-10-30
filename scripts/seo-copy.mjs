@@ -10,9 +10,9 @@ const staticCopy = {
     "/about/founders": ["Основатели компании — Dr. Nona Moldova", "Доктор Нонна и Михаил Шнеерсон — основатели Dr. Nona International. История людей, стоящих у истоков компании и её развития."],
     "/about/science": ["Наука, производство и технологии — Dr. Nona Moldova", "Подход Dr. Nona к разработке продукции: исследования, производственные процессы и контроль качества. Узнайте больше о научном направлении компании."],
     "/ourformula": ["Halo Complex™: история формулы — Dr. Nona Moldova", "История Halo Complex™: Мёртвое море, археи, водоросль Dunaliella и минералы. Происхождение формулы Dr. Nona и ссылка на патент IL222127B."],
-    "/contactus": ["Контакты и консультация — Dr. Nona Moldova", "Свяжитесь с Dr. Nona в Молдове: телефон и форма обращения. Задайте вопрос о продукции или передайте консультанту выбранные продукты."],
+    "/contactus": ["Оформление заказа и контакты — Dr. Nona Moldova", "Оформите заказ выбранных товаров Dr. Nona в Молдове. Укажите контактные данные и регион доставки; менеджер свяжется для подтверждения заказа."],
     "/certificates": ["Сертификаты и запрос документов — Dr. Nona Moldova", "Документы о продукции Dr. Nona для рынка Молдовы. Перейдите к форме обращения, чтобы запросить необходимые сертификаты и уточнить сведения."],
-    "/selection": ["Выбранные продукты — Dr. Nona Moldova", "Ваша подборка продуктов Dr. Nona. Проверьте сохранённые позиции и передайте их консультанту через форму обращения."],
+    "/selection": ["Выбранные продукты — Dr. Nona Moldova", "Ваша подборка продуктов Dr. Nona. Проверьте сохранённые позиции и перейдите к оформлению заказа."],
     "/bad-request": ["Некорректная ссылка — Dr. Nona Moldova", "Адрес страницы содержит некорректные символы. Вернитесь на главную страницу Dr. Nona Moldova или откройте каталог продукции."],
     "/faq": ["Вопросы и ответы — Dr. Nona Moldova", "Раздел вопросов и ответов Dr. Nona. Если нужных сведений нет на странице, обратитесь через контакты представительства в Молдове."],
     "/privacypolicy": ["Политика конфиденциальности — Dr. Nona Moldova", "Данные обращений и хранилище браузера Dr. Nona Moldova. Рабочая версия политики; реквизиты оператора и сроки хранения требуют уточнения."],
@@ -47,9 +47,9 @@ const staticCopy = {
     "/about/founders": ["Fondatorii companiei — Dr. Nona Moldova", "Dr. Nona și Mihail Shneerson, fondatorii Dr. Nona International. Cunoaște oamenii aflați la începutul istoriei companiei și al dezvoltării brandului."],
     "/about/science": ["Știință, producție și tehnologie — Dr. Nona Moldova", "Abordarea Dr. Nona în dezvoltarea produselor: cercetare, procese de producție și controlul calității. Află mai multe despre activitatea companiei."],
     "/ourformula": ["Halo Complex™: povestea formulei — Dr. Nona Moldova", "Povestea Halo Complex™: Marea Moartă, arhee, alga Dunaliella și minerale. Originea formulei Dr. Nona și trimiterea la brevetul IL222127B."],
-    "/contactus": ["Contact și consultație în Moldova — Dr. Nona", "Contactează Dr. Nona în Moldova prin telefon sau formular. Pune o întrebare despre produse sau transmite selecția ta unui consultant."],
+    "/contactus": ["Comenzi și contact în Moldova — Dr. Nona", "Plasează comanda produselor Dr. Nona în Moldova. Completează datele de contact și regiunea de livrare; managerul te va contacta pentru confirmare."],
     "/certificates": ["Certificate și solicitări de documente — Dr. Nona Moldova", "Documente despre produsele Dr. Nona pentru piața din Moldova. Accesează formularul de contact pentru a solicita certificate și informații suplimentare."],
-    "/selection": ["Produsele tale selectate — Dr. Nona Moldova", "Selecția ta de produse Dr. Nona. Verifică produsele salvate și transmite lista consultantului prin formularul de contact."],
+    "/selection": ["Produsele tale selectate — Dr. Nona Moldova", "Selecția ta de produse Dr. Nona. Verifică produsele salvate și continuă cu plasarea comenzii."],
   },
 };
 
@@ -67,8 +67,9 @@ export function getSearchCopy(route, product, romanianProduct) {
   const name = product.officialName;
   const isRomanian = variant === "ro";
   const availableFields = [];
-  if (product.ingredients !== null) availableFields.push(isRomanian ? "compoziție" : "состав");
-  if (product.howToUse !== null) availableFields.push(isRomanian ? "mod de utilizare" : "способ применения");
+  const copy = isRomanian ? romanianProduct : product;
+  if (copy.ingredients !== null) availableFields.push(isRomanian ? "compoziție" : "состав");
+  if (copy.howToUse !== null) availableFields.push(isRomanian ? "mod de utilizare" : "способ применения");
   const fields = availableFields.length ? `, ${availableFields.join(", ")}` : "";
   if (isRomanian) return {
     title: `${name}: detalii — Dr. Nona Moldova`,
@@ -76,7 +77,7 @@ export function getSearchCopy(route, product, romanianProduct) {
   };
   return variant === "ru" ? {
     title: `${name}: описание — Dr. Nona Moldova`,
-    description: `${name} — ${product.category.toLocaleLowerCase("ru")}. Описание${fields} продукта Dr. Nona в каталоге для Молдовы.`,
+    description: `${name} — ${product.category.toLocaleLowerCase("ru")}. Описание${fields} продукта Dr. Nona: сведения о продукте в каталоге для Молдовы.`,
   } : {
     title: `${name} — Dr. Nona Moldova`,
     description: `${name} Dr. Nona. Категория: ${product.category.toLocaleLowerCase("ru")}. Сведения о продукте${fields} в каталоге для Молдовы.`,

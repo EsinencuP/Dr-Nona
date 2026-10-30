@@ -1,3 +1,4 @@
+import { hasVerbatimMoldovaCopy } from "../src/product-copy-policy.mjs";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { isLocaleRouteSupported } from "../src/locale-routing.mjs";
 import { inlineLocaleResources, keysetDifference, leafFields, productFieldStatus, readLocaleMessages } from "./bilingual-parity-lib.mjs";
@@ -38,14 +39,14 @@ for (const p of products) {
   add("product", p.slug, "imageAlt", p.imageAlt, r.imageAlt, source, "SEMANTIC_PARITY", { authorization: review.authorization?.id });
   for (const field of descriptive) {
     const approval = review.products[p.slug]?.[field] ?? review.defaultStatus;
-    if (approval !== "approved" && pubRo[field] != null) errors.push(`Quarantine leak: ${p.slug}.${field}`);
+    if (!hasVerbatimMoldovaCopy(r) && approval !== "approved" && pubRo[field] != null) errors.push(`Quarantine leak: ${p.slug}.${field}`);
     const blockedRu = claims.some(c => c.scope === "product" && c.contentId === p.slug && c.field === field && c.status !== "approved");
-    if (blockedRu && pub?.[field] != null) errors.push(`RU claim leak: ${p.slug}.${field}`);
+    if (!hasVerbatimMoldovaCopy(p) && blockedRu && pub?.[field] != null) errors.push(`RU claim leak: ${p.slug}.${field}`);
     const sourceIssue = review.evidence?.[p.slug]?.sourceIssues.find(issue => issue.field === field);
     const authorized = approval === "approved";
     add("product", p.slug, field, p[field], r[field], source, sourceIssue ? "NEEDS_EDITORIAL_REVIEW" : authorized ? "SEMANTIC_PARITY" : productFieldStatus(p[field], r[field], field), {
       approval, requiresEditorialReview: !authorized || Boolean(sourceIssue), publicRu: pub?.[field] ?? null, publicRo: pubRo[field],
-      quarantine: approval !== "approved", repaired: repairs.some(item => item.entity === p.slug && item.field === field),
+      quarantine: !hasVerbatimMoldovaCopy(r) && approval !== "approved", verbatimOriginal: hasVerbatimMoldovaCopy(r), repaired: repairs.some(item => item.entity === p.slug && item.field === field),
       note: sourceIssue?.reason ?? (authorized ? "Owner-authorized automated translation/condensed factual adaptation; not independent linguistic or legal approval. Regulated marketing claims were omitted, not approved." : "Source-language text requires semantic/editorial review."),
     });
   }

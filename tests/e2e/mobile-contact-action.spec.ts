@@ -10,7 +10,7 @@ for (const locale of ["ru", "ro"] as const) {
       await expect(action).toBeHidden();
       return;
     }
-    const link = action.getByRole("link", { name: locale === "ro" ? "Solicită o consultație" : "Получить консультацию" });
+    const link = action.getByRole("link", { name: locale === "ro" ? "Plasează comanda" : "Оформить заказ" });
     await expect(link).toHaveAttribute("href", `${prefix}/contactus`);
     for (const width of [320, 375, 430]) {
       await page.setViewportSize({ width, height: 812 });
