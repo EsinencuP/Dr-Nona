@@ -91,7 +91,7 @@ for (const locale of ["ru", "ro"]) {
     expect(images.some((url) => url.includes("/catalog-normalized/") && url.endsWith(".png"))).toBe(false);
   });
 
-  test(`${locale}: editorial does not load catalogue data`, async ({ page }) => {
+  test(`${locale}: a retired editorial route does not load catalogue data`, async ({ page }) => {
     const requests = observeModuleRequests(page);
     await page.goto(`/${locale}/editorial`);
     await expect(page.locator("main h1")).toBeVisible();

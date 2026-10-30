@@ -6,11 +6,22 @@ import { useLocale } from "./locales/LocaleProvider";
 
 type Locale = "ru" | "ro";
 
+export type ProductSourceBlock =
+  | { type: "paragraph" | "heading"; text: string }
+  | { type: "list"; ordered: boolean; items: string[] };
+
 export type Product = {
   slug: string;
   officialName: string;
+  cardTitle?: string;
+  packageSize?: {
+    quantity: number;
+    unit: "ml" | "g" | "caps" | "pieces" | "tea-bags" | "samples";
+  };
   shortDescription: string | null;
   longDescription: string | null;
+  sourceBlocks?: ProductSourceBlock[];
+  sourceCopy?: { method: string; sourceUrl: string; textHash: string };
   ingredients: string | null;
   howToUse: string | null;
   sku: string;
@@ -84,6 +95,8 @@ type RomanianProductCopy = Pick<
   | "category"
   | "imageAlt"
   | "sourceUrl"
+  | "sourceBlocks"
+  | "sourceCopy"
 >;
 
 export type OfficialPageData = {
@@ -184,7 +197,7 @@ export function loadProductData(locale: Locale = "ru") {
         if (!copy || fields.some((field) => !Object.hasOwn(copy, field))) {
           throw new Error(`Incomplete Romanian product record: ${product.slug}`);
         }
-        return { ...product, ...copy };
+        return { ...product, ...copy, sourceBlocks: copy.sourceBlocks, sourceCopy: copy.sourceCopy };
       }),
       locale
     );
@@ -196,7 +209,7 @@ export function loadProductData(locale: Locale = "ru") {
 export function loadOfficialPageData(locale: Locale = "ru") {
   const cached = officialPageDataPromises.get(locale);
   if (cached) return cached;
-  const promise = import("./data/official-pages.json").then((module) => {
+  const promise = import("./data/official-pages-public.json").then((module) => {
     const localizedPages = companyPages[locale];
     if (Object.keys(companyPages.ru).some((path) => !localizedPages[path])) {
       throw new Error(`Incomplete company page translations: ${locale}`);

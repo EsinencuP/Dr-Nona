@@ -2,6 +2,22 @@ import { expect, test } from "@playwright/test";
 
 const testBaseUrl = `http://127.0.0.1:${process.env.PLAYWRIGHT_PORT ?? "4173"}`;
 
+for (const locale of ["ru", "ro"]) {
+  test(`${locale}: search copy changes with the page and stays localized`, async ({ page }) => {
+    await page.goto(`/${locale}/about`);
+    await expect(page).toHaveTitle(locale === "ro" ? /Despre brand și fondatori/ : /Знакомство с компанией/);
+    const before = await page.locator('meta[name="description"]').getAttribute("content");
+    await page.locator('.about-chapter a[href$="/about/science"]').click();
+    await expect(page).toHaveTitle(locale === "ro" ? /Știință, producție și tehnologie/ : /Разработка и контроль качества/);
+    const description = page.locator('meta[name="description"]');
+    await expect(description).toHaveCount(1);
+    await expect(description).not.toHaveAttribute("content", before ?? "");
+    await expect(description).toHaveAttribute("content", locale === "ro" ? /controlul calității/ : /контроль качества/);
+    await expect(page.locator('meta[property="og:description"]')).toHaveAttribute("content", await description.getAttribute("content") ?? "");
+    expect(await page.title()).not.toMatch(/\((?:RU|RO)\)| · /);
+  });
+}
+
 test("product route exposes complete route metadata and Product JSON-LD", async ({
   page,
 }) => {
@@ -82,11 +98,12 @@ test("legacy /main URL permanently resolves to the canonical home", async ({
   );
 });
 
-test("article route exposes Article and Breadcrumb metadata", async ({
+test("retired article route has noindex metadata without publication schema", async ({
   page,
 }) => {
   await page.goto("/blog/what-to-eat-after-coronavirus");
-  await expect(page).toHaveTitle(/Чем питаться после коронавируса/);
+  await expect(page).toHaveTitle(/Страница не найдена/);
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex,follow");
 
   const metadata = await page.evaluate(() => {
     const jsonLd = JSON.parse(
@@ -110,19 +127,13 @@ test("article route exposes Article and Breadcrumb metadata", async ({
     };
   });
 
-  expect(metadata.title).toContain("Чем питаться после коронавируса");
+  expect(metadata.title).toContain("Страница не найдена");
   expect(metadata.canonical).toBe(
     `${testBaseUrl}/blog/what-to-eat-after-coronavirus`
   );
-  expect(metadata.ogType).toBe("article");
-  expect(metadata.types).toEqual(
-    expect.arrayContaining(["WebPage", "BlogPosting", "BreadcrumbList"])
-  );
-  expect(metadata.article).toMatchObject({
-    headline: "Чем питаться после коронавируса",
-    dateModified: "2022-02-17T00:00:00.000Z",
-  });
-  expect(metadata.article).not.toHaveProperty("datePublished");
+  expect(metadata.ogType).toBe("website");
+  expect(metadata.types).toEqual(["WebPage", "BreadcrumbList"]);
+  expect(metadata.article).toBeUndefined();
 });
 
 test("unknown routes are explicitly noindex", async ({ page }) => {

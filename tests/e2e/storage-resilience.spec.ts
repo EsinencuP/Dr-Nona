@@ -33,10 +33,10 @@ test("restricted storage does not break startup or session selection", async ({
     .innerText();
   await firstCard.getByRole("button", { name: "В подборку" }).click();
   await expect(
-    page.getByRole("link", { name: "Подборка: 1" })
+    page.getByRole("link", { name: "Оформить заказ: 1" })
   ).toBeVisible();
 
-  await page.getByRole("link", { name: "Подборка: 1" }).click();
+  await page.getByRole("link", { name: "Оформить заказ: 1" }).click();
   await expect(
     page.getByRole("heading", { level: 2, name: productName })
   ).toBeVisible();

@@ -1,7 +1,5 @@
 import { z } from "zod";
-import { MASTERCLASS_TOPICS } from "../constants/masterclass-topics.js";
 import { MOLDOVA_REGIONS } from "../constants/moldova-regions.js";
-import { validateAppointmentWindow } from "./appointment-policy.js";
 
 const NAME_MAX = 60;
 const PHONE_MAX = 32;
@@ -116,6 +114,9 @@ const baseApplicationSchema = z.object({
 });
 
 export const orderItemSchema = z.object({
+  officialName: z.string().trim().min(1).max(200).optional(),
+  sku: z.string().trim().max(100).optional(),
+  url: z.string().url().max(500).optional(),
   slug: z
     .string()
     .trim()
@@ -148,51 +149,11 @@ const orderApplicationSchema = baseApplicationSchema.extend({
       message: "Список товаров содержит повторяющиеся позиции",
     }),
   items: z.array(orderItemSchema).max(20).optional(),
-});
+}).strict();
 
-const consultationApplicationSchema = baseApplicationSchema.extend({
-  type: z.literal("consultation"),
-  consultationSlotId: z.string().uuid("Некорректный слот консультации").optional(),
-  consultationMode: z.enum(["online", "offline"], {
-    error: "Выберите формат консультации",
-  }),
-  consultationDate: z
-    .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/u, "Некорректная дата"),
-  consultationTime: z
-    .string()
-    .regex(/^(?:[01]\d|2[0-3]):[0-5]\d$/u, "Некорректное время"),
-});
-
-const masterclassApplicationSchema = baseApplicationSchema.extend({
-  type: z.literal("masterclass"),
-  masterclassTopic: z.enum(MASTERCLASS_TOPICS, {
-    error: "Выберите тему мастер-класса из списка",
-  }),
-  eventDate: z
-    .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/u, "Некорректная дата"),
-  eventTime: z
-    .string()
-    .regex(/^(?:[01]\d|2[0-3]):[0-5]\d$/u, "Некорректное время"),
-});
-
-export const applicationInputSchema = z.discriminatedUnion("type", [
-  orderApplicationSchema,
-  consultationApplicationSchema,
-  masterclassApplicationSchema,
-]);
-
+export const applicationInputSchema = orderApplicationSchema;
 export type ApplicationInput = z.infer<typeof applicationInputSchema>;
-export type OrderApplicationInput = Extract<ApplicationInput, { type: "order" }>;
-export type ConsultationApplicationInput = Extract<
-  ApplicationInput,
-  { type: "consultation" }
->;
-export type MasterclassApplicationInput = Extract<
-  ApplicationInput,
-  { type: "masterclass" }
->;
+export type OrderApplicationInput = ApplicationInput;
 
 export type ApplicationValidationOptions = {
   allowedProductSlugs: ReadonlySet<string>;
@@ -241,36 +202,6 @@ export function validateApplicationInput(
       ) {
         fieldErrors.items = "Некорректные данные о количестве товаров";
       }
-    }
-  } else if (data.type === "consultation") {
-    const violation = validateAppointmentWindow(
-      "consultation",
-      data.consultationDate,
-      data.consultationTime,
-      options.now
-    );
-    if (violation === "invalid") {
-      fieldErrors.consultationDate = "Некорректная дата";
-    } else if (violation === "before_minimum") {
-      fieldErrors.consultationDate =
-        "Выберите будущую дату и время по часовому поясу Кишинёва";
-    } else if (violation === "after_maximum") {
-      fieldErrors.consultationDate =
-        "Выберите дату консультации не позднее чем через 90 дней";
-    }
-  } else {
-    const violation = validateAppointmentWindow(
-      "masterclass",
-      data.eventDate,
-      data.eventTime,
-      options.now
-    );
-    if (violation === "invalid") {
-      fieldErrors.eventDate = "Некорректная дата";
-    } else if (violation === "before_minimum") {
-      fieldErrors.eventDate = "Выберите дату мастер-класса начиная со следующего дня";
-    } else if (violation === "after_maximum") {
-      fieldErrors.eventDate = "Выберите дату мастер-класса не позднее чем через 180 дней";
     }
   }
 

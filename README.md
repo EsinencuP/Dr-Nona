@@ -1,6 +1,6 @@
 # Dr. Nona Moldova
 
-This repository contains the Russian-language Moldova catalogue for Dr. Nona. It presents products, Halo Complex™, company information and a consultation handoff without commerce features.
+This repository contains the RU/RO Moldova catalogue for Dr. Nona. It presents products, Halo Complex™, company information and order requests for selected products, without online payment. The [2026-10-30 order-only decision](docs/ORDER_ONLY_FLOW_2026-10-30.md) retires public consultation and masterclass booking.
 
 ## Current status
 
@@ -35,6 +35,11 @@ Telegram and database credentials belong only to the
 [Dr-Nona-CRM repository](https://github.com/EsinencuP/Dr-Nona-CRM). See
 [contact delivery](docs/CONTACT_DELIVERY.md) for the complete deployment
 contract.
+
+The owner-authorized [reviews system](docs/REVIEWS_2026-10-21.md) adds public
+RU/RO reviews and anonymous submissions through `/api/reviews`, with moderation
+and persistence owned by the separate CRM. `CRM_REVIEWS_API_URL` is optional;
+the proxy otherwise derives `/api/reviews` from `CRM_APPLICATIONS_API_URL`.
 
 ## Available commands
 

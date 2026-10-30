@@ -10,9 +10,9 @@ test("home exposes a complete locale switch and preserves Romanian navigation", 
   await expect(page).toHaveURL(/\/ro$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "ro");
   await expect(
-    page.getByRole("heading", { level: 2, name: "Recomandarea noastră" })
+    page.getByRole("heading", { level: 2, name: "Categorii de produse" })
   ).toBeVisible();
-  await page.getByRole("link", { name: "Selecție: 0" }).click();
+  await page.getByRole("link", { name: "Plasează comanda: 0" }).click();
   await expect(page).toHaveURL(/\/ro\/selection$/);
   await expect(
     page.getByRole("heading", { level: 2, name: "Selecția este goală" })
@@ -86,22 +86,19 @@ test("contact flow preserves context and exposes the real application form", asy
   await page.goto("/contactus");
 
   await expect(
-    page.getByRole("heading", { level: 3, name: "В заявку войдут" })
+    page.getByRole("heading", { level: 3, name: "В заказ войдут" })
   ).toBeVisible();
   await expect(page.getByText("SKU 324001")).toHaveCount(2);
   await expect(page.locator("form.application-form")).toHaveCount(1);
-  await expect(page.getByRole("button", { name: "Заказ" })).toHaveAttribute(
-    "aria-pressed",
-    "true"
-  );
+  await expect(page.locator(".application-mode")).toHaveCount(0);
   await expect(
-    page.getByRole("button", { name: "Отправить заявку" })
+    page.getByRole("button", { name: "Оформить заказ" })
   ).toBeVisible();
   await expect(
     page.getByRole("heading", { level: 2, name: "Филиал в Молдове" })
-  ).toBeVisible();
-  await expect(page.getByRole("link", { name: "+373 69 281 916" })).toHaveCount(3);
-  await expect(page.getByRole("link", { name: "+373 69 049 793" })).toHaveCount(3);
+  ).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "+373 69 281 916" })).toHaveCount(2);
+  await expect(page.getByRole("link", { name: "+373 69 049 793" })).toHaveCount(0);
   await expect(page.getByText("Израиль")).toHaveCount(0);
   await expect(page.getByText(/Telegram/)).toHaveCount(0);
   const email = page.getByRole("link", { name: "Подготовить письмо" });
@@ -119,12 +116,9 @@ test("Romanian contact route localizes the form and keeps the selected language"
   ).toBeVisible();
   await expect(page.getByLabel("Prenume")).toBeVisible();
   await expect(page.getByLabel("Nume", { exact: true })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Consultație" })).toHaveAttribute(
-    "aria-pressed",
-    "true"
-  );
+  await expect(page.locator(".application-mode")).toHaveCount(0);
   await expect(
-    page.getByRole("button", { name: "Trimite solicitarea" })
+    page.getByRole("button", { name: "Plasează comanda" })
   ).toBeVisible();
 
   await page.getByRole("link", { name: "Catalog" }).first().click();
@@ -132,7 +126,7 @@ test("Romanian contact route localizes the form and keeps the selected language"
   await expect(page.locator("html")).toHaveAttribute("lang", "ro");
 });
 
-test("certificates page links to the international archive without review copy", async ({
+test("certificates page shows local document availability without an outbound archive", async ({
   page,
 }) => {
   await page.goto("/certificates");
@@ -140,12 +134,7 @@ test("certificates page links to the international archive without review copy",
   await expect(
     page.getByRole("heading", { level: 1, name: "Сертификаты и документы" })
   ).toBeVisible();
-  await expect(
-    page.getByRole("heading", {
-      level: 2,
-      name: "Международный архив сертификатов",
-    })
-  ).toBeVisible();
+  await expect(page.getByRole("link", { name: "Запросить документы" })).toHaveAttribute("href", "/contactus");
   await expect(page.getByRole("combobox")).toHaveCount(0);
   await expect(page.getByText("Russia")).toHaveCount(0);
   await expect(page.getByText("Israel")).toHaveCount(0);
@@ -153,5 +142,6 @@ test("certificates page links to the international archive without review copy",
   await expect(page.getByText(/провер/i)).toHaveCount(0);
   await expect(
     page.getByRole("link", { name: /Открыть международный архив/i })
-  ).toBeVisible();
+  ).toHaveCount(0);
+  await expect(page.getByText("Документы для Молдовы пока не опубликованы.")).toHaveCount(0);
 });

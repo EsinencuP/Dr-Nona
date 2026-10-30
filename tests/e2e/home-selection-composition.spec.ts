@@ -45,150 +45,35 @@ test("home and selection keep the approved composition at priority widths", asyn
     await preparePage(page, "/");
 
     const homeLayout = await page.evaluate(() => {
-      const hero = document.querySelector<HTMLElement>(".home-hero");
-      const science = document.querySelector<HTMLElement>(".science-section");
-      const spotlight = document.querySelector<HTMLElement>(
-        ".home-product-spotlight > article"
-      );
-      const spotlightMedia = spotlight?.querySelector<HTMLElement>(
-        ".home-product-spotlight__media"
-      );
-      const spotlightPicture = spotlightMedia?.querySelector<HTMLElement>(
-        ".product-picture"
-      );
-      const spotlightActions = document.querySelector<HTMLElement>(
-        ".home-product-spotlight__actions"
-      );
-      const promo = document.querySelector<HTMLElement>(
-        ".home-promo-banner > article"
-      );
-      const promoImage = promo?.querySelector<HTMLImageElement>("img");
-      const promoStage = promo?.querySelector<HTMLElement>(
-        ".home-promo-banner__stage"
-      );
-      const promoPicture = promo?.querySelector<HTMLElement>(
-        ".product-picture"
-      );
-      const promoContent = promo?.querySelector<HTMLElement>(
-        ".home-promo-banner__content"
-      );
-      const lordImage = document.querySelector<HTMLImageElement>(
-        ".home-lord-banner__visual img"
-      );
-      const miniMedia = document.querySelector<HTMLElement>(
-        ".home-product-mini__media"
-      );
-      const miniPicture = miniMedia?.querySelector<HTMLElement>(
-        ".product-picture"
-      );
-      const miniImage = miniPicture?.querySelector<HTMLImageElement>("img");
-      const heroRect = hero?.getBoundingClientRect();
-      const scienceRect = science?.getBoundingClientRect();
-      const spotlightRect = spotlight?.getBoundingClientRect();
-      const spotlightMediaRect = spotlightMedia?.getBoundingClientRect();
-      const spotlightPictureRect = spotlightPicture?.getBoundingClientRect();
-      const actionsRect = spotlightActions?.getBoundingClientRect();
-      const promoStyle = promo ? getComputedStyle(promo) : null;
-      const promoImageStyle = promoImage ? getComputedStyle(promoImage) : null;
-      const promoPictureRect = promoPicture?.getBoundingClientRect();
-      const promoContentRect = promoContent?.getBoundingClientRect();
-      const promoStageRect = promoStage?.getBoundingClientRect();
-      const miniMediaRect = miniMedia?.getBoundingClientRect();
-      const miniImageStyle = miniImage ? getComputedStyle(miniImage) : null;
-
+      const hero = document.querySelector(".home-hero")!.getBoundingClientRect();
+      const science = document.querySelector(".science-section")!.getBoundingClientRect();
+      const grid = document.querySelector(".home-categories__grid")!;
+      const clipped = [...grid.querySelectorAll("h3, p")].filter((element) => {
+        const range = document.createRange();
+        range.selectNodeContents(element);
+        const text = range.getBoundingClientRect();
+        const box = element.getBoundingClientRect();
+        return text.left < box.left - 1 || text.right > box.right + 1 || text.bottom > box.bottom + 1;
+      });
       return {
-        heroBottom: heroRect?.bottom ?? 0,
-        scienceTop: scienceRect?.top ?? 0,
-        viewportHeight: window.innerHeight,
-        spotlightActionGap: spotlightRect && actionsRect
-          ? Math.round(spotlightRect.bottom - actionsRect.bottom)
-          : 999,
-        spotlightPictureWidth: spotlightPictureRect?.width ?? 0,
-        spotlightPictureHeight: spotlightPictureRect?.height ?? 0,
-        spotlightMediaWidth: spotlightMediaRect?.width ?? 0,
-        spotlightMediaHeight: spotlightMediaRect?.height ?? 0,
-        promoColumns: promoStyle?.gridTemplateColumns ?? "",
-        promoRows: promoStyle?.gridTemplateRows ?? "",
-        promoPictureTop: promoPictureRect?.top ?? 0,
-        promoPictureLeft: promoPictureRect?.left ?? 0,
-        promoStageWidth: promoStageRect?.width ?? 0,
-        promoStageHeight: promoStageRect?.height ?? 0,
-        promoStageColumn: promoStage ? getComputedStyle(promoStage).gridColumnStart : "",
-        promoStageRow: promoStage ? getComputedStyle(promoStage).gridRowStart : "",
-        promoContentBottom: promoContentRect?.bottom ?? 0,
-        promoContentRight: promoContentRect?.right ?? 0,
-        promoImageFit: promoImageStyle?.objectFit ?? "",
-        lordImageFit: lordImage ? getComputedStyle(lordImage).objectFit : "",
-        miniMediaHeight: miniMediaRect?.height ?? 0,
-        miniImageLayoutHeight: Number.parseFloat(miniImageStyle?.height ?? "0"),
-        miniSourceDisplays: miniPicture
-          ? [...miniPicture.querySelectorAll("source")].map(
-              (source) => getComputedStyle(source).display
-            )
-          : [],
-        miniImageSource: miniImage?.currentSrc ?? "",
-        documentWidth: document.documentElement.scrollWidth,
-        viewportWidth: document.documentElement.clientWidth,
+        heroBottom: hero.bottom,
+        scienceTop: science.top,
+        columns: getComputedStyle(grid).gridTemplateColumns.trim().split(/\s+/).length,
+        clipped: clipped.map((element) => element.textContent),
+        overflow: document.documentElement.scrollWidth > innerWidth,
       };
     });
-
-    expect(homeLayout.heroBottom, `${viewport.name}: hero fills first screen`).toBeGreaterThanOrEqual(
-      viewport.height - 1
-    );
-    expect(homeLayout.scienceTop, `${viewport.name}: science below fold`).toBeGreaterThanOrEqual(
-      homeLayout.viewportHeight - 1
-    );
-    expect(homeLayout.spotlightActionGap, `${viewport.name}: spotlight actions`).toBeLessThanOrEqual(
-      viewport.width <= 640 ? 24 : 44
-    );
-    expect(homeLayout.spotlightPictureWidth).toBeGreaterThan(0);
-    expect(homeLayout.spotlightPictureHeight).toBeGreaterThan(0);
-    expect(homeLayout.spotlightPictureWidth).toBeLessThanOrEqual(
-      homeLayout.spotlightMediaWidth + 1
-    );
-    expect(homeLayout.spotlightPictureHeight).toBeLessThanOrEqual(
-      homeLayout.spotlightMediaHeight + 1
-    );
-    expect(homeLayout.promoImageFit).toBe("contain");
-    expect(homeLayout.promoStageWidth).toBeGreaterThan(0);
-    expect(homeLayout.promoStageHeight).toBeGreaterThan(0);
-    expect(homeLayout.lordImageFit).toBe("contain");
-    expect(homeLayout.miniImageLayoutHeight).toBeCloseTo(
-      homeLayout.miniMediaHeight,
-      0
-    );
-    expect(homeLayout.miniSourceDisplays).toEqual(["none", "none"]);
-    expect(homeLayout.miniImageSource).toContain("/products/catalog-responsive/");
-    expect(homeLayout.documentWidth).toBeLessThanOrEqual(homeLayout.viewportWidth + 1);
-
-    const lordImage = page.locator(".home-lord-banner__visual img");
-    await lordImage.scrollIntoViewIfNeeded();
-    await expect(lordImage).toHaveJSProperty("complete", true);
-    const lordMedia = await lordImage.evaluate((image: HTMLImageElement) => ({
-      naturalWidth: image.naturalWidth,
-      naturalHeight: image.naturalHeight,
-      currentSrc: image.currentSrc,
-    }));
-    expect(lordMedia.naturalWidth).toBeGreaterThan(0);
-    expect(lordMedia.naturalHeight).toBeGreaterThan(0);
-    expect(lordMedia.naturalWidth).toBe(lordMedia.naturalHeight);
-    expect(lordMedia.currentSrc).toContain("/collections/lord-collection-");
-
-    if (viewport.width <= 640) {
-      expect(homeLayout.promoStageColumn).toBe("1");
-      expect(homeLayout.promoStageRow).toBe("2");
-      expect(homeLayout.promoColumns.trim().split(/\s+/)).toHaveLength(1);
-      expect(homeLayout.promoPictureTop).toBeGreaterThanOrEqual(
-        homeLayout.promoContentBottom - 1
-      );
-    } else {
-      expect(homeLayout.promoStageColumn).toBe("2");
-      expect(homeLayout.promoStageRow).toBe("1");
-      expect(homeLayout.promoColumns.trim().split(/\s+/)).toHaveLength(2);
-      expect(homeLayout.promoPictureLeft).toBeGreaterThanOrEqual(
-        homeLayout.promoContentRight - 1
-      );
-    }
+    expect(homeLayout.heroBottom).toBeGreaterThanOrEqual(viewport.height - 1);
+    expect(homeLayout.scienceTop).toBeGreaterThanOrEqual(viewport.height - 1);
+    expect(homeLayout.columns).toBe(viewport.width <= 960 ? 1 : 2);
+    expect(homeLayout.clipped).toEqual([]);
+    expect(homeLayout.overflow).toBe(false);
+    await expect(page.locator(".home-categories .home-category")).toHaveCount(8);
+    await expect(page.locator(".home-product-showcase, .home-campaign-grid")).toHaveCount(0);
+    await expect(page.locator("main a[href^='/product/']")).toHaveCount(0);
+    await page.getByRole("link", { name: "Весь каталог", exact: true }).click();
+    await expect(page).toHaveURL(/\/products$/);
+    await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50);
 
     await page.evaluate(() => {
       localStorage.setItem(

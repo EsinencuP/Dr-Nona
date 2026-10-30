@@ -63,7 +63,7 @@ describe("application schema", () => {
     "accepts cross-repository order fixture: $name",
     (fixture) => {
       const result = validateApplicationInput(
-        { ...base, type: "order", ...fixture },
+        { ...base, type: "order", ...Object.fromEntries(Object.entries(fixture).filter(([key]) => key !== "name")) },
         { allowedProductSlugs: new Set(orderContractFixtures.allowedProductSlugs) }
       );
       expect(result.success).toBe(true);
@@ -74,7 +74,7 @@ describe("application schema", () => {
     "rejects cross-repository order fixture: $name",
     (fixture) => {
       const result = validateApplicationInput(
-        { ...base, type: "order", ...fixture },
+        { ...base, type: "order", ...Object.fromEntries(Object.entries(fixture).filter(([key]) => key !== "name")) },
         { allowedProductSlugs: new Set(orderContractFixtures.allowedProductSlugs) }
       );
       expect(result.success).toBe(false);
@@ -180,7 +180,7 @@ describe("application schema", () => {
     if (!result.success) expect(result.fieldErrors).toHaveProperty(field);
   });
 
-  test("accepts a future consultation in Europe/Chisinau", () => {
+  test("rejects the retired consultation type even for future dates", () => {
     const result = validateApplicationInput(
       {
         ...base,
@@ -191,10 +191,10 @@ describe("application schema", () => {
       },
       { allowedProductSlugs: allowed, now: new Date("2030-06-19T08:00:00Z") }
     );
-    expect(result.success).toBe(true);
+    expect(result.success).toBe(false);
   });
 
-  test("accepts a future masterclass from the curated topics list", () => {
+  test("rejects the retired masterclass type even for a curated topic", () => {
     const result = validateApplicationInput(
       {
         ...base,
@@ -206,7 +206,7 @@ describe("application schema", () => {
       { allowedProductSlugs: allowed, now: new Date("2030-06-19T08:00:00Z") }
     );
 
-    expect(result.success).toBe(true);
+    expect(result.success).toBe(false);
     if (result.success) {
       expect(result.data).toMatchObject({
         type: "masterclass",
@@ -342,7 +342,7 @@ describe("application schema", () => {
       { allowedProductSlugs: allowed, now: new Date("2030-06-19T08:00:00Z") }
     );
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.fieldErrors).toHaveProperty(field);
+    if (!result.success) expect(result.fieldErrors).toHaveProperty("type");
   });
 
   test("rejects past Chisinau local date and time", () => {
@@ -358,7 +358,7 @@ describe("application schema", () => {
     );
     expect(result.success).toBe(false);
     if (!result.success) {
-      expect(result.fieldErrors).toHaveProperty("consultationDate");
+      expect(result.fieldErrors).toHaveProperty("type");
     }
   });
 
@@ -380,7 +380,7 @@ describe("application schema", () => {
     );
 
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.fieldErrors).toHaveProperty(field);
+    if (!result.success) expect(result.fieldErrors).toHaveProperty("type");
   });
 
   test("rejects a past masterclass in Chisinau local time", () => {
@@ -396,7 +396,7 @@ describe("application schema", () => {
     );
 
     expect(result.success).toBe(false);
-    if (!result.success) expect(result.fieldErrors).toHaveProperty("eventDate");
+    if (!result.success) expect(result.fieldErrors).toHaveProperty("type");
   });
 
   test("normalizes phone without inventing a country code", () => {

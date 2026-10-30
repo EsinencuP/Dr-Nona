@@ -386,6 +386,50 @@
   text-underline-offset: 3px;
 }
 
+.application-thanks {
+  width: min(520px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: clamp(24px, 5vw, 40px);
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-raised);
+  color: var(--ink);
+}
+
+.application-thanks::backdrop {
+  background: rgb(6 29 38 / 65%);
+}
+
+.application-thanks__icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  color: var(--sea-700);
+}
+
+.application-thanks h2 {
+  margin: 0 0 16px;
+  font-size: var(--type-section);
+  line-height: var(--leading-title);
+}
+
+.application-thanks p {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.application-thanks__number {
+  margin-block: 20px 28px;
+  overflow-wrap: anywhere;
+}
+
+.application-thanks .button {
+  width: 100%;
+  min-height: 48px;
+}
+
 @media (max-width: 980px) {
   .application-panel {
     grid-template-columns: 1fr;
@@ -453,3 +497,20 @@
     width: 100%;
   }
 }
+
+.application-thanks__close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.application-thanks__close svg { width: 24px; height: 24px; }

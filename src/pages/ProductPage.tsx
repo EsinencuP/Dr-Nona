@@ -1,4 +1,3 @@
-import { ArrowUpRight } from "@phosphor-icons/react/ArrowUpRight";
 import { BookmarkSimple } from "@phosphor-icons/react/BookmarkSimple";
 import { Check } from "@phosphor-icons/react/Check";
 import { Drop } from "@phosphor-icons/react/Drop";
@@ -8,20 +7,18 @@ import { useEffect } from "react";
 import {
   ProductCard,
   SectionHeading,
-  splitText,
 } from "../components/ui";
 import { ProductImage } from "../components/ProductImage";
+import { PageBreadcrumbs, ReadingLinks } from "../components/PageNavigation";
 import { productImageStyle } from "../features/product/productImagePresentation";
+import { getProductTitle } from "../features/product/productNames";
 import {
   getProductCopy,
   getProductDisclaimer,
 } from "../claims";
 import { useProductDetail } from "../features/product/productDetailData";
 import { recordProductView } from "../features/contact/utm-capture";
-import {
-  buildProductOverview,
-  summarizeProductField,
-} from "../features/product/productPresentation";
+import { ProductSourceText } from "../features/product/ProductSourceText";
 import { useSelection } from "../features/selection/SelectionContext";
 import { useLocale } from "../locales/LocaleProvider";
 import { Link, useParams } from "../router";
@@ -38,84 +35,55 @@ export default function ProductPage() {
   const copy = locale === "ro"
     ? {
         overview: "Despre produs",
-        detailEyebrow: "Informații despre produs",
-        detailTitle: "Descriere, compoziție și utilizare",
-        detailIntro:
-          "Informațiile disponibile sunt grupate într-un singur loc, pentru o comparare rapidă și o alegere mai clară.",
-        formulaBasis: "Baza formulei",
-        usageSummary: "Cum se utilizează",
-        selectionHint: "Salvează produsul pentru a-l transmite consultantului împreună cu solicitarea ta.",
-        selectedHint: "Produsul este salvat și va rămâne în contextul solicitării tale.",
+        selectionHint: "Salvează produsul pentru a-l transmite managerului pentru plasarea comenzii.",
+        selectedHint: "Produsul este salvat și va rămâne în comanda ta.",
         openSelection: "Deschide selecția",
-        imageCaption: "Imaginea produsului",
-        additionalSource: "Informații suplimentare",
-        nextStep: "Pasul următor",
+        formula: "Despre formula Halo Complex™",
+        formulaHint: "Originea și istoria formulei Dr. Nona.",
+        order: "Plasează comanda",
+        orderHint: "Produsul va fi inclus în formularul comenzii.",
       }
     : {
         overview: "О продукте",
-        detailEyebrow: "Информация о продукте",
-        detailTitle: "Описание, состав и применение",
-        detailIntro:
-          "Доступные сведения собраны в одном месте, чтобы продукт было проще изучить и сравнить.",
-        formulaBasis: "Основа формулы",
-        usageSummary: "Как использовать",
-        selectionHint: "Сохраните продукт, чтобы передать его консультанту вместе с вашей заявкой.",
-        selectedHint: "Продукт сохранён и останется в контексте вашей заявки.",
+        selectionHint: "Сохраните продукт, чтобы передать его менеджеру для оформления заказа.",
+        selectedHint: "Продукт сохранён и останется в вашем заказе.",
         openSelection: "Открыть подборку",
-        imageCaption: "Изображение продукта",
-        additionalSource: "Дополнительные данные",
-        nextStep: "Следующий шаг",
+        formula: "О формуле Halo Complex™",
+        formulaHint: "Происхождение и история формулы Dr. Nona.",
+        order: "Оформить заказ",
+        orderHint: "Товар будет передан в форму заказа.",
       };
   if (!product) return <NotFoundPage />;
+  const title = getProductTitle(product);
   const saved = contains(product.slug);
-  const productShortDescription = getProductCopy(product, "shortDescription");
   const productLongDescription = getProductCopy(product, "longDescription");
   const productDisclaimer = getProductDisclaimer(product, locale);
   const productIngredients = getProductCopy(product, "ingredients");
   const productHowToUse = getProductCopy(product, "howToUse");
-  const productOverview = buildProductOverview(
-    {
-      officialName: product.officialName,
-      category: product.category,
-      longDescription: productLongDescription,
-      ingredients: productIngredients,
-      howToUse: productHowToUse,
-    },
-    locale
-  );
-  const overviewParagraphs = splitText(productOverview, 300);
-  const productSummary = summarizeProductField(productOverview, 240);
-  const ingredientSummary = summarizeProductField(productIngredients);
-  const usageSummary = summarizeProductField(productHowToUse);
+  const categoryPath = `/products?${new URLSearchParams({ category: product.category })}`;
 
   return (
     <div className="product-page">
       <section className="product-detail container">
-        <nav className="breadcrumbs" aria-label={t.breadcrumbs}>
-          <Link to="/">{t.home}</Link>
-          <span aria-hidden="true">/</span>
-          <Link to="/products">{t.catalog}</Link>
-          <span aria-hidden="true">/</span>
-          <span aria-current="page">{product.officialName}</span>
-        </nav>
+        <PageBreadcrumbs current={title} currentLang="en" parents={[
+          { to: "/products", label: t.catalog },
+          { to: categoryPath, label: product.category },
+        ]} />
         <div className="product-detail__grid">
           <div className="product-info">
             <header className="product-identity">
-            <div className="product-info__kicker">
-              <p className="eyebrow">{product.category}</p>
-              <span>Dr. Nona Moldova</span>
-            </div>
-            <h1
-              className={
-                product.officialName.length > 60
-                  ? "product-title product-title--long"
-                  : product.officialName.length > 36
-                    ? "product-title product-title--medium"
-                    : "product-title"
-              }
-            >
-              {product.officialName}
-            </h1>
+              <h1
+                lang="en"
+                className={
+                  title.length > 60
+                    ? "product-title product-title--long"
+                    : title.length > 36
+                      ? "product-title product-title--medium"
+                      : "product-title"
+                }
+              >
+                {title}
+              </h1>
             </header>
             <figure className="product-stage" style={productImageStyle(product.slug)}>
               <div className="product-stage__media">
@@ -129,127 +97,87 @@ export default function ProductPage() {
                   sizes="(max-width: 960px) 320px, 560px"
                 />
               </div>
-              <figcaption className="product-stage__caption">
-                {copy.imageCaption} · Dr. Nona
-              </figcaption>
             </figure>
-            <div className="product-decision">
-            {productShortDescription && (
-              <p className="product-purpose">{productShortDescription}</p>
-            )}
-            {productDisclaimer && (
-              <aside
-                className="product-disclaimer"
-                role="note"
-                data-testid="product-disclaimer"
-              >
-                <SealCheck aria-hidden="true" />
-                <div>
-                  <strong>{productDisclaimer.title}</strong>
-                  <p>{productDisclaimer.text}</p>
-                </div>
-              </aside>
-            )}
-            <div className="product-action-panel">
-              <button
-                className="button button--primary product-select-button"
-                type="button"
-                aria-pressed={saved}
-                onClick={() => toggle(product.slug)}
-              >
-                {saved ? <Check aria-hidden="true" /> : <BookmarkSimple aria-hidden="true" />}
-                {saved ? t.added : t.add}
-              </button>
-              <div>
-                <p aria-live="polite">{saved ? copy.selectedHint : copy.selectionHint}</p>
-                {saved && <Link to="/selection">{copy.openSelection} →</Link>}
+            <div className="product-knowledge__content">
+              {productLongDescription && (
+                <article className="product-copy-card product-copy-card--overview">
+                  <div>
+                    <h2>{copy.overview}</h2>
+                    <div className="product-source-text" data-testid="full-product-description">
+                      <ProductSourceText blocks={product.sourceBlocks} text={productLongDescription} />
+                    </div>
+                  </div>
+                </article>
+              )}
+              <div className="product-specification-grid">
+                {productIngredients && (
+                  <article className="product-copy-card">
+                    <Leaf aria-hidden="true" />
+                    <div>
+                      <h2>{t.ingredients}</h2>
+                      <p>{productIngredients}</p>
+                    </div>
+                  </article>
+                )}
+                {productHowToUse && (
+                  <article className="product-copy-card">
+                    <Drop aria-hidden="true" />
+                    <div>
+                      <h2>{t.use}</h2>
+                      <p>{productHowToUse}</p>
+                    </div>
+                  </article>
+                )}
               </div>
             </div>
-            <dl className="product-facts">
-              <div><dt>{t.sku}</dt><dd>{product.sku || "NV"}</dd></div>
-              <div><dt>{t.category}</dt><dd>{product.category}</dd></div>
-            </dl>
-            </div>
-            <div className="product-summary">
-              <p className="product-description">{productSummary}</p>
-              {(ingredientSummary || usageSummary) && (
-                <div className="product-highlights" role="list" aria-label={copy.detailEyebrow}>
-                  {ingredientSummary && (
-                    <div className="product-highlight" role="listitem">
-                      <Leaf aria-hidden="true" />
-                      <div>
-                        <strong>{copy.formulaBasis}</strong>
-                        <p>{ingredientSummary}</p>
-                      </div>
-                    </div>
-                  )}
-                  {usageSummary && (
-                    <div className="product-highlight" role="listitem">
-                      <Drop aria-hidden="true" />
-                      <div>
-                        <strong>{copy.usageSummary}</strong>
-                        <p>{usageSummary}</p>
-                      </div>
-                    </div>
-                  )}
-                </div>
+            <div className="product-decision">
+              {productDisclaimer && (
+                <aside
+                  className="product-disclaimer"
+                  role="note"
+                  data-testid="product-disclaimer"
+                >
+                  <SealCheck aria-hidden="true" />
+                  <div>
+                    <strong>{productDisclaimer.title}</strong>
+                    <p>{productDisclaimer.text}</p>
+                  </div>
+                </aside>
               )}
+              <div className="product-action-panel">
+                <button
+                  className="button button--primary product-select-button"
+                  type="button"
+                  aria-pressed={saved}
+                  onClick={() => toggle(product.slug)}
+                >
+                  {saved ? <Check aria-hidden="true" /> : <BookmarkSimple aria-hidden="true" />}
+                  {saved ? t.added : t.add}
+                </button>
+                <div>
+                  <p aria-live="polite">{saved ? copy.selectedHint : copy.selectionHint}</p>
+                  {saved && <Link to="/selection">{copy.openSelection} →</Link>}
+                </div>
+              </div>
+              <dl className="product-facts">
+                <div><dt>{t.sku}</dt><dd>{product.sku || "NV"}</dd></div>
+                <div><dt>{t.category}</dt><dd><Link className="inline-link" to={categoryPath}>{product.category}</Link></dd></div>
+              </dl>
+
             </div>
           </div>
         </div>
       </section>
 
-      <section className="product-knowledge container">
-        <div className="product-knowledge__intro">
-          <p className="eyebrow">{copy.detailEyebrow}</p>
-          <h2>{copy.detailTitle}</h2>
-          <p>{copy.detailIntro}</p>
-        </div>
-        <div className="product-knowledge__content">
-          <article className="product-copy-card product-copy-card--overview">
-            <span className="product-copy-card__index" aria-hidden="true">01</span>
-            <div>
-              <h3>{copy.overview}</h3>
-              {overviewParagraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
-          </article>
-          <div className="product-specification-grid">
-            {productIngredients && (
-              <article className="product-copy-card">
-                <Leaf aria-hidden="true" />
-                <div>
-                  <h3>{t.ingredients}</h3>
-                  <p>{productIngredients}</p>
-                </div>
-              </article>
-            )}
-            {productHowToUse && (
-              <article className="product-copy-card">
-                <Drop aria-hidden="true" />
-                <div>
-                  <h3>{t.use}</h3>
-                  <p>{productHowToUse}</p>
-                </div>
-              </article>
-            )}
-          </div>
-          <div className="product-source-links">
-            <a className="official-source-link" href={product.sourceUrl} target="_blank" rel="noreferrer">
-              {t.source}: drnona.md <ArrowUpRight aria-hidden="true" />
-            </a>
-            {product.officialSourceUrl && (
-              <a className="official-source-link" href={product.officialSourceUrl} target="_blank" rel="noreferrer">
-                {copy.additionalSource}: drnona.com <ArrowUpRight aria-hidden="true" />
-              </a>
-            )}
-          </div>
-        </div>
-      </section>
+      <div className="container">
+        <ReadingLinks links={[
+          { to: "/ourformula", label: copy.formula, description: copy.formulaHint },
+          { to: `/contactus?${new URLSearchParams({ products: product.slug })}`, label: copy.order, description: copy.orderHint },
+        ]} />
+      </div>
 
       <section className="section container related-section">
-        <SectionHeading eyebrow={copy.nextStep} title={t.related} />
+        <SectionHeading title={t.related} />
         <div className="related-grid">
           {related.map((item) => (
             <ProductCard key={item.slug} product={item} compact />

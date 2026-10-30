@@ -2,17 +2,16 @@
 
 The public contact and certificate surfaces must describe Moldova accurately. Foreign data may provide context but cannot imply local approval.
 
-Last verified: 2026-09-01 against `src/data/market.json` and `npm run market:validate`.
+Last verified: 2026-10-15 against `src/data/market.json` and the owner's contact-removal instruction.
 
 ## Primary contact
 
-The current public source is the official branch listing:
+The current public contact configuration is:
 
 - Country: Moldova
-- City: Chișinău
-- Address: str. Miron Costin 7, office 511
-- Phones: `+373 69 281 916` and `+373 69 049 793`
-- Source: [official warehouse listing](https://drnona.com/en/warehouses)
+- Phone: `+373 69 281 916`
+
+The owner withdrew the second phone as invalid and requested removal of all public branch and physical-address references. The branch page, footer link and address card are retired. Internal source provenance remains in the market configuration; it does not override the owner's newer decision. See [CONTACT_REMOVALS_2026-10-15.md](CONTACT_REMOVALS_2026-10-15.md).
 
 The Moldova legal entity, local email and public Telegram identity are `PENDING APPROVAL`. The international `shopinfo@drnona.com` address remains labeled as international support, not a Moldova entity.
 

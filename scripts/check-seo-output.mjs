@@ -45,14 +45,16 @@ for (const route of manifest.routes) {
   const canonical = absoluteUrl(route.canonicalPath, siteOrigin);
 
   expect($("title").text() === route.title, `${route.path}: title mismatch.`);
+  expect($("title").length === 1, `${route.path}: expected exactly one title.`);
+  expect($('meta[name="description"]').length === 1, `${route.path}: expected exactly one meta description.`);
   expect(
     $('meta[name="description"]').attr("content") === route.description,
     `${route.path}: description mismatch.`
   );
   if (route.indexable) {
     expect(
-      route.title.length >= 30 && route.title.length <= 65,
-      `${route.path}: title must contain 30-65 characters.`
+      route.title.trim().length > 0 && route.title.length <= 95,
+      `${route.path}: title must be concise and retain the complete page or product identity (maximum 95 characters).`
     );
     expect(
       route.description.length >= 70 && route.description.length <= 160,
@@ -61,6 +63,10 @@ for (const route of manifest.routes) {
     expect(
       !/^Shop Dr\. Nona International premium skincare/iu.test(route.description),
       `${route.path}: imported English boilerplate description is forbidden.`
+    );
+    expect(
+      !/\((?:RU|RO)\)|Русская версия|Дополнительная официальная информация|Informații oficiale suplimentare| · /u.test(`${route.title} ${route.description}`),
+      `${route.path}: technical uniqueness markers and length-padding boilerplate are forbidden.`
     );
     expect(Boolean(route.alternates), `${route.path}: locale alternates are missing.`);
   }

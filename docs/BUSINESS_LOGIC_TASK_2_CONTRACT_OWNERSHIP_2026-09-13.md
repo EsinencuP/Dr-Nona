@@ -1,3 +1,5 @@
+Contract update, 2026-10-30: the public catalogue producer and CRM intake accept only `order`. The consultation/masterclass wire tokens below document the historical contract and existing CRM records, not currently accepted public flows. See [the current contract](ORDER_ONLY_FLOW_2026-10-30.md).
+
 # Business logic audit V2 — Task 2 contract and ownership
 
 **Status:** PASS  

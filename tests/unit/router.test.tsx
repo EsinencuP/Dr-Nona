@@ -54,7 +54,7 @@ describe("custom router", () => {
   test("adds locale prefixes only to routes with complete localized content", () => {
     expect(isLocaleRouteSupported("/products")).toBe(true);
     expect(isLocaleRouteSupported("/product/dynamic-hydrating-cream")).toBe(true);
-    expect(isLocaleRouteSupported("/blog")).toBe(true);
+    expect(isLocaleRouteSupported("/blog")).toBe(false);
     expect(isLocaleRouteSupported("/blog/original-article")).toBe(false);
     expect(isLocaleRouteSupported("/faq")).toBe(false);
     expect(localePathFor("/products", "?category=face", "ro")).toBe(

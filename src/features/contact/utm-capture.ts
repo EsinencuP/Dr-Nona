@@ -1,4 +1,5 @@
 import type { ApplicationAttribution } from "../../../shared/applications/application-schema";
+import { getPrivacyChoice } from "../privacy/privacyChoice";
 
 const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content"] as const;
 const FIRST_TOUCH_KEY = "attribution_first_touch_v1";
@@ -14,6 +15,27 @@ function safeSessionStorage(): Storage | null {
   } catch {
     return null;
   }
+}
+
+export function clearOptionalSessionData() {
+  const storage = safeSessionStorage();
+  if (!storage) return;
+  for (const key of [...UTM_KEYS, FIRST_TOUCH_KEY, LAST_TOUCH_KEY, PRODUCT_HISTORY_KEY]) {
+    try {
+      storage.removeItem(key);
+    } catch {
+      // Restricted browser storage cannot be cleared; consent gates still prevent reads and transmission.
+      return;
+    }
+  }
+}
+
+function optionalSessionStorage() {
+  if (getPrivacyChoice() !== "accepted") {
+    clearOptionalSessionData();
+    return null;
+  }
+  return safeSessionStorage();
 }
 
 function rawValue(value: string | null) {
@@ -82,7 +104,7 @@ function makeTouch(search: URLSearchParams, capturedAt: string): Touch {
 }
 
 export function readSessionValue(key: string): string | undefined {
-  const storage = safeSessionStorage();
+  const storage = optionalSessionStorage();
   if (!storage) return undefined;
   try {
     return storage.getItem(key) ?? undefined;
@@ -92,7 +114,7 @@ export function readSessionValue(key: string): string | undefined {
 }
 
 export function captureUtmParameters(now = new Date()): void {
-  const storage = safeSessionStorage();
+  const storage = optionalSessionStorage();
   if (!storage) return;
   const params = new URLSearchParams(window.location.search);
   const touch = makeTouch(params, now.toISOString());
@@ -107,7 +129,7 @@ export function captureUtmParameters(now = new Date()): void {
 }
 
 export function recordProductView(slug: string): void {
-  const storage = safeSessionStorage();
+  const storage = optionalSessionStorage();
   if (!storage || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(slug)) return;
   const existing = readJson<unknown>(storage, PRODUCT_HISTORY_KEY);
   const history = Array.isArray(existing) ? existing.filter((item): item is string => typeof item === "string") : [];
@@ -119,7 +141,7 @@ export function recordProductView(slug: string): void {
 }
 
 export function readApprovedProductHistory(allowedProductSlugs: ReadonlySet<string>) {
-  const storage = safeSessionStorage();
+  const storage = optionalSessionStorage();
   if (!storage) return [];
   const rawHistory = readJson<unknown>(storage, PRODUCT_HISTORY_KEY);
   return Array.isArray(rawHistory)
@@ -136,7 +158,7 @@ export function buildApplicationAttribution(input: {
   consentAccepted: boolean;
 }): ApplicationAttribution | undefined {
   if (!input.consentAccepted) return undefined;
-  const storage = safeSessionStorage();
+  const storage = optionalSessionStorage();
   if (!storage) return undefined;
   const firstTouch = readJson<Touch>(storage, FIRST_TOUCH_KEY);
   const lastTouch = readJson<Touch>(storage, LAST_TOUCH_KEY);

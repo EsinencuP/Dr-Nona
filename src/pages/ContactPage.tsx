@@ -1,38 +1,47 @@
-import { ArrowUpRight } from "@phosphor-icons/react/ArrowUpRight";
 import { CopySimple } from "@phosphor-icons/react/CopySimple";
 import { EnvelopeSimple } from "@phosphor-icons/react/EnvelopeSimple";
-import { MapPin } from "@phosphor-icons/react/MapPin";
 import { Phone } from "@phosphor-icons/react/Phone";
 import { useState } from "react";
 import { useProductData } from "../data";
 import type { Product } from "../data";
 import {
-  buildConsultationEmail,
-  copyConsultationText,
+  buildOrderEmail,
+  copyOrderText,
   resolveSelectionProducts,
 } from "../features/contact/consultation";
 import { ApplicationForm } from "../features/contact/ApplicationForm";
 import { useSelection } from "../features/selection/SelectionContext";
 import { useLocale } from "../locales/LocaleProvider";
 import { marketData } from "../market";
+import { getProductTitle } from "../features/product/productNames";
 import { Link, useSearchParams } from "../router";
+import { PageBreadcrumbs } from "../components/PageNavigation";
 
-function ContactPageWithProducts({ slugs }: { slugs: string[] }) {
+function ContactPageWithProducts({ slugs, onAccepted }: { slugs: string[]; onAccepted: () => void }) {
   const { productBySlug } = useProductData();
   return (
     <ContactPageContent
       handoffProducts={resolveSelectionProducts(slugs, productBySlug)}
+      onAccepted={onAccepted}
     />
   );
 }
 
 export default function ContactPage() {
-  const [params] = useSearchParams();
-  const { selected } = useSelection();
+  const [params, setParams] = useSearchParams();
+  const { selected, clear } = useSelection();
+  const [completed, setCompleted] = useState(false);
+  const onAccepted = () => {
+    setCompleted(true);
+    clear();
+    const nextParams = new URLSearchParams(params);
+    nextParams.delete("products");
+    setParams(nextParams, { replace: true });
+  };
   const productParam = params.get("products");
-  const slugs = productParam !== null ? productParam.split(",") : selected;
-  return slugs.length ? (
-    <ContactPageWithProducts slugs={slugs} />
+  const slugs = Array.from(new Set([...selected, ...(productParam?.split(",") ?? [])])).filter(Boolean);
+  return slugs.length || completed ? (
+    <ContactPageWithProducts slugs={slugs} onAccepted={onAccepted} />
   ) : (
     <ContactPageContent handoffProducts={[]} />
   );
@@ -40,20 +49,20 @@ export default function ContactPage() {
 
 function ContactPageContent({
   handoffProducts,
+  onAccepted,
 }: {
   handoffProducts: Product[];
+  onAccepted?: () => void;
 }) {
   const { locale } = useLocale();
   const copy = locale === "ro"
     ? {
-        eyebrow: "Dr. Nona · Moldova",
         title: "Contacte în Moldova",
-        directEyebrow: "Chișinău · Contact direct",
-        directTitle: "Consultație în Chișinău",
+        directTitle: "Contact pentru comandă",
         withSelection:
-          "Selecția a fost transferată în formular. Verificați produsele de mai jos și trimiteți solicitarea sau contactați direct filiala.",
+          "Produsele selectate au fost transferate în formularul comenzii.",
         withoutSelection:
-          "Pentru o consultație, completați formularul sau contactați direct filiala Dr. Nona din Chișinău.",
+          "Selectați produsele din catalog pentru a plasa o comandă.",
         included: "Produse incluse",
         positions: "produse",
         missingSku: "nu este indicat",
@@ -64,20 +73,15 @@ function ContactPageContent({
           "Lista completă a fost copiată. O puteți transmite prin canalul preferat.",
         copyFailed:
           "Lista nu a putut fi copiată. Utilizați emailul pregătit.",
-        branch: "Filiala din Moldova",
-        source: "Lista oficială a filialelor",
-        country: "Moldova",
       }
     : {
-        eyebrow: "Dr. Nona · Молдова",
         title: "Контакты в Молдове",
-        directEyebrow: "Кишинёв · Прямая связь",
-        directTitle: "Консультация в Кишинёве",
+        directTitle: "Связь по заказу",
         withSelection:
-          "Подборка перенесена в форму. Проверьте товары ниже и отправьте заявку или свяжитесь с филиалом напрямую.",
+          "Выбранные товары перенесены в форму заказа.",
         withoutSelection:
-          "Для консультации заполните форму или свяжитесь напрямую с филиалом Dr. Nona в Кишинёве.",
-        included: "В заявку войдут",
+          "Выберите товары в каталоге, чтобы оформить заказ.",
+        included: "В заказ войдут",
         positions: "поз.",
         missingSku: "не указан",
         prepareEmail: "Подготовить письмо",
@@ -87,27 +91,23 @@ function ContactPageContent({
           "Список скопирован полностью. Вставьте его в удобный канал связи.",
         copyFailed:
           "Не удалось скопировать список. Используйте подготовленное письмо.",
-        branch: "Филиал в Молдове",
-        source: "Официальный список филиалов",
-        country: "Молдова",
       };
   const [copyStatus, setCopyStatus] = useState("");
-  const emailHref = buildConsultationEmail(handoffProducts, locale);
+  const emailHref = buildOrderEmail(handoffProducts, locale);
   const handleCopy = async () => {
-    const copied = await copyConsultationText(handoffProducts, locale);
+    const copied = await copyOrderText(handoffProducts, locale);
     setCopyStatus(copied ? copy.copied : copy.copyFailed);
   };
 
   return (
     <section className="contact-page container">
+      <PageBreadcrumbs current={copy.title} />
       <div className="official-page__header">
-        <p className="eyebrow">{copy.eyebrow}</p>
         <h1>{copy.title}</h1>
       </div>
-      <ApplicationForm products={handoffProducts} />
+      <ApplicationForm products={handoffProducts} onAccepted={onAccepted} />
       <div className="contact-layout">
         <div className="contact-direct">
-          <p className="eyebrow">{copy.directEyebrow}</p>
           <h2>{copy.directTitle}</h2>
           <p>
             {handoffProducts.length ? copy.withSelection : copy.withoutSelection}
@@ -121,7 +121,7 @@ function ContactPageContent({
               <ul>
                 {handoffProducts.map((product) => (
                   <li key={product.slug}>
-                    <Link to={`/product/${product.slug}`}>{product.officialName}</Link>
+                    <Link lang="en" to={`/product/${product.slug}`}>{getProductTitle(product)}</Link>
                     <span>SKU {product.sku || copy.missingSku}</span>
                   </li>
                 ))}
@@ -135,13 +135,6 @@ function ContactPageContent({
             >
               <Phone aria-hidden="true" />
               {marketData.contact.phones[0].label}
-            </a>
-            <a
-              className="button button--quiet"
-              href={marketData.contact.phones[1].href}
-            >
-              <Phone aria-hidden="true" />
-              {marketData.contact.phones[1].label}
             </a>
             <a
               className="button button--quiet"
@@ -159,33 +152,11 @@ function ContactPageContent({
             )}
           </div>
           {copyStatus && (
-            <p className="consultation-copy-status" role="status" aria-live="polite">
+            <p className="order-copy-status" role="status" aria-live="polite">
               {copyStatus}
             </p>
           )}
         </div>
-        <aside className="contact-card">
-          <MapPin aria-hidden="true" />
-          <h2>{copy.branch}</h2>
-          <p>
-            {copy.country}<br />
-            {marketData.contact.city}<br />
-            {marketData.contact.address}
-          </p>
-          {marketData.contact.phones.map((phone) => (
-            <a href={phone.href} key={phone.href}>
-              <Phone aria-hidden="true" /> {phone.label}
-            </a>
-          ))}
-          <a
-            className="contact-card__source"
-            href={marketData.contact.sourceUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {copy.source} <ArrowUpRight aria-hidden="true" />
-          </a>
-        </aside>
       </div>
     </section>
   );

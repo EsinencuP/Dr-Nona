@@ -3075,6 +3075,26 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
+    "id": "CLM-A627B71D2B",
+    "fingerprint": "a627b71d2ba197c4f326de1aa4d96ecdf5f2692bc6169afcbba58bc0a8bb76e1",
+    "scope": "official-page",
+    "contentId": "/blog/tone-skin-at-home",
+    "field": "paragraphs.1",
+    "claimText": "В медицине это средство пользуется широкой популярностью благодаря своим антибактериальным, регенерирующим, противовоспалительным и дезодорирующим свойствам.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://drnona.com/blog/tone-skin-at-home",
+    "sourceLastmod": "2022-02-17T00:00:00.000Z",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
     "id": "CLM-A889FB69F8",
     "fingerprint": "a889fb69f82cb9792d7f2fb303cbe0f941e23e08c2ebe447414f5886641de57b",
     "scope": "official-page",
@@ -3800,12 +3820,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-9759993209",
-    "fingerprint": "9759993209e35ef3a9974a88d4d7d21b0bb4d00b813ca7483134d4df3c6fd442",
+    "id": "CLM-965CF9970D",
+    "fingerprint": "965cf9970d50054633ab5446d7a14e2b1a3576307cc36e2a77563ace5bcff98d",
     "scope": "product",
     "contentId": "anti-aging-serum",
     "field": "longDescription",
-    "claimText": "В составе сыворотки: Вода и минералы Мёртвого моря Натуральные растительные экстракты Витамины и антиоксиданты Активные компоненты против старения ANTI-AGING SERUM: Разглаживает морщины и мелкие линии Повышает упругость и эластичность кожи Глубоко увлажняет и питает Улучшает тон и текстуру кожи Придаёт эффект «сияющей» и ухоженной кожи Подходит: Для всех типов кожи Для женщин и мужчин Для ежедневного ухода (утро/вечер) Лёгкая текстура быстро впитывается, не оставляя липкости — идеально под крем или как самостоятельный уход.",
+    "claimText": "Активные компоненты против старения",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -3820,12 +3840,32 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-BA47A530BC",
-    "fingerprint": "ba47a530bc13d6056266c2522b75882a135129a17d121b30240a00aa59f60bbf",
+    "id": "CLM-CC42CBE036",
+    "fingerprint": "cc42cbe0364a74d251e3afae82b71088f988c84f8f77a65c801bb1a5b17cc408",
     "scope": "product",
     "contentId": "anti-aging-serum",
     "field": "longDescription",
-    "claimText": "Nona — выбор тех, кто ценит качество, науку и премиальный уход Работает на клеточном уровне благодаря запатентованному комплексу Halo Complex — запускает процессы обновления и восстановления кожи.",
+    "claimText": "Витамины и антиоксиданты",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://www.drnona.md/anti_aging_serum",
+    "sourceLastmod": "2026-02-06T14:38:45+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-85EF9CBC51",
+    "fingerprint": "85ef9cbc51b1810110462d9536e4aabc6c58d81b40d08d94d3009f07f9e71b68",
+    "scope": "product",
+    "contentId": "anti-aging-serum",
+    "field": "longDescription",
+    "claimText": "Работает на клеточном уровне благодаря запатентованному комплексу Halo Complex — запускает процессы обновления и восстановления кожи.",
     "claimType": "cosmetic",
     "detectionReasons": [
       "cosmetic-efficacy"
@@ -3840,18 +3880,78 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-0477517D59",
-    "fingerprint": "0477517d594fb4ba64aaa4085f1c270edc3e13d6a76c22197d3560b935bf2140",
+    "id": "CLM-C86B507D95",
+    "fingerprint": "c86b507d95e295ec66ca1d9aa65286aecf4a93415d3794f504f2b44e25f40dba",
     "scope": "product",
     "contentId": "ard-complex",
     "field": "longDescription",
-    "claimText": "Лёгкий по текстуре и с невероятным ароматом крем: запускает обновление клеток благодаря сочетанию Архибактерии и водоросли Дуналиелла, богатых β-каротином — природным антиоксидантом Глубоко увлажняет и замедляет процесс старения с помощью масла конопли А экстракт финика, насыщенный витамином A и E, фитостеролами и урсуловой кислотой, не только питает кожу витаминами, но и борется с возрастными изменениями Теперь молодая и упругая кожа — это не мечта, а реальный уход, который действует!",
+    "claimText": "Глубоко увлажняет и замедляет процесс старения с помощью масла конопли",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
     ],
     "sourceUrl": "https://www.drnona.md/ard_cream_for_face",
     "sourceLastmod": "2026-02-06T14:38:46+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-360E871502",
+    "fingerprint": "360e8715025440ddf74785da4375a4abf45ae1a7244a924bf5d4330607012e73",
+    "scope": "product",
+    "contentId": "ard-complex",
+    "field": "longDescription",
+    "claimText": "запускает обновление клеток благодаря сочетанию Архибактерии и водоросли Дуналиелла, богатых β-каротином — природным антиоксидантом",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://www.drnona.md/ard_cream_for_face",
+    "sourceLastmod": "2026-02-06T14:38:46+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-42660AE154",
+    "fingerprint": "42660ae154e86bdd8c9e68d432cee5b69c954e0059357a8693afb7142f061108",
+    "scope": "product",
+    "contentId": "beauty-mask-for-face",
+    "field": "longDescription",
+    "claimText": "Лечебная грязь и минералы Мёртвого моря",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://www.drnona.md/recovering_mud_musk",
+    "sourceLastmod": "2026-02-06T14:39:19+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-731BE4363A",
+    "fingerprint": "731be4363a53ce91bdc21bda88fe1b0445f848f77131bfb777937063236429a7",
+    "scope": "product",
+    "contentId": "beauty-mask-for-face",
+    "field": "longDescription",
+    "claimText": "Натуральная восстанавливающая грязевая маска на основе лечебной грязи и минералов Мёртвого моря, созданная для интенсивного очищения, питания и обновления кожи",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://www.drnona.md/recovering_mud_musk",
+    "sourceLastmod": "2026-02-06T14:39:19+00:00",
     "market": "MD",
     "status": "pending",
     "reviewer": null,
@@ -3892,26 +3992,6 @@
     ],
     "sourceUrl": "https://www.drnona.md/body_butter",
     "sourceLastmod": "2026-02-06T14:38:41+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-C07A61E2E6",
-    "fingerprint": "c07a61e2e61f3d02c2d0c66238497991c85ed517cce29db6473b5464f9f870c7",
-    "scope": "product",
-    "contentId": "chocoseen",
-    "field": "longDescription",
-    "claimText": "- Энергия и здоровье в каждой чашке!",
-    "claimType": "health",
-    "detectionReasons": [
-      "health-or-body-function"
-    ],
-    "sourceUrl": "https://www.drnona.md/chocoseen",
-    "sourceLastmod": "2026-02-06T14:38:52+00:00",
     "market": "MD",
     "status": "pending",
     "reviewer": null,
@@ -3980,12 +4060,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-5A8BBE42B0",
-    "fingerprint": "5a8bbe42b0bf89c207ba29a4ec1a3f68e2e6d3dec2014427a075661709c1db55",
+    "id": "CLM-C55EE8BB53",
+    "fingerprint": "c55ee8bb538987e08bca3b75e908af08d4b2d0b1561f9c46366d27bbcdafe453",
     "scope": "product",
     "contentId": "chocoseen",
-    "field": "shortDescription",
-    "claimText": "Энергия и здоровье в каждой чашке!",
+    "field": "longDescription",
+    "claimText": "Nona - Энергия и здоровье в каждой чашке!",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -4000,12 +4080,32 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-9749A18D9E",
-    "fingerprint": "9749a18d9e7394a43a2336fc72d43bd680eb8ab84fb2da18c2d36670d96b3b6f",
+    "id": "CLM-5067411617",
+    "fingerprint": "506741161722e9abcb98f8ce00894e54dc998a8beef55f697adf1efa362438a9",
+    "scope": "product",
+    "contentId": "chocoseen",
+    "field": "shortDescription",
+    "claimText": "Nona - Энергия и здоровье в каждой чашке!",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://www.drnona.md/chocoseen",
+    "sourceLastmod": "2026-02-06T14:38:52+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-0843CB8E78",
+    "fingerprint": "0843cb8e78c003b213031f5e4c760f861f1a7193cd3a48930be814c271fcad5f",
     "scope": "product",
     "contentId": "cleanseen",
     "field": "longDescription",
-    "claimText": "Натуральная формула создана, чтобы поддержать здоровье твоей пищеварительной системы Если:. чувствуешь тяжесть после еды, вздутие, нерегулярный стул;. много сидишь / малоподвижный образ жизни;. питание далеко от идеала — тогда этот продукт точно для тебя!",
+    "claimText": "Натуральная формула создана, чтобы поддержать здоровье твоей пищеварительной системы",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -4060,12 +4160,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-CF222B5329",
-    "fingerprint": "cf222b5329f0137f1f5aab743562284e422b3b928c41a79f48db9100d5f4ccd0",
+    "id": "CLM-8E556A7E4B",
+    "fingerprint": "8e556a7e4b57f1f5b5d37b2da80921c2bbbecf9b183978170aaf01d0ad9145d4",
     "scope": "product",
     "contentId": "coffee-mix",
     "field": "longDescription",
-    "claimText": "Это твой продуктивный день Уникальная смесь натуральных, травяных ингредиентов, которые помогают взбодриться, ускоряют метаболизм, поддерживют здоровье и заряжают энергией на весь день!!",
+    "claimText": "Уникальная смесь натуральных, травяных ингредиентов, которые помогают взбодриться , ускоряют метаболизм , поддерживют здоровье и заряжают энергией на весь день !!",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -4080,12 +4180,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-B089D24FB1",
-    "fingerprint": "b089d24fb11e669d4818585862ed3b5077cc5a6b1781b0e8ae5b2cc1be78ea8c",
+    "id": "CLM-623182BBBA",
+    "fingerprint": "623182bbba073de5a40a6fc090545cca1766e4fd66efb4863f7cdbea66b3ebbd",
     "scope": "product",
     "contentId": "conditioner",
     "field": "longDescription",
-    "claimText": "Nona помогает: Интенсивно увлажнять и смягчать волосы Восстанавливать поврежденные участки и секущиеся кончики Укреплять структуру волос от корней до кончиков Облегчать расчесывание и укладку Придавать волосам блеск, шелковистость и здоровый вид Идеально при: Сухих, ломких и повреждённых волосах Тусклости и недостатке питания Частом использовании фенов и стайлинговых приборов Наличии секущихся кончиков Подходит для ежедневного или регулярного ухода, для всех типов волос Оставляет ощущение лёгкости, мягкости и ухоженности после каждого применения!",
+    "claimText": "Придавать волосам блеск, шелковистость и здоровый вид",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -4100,12 +4200,32 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-C73B856BB6",
-    "fingerprint": "c73b856bb67c133c971078c2ec9b02c625d0c96a618298b643f144bb285c2f1d",
+    "id": "CLM-A2AA4A2E70",
+    "fingerprint": "a2aa4a2e701ef600439ab2338811f4d99cca997d0d174527f371b99b2796f501",
     "scope": "product",
     "contentId": "dead-sea-water-compresses",
     "field": "longDescription",
-    "claimText": "Благодаря своему уникальному составу, обладает не только полезными свойствами, но и широким спектром применения: Оказывает антисептическое и антибактериальное действие Успокаивает воспаления Дезинфицирует, регенерирует и очищает кожу Способствует заживлению ран и снятию воспалений Эффективен при травмах Устраняет отёчность, усталость и пигментацию.",
+    "claimText": "Дезинфицирует, регенерирует и очищает кожу",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://www.drnona.md/compressed_wipes_ru",
+    "sourceLastmod": "2026-02-06T14:39:08+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-6551BEDFE6",
+    "fingerprint": "6551bedfe6515d60a1a1d2f9150b01d6e78856f52f3fa970919a63ea11955649",
+    "scope": "product",
+    "contentId": "dead-sea-water-compresses",
+    "field": "longDescription",
+    "claimText": "Способствует заживлению ран и снятию воспалений",
     "claimType": "therapeutic",
     "detectionReasons": [
       "pain-healing-or-relief"
@@ -4141,12 +4261,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-750DBE8212",
-    "fingerprint": "750dbe82121d13e852b3e2ac85a7bae6fb9674e7831f115cc455f698fe6d6ed3",
+    "id": "CLM-EA7E305F41",
+    "fingerprint": "ea7e305f417239a01041ab5c6c6c1f7370d674901f6cf4156fd283211c2b3f59",
     "scope": "product",
     "contentId": "dnd-chewing-gum-tablets",
     "field": "longDescription",
-    "claimText": "- Оздоровительный БАД в форме жевательной резинки Сочетание вкуса, качества и пользы.",
+    "claimText": "Ощути её вкус и получи максимальную пользу для своего здоровья и заряд энергии !",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -4161,12 +4281,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-9631F6E823",
-    "fingerprint": "9631f6e823d466407de11e69f2d1a327eefd1bf5b431a8e999fdd823355411c3",
+    "id": "CLM-B7C91BFA1B",
+    "fingerprint": "b7c91bfa1ba5aba53bb5965c9d6754cdcdd6aca134b0641b7e61c3def7aa3c5d",
     "scope": "product",
     "contentId": "dnd-chewing-gum-tablets",
     "field": "longDescription",
-    "claimText": "Ощути её вкус и получи максимальную пользу для своего здоровья и заряд энергии!",
+    "claimText": "Это мощный природный антиоксидант, укрепляющий иммунитет и замедляющий старение .",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -4181,12 +4301,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-445B3BF246",
-    "fingerprint": "445b3bf2464d47a413e38943ce747567e1e095e7b9e868f15802a6ef5a9beae3",
+    "id": "CLM-4F6B417B41",
+    "fingerprint": "4f6b417b41d1d8f871540c6ebae0f772fe8547ab9799a305effca0d9c6d73e66",
     "scope": "product",
     "contentId": "dnd-chewing-gum-tablets",
     "field": "longDescription",
-    "claimText": "Также в его состав входят: Halo Complex (патент компании) Бета-каротин, выработанный из архибактерии и водоросли Дуналиелла Глюкозамин Куркумин Имбирь, Алое Вера Витамин B3 И другие ингредиенты Это мощный природный антиоксидант, укрепляющий иммунитет и замедляющий старение.",
+    "claimText": "DND - Оздоровительный БАД в форме жевательной резинки",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -4201,12 +4321,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-F04C28C7E9",
-    "fingerprint": "f04c28c7e9ce463a7627026efa4ef5cc22efde4d0f2ee058323e28889c7256db",
+    "id": "CLM-4866313B2D",
+    "fingerprint": "4866313b2dcc2b97f17a957c96786edc2c5cd56cbea3cd8050cf373aa1eb3790",
     "scope": "product",
     "contentId": "dnd-chewing-gum-tablets",
     "field": "shortDescription",
-    "claimText": "Оздоровительный БАД в форме жевательной резинки Сочетание вкуса, качества и пользы.",
+    "claimText": "DND - Оздоровительный БАД в форме жевательной резинки",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -4221,12 +4341,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-9850B309E7",
-    "fingerprint": "9850b309e7bedf4e1f82e3b4956c2f835a47830a146093409b3f3e085188d292",
+    "id": "CLM-B00A32183E",
+    "fingerprint": "b00a32183e0a9f601f7135b5b3d702cd9105581829b14ed39d1b0e8ded2ede30",
     "scope": "product",
     "contentId": "dynamic-hydrating-cream",
     "field": "longDescription",
-    "claimText": "Универсальный крем, который заботится о коже каждый день Мощное восстановление и защита — ускоряет регенерацию, снимает покраснения и раздражения.",
+    "claimText": "Мощное восстановление и защита — ускоряет регенерацию, снимает покраснения и раздражения.",
     "claimType": "therapeutic",
     "detectionReasons": [
       "pain-healing-or-relief"
@@ -4261,26 +4381,6 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-EC74D102B2",
-    "fingerprint": "ec74d102b2d63fe140b46bb87cbb41769b90878c7e87cf825f26581a1a3cfcc2",
-    "scope": "product",
-    "contentId": "dynamic-hydrating-cream",
-    "field": "shortDescription",
-    "claimText": "Универсальный крем, который заботится о коже каждый день Мощное восстановление и защита — ускоряет регенерацию, снимает покраснения и раздражения.",
-    "claimType": "therapeutic",
-    "detectionReasons": [
-      "pain-healing-or-relief"
-    ],
-    "sourceUrl": "https://www.drnona.md/dynamic",
-    "sourceLastmod": "2026-02-06T14:38:40+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
     "id": "CLM-3523A22876",
     "fingerprint": "3523a228764e369a98a347b7198c187a49e4d043b78be83cce9fc72e1468499e",
     "scope": "product",
@@ -4301,15 +4401,34 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-6AEB8CA3AD",
-    "fingerprint": "6aeb8ca3ad2f69e8e244599c73c88ccc075f1e7cb4871f615a3015d63c8d5ecd",
+    "id": "CLM-4710F842DD",
+    "fingerprint": "4710f842ddc5c9fd995f9314cdb3db17a9dc6b369697ae23e3e0a7cf8f047b7a",
     "scope": "product",
     "contentId": "facial-solaris",
     "field": "longDescription",
-    "claimText": "Что делает Facial Solaris: активно питает и увлажняет кожу; способствует обновлению клеток и повышает упругость; помогает бороться с пигментными пятнами; придаёт коже здоровое сияние и свежий вид.",
+    "claimText": "придаёт коже здоровое сияние и свежий вид.",
     "claimType": "health",
     "detectionReasons": [
-      "health-or-body-function",
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://www.drnona.md/facial_solaris",
+    "sourceLastmod": "2026-02-06T14:38:42+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-75F0731E7B",
+    "fingerprint": "75f0731e7b357ce388f21f291ee7b16dc6ae8d1b545291c27953935e3ea86cfe",
+    "scope": "product",
+    "contentId": "facial-solaris",
+    "field": "longDescription",
+    "claimText": "способствует обновлению клеток и повышает упругость;",
+    "claimType": "cosmetic",
+    "detectionReasons": [
       "cosmetic-efficacy"
     ],
     "sourceUrl": "https://www.drnona.md/facial_solaris",
@@ -4362,12 +4481,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-2F92B8E793",
-    "fingerprint": "2f92b8e7939ca30842009359363ca64b842c1a0edc3a449e81c50102bd9eceda",
+    "id": "CLM-4008DD952F",
+    "fingerprint": "4008dd952f2f708797318c744819e5b1dd82f8174662f4f956798731622ba235",
     "scope": "product",
     "contentId": "fase-9",
     "field": "longDescription",
-    "claimText": "Поддерживает работу иммунной системы.",
+    "claimText": "Поддерживает работу иммунной системы",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -4382,12 +4501,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-E59C340BAF",
-    "fingerprint": "e59c340baf819bcb38b9cb31129d782cf56f6905870669f2e07f7b302d31c889",
+    "id": "CLM-C48C690879",
+    "fingerprint": "c48c690879694c424d0a951e8a85967c4f78dcfc36f73c70714dc96b74455b1b",
     "scope": "product",
     "contentId": "fase-9",
     "field": "longDescription",
-    "claimText": "Способствует восстановлению и участвует в регенерации клеток, а это особо важно в подростковом возрасте и во время беременности.",
+    "claimText": "Способствует восстановлению и участвует в регенерации клеток, а это особо важно в подростковом возрасте и во время беременности",
     "claimType": "therapeutic",
     "detectionReasons": [
       "pain-healing-or-relief"
@@ -4402,12 +4521,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-F04B8BE50A",
-    "fingerprint": "f04b8be50af3364253e9661c8d772a31b27905f8e373c255e692ccbec885df2c",
+    "id": "CLM-80158706AF",
+    "fingerprint": "80158706af425cdd1772a0fdc9d5bf1f6efcb3bc2ebe83c19b4f3181ff377753",
     "scope": "product",
     "contentId": "fase-9",
     "field": "longDescription",
-    "claimText": "Является антиоксидантом и снижает риск хронических воспалений.",
+    "claimText": "Является антиоксидантом и снижает риск хронических воспалений",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -4422,12 +4541,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-A90E343039",
-    "fingerprint": "a90e343039b53e1c72ce002918dcb3908adf9f7e6f55300901a1a2adb4c95e68",
+    "id": "CLM-1630F05B24",
+    "fingerprint": "1630f05b2448bcc48d1c7aaddf7af4ed7ddd3958e338cc6e35337bff5bfcaccd",
     "scope": "product",
     "contentId": "femseen",
     "field": "longDescription",
-    "claimText": "Поддерживает уровень энергии и жизненный тонус.",
+    "claimText": "Поддерживает уровень энергии и жизненный тонус",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -4442,12 +4561,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-E017515852",
-    "fingerprint": "e0175158522671c8c79e320c39b491244f224186b81b29c0de673d6abcecc491",
+    "id": "CLM-6D196131A2",
+    "fingerprint": "6d196131a24678b7eb6ce428364be6e706de1033f6d0d71905b7137ebce6f35e",
     "scope": "product",
     "contentId": "femseen",
     "field": "longDescription",
-    "claimText": "Растительные экстракты, подобранные специально для женского здоровья.",
+    "claimText": "Растительные экстракты, подобранные специально для женского здоровья",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -4462,12 +4581,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-34D8799999",
-    "fingerprint": "34d8799999bc3dc3cbfc9b8b9bc879a152a776109a8af15f44fd23c82d274850",
+    "id": "CLM-92C05F14BB",
+    "fingerprint": "92c05f14bbdec41195700287c17a9f8af8237bea85a67935a17cd8b37391adc8",
     "scope": "product",
     "contentId": "femseen",
     "field": "longDescription",
-    "claimText": "Nona — гармония, забота и поддержка женского здоровья FEMSEEN — это биологически активная добавка, созданная специально для поддержки женского организма, гормонального баланса и общего самочувствия Идеальный выбор для женщин, которые хотят чувствовать себя уверенно, спокойно и энергично каждый день Основные преимущества FEMSEEN:.",
+    "claimText": "Nona — гармония, забота и поддержка женского здоровья",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -4482,12 +4601,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-1791EF5877",
-    "fingerprint": "1791ef5877709927c3ad9396885cde147e555a3484165674b46159711c6cd1d5",
+    "id": "CLM-EB9B46C9AB",
+    "fingerprint": "eb9b46c9ab2fea799058f8757dd8487ad84dea4345418ac36ba6f57485dd9abb",
     "scope": "product",
     "contentId": "femseen",
     "field": "shortDescription",
-    "claimText": "Nona — гармония, забота и поддержка женского здоровья FEMSEEN — это биологически активная добавка, созданная специально для поддержки женского организма, гормонального баланса и общего самочувствия Идеальный выбор для женщин, которые хотят…",
+    "claimText": "Nona — гармония, забота и поддержка женского здоровья",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -4502,12 +4621,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-DBD4DBCBAC",
-    "fingerprint": "dbd4dbcbac90c350b6bbbb2eef2703c62fc0ca08040354a5af8fd176f5b6e8c3",
+    "id": "CLM-67D547425C",
+    "fingerprint": "67d547425c4e5c108f965cb26192f637529cc06ed53b22628721f42cbc1bf609",
     "scope": "product",
     "contentId": "frequent-use-tonic-shampoo",
     "field": "longDescription",
-    "claimText": "Подходит для ежедневного ухода, укрепления и оздоровления волос и кожи головы Мощная формула с минералами и комплексом Halo Complex!",
+    "claimText": "Подходит для ежедневного ухода, укрепления и оздоровления волос и кожи головы",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -4542,12 +4661,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-8D53FECA46",
-    "fingerprint": "8d53feca468a992aaa85273dedea75415a0e6fadd7bd25c2e5f6ef830f8d9388",
+    "id": "CLM-DDB00DF641",
+    "fingerprint": "ddb00df6418d5912dbba70fc7576c0cf2a4c69f5c1450816e3589dc8dd56cc9b",
     "scope": "product",
     "contentId": "goldseen",
     "field": "longDescription",
-    "claimText": "Витамин Е — защита клеток от старения;.",
+    "claimText": "Витамин Е — защита клеток от старения;",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -4582,6 +4701,26 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
+    "id": "CLM-4534B4898E",
+    "fingerprint": "4534b4898ed95b4d98225f9ee4c1b863cfc49b258f0a6fae5f254e465c0e8653",
+    "scope": "product",
+    "contentId": "goldseen",
+    "field": "longDescription",
+    "claimText": "защищает клетки от повреждений,",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://www.drnona.md/goldseen",
+    "sourceLastmod": "2026-02-06T14:38:59+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
     "id": "CLM-E5043F86A3",
     "fingerprint": "e5043f86a336e8ec345405c229b1a6c926db66e2c4643db7714009787701448f",
     "scope": "product",
@@ -4602,32 +4741,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-0238794191",
-    "fingerprint": "0238794191390e265942a84d993d90bfe1fd13d9a241bdf278ecfca4b16aa976",
+    "id": "CLM-8C28C29597",
+    "fingerprint": "8c28c295974c3b3f82035e49e0ce94bf903a83689ce4257fbbe3aeb988402c21",
     "scope": "product",
     "contentId": "goldseen",
     "field": "longDescription",
-    "claimText": "Такой состав работает комплексно: повышает энергию, защищает клетки от повреждений, поддерживает сердце и мозг, улучшает общее состояние организма.",
-    "claimType": "therapeutic",
-    "detectionReasons": [
-      "pain-healing-or-relief"
-    ],
-    "sourceUrl": "https://www.drnona.md/goldseen",
-    "sourceLastmod": "2026-02-06T14:38:59+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-11DCBA7863",
-    "fingerprint": "11dcba7863f67b81b4a36709402cec0476d588839207f375a7025b9122e3b665",
-    "scope": "product",
-    "contentId": "goldseen",
-    "field": "longDescription",
-    "claimText": "Что входит: GOLDSEEN сочетает мощные антиоксиданты и жирные кислоты:.",
+    "claimText": "Это не просто БАД — это мощная формула антиоксидантов, которая защищает клетки, поддерживает сердце, иммунитет и общее самочувствие",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -4642,39 +4761,18 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-3DB4263E19",
-    "fingerprint": "3db4263e194b27d1c28d1e85be91624be45f89251add494e7764c3a6ce0b88aa",
+    "id": "CLM-BAAB3D9DD0",
+    "fingerprint": "baab3d9dd01cb2628f5adf56b49cd2e1252994d37a03b58b31f872eb8a2d54fd",
     "scope": "product",
     "contentId": "goldseen",
     "field": "longDescription",
-    "claimText": "Это не просто БАД — это мощная формула антиоксидантов, которая защищает клетки, поддерживает сердце, иммунитет и общее самочувствие Если ты:. быстро устаёшь, часто чувствуешь упадок сил;. стрессуешь, мало спишь, много работаешь или учишься;. питание не всегда правильное;. хочешь поддержать сердце, мозг и общий тонус.",
+    "claimText": "GOLDSEEN сочетает мощные антиоксиданты и жирные кислоты:",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
     ],
     "sourceUrl": "https://www.drnona.md/goldseen",
     "sourceLastmod": "2026-02-06T14:38:59+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-09272D4E2D",
-    "fingerprint": "09272d4e2dded228cedb6a67632e31b7040c36226f8538dbb87f78a87ba3dab9",
-    "scope": "product",
-    "contentId": "gonseen",
-    "field": "longDescription",
-    "claimText": "В составе этого чая только сила природы: Halo complex (запатентованная формула на использование архибактерии, которая усиливает действие всех остальных ингредиентов), действует на клеточном уровне Парагвайский чай Листья оливы Цветки календулы Листья и цветы хризантемы Листья душицы Мелисса Листья синего василька 7 причин влюбиться в GONSEEN: Мягко и эффективно выводит токсины и очищает организм Мощный адаптоген, укрепляет иммунитет, помогает восстановиться после вирусов и болезней Нормализует работу нервной системы, дарит силу и покой одновременно Помогает работе органов ЖКТ, улучшает пищеварение, помогает при вздутии, тяжести и дискомфорте Поддерживает здоровье сердца и нормализует давление Улучшает функцию работы почек (выводит песок и препятствует его образованию) Чай долголетия, продлевающий жизнь Попробуй наш чай GONSEEN и почувствуй, как твой организм ежедневно говорит тебе: «Благодарю!»",
-    "claimType": "medical",
-    "detectionReasons": [
-      "diagnosis-treatment-or-disease",
-      "health-or-body-function"
-    ],
-    "sourceUrl": "https://www.drnona.md/gonseen",
-    "sourceLastmod": "2026-02-06T14:38:50+00:00",
     "market": "MD",
     "status": "pending",
     "reviewer": null,
@@ -4703,12 +4801,33 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-B4DB9B98B1",
-    "fingerprint": "b4db9b98b11032339e70914a512457eb33d655ede82525b5732991de02286532",
+    "id": "CLM-FDF87EF438",
+    "fingerprint": "fdf87ef4380d58724468230c407b4159225af484535f682d1c89a6bd87d7a1e5",
     "scope": "product",
     "contentId": "gonseen",
     "field": "longDescription",
-    "claimText": "Это ритуал очищения, оздоровления, восстановления, наслаждения вкусом и внутренней гармонии.",
+    "claimText": "Мощный адаптоген, укрепляет иммунитет , помогает восстановиться после вирусов и болезней",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease",
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://www.drnona.md/gonseen",
+    "sourceLastmod": "2026-02-06T14:38:50+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-FD216C3C71",
+    "fingerprint": "fd216c3c71407e1c2d110bda2cbd74d869da89fb010666c7491c45e6716f461c",
+    "scope": "product",
+    "contentId": "gonseen",
+    "field": "longDescription",
+    "claimText": "Поддерживает здоровье сердца и нормализует давление",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -4723,78 +4842,98 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-7061C533BC",
-    "fingerprint": "7061c533bc79e3b6a81c75cf6049a86ca63f0972cfb3768de817f2fb6d2f6657",
+    "id": "CLM-A753BB6197",
+    "fingerprint": "a753bb61976fc8c1f9f14617928538be2bc90788219d2ba7d5a7d2d18031e59b",
     "scope": "product",
-    "contentId": "halo-pure-unisex-deodorant-stick",
-    "field": "howToUse",
-    "claimText": "Поверните колесо в основании контейнера и нанести немного дезодоранта на сухие и чистые подмышечные впадины.",
+    "contentId": "gonseen",
+    "field": "longDescription",
+    "claimText": "Чай долголетия , продлевающий жизнь",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://www.drnona.md/gonseen",
+    "sourceLastmod": "2026-02-06T14:38:50+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-A7F74FAAFC",
+    "fingerprint": "a7f74faafc3d70a3c866a9f9abda9d249852dce21f21420c9c424c032ed9c0fb",
+    "scope": "product",
+    "contentId": "gonseen",
+    "field": "longDescription",
+    "claimText": "Это ритуал очищения, оздоровления, восстановления, наслаждения вкусом и внутренней гармонии .",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://www.drnona.md/gonseen",
+    "sourceLastmod": "2026-02-06T14:38:50+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-780E3EBAB3",
+    "fingerprint": "780e3ebab3c57792d15393543500e1e8f0c0c6f77b37f2b0f8d9a491778038a8",
+    "scope": "product",
+    "contentId": "halo-shenseen-toothpaste",
+    "field": "longDescription",
+    "claimText": "Не просто паста — ежедневный уход за здоровьем зубов и дёсен",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://www.drnona.md/shenseen_mousse_toothpaste",
+    "sourceLastmod": "2026-02-06T14:39:14+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-436D3956B0",
+    "fingerprint": "436d3956b02d17d1a9d8f67fa98e928c1a25c8280c9e82bb4fad660e7f602a6a",
+    "scope": "product",
+    "contentId": "halo-shenseen-toothpaste",
+    "field": "longDescription",
+    "claimText": "SHENSEEN — это чистота, свежесть и забота о здоровье полости рта каждый день",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://www.drnona.md/shenseen_mousse_toothpaste",
+    "sourceLastmod": "2026-02-06T14:39:14+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-61B551C2F4",
+    "fingerprint": "61b551c2f45d626f8250ce40ca7d36e8664f0feb1aa81ef0e054b9820ec8e70d",
+    "scope": "product",
+    "contentId": "hand-and-nail-treatment",
+    "field": "longDescription",
+    "claimText": "Крем обладает защитным, питательным, противовоспалительным, регенерирующим действием.",
     "claimType": "therapeutic",
     "detectionReasons": [
       "pain-healing-or-relief"
     ],
-    "sourceUrl": "https://www.drnona.md/unisex_deodorant_stick",
-    "sourceLastmod": "2026-02-06T14:39:14+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-F883F11B00",
-    "fingerprint": "f883f11b00e0a3d43525a211c1378cf2de35832b4c05df15fa7314db5abbb385",
-    "scope": "product",
-    "contentId": "halo-shenseen-toothpaste",
-    "field": "longDescription",
-    "claimText": "Эффективно очищает зубы и межзубные пространства Защищает от кариеса и налёта Укрепляет дёсны и снижает кровоточивость Обладает антибактериальным действием Освежает дыхание надолго Не повреждает эмаль и не раздражает слизистую SHENSEEN — это чистота, свежесть и забота о здоровье полости рта каждый день Улыбайся уверенно — твоя улыбка под защитой Dr.",
-    "claimType": "health",
-    "detectionReasons": [
-      "health-or-body-function"
-    ],
-    "sourceUrl": "https://www.drnona.md/shenseen_mousse_toothpaste",
-    "sourceLastmod": "2026-02-06T14:39:14+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-244C397D72",
-    "fingerprint": "244c397d725c6b3aeaca4ab3598ef3b2ad67839082163261b6f6d3a4241501c9",
-    "scope": "product",
-    "contentId": "halo-shenseen-toothpaste",
-    "field": "longDescription",
-    "claimText": "Nona Не просто паста — ежедневный уход за здоровьем зубов и дёсен Инновационная формула на основе запатентованного Halo Complex и натуральных компонентов Без фтора, парабенов и агрессивных абразивов Подходит взрослым и подросткам Идеальна даже для чувствительных дёсен В состав SHENSEEN входят: Минералы Мёртвого моря Запатентованный Halo Complex Натуральные растительные экстракты Активные очищающие компоненты Антисептические ингредиенты природного происхождения Что делает SHENSEEN особенной?",
-    "claimType": "health",
-    "detectionReasons": [
-      "health-or-body-function"
-    ],
-    "sourceUrl": "https://www.drnona.md/shenseen_mousse_toothpaste",
-    "sourceLastmod": "2026-02-06T14:39:14+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-C072B3E92A",
-    "fingerprint": "c072b3e92a6ddb460c32dfd5960c677f0b82881fdb01fc3b6a179cd728475d68",
-    "scope": "product",
-    "contentId": "halo-shenseen-toothpaste",
-    "field": "shortDescription",
-    "claimText": "Nona Не просто паста — ежедневный уход за здоровьем зубов и дёсен Инновационная формула на основе запатентованного Halo Complex и натуральных компонентов Без фтора, парабенов и агрессивных абразивов Подходит взрослым и…",
-    "claimType": "health",
-    "detectionReasons": [
-      "health-or-body-function"
-    ],
-    "sourceUrl": "https://www.drnona.md/shenseen_mousse_toothpaste",
-    "sourceLastmod": "2026-02-06T14:39:14+00:00",
+    "sourceUrl": "https://www.drnona.md/hand_and_nail_cream",
+    "sourceLastmod": "2026-02-06T14:38:39+00:00",
     "market": "MD",
     "status": "pending",
     "reviewer": null,
@@ -4863,15 +5002,14 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-D59855D8C0",
-    "fingerprint": "d59855d8c0431fdaf39b39ccd4170b9db23d55c2c6079168c9c101d4b04dd6bb",
+    "id": "CLM-4FC6CD269D",
+    "fingerprint": "4fc6cd269dcb489f116208f084fe12b6b915f81f25c3254eb80ee478b988067f",
     "scope": "product",
     "contentId": "imunseen",
     "field": "longDescription",
-    "claimText": "Когда иммунитет под угрозой, на помощь приходит ИМУНСИН — мощная запатентованая формула на основе Halo Complex ( использование Архебактерии и водоросли Дуналиела ), минералы Мёртвого моря, витамин С, цинк и основной ингредиент – бузина чёрная Согласно научным исследованиям если на самых ранних стадиях вируса начать принимать чёрную бузину, то вирус не прикрепиться к клетке, течение болезни будет не таким длительным и без последствий Что делает ИМУНСИН таким особенным?",
-    "claimType": "medical",
+    "claimText": "Когда иммунитет под угрозой, на помощь приходит ИМУНСИН — мощная запатентованая формула на основе Halo Complex ( использование Архебактерии и водоросли Дуналиела ), минералы Мёртвого моря, витамин С, цинк и основной ингредиент – бузина чёрная",
+    "claimType": "health",
     "detectionReasons": [
-      "diagnosis-treatment-or-disease",
       "health-or-body-function"
     ],
     "sourceUrl": "https://www.drnona.md/imunseen",
@@ -4944,6 +5082,26 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
+    "id": "CLM-CE6A0E1E3C",
+    "fingerprint": "ce6a0e1e3c42862a0bc71241dfcc5f2e819fd2157fa89deed450ee8f53e874da",
+    "scope": "product",
+    "contentId": "imunseen",
+    "field": "longDescription",
+    "claimText": "Согласно научным исследованиям если на самых ранних стадиях вируса начать принимать чёрную бузину, то вирус не прикрепиться к клетке, течение болезни будет не таким длительным и без последствий",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://www.drnona.md/imunseen",
+    "sourceLastmod": "2026-02-06T14:38:58+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
     "id": "CLM-79212A0F0A",
     "fingerprint": "79212a0f0a3cde049fdc6debdf6f535e1580c6e98afa33d49750ecff390e4567",
     "scope": "product",
@@ -4984,32 +5142,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-E28BA39AEE",
-    "fingerprint": "e28ba39aee3efeb3b3d4a1d42ebd97a699b4750f9f5becf58a51fa5205182c35",
-    "scope": "product",
-    "contentId": "kiwi-deodorant",
-    "field": "howToUse",
-    "claimText": "Взболтать флакон, нанести немного дезодоранта на подмышечные впадины и дать высохнуть перед одеванием.",
-    "claimType": "therapeutic",
-    "detectionReasons": [
-      "pain-healing-or-relief"
-    ],
-    "sourceUrl": "https://www.drnona.md/deodorant_kiwi",
-    "sourceLastmod": "2026-02-06T14:39:11+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-EBD247F478",
-    "fingerprint": "ebd247f478b31d6e226d644b6cf8d5fc3c58477cc11505955d133a866cc2ad54",
+    "id": "CLM-6ABC7C371E",
+    "fingerprint": "6abc7c371e9f0c60cf1bb886337c6f70f460b1466731772d1233dd93e0772374",
     "scope": "product",
     "contentId": "kiwi-deodorant",
     "field": "longDescription",
-    "claimText": "Nona для поддержки здоровья кожи и её естественного pH Подходит для всех типов кожи, включая чувствительную Аромат — сочный, свежий, с яркой киви-ноткой, которая дарит ощущение чистоты и энергии.",
+    "claimText": "Nona для поддержки здоровья кожи и её естественного pH",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -5024,32 +5162,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-666AFA7B24",
-    "fingerprint": "666afa7b240e080539c67a3791d869b854dbd763f7d8ab4678372e8f0bde6b36",
-    "scope": "product",
-    "contentId": "lady-deodorant",
-    "field": "howToUse",
-    "claimText": "Взболтать флакон, нанести немного дезодоранта на подмышечные впадины и дать высохнуть перед одеванием.",
-    "claimType": "therapeutic",
-    "detectionReasons": [
-      "pain-healing-or-relief"
-    ],
-    "sourceUrl": "https://www.drnona.md/deodorant_lady",
-    "sourceLastmod": "2026-02-06T14:39:10+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-51E352ECE7",
-    "fingerprint": "51e352ece70afdc54beac5222c5f0742ef5287be76e9c94e65d2faf74f294ce6",
+    "id": "CLM-AB3D5938FD",
+    "fingerprint": "ab3d5938fd121f924bc9ea77f19574339d1491fea69860fc337e01e452c4a355",
     "scope": "product",
     "contentId": "lady-deodorant",
     "field": "longDescription",
-    "claimText": "Nona, который поддерживает здоровье кожи и баланс pH Подходит даже для чувствительной кожи Аромат — лёгкий, женственный, с нотами чистоты и свежести.",
+    "claimText": "Nona, который поддерживает здоровье кожи и баланс pH",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -5064,12 +5182,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-8089535B6D",
-    "fingerprint": "8089535b6d05efe5db1c170b7718ecd72bf243ead05fd3f920245545b5f20eb7",
+    "id": "CLM-473EA626D5",
+    "fingerprint": "473ea626d5e6573cb71de2f04070cb475b4511bb39234d2f303159378ac23f73",
     "scope": "product",
     "contentId": "lipstick-new",
     "field": "longDescription",
-    "claimText": "Она не только придаёт губам ухоженный и свежий вид, но и бережно защищает их от пересыхания, трещинок и воздействия холода или жары.",
+    "claimText": "Она не только придаёт губам ухоженный и свежий вид, но и бережно защищает их от пересыхания , трещинок и воздействия холода или жары .",
     "claimType": "therapeutic",
     "detectionReasons": [
       "pain-healing-or-relief"
@@ -5104,32 +5222,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-782728A60E",
-    "fingerprint": "782728a60e8cc09ed2a7a35c4c592872ce952b7f7f8795ac92e7b4a364bec5bf",
-    "scope": "product",
-    "contentId": "lord-deodorant",
-    "field": "howToUse",
-    "claimText": "Взболтать флакон, нанести немного дезодоранта на подмышечные впадины и дать высохнуть перед одеванием.",
-    "claimType": "therapeutic",
-    "detectionReasons": [
-      "pain-healing-or-relief"
-    ],
-    "sourceUrl": "https://www.drnona.md/deodorant_lord",
-    "sourceLastmod": "2026-02-06T14:39:12+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-8594FDEF40",
-    "fingerprint": "8594fdef40527e5a7c8b1a0fbbcbb02e90c39e69bf0170e244770acdaa5eb13d",
+    "id": "CLM-57702EE6BE",
+    "fingerprint": "57702ee6be1d764e73134a2e1dd4f7e2f5f89f6f5f435eed1d0badc300b083cd",
     "scope": "product",
     "contentId": "mouthwash",
     "field": "longDescription",
-    "claimText": "– освежающий и оздоравливающий ополаскиватель для полости рта.",
+    "claimText": "Помогает поддерживать здоровье дёсен, свежее дыхание и чистоту полости рта каждый день",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -5144,32 +5242,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-E11E1D10D5",
-    "fingerprint": "e11e1d10d5e8a6c05234a1594a5193690aead4502d87a0ebf4ea14c644ebda14",
+    "id": "CLM-8D9F54F789",
+    "fingerprint": "8d9f54f7892e878e2834c3df0c3b52b3a222e4a6aa201d3bd4dd1f2d62c7619b",
     "scope": "product",
     "contentId": "mouthwash",
     "field": "longDescription",
-    "claimText": "Помогает поддерживать здоровье дёсен, свежее дыхание и чистоту полости рта каждый день Богатый состав, работающий на глубоком уровне!",
-    "claimType": "health",
-    "detectionReasons": [
-      "health-or-body-function"
-    ],
-    "sourceUrl": "https://www.drnona.md/mouthwash",
-    "sourceLastmod": "2026-02-06T14:39:08+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-EABB0E57AC",
-    "fingerprint": "eabb0e57accb5c13e85856c21dbc5398777b9caefee1a5bf1b3169fc5d692363",
-    "scope": "product",
-    "contentId": "mouthwash",
-    "field": "longDescription",
-    "claimText": "Nona помогает: Укрепить дёсны и снять воспаление Уменьшить кровоточивость и чувствительность Освежить дыхание на долгое время Ускорить заживление микротрещин и раздражений во рту Снизить риск развития кариеса и стоматита Идеален при: Воспалениях дёсен (гингивит, пародонтит) Налёте, неприятном запахе и сухости во рту Афтозных язвочках и микротравмах Ношении брекетов или пластин Подходит для ежедневного применения, для всей семьи Оставляет приятный освежающий вкус и дарит чувство чистоты надолго!",
+    "claimText": "Ускорить заживление микротрещин и раздражений во рту",
     "claimType": "therapeutic",
     "detectionReasons": [
       "pain-healing-or-relief"
@@ -5184,12 +5262,32 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-D5E94BB6E1",
-    "fingerprint": "d5e94bb6e1416fc88b5bcb24b0e6a329d1df0fa94c0052b74351e7701b25ce7f",
+    "id": "CLM-917AD1A72C",
+    "fingerprint": "917ad1a72cc70aaef2632654e6bdf212f7d568949a71b9261bbb8cd02b0cef7a",
+    "scope": "product",
+    "contentId": "mouthwash",
+    "field": "longDescription",
+    "claimText": "Nona – освежающий и оздоравливающий ополаскиватель для полости рта.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://www.drnona.md/mouthwash",
+    "sourceLastmod": "2026-02-06T14:39:08+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-941E76B9EF",
+    "fingerprint": "941e76b9efc1c9c3008f99daf4a30339fd7d493c225d570547ec03546937e55e",
     "scope": "product",
     "contentId": "mouthwash",
     "field": "shortDescription",
-    "claimText": "освежающий и оздоравливающий ополаскиватель для полости рта.",
+    "claimText": "Nona – освежающий и оздоравливающий ополаскиватель для полости рта.",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -5204,32 +5302,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-43EC1F4D3E",
-    "fingerprint": "43ec1f4d3eaef9724f7d15a64145c4cdf25a07d00f9310618b16aec2bf44b67c",
-    "scope": "product",
-    "contentId": "night-cream",
-    "field": "ingredients",
-    "claimText": "Соль Мёртвого моря, масло авокадо,растительное масло, экстракты: черники, грецкого ореха, фукуса пузырчатого, расторопши, гинкго билобы, витамины Е и С.",
-    "claimType": "therapeutic",
-    "detectionReasons": [
-      "pain-healing-or-relief"
-    ],
-    "sourceUrl": "https://www.drnona.md/night_cream",
-    "sourceLastmod": "2026-02-06T14:38:44+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-B4054AB8FB",
-    "fingerprint": "b4054ab8fb5caa2eebe3a4ae5f7d1d9c371ee751026adcd2ec3489dc6053ae23",
+    "id": "CLM-0F26634C2D",
+    "fingerprint": "0f26634c2dbe8f7dba0d18f8e8fed631782922c7186b667fc1ebf016d6fd30e9",
     "scope": "product",
     "contentId": "okseen",
     "field": "longDescription",
-    "claimText": "– натуральный, антиоксидантный комплекс от компании Dr.",
+    "claimText": "А именно Селен – это жизненно важный микроэлемент , который участвует во множестве процессов в организме, особенно связанных с иммунной защитой .",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -5244,12 +5322,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-1EC2FCC04A",
-    "fingerprint": "1ec2fcc04adb0c82edf57af022e7ad58d5176f19cad9ae5687d6d5adc4a5a85d",
+    "id": "CLM-4B5782308F",
+    "fingerprint": "4b5782308f987eea1311df7aa7339e8e41387381b3e5fb7f6b6d473b623018de",
     "scope": "product",
     "contentId": "okseen",
     "field": "longDescription",
-    "claimText": "А именно Селен – это жизненно важный микроэлемент, который участвует во множестве процессов в организме, особенно связанных с иммунной защитой.",
+    "claimText": "Именно такая комбинация антиоксидантов делает OKSEEN не только полезным для здоровья , но и универсальным в применении .",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -5264,33 +5342,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-F22597069A",
-    "fingerprint": "f22597069a0bb02ed2ad70288b682507eb58c54296d8135434c14fc4a08f45e4",
+    "id": "CLM-076707DD4A",
+    "fingerprint": "076707dd4a4d152404de85c4796105118d1fff2a523330116b12fcb51a23c4cb",
     "scope": "product",
     "contentId": "okseen",
     "field": "longDescription",
-    "claimText": "Полезные свойства: Является ведущим препаратом для поддержки организма при простудных заболеваниях и вирусных инфекциях Поддерживает здоровье сердечно-сосудистой системы и щитовидной железы Нейтрализует свободные радикалы, замедляющие старение Защищает клетки от окислительного стресса Попробуй наш OKSEEN и защити своё здоровье изнутри!",
-    "claimType": "medical",
-    "detectionReasons": [
-      "diagnosis-treatment-or-disease",
-      "health-or-body-function"
-    ],
-    "sourceUrl": "https://www.drnona.md/okseen",
-    "sourceLastmod": "2026-02-06T14:38:55+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-99F4E2A5CA",
-    "fingerprint": "99f4e2a5ca25c281e9c0bcbe752bb6311500c8af392e18d7cea777c269e6839d",
-    "scope": "product",
-    "contentId": "okseen",
-    "field": "longDescription",
-    "claimText": "Это минерал-антиоксидант, который нейтрализует свободные радикалы и замедляет старение.",
+    "claimText": "Нейтрализует свободные радикалы , замедляющие старение",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -5305,12 +5362,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-D8884E4FCE",
-    "fingerprint": "d8884e4fce1861960f4c6bfb1e73ff2a4df81c642155f63411a9843da6cc55d4",
+    "id": "CLM-54AAACE47E",
+    "fingerprint": "54aaace47e96c0b64d3d73fcd36cd99283f29c2b3146eb1fed3d71403ef1d6b1",
     "scope": "product",
     "contentId": "okseen",
     "field": "longDescription",
-    "claimText": "Nona на использование архибактерии и водоросли Дуналиелла ) Селен Витамин E Именно такая комбинация антиоксидантов делает OKSEEN не только полезным для здоровья, но и универсальным в применении.",
+    "claimText": "Поддерживает здоровье сердечно-сосудистой системы и щитовидной железы",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -5325,12 +5382,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-725B9C06F1",
-    "fingerprint": "725b9c06f18aebd8f29e45ccaff03c39205541991b3b9927d35def767aa80764",
+    "id": "CLM-13B6569E3E",
+    "fingerprint": "13b6569e3e68677ab9512e50c4d3278f6f4fb1ade7ec0b2e7a0f9f375aa0639a",
     "scope": "product",
     "contentId": "okseen",
-    "field": "shortDescription",
-    "claimText": "натуральный, антиоксидантный комплекс от компании Dr.",
+    "field": "longDescription",
+    "claimText": "Попробуй наш OKSEEN и защити своё здоровье изнутри!",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -5345,15 +5402,115 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-33CA121A8C",
-    "fingerprint": "33ca121a8cd3dd109a87a3dc4cb5d44ef7d1446f9b24f832fe12af6c26df3347",
+    "id": "CLM-6C7D4CB2D0",
+    "fingerprint": "6c7d4cb2d08f04e1db4a312d1bad24c87f89fedd6b136475566c25cfbcdbd7ed",
     "scope": "product",
-    "contentId": "pulmoseen",
+    "contentId": "okseen",
     "field": "longDescription",
-    "claimText": "Заболеваниях дыхательных путей.",
+    "claimText": "Это минерал-антиоксидант , который нейтрализует свободные радикалы и замедляет старение .",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://www.drnona.md/okseen",
+    "sourceLastmod": "2026-02-06T14:38:55+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-4270392450",
+    "fingerprint": "427039245041b9f9cd7e3fafc92699c61cfa2254b1455609550c9a04a647d93d",
+    "scope": "product",
+    "contentId": "okseen",
+    "field": "longDescription",
+    "claimText": "Является ведущим препаратом для поддержки организма при простудных заболеваниях и вирусных инфекциях",
     "claimType": "medical",
     "detectionReasons": [
       "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://www.drnona.md/okseen",
+    "sourceLastmod": "2026-02-06T14:38:55+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-89518DE78B",
+    "fingerprint": "89518de78b92086516bbe4a50c63485f333b7600b305bcd6a9a10e4cd616acd4",
+    "scope": "product",
+    "contentId": "okseen",
+    "field": "longDescription",
+    "claimText": "Nona – натуральный, антиоксидантный комплекс от компании Dr.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://www.drnona.md/okseen",
+    "sourceLastmod": "2026-02-06T14:38:55+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-B838C82623",
+    "fingerprint": "b838c82623003669704fc7db65292f68fc23d0f0bd305d313f5ace221024770d",
+    "scope": "product",
+    "contentId": "okseen",
+    "field": "shortDescription",
+    "claimText": "Nona – натуральный, антиоксидантный комплекс от компании Dr.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://www.drnona.md/okseen",
+    "sourceLastmod": "2026-02-06T14:38:55+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-ACAA185643",
+    "fingerprint": "acaa185643208e903924860ede850ba76bc3e2eefbf5ff7aa1435a35e269c096",
+    "scope": "product",
+    "contentId": "pulmoseen",
+    "field": "longDescription",
+    "claimText": "— Заболеваниях дыхательных путей",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://www.drnona.md/pulmoseen",
+    "sourceLastmod": "2026-02-06T14:39:01+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-2C0DBFCCF6",
+    "fingerprint": "2c0dbfccf635f8ed846a33c50462aa7b48815fe3505fba7bbd4c4e56e4bd23bd",
+    "scope": "product",
+    "contentId": "pulmoseen",
+    "field": "longDescription",
+    "claimText": "— Частых простудах и слабом иммунитете",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
     ],
     "sourceUrl": "https://www.drnona.md/pulmoseen",
     "sourceLastmod": "2026-02-06T14:39:01+00:00",
@@ -5385,12 +5542,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-2CAB38BCB0",
-    "fingerprint": "2cab38bcb01a7c828b6850b1c74a3ea0793d245cd42a5e68ae7a1cb2bd900788",
+    "id": "CLM-6E94D48B44",
+    "fingerprint": "6e94d48b4485236862743e67e9f7a0ccfadede2f424ff3fe88cba22eff746223",
     "scope": "product",
     "contentId": "pulmoseen",
     "field": "longDescription",
-    "claimText": "Частых простудах и слабом иммунитете.",
+    "claimText": "PULMOSEEN от Dr.Nona — поддержка лёгких и иммунитета каждый день.",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -5405,32 +5562,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-E2ACB65839",
-    "fingerprint": "e2acb65839e288219a803fad6ab0f54ff72bc60d413da2fb47e65d904f47a235",
-    "scope": "product",
-    "contentId": "pulmoseen",
-    "field": "longDescription",
-    "claimText": "Nona — поддержка лёгких и иммунитета каждый день.",
-    "claimType": "health",
-    "detectionReasons": [
-      "health-or-body-function"
-    ],
-    "sourceUrl": "https://www.drnona.md/pulmoseen",
-    "sourceLastmod": "2026-02-06T14:39:01+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-BCAF459BD0",
-    "fingerprint": "bcaf459bd0d9be412e92c76ed28d10038b184257a1000182f7767361ff8a9ce0",
+    "id": "CLM-8AEB814C2C",
+    "fingerprint": "8aeb814c2c47e91c64ad8421f698aa6034a6a2a7a650984ab11bd7a22658afc9",
     "scope": "product",
     "contentId": "pulmoseen",
     "field": "shortDescription",
-    "claimText": "Nona — поддержка лёгких и иммунитета каждый день.",
+    "claimText": "PULMOSEEN от Dr.Nona — поддержка лёгких и иммунитета каждый день.",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -5445,12 +5582,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-498625236F",
-    "fingerprint": "498625236f1a3de6c72ca254f305184c087d24c88d8e075c37ea513f6122aa98",
+    "id": "CLM-CA7D4C1698",
+    "fingerprint": "ca7d4c16986267804b276868de2de6e156b5e7d12b3a44971e998870c4cf9a2d",
     "scope": "product",
     "contentId": "ravseen",
     "field": "longDescription",
-    "claimText": "Поддерживает здоровье сердца и сосудов.",
+    "claimText": "Поддерживает здоровье сердца и сосудов",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -5505,17 +5642,459 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-91EDCF2742",
-    "fingerprint": "91edcf27426d73208b32234576dda6dd95f6d64a5399e96d5d9db23ebaf0d2b0",
+    "id": "CLM-234ACF843E",
+    "fingerprint": "234acf843ea358e81201604cad3c1a8b8e1b9cb556a3ce4f3619b1e43eb20c4b",
     "scope": "product",
-    "contentId": "ravseen",
-    "field": "shortDescription",
-    "claimText": "Nona - это полиненасыщенные жирные кислоты Omega 3 ( на базе патента ), которые организм не способен вырабатывать самостоятельно, но они крайне необходимы нашему организму, так как играют ключевую роль в здоровье сердца, мозга,…",
+    "contentId": "reumoseen",
+    "field": "longDescription",
+    "claimText": "Поддерживать здоровье опорно-двигательной системы",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
     ],
-    "sourceUrl": "https://www.drnona.md/ravseen",
+    "sourceUrl": "https://www.drnona.md/reumoseen",
+    "sourceLastmod": "2026-02-06T14:39:02+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-10BBAA8077",
+    "fingerprint": "10bbaa8077ca5e690ff33f5438fc055ac80bcb0b4371053f9bafba5fa529bec2",
+    "scope": "product",
+    "contentId": "reumoseen",
+    "field": "longDescription",
+    "claimText": "Помогает при болях в суставах, спине и мыщцах",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://www.drnona.md/reumoseen",
+    "sourceLastmod": "2026-02-06T14:39:02+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-10D9428CD6",
+    "fingerprint": "10d9428cd6cf97a5cc5526ab0745d291cfd709c185df82157ad8d8d4f752c4cc",
+    "scope": "product",
+    "contentId": "reumoseen",
+    "field": "longDescription",
+    "claimText": "Уменьшать боли в суставах и мышцах",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://www.drnona.md/reumoseen",
+    "sourceLastmod": "2026-02-06T14:39:02+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-7472255D83",
+    "fingerprint": "7472255d8334ad4f2fd745c42dd357fa9dc2f702d8cb9e823265c318774b5e93",
+    "scope": "product",
+    "contentId": "reumoseen",
+    "field": "longDescription",
+    "claimText": "REUNOSEEN — это мощная пртивоспалительная добавка Уникальный состав с натуральными экстрактами и антиоксидантами такими как:",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://www.drnona.md/reumoseen",
+    "sourceLastmod": "2026-02-06T14:39:02+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-8A74971255",
+    "fingerprint": "8a74971255561e22ec336815baefa1810541229c640ff809ed78aab1cc462f65",
+    "scope": "product",
+    "contentId": "ro:anti-aging-serum",
+    "field": "longDescription",
+    "claimText": "Acționează la nivel celular datorită complexului brevetat Halo Complex — activează procesele de regenerare și refacere a pielii.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro",
+      "cosmetic-efficacy-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/anti_aging_serum_ro",
+    "sourceLastmod": "2026-02-06T14:38:45+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-1843E0250A",
+    "fingerprint": "1843e0250a69e9c2cb68c154ac784839546d10183c3e9e6a2adb3d4d7fe5ed52",
+    "scope": "product",
+    "contentId": "ro:anti-aging-serum",
+    "field": "longDescription",
+    "claimText": "Componente active anti-îmbătrânire",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/anti_aging_serum_ro",
+    "sourceLastmod": "2026-02-06T14:38:45+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-D727D397C3",
+    "fingerprint": "d727d397c3db3d58dd9e3d4e89a1324ed7662f668e91066ef5155393ddfa2dc2",
+    "scope": "product",
+    "contentId": "ro:ard-complex",
+    "field": "longDescription",
+    "claimText": "extractul de curmale, bogat în vitaminele A și E , fitosteroli și acid ursolic, nu doar hrănește pielea cu vitamine, ci și luptă activ împotriva semnelor de îmbătrânire",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/ard_cream_for_face_ro",
+    "sourceLastmod": "2026-02-06T14:38:46+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-07FAC8DA1B",
+    "fingerprint": "07fac8da1b0ba23414ea448507d6a9c126d7e3b3face572efc6caf9c46159e33",
+    "scope": "product",
+    "contentId": "ro:ard-complex",
+    "field": "longDescription",
+    "claimText": "hidratează profund și încetinește procesul de îmbătrânire cu ajutorul uleiului de cânepă",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/ard_cream_for_face_ro",
+    "sourceLastmod": "2026-02-06T14:38:46+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-C7A681EF4D",
+    "fingerprint": "c7a681ef4d86d1ce2faf0a0a4e6840cf94729b78ca1c9ac377999b761fbde1c7",
+    "scope": "product",
+    "contentId": "ro:ard-complex",
+    "field": "longDescription",
+    "claimText": "stimulează regenerarea celulară datorită combinației dintre arhebacterii și alga Dunaliella, bogate în β-caroten — un antioxidant natural puternic",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro",
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/ard_cream_for_face_ro",
+    "sourceLastmod": "2026-02-06T14:38:46+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-04695ABB00",
+    "fingerprint": "04695abb0070482429435c9ea36cf4999144e3ae5c073c32086a171a4150880a",
+    "scope": "product",
+    "contentId": "ro:beauty-mask-for-face",
+    "field": "longDescription",
+    "claimText": "Mască naturală regenerantă cu nămol terapeutic și minerale din Marea Moartă, creată pentru curățare intensă, hrănire și reînnoirea pielii",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/recovering_mud_musk_ro",
+    "sourceLastmod": "2026-02-06T14:39:19+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-5F752D59FF",
+    "fingerprint": "5f752d59ff5290dc992ac88aa26c705d4d1a3862ccc5b6a3a6254900deadaa14",
+    "scope": "product",
+    "contentId": "ro:beauty-mask-for-face",
+    "field": "longDescription",
+    "claimText": "Nămol terapeutic și minerale din Marea Moartă",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/recovering_mud_musk_ro",
+    "sourceLastmod": "2026-02-06T14:39:19+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-2A081011B4",
+    "fingerprint": "2a081011b473c2b4c502162c3e52ba9b97d3e92e99d61aba8cd3ecddf3200803",
+    "scope": "product",
+    "contentId": "ro:beauty-mask-for-face",
+    "field": "longDescription",
+    "claimText": "Nevoia de curățare profundă și regenerare",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/recovering_mud_musk_ro",
+    "sourceLastmod": "2026-02-06T14:39:19+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-56C9CC81AB",
+    "fingerprint": "56c9cc81ab58baacaed194e32d3abdded9fc98ece4090a3c12b35a0f6d20dcaf",
+    "scope": "product",
+    "contentId": "ro:beauty-mask-for-face",
+    "field": "longDescription",
+    "claimText": "Nona — regenerare profundă și detoxifierea pielii",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/recovering_mud_musk_ro",
+    "sourceLastmod": "2026-02-06T14:39:19+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-888D941414",
+    "fingerprint": "888d941414ba3e4aed188a1934f359dc5165d0f8e1190b359e8184bc497dd6f3",
+    "scope": "product",
+    "contentId": "ro:beauty-mask-for-face",
+    "field": "longDescription",
+    "claimText": "Nona, care susține protecția celulară, accelerează regenerarea și potențează acțiunea tuturor componentelor active.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/recovering_mud_musk_ro",
+    "sourceLastmod": "2026-02-06T14:39:19+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-B000A2B58D",
+    "fingerprint": "b000a2b58dc5859845bac834f8623e3cba0742448e4ca3fb6bd81c848daabba1",
+    "scope": "product",
+    "contentId": "ro:beauty-mask-for-face",
+    "field": "longDescription",
+    "claimText": "Reducerea inflamațiilor, roșeții și erupțiilor cutanate",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/recovering_mud_musk_ro",
+    "sourceLastmod": "2026-02-06T14:39:19+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-8A5D0593BF",
+    "fingerprint": "8a5d0593bf83126306cd14b39731655a15dae942003a87f0f68d74ca6afbfd27",
+    "scope": "product",
+    "contentId": "ro:beauty-mask-for-face",
+    "field": "shortDescription",
+    "claimText": "Nona — regenerare profundă și detoxifierea pielii",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/recovering_mud_musk_ro",
+    "sourceLastmod": "2026-02-06T14:39:19+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-9429EEC9B6",
+    "fingerprint": "9429eec9b6e8ddcd96b50afa125b8ad7d3223a68b533530f604dfad3a2a765d9",
+    "scope": "product",
+    "contentId": "ro:body-butter",
+    "field": "longDescription",
+    "claimText": "Datorită complexului unic Halo Complex cu minerale din Marea Moartă, produsul nu numai că îngrijește suprafața pielii, dar și stimulează regenerarea acesteia din interior.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/body_butter_ro",
+    "sourceLastmod": "2026-02-06T14:38:41+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-FF7D8D6AB8",
+    "fingerprint": "ff7d8d6ab871df5343e5ce72a3a2841987ba18b8688566d31733a055843603e9",
+    "scope": "product",
+    "contentId": "ro:body-butter",
+    "field": "longDescription",
+    "claimText": "Uleiul de shea înmoaie, vindecă zonele uscate și deteriorate, iar uleiul de mango conferă catifelare, vânătăi și un parfum incredibil.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/body_butter_ro",
+    "sourceLastmod": "2026-02-06T14:38:41+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-EF397E7564",
+    "fingerprint": "ef397e7564bf72c1d5cc8de78e4a969bdc8bc18518415882650e770be493c98a",
+    "scope": "product",
+    "contentId": "ro:chocoseen",
+    "field": "longDescription",
+    "claimText": "* Întărește sistemul imunitar, susține puterea de apărare a organismului.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/chocoseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:52+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-027161D65E",
+    "fingerprint": "027161d65e1fae136b7e366993fe2d06ebb2ba82e440d4f904aef7b4ac974799",
+    "scope": "product",
+    "contentId": "ro:chocoseen",
+    "field": "longDescription",
+    "claimText": "Este o formulă puternică, care ajută organismul să facă față stresului, să-și recupereze forțele și să-și întărească imunitatea!",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/chocoseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:52+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-CCE9F015D5",
+    "fingerprint": "cce9f015d5da9e6cd623d0a378dfbd4e8dc4f5d593a5f1fca7b78ccdf6f60b17",
+    "scope": "product",
+    "contentId": "ro:chocoseen",
+    "field": "longDescription",
+    "claimText": "Nona - Energie și sănătate în fiecare ceașcă!",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/chocoseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:52+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-7E899CFF49",
+    "fingerprint": "7e899cff499fe3b61735e58a0547ad4b559b9474854d12fa17bf327e8511ba70",
+    "scope": "product",
+    "contentId": "ro:chocoseen",
+    "field": "shortDescription",
+    "claimText": "Nona - Energie și sănătate în fiecare ceașcă!",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/chocoseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:52+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-6E40A9069B",
+    "fingerprint": "6e40a9069b05dd0a7d48d3eb748dba4c5315f4a6937f8ec504b94e7e3bd04f61",
+    "scope": "product",
+    "contentId": "ro:cleanseen",
+    "field": "longDescription",
+    "claimText": "Formula naturală este creată pentru a susține sănătatea sistemului tău digestiv",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/cleanseen_ro",
     "sourceLastmod": "2026-02-06T14:39:00+00:00",
     "market": "MD",
     "status": "pending",
@@ -5525,38 +6104,1522 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-EBD06A99CC",
-    "fingerprint": "ebd06a99ccaec9960e7f7bd0ab1545a8dd432f630607ffac1b6a66bc3f9fa4d0",
+    "id": "CLM-E05A8DFF59",
+    "fingerprint": "e05a8dff59159aa1e0d02d33b62572b65609c606abe765554bd2d17e95c00777",
     "scope": "product",
-    "contentId": "reumoseen",
+    "contentId": "ro:coffee-mix",
     "field": "longDescription",
-    "claimText": "Благодаря своему уникальному составу REUMOSEEN помогает Снимать воспаления Уменьшать боли в суставах и мышцах Восстанавливать подвижность Поддерживать здоровье опорно-двигательной системы Помогает при болях в суставах, спине и мыщцах Обладает противоревматическими свойствами.",
-    "claimType": "therapeutic",
-    "detectionReasons": [
-      "pain-healing-or-relief",
-      "health-or-body-function"
-    ],
-    "sourceUrl": "https://www.drnona.md/reumoseen",
-    "sourceLastmod": "2026-02-06T14:39:02+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-A2F2264886",
-    "fingerprint": "a2f2264886c8a916ba11ece98bd8b20733895169e999f8e532a44e65eccb629a",
-    "scope": "product",
-    "contentId": "reumoseen",
-    "field": "longDescription",
-    "claimText": "REUNOSEEN — это мощная пртивоспалительная добавка Уникальный состав с натуральными экстрактами и антиоксидантами такими как: Нalo Complex Гарпагофитум Пижма Чёрная смородина Экстракт босвелии Экстракт куркумы.",
+    "claimText": "Un amestec unic de ingrediente naturale, pe bază de plante, care te ajută să te revigorezi , accelerează metabolismul , mențin sănătatea și îți dau energie pentru întreaga zi !!",
     "claimType": "health",
     "detectionReasons": [
-      "health-or-body-function"
+      "health-or-body-function-ro"
     ],
-    "sourceUrl": "https://www.drnona.md/reumoseen",
+    "sourceUrl": "https://www.drnona.md/slimseen_coffee_mix_ro",
+    "sourceLastmod": "2026-02-06T14:38:52+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-6C53097899",
+    "fingerprint": "6c530978991ee7fed74aecd32841b4f276af81a985ab2ed6680252778112932b",
+    "scope": "product",
+    "contentId": "ro:conditioner",
+    "field": "longDescription",
+    "claimText": "Nona, care asigură nutriție celulară, protecție și regenerarea părului.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/mineral_hair_conditioner_ro",
+    "sourceLastmod": "2026-02-06T14:39:17+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-1CFDF2CBBE",
+    "fingerprint": "1cfdf2cbbe96dd8e210b6cccd845ff75c4527e6b5d39e170e085f0b3dca4ba99",
+    "scope": "product",
+    "contentId": "ro:dead-sea-water-compresses",
+    "field": "longDescription",
+    "claimText": "Acesta este un remediu natural eficient pentru îngrijirea, sănătatea și refacerea pielii , disponibil sub formă de comprese sterile de unică folosință.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/compressed_wipes_ro",
+    "sourceLastmod": "2026-02-06T14:39:08+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-C6B1BFC648",
+    "fingerprint": "c6b1bfc6483762eb87f86c3ffaf2ff29ab78f6c034ff145c29ab30f4af7acefb",
+    "scope": "product",
+    "contentId": "ro:dead-sea-water-compresses",
+    "field": "longDescription",
+    "claimText": "Calmează inflamațiile",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/compressed_wipes_ro",
+    "sourceLastmod": "2026-02-06T14:39:08+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-ADBA118581",
+    "fingerprint": "adba11858163076e7367ff0fe31e3e5b7d2919795b7b8cb548ace1d1552a9f31",
+    "scope": "product",
+    "contentId": "ro:dead-sea-water-compresses",
+    "field": "longDescription",
+    "claimText": "Dezinfectează, regenerează și curăță pielea",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/compressed_wipes_ro",
+    "sourceLastmod": "2026-02-06T14:39:08+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-DEA8B69598",
+    "fingerprint": "dea8b69598da8a3c26a5f0a51274583b803c2c2744cb60d43bc6097c8c59f25d",
+    "scope": "product",
+    "contentId": "ro:dead-sea-water-compresses",
+    "field": "longDescription",
+    "claimText": "Eficient în cazul leziunilor",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/compressed_wipes_ro",
+    "sourceLastmod": "2026-02-06T14:39:08+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-2AF1FE0D7F",
+    "fingerprint": "2af1fe0d7f8cb886da7d777d3c33729ee35f8a55262b82d227cb14f4dcf4dc81",
+    "scope": "product",
+    "contentId": "ro:dead-sea-water-compresses",
+    "field": "longDescription",
+    "claimText": "Favorizează vindecarea rănilor și eliminarea inflamațiilor",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease-ro",
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/compressed_wipes_ro",
+    "sourceLastmod": "2026-02-06T14:39:08+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-CE85CDB139",
+    "fingerprint": "ce85cdb1396d16ffb6d0cd1b5a0d51ff87cc8b40d0fc0c89ab8e82b2aeb4e9bd",
+    "scope": "product",
+    "contentId": "ro:dead-sea-water-compresses",
+    "field": "longDescription",
+    "claimText": "Nona sunt o mini trusă medicală și un duș răcoritor în poșeta ta!",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/compressed_wipes_ro",
+    "sourceLastmod": "2026-02-06T14:39:08+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-24FDD67BF6",
+    "fingerprint": "24fdd67bf673b6342a6ab0fa7b322dee252243614d435d9a5efa38200c2264f4",
+    "scope": "product",
+    "contentId": "ro:dnd-chewing-gum-tablets",
+    "field": "longDescription",
+    "claimText": "Are efect antiinflamator și antibacterian",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/dnd_ro",
+    "sourceLastmod": "2026-02-06T14:38:57+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-979312022E",
+    "fingerprint": "979312022e5bfd8a05bb03038cf47558b19b6cbc8c257ef13ad6a8479fd674bf",
+    "scope": "product",
+    "contentId": "ro:dnd-chewing-gum-tablets",
+    "field": "longDescription",
+    "claimText": "Este un puternic antioxidant natural, care întărește imunitatea și încetinește îmbătrânirea .",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/dnd_ro",
+    "sourceLastmod": "2026-02-06T14:38:57+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-EE25EAE846",
+    "fingerprint": "ee25eae8462360751b20c70aa69e80b009aa43e93de5d09bc30de862a5f07f48",
+    "scope": "product",
+    "contentId": "ro:dnd-chewing-gum-tablets",
+    "field": "longDescription",
+    "claimText": "Simte-i gustul și obține beneficii maxime pentru sănătatea ta și un plus de energie !",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/dnd_ro",
+    "sourceLastmod": "2026-02-06T14:38:57+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-251A54ABDC",
+    "fingerprint": "251a54abdc3d7afb56442b257345251d03dd3e400556a1d8be63203fc46fcbb2",
+    "scope": "product",
+    "contentId": "ro:dynamic-hydrating-cream",
+    "field": "longDescription",
+    "claimText": "Extracte de aloe și mușețel — calmează și protejează pielea de inflamații.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/dynamic_ro",
+    "sourceLastmod": "2026-02-06T14:38:40+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-7F7D3E1781",
+    "fingerprint": "7f7d3e1781503aeaf1c0c01ef1e9ccb46da65d6da849c5a7086784c46c72bc9e",
+    "scope": "product",
+    "contentId": "ro:dynamic-hydrating-cream",
+    "field": "longDescription",
+    "claimText": "Nona cu antioxidanți pentru protejarea celulelor împotriva îmbătrânirii.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/dynamic_ro",
+    "sourceLastmod": "2026-02-06T14:38:40+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-5620E21A66",
+    "fingerprint": "5620e21a66525abc9cc1f133e30349aca5ada469830de40d39faf34198ec3d06",
+    "scope": "product",
+    "contentId": "ro:dynamic-hydrating-cream",
+    "field": "longDescription",
+    "claimText": "Regenerare și protecție puternică — accelerează regenerarea, elimină roșeața și iritațiile.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/dynamic_ro",
+    "sourceLastmod": "2026-02-06T14:38:40+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-50E9BDA9B2",
+    "fingerprint": "50e9bda9b25a642e5306918b9bea7e58802bf9dc4d7865ec52184fe64747baea",
+    "scope": "product",
+    "contentId": "ro:face-soap",
+    "field": "longDescription",
+    "claimText": "Acid salicilic — curăță delicat porii și reduce inflamațiile.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/facial_foam_soap_ro",
+    "sourceLastmod": "2026-02-06T14:39:13+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-41B1325743",
+    "fingerprint": "41b13257439104b8dfa9149a4bd8c5babcab76be6630945be8dcf5250048a5f2",
+    "scope": "product",
+    "contentId": "ro:face-soap",
+    "field": "longDescription",
+    "claimText": "Sinergia Arhebacteriilor și Dunaliella — efect antiinflamator puternic și transport eficient al ingredientelor către zonele necesare ale pielii.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/facial_foam_soap_ro",
+    "sourceLastmod": "2026-02-06T14:39:13+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-A38496CB86",
+    "fingerprint": "a38496cb862543461e278b788ac35196c37640e20bcd039a10b2c0db667f3333",
+    "scope": "product",
+    "contentId": "ro:facial-solaris",
+    "field": "longDescription",
+    "claimText": "contribuie la regenerarea celulelor și crește elasticitatea;",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/facial_solaris_ro",
+    "sourceLastmod": "2026-02-06T14:38:42+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-B1547F4394",
+    "fingerprint": "b1547f43948639313585b0a3bd452571070436e7cef59ee21101e96576e6acf3",
+    "scope": "product",
+    "contentId": "ro:facial-solaris",
+    "field": "longDescription",
+    "claimText": "Formula ajută pielea să se regenereze, uniformizează tonul, netezește ridurile fine și protejează împotriva stresului extern.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/facial_solaris_ro",
+    "sourceLastmod": "2026-02-06T14:38:42+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-0D6BB02D95",
+    "fingerprint": "0d6bb02d958879a8729472b9f9c1b75c4a88e75c7fc977b78a26edd8c1624cdc",
+    "scope": "product",
+    "contentId": "ro:fase-9",
+    "field": "longDescription",
+    "claimText": "Contribuie la refacerea și participă la regenerarea celulelor, ceea ce este deosebit de important în perioada adolescenței și în timpul sarcinii",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/phase_9_ro",
+    "sourceLastmod": "2026-02-06T14:38:56+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-84936E3D64",
+    "fingerprint": "84936e3d64dc2241f284fa8cecf5744c82b92e70a0a68e2c92ef5ed45193668c",
+    "scope": "product",
+    "contentId": "ro:fase-9",
+    "field": "longDescription",
+    "claimText": "Este un antioxidant și reduce riscul de inflamații cronice",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro",
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/phase_9_ro",
+    "sourceLastmod": "2026-02-06T14:38:56+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-C7E54EC783",
+    "fingerprint": "c7e54ec78362d07e1a9d9b2405bbaf398d6e77bad5e5a6954b447c785b63360f",
+    "scope": "product",
+    "contentId": "ro:fase-9",
+    "field": "longDescription",
+    "claimText": "Susține funcționarea sistemului imunitar",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/phase_9_ro",
+    "sourceLastmod": "2026-02-06T14:38:56+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-EBB5F8A05C",
+    "fingerprint": "ebb5f8a05c1faec2f489c4e91c8c05910d05f81b20a1afe2f398ee8ee81f342e",
+    "scope": "product",
+    "contentId": "ro:femseen",
+    "field": "longDescription",
+    "claimText": "Extracte vegetale atent selecționate pentru sănătatea feminină",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/femseen_ro",
+    "sourceLastmod": "2026-02-06T14:39:05+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-66CBF201F4",
+    "fingerprint": "66cbf201f4a7844751ad09be30ce4ec024e091779be0c849b414e19c16c7dea4",
+    "scope": "product",
+    "contentId": "ro:femseen",
+    "field": "longDescription",
+    "claimText": "Nona — armonie, grijă și susținere pentru sănătatea feminină",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/femseen_ro",
+    "sourceLastmod": "2026-02-06T14:39:05+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-B51A18391C",
+    "fingerprint": "b51a18391cab47f4ab6ce85f3db1c719ace81bbac4d83aa92fd654c728a702f1",
+    "scope": "product",
+    "contentId": "ro:femseen",
+    "field": "longDescription",
+    "claimText": "Susține nivelul de energie și vitalitatea",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/femseen_ro",
+    "sourceLastmod": "2026-02-06T14:39:05+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-3A2D5FEBB4",
+    "fingerprint": "3a2d5febb4bbbce0f95996a3ed167bbb829a9eef6984b2968065f1eb1bfec343",
+    "scope": "product",
+    "contentId": "ro:femseen",
+    "field": "shortDescription",
+    "claimText": "Nona — armonie, grijă și susținere pentru sănătatea feminină",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/femseen_ro",
+    "sourceLastmod": "2026-02-06T14:39:05+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-6669AEF20D",
+    "fingerprint": "6669aef20d093582f330b0029eab28ad297a481b02966e9b66ff0a9edee3067e",
+    "scope": "product",
+    "contentId": "ro:frequent-use-tonic-shampoo",
+    "field": "longDescription",
+    "claimText": "Întărirea rădăcinilor și prevenirea căderii părului",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/mineral_shampoo_ro",
+    "sourceLastmod": "2026-02-06T14:39:16+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-54929F3C66",
+    "fingerprint": "54929f3c664b2b554447915673fedef724d83ffc27b26165cbb74d6b749e4869",
+    "scope": "product",
+    "contentId": "ro:frequent-use-tonic-shampoo",
+    "field": "longDescription",
+    "claimText": "Nona, care susține sănătatea celulară, protejează și stimulează procesele de regenerare.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro",
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/mineral_shampoo_ro",
+    "sourceLastmod": "2026-02-06T14:39:16+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-F430CAE131",
+    "fingerprint": "f430cae131f0a25c12e51f39b649be56eb4cbcedf7e0c1642da332de4a2facc4",
+    "scope": "product",
+    "contentId": "ro:goldseen",
+    "field": "longDescription",
+    "claimText": "Ai grijă de sănătatea ta în fiecare zi — alege GOLDSEEN!",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/goldseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:59+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-B7509FCCEA",
+    "fingerprint": "b7509fccea326b63a41718729ee708014a264d2f73c73847cc3667643cbe1be4",
+    "scope": "product",
+    "contentId": "ro:goldseen",
+    "field": "longDescription",
+    "claimText": "Nu este doar un supliment alimentar — este o formulă puternică de antioxidanți care protejează celulele, susține inima, imunitatea și starea generală de sănătate",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/goldseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:59+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-B41633CF78",
+    "fingerprint": "b41633cf7843a56374616623543183dbbba47d42a5702e4b3bd60b395f538047",
+    "scope": "product",
+    "contentId": "ro:goldseen",
+    "field": "longDescription",
+    "claimText": "Seleniu — întărește imunitatea și ajută organismul să combată stresul.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/goldseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:59+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-FFBB026291",
+    "fingerprint": "ffbb0262912e4ab5afa11440557d722d27feb8ecad0eed924306694c67f12e02",
+    "scope": "product",
+    "contentId": "ro:goldseen",
+    "field": "longDescription",
+    "claimText": "Vitamina E — protejează celulele împotriva îmbătrânirii;",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/goldseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:59+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-5C7E2C2048",
+    "fingerprint": "5c7e2c204800ed66a9b49e2a695f6c93421b0ef32ab065f9457c6fc8086a9baa",
+    "scope": "product",
+    "contentId": "ro:gonseen",
+    "field": "longDescription",
+    "claimText": "Adaptogen puternic, întărește imunitatea , ajută la recuperarea după viruși și boli",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/gonseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:50+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-2101991DE6",
+    "fingerprint": "2101991de640afb82a3b01e6a2b40213cb11053e524c4a1f59734abdf86d46fb",
+    "scope": "product",
+    "contentId": "ro:gonseen",
+    "field": "longDescription",
+    "claimText": "Este un ritual de purificare, vindecare, refacere, savurare a gustului și armonie interioară .",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/gonseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:50+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-FFCEBCAD92",
+    "fingerprint": "ffcebcad926fa9362d82a0238abd3ba16a2fd20eacd39ca4297994b70bb6c07e",
+    "scope": "product",
+    "contentId": "ro:gonseen",
+    "field": "longDescription",
+    "claimText": "Halo complex (formulă brevetată pentru utilizarea archaebacteriilor, care potențează acțiunea tuturor celorlalte ingrediente), acționează la nivel celular.",
+    "claimType": "cosmetic",
+    "detectionReasons": [
+      "cosmetic-efficacy-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/gonseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:50+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-172AECA5D5",
+    "fingerprint": "172aeca5d5a372a90a2d737b7a33e9fb79c98a52a7216577778965c4969bb856",
+    "scope": "product",
+    "contentId": "ro:gonseen",
+    "field": "longDescription",
+    "claimText": "O gură de sănătate într-o ceașcă de ceai.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/gonseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:50+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-06224C7E1C",
+    "fingerprint": "06224c7e1cec3b6c507ee479d42443971740996688456d881db87932a2165abd",
+    "scope": "product",
+    "contentId": "ro:gonseen",
+    "field": "longDescription",
+    "claimText": "Susține sănătatea inimii și normalizează tensiunea",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/gonseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:50+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-360DA9188E",
+    "fingerprint": "360da9188edede016fc17d46015e01826a41b1c401b20a7141aad571375852df",
+    "scope": "product",
+    "contentId": "ro:halo-gel",
+    "field": "longDescription",
+    "claimText": "Gel de duș natural cu efect de îngrijire și regenerare, care nu doar curăță, ci și protejează pielea chiar în timpul dușului",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/shower_gel_ro",
+    "sourceLastmod": "2026-02-06T14:39:15+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-A5F407D41C",
+    "fingerprint": "a5f407d41c9f61b39d9850b70fe482a2322711f54561337633cd42af69110865",
+    "scope": "product",
+    "contentId": "ro:halo-gel",
+    "field": "longDescription",
+    "claimText": "Ingredientul-cheie — Halo Complex — complex brevetat care susține protecția celulară și regenerarea naturală a pielii.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/shower_gel_ro",
+    "sourceLastmod": "2026-02-06T14:39:15+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-387245E4AE",
+    "fingerprint": "387245e4aec0e4c1b9e544b85b04d25852efa28f77b94629d7295681cd27376e",
+    "scope": "product",
+    "contentId": "ro:halo-shenseen-toothpaste",
+    "field": "longDescription",
+    "claimText": "SHENSEEN înseamnă curățenie, prospețime și grijă pentru sănătatea cavității bucale, zi de zi",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/shenseen_mousse_toothpaste_ro",
+    "sourceLastmod": "2026-02-06T14:39:14+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-7A8414ADD2",
+    "fingerprint": "7a8414add233fadaba1fa189c09fecf8e15ddfca415c27ab5611292b7cc3659e",
+    "scope": "product",
+    "contentId": "ro:hand-and-nail-treatment",
+    "field": "longDescription",
+    "claimText": "Crema are efect protector, nutritiv, antiinflamator și regenerator.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/hand_and_nail_cream_ro",
+    "sourceLastmod": "2026-02-06T14:38:39+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-02FF523ECF",
+    "fingerprint": "02ff523ecfed2f84cd535624664de53645438ac96afcaa55cdc6879601e0e27f",
+    "scope": "product",
+    "contentId": "ro:hand-and-nail-treatment",
+    "field": "longDescription",
+    "claimText": "Este recomandat în cazul infecțiilor fungice ale unghiilor și al diverselor afecțiuni ale pielii.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/hand_and_nail_cream_ro",
+    "sourceLastmod": "2026-02-06T14:38:39+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-61062913AC",
+    "fingerprint": "61062913ac642575c045ae40551675c986e9a5d03762a2ea12546d7449c0de23",
+    "scope": "product",
+    "contentId": "ro:imunseen",
+    "field": "longDescription",
+    "claimText": "Ajută la recuperarea mai rapidă după boală.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/imunseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:58+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-2981DA2671",
+    "fingerprint": "2981da26719f7578d2d246d489e65d352d18e6004b2769ed1552e3a40a1a5df3",
+    "scope": "product",
+    "contentId": "ro:imunseen",
+    "field": "longDescription",
+    "claimText": "Are efect antiinflamator și antioxidant.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro",
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/imunseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:58+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-46DAF996D8",
+    "fingerprint": "46daf996d869ed6e077462cfc07743c18ed40220c9faf7daa2a417fb15598480",
+    "scope": "product",
+    "contentId": "ro:imunseen",
+    "field": "longDescription",
+    "claimText": "Când imunitatea este amenințată, IMUNSEEN vine în ajutor — o formulă puternică brevetată pe bază de Halo Complex (utilizarea arhebacteriilor și algelor Dunaliella), minerale din Marea Moartă, vitamina C, zinc și ingredientul principal — soc negru",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/imunseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:58+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-1FB7ACA016",
+    "fingerprint": "1fb7aca016089b08ebdcc24539001826b5078abfa90192e5c5cb35ff1cc37476",
+    "scope": "product",
+    "contentId": "ro:imunseen",
+    "field": "longDescription",
+    "claimText": "Doar un singur curs de administrare a IMUNSEEN — și vei simți diferența: mai multă energie, imunitate puternică și stare de bine.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/imunseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:58+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-6DC754C2F5",
+    "fingerprint": "6dc754c2f50de634a16c4ecb165e83fcb8a0542a417e598dc9d53678ef319cce",
+    "scope": "product",
+    "contentId": "ro:imunseen",
+    "field": "longDescription",
+    "claimText": "Nona — gardianul personal al imunității tale în fiecare zi!",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/imunseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:58+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-422BBEEF87",
+    "fingerprint": "422bbeef878e599d55118cef29d745fec2ff15c0a7270e04dd2ddfaaa74fc91d",
+    "scope": "product",
+    "contentId": "ro:imunseen",
+    "field": "longDescription",
+    "claimText": "Nu aștepta până când organismul îți va cere ajutorul — începe să-ți întărești imunitatea chiar astăzi cu IMUNSEEN de la Dr.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/imunseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:58+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-80F75D9920",
+    "fingerprint": "80f75d99204f2572c1501d034ce2087f8c664df8694af12438b97ae0e8232f2a",
+    "scope": "product",
+    "contentId": "ro:imunseen",
+    "field": "longDescription",
+    "claimText": "Susține imunitatea în sezonul răcelilor și al virusurilor.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/imunseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:58+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-DBDC097DB1",
+    "fingerprint": "dbdc097db1a27c0c34ea1ed06018ff7fe31446b5f3813dfd2449683f3dc66337",
+    "scope": "product",
+    "contentId": "ro:imunseen",
+    "field": "shortDescription",
+    "claimText": "Nona — gardianul personal al imunității tale în fiecare zi!",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/imunseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:58+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-4D4977973A",
+    "fingerprint": "4d4977973ae380fa51107055fc7585590ca9126f3a4644447823ad74ea49fa06",
+    "scope": "product",
+    "contentId": "ro:lady-deodorant",
+    "field": "longDescription",
+    "claimText": "Nona, care menține sănătatea pielii și echilibrul pH-ului.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/deodorant_lady_ro",
+    "sourceLastmod": "2026-02-06T14:39:10+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-84239A3CCA",
+    "fingerprint": "84239a3cca478998799552af94da666c02b6979cf61a63e91c2193dc8cb148eb",
+    "scope": "product",
+    "contentId": "ro:lipstick-new",
+    "field": "longDescription",
+    "claimText": "Conține complexul brevetat Halo Complex cu minerale din Marea Moartă , uleiuri și vitamine care hrănesc și regenerează pielea delicată a buzelor.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/mineral_lipstick_ro",
+    "sourceLastmod": "2026-02-06T14:39:18+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-5B2C5DBB4B",
+    "fingerprint": "5b2c5dbb4b95669eba76dc7951aa164b7761650d164a784d0fae47f777842275",
+    "scope": "product",
+    "contentId": "ro:mouthwash",
+    "field": "longDescription",
+    "claimText": "Accelera vindecarea microfisurilor și iritațiilor din gură",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease-ro",
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/mouthwash_ro",
+    "sourceLastmod": "2026-02-06T14:39:08+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-418B2BEF0C",
+    "fingerprint": "418b2bef0cc3b13d5744d3e1f5d069675ca4399b7f86a9cbc3b9ed105215fcce",
+    "scope": "product",
+    "contentId": "ro:mouthwash",
+    "field": "longDescription",
+    "claimText": "Componenta principală – Halo Complex – complex brevetat al companiei, care asigură protecția și regenerarea celulară.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/mouthwash_ro",
+    "sourceLastmod": "2026-02-06T14:39:08+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-9D1F9CFBCB",
+    "fingerprint": "9d1f9cfbcb3c198fe47ac1548f9ad7f9c71650caedc996068a85f7a483b13938",
+    "scope": "product",
+    "contentId": "ro:mouthwash",
+    "field": "longDescription",
+    "claimText": "Inflamarea gingiilor (gingivită, parodontită)",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/mouthwash_ro",
+    "sourceLastmod": "2026-02-06T14:39:08+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-EAEA21709E",
+    "fingerprint": "eaea21709e1dd241f3ee58a9d5544ad0e3b73564a7f91b71eca1cbb448c3432c",
+    "scope": "product",
+    "contentId": "ro:mouthwash",
+    "field": "longDescription",
+    "claimText": "Întări gingiile și elimina inflamația",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/mouthwash_ro",
+    "sourceLastmod": "2026-02-06T14:39:08+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-D23B3324EA",
+    "fingerprint": "d23b3324ea115e29084affe0b07781b16f42801c19af7040a2a1c027441b9463",
+    "scope": "product",
+    "contentId": "ro:mouthwash",
+    "field": "longDescription",
+    "claimText": "Un produs natural cu puternice proprietăți antiinflamatorii și antiseptice",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/mouthwash_ro",
+    "sourceLastmod": "2026-02-06T14:39:08+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-AC2274F401",
+    "fingerprint": "ac2274f40147721907dd737c2574f4e4d22abae4496db5fedd39dcdbe21fd7db",
+    "scope": "product",
+    "contentId": "ro:night-cream",
+    "field": "longDescription",
+    "claimText": "În timp ce tu te odihnești, ingredientele active pe baza complexului brevetat cu arhebacterii și minerale din Marea Moartă refac, hrănesc și întineresc pielea.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/night_cream_ro",
+    "sourceLastmod": "2026-02-06T14:38:44+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-4103443D83",
+    "fingerprint": "4103443d83aa19f3173931dc1c11d9ab12d234a7e1076003ca0b1dbb60964899",
+    "scope": "product",
+    "contentId": "ro:okseen",
+    "field": "longDescription",
+    "claimText": "Este un mineral antioxidant , care neutralizează radicalii liberi și încetinește îmbătrânirea .",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/okseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:55+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-8298ABDEDC",
+    "fingerprint": "8298abdedc21ad9b9d63e756c3d6b9daf8b60e7e5329aae488e275539bf5999e",
+    "scope": "product",
+    "contentId": "ro:okseen",
+    "field": "longDescription",
+    "claimText": "Încearcă OKSEEN și protejează-ți sănătatea din interior!",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/okseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:55+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-FE60AD05A8",
+    "fingerprint": "fe60ad05a824a3b525e0946664320d9dcd37ad0c5ac8b732c35c848460095429",
+    "scope": "product",
+    "contentId": "ro:okseen",
+    "field": "longDescription",
+    "claimText": "Neutralizează radicalii liberi , încetinind îmbătrânirea",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/okseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:55+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-0A312BC28A",
+    "fingerprint": "0a312bc28a98420af09c4e51ff6131ea9a3b332d3998e612df2c1399082393f1",
+    "scope": "product",
+    "contentId": "ro:okseen",
+    "field": "longDescription",
+    "claimText": "Nona – complex natural antioxidant de la compania Dr.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/okseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:55+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-0DBF832009",
+    "fingerprint": "0dbf832009b39f730996771adef7dc18e55515a9046d461190a7c7b7e22b37ae",
+    "scope": "product",
+    "contentId": "ro:okseen",
+    "field": "longDescription",
+    "claimText": "Seleniul este un oligoelement vital , care participă la numeroase procese din organism, în special la cele legate de apărarea imunitară .",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/okseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:55+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-7C0CE641D3",
+    "fingerprint": "7c0ce641d3529f1567855a937be39edc28130bcbf3b5b1440b03c38c2acacd90",
+    "scope": "product",
+    "contentId": "ro:okseen",
+    "field": "longDescription",
+    "claimText": "Susține sănătatea sistemului cardiovascular și a glandei tiroide",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/okseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:55+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-98F53FB9CE",
+    "fingerprint": "98f53fb9ce8e5f425c73d968cdbd9fd8a5f932f983d863ff7379e30657c116fe",
+    "scope": "product",
+    "contentId": "ro:okseen",
+    "field": "longDescription",
+    "claimText": "Tocmai această combinație de antioxidanți face ca OKSEEN să fie nu numai benefic pentru sănătate , ci și universal în utilizare .",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/okseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:55+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-5C72C4405B",
+    "fingerprint": "5c72c4405ba3ce58fd0cc9bbfd51bd1172da5cc99bc2c2754a2763d44e6ca5a1",
+    "scope": "product",
+    "contentId": "ro:okseen",
+    "field": "shortDescription",
+    "claimText": "Nona – complex natural antioxidant de la compania Dr.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/okseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:55+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-73DDE09940",
+    "fingerprint": "73dde099408cb934340bdaef6f1b6d65b9b980c88c3eab36de789f09876fb466",
+    "scope": "product",
+    "contentId": "ro:pulmoseen",
+    "field": "longDescription",
+    "claimText": "— Afecțiuni ale căilor respiratorii",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/pulmoseen_ro",
+    "sourceLastmod": "2026-02-06T14:39:01+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-29704DC313",
+    "fingerprint": "29704dc3135a4bee97331ea459cda8d9a598c6b86d4415bcd6bd73f02b873763",
+    "scope": "product",
+    "contentId": "ro:pulmoseen",
+    "field": "longDescription",
+    "claimText": "— Răceli frecvente și imunitate scăzută",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/pulmoseen_ro",
+    "sourceLastmod": "2026-02-06T14:39:01+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-019EC01CA0",
+    "fingerprint": "019ec01ca099474b4605a3e699ae893da5cd8f375ebbf0a312ba030c686c56ff",
+    "scope": "product",
+    "contentId": "ro:pulmoseen",
+    "field": "longDescription",
+    "claimText": "Ai grijă de sănătatea plămânilor tăi împreună cu PULMOSEEN!",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/pulmoseen_ro",
+    "sourceLastmod": "2026-02-06T14:39:01+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-CBCD8C0FC8",
+    "fingerprint": "cbcd8c0fc82c51267cca41bfcd7c97d71f869da1528309a69c04d66c40b48c67",
+    "scope": "product",
+    "contentId": "ro:pulmoseen",
+    "field": "longDescription",
+    "claimText": "Nona — suport zilnic pentru sănătatea plămânilor și a sistemului imunitar.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/pulmoseen_ro",
+    "sourceLastmod": "2026-02-06T14:39:01+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-9B40DAD0CD",
+    "fingerprint": "9b40dad0cd02ab4d35d8c99565fa600734b0f54a262d33dca9b9cbcd60415280",
+    "scope": "product",
+    "contentId": "ro:pulmoseen",
+    "field": "longDescription",
+    "claimText": "Ușurează respirația și reduce inflamația",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/pulmoseen_ro",
+    "sourceLastmod": "2026-02-06T14:39:01+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-ECD9142500",
+    "fingerprint": "ecd9142500574af77ec7e25f47f1c0cf79c35a648a91364b4b256ee70393810b",
+    "scope": "product",
+    "contentId": "ro:pulmoseen",
+    "field": "shortDescription",
+    "claimText": "Nona — suport zilnic pentru sănătatea plămânilor și a sistemului imunitar.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/pulmoseen_ro",
+    "sourceLastmod": "2026-02-06T14:39:01+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-FA417E5319",
+    "fingerprint": "fa417e53196d83d6bccdd8392b7c53f7893fe6721b7229bc248c17be8dfcf309",
+    "scope": "product",
+    "contentId": "ro:ravseen",
+    "field": "longDescription",
+    "claimText": "Nona reprezintă acizi grași polinesaturați Omega 3 (pe baza unui brevet), pe care organismul nu îi poate produce singur, dar care sunt extrem de necesari, deoarece joacă un rol esențial în sănătatea inimii, creierului, pielii, sistemului imunitar și hormonal.",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/ravseen_ro",
+    "sourceLastmod": "2026-02-06T14:39:00+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-413D3A8EB2",
+    "fingerprint": "413d3a8eb2840f76173bd42cb95107ea72036b7ccdd79b0ac4b48cd7e36bede7",
+    "scope": "product",
+    "contentId": "ro:ravseen",
+    "field": "longDescription",
+    "claimText": "Reduce inflamațiile cronice din organism",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/ravseen_ro",
+    "sourceLastmod": "2026-02-06T14:39:00+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-81FDD6F1AC",
+    "fingerprint": "81fdd6f1acda48781f65f25dc582cc4a7bfee510ffa73fc93fe26b1c8367c948",
+    "scope": "product",
+    "contentId": "ro:ravseen",
+    "field": "longDescription",
+    "claimText": "Susține sănătatea inimii și a vaselor de sânge",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/ravseen_ro",
+    "sourceLastmod": "2026-02-06T14:39:00+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-27FFF17F9D",
+    "fingerprint": "27fff17f9d71c2433cebad6c299ee5a1ed4d9fece4a04cbf9e260b3c26f34bff",
+    "scope": "product",
+    "contentId": "ro:ravseen",
+    "field": "longDescription",
+    "claimText": "Susține sistemul imunitar și întărește funcțiile de apărare ale organismului",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/ravseen_ro",
+    "sourceLastmod": "2026-02-06T14:39:00+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-551E5571C8",
+    "fingerprint": "551e5571c844fb64497544e25d216cc4d13b686783afa74511f5f8c3b0ee2dd6",
+    "scope": "product",
+    "contentId": "ro:reumoseen",
+    "field": "longDescription",
+    "claimText": "Ameliorarea durerilor de articulații, spate și mușchi",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/reumoseen_ro",
     "sourceLastmod": "2026-02-06T14:39:02+00:00",
     "market": "MD",
     "status": "pending",
@@ -5566,12 +7629,654 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-9E818C4405",
-    "fingerprint": "9e818c4405b533fcecda7ecdb972fb03b5295cd28c799eda565307935b7cacee",
+    "id": "CLM-A57CBB196E",
+    "fingerprint": "a57cbb196e2db292ee4e12968afab72b5ff1063f4fe517154aaa5b860186b068",
+    "scope": "product",
+    "contentId": "ro:reumoseen",
+    "field": "longDescription",
+    "claimText": "Diminuarea durerilor articulare și musculare",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/reumoseen_ro",
+    "sourceLastmod": "2026-02-06T14:39:02+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-4ADE19AFEF",
+    "fingerprint": "4ade19afef77bd7db59dd4d4959b0d5081270595d963043c54a79a7809a846e0",
+    "scope": "product",
+    "contentId": "ro:reumoseen",
+    "field": "longDescription",
+    "claimText": "Reducerea inflamațiilor",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/reumoseen_ro",
+    "sourceLastmod": "2026-02-06T14:39:02+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-ECB40C9740",
+    "fingerprint": "ecb40c97405f4e8e3db69380b3b3c0aec7be70ced972115012b10d2575cc197a",
+    "scope": "product",
+    "contentId": "ro:reumoseen",
+    "field": "longDescription",
+    "claimText": "REUMOSEEN este un supliment puternic cu efect antiinflamator, cu o formulă unică ce conține extracte naturale și antioxidanți precum:",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/reumoseen_ro",
+    "sourceLastmod": "2026-02-06T14:39:02+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-6EBB259D45",
+    "fingerprint": "6ebb259d452fd1e4a2137d7e16d15df3a42012efa563159cacbf91372d6da5da",
+    "scope": "product",
+    "contentId": "ro:reumoseen",
+    "field": "longDescription",
+    "claimText": "Susținerea sănătății sistemului osteo-articular",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/reumoseen_ro",
+    "sourceLastmod": "2026-02-06T14:39:02+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-DBADD0D19D",
+    "fingerprint": "dbadd0d19df1f68d41e35dc6de7a5e268146a5ad729416ff4bda5e305f5527f1",
+    "scope": "product",
+    "contentId": "ro:salts-camomile",
+    "field": "longDescription",
+    "claimText": "Compoziție bogată cu efect terapeutic",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/bath_salts_with_chamomile_extract_ro",
+    "sourceLastmod": "2026-02-06T14:39:19+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-847FDDF6FF",
+    "fingerprint": "847fddf6ff45957a556e4dab643828238e03fd8e03e633620dd893bc10861cda",
+    "scope": "product",
+    "contentId": "ro:salts-camomile",
+    "field": "longDescription",
+    "claimText": "Nona — relaxare, regenerare și grijă pentru corp",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/bath_salts_with_chamomile_extract_ro",
+    "sourceLastmod": "2026-02-06T14:39:19+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-BA15553663",
+    "fingerprint": "ba155536630e63b8fb5b10ad082fea72bfcf98950b664da3f28c631f4096732c",
+    "scope": "product",
+    "contentId": "ro:salts-camomile",
+    "field": "longDescription",
+    "claimText": "Nona, care susține protecția celulară, stimulează regenerarea și ajută pielea să se refacă în mod natural.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/bath_salts_with_chamomile_extract_ro",
+    "sourceLastmod": "2026-02-06T14:39:19+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-3F76B537D1",
+    "fingerprint": "3f76b537d1d18cb136213743aaac34180ebfafc13a9088fe1657f56eef8edaee",
+    "scope": "product",
+    "contentId": "ro:salts-camomile",
+    "field": "longDescription",
+    "claimText": "Nona, vei simți cum baia se transformă într-un adevărat ritual SPA de regenerare",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/bath_salts_with_chamomile_extract_ro",
+    "sourceLastmod": "2026-02-06T14:39:19+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-FFC107EBFC",
+    "fingerprint": "ffc107ebfcebc6358c1d5c43743371835bd5e9fbef346670cdc344fa631fa3b3",
+    "scope": "product",
+    "contentId": "ro:salts-camomile",
+    "field": "shortDescription",
+    "claimText": "Nona — relaxare, regenerare și grijă pentru corp",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/bath_salts_with_chamomile_extract_ro",
+    "sourceLastmod": "2026-02-06T14:39:19+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-2D11CFA35B",
+    "fingerprint": "2d11cfa35bdb50b62e83ef7b133385f1aa18a30560590fec937d5346f34a55ca",
+    "scope": "product",
+    "contentId": "ro:salts-lavander",
+    "field": "longDescription",
+    "claimText": "Compoziție bogată cu efect terapeutic",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/bath_salts_with_lavander_extract_ro",
+    "sourceLastmod": "2026-02-06T14:39:22+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-193B8890FB",
+    "fingerprint": "193b8890fb20ecdcfe8fdddd0f790c85f7f1ececf8c418af1b1485da542f7356",
+    "scope": "product",
+    "contentId": "ro:salts-lavander",
+    "field": "longDescription",
+    "claimText": "Nona, care susține protecția celulară, intensifică regenerarea și ajută pielea să se refacă în mod natural.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/bath_salts_with_lavander_extract_ro",
+    "sourceLastmod": "2026-02-06T14:39:22+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-836FEFC21A",
+    "fingerprint": "836fefc21af95d58586b9add6dad5a60b4995b90470f5bb69738de1c06d31826",
+    "scope": "product",
+    "contentId": "ro:salts-rosemary",
+    "field": "longDescription",
+    "claimText": "Compoziție puternică cu efect terapeutic",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/bath_salts_with_rosemary_extract_ro",
+    "sourceLastmod": "2026-02-06T14:39:21+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-1124EB0938",
+    "fingerprint": "1124eb0938d349deff9c60eb71e7641c85a6eba8d8c566ecb68a231c1b4c74ff",
+    "scope": "product",
+    "contentId": "ro:salts-rosemary",
+    "field": "longDescription",
+    "claimText": "Nevoia de prospețime și vitalitate",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/bath_salts_with_rosemary_extract_ro",
+    "sourceLastmod": "2026-02-06T14:39:21+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-EA40AA31B7",
+    "fingerprint": "ea40aa31b7d60180e6214c49f5e5b8529df876d2a2dc29a224c9f9a3ef668d5b",
+    "scope": "product",
+    "contentId": "ro:salts-rosemary",
+    "field": "longDescription",
+    "claimText": "Reducerea oboselii musculare și a tensiunii",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/bath_salts_with_rosemary_extract_ro",
+    "sourceLastmod": "2026-02-06T14:39:21+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-6C655B3811",
+    "fingerprint": "6c655b381149aedb21383fba3d036233ec63680e4fa9c30bd683a2cb87b0c8c2",
+    "scope": "product",
+    "contentId": "ro:salts-ylangylang",
+    "field": "longDescription",
+    "claimText": "Compoziție bogată cu efect terapeutic și aromaterapeutic",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/bath_salts_with_ylang_ylang_extract_ro",
+    "sourceLastmod": "2026-02-06T14:39:20+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-962CEB585D",
+    "fingerprint": "962ceb585df741c90418ed1d29be845e22a1a9fa9bee292700e829c24ca7a5fe",
+    "scope": "product",
+    "contentId": "ro:salts-ylangylang",
+    "field": "longDescription",
+    "claimText": "Nona, care susține protecția celulară, activează regenerarea și ajută pielea să se refacă în mod natural.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/bath_salts_with_ylang_ylang_extract_ro",
+    "sourceLastmod": "2026-02-06T14:39:20+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-DB4A545716",
+    "fingerprint": "db4a5457167aeda479975cf9568db9a52cd90c641f3476dc578c9c04cfcf2024",
+    "scope": "product",
+    "contentId": "ro:shower-gel-lord",
+    "field": "longDescription",
+    "claimText": "Complexul brevetat Halo Complex — contribuie la sănătatea celulelor pielii",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/shower_gel_lord_ro",
+    "sourceLastmod": "2026-02-06T14:39:09+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-D0D1A2A4CE",
+    "fingerprint": "d0d1a2a4ce1d53b9f1ac2b8cb30a18b3b7ad73d990a6381cd2442303df48141b",
+    "scope": "product",
+    "contentId": "ro:shower-gel-lord",
+    "field": "longDescription",
+    "claimText": "Noroi din Marea Moartă — cunoscut pentru proprietățile sale regenerative puternice",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/shower_gel_lord_ro",
+    "sourceLastmod": "2026-02-06T14:39:09+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-F69347C651",
+    "fingerprint": "f69347c651291e5569e5a70024132b7d988898b0ededeed291ff6e3c7cfd8918",
+    "scope": "product",
+    "contentId": "ro:shp-day-time-face-cream-lc",
+    "field": "longDescription",
+    "claimText": "SPF 30 protejează eficient pielea împotriva razelor UVA și UVB, prevenind fotoîmbătrânirea",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease-ro",
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/shp_day_time_face_cream_ro",
+    "sourceLastmod": "2026-02-06T14:38:47+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-B1FA42E261",
+    "fingerprint": "b1fa42e2617efde47015a8480f7f27d48eaff2c51bbfa54239a85ef45722f96d",
+    "scope": "product",
+    "contentId": "ro:shp-day-time-face-cream-lc",
+    "field": "longDescription",
+    "claimText": "Stimulează regenerarea celulară datorită sinergiei dintre arhebacterii și alga Dunaliella, bogată în β-caroten — un antioxidant natural puternic",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro",
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/shp_day_time_face_cream_ro",
+    "sourceLastmod": "2026-02-06T14:38:47+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-BEA869F643",
+    "fingerprint": "bea869f643411d6c39634ded12335a854c808b05421ee3b0d5f307b395c5d3c0",
+    "scope": "product",
+    "contentId": "ro:solaris-body-lotion",
+    "field": "longDescription",
+    "claimText": "Acționează la nivel celular, datorită complexului brevetat – Halo Complex",
+    "claimType": "cosmetic",
+    "detectionReasons": [
+      "cosmetic-efficacy-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/solaris_ro",
+    "sourceLastmod": "2026-02-06T14:38:38+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-37AFFF59A3",
+    "fingerprint": "37afff59a37da4c88e86ad314749b865a8dfc539656e94ba73447632925195d9",
+    "scope": "product",
+    "contentId": "ro:solaris-body-lotion",
+    "field": "longDescription",
+    "claimText": "Ameliorează durerile musculare și articulare",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/solaris_ro",
+    "sourceLastmod": "2026-02-06T14:38:38+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-A0503AEA04",
+    "fingerprint": "a0503aea04f642281357201024075e06204c65c74936b009073124deb00c836b",
+    "scope": "product",
+    "contentId": "ro:solaris-body-lotion",
+    "field": "longDescription",
+    "claimText": "Are efect antiinflamator și tonifiant",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/solaris_ro",
+    "sourceLastmod": "2026-02-06T14:38:38+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-3ACDF446CF",
+    "fingerprint": "3acdf446cf81a663628adcbcf7f79a6949d5e17b6ad67d1ec2aea9df3691f451",
+    "scope": "product",
+    "contentId": "ro:solaris-body-lotion",
+    "field": "longDescription",
+    "claimText": "Cremă cosmetică cu efect terapeutic fantastic.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/solaris_ro",
+    "sourceLastmod": "2026-02-06T14:38:38+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-62CB6F3D06",
+    "fingerprint": "62cb6f3d06e015991c1ebd191b14fc41ea7a3cbb8a3334b1ff8858fc1f371867",
+    "scope": "product",
+    "contentId": "ro:solaris-body-lotion",
+    "field": "longDescription",
+    "claimText": "Hidratează, hrănește și întinerește pielea",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/solaris_ro",
+    "sourceLastmod": "2026-02-06T14:38:38+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-08494BEAA9",
+    "fingerprint": "08494beaa9fa9c831912bcd79c4399277fc345b19e1cedc2df9175a336e21d11",
+    "scope": "product",
+    "contentId": "ro:solaris-body-lotion",
+    "field": "longDescription",
+    "claimText": "Nona – cremă regenerantă pentru corp.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/solaris_ro",
+    "sourceLastmod": "2026-02-06T14:38:38+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-BA20069A55",
+    "fingerprint": "ba20069a552444268c5345eadb862ace0da92848fc83af1ad25a50d93d23e284",
+    "scope": "product",
+    "contentId": "ro:solaris-body-lotion",
+    "field": "longDescription",
+    "claimText": "Pentru vindecarea rănilor și resorbția cicatricilor cheloide",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/solaris_ro",
+    "sourceLastmod": "2026-02-06T14:38:38+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-AB9F77BB2F",
+    "fingerprint": "ab9f77bb2ffaf045c693f9ee353b49515ac386f2db6d879fcdea58a06dc41d59",
+    "scope": "product",
+    "contentId": "ro:solaris-body-lotion",
+    "field": "shortDescription",
+    "claimText": "Cremă cosmetică cu efect terapeutic fantastic.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/solaris_ro",
+    "sourceLastmod": "2026-02-06T14:38:38+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-D8321D32A5",
+    "fingerprint": "d8321d32a5ba7492807ffe4c7da9a1a2c14a870aa7d545a3aba267731f4c305c",
+    "scope": "product",
+    "contentId": "ro:solaris-body-lotion",
+    "field": "shortDescription",
+    "claimText": "Nona – cremă regenerantă pentru corp.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/solaris_ro",
+    "sourceLastmod": "2026-02-06T14:38:38+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-F49A3C2FFC",
+    "fingerprint": "f49a3c2ffcb87b2c28e01729d26eb7cc605c57745607de520077594dbc245c04",
+    "scope": "product",
+    "contentId": "ro:soupseen",
+    "field": "longDescription",
+    "claimText": "Această formulă ajută organismul să se refacă, să întărească sistemul imunitar și să mențină vitalitatea",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/soupseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:53+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-949F3D36DC",
+    "fingerprint": "949f3d36dc729c05bf25f243a46e2153c0de313e29332faf69be5ea0bb079097",
+    "scope": "product",
+    "contentId": "ro:soupseen",
+    "field": "longDescription",
+    "claimText": "Oferă-ți nu doar o masă, ci un tratament inteligent pentru organism, deoarece Soupseen este mai mult decât o simplă supă.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/soupseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:53+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-AEBB8C3008",
+    "fingerprint": "aebb8c300857e8a0ca50c3ba27d6cf2b55e72183b7b8200cd7e11ae0cf59df26",
+    "scope": "product",
+    "contentId": "ro:soupseen",
+    "field": "longDescription",
+    "claimText": "Susține sistemul imunitar",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function-ro"
+    ],
+    "sourceUrl": "https://www.drnona.md/soupseen_ro",
+    "sourceLastmod": "2026-02-06T14:38:53+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-04873A1C30",
+    "fingerprint": "04873a1c304e0adddd44459af39522f386f5c69c0efaa6418fa7d57478f45d22",
     "scope": "product",
     "contentId": "salts-camomile",
     "field": "longDescription",
-    "claimText": "Nona — расслабление, восстановление и забота о теле Натуральная соль для ванн с экстрактом ромашки и минералами Мёртвого моря, созданная для глубокого расслабления, восстановления кожи и снятия напряжения после насыщенного дня Один из самых любимых продуктов для релакса Dr.",
+    "claimText": "Натуральная соль для ванн с экстрактом ромашки и минералами Мёртвого моря, созданная для глубокого расслабления, восстановления кожи и снятия напряжения после насыщенного дня",
     "claimType": "cosmetic",
     "detectionReasons": [
       "cosmetic-efficacy"
@@ -5606,32 +8311,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-E1915B74F5",
-    "fingerprint": "e1915b74f50a82c4b63f5a8ea6cc03974a509d9946888a492dfa1d369416f7e2",
-    "scope": "product",
-    "contentId": "salts-camomile",
-    "field": "shortDescription",
-    "claimText": "Nona — расслабление, восстановление и забота о теле Натуральная соль для ванн с экстрактом ромашки и минералами Мёртвого моря, созданная для глубокого расслабления, восстановления кожи и снятия напряжения после насыщенного дня Один из самых любимых…",
-    "claimType": "cosmetic",
-    "detectionReasons": [
-      "cosmetic-efficacy"
-    ],
-    "sourceUrl": "https://www.drnona.md/bath_salts_with_chamomile_extract",
-    "sourceLastmod": "2026-02-06T14:39:19+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-A02177CC0B",
-    "fingerprint": "a02177cc0bc8c8dae32f947387271799d58d33a95e82fcf710a2a330985d4329",
+    "id": "CLM-7CCD6D7DF6",
+    "fingerprint": "7ccd6d7df64320135dc8b495ed72c59ef640846469864520f2ae1a936d0d7178",
     "scope": "product",
     "contentId": "salts-lavander",
     "field": "longDescription",
-    "claimText": "Nona — глубокое расслабление, спокойствие и забота о теле Натуральная соль для ванн с экстрактом лаванды и минералами Мёртвого моря, созданная для мягкого расслабления, восстановления кожи и гармонизации нервной системы после насыщенного дня Один из самых успокаивающих и любимых продуктов для релакса Dr.",
+    "claimText": "Натуральная соль для ванн с экстрактом лаванды и минералами Мёртвого моря, созданная для мягкого расслабления, восстановления кожи и гармонизации нервной системы после насыщенного дня",
     "claimType": "cosmetic",
     "detectionReasons": [
       "cosmetic-efficacy"
@@ -5666,32 +8351,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-9D7901AD5F",
-    "fingerprint": "9d7901ad5facfc835f4ee3a4e1d3ff8713e41eb7f4defc78051356a96cc27226",
-    "scope": "product",
-    "contentId": "salts-lavander",
-    "field": "shortDescription",
-    "claimText": "Nona — глубокое расслабление, спокойствие и забота о теле Натуральная соль для ванн с экстрактом лаванды и минералами Мёртвого моря, созданная для мягкого расслабления, восстановления кожи и гармонизации нервной системы после насыщенного дня Один из…",
-    "claimType": "cosmetic",
-    "detectionReasons": [
-      "cosmetic-efficacy"
-    ],
-    "sourceUrl": "https://www.drnona.md/bath_salts_with_lavender_extract",
-    "sourceLastmod": "2026-02-06T14:39:22+00:00",
-    "market": "MD",
-    "status": "pending",
-    "reviewer": null,
-    "reviewedAt": null,
-    "approvalReference": null,
-    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
-  },
-  {
-    "id": "CLM-C577981144",
-    "fingerprint": "c577981144b6ed77ef4a9c5e6faf0aa95e8f8effdc485ab73fe97d2cd4393dee",
+    "id": "CLM-9908C24E17",
+    "fingerprint": "9908c24e171b758c289764bd4f48ee89666d90f6a34cd0d16f00258a65da033c",
     "scope": "product",
     "contentId": "salts-rosemary",
     "field": "longDescription",
-    "claimText": "Nona помогают: Снять мышечную усталость и напряжение Освежить тело и разум, повысить тонус Облегчить дыхание и создать ощущение чистоты Очистить и смягчить кожу Улучшить общее самочувствие и уровень энергии Идеальны при: Усталости и снижении энергии Восстановлении после тренировок Сезонных нагрузках на организм Желании глубоко очиститься и перезагрузиться Потребности в свежести и бодрости Подходят для регулярного применения Оставляют кожу чистой, мягкой и свежей, а тело — наполненным силой и энергией природы BATH SALTS with Rosemary, Eucalyptus & Thyme Extract Dr.",
+    "claimText": "Снять мышечную усталость и напряжение",
     "claimType": "therapeutic",
     "detectionReasons": [
       "pain-healing-or-relief"
@@ -5746,12 +8411,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-6DF4E305FF",
-    "fingerprint": "6df4e305ff6a27e0a536d6c2adcd42e34c27e7081c6eefcdd043495740da9fcf",
+    "id": "CLM-48ABB264FA",
+    "fingerprint": "48abb264faef5dcaf09d0614788264bdd8216b0863099129eaffc7bdd703f3d8",
     "scope": "product",
     "contentId": "shower-gel-lord",
     "field": "longDescription",
-    "claimText": "В составе: Грязь Мёртвого моря — известна своими мощными восстановительными свойствами Минералы Мёртвого моря — помогают поддерживать водный баланс кожи Эфирные масла и растительные экстракты — питают и смягчают Запатентованный комплекс Halo Complex — способствует оздоровлению клеток кожи Преимущества Shower Gel LORD: Глубоко очищает, не пересушивая Поддерживает естественный уровень увлажнённости кожи Освежает и тонизирует — идеально для утра и после тренировки Подходит для всех типов кожи, включая чувствительную Оставляет приятный лёгкий аромат свежести Особенно хорош:.",
+    "claimText": "Запатентованный комплекс Halo Complex — способствует оздоровлению клеток кожи",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -5766,12 +8431,12 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-ADB213783E",
-    "fingerprint": "adb213783ece4cf121d5d03493315d521e78a9d6b1107e4e17625517b3fda615",
+    "id": "CLM-7FFF9722A7",
+    "fingerprint": "7fff9722a7f6129c4d9ef59652d347dda7cdf6b9f8c5eb73e824e02a948970d3",
     "scope": "product",
     "contentId": "shp-day-time-face-cream-lc",
     "field": "longDescription",
-    "claimText": "Nona Инновационный дневной крем для лица с SPF 30, который обеспечивает коже увлажнение, защиту и уход в течение всего дня Идеальное сочетание научных разработок и силы природы Лёгкая текстура быстро впитывается, не оставляет липкости и подходит для ежедневного использования — кожа выглядит свежей, ухоженной и сияющей Активное действие крема: Запускает обновление клеток благодаря синергии Архибактерии и водоросли Дуналиелла, богатой β-каротином — мощным природным антиоксидантом SPF 30 надёжно защищает кожу от UVA и UVB-лучей, предотвращая фотостарение Интенсивно увлажняет и помогает сохранить упругость кожи Поддерживает естественный баланс кожи и защищает от воздействия окружающей среды Результат при регулярном использовании: Защищённая кожа без пигментации Увлажнённый и ровный тон лица Повышенная упругость и эластичность Свежий, здоровый и ухоженный вид Отличная база под макияж SHP DAY TIME FACE CREAM SPF 30 — ежедневная защита и забота о коже, которой можно доверять Сохрани молодость и сияние своей кожи каждый день",
+    "claimText": "Запускает обновление клеток благодаря синергии Архибактерии и водоросли Дуналиелла, богатой β-каротином — мощным природным антиоксидантом",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -5786,12 +8451,52 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-A96290220E",
-    "fingerprint": "a96290220ef4b997e181377a017baadbb1b4be38ccae9234ac29c9a343b7d474",
+    "id": "CLM-F471AEE643",
+    "fingerprint": "f471aee643e5c15a80cfa3853ce41fff50da1fcffc1ddf8248e028d4f6adef80",
+    "scope": "product",
+    "contentId": "shp-day-time-face-cream-lc",
+    "field": "longDescription",
+    "claimText": "Свежий, здоровый и ухоженный вид",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://www.drnona.md/shp_day_time_face_cream",
+    "sourceLastmod": "2026-02-06T14:38:47+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-053D31D084",
+    "fingerprint": "053d31d08464ab9c4df2cae62ceaef58e93d95bfe8df66554f3e2cc8a533e33b",
+    "scope": "product",
+    "contentId": "shp-day-time-face-cream-lc",
+    "field": "longDescription",
+    "claimText": "SPF 30 надёжно защищает кожу от UVA и UVB-лучей, предотвращая фотостарение",
+    "claimType": "health",
+    "detectionReasons": [
+      "health-or-body-function"
+    ],
+    "sourceUrl": "https://www.drnona.md/shp_day_time_face_cream",
+    "sourceLastmod": "2026-02-06T14:38:47+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-716A704386",
+    "fingerprint": "716a7043862eeb83a3dbc969b9c73d34680b018a9afae8458e773635474e5eb5",
     "scope": "product",
     "contentId": "solaris-body-lotion",
     "field": "longDescription",
-    "claimText": "Благодаря своей уникальной формуле, крем SOLARIS: Обладает противовоспалительным и общеукрепляющим действием Увлажняет, питает и омолаживает кожу Используется для общего массажа Для заживления ран и рассасывания келоидных рубцов Облегчает боли в мышцах и суставах Идеален при: Сухости и трещинах Ожогах и раздражениях Пигментации и растяжках Подходит для всей семьи Попробовав крем SOLARIS однажды, вы непременно станете его поклонником на всю жизнь!!",
+    "claimText": "Для заживления ран и рассасывания келоидных рубцов",
     "claimType": "therapeutic",
     "detectionReasons": [
       "pain-healing-or-relief"
@@ -5806,12 +8511,132 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-0D0AC0E84A",
-    "fingerprint": "0d0ac0e84ae49060798e55fb175239d2a3895d97909cbf7f4165e4716d28c0e1",
+    "id": "CLM-8BC3B3245C",
+    "fingerprint": "8bc3b3245cc6b5150242c8445231959437b35501f38137ac0ae7416c8c5eb9b4",
+    "scope": "product",
+    "contentId": "solaris-body-lotion",
+    "field": "longDescription",
+    "claimText": "Косметический крем с фантастическим лечебным эффектом.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://www.drnona.md/solaris",
+    "sourceLastmod": "2026-02-06T14:38:38+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-3E91705234",
+    "fingerprint": "3e91705234215e60815e2bf419677c4e7accc99321304ff29ee58d0fa337d2b6",
+    "scope": "product",
+    "contentId": "solaris-body-lotion",
+    "field": "longDescription",
+    "claimText": "Облегчает боли в мышцах и суставах",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://www.drnona.md/solaris",
+    "sourceLastmod": "2026-02-06T14:38:38+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-077BC89F6F",
+    "fingerprint": "077bc89f6fcebf02303b97ec96b1d282ee038c3e9b4d892f18d1c135f08354a1",
+    "scope": "product",
+    "contentId": "solaris-body-lotion",
+    "field": "longDescription",
+    "claimText": "Сухости и трещинах",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://www.drnona.md/solaris",
+    "sourceLastmod": "2026-02-06T14:38:38+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-FC93E1A6E3",
+    "fingerprint": "fc93e1a6e3e636df10ce4d73e4d357e879352dd0d1a7b631300a5d471525b009",
+    "scope": "product",
+    "contentId": "solaris-body-lotion",
+    "field": "longDescription",
+    "claimText": "Nona – регенерирующий крем для тела.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://www.drnona.md/solaris",
+    "sourceLastmod": "2026-02-06T14:38:38+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-7A89F4BCA9",
+    "fingerprint": "7a89f4bca91f292d8d161e4cabc440d03f3e8a996c09de749d043177dd17d6d0",
+    "scope": "product",
+    "contentId": "solaris-body-lotion",
+    "field": "shortDescription",
+    "claimText": "Косметический крем с фантастическим лечебным эффектом.",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://www.drnona.md/solaris",
+    "sourceLastmod": "2026-02-06T14:38:38+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-6390DB3422",
+    "fingerprint": "6390db3422aec59551775177fa64fc9d974bd876da02c2c775d2802896b55962",
+    "scope": "product",
+    "contentId": "solaris-body-lotion",
+    "field": "shortDescription",
+    "claimText": "Nona – регенерирующий крем для тела.",
+    "claimType": "therapeutic",
+    "detectionReasons": [
+      "pain-healing-or-relief"
+    ],
+    "sourceUrl": "https://www.drnona.md/solaris",
+    "sourceLastmod": "2026-02-06T14:38:38+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-A59D472FD3",
+    "fingerprint": "a59d472fd398ca1338c6ca2afeced16835c19e5f45f2cb9f5cd9889c7a5f1faa",
     "scope": "product",
     "contentId": "soupseen",
     "field": "longDescription",
-    "claimText": "Аминокислоты и микроэлементы Полезные свойства Soupseen: Поддерживает иммунную систему Помогает восстановиться после физической и умственной нагрузки Улучшает общее самочувствие и уровень энергии Подходит в период диет и контроля веса Лёгок для пищеварения — идеально при усталости и снижении аппетита Поддерживает организм в период стресса и ослабленного состояния Вкус: Нежный, мягкий, сбалансированный вкус — ощущение тепла, уюта и заботы с первой ложки Идеален как лёгкий обед или ужин.",
+    "claimText": "Поддерживает иммунную систему",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
@@ -5826,18 +8651,38 @@
     "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
   },
   {
-    "id": "CLM-061AEE5CA8",
-    "fingerprint": "061aee5ca8ef46110af7105d7e5659346401ae63f70e1e4ebcaca4357a1f3f50",
+    "id": "CLM-E9308EA1AE",
+    "fingerprint": "e9308ea1ae3718bc4c7d24e97f7bf9e67a7c626954ef119496bb2784c266d0e0",
     "scope": "product",
     "contentId": "soupseen",
     "field": "longDescription",
-    "claimText": "Nona и силы минералов Мёртвого моря В составе — инновационный, запатентованный Halo Complex, обогащённый минералами Мёртвого моря и натуральными компонентами Эта формула помогает организму восстанавливаться, укреплять иммунитет и поддерживать жизненный тонус Активный состав:.",
+    "claimText": "Эта формула помогает организму восстанавливаться, укреплять иммунитет и поддерживать жизненный тонус",
     "claimType": "health",
     "detectionReasons": [
       "health-or-body-function"
     ],
     "sourceUrl": "https://www.drnona.md/soupseen",
     "sourceLastmod": "2026-02-06T14:38:53+00:00",
+    "market": "MD",
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null,
+    "approvalReference": null,
+    "notes": "Auto-detected candidate. Legal and regulatory validity for Moldova is not verified."
+  },
+  {
+    "id": "CLM-13A8136972",
+    "fingerprint": "13a81369722224951a3aaef5bb1bcde2ccfc3684ce9024bce4f5861f3fe45726",
+    "scope": "product",
+    "contentId": "yamseen",
+    "field": "longDescription",
+    "claimText": "В составе только сила лечебных трав, минералы Мёртвого моря и Halo Complex ( патент компании на использование АРХЕБАКТЕРИИ и водоросли ДУНАЛИЕЛЛА)",
+    "claimType": "medical",
+    "detectionReasons": [
+      "diagnosis-treatment-or-disease"
+    ],
+    "sourceUrl": "https://www.drnona.md/yamseen",
+    "sourceLastmod": "2026-02-06T14:39:03+00:00",
     "market": "MD",
     "status": "pending",
     "reviewer": null,

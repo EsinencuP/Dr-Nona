@@ -1,10 +1,16 @@
+import { createHash, createHmac } from "node:crypto";
 import { describe, expect, test, vi } from "vitest";
 import { createApplicationsProxy } from "../../api/applications";
 
 const applicationBody = {
   locale: "ru-MD",
-  type: "consultation",
+  type: "order",
   firstName: "Ana",
+  lastName: "Popescu",
+  phone: "069123456",
+  city: "Кишинёв",
+  consentAccepted: true,
+  productSlugs: ["lord-deodorant"],
 };
 const proxySecret = "test-shared-secret-at-least-32-bytes";
 
@@ -78,12 +84,13 @@ describe("POST /api/applications proxy", () => {
     expect(new Headers(init?.headers).get("x-dr-nona-client-key")).toBe(
       "tF6F8G4h8B5npHadMGeGvVvVoCOVu5u4JLz-UAIars8"
     );
-    expect(new Headers(init?.headers).get("x-dr-nona-proxy-signature")).toBe(
-      "0v55Hs8WlyNFhC7uOZTXMG_3DE3jyLnK_5YWzAwNG_w"
-    );
-    expect(JSON.parse(new TextDecoder().decode(init?.body as ArrayBuffer))).toEqual(
-      applicationBody
-    );
+    const forwardedBody = init?.body as ArrayBuffer;
+    const digest = createHash("sha256").update(Buffer.from(forwardedBody)).digest("base64url");
+    const payload = `1:1800000000:tF6F8G4h8B5npHadMGeGvVvVoCOVu5u4JLz-UAIars8:${digest}`;
+    expect(new Headers(init?.headers).get("x-dr-nona-proxy-signature")).toBe(createHmac("sha256", proxySecret).update(payload).digest("base64url"));
+    expect(JSON.parse(new TextDecoder().decode(forwardedBody))).toMatchObject({ ...applicationBody,
+      items: [{ slug: "lord-deodorant", quantity: 1, officialName: "Deodorant ( LORD )", sku: "324001", url: "https://catalog.example/ru/product/lord-deodorant" }],
+    });
   });
 
   test("returns a controlled error when the CRM endpoint is unavailable", async () => {
@@ -141,4 +148,12 @@ describe("POST /api/applications proxy", () => {
     })(request());
     expect(response.status).toBe(503);
   });
+});
+
+ test.each(["consultation", "masterclass"])("rejects retired %s requests without forwarding", async type => {
+  const upstream = vi.fn();
+  const handler = createApplicationsProxy({ endpoint: () => "https://crm.example/api/applications", proxySecret: () => proxySecret, fetch: upstream });
+  const response = await handler(request({ ...applicationBody, type }));
+  expect(response.status).toBe(400);
+  expect(upstream).not.toHaveBeenCalled();
 });

@@ -19,11 +19,11 @@ export function resolveSelectionProducts(
     .filter((product): product is Product => Boolean(product));
 }
 
-type ConsultationLocale = "ru" | "ro";
+type OrderLocale = "ru" | "ro";
 
 export function productPublicUrl(
   product: Product,
-  locale: ConsultationLocale = "ru"
+  locale: OrderLocale = "ru"
 ) {
   const prefix = locale === "ro" ? "/ro" : "";
   return new URL(
@@ -32,16 +32,16 @@ export function productPublicUrl(
   ).href;
 }
 
-export function buildConsultationText(
+export function buildOrderText(
   productsToSend: Product[],
-  locale: ConsultationLocale = "ru"
+  locale: OrderLocale = "ru"
 ) {
   const copy = locale === "ro"
     ? {
         greeting: "Bună ziua!",
         withProducts:
-          "Doresc o consultație despre produsele Dr. Nona selectate:",
-        withoutProducts: "Doresc o consultație despre produsele Dr. Nona.",
+          "Doresc să comand următoarele produse Dr. Nona:",
+        withoutProducts: "Doresc să plasez o comandă Dr. Nona.",
         sku: "Cod produs",
         missingSku: "nu este indicat",
         link: "Link",
@@ -50,8 +50,8 @@ export function buildConsultationText(
     : {
         greeting: "Здравствуйте!",
         withProducts:
-          "Хочу получить консультацию по выбранным продуктам Dr. Nona:",
-        withoutProducts: "Хочу получить консультацию по продукции Dr. Nona.",
+          "Хочу заказать выбранные товары Dr. Nona:",
+        withoutProducts: "Хочу оформить заказ Dr. Nona.",
         sku: "Артикул",
         missingSku: "не указан",
         link: "Ссылка",
@@ -72,27 +72,27 @@ export function buildConsultationText(
   ].join("\r\n");
 }
 
-export function buildConsultationEmail(
+export function buildOrderEmail(
   productsToSend: Product[],
-  locale: ConsultationLocale = "ru"
+  locale: OrderLocale = "ru"
 ) {
   const subject = locale === "ro"
     ? productsToSend.length
-      ? `Consultație pentru selecția Dr. Nona — ${productsToSend.length} produse`
-      : "Consultație Dr. Nona Moldova"
+      ? `Comandă Dr. Nona — ${productsToSend.length} produse`
+      : "Comandă Dr. Nona Moldova"
     : productsToSend.length
-      ? `Консультация по подборке Dr. Nona — ${productsToSend.length} поз.`
-      : "Консультация Dr. Nona Moldova";
-  const body = buildConsultationText(productsToSend, locale);
+      ? `Заказ Dr. Nona — ${productsToSend.length} поз.`
+      : "Заказ Dr. Nona Moldova";
+  const body = buildOrderText(productsToSend, locale);
 
   return `mailto:${officialContactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
-export async function copyConsultationText(
+export async function copyOrderText(
   productsToSend: Product[],
-  locale: ConsultationLocale = "ru"
+  locale: OrderLocale = "ru"
 ) {
-  const text = buildConsultationText(productsToSend, locale);
+  const text = buildOrderText(productsToSend, locale);
 
   if (navigator.clipboard?.writeText) {
     try {
@@ -115,7 +115,7 @@ export async function copyConsultationText(
   return copied;
 }
 
-export function buildConsultationPath(productsToSend: Product[]) {
+export function buildOrderPath(productsToSend: Product[]) {
   const params = new URLSearchParams({
     products: productsToSend.map((product) => product.slug).join(","),
   });

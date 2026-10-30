@@ -3,16 +3,10 @@
   "contact": {
     "kind": "official-branch-listing",
     "country": "Молдова",
-    "city": "Кишинёв",
-    "address": "ул. Мирон Костин 7, каб. 511",
     "phones": [
       {
         "label": "+373 69 281 916",
         "href": "tel:+37369281916"
-      },
-      {
-        "label": "+373 69 049 793",
-        "href": "tel:+37369049793"
       }
     ],
     "sourceUrl": "https://drnona.com/en/warehouses",

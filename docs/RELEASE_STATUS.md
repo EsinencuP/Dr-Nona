@@ -2,7 +2,7 @@
 
 No. Technical quality gates pass locally, but production approval remains blocked by the items below.
 
-Last verified: 2026-09-17 against base commit `3107742bd65b` and the current cleanup worktree.
+Last verified: 2026-10-30 against base commit `3107742bd65b` and the current cleanup worktree.
 
 This file is generated from `docs/release-status.json`. Run `npm run release:status:generate` after changing the machine-readable status.
 
@@ -11,8 +11,8 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 | Field | Value |
 |---|---|
 | Verdict | `release-blocked` |
-| Label | Technical QA passes; production approval is blocked |
-| Branch | `main` |
+| Label | Verbatim Moldova originals restored; editorial and legal review remain separate; production blocked |
+| Branch | `content/product-descriptions` |
 | Base commit | `3107742bd65b` |
 | Environment | Windows local QA with Node 22.23.1, npm 10.9.8 and Chromium desktop/mobile; GitHub Actions and Vercel production smoke |
 
@@ -24,9 +24,9 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 | Published products | 50 |
 | Draft products | 0 |
 | Official content records | 137 |
-| Claims | 291 |
+| Claims | 433 |
 | Approved claims | 0 |
-| Pending claims | 291 |
+| Pending claims | 433 |
 | Rejected claims | 0 |
 
 ## Open release blockers
@@ -39,6 +39,7 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 | `P1-CONTENT` | P1 | content | Moldova certificates and the final local scope for service and editorial pages are not approved. |
 | `P1-CI-PROTECTION` | P1 | engineering | The repository workflow exists, but the required GitHub branch rule is not verified. |
 | `P1-SEO-ORIGIN` | P1 | engineering | The production origin and live search-engine validation are not approved. |
+| `P0-LOCALE` | P0 | content | New verbatim RU/RO source originals supersede the 2026-10-05 copy fingerprints. Original text reproduction is owner-authorized; independent editorial review remains pending. |
 
 ## Acceptance criteria
 
@@ -77,11 +78,15 @@ This file is generated from `docs/release-status.json`. Run `npm run release:sta
 - Deploy prerendered canonical routes, sitemap and robots policy.
 - Pass live Rich Results and URL inspection without critical errors.
 
+### `P0-LOCALE`
+
+- Review the current original RU/RO copy without treating source reproduction as medical/legal approval.
+- Record current review evidence for the revised originals; do not reuse stale translation approval.
+
 ## Resolved blockers
 
 | ID | Status | Date | Resolution |
 |---|---|---|---|
-| `P0-LOCALE` | resolved | 2026-09-10 | User Direct Decision #1 authorizes automated ro-MD localization: 50 products, 350 nonempty fields, 35 paired UI keys and localized product SEO. 31 source issues remain explicit Romanian disclosures; no medical/legal claims were approved. |
 | `P1-RANKING` | resolved | 2026-09-17 | Owner-approved distinct completed real-order counts in a rolling 90-day window; at least 10 orders from 5 clients, human-reviewed aggregate snapshot, seven-day expiry, official-order fallback, RU/RO disclosure and no catalogue runtime CRM access. Current production data is below threshold, so fallback is expected. |
 
 ## Release rule

@@ -1,13 +1,9 @@
 import type {
   ApplicationAttribution,
   ApplicationInput,
+  OrderItemInput,
 } from "../../../shared/applications/application-schema";
-import {
-  MASTERCLASS_TOPICS,
-  type MasterclassTopic,
-} from "../../../shared/constants/masterclass-topics";
 import { MOLDOVA_REGIONS } from "../../../shared/constants/moldova-regions";
-import { validateAppointmentWindow } from "../../../shared/applications/appointment-policy";
 
 export type ClientValidationResult =
   | { success: true; data: ApplicationInput }
@@ -21,13 +17,6 @@ function optionalTrimmedText(value: unknown) {
 
 function optionalString(value: unknown) {
   return typeof value === "string" ? value : undefined;
-}
-
-function isMasterclassTopic(value: unknown): value is MasterclassTopic {
-  return (
-    typeof value === "string" &&
-    MASTERCLASS_TOPICS.some((topic) => topic === value)
-  );
 }
 
 function isProductSlug(value: unknown): value is string {
@@ -106,7 +95,7 @@ function validateOrderItems(rawItems: unknown, slugs: string[]) {
 
   const selectedSlugs = new Set(slugs);
   const seen = new Set<string>();
-  const items: Array<{ slug: string; quantity: number }> = [];
+  const items: OrderItemInput[] = [];
   for (const candidate of rawItems) {
     if (typeof candidate !== "object" || candidate === null) return null;
     const item = candidate as Record<string, unknown>;
@@ -122,7 +111,11 @@ function validateOrderItems(rawItems: unknown, slugs: string[]) {
       return null;
     }
     seen.add(item.slug);
-    items.push({ slug: item.slug, quantity: item.quantity });
+    items.push({ slug: item.slug, quantity: item.quantity,
+      ...(typeof item.officialName === "string" ? { officialName: item.officialName } : {}),
+      ...(typeof item.sku === "string" ? { sku: item.sku } : {}),
+      ...(typeof item.url === "string" ? { url: item.url } : {}),
+    });
   }
   return seen.size === selectedSlugs.size ? items : null;
 }
@@ -130,8 +123,7 @@ function validateOrderItems(rawItems: unknown, slugs: string[]) {
 export function validateClientApplication(
   raw: Record<string, unknown>,
   allowedProductSlugs: ReadonlySet<string>,
-  locale: "ru" | "ro" = "ru",
-  now = new Date()
+  locale: "ru" | "ro" = "ru"
 ): ClientValidationResult {
   const fieldErrors: Record<string, string> = {};
   const copy = locale === "ro"
@@ -148,15 +140,6 @@ export function validateClientApplication(
         productLimit: "Puteți selecta cel mult 20 de produse",
         unavailableProduct: "Unul sau mai multe produse nu sunt disponibile",
         invalidItems: "Date incorecte despre cantitatea produselor",
-        consultationMode: "Selectați formatul consultației",
-        consultationSlot: "Selectați un interval disponibil",
-        masterclassTopic: "Selectați o temă de masterclass din listă",
-        date: "Dată incorectă",
-        time: "Oră incorectă",
-        futureConsultation: "Selectați o dată și o oră viitoare în fusul orar al Chișinăului",
-        consultationMaximum: "Selectați o dată pentru consultație în următoarele 90 de zile",
-        masterclassMinimum: "Selectați o dată pentru masterclass începând de mâine",
-        masterclassMaximum: "Selectați o dată pentru masterclass în următoarele 180 de zile",
         type: "Tip de solicitare necunoscut",
         attribution: "Date de atribuire nevalide",
       }
@@ -173,15 +156,6 @@ export function validateClientApplication(
         productLimit: "Можно выбрать не более 20 товаров",
         unavailableProduct: "Один или несколько товаров недоступны",
         invalidItems: "Некорректные данные о количестве товаров",
-        consultationMode: "Выберите формат консультации",
-        consultationSlot: "Выберите доступный слот",
-        masterclassTopic: "Выберите тему мастер-класса из списка",
-        date: "Некорректная дата",
-        time: "Некорректное время",
-        futureConsultation: "Выберите будущую дату и время по часовому поясу Кишинёва",
-        consultationMaximum: "Выберите дату консультации не позднее чем через 90 дней",
-        masterclassMinimum: "Выберите дату мастер-класса начиная со следующего дня",
-        masterclassMaximum: "Выберите дату мастер-класса не позднее чем через 180 дней",
         type: "Неизвестный тип заявки",
         attribution: "Некорректные данные атрибуции",
       };
@@ -242,6 +216,10 @@ export function validateClientApplication(
     attribution: parsedAttribution,
   };
 
+  if (optionalFields.email && (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/u.test(optionalFields.email))) fieldErrors.email = locale === "ro" ? "Adresa de email nu este corectă" : "Некорректный адрес электронной почты";
+  if ((optionalFields.comment?.length ?? 0) > 500) fieldErrors.comment = locale === "ro" ? "Comentariul poate avea cel mult 500 de caractere" : "Комментарий: не более 500 символов";
+  if ((optionalFields.preferredCallTime?.length ?? 0) > 100) fieldErrors.preferredCallTime = locale === "ro" ? "Intervalul pentru apel este prea lung" : "Время звонка: слишком длинное значение";
+
   if (raw.type === "order") {
     const rawSlugs = Array.isArray(raw.productSlugs) ? raw.productSlugs : [];
     const slugs = rawSlugs.filter(isProductSlug);
@@ -272,123 +250,6 @@ export function validateClientApplication(
         website: String(raw.website ?? ""),
         productSlugs: slugs,
         items: items!,
-        ...optionalFields,
-      },
-    };
-  }
-
-  if (raw.type === "consultation") {
-    if (
-      raw.consultationSlotId !== undefined &&
-      (typeof raw.consultationSlotId !== "string" ||
-        !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu.test(raw.consultationSlotId))
-    ) {
-      fieldErrors.consultationSlotId = copy.consultationSlot;
-    }
-    if (raw.consultationMode !== "online" && raw.consultationMode !== "offline") {
-      fieldErrors.consultationMode = copy.consultationMode;
-    }
-    if (
-      typeof raw.consultationDate !== "string" ||
-      !/^\d{4}-\d{2}-\d{2}$/u.test(raw.consultationDate)
-    ) {
-      fieldErrors.consultationDate = copy.date;
-    }
-    if (
-      typeof raw.consultationTime !== "string" ||
-      !/^(?:[01]\d|2[0-3]):[0-5]\d$/u.test(raw.consultationTime)
-    ) {
-      fieldErrors.consultationTime = copy.time;
-    }
-    if (
-      typeof raw.consultationDate === "string" &&
-      typeof raw.consultationTime === "string" &&
-      !fieldErrors.consultationDate &&
-      !fieldErrors.consultationTime
-    ) {
-      const violation = validateAppointmentWindow(
-        "consultation",
-        raw.consultationDate,
-        raw.consultationTime,
-        now
-      );
-      if (violation === "invalid") fieldErrors.consultationDate = copy.date;
-      else if (violation === "before_minimum") fieldErrors.consultationDate = copy.futureConsultation;
-      else if (violation === "after_maximum") fieldErrors.consultationDate = copy.consultationMaximum;
-    }
-    if (Object.keys(fieldErrors).length) return { success: false, fieldErrors };
-    return {
-      success: true,
-      data: {
-        locale: locale === "ro" ? "ro-MD" : "ru-MD",
-        type: "consultation",
-        firstName: String(raw.firstName).trim(),
-        lastName: String(raw.lastName).trim(),
-        phone,
-        city,
-        consentAccepted: true,
-        website: String(raw.website ?? ""),
-        consultationMode: raw.consultationMode as "online" | "offline",
-        consultationSlotId: raw.consultationSlotId as string | undefined,
-        consultationDate: String(raw.consultationDate),
-        consultationTime: String(raw.consultationTime),
-        ...optionalFields,
-      },
-    };
-  }
-
-  if (raw.type === "masterclass") {
-    const masterclassTopic = raw.masterclassTopic;
-    const masterclassTopicIsValid = isMasterclassTopic(masterclassTopic);
-    if (!masterclassTopicIsValid) {
-      fieldErrors.masterclassTopic = copy.masterclassTopic;
-    }
-    if (
-      typeof raw.eventDate !== "string" ||
-      !/^\d{4}-\d{2}-\d{2}$/u.test(raw.eventDate)
-    ) {
-      fieldErrors.eventDate = copy.date;
-    }
-    if (
-      typeof raw.eventTime !== "string" ||
-      !/^(?:[01]\d|2[0-3]):[0-5]\d$/u.test(raw.eventTime)
-    ) {
-      fieldErrors.eventTime = copy.time;
-    }
-    if (
-      typeof raw.eventDate === "string" &&
-      typeof raw.eventTime === "string" &&
-      !fieldErrors.eventDate &&
-      !fieldErrors.eventTime
-    ) {
-      const violation = validateAppointmentWindow(
-        "masterclass",
-        raw.eventDate,
-        raw.eventTime,
-        now
-      );
-      if (violation === "invalid") fieldErrors.eventDate = copy.date;
-      else if (violation === "before_minimum") fieldErrors.eventDate = copy.masterclassMinimum;
-      else if (violation === "after_maximum") fieldErrors.eventDate = copy.masterclassMaximum;
-    }
-    if (!masterclassTopicIsValid || Object.keys(fieldErrors).length) {
-      return { success: false, fieldErrors };
-    }
-
-    return {
-      success: true,
-      data: {
-        locale: locale === "ro" ? "ro-MD" : "ru-MD",
-        type: "masterclass",
-        firstName: String(raw.firstName).trim(),
-        lastName: String(raw.lastName).trim(),
-        phone,
-        city,
-        consentAccepted: true,
-        website: String(raw.website ?? ""),
-        masterclassTopic,
-        eventDate: String(raw.eventDate),
-        eventTime: String(raw.eventTime),
         ...optionalFields,
       },
     };

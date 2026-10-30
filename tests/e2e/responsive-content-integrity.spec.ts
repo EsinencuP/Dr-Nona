@@ -29,11 +29,27 @@ for (const locale of ["ru", "ro"] as const) {
   test(`${locale}: About reading text and facts remain complete on mobile`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(`/${locale}/about`);
-    const paragraphs = page.locator(".about-overview__statement p, .about-chapters__heading > p");
-    await expect(paragraphs).toHaveCount(2);
+    const paragraphs = page.locator(".about-overview__statement p, .about-chapter__body > p");
+    await expect(paragraphs).toHaveCount(5);
     await page.evaluate(() => document.fonts.ready);
+    const order = await page.evaluate(() => {
+      const cards = document.querySelector(".about-chapters")!.getBoundingClientRect();
+      const description = document.querySelector(".about-overview__statement")!.getBoundingClientRect();
+      const facts = document.querySelector(".about-facts")!.getBoundingClientRect();
+      return cards.bottom <= description.top && description.bottom < facts.top;
+    });
+    expect(order).toBe(true);
+    await expect(page.locator(".about-overview__statement > span")).toHaveCount(0);
     for (const width of [320, 375, 430, 641, 768, 960, 1024, 1180, 1440, 1920]) {
       await page.setViewportSize({ width, height: 900 });
+      const sizes = await page.evaluate(() => ({
+        paragraph: parseFloat(getComputedStyle(document.querySelector(".about-overview__statement p")!).fontSize),
+        number: parseFloat(getComputedStyle(document.querySelector(".about-facts dt")!).fontSize),
+        label: parseFloat(getComputedStyle(document.querySelector(".about-facts dd")!).fontSize),
+      }));
+      expect(sizes.paragraph).toBeGreaterThanOrEqual(18);
+      expect(sizes.number).toBeGreaterThanOrEqual(40);
+      expect(sizes.label).toBeGreaterThanOrEqual(16);
       for (const paragraph of await paragraphs.all()) {
         await expect(paragraph).toHaveCSS("-webkit-line-clamp", "none");
         const overflow = await paragraph.evaluate((element) => {
@@ -62,16 +78,17 @@ for (const locale of ["ru", "ro"] as const) {
     }
   });
 
-  test(`${locale}: home mini product titles support long names and user text spacing`, async ({ page }) => {
+  test(`${locale}: home category titles support long names and user text spacing`, async ({ page }) => {
+    test.setTimeout(60_000);
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(`/${locale}`);
-    const headings = page.locator(".home-product-mini h3");
-    await expect(headings).toHaveCount(2);
+    const headings = page.locator(".home-category h3");
+    await expect(headings).toHaveCount(8);
     const name = locale === "ru"
       ? "Диагностическое длинное название набора средств для ежедневного ухода за кожей"
       : "Denumire diagnostică lungă a colecției de produse pentru îngrijirea zilnică a pielii";
     await headings.evaluateAll((elements, text) => elements.forEach((element) => { element.textContent = text; }), name);
-    await page.addStyleTag({ content: ".home-product-mini h3 { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; }" });
+    await page.addStyleTag({ content: ".home-category h3 { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; }" });
     for (const width of widths) {
       await page.setViewportSize({ width, height: width === 844 ? 390 : 900 });
       for (const heading of await headings.all()) {
@@ -81,8 +98,8 @@ for (const locale of ["ru", "ro"] as const) {
           const range = document.createRange();
           range.selectNodeContents(element);
           const text = range.getBoundingClientRect(), box = element.getBoundingClientRect();
-          const action = element.parentElement!.querySelector(".text-link")!.getBoundingClientRect();
-          return text.right <= box.right + 1 && text.bottom <= box.bottom + 1 && text.bottom <= action.top + 1;
+          const description = element.closest(".home-category")!.querySelector("p")!.getBoundingClientRect();
+          return text.right <= box.right + 1 && text.bottom <= box.bottom + 1 && text.bottom <= description.top + 1;
         });
         expect(fit).toBe(true);
       }
@@ -100,6 +117,9 @@ for (const locale of ["ru", "ro"] as const) {
       await page.evaluate(() => document.fonts.ready);
       for (const width of widths) {
         await page.setViewportSize({ width, height: width === 844 ? 390 : 900 });
+        await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+        await expect(page.locator(".product-stage img")).toBeVisible();
+        await expect(page.locator(".product-select-button")).toBeVisible();
         await page.locator(".product-stage img").evaluate((element: HTMLImageElement) => element.decode());
         const state = await page.evaluate(() => {
           const title = document.querySelector("h1")!, image = document.querySelector<HTMLImageElement>(".product-stage img")!;

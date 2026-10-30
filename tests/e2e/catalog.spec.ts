@@ -53,10 +53,14 @@ test("an unknown query shows a recoverable empty state", async ({ page }) => {
   await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50);
 });
 
-test("RU and RO explain the official-order fallback when the CRM sample is insufficient", async ({ page }) => {
-  await expect(page.locator(".catalog-popularity-note")).toContainText("порядке каталога");
-  await page.goto("/ro/products");
-  await expect(page.locator(".catalog-popularity-note")).toContainText("ordinea catalogului");
+test("RU and RO keep the catalogue free of editorial labels and temporary explanations", async ({ page }) => {
+  for (const path of ["/products", "/ro/products"]) {
+    await page.goto(path);
+    await expect(page.locator(".catalog-grid .product-card")).toHaveCount(50);
+    await expect(page.locator(".page-intro .eyebrow, .page-intro > p, .catalog-popularity-note")).toHaveCount(0);
+    await expect(page.locator(".catalog-grid .product-card__volume")).toHaveCount(28);
+    await expect(page.locator(".catalog-status")).toContainText("50");
+  }
 });
 
 test("Romanian diacritics and a bounded product-name typo remain searchable", async ({ page }, testInfo) => {
@@ -67,17 +71,21 @@ test("Romanian diacritics and a bounded product-name typo remain searchable", as
   }
   const search = page.getByRole("searchbox", { name: "Caută după denumire" });
   await search.fill("sampon mineral");
-  await expect(page.getByRole("heading", { level: 2, name: "Șampon mineral" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2, name: "Mineral Shampoo" })).toBeVisible();
+  await expect(page.locator(".product-card__localized-name")).toHaveText("Șampon mineral");
   await search.fill("musetel");
-  await expect(page.getByRole("heading", { level: 2, name: "Sare de baie cu mușețel" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2, name: "Bath Salts with Camomile extract" })).toBeVisible();
+  await expect(page.locator(".product-card").filter({ has: page.getByRole("heading", { level: 2, name: "Bath Salts with Camomile extract" }) }).locator(".product-card__localized-name")).toHaveText("Sare de baie cu mușețel");
   await search.fill("solairs");
-  await expect(page.getByRole("heading", { level: 2, name: "Loțiune de corp Solaris" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2, name: "Solaris Body Lotion" })).toBeVisible();
 });
 
 test("selection action stays separated from product copy", async ({ page }) => {
   await page.goto("/products");
   const card = page.locator(".catalog-grid .product-card").first();
   const description = card.locator(".product-card__description");
+  await expect(card.getByRole("heading", { level: 2 })).toHaveText("Solaris Body Lotion");
+  await expect(description).toHaveText("Лосьон для тела Solaris");
   const selectionButton = card.locator(".save-button");
 
   const [descriptionBox, buttonBox] = await Promise.all([

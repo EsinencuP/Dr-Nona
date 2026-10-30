@@ -1,21 +1,21 @@
 import { ArrowRight } from "@phosphor-icons/react/ArrowRight";
 import { BookmarkSimple } from "@phosphor-icons/react/BookmarkSimple";
 import { CopySimple } from "@phosphor-icons/react/CopySimple";
-import { EnvelopeSimple } from "@phosphor-icons/react/EnvelopeSimple";
 import { X } from "@phosphor-icons/react/X";
 import { useState } from "react";
 import type { CSSProperties } from "react";
 import { ProductImage } from "../components/ProductImage";
+import { getProductTitle } from "../features/product/productNames";
 import { useProductData } from "../data";
 import type { Product } from "../data";
 import {
-  buildConsultationEmail,
-  buildConsultationPath,
-  copyConsultationText,
+  buildOrderPath,
+  copyOrderText,
 } from "../features/contact/consultation";
 import { useSelection } from "../features/selection/SelectionContext";
 import { useLocale } from "../locales/LocaleProvider";
 import { Link } from "../router";
+import { PageBreadcrumbs } from "../components/PageNavigation";
 
 export default function SelectionPage() {
   const { selected, toggle } = useSelection();
@@ -23,46 +23,36 @@ export default function SelectionPage() {
   const { locale } = useLocale();
   const copy = locale === "ro"
     ? {
-        eyebrow: "Selecția mea",
         title: "Produse selectate",
-        intro:
-          "Păstrați produsele care vă interesează și transmiteți selecția consultantului.",
         sku: "Cod produs",
         missingSku: "nu este indicat",
         remove: "Elimină",
-        next: "Pasul următor",
-        handoff: "Trimiteți selecția pentru consultație",
-        handoffSummary: (count: number) =>
-          `Consultantul va primi denumirile, codurile și linkurile celor ${count} produse selectate.`,
-        continue: "Verifică și continuă",
-        email: "Pregătește emailul",
+        handoff: "Plasează comanda chiar acum",
+        handoffSummary: () =>
+          "Trimiteți comanda — consultantul nostru vă va contacta în cel mai scurt timp, va răspunde la întrebări și vă va ajuta să stabiliți detaliile livrării",
+        continue: "Plasează comanda",
         copy: "Copiază lista",
         copied: "Lista completă a fost copiată.",
         copyFailed:
-          "Lista nu a putut fi copiată. Continuați la verificarea solicitării.",
+          "Lista nu a putut fi copiată. Continuați cu plasarea comenzii.",
         emptyTitle: "Selecția este goală",
         emptyText:
           "Adăugați produse din catalog — ele vor rămâne aici și după schimbarea paginii.",
         openCatalog: "Deschide catalogul",
       }
     : {
-        eyebrow: "Личная подборка",
         title: "Выбранные продукты",
-        intro:
-          "Сохраните интересующие позиции и передайте готовый список консультанту.",
         sku: "Артикул",
         missingSku: "не указан",
         remove: "Удалить",
-        next: "Следующий шаг",
-        handoff: "Передать подборку для консультации",
-        handoffSummary: (count: number) =>
-          `Консультант получит названия, артикулы и ссылки для ${count} выбранных позиций.`,
-        continue: "Проверить и продолжить",
-        email: "Подготовить email",
+        handoff: "Оформите заказ прямо сейчас",
+        handoffSummary: () =>
+          "Отправьте заказ — наш консультант свяжется с вами в ближайшее время, ответит на вопросы и поможет согласовать доставку",
+        continue: "Оформить заказ",
         copy: "Скопировать список",
         copied: "Список скопирован полностью.",
         copyFailed:
-          "Не удалось скопировать список. Перейдите к проверке перед отправкой.",
+          "Не удалось скопировать список. Перейдите к оформлению заказа.",
         emptyTitle: "В подборке пока нет продуктов",
         emptyText:
           "Добавляйте продукты из каталога — они останутся здесь и после перехода на другую страницу.",
@@ -70,18 +60,17 @@ export default function SelectionPage() {
       };
   const [copyStatus, setCopyStatus] = useState("");
   const chosen = selected.map((slug) => productBySlug.get(slug)).filter((item): item is Product => Boolean(item));
-  const consultationPath = buildConsultationPath(chosen);
-  const emailHref = buildConsultationEmail(chosen, locale);
+  const orderPath = buildOrderPath(chosen);
   const handleCopy = async () => {
-    const copied = await copyConsultationText(chosen, locale);
+    const copied = await copyOrderText(chosen, locale);
     setCopyStatus(copied ? copy.copied : copy.copyFailed);
   };
   return (
     <section className="selection-page container">
-      <div className="page-intro">
-        <div><p className="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1></div>
-        <p>{copy.intro}</p>
-      </div>
+      <PageBreadcrumbs current={copy.title} parents={[{ to: "/products", label: locale === "ro" ? "Catalog" : "Каталог" }]} />
+      <header className="selection-page__heading">
+        <h1>{copy.title}</h1>
+      </header>
       {chosen.length ? (
         <div className="selection-layout">
           <div className="selection-list">
@@ -90,7 +79,7 @@ export default function SelectionPage() {
                 <Link
                   className="selection-list__media"
                   to={`/product/${product.slug}`}
-                  aria-label={product.officialName}
+                  aria-label={getProductTitle(product)}
                   style={{
                     "--selection-object-scale": product.catalogScale,
                   } as CSSProperties}
@@ -105,28 +94,24 @@ export default function SelectionPage() {
                 </Link>
                 <div>
                   <small>{product.category}</small>
-                  <h2><Link to={`/product/${product.slug}`}>{product.officialName}</Link></h2>
+                  <h2 lang="en"><Link to={`/product/${product.slug}`}>{getProductTitle(product)}</Link></h2>
                   <p className="selection-list__sku">{copy.sku}: {product.sku || copy.missingSku}</p>
                 </div>
-                <button type="button" onClick={() => toggle(product.slug)} aria-label={`${copy.remove} ${product.officialName}`}><X aria-hidden="true" /></button>
+                <button type="button" onClick={() => toggle(product.slug)} aria-label={`${copy.remove} ${getProductTitle(product)}`}><X aria-hidden="true" /></button>
               </article>
             ))}
           </div>
           <div className="selection-contact">
             <div>
-              <p className="eyebrow eyebrow--light">{copy.next}</p>
               <h2>{copy.handoff}</h2>
               <p className="selection-contact__summary">
-                {copy.handoffSummary(chosen.length)}
+                {copy.handoffSummary()}
               </p>
             </div>
             <div>
-              <Link className="button button--light" to={consultationPath}>
+              <Link className="button button--light" to={orderPath}>
                 {copy.continue} <ArrowRight aria-hidden="true" />
               </Link>
-              <a className="button button--outline-light" href={emailHref}>
-                <EnvelopeSimple aria-hidden="true" /> {copy.email}
-              </a>
               <button className="button button--outline-light" type="button" onClick={handleCopy}>
                 <CopySimple aria-hidden="true" /> {copy.copy}
               </button>

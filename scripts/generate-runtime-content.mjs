@@ -1,4 +1,8 @@
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { hasVerbatimMoldovaCopy } from "../src/product-copy-policy.mjs";
+import { createHash } from "node:crypto";
+import { writeGeneratedFile } from "./write-generated-file.mjs";
+import { isRetiredEditorialPath } from "../src/editorial-policy.mjs";
+import { mkdirSync, readFileSync } from "node:fs";
 import { hasCurrentTranslationApproval } from "./romanian-translation-approval-lib.mjs";
 
 const pages = JSON.parse(
@@ -8,6 +12,26 @@ const claims = JSON.parse(
   readFileSync("src/data/claims-registry.json", "utf8")
 );
 const products = JSON.parse(readFileSync("src/data/products.json", "utf8"));
+const productVolumes = JSON.parse(readFileSync("src/data/product-volumes.json", "utf8")).products;
+const packageUnits = new Set(["ml", "g", "caps", "pieces", "tea-bags", "samples"]);
+for (const product of products.filter((item) => item.publicationStatus === "published")) {
+  const record = productVolumes[product.slug];
+  const size = record?.packageSize;
+  if (!record || record.officialName !== product.officialName ||
+      !size || !Number.isFinite(size.quantity) || size.quantity <= 0 || !packageUnits.has(size.unit) ||
+      (!["ml", "g"].includes(size.unit) && !Number.isInteger(size.quantity)) ||
+      !record.sourceText?.trim() || record.productSourceUrl !== product.sourceUrl) {
+    throw new Error(`Missing, stale or invalid product package record: ${product.slug}`);
+  }
+}
+const russianCardNames = JSON.parse(
+  readFileSync("src/data/product-card-names-ru.json", "utf8")
+);
+for (const product of products.filter((item) => item.publicationStatus === "published")) {
+  if (typeof russianCardNames[product.slug] !== "string" || !russianCardNames[product.slug].trim()) {
+    throw new Error(`Missing Russian product card name: ${product.slug}`);
+  }
+}
 const romanianProducts = JSON.parse(
   readFileSync("src/data/products-ro.json", "utf8")
 );
@@ -47,12 +71,21 @@ function fieldIsPublishable(contentId, field) {
   return fieldPublishability[`product\u001f${contentId}\u001f${field}`] ?? true;
 }
 
+for (const product of [...products, ...Object.values(romanianProducts)]) {
+  if ((product.sourceCopy || product.sourceBlocks) && (!hasVerbatimMoldovaCopy(product) ||
+      createHash("sha256").update(product.longDescription).digest("hex") !== product.sourceCopy.textHash)) {
+    throw new Error(`Invalid verbatim source evidence: ${product.sourceUrl}`);
+  }
+}
+
 const publicProducts = products.map((product) => ({
   ...product,
+  cardTitle: product.officialName,
+  packageSize: productVolumes[product.slug]?.packageSize,
   ...Object.fromEntries(
     productCopyFields.map((field) => [
       field,
-      fieldIsPublishable(product.slug, field) ? product[field] : null,
+      hasVerbatimMoldovaCopy(product) || fieldIsPublishable(product.slug, field) ? product[field] : null,
     ])
   ),
 }));
@@ -72,8 +105,8 @@ const publicRomanianProducts = Object.fromEntries(
         ...Object.fromEntries(
           productCopyFields.map((field) => [
             field,
-            review[field] === "approved" &&
-            fieldIsPublishable(`ro:${product.slug}`, field)
+            hasVerbatimMoldovaCopy(localized) || (review[field] === "approved" &&
+            fieldIsPublishable(`ro:${product.slug}`, field))
               ? localized[field]
               : null,
           ])
@@ -83,13 +116,14 @@ const publicRomanianProducts = Object.fromEntries(
   })
 );
 
-// Projections are derived only after the existing claims/editorial quarantine.
+// Verbatim source reproduction is independent of claims/editorial review.
+// Legacy copy continues to use the claims/editorial quarantine.
 // A direct PDP needs its own product and the same four recommendations as the
 // catalogue comparator; it must not fetch all 50 detailed records.
 const published = publicProducts.filter((product) => product.publicationStatus === "published");
 function localize(product, locale) {
   return locale === "ro"
-    ? { ...product, ...publicRomanianProducts[product.slug], contentLocale: locale }
+    ? { ...product, ...publicRomanianProducts[product.slug], sourceBlocks: publicRomanianProducts[product.slug].sourceBlocks, sourceCopy: publicRomanianProducts[product.slug].sourceCopy, contentLocale: locale }
     : { ...product, contentLocale: locale };
 }
 function relatedProducts(product) {
@@ -101,48 +135,17 @@ function relatedProducts(product) {
 mkdirSync("src/data/product-details", { recursive: true });
 for (const product of published) {
   const related = relatedProducts(product);
-  writeFileSync(`src/data/product-details/${product.slug}.json`, `${JSON.stringify(Object.fromEntries(
+  writeGeneratedFile(`src/data/product-details/${product.slug}.json`, `${JSON.stringify(Object.fromEntries(
     ["ru", "ro"].map((locale) => [locale, { product: localize(product, locale), related: related.map((item) => localize(item, locale)) }])
   ))}\n`);
 }
-writeFileSync("src/data/home-products.json", `${JSON.stringify(Object.fromEntries(
+writeGeneratedFile("src/data/home-products.json", `${JSON.stringify(Object.fromEntries(
   ["ru", "ro"].map((locale) => [locale, homeProductSlugs.map((slug) => {
     const product = published.find((item) => item.slug === slug);
     if (!product) throw new Error(`Missing published home product: ${slug}`);
     return localize(product, locale);
   })])
 ))}\n`);
-
-function editorial(kind, limit) {
-  return pages
-    .filter((page) => page.path.startsWith(`/${kind}/`) && !page.error)
-    .sort(
-      (left, right) =>
-        new Date(right.sourceLastmod || 0).getTime() -
-        new Date(left.sourceLastmod || 0).getTime()
-    )
-    .slice(0, limit)
-    .map(
-      ({
-        path,
-        title,
-        description,
-        headings,
-        images,
-        sourceUrl,
-        sourceLastmod,
-      }) => ({
-        path,
-        title,
-        description,
-        headings,
-        paragraphs: [],
-        images,
-        sourceUrl,
-        sourceLastmod,
-      })
-    );
-}
 
 const runtimeContent = {
   version: 1,
@@ -152,7 +155,7 @@ const runtimeContent = {
     blockedScopes: [...blockedScopes].sort(),
   },
   home: {
-    editorial: [...editorial("news", 2), ...editorial("blog", 1)],
+    editorial: [],
     productSlugs: homeProductSlugs.map((slug) => {
       const product = products.find((candidate) => candidate.slug === slug);
       if (!product || product.publicationStatus !== "published") {
@@ -163,25 +166,25 @@ const runtimeContent = {
   },
 };
 
-writeFileSync(
+writeGeneratedFile(
   "src/data/products-public.json",
   `${JSON.stringify(publicProducts, null, 2)}\n`,
   "utf8"
 );
 
-writeFileSync(
+writeGeneratedFile(
   "src/data/products-ro-public.json",
   `${JSON.stringify(publicRomanianProducts, null, 2)}\n`,
   "utf8"
 );
 
-writeFileSync(
+writeGeneratedFile(
   "src/data/runtime-content.json",
   `${JSON.stringify(runtimeContent, null, 2)}\n`,
   "utf8"
 );
 
-writeFileSync(
+writeGeneratedFile(
   "src/data/published-product-slugs.json",
   `${JSON.stringify(
     products
@@ -196,3 +199,5 @@ writeFileSync(
 console.log(
   `Runtime content: ${Object.keys(fieldPublishability).length} claim fields; ${runtimeContent.home.editorial.length} home editorial cards; ${runtimeContent.home.productSlugs.length} home products; ${products.filter((product) => product.publicationStatus === "published").length} selectable products.`
 );
+
+writeGeneratedFile("src/data/official-pages-public.json", `${JSON.stringify(pages.filter((page) => !isRetiredEditorialPath(page.path) && page.path !== "/warehouses"))}\n`, "utf8");

@@ -1,0 +1,6 @@
+// TODO: вставьте полные HTTPS-ссылки на страницы Dr. Nona Moldova.
+// Пока строка пустая, в футере отображается иконка без ссылки.
+export const socialLinks = {
+  instagram: "", // https://www.instagram.com/...
+  facebook: "", // https://www.facebook.com/...
+};

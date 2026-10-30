@@ -1,19 +1,15 @@
 import { expect, test } from "@playwright/test";
 
-test("pending product copy is replaced without internal review language", async ({
+test("source product copy is shown without changing review status", async ({
   page,
 }) => {
   await page.goto("/product/solaris-body-lotion");
 
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Solaris");
   await expect(page.getByTestId("claims-review-notice")).toHaveCount(0);
-  await expect(page.locator(".product-purpose")).toHaveText(
-    "Крем из ассортимента Dr. Nona для ежедневного ухода за кожей."
-  );
-  await expect(page.locator(".product-description")).toContainText(
-    "Solaris Body Lotion представлен в каталоге Dr. Nona Moldova"
-  );
-  await expect(page.getByText(/бестселлер компании/i)).toHaveCount(0);
+  await expect(page.locator(".product-purpose")).toHaveCount(0);
+  await expect(page.locator(".product-copy-card--overview")).toBeVisible();
+  await expect(page.getByTestId("full-product-description")).toContainText(/Бестселлер компании/i);
 });
 
 test("supplement product shows a neutral adjacent disclaimer", async ({
@@ -26,13 +22,9 @@ test("supplement product shows a neutral adjacent disclaimer", async ({
   await expect(disclaimer).toContainText("Не является лекарственным средством");
   await expect(disclaimer).not.toContainText("Молдовы");
   await expect(disclaimer).not.toContainText("подтверждения");
-  await expect(page.locator(".product-purpose")).toHaveText(
-    "Напиток из ассортимента Dr. Nona для повседневного рациона."
-  );
-  await expect(page.locator(".product-description")).toContainText(
-    "Gonseen Tea представлен в каталоге Dr. Nona Moldova"
-  );
-  await expect(page.getByText(/чай gonseen/i)).toHaveCount(0);
+  await expect(page.locator(".product-purpose")).toHaveCount(0);
+  await expect(page.locator(".product-copy-card--overview")).toBeVisible();
+  await expect(page.getByTestId("full-product-description")).toContainText(/Чай GONSEEN/i);
 });
 
 test("Halo formula uses neutral copy without an internal review state", async ({

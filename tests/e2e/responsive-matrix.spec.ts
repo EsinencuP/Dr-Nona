@@ -388,12 +388,13 @@ async function runViewportContract(
     })
   ).toBeVisible();
   const productInformationCards = page.locator(".product-copy-card");
-  await expect(productInformationCards).toHaveCount(2);
+  await expect(productInformationCards).toHaveCount(1);
+  await expect(page.getByTestId("full-product-description")).toContainText("Halo Complex");
   await expect(productInformationCards.first()).toBeVisible();
   await page.evaluate(() => {
     const title = document.querySelector(".product-info h1");
     const firstInformationLabel = document.querySelector(
-      ".product-copy-card h3"
+      ".product-copy-card h2"
     );
     if (title) {
       title.textContent =
@@ -421,7 +422,7 @@ async function runViewportContract(
     page.getByRole("heading", { level: 1, name: "Контакты в Молдове" })
   ).toBeVisible();
   await expect(page.locator("form.application-form")).toHaveCount(1);
-  await expect(page.locator(".contact-direct__actions a")).toHaveCount(3);
+  await expect(page.locator(".contact-direct__actions a")).toHaveCount(2);
   await expectHealthyLayout(page, `${viewport.name} contact`, touch);
 
   await preparePage(page, "/about/company");

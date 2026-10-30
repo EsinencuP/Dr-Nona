@@ -1,16 +1,22 @@
 import { ArrowUpRight } from "@phosphor-icons/react/ArrowUpRight";
 import { BookmarkSimple } from "@phosphor-icons/react/BookmarkSimple";
+import { FacebookLogo } from "@phosphor-icons/react/FacebookLogo";
+import { InstagramLogo } from "@phosphor-icons/react/InstagramLogo";
 import { List } from "@phosphor-icons/react/List";
 import { Phone } from "@phosphor-icons/react/Phone";
 import { X } from "@phosphor-icons/react/X";
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { useSelection } from "../features/selection/SelectionContext";
+import { MobileContactAction } from "../features/contact/MobileContactAction";
+import { PrivacyNotice } from "../features/privacy/PrivacyNotice";
+import { openPrivacyPreferences } from "../features/privacy/privacyChoice";
 import { useLocale } from "../locales/LocaleProvider";
 import { marketData } from "../market";
 import { applyRouteMetadata } from "../seo";
 import { localePathFor } from "../locale-routing.mjs";
 import { Link, NavLink, useLocation, useSetLocale } from "../router";
+import { socialLinks } from "./social-links";
 
 const CRM_ENTRY_URL =
   import.meta.env.VITE_CRM_URL?.trim() || "http://127.0.0.1:3001/dashboard";
@@ -105,7 +111,7 @@ function Header() {
     ["/products", t.catalog],
     ["/about", t.about],
     ["/ourformula", t.formula],
-    ["/editorial", t.editorial],
+    ["/reviews", locale === "ro" ? "Recenzii" : "Отзывы"],
   ];
 
   return (
@@ -164,11 +170,11 @@ function Header() {
           <Link
             className="selection-link"
             to="/selection"
-            aria-label={`${t.selection}: ${selected.length}`}
+            aria-label={`${t.placeOrder}: ${selected.length}`}
             onClick={() => setOpen(false)}
           >
             <BookmarkSimple aria-hidden="true" weight={selected.length ? "fill" : "regular"} />
-            <span>{t.selection}</span>
+            <span>{t.placeOrder}</span>
             <b>{selected.length}</b>
           </Link>
           <button
@@ -202,7 +208,7 @@ function Header() {
             </NavLink>
           ))}
           <NavLink to="/selection" onClick={() => setOpen(false)}>
-            <span>{t.selection}</span>
+            <span>{t.placeOrder}</span>
             <b>{selected.length}</b>
           </NavLink>
           <a href={CRM_ENTRY_URL} onClick={() => setOpen(false)}>
@@ -224,13 +230,14 @@ function Footer() {
         sections: "Secțiuni",
         information: "Informații",
         contacts: "Contacte",
-        branches: "Filiale",
         certificates: "Certificate",
         faq: "Întrebări și răspunsuri",
         contact: "Contact",
-        city: "Chișinău · Moldova",
+        social: "Rețele sociale",
+        socialPending: "Link neadăugat",
         terms: "Termeni de utilizare",
         privacy: "Politica de confidențialitate",
+        cookieSettings: "Setări cookies",
         accessibility: "Accesibilitate",
       }
     : {
@@ -239,13 +246,14 @@ function Footer() {
         sections: "Разделы",
         information: "Информация",
         contacts: "Контакты",
-        branches: "Филиалы",
         certificates: "Сертификаты",
         faq: "Вопросы и ответы",
         contact: "Связь",
-        city: "Кишинёв · Молдова",
+        social: "Социальные сети",
+        socialPending: "Ссылка не добавлена",
         terms: "Условия использования",
         privacy: "Политика конфиденциальности",
+        cookieSettings: "Настройки cookies",
         accessibility: "Доступность",
       };
   return (
@@ -261,24 +269,48 @@ function Footer() {
           <Link to="/products">{t.catalog}</Link>
           <Link to="/about">{t.about}</Link>
           <Link to="/ourformula">Halo Complex™</Link>
-          <Link to="/editorial">{t.editorial}</Link>
+          <Link to="/reviews">{locale === "ro" ? "Recenzii" : "Отзывы"}</Link>
         </div>
         <div>
           <p className="footer-title">{copy.information}</p>
           <Link to="/contactus">{copy.contacts}</Link>
-          <Link to="/warehouses">{copy.branches}</Link>
           <Link to="/certificates">{copy.certificates}</Link>
           <Link to="/faq">{copy.faq}</Link>
         </div>
         <div>
           <p className="footer-title">{copy.contact}</p>
-          <a href={marketData.contact.phones[0].href}>
-            <Phone aria-hidden="true" /> {marketData.contact.phones[0].label}
-          </a>
-          <a href={marketData.contact.phones[1].href}>
-            <Phone aria-hidden="true" /> {marketData.contact.phones[1].label}
-          </a>
-          <span className="footer-contact-market">{copy.city}</span>
+          {marketData.contact.phones.map((phone) => (
+            <a href={phone.href} key={phone.href}>
+              <Phone aria-hidden="true" /> {phone.label}
+            </a>
+          ))}
+          <div className="footer-social" role="group" aria-label={copy.social}>
+            {[
+              { name: "Instagram", href: socialLinks.instagram.trim(), Icon: InstagramLogo },
+              { name: "Facebook", href: socialLinks.facebook.trim(), Icon: FacebookLogo },
+            ].map(({ name, href, Icon }) => href ? (
+              <a
+                className="footer-social__item"
+                key={name}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={name}
+              >
+                <Icon aria-hidden="true" />
+              </a>
+            ) : (
+              <span
+                className="footer-social__item"
+                key={name}
+                role="img"
+                aria-label={`${name} — ${copy.socialPending}`}
+                title={`${name} — ${copy.socialPending}`}
+              >
+                <Icon aria-hidden="true" />
+              </span>
+            ))}
+          </div>
         </div>
       </div>
       <div className="footer-bottom">
@@ -286,6 +318,7 @@ function Footer() {
         <div>
           <Link to="/termsofuse">{copy.terms}</Link>
           <Link to="/privacypolicy">{copy.privacy}</Link>
+          <button className="footer-privacy-settings" type="button" onClick={openPrivacyPreferences}>{copy.cookieSettings}</button>
           <Link to="/accessibility-statement">{copy.accessibility}</Link>
         </div>
       </div>
@@ -301,6 +334,8 @@ function PageShell({ children }: { children: ReactNode }) {
         {children}
       </main>
       <Footer />
+      <MobileContactAction />
+      <PrivacyNotice />
     </>
   );
 }

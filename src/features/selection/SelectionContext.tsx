@@ -10,11 +10,13 @@ import {
 import type { ReactNode } from "react";
 import { safeLocalStorage, selectionSchema } from "../../app/storage";
 import publishedProductSlugsJson from "../../data/published-product-slugs.json";
+import { useLocale } from "../../locales/LocaleProvider";
 
 type SelectionContextValue = {
   selected: string[];
   toggle: (slug: string) => void;
   contains: (slug: string) => boolean;
+  clear: () => void;
 };
 
 const SelectionContext = createContext<SelectionContextValue | null>(null);
@@ -31,12 +33,16 @@ export function useSelection() {
 }
 
 export function SelectionProvider({ children }: { children: ReactNode }) {
+  const { locale } = useLocale();
+  const copy = locale === "ro"
+    ? { added: "Produsul a fost adăugat în selecție", removed: "Produsul a fost eliminat din selecție" }
+    : { added: "Продукт добавлен в подборку", removed: "Продукт удалён из подборки" };
   const [selected, setSelected] = useState<string[]>(() =>
     sanitizeSelection(
       safeLocalStorage.get("drnona-selection", selectionSchema, [])
     )
   );
-  const [announcement, setAnnouncement] = useState("");
+  const [announcement, setAnnouncement] = useState<"added" | "removed" | null>(null);
   const announcementTimer = useRef<number | null>(null);
 
   useEffect(() => {
@@ -76,15 +82,12 @@ export function SelectionProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<SelectionContextValue>(() => ({
     selected,
+    clear: () => { setSelected([]); setAnnouncement(null); },
     contains: (slug) => selected.includes(slug),
     toggle: (slug) => {
       setSelected((current) => {
         const exists = current.includes(slug);
-        setAnnouncement(
-          exists
-            ? "Продукт удалён из подборки"
-            : "Продукт добавлен в подборку"
-        );
+        setAnnouncement(exists ? "removed" : "added");
         return exists
           ? current.filter((item) => item !== slug)
           : [...current, slug];
@@ -93,7 +96,7 @@ export function SelectionProvider({ children }: { children: ReactNode }) {
         window.clearTimeout(announcementTimer.current);
       }
       announcementTimer.current = window.setTimeout(() => {
-        setAnnouncement("");
+        setAnnouncement(null);
         announcementTimer.current = null;
       }, 2200);
     },
@@ -107,7 +110,7 @@ export function SelectionProvider({ children }: { children: ReactNode }) {
         role="status"
         aria-live="polite"
       >
-        <Check aria-hidden="true" /> {announcement}
+        <Check aria-hidden="true" /> {announcement && copy[announcement]}
       </div>
     </SelectionContext.Provider>
   );

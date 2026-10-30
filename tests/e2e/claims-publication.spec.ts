@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("pending product claims stay out of home, catalogue search and detail", async ({
+test("source originals stay searchable and fully visible independently of pending review", async ({
   page,
 }, testInfo) => {
   await page.goto("/");
@@ -21,19 +21,11 @@ test("pending product claims stay out of home, catalogue search and detail", asy
   await page
     .getByRole("searchbox", { name: "Поиск по названию" })
     .fill("лечебным эффектом");
-  await expect(
-    page.getByRole("heading", {
-      level: 2,
-      name: "По этим параметрам ничего не найдено.",
-    })
-  ).toBeVisible();
+  await expect(page.locator(".product-card").filter({ hasText: "Solaris" }).first()).toBeVisible();
 
   await page.goto("/product/dynamic-hydrating-cream");
-  await expect(
-    page.locator(".product-purpose").getByText(
-      "Крем из ассортимента Dr. Nona для ежедневного ухода за кожей."
-    )
-  ).toBeVisible();
-  await expect(page.getByText(/ускоряет регенерацию/u)).toHaveCount(0);
-  await expect(page.getByText(/защиты клеток от старения/u)).toHaveCount(0);
+  await expect(page.locator(".product-purpose")).toHaveCount(0);
+  await expect(page.locator(".product-copy-card--overview")).toBeVisible();
+  await expect(page.getByTestId("full-product-description")).toContainText(/ускоряет регенерацию/u);
+  await expect(page.getByTestId("full-product-description")).toContainText(/защиты клеток от старения/u);
 });
